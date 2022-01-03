@@ -1,0 +1,12 @@
+{
+	"name": "Turns",
+	"plugin-id": "Sprite",
+	"sid": 828576026815589,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"Turn180",
+		"Turn90"
+	]
+}

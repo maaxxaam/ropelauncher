@@ -1,0 +1,50 @@
+{
+	"name": "Pole",
+	"plugin-id": "Sprite",
+	"sid": 966953607385157,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "Clockwise",
+			"type": "boolean",
+			"desc": "Whether to rotate the car in clockwise or anti-clockwise direction",
+			"sid": 924253149283891
+		},
+		{
+			"name": "TurnAngle",
+			"type": "number",
+			"desc": "",
+			"sid": 607575723801225
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 50,
+						"height": 50,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 3689795,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 528195894255768,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

@@ -1,0 +1,77 @@
+{
+	"name": "Car2",
+	"plugin-id": "Sprite",
+	"sid": 238911985306016,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "Trail",
+			"type": "number",
+			"desc": "",
+			"sid": 249203281949651
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "bound",
+			"name": "BoundToLayout",
+			"sid": 952108723898195
+		},
+		{
+			"behaviorId": "scrollto",
+			"name": "ScrollTo",
+			"sid": 506923050802504
+		},
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 843296125530563
+		},
+		{
+			"behaviorId": "Car",
+			"name": "Car",
+			"sid": 672776114892879
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 100,
+						"height": 50,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5143006,
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "LeftBackTrail",
+								"x": 0,
+								"y": 0.1
+							},
+							{
+								"name": "RightBackTrail",
+								"x": 0,
+								"y": 0.9
+							}
+						],
+						"duration": 1
+					}
+				],
+				"sid": 765634219857229,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

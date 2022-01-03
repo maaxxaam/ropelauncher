@@ -1,0 +1,1384 @@
+{
+	"name": "Event sheet 1",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "OrbitLerp",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 399203951315245
+		},
+		{
+			"eventType": "variable",
+			"name": "OrbitOffset",
+			"type": "number",
+			"initialValue": "120",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 336637752551361
+		},
+		{
+			"eventType": "variable",
+			"name": "DesAngle",
+			"type": "number",
+			"initialValue": "270",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 854686913018689
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "OldCode",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-any-touch-end",
+							"objectClass": "Touch",
+							"sid": 590600003465309
+						},
+						{
+							"id": "is-enabled",
+							"objectClass": "Car",
+							"sid": 242813854372076,
+							"behaviorType": "Orbit"
+						},
+						{
+							"id": "is-pinned",
+							"objectClass": "Car",
+							"sid": 827264583991748,
+							"disabled": true,
+							"behaviorType": "Pin"
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "Pole",
+							"sid": 236170920399734,
+							"parameters": {
+								"which": "nearest",
+								"x": "Car.X",
+								"y": "Car.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "Car",
+							"sid": 727709245551753,
+							"behaviorType": "Bullet",
+							"parameters": {
+								"state": "enabled"
+							}
+						},
+						{
+							"id": "set-enabled",
+							"objectClass": "Car",
+							"sid": 423626830173708,
+							"behaviorType": "Orbit",
+							"parameters": {
+								"state": "disabled"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 898379558035984,
+							"parameters": {
+								"variable": "DesAngle",
+								"value": "Pole.TurnAngle"
+							}
+						}
+					],
+					"sid": 608988375310710,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 240643863210622,
+							"parameters": {
+								"first-value": "TiledBackground.Count",
+								"comparison": 1,
+								"second-value": "0"
+							}
+						},
+						{
+							"id": "is-enabled",
+							"objectClass": "Car",
+							"sid": 472538375289313,
+							"behaviorType": "Orbit"
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "Pole",
+							"sid": 690750646103256,
+							"parameters": {
+								"which": "nearest",
+								"x": "Car.X",
+								"y": "Car.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 185231760800735,
+							"parameters": {
+								"variable": "OrbitLerp",
+								"value": "lerp(OrbitLerp, OrbitOffset, 0.05)"
+							}
+						},
+						{
+							"id": "set-angle-toward-position",
+							"objectClass": "Car",
+							"sid": 223781923961290,
+							"disabled": true,
+							"parameters": {
+								"x": "Pole.X",
+								"y": "Pole.Y"
+							}
+						},
+						{
+							"id": "rotate-clockwise",
+							"objectClass": "Car",
+							"sid": 458304619219335,
+							"disabled": true,
+							"parameters": {
+								"degrees": "Pole.Clockwise ? OrbitLerp - 90 :  90 - OrbitLerp"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "Car",
+							"sid": 186265418307278,
+							"disabled": true,
+							"parameters": {
+								"angle": "lerp(Car.Angle, (angle(Car.X, Car.Y, Pole.X, Pole.Y) + (Pole.Clockwise ? OrbitOffset : 360- OrbitOffset) + 180) % 360, 0.1)"
+							}
+						},
+						{
+							"id": "rotate-toward-angle",
+							"objectClass": "Car",
+							"sid": 651113549170165,
+							"parameters": {
+								"degrees": "5",
+								"angle": "angle(Car.X, Car.Y, Pole.X, Pole.Y) + (Pole.Clockwise ? OrbitOffset : 360- OrbitOffset) + 180"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "dbgtxt",
+							"sid": 412281001677598,
+							"disabled": true,
+							"parameters": {
+								"text": " (angle(Car.X, Car.Y, Pole.X, Pole.Y) + (Pole.Clockwise ? OrbitOffset : 360- OrbitOffset) + 180) % 360&newline&Car.Angle"
+							}
+						}
+					],
+					"sid": 295045421004629,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 627514437197905
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 807408772592617
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 429007834019966,
+							"parameters": {
+								"variable": "OrbitLerp",
+								"value": "0"
+							}
+						}
+					],
+					"sid": 364374371281914,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-on-screen",
+							"objectClass": "TiledBackground",
+							"sid": 811852825826400
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "Pole",
+							"sid": 862956936040465,
+							"parameters": {
+								"which": "nearest",
+								"x": "Car.X",
+								"y": "Car.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-angle-toward-position",
+							"objectClass": "TiledBackground",
+							"sid": 315868043489899,
+							"parameters": {
+								"x": "Pole.X",
+								"y": "Pole.Y"
+							}
+						},
+						{
+							"id": "set-height",
+							"objectClass": "TiledBackground",
+							"sid": 358317639029123,
+							"parameters": {
+								"height": "distance(Car.X, Car.Y, Pole.X, Pole.Y)"
+							}
+						},
+						{
+							"id": "rotate-counter-clockwise",
+							"objectClass": "TiledBackground",
+							"sid": 110424150725704,
+							"parameters": {
+								"degrees": "90"
+							}
+						}
+					],
+					"sid": 589069613887092,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-any-touch-start",
+							"objectClass": "Touch",
+							"sid": 755504894915395
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "Pole",
+							"sid": 568589520634346,
+							"parameters": {
+								"which": "nearest",
+								"x": "Car.X",
+								"y": "Car.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 695594561751617,
+							"parameters": {
+								"object-to-create": "TiledBackground",
+								"layer": "0",
+								"x": "Car.X",
+								"y": "Car.Y",
+								"create-hierarchy": false
+							}
+						},
+						{
+							"id": "pin-to-object-properties",
+							"objectClass": "TiledBackground",
+							"sid": 304132598628189,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "Car",
+								"x": true,
+								"y": true,
+								"angle": false,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "move-to-object",
+							"objectClass": "TiledBackground",
+							"sid": 858229354976406,
+							"parameters": {
+								"where": "behind",
+								"object": "Car"
+							}
+						},
+						{
+							"id": "move-to-object",
+							"objectClass": "TiledBackground",
+							"sid": 557075642407333,
+							"parameters": {
+								"where": "behind",
+								"object": "Pole"
+							}
+						},
+						{
+							"id": "set-angle-toward-position",
+							"objectClass": "TiledBackground",
+							"sid": 761594484342809,
+							"parameters": {
+								"x": "Pole.X",
+								"y": "Pole.Y"
+							}
+						},
+						{
+							"id": "rotate-counter-clockwise",
+							"objectClass": "TiledBackground",
+							"sid": 959949719203006,
+							"parameters": {
+								"degrees": "90"
+							}
+						},
+						{
+							"id": "set-height",
+							"objectClass": "TiledBackground",
+							"sid": 665872005002821,
+							"parameters": {
+								"height": "distance(Car.X, Car.Y, Pole.X, Pole.Y)"
+							}
+						}
+					],
+					"sid": 448256708177241,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-any-touch-end",
+							"objectClass": "Touch",
+							"sid": 488308959499775
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "TiledBackground",
+							"sid": 167294380276536
+						}
+					],
+					"sid": 649187865907122,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-in-touch",
+							"objectClass": "Touch",
+							"sid": 138922639169705
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "Pole",
+							"sid": 148981249678964,
+							"parameters": {
+								"which": "nearest",
+								"x": "Car.X",
+								"y": "Car.Y"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 360351796973327,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-collision-with-another-object",
+									"objectClass": "Car",
+									"sid": 213437124929511,
+									"parameters": {
+										"object": "Turn90"
+									}
+								},
+								{
+									"id": "on-collision-with-another-object",
+									"objectClass": "Car",
+									"sid": 212938612457479,
+									"parameters": {
+										"object": "Turn180"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 177065464679124,
+							"disabled": true,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-enabled",
+											"objectClass": "Car",
+											"sid": 578734979073299,
+											"behaviorType": "Bullet"
+										}
+									],
+									"actions": [
+										{
+											"id": "set-enabled",
+											"objectClass": "Car",
+											"sid": 472339218509674,
+											"behaviorType": "Bullet",
+											"parameters": {
+												"state": "disabled"
+											}
+										},
+										{
+											"id": "set-enabled",
+											"objectClass": "Car",
+											"sid": 577710163014528,
+											"behaviorType": "Orbit",
+											"parameters": {
+												"state": "enabled"
+											}
+										},
+										{
+											"id": "set-radius",
+											"objectClass": "Car",
+											"sid": 662529937121879,
+											"behaviorType": "Orbit",
+											"parameters": {
+												"primary": "distance(Car.X, Car.Y, Pole.X, Pole.Y)",
+												"secondary": "distance(Car.X, Car.Y, Pole.X, Pole.Y)"
+											}
+										},
+										{
+											"id": "set-target",
+											"objectClass": "Car",
+											"sid": 905823053917554,
+											"behaviorType": "Orbit",
+											"parameters": {
+												"x": "Pole.X",
+												"y": "Pole.Y"
+											}
+										},
+										{
+											"id": "set-rotation",
+											"objectClass": "Car",
+											"sid": 114683253799339,
+											"behaviorType": "Orbit",
+											"parameters": {
+												"angle": "angle(Car.X, Car.Y, Pole.X, Pole.Y) + 180"
+											}
+										}
+									],
+									"sid": 740254600442146,
+									"disabled": true,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "is-boolean-instance-variable-set",
+													"objectClass": "Pole",
+													"sid": 833496951105211,
+													"parameters": {
+														"instance-variable": "Clockwise"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-speed",
+													"objectClass": "Car",
+													"sid": 744044346516651,
+													"behaviorType": "Orbit",
+													"parameters": {
+														"speed": "70"
+													}
+												},
+												{
+													"id": "set-acceleration",
+													"objectClass": "Car",
+													"sid": 851701728386993,
+													"behaviorType": "Orbit",
+													"parameters": {
+														"acceleration": "40"
+													}
+												}
+											],
+											"sid": 322291484944317,
+											"disabled": true
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 668380837807665
+												}
+											],
+											"actions": [
+												{
+													"id": "set-speed",
+													"objectClass": "Car",
+													"sid": 521532197686264,
+													"behaviorType": "Orbit",
+													"parameters": {
+														"speed": "-70"
+													}
+												},
+												{
+													"id": "set-acceleration",
+													"objectClass": "Car",
+													"sid": 369326195440622,
+													"behaviorType": "Orbit",
+													"parameters": {
+														"acceleration": "-40"
+													}
+												}
+											],
+											"sid": 277016214269273,
+											"disabled": true
+										}
+									]
+								}
+							],
+							"isOrBlock": true
+						}
+					]
+				}
+			],
+			"sid": 851992536082412
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 157482633919241
+				}
+			],
+			"actions": [
+				{
+					"id": "move-to-top",
+					"objectClass": "Car2",
+					"sid": 254084424532482
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 358013970452926,
+					"parameters": {
+						"variable": "DesAngle",
+						"value": "Car2.Angle"
+					}
+				},
+				{
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 588533667299294,
+					"parameters": {
+						"object": "Car2",
+						"time-scale": "0"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "dbgtxt",
+					"sid": 785447006561160,
+					"parameters": {
+						"text": "\"3\""
+					}
+				},
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 872452996975169,
+					"parameters": {
+						"seconds": "0.5"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "dbgtxt",
+					"sid": 267889157482050,
+					"parameters": {
+						"text": "\"2\""
+					}
+				},
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 483535772376535,
+					"parameters": {
+						"seconds": "0.5"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "dbgtxt",
+					"sid": 957196118643071,
+					"parameters": {
+						"text": "\"1\""
+					}
+				},
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 274923404517836,
+					"parameters": {
+						"seconds": "0.5"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "dbgtxt",
+					"sid": 498204945200149,
+					"parameters": {
+						"text": "\"GO!\""
+					}
+				},
+				{
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 166994928725296,
+					"parameters": {
+						"object": "Car2",
+						"time-scale": "1"
+					}
+				},
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 532145927276975,
+					"parameters": {
+						"seconds": "1.0"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "dbgtxt",
+					"sid": 214023852890833,
+					"parameters": {
+						"text": "\"\""
+					}
+				},
+				{
+					"id": "spawn-another-object",
+					"objectClass": "Car2",
+					"sid": 289640410829991,
+					"parameters": {
+						"object": "Particles",
+						"layer": "Car2.LayerName",
+						"image-point": "\"LeftBackTrail\"",
+						"create-hierarchy": false
+					}
+				},
+				{
+					"id": "set-angle",
+					"objectClass": "Particles",
+					"sid": 616387091349847,
+					"parameters": {
+						"angle": "Car2.Angle - 180"
+					}
+				},
+				{
+					"id": "pin-to-object-properties",
+					"objectClass": "Particles",
+					"sid": 180659918291318,
+					"behaviorType": "Pin",
+					"parameters": {
+						"pin-to": "Car2",
+						"x": true,
+						"y": true,
+						"angle": true,
+						"width-type": "no",
+						"height-type": "no",
+						"z": false
+					}
+				},
+				{
+					"id": "set-rate",
+					"objectClass": "Particles",
+					"sid": 517972234257490,
+					"parameters": {
+						"rate": "0"
+					}
+				},
+				{
+					"id": "spawn-another-object",
+					"objectClass": "Car2",
+					"sid": 802719506692183,
+					"parameters": {
+						"object": "Particles",
+						"layer": "Car2.LayerName",
+						"image-point": "\"RightBackTrail\"",
+						"create-hierarchy": false
+					}
+				},
+				{
+					"id": "set-angle",
+					"objectClass": "Particles",
+					"sid": 721446411194338,
+					"parameters": {
+						"angle": "Car2.Angle - 180"
+					}
+				},
+				{
+					"id": "pin-to-object-properties",
+					"objectClass": "Particles",
+					"sid": 958644679613396,
+					"behaviorType": "Pin",
+					"parameters": {
+						"pin-to": "Car2",
+						"x": true,
+						"y": true,
+						"angle": true,
+						"width-type": "no",
+						"height-type": "no",
+						"z": false
+					}
+				},
+				{
+					"id": "set-rate",
+					"objectClass": "Particles",
+					"sid": 736770755585656,
+					"parameters": {
+						"rate": "0"
+					}
+				}
+			],
+			"sid": 515440288879850
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "Car2",
+					"sid": 488645396680068,
+					"parameters": {
+						"object": "Road"
+					},
+					"isInverted": true
+				},
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "Car2",
+					"sid": 820751043265699,
+					"parameters": {
+						"object": "Turns"
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Car2",
+					"sid": 199845335588837
+				},
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 766096467692374,
+					"parameters": {
+						"message": "\"Хорошая была попытка! Нажми [R] для перезапуска или обнови страницу\""
+					}
+				}
+			],
+			"sid": 412178629026609
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 763813914464495,
+					"parameters": {
+						"key": 82
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "restart-layout",
+					"objectClass": "System",
+					"sid": 781107925353791
+				}
+			],
+			"sid": 232104393945384
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 794126911907146
+				}
+			],
+			"actions": [
+				{
+					"id": "simulate-control",
+					"objectClass": "Car2",
+					"sid": 223795833059267,
+					"behaviorType": "Car",
+					"parameters": {
+						"control": "accelerate"
+					}
+				}
+			],
+			"sid": 420129950088296
+		},
+		{
+			"eventType": "variable",
+			"name": "inTouches",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 455937686901268
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-any-touch-start",
+					"objectClass": "Touch",
+					"sid": 333748345821127
+				}
+			],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 690347082716278,
+					"parameters": {
+						"variable": "inTouches",
+						"value": "1"
+					}
+				}
+			],
+			"sid": 769767432838179
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-any-touch-end",
+					"objectClass": "Touch",
+					"sid": 537554919706905
+				}
+			],
+			"actions": [
+				{
+					"id": "subtract-from-eventvar",
+					"objectClass": "System",
+					"sid": 906233469314013,
+					"parameters": {
+						"variable": "inTouches",
+						"value": "1"
+					}
+				}
+			],
+			"sid": 891062402584541
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-in-touch",
+					"objectClass": "Touch",
+					"sid": 752403312444725
+				},
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "Car2",
+					"sid": 358013251080415,
+					"parameters": {
+						"object": "Turns"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 780802226570685,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 367164006128034,
+							"parameters": {
+								"variable": "inTouches",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-drift-recover",
+							"objectClass": "Car2",
+							"sid": 215407215166641,
+							"behaviorType": "Car",
+							"parameters": {
+								"drift-recover": "50"
+							}
+						},
+						{
+							"id": "set-steer-speed",
+							"objectClass": "Car2",
+							"sid": 910077491655050,
+							"behaviorType": "Car",
+							"parameters": {
+								"steer-speed": "80"
+							}
+						},
+						{
+							"id": "simulate-control",
+							"objectClass": "Car2",
+							"sid": 708274427312402,
+							"disabled": true,
+							"behaviorType": "Car",
+							"parameters": {
+								"control": "steer-left"
+							}
+						}
+					],
+					"sid": 399433170656310
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 758813886813754,
+							"parameters": {
+								"variable": "inTouches",
+								"comparison": 0,
+								"value": "2"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-drift-recover",
+							"objectClass": "Car2",
+							"sid": 700542566927979,
+							"behaviorType": "Car",
+							"parameters": {
+								"drift-recover": "20"
+							}
+						},
+						{
+							"id": "set-steer-speed",
+							"objectClass": "Car2",
+							"sid": 497202277597570,
+							"behaviorType": "Car",
+							"parameters": {
+								"steer-speed": "120"
+							}
+						},
+						{
+							"id": "simulate-control",
+							"objectClass": "Car2",
+							"sid": 705346008299284,
+							"disabled": true,
+							"behaviorType": "Car",
+							"parameters": {
+								"control": "steer-left"
+							}
+						}
+					],
+					"sid": 860142754473427
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "Pole",
+							"sid": 226086908971261,
+							"parameters": {
+								"which": "nearest",
+								"x": "Car2.X",
+								"y": "Car2.Y"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 868721727006620,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Pole",
+									"sid": 312489536522908,
+									"parameters": {
+										"instance-variable": "Clockwise"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "simulate-control",
+									"objectClass": "Car2",
+									"sid": 506433334094727,
+									"behaviorType": "Car",
+									"parameters": {
+										"control": "steer-right"
+									}
+								}
+							],
+							"sid": 581981812900275
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 360818409713147
+								}
+							],
+							"actions": [
+								{
+									"id": "simulate-control",
+									"objectClass": "Car2",
+									"sid": 751103394635878,
+									"behaviorType": "Car",
+									"parameters": {
+										"control": "steer-left"
+									}
+								}
+							],
+							"sid": 833142256208186
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 957302774306347
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "Pole",
+							"sid": 978240245346224,
+							"parameters": {
+								"which": "nearest",
+								"x": "Car2.X",
+								"y": "Car2.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 577866840263425,
+							"parameters": {
+								"variable": "DesAngle",
+								"value": "Pole.TurnAngle"
+							}
+						}
+					],
+					"sid": 372058250739492
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "else",
+					"objectClass": "System",
+					"sid": 574585616881117
+				},
+				{
+					"id": "is-any-playing",
+					"objectClass": "Car2",
+					"sid": 250715584695468,
+					"behaviorType": "Tween",
+					"isInverted": true
+				},
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "Car2",
+					"sid": 464761545029965,
+					"parameters": {
+						"object": "Turns"
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [
+				{
+					"id": "tween-one-property",
+					"objectClass": "Car2",
+					"sid": 389231100409045,
+					"behaviorType": "Tween",
+					"parameters": {
+						"tags": "\"Stabilize\"",
+						"property": "offsetAngle",
+						"end-value": "DesAngle + asin(sin(DesAngle - Car2.Angle)) / 1.75",
+						"time": "0.6",
+						"ease": "easeinoutsine",
+						"destroy-on-complete": "no",
+						"loop": "no",
+						"ping-pong": "no"
+					}
+				}
+			],
+			"sid": 118648590105923
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-moving",
+					"objectClass": "Car2",
+					"sid": 790420976361589,
+					"behaviorType": "Car"
+				},
+				{
+					"id": "is-within-angle",
+					"objectClass": "System",
+					"sid": 236632200717979,
+					"parameters": {
+						"angle-1": "Car2.Angle",
+						"within": "5",
+						"angle-2": "Car2.Car.MovingAngle"
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [],
+			"sid": 134775696802758,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 526074013773479
+						}
+					],
+					"actions": [
+						{
+							"id": "spawn-another-object",
+							"objectClass": "Car2",
+							"sid": 762479167965690,
+							"parameters": {
+								"object": "DriftMarks",
+								"layer": "Car2.LayerName",
+								"image-point": "\"LeftBackTrail\"",
+								"create-hierarchy": false
+							}
+						},
+						{
+							"id": "move-to-object",
+							"objectClass": "DriftMarks",
+							"sid": 635212452691646,
+							"parameters": {
+								"where": "behind",
+								"object": "Car2"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "DriftMarks",
+							"sid": 717406201239684,
+							"parameters": {
+								"angle": "0"
+							}
+						},
+						{
+							"id": "move-to-object",
+							"objectClass": "DriftMarks",
+							"sid": 705666813613337,
+							"parameters": {
+								"where": "behind",
+								"object": "Particles"
+							}
+						},
+						{
+							"id": "spawn-another-object",
+							"objectClass": "Car2",
+							"sid": 896026116522376,
+							"parameters": {
+								"object": "DriftMarks",
+								"layer": "Car2.LayerName",
+								"image-point": "\"RightBackTrail\"",
+								"create-hierarchy": false
+							}
+						},
+						{
+							"id": "move-to-object",
+							"objectClass": "DriftMarks",
+							"sid": 174242629708297,
+							"parameters": {
+								"where": "behind",
+								"object": "Car2"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "DriftMarks",
+							"sid": 698850271235966,
+							"parameters": {
+								"angle": "0"
+							}
+						},
+						{
+							"id": "move-to-object",
+							"objectClass": "DriftMarks",
+							"sid": 219569952067814,
+							"parameters": {
+								"where": "behind",
+								"object": "Particles"
+							}
+						},
+						{
+							"id": "add-to-instvar",
+							"objectClass": "Car2",
+							"sid": 732859638844109,
+							"parameters": {
+								"instance-variable": "Trail",
+								"value": "2"
+							}
+						},
+						{
+							"id": "set-rate",
+							"objectClass": "Particles",
+							"sid": 650651101205570,
+							"parameters": {
+								"rate": "100"
+							}
+						}
+					],
+					"sid": 208950274237038
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [],
+					"sid": 737995482274951,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-nth-instance",
+									"objectClass": "System",
+									"sid": 456985962539730,
+									"parameters": {
+										"object": "DriftMarks",
+										"instance": "Car2.Trail"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "push-point",
+									"objectClass": "DriftMarks",
+									"sid": 916581114213759,
+									"behaviorType": "TrailRenderer",
+									"parameters": {
+										"x": "Car2.ImagePointX(\"LeftBackTrail\")",
+										"y": "Car2.ImagePointY(\"LeftBackTrail\")",
+										"angle": "0",
+										"angle-towards-new-position": true
+									}
+								}
+							],
+							"sid": 678568179609059
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-nth-instance",
+									"objectClass": "System",
+									"sid": 486423331029928,
+									"parameters": {
+										"object": "DriftMarks",
+										"instance": "Car2.Trail + 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "push-point",
+									"objectClass": "DriftMarks",
+									"sid": 159319100874064,
+									"behaviorType": "TrailRenderer",
+									"parameters": {
+										"x": "Car2.ImagePointX(\"RightBackTrail\")",
+										"y": "Car2.ImagePointY(\"RightBackTrail\")",
+										"angle": "0",
+										"angle-towards-new-position": true
+									}
+								}
+							],
+							"sid": 804452534513445
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "else",
+					"objectClass": "System",
+					"sid": 210392600392291
+				}
+			],
+			"actions": [
+				{
+					"id": "set-rate",
+					"objectClass": "Particles",
+					"sid": 387634424418858,
+					"parameters": {
+						"rate": "0"
+					}
+				}
+			],
+			"sid": 901237640377648
+		}
+	],
+	"sid": 528873411861220
+}
