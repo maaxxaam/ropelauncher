@@ -1,0 +1,673 @@
+{
+	"name": "AllEvents",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "SFX",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 502695462710004
+		},
+		{
+			"eventType": "variable",
+			"name": "ExtraAnimation",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 673485137027996
+		},
+		{
+			"eventType": "variable",
+			"name": "Music",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 624754048191963
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 472772595553118,
+					"parameters": {
+						"object": "Buttons"
+					}
+				},
+				{
+					"id": "is-on-screen",
+					"objectClass": "Buttons",
+					"sid": 166040165340706
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "PlayIf",
+					"sid": 240166573990326,
+					"parameters": [
+						"\"Click\"",
+						"SFX"
+					]
+				}
+			],
+			"sid": 940687657309202
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 176024193756268,
+					"parameters": {
+						"key": 77
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "toggle-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 441744587974503,
+					"parameters": {
+						"variable": "Music"
+					}
+				}
+			],
+			"sid": 124697664816028
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 232093746319636,
+					"parameters": {
+						"key": 83
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "toggle-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 245384607366767,
+					"parameters": {
+						"variable": "SFX"
+					}
+				}
+			],
+			"sid": 283161554395941
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 269361284964291,
+					"parameters": {
+						"object": "Buttons"
+					}
+				},
+				{
+					"id": "is-on-screen",
+					"objectClass": "Buttons",
+					"sid": 333168185593767
+				}
+			],
+			"actions": [],
+			"sid": 320309199830511,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-touching-object",
+							"objectClass": "Touch",
+							"sid": 598964739731520,
+							"parameters": {
+								"object": "Buttons"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "Buttons",
+							"sid": 810685919490558,
+							"parameters": {
+								"animation": "Buttons.AnimationPrefix&\"Tap\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 855953674985525
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 174053612666237
+						},
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 326397937446697,
+							"parameters": {
+								"object": "Buttons"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "Buttons",
+							"sid": 424447305265132,
+							"parameters": {
+								"animation": "Buttons.AnimationPrefix&\"Hover\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 816410682569186
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 464999572643859
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "Buttons",
+							"sid": 489207661496558,
+							"parameters": {
+								"animation": "Buttons.AnimationPrefix&\"Idle\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 846331647471808
+				}
+			]
+		},
+		{
+			"functionName": "PlayIf",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Filename",
+					"type": "string",
+					"initialValue": "",
+					"comment": "Name of an audio file to play",
+					"sid": 237253212542030
+				},
+				{
+					"name": "Expression",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "Expression to determine whether to play the file or not",
+					"sid": 104658008116847
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 704224373949690,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 859216412819121,
+							"parameters": {
+								"variable": "Expression",
+								"comparison": 4,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 108608459940052,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "Filename",
+								"loop": "not-looping",
+								"volume": "0",
+								"tag-optional": "Filename"
+							}
+						}
+					],
+					"sid": 272421280971747
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 226869733806022,
+					"parameters": {
+						"object": "SettBut"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 477010559639837,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 647098655001547,
+							"parameters": {
+								"first-value": "SettBut.IID",
+								"comparison": 0,
+								"second-value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 596969427043958,
+							"parameters": {
+								"variable": "Music"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "SettBut",
+							"sid": 456112731158386,
+							"parameters": {
+								"animation": "Music ? \"On\" : \"Off\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "player-toggle",
+							"objectClass": "GameScore",
+							"sid": 951453170156991,
+							"parameters": {
+								"key": "\"music\""
+							}
+						},
+						{
+							"id": "player-sync",
+							"objectClass": "GameScore",
+							"sid": 596842855833307,
+							"parameters": {
+								"override": false
+							}
+						}
+					],
+					"sid": 604359223511584,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-tag-playing",
+									"objectClass": "Audio",
+									"sid": 251247133153132,
+									"parameters": {
+										"tag": "\"Music\""
+									},
+									"isInverted": true
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 386206408586653,
+									"parameters": {
+										"variable": "Music"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "play",
+									"objectClass": "Audio",
+									"sid": 997725110087250,
+									"parameters": {
+										"audio-file": "Background",
+										"loop": "looping",
+										"volume": "-10",
+										"tag-optional": "\"Music\""
+									}
+								}
+							],
+							"sid": 978881221503096
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-tag-playing",
+									"objectClass": "Audio",
+									"sid": 399694148756535,
+									"parameters": {
+										"tag": "\"Music\""
+									}
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 134465851316772,
+									"parameters": {
+										"variable": "Music"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "stop",
+									"objectClass": "Audio",
+									"sid": 727211454621399,
+									"parameters": {
+										"tag": "\"Music\""
+									}
+								}
+							],
+							"sid": 809437055105573
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 245026751938489,
+							"parameters": {
+								"first-value": "SettBut.IID",
+								"comparison": 0,
+								"second-value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 145642936155276,
+							"parameters": {
+								"variable": "SFX"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "SettBut",
+							"sid": 860622881891233,
+							"parameters": {
+								"animation": "SFX ? \"On\" : \"Off\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "player-toggle",
+							"objectClass": "GameScore",
+							"sid": 926666093317204,
+							"parameters": {
+								"key": "\"sfx\""
+							}
+						},
+						{
+							"id": "player-sync",
+							"objectClass": "GameScore",
+							"sid": 744908372733051,
+							"parameters": {
+								"override": false
+							}
+						}
+					],
+					"sid": 560932688379192
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 181994039768345,
+							"parameters": {
+								"first-value": "SettBut.IID",
+								"comparison": 0,
+								"second-value": "2"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 903207625570580,
+							"parameters": {
+								"variable": "ExtraAnimation"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "SettBut",
+							"sid": 945564651150620,
+							"parameters": {
+								"animation": "ExtraAnimation ? \"On\" : \"Off\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "player-toggle",
+							"objectClass": "GameScore",
+							"sid": 547653725933575,
+							"parameters": {
+								"key": "\"extraanim\""
+							}
+						},
+						{
+							"id": "player-sync",
+							"objectClass": "GameScore",
+							"sid": 894414462813819,
+							"parameters": {
+								"override": false
+							}
+						}
+					],
+					"sid": 388229401740255,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-animation-playing",
+									"objectClass": "SettBut",
+									"sid": 305210730448603,
+									"parameters": {
+										"animation": "\"Off\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 730733248176328
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 646503656523520
+								}
+							],
+							"actions": [],
+							"sid": 141642944475527
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 433689158777389,
+							"parameters": {
+								"first-value": "SettBut.IID",
+								"comparison": 0,
+								"second-value": "3"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 764062445072733,
+							"parameters": {
+								"variable": "Speed",
+								"value": "Speed = 2 ? 1 : 2"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "SettBut",
+							"sid": 510401006043380,
+							"parameters": {
+								"animation": "Speed = 1 ? \"On\" : \"Off\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "player-set",
+							"objectClass": "GameScore",
+							"sid": 740307215982884,
+							"parameters": {
+								"key": "\"speed\"",
+								"value": "Speed"
+							}
+						},
+						{
+							"id": "player-sync",
+							"objectClass": "GameScore",
+							"sid": 705726985032121,
+							"parameters": {
+								"override": false
+							}
+						}
+					],
+					"sid": 523993315715942
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-ads-fullscreen-playing",
+					"objectClass": "GameScore",
+					"sid": 521616342084020
+				}
+			],
+			"actions": [
+				{
+					"id": "set-silent",
+					"objectClass": "Audio",
+					"sid": 525820834549582,
+					"parameters": {
+						"mode": "silent"
+					}
+				}
+			],
+			"sid": 526433316224888
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-ads-fullscreen-close",
+					"objectClass": "GameScore",
+					"sid": 171438030473778
+				}
+			],
+			"actions": [
+				{
+					"id": "set-silent",
+					"objectClass": "Audio",
+					"sid": 466209090657785,
+					"parameters": {
+						"mode": "not-silent"
+					}
+				}
+			],
+			"sid": 769846554908381
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-ads-fullscreen-close",
+					"objectClass": "GameScore",
+					"sid": 305695147477661
+				},
+				{
+					"id": "is-ads-sticky-available",
+					"objectClass": "GameScore",
+					"sid": 205848292995428
+				},
+				{
+					"id": "is-on-mobile",
+					"objectClass": "PlatformInfo",
+					"sid": 686052690129150
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 596988433072394,
+					"parameters": {
+						"variable": "AdsDisabled"
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [
+				{
+					"id": "ads-show-sticky",
+					"objectClass": "GameScore",
+					"sid": 301718773726286
+				}
+			],
+			"sid": 674746645293579
+		}
+	],
+	"sid": 936943754957788
+}

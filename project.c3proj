@@ -79,6 +79,70 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "Tilemap",
+			"name": "Tilemap",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "ValerypopoffTouchPlusPlugin",
+			"name": "Valerypopoff Touch Plus",
+			"author": "Valera Popov",
+			"version": "1.1.7",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Mouse",
+			"name": "Mouse",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Audio",
+			"name": "Audio",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "maaxxaam_devtodev",
+			"name": "devtodev SDK",
+			"author": "maaxxaam",
+			"version": "0.0.0.3",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "GameAnalytics",
+			"name": "GameAnalytics",
+			"author": "GameAnalytics",
+			"version": "3.0.12",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "PlatformInfo",
+			"name": "Platform info",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Eponesh_GameScore",
+			"name": "GameScore",
+			"author": "Eponesh",
+			"version": "1.0.25",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "bound",
 			"name": "Bound to layout",
@@ -149,6 +213,14 @@
 			"author": "skymen",
 			"version": "1.0.2.1",
 			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "DragnDrop",
+			"name": "Drag & Drop",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
 		}
 	],
 	"uniqueId": "j211m18wkv4",
@@ -168,7 +240,22 @@
 			"Keyboard",
 			"Car2",
 			"DriftMarks",
-			"Particles"
+			"Particles",
+			"roads",
+			"drift_zone",
+			"cam_follow",
+			"DriftBut",
+			"vis_bar",
+			"ValerypopoffTouchPlus",
+			"Mouse",
+			"Audio",
+			"devtodevSDK",
+			"GameAnalytics",
+			"PlatformInfo",
+			"GameScore",
+			"SettBut",
+			"mmtext",
+			"LvlBut"
 		],
 		"subfolders": []
 	},
@@ -176,30 +263,70 @@
 	"containers": [],
 	"families": {
 		"items": [
-			"Turns"
+			"Turns",
+			"Buttons"
 		],
 		"subfolders": []
 	},
 	"layouts": {
 		"items": [
-			"Layout 1",
-			"Resources"
+			"Lvl1",
+			"Lvl2",
+			"Lvl3",
+			"Resources",
+			"Menu"
 		],
 		"subfolders": []
 	},
 	"eventSheets": {
 		"items": [
-			"Event sheet 1"
+			"GameSheet",
+			"Devtodev",
+			"MenuSheet",
+			"AllEvents"
 		],
 		"subfolders": []
 	},
 	"rootFileFolders": {
 		"script": {
-			"items": [],
+			"items": [
+				{
+					"name": "main.js",
+					"type": "application/javascript",
+					"sid": 329361097453268,
+					"script-info": {
+						"purpose": "main"
+					}
+				},
+				{
+					"name": "devtodev.js",
+					"type": "application/javascript",
+					"sid": 867712184254847,
+					"script-info": {
+						"purpose": "imports-for-events"
+					}
+				}
+			],
 			"subfolders": []
 		},
 		"sound": {
-			"items": [],
+			"items": [
+				{
+					"name": "Click.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 462633506088436
+				},
+				{
+					"name": "Victory.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 915894721182521
+				},
+				{
+					"name": "Background.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 639354427885837
+				}
+			],
 			"subfolders": []
 		},
 		"music": {
@@ -286,7 +413,9 @@
 		],
 		"subfolders": [
 			{
-				"items": [],
+				"items": [
+					"Ease 1"
+				],
 				"subfolders": []
 			}
 		]
@@ -340,5 +469,5 @@
 	},
 	"viewportWidth": 720,
 	"viewportHeight": 1280,
-	"firstLayout": null
+	"firstLayout": "Menu"
 }

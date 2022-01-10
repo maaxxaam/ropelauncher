@@ -167,21 +167,21 @@
 				{
 					"type": "Particles",
 					"properties": {
-						"rate": 100,
+						"rate": 50,
 						"spray-cone": 25,
 						"type": "continuous-spray",
 						"object": 444792131048522,
 						"live-preview": false,
-						"speed": 300,
-						"size": 16,
+						"speed": 200,
+						"size": 32,
 						"opacity": 100,
 						"grow-rate": 0,
 						"x-randomiser": 0,
 						"y-randomiser": 20,
 						"initial-speed-randomiser": 200,
-						"size-randomiser": 8,
+						"size-randomiser": 16,
 						"grow-rate-randomiser": 0,
-						"acceleration": -300,
+						"acceleration": -200,
 						"gravity": 0,
 						"angle-randomiser": 0,
 						"life-speed-randomiser": 0,
@@ -204,6 +204,35 @@
 						"width": 100,
 						"height": 100,
 						"originX": 0,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "drift_zone",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 30,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 797,
+						"y": 332,
+						"width": 640,
+						"height": 640,
+						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
 							1,

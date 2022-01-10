@@ -1,0 +1,14 @@
+{
+	"name": "devtodevSDK",
+	"plugin-id": "maaxxaam_devtodev",
+	"sid": 700038487493033,
+	"singleglobal-inst": {
+		"type": "devtodevSDK",
+		"properties": {
+			"app-version": "value",
+			"secret-key": "value",
+			"auto-init": true
+		},
+		"uid": 17
+	}
+}

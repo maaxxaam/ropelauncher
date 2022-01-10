@@ -1,5 +1,5 @@
 {
-	"name": "Event sheet 1",
+	"name": "GameSheet",
 	"events": [
 		{
 			"eventType": "variable",
@@ -20,6 +20,26 @@
 			"isStatic": false,
 			"isConstant": true,
 			"sid": 336637752551361
+		},
+		{
+			"eventType": "variable",
+			"name": "AdsDisabled",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 524580793711449
+		},
+		{
+			"eventType": "variable",
+			"name": "Speed",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 408447452104862
 		},
 		{
 			"eventType": "variable",
@@ -602,6 +622,30 @@
 					}
 				},
 				{
+					"id": "set-position-to-another-object",
+					"objectClass": "cam_follow",
+					"sid": 436324322341443,
+					"parameters": {
+						"object": "Car2",
+						"image-point-optional": "0"
+					}
+				},
+				{
+					"id": "add-child",
+					"objectClass": "Car2",
+					"sid": 612713030652429,
+					"parameters": {
+						"child": "cam_follow",
+						"transform-x": true,
+						"transform-y": true,
+						"transform-w": false,
+						"transform-h": false,
+						"transform-a": false,
+						"transform-z-elevation": true,
+						"destroy-with-parent": false
+					}
+				},
+				{
 					"id": "set-text",
 					"objectClass": "dbgtxt",
 					"sid": 785447006561160,
@@ -725,6 +769,15 @@
 					}
 				},
 				{
+					"id": "move-to-object",
+					"objectClass": "Particles",
+					"sid": 691923753067029,
+					"parameters": {
+						"where": "behind",
+						"object": "Car2"
+					}
+				},
+				{
 					"id": "spawn-another-object",
 					"objectClass": "Car2",
 					"sid": 802719506692183,
@@ -765,6 +818,19 @@
 					"parameters": {
 						"rate": "0"
 					}
+				},
+				{
+					"id": "move-to-object",
+					"objectClass": "Particles",
+					"sid": 593301169532937,
+					"parameters": {
+						"where": "behind",
+						"object": "Car2"
+					}
+				},
+				{
+					"callFunction": "PlaceDriftZones",
+					"sid": 151066115383564
 				}
 			],
 			"sid": 515440288879850
@@ -773,11 +839,20 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "pick-nth-instance",
+					"objectClass": "System",
+					"sid": 578979777615454,
+					"parameters": {
+						"object": "roads",
+						"instance": "1"
+					}
+				},
+				{
 					"id": "is-overlapping-another-object",
 					"objectClass": "Car2",
-					"sid": 488645396680068,
+					"sid": 377815285178596,
 					"parameters": {
-						"object": "Road"
+						"object": "roads"
 					},
 					"isInverted": true
 				},
@@ -800,9 +875,9 @@
 				{
 					"id": "alert",
 					"objectClass": "Browser",
-					"sid": 766096467692374,
+					"sid": 895548545048312,
 					"parameters": {
-						"message": "\"Хорошая была попытка! Нажми [R] для перезапуска или обнови страницу\""
+						"message": "\"Хорошая была попытка! Нажми [R] для перезапуска или [ESC] для выхода в меню\""
 					}
 				}
 			],
@@ -868,6 +943,14 @@
 					"id": "on-any-touch-start",
 					"objectClass": "Touch",
 					"sid": 333748345821127
+				},
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 369040034790652,
+					"parameters": {
+						"key": 32
+					}
 				}
 			],
 			"actions": [
@@ -881,7 +964,9 @@
 					}
 				}
 			],
-			"sid": 769767432838179
+			"sid": 769767432838179,
+			"disabled": true,
+			"isOrBlock": true
 		},
 		{
 			"eventType": "block",
@@ -890,6 +975,14 @@
 					"id": "on-any-touch-end",
 					"objectClass": "Touch",
 					"sid": 537554919706905
+				},
+				{
+					"id": "on-key-released",
+					"objectClass": "Keyboard",
+					"sid": 251655692608451,
+					"parameters": {
+						"key": 32
+					}
 				}
 			],
 			"actions": [
@@ -903,23 +996,26 @@
 					}
 				}
 			],
-			"sid": 891062402584541
+			"sid": 891062402584541,
+			"disabled": true,
+			"isOrBlock": true
 		},
 		{
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "is-in-touch",
-					"objectClass": "Touch",
-					"sid": 752403312444725
+					"id": "pick-by-unique-id",
+					"objectClass": "DriftBut",
+					"sid": 432276247561314,
+					"parameters": {
+						"unique-id": "8"
+					}
 				},
 				{
-					"id": "is-overlapping-another-object",
-					"objectClass": "Car2",
-					"sid": 358013251080415,
-					"parameters": {
-						"object": "Turns"
-					}
+					"id": "is-dragging",
+					"objectClass": "DriftBut",
+					"sid": 149014495017205,
+					"behaviorType": "DragDrop"
 				}
 			],
 			"actions": [],
@@ -929,135 +1025,41 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-eventvar",
+							"id": "pick-all",
 							"objectClass": "System",
-							"sid": 367164006128034,
+							"sid": 424156832039337,
 							"parameters": {
-								"variable": "inTouches",
-								"comparison": 0,
-								"value": "1"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-drift-recover",
-							"objectClass": "Car2",
-							"sid": 215407215166641,
-							"behaviorType": "Car",
-							"parameters": {
-								"drift-recover": "50"
-							}
-						},
-						{
-							"id": "set-steer-speed",
-							"objectClass": "Car2",
-							"sid": 910077491655050,
-							"behaviorType": "Car",
-							"parameters": {
-								"steer-speed": "80"
-							}
-						},
-						{
-							"id": "simulate-control",
-							"objectClass": "Car2",
-							"sid": 708274427312402,
-							"disabled": true,
-							"behaviorType": "Car",
-							"parameters": {
-								"control": "steer-left"
-							}
-						}
-					],
-					"sid": 399433170656310
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-eventvar",
-							"objectClass": "System",
-							"sid": 758813886813754,
-							"parameters": {
-								"variable": "inTouches",
-								"comparison": 0,
-								"value": "2"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-drift-recover",
-							"objectClass": "Car2",
-							"sid": 700542566927979,
-							"behaviorType": "Car",
-							"parameters": {
-								"drift-recover": "20"
-							}
-						},
-						{
-							"id": "set-steer-speed",
-							"objectClass": "Car2",
-							"sid": 497202277597570,
-							"behaviorType": "Car",
-							"parameters": {
-								"steer-speed": "120"
-							}
-						},
-						{
-							"id": "simulate-control",
-							"objectClass": "Car2",
-							"sid": 705346008299284,
-							"disabled": true,
-							"behaviorType": "Car",
-							"parameters": {
-								"control": "steer-left"
-							}
-						}
-					],
-					"sid": 860142754473427
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-nearestfurthest",
-							"objectClass": "Pole",
-							"sid": 226086908971261,
-							"parameters": {
-								"which": "nearest",
-								"x": "Car2.X",
-								"y": "Car2.Y"
+								"object": "DriftBut"
 							}
 						}
 					],
 					"actions": [],
-					"sid": 868721727006620,
+					"sid": 882430671303141,
 					"children": [
 						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "Pole",
-									"sid": 312489536522908,
+									"id": "is-overlapping-another-object",
+									"objectClass": "DriftBut",
+									"sid": 745506819262735,
 									"parameters": {
-										"instance-variable": "Clockwise"
+										"object": "DriftBut"
 									}
 								}
 							],
 							"actions": [
 								{
-									"id": "simulate-control",
-									"objectClass": "Car2",
-									"sid": 506433334094727,
-									"behaviorType": "Car",
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 841176141612295,
 									"parameters": {
-										"control": "steer-right"
+										"variable": "inTouches",
+										"value": "2"
 									}
 								}
 							],
-							"sid": 581981812900275
+							"sid": 970458650443297
 						},
 						{
 							"eventType": "block",
@@ -1065,21 +1067,21 @@
 								{
 									"id": "else",
 									"objectClass": "System",
-									"sid": 360818409713147
+									"sid": 208012939149755
 								}
 							],
 							"actions": [
 								{
-									"id": "simulate-control",
-									"objectClass": "Car2",
-									"sid": 751103394635878,
-									"behaviorType": "Car",
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 250916286428498,
 									"parameters": {
-										"control": "steer-left"
+										"variable": "inTouches",
+										"value": "1"
 									}
 								}
 							],
-							"sid": 833142256208186
+							"sid": 512423450640731
 						}
 					]
 				},
@@ -1087,33 +1089,241 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 957302774306347
+							"id": "is-overlapping-another-object",
+							"objectClass": "Car2",
+							"sid": 945153146602314,
+							"parameters": {
+								"object": "Turns"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 231140181587620,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 761851986304153,
+									"parameters": {
+										"variable": "inTouches",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-drift-recover",
+									"objectClass": "Car2",
+									"sid": 178104920776778,
+									"behaviorType": "Car",
+									"parameters": {
+										"drift-recover": "40"
+									}
+								},
+								{
+									"id": "set-steer-speed",
+									"objectClass": "Car2",
+									"sid": 538281066636753,
+									"behaviorType": "Car",
+									"parameters": {
+										"steer-speed": "80"
+									}
+								},
+								{
+									"id": "simulate-control",
+									"objectClass": "Car2",
+									"sid": 638417584665196,
+									"disabled": true,
+									"behaviorType": "Car",
+									"parameters": {
+										"control": "steer-left"
+									}
+								}
+							],
+							"sid": 666471045203623
 						},
 						{
-							"id": "pick-nearestfurthest",
-							"objectClass": "Pole",
-							"sid": 978240245346224,
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 463153065526815,
+									"parameters": {
+										"variable": "inTouches",
+										"comparison": 0,
+										"value": "2"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-drift-recover",
+									"objectClass": "Car2",
+									"sid": 899525998056196,
+									"behaviorType": "Car",
+									"parameters": {
+										"drift-recover": "60"
+									}
+								},
+								{
+									"id": "set-steer-speed",
+									"objectClass": "Car2",
+									"sid": 363663603248517,
+									"behaviorType": "Car",
+									"parameters": {
+										"steer-speed": "120"
+									}
+								},
+								{
+									"id": "simulate-control",
+									"objectClass": "Car2",
+									"sid": 554328081827714,
+									"disabled": true,
+									"behaviorType": "Car",
+									"parameters": {
+										"control": "steer-left"
+									}
+								}
+							],
+							"sid": 235958564406726
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-nearestfurthest",
+									"objectClass": "Pole",
+									"sid": 938644628897689,
+									"parameters": {
+										"which": "nearest",
+										"x": "Car2.X",
+										"y": "Car2.Y"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 577172951854414,
+									"parameters": {
+										"variable": "DesAngle",
+										"value": "Pole.TurnAngle"
+									}
+								}
+							],
+							"sid": 405493859005912,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "Pole",
+											"sid": 338581166149387,
+											"parameters": {
+												"instance-variable": "Clockwise"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car2",
+											"sid": 853647779264033,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "steer-right"
+											}
+										}
+									],
+									"sid": 465461477262373
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 681373567912729
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car2",
+											"sid": 292210432570638,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "steer-left"
+											}
+										}
+									],
+									"sid": 765700477840405
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 890401306673552
+								},
+								{
+									"id": "pick-nearestfurthest",
+									"objectClass": "Pole",
+									"sid": 916567770622665,
+									"parameters": {
+										"which": "nearest",
+										"x": "Car2.X",
+										"y": "Car2.Y"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 605857552697612,
+							"disabled": true
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 638217502683161,
 							"parameters": {
-								"which": "nearest",
-								"x": "Car2.X",
-								"y": "Car2.Y"
+								"object": "DriftBut"
 							}
 						}
 					],
 					"actions": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 577866840263425,
+							"id": "set-visible",
+							"objectClass": "DriftBut",
+							"sid": 750498732314514,
 							"parameters": {
-								"variable": "DesAngle",
-								"value": "Pole.TurnAngle"
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "vis_bar",
+							"sid": 318032009460529,
+							"parameters": {
+								"visibility": "visible"
 							}
 						}
 					],
-					"sid": 372058250739492
+					"sid": 556756768575491
 				}
 			]
 		},
@@ -1124,43 +1334,101 @@
 					"id": "else",
 					"objectClass": "System",
 					"sid": 574585616881117
-				},
-				{
-					"id": "is-any-playing",
-					"objectClass": "Car2",
-					"sid": 250715584695468,
-					"behaviorType": "Tween",
-					"isInverted": true
-				},
-				{
-					"id": "is-overlapping-another-object",
-					"objectClass": "Car2",
-					"sid": 464761545029965,
-					"parameters": {
-						"object": "Turns"
-					},
-					"isInverted": true
 				}
 			],
-			"actions": [
+			"actions": [],
+			"sid": 118648590105923,
+			"children": [
 				{
-					"id": "tween-one-property",
-					"objectClass": "Car2",
-					"sid": 389231100409045,
-					"behaviorType": "Tween",
-					"parameters": {
-						"tags": "\"Stabilize\"",
-						"property": "offsetAngle",
-						"end-value": "DesAngle + asin(sin(DesAngle - Car2.Angle)) / 1.75",
-						"time": "0.6",
-						"ease": "easeinoutsine",
-						"destroy-on-complete": "no",
-						"loop": "no",
-						"ping-pong": "no"
-					}
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-any-playing",
+							"objectClass": "Car2",
+							"sid": 623041053272745,
+							"behaviorType": "Tween",
+							"isInverted": true
+						},
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "Car2",
+							"sid": 960719554320995,
+							"parameters": {
+								"object": "Turns"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "tween-one-property",
+							"objectClass": "Car2",
+							"sid": 567205307875586,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"Stabilize\"",
+								"property": "offsetAngle",
+								"end-value": "DesAngle",
+								"time": "1.5",
+								"ease": "Ease 1",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no"
+							}
+						},
+						{
+							"id": "tween-one-property",
+							"objectClass": "Car2",
+							"sid": 347293995845326,
+							"disabled": true,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"Stabilize\"",
+								"property": "offsetAngle",
+								"end-value": "DesAngle + asin(sin(DesAngle - Car2.Angle)) / 1.75",
+								"time": "0.6",
+								"ease": "easeinoutsine",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no"
+							}
+						}
+					],
+					"sid": 594276071203731
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "DriftBut",
+							"sid": 983427609424912,
+							"parameters": {
+								"unique-id": "10"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "DriftBut",
+							"sid": 454325811208292,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "vis_bar",
+							"sid": 347654022257967,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 777540506178673
 				}
-			],
-			"sid": 118648590105923
+			]
 		},
 		{
 			"eventType": "block",
@@ -1174,10 +1442,10 @@
 				{
 					"id": "is-within-angle",
 					"objectClass": "System",
-					"sid": 236632200717979,
+					"sid": 994657812960453,
 					"parameters": {
 						"angle-1": "Car2.Angle",
-						"within": "5",
+						"within": "7",
 						"angle-2": "Car2.Car.MovingAngle"
 					},
 					"isInverted": true
@@ -1208,15 +1476,6 @@
 							}
 						},
 						{
-							"id": "move-to-object",
-							"objectClass": "DriftMarks",
-							"sid": 635212452691646,
-							"parameters": {
-								"where": "behind",
-								"object": "Car2"
-							}
-						},
-						{
 							"id": "set-angle",
 							"objectClass": "DriftMarks",
 							"sid": 717406201239684,
@@ -1242,15 +1501,6 @@
 								"layer": "Car2.LayerName",
 								"image-point": "\"RightBackTrail\"",
 								"create-hierarchy": false
-							}
-						},
-						{
-							"id": "move-to-object",
-							"objectClass": "DriftMarks",
-							"sid": 174242629708297,
-							"parameters": {
-								"where": "behind",
-								"object": "Car2"
 							}
 						},
 						{
@@ -1378,6 +1628,374 @@
 				}
 			],
 			"sid": 901237640377648
+		},
+		{
+			"functionName": "PlaceDriftZones",
+			"functionDescription": "",
+			"functionCategory": "Level",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "for",
+					"objectClass": "System",
+					"sid": 751564010664700,
+					"parameters": {
+						"name": "\"roadX\"",
+						"start-index": "0",
+						"end-index": "roads.TileWidth - 1"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 351024438960649,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 487464862427480,
+							"parameters": {
+								"name": "\"roadY\"",
+								"start-index": "0",
+								"end-index": "roads.TileHeight - 1"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 449965397720927,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "up right"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-tile-at",
+									"objectClass": "roads",
+									"sid": 392503793813684,
+									"parameters": {
+										"tile-x": "loopindex(\"roadX\")",
+										"tile-y": "loopindex(\"roadY\")",
+										"comparison": 0,
+										"tile": "130"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 472016240590035,
+									"parameters": {
+										"object-to-create": "drift_zone",
+										"layer": "0",
+										"x": "roads.TileToPositionX(loopindex(\"roadX\"))",
+										"y": "roads.TileToPositionY(loopindex(\"roadY\"))",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-size",
+									"objectClass": "drift_zone",
+									"sid": 494117293537636,
+									"parameters": {
+										"width": "640",
+										"height": "640"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "drift_zone",
+									"sid": 268218252326346,
+									"parameters": {
+										"x": "Self.X - 256",
+										"y": "Self.Y - 256"
+									}
+								}
+							],
+							"sid": 400634761434504
+						},
+						{
+							"eventType": "comment",
+							"text": "up left"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-tile-at",
+									"objectClass": "roads",
+									"sid": 398042725944329,
+									"parameters": {
+										"tile-x": "loopindex(\"roadX\")",
+										"tile-y": "loopindex(\"roadY\")",
+										"comparison": 0,
+										"tile": "131"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 904754253514880,
+									"parameters": {
+										"object-to-create": "drift_zone",
+										"layer": "0",
+										"x": "roads.TileToPositionX(loopindex(\"roadX\"))",
+										"y": "roads.TileToPositionY(loopindex(\"roadY\"))",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-size",
+									"objectClass": "drift_zone",
+									"sid": 482065830077362,
+									"parameters": {
+										"width": "640",
+										"height": "640"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "drift_zone",
+									"sid": 458519301420257,
+									"parameters": {
+										"x": "Self.X - 256",
+										"y": "Self.Y + 256"
+									}
+								},
+								{
+									"id": "alert",
+									"objectClass": "Browser",
+									"sid": 644129184756785,
+									"disabled": true,
+									"parameters": {
+										"message": "roads.TileToPositionX(loopindex(\"roadX\"))&newline&roads.TileToPositionY(loopindex(\"roadY\"))"
+									}
+								}
+							],
+							"sid": 986511296644756,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "comment",
+							"text": "down right"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-tile-at",
+									"objectClass": "roads",
+									"sid": 711301959629804,
+									"parameters": {
+										"tile-x": "loopindex(\"roadX\")",
+										"tile-y": "loopindex(\"roadY\")",
+										"comparison": 0,
+										"tile": "148"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 108762746060327,
+									"parameters": {
+										"object-to-create": "drift_zone",
+										"layer": "0",
+										"x": "roads.TileToPositionX(loopindex(\"roadX\"))",
+										"y": "roads.TileToPositionY(loopindex(\"roadY\"))",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-size",
+									"objectClass": "drift_zone",
+									"sid": 926925299096704,
+									"parameters": {
+										"width": "640",
+										"height": "640"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "drift_zone",
+									"sid": 591256860018079,
+									"parameters": {
+										"x": "Self.X + 256",
+										"y": "Self.Y - 256"
+									}
+								}
+							],
+							"sid": 561186520225108
+						},
+						{
+							"eventType": "comment",
+							"text": "down left"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-tile-at",
+									"objectClass": "roads",
+									"sid": 604235691203376,
+									"parameters": {
+										"tile-x": "loopindex(\"roadX\")",
+										"tile-y": "loopindex(\"roadY\")",
+										"comparison": 0,
+										"tile": "149"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 830499898079416,
+									"parameters": {
+										"object-to-create": "drift_zone",
+										"layer": "0",
+										"x": "roads.TileToPositionX(loopindex(\"roadX\"))",
+										"y": "roads.TileToPositionY(loopindex(\"roadY\"))",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-size",
+									"objectClass": "drift_zone",
+									"sid": 339358570543188,
+									"parameters": {
+										"width": "640",
+										"height": "640"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "drift_zone",
+									"sid": 428573029877369,
+									"parameters": {
+										"x": "Self.X + 256",
+										"y": "Self.Y + 256"
+									}
+								}
+							],
+							"sid": 181887752958370
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-moving",
+					"objectClass": "Car2",
+					"sid": 198437559846316,
+					"behaviorType": "Car"
+				}
+			],
+			"actions": [
+				{
+					"id": "set-position",
+					"objectClass": "cam_follow",
+					"sid": 934629240928815,
+					"parameters": {
+						"x": "Car2.X + Car2.Car.VectorX/2",
+						"y": "Car2.Y + Car2.Car.VectorY/2"
+					}
+				}
+			],
+			"sid": 300078525979333
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-drop",
+					"objectClass": "DriftBut",
+					"sid": 798619976081536,
+					"behaviorType": "DragDrop"
+				}
+			],
+			"actions": [
+				{
+					"id": "set-y",
+					"objectClass": "DriftBut",
+					"sid": 107594206057742,
+					"parameters": {
+						"y": "1077"
+					}
+				}
+			],
+			"sid": 862422439010884
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-dragging",
+					"objectClass": "DriftBut",
+					"sid": 343188995544613,
+					"behaviorType": "DragDrop"
+				},
+				{
+					"id": "is-between-values",
+					"objectClass": "System",
+					"sid": 906455896047742,
+					"parameters": {
+						"value": "DriftBut.Y",
+						"lower-bound": "727",
+						"upper-bound": "1077"
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [
+				{
+					"id": "set-y",
+					"objectClass": "DriftBut",
+					"sid": 774243126710754,
+					"parameters": {
+						"y": "clamp(DriftBut.Y, 727, 1077)"
+					}
+				}
+			],
+			"sid": 343021550201245
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-released",
+					"objectClass": "Keyboard",
+					"sid": 877449549200027,
+					"parameters": {
+						"key": 27
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 504675617470086,
+					"parameters": {
+						"layout": "Menu"
+					}
+				}
+			],
+			"sid": 627027623658666
 		}
 	],
 	"sid": 528873411861220

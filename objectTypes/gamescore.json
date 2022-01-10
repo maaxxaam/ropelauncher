@@ -1,0 +1,15 @@
+{
+	"name": "GameScore",
+	"plugin-id": "Eponesh_GameScore",
+	"sid": 179294838742491,
+	"singleglobal-inst": {
+		"type": "GameScore",
+		"properties": {
+			"project-id": 0,
+			"token": "",
+			"show-preloader": false,
+			"should-wait-player": true
+		},
+		"uid": 22
+	}
+}

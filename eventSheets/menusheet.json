@@ -1,0 +1,30 @@
+{
+	"name": "MenuSheet",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-touched-object",
+					"objectClass": "Touch",
+					"sid": 797471129203189,
+					"parameters": {
+						"object": "LvlBut"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout-by-name",
+					"objectClass": "System",
+					"sid": 857209978216130,
+					"parameters": {
+						"layout": "\"Lvl\"&LvlBut.IID+1"
+					}
+				}
+			],
+			"sid": 594997690382650
+		}
+	],
+	"sid": 188176345997916
+}

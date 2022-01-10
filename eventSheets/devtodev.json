@@ -1,0 +1,244 @@
+{
+	"name": "Devtodev",
+	"events": [
+		{
+			"functionName": "initDevtodev",
+			"functionDescription": "Initialize devtodev analytics",
+			"functionCategory": "Analytics",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "playerID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 450740398653735
+				},
+				{
+					"name": "platformType",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 515708798102046
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 296473705381386,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "runtime.setReturnValue(initDevtodev(localVars.platformType, localVars.playerID))"
+				}
+			]
+		},
+		{
+			"functionName": "setLevel",
+			"functionDescription": "",
+			"functionCategory": "devtodev",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Level",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 119377722628362
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 753539209509843,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "runtime.setReturnValue(d2d_setLevel(localVars.Level))"
+				}
+			]
+		},
+		{
+			"functionName": "LevelUp",
+			"functionDescription": "",
+			"functionCategory": "devtodev",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Level",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 883135097665444
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 336661037321807,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "runtime.setReturnValue(d2d_lvlUp(localVars.Level))"
+				}
+			]
+		},
+		{
+			"functionName": "PaymentToD2D",
+			"functionDescription": "",
+			"functionCategory": "devtodev",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "id",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 911319212336957
+				},
+				{
+					"name": "name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 297517166788947
+				},
+				{
+					"name": "price",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 440649955354714
+				},
+				{
+					"name": "type",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 799707965845172
+				},
+				{
+					"name": "currency",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 660858232891115
+				},
+				{
+					"name": "cur_amount",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "",
+					"sid": 545949033303942
+				},
+				{
+					"name": "amount",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "",
+					"sid": 586507287450898
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 597771411247254,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "runtime.setReturnValue(d2d_onPayment(localVars.id, localVars.name, localVars.price, localVars.type, localVars.amount, localVars.currency, localVars.cur_amount))"
+				}
+			]
+		},
+		{
+			"functionName": "startProgression",
+			"functionDescription": "",
+			"functionCategory": "devtodev",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 343059792546548
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 107430567874657,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "runtime.setReturnValue(d2d_startProgressionEvent(localVars.name))"
+				}
+			]
+		},
+		{
+			"functionName": "quickEndProgression",
+			"functionDescription": "",
+			"functionCategory": "devtodev",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 557177642062867
+				},
+				{
+					"name": "success",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 898710204868077
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 594766111787996,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "var succ = false;\nif (localVars.success > 0) succ = true;\nconsole.log(\"Succ is \" + succ);\nruntime.setReturnValue(d2d_quickEndProgressionEvent(localVars.name, succ));"
+				}
+			]
+		},
+		{
+			"functionName": "tutorialStep",
+			"functionDescription": "",
+			"functionCategory": "devtodev",
+			"functionReturnType": "string",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "step",
+					"type": "number",
+					"initialValue": "-2",
+					"comment": "",
+					"sid": 119723240852028
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 107922004452531,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "runtime.setReturnValue(d2d_tutorialStep(localVars.step))"
+				}
+			]
+		}
+	],
+	"sid": 183434847324506
+}

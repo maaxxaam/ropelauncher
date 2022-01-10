@@ -1,26 +1,26 @@
 {
-	"name": "Particles",
-	"plugin-id": "Particles",
-	"sid": 444792131048522,
+	"name": "cam_follow",
+	"plugin-id": "TiledBg",
+	"sid": 978435797628091,
 	"isGlobal": false,
 	"instanceVariables": [],
 	"behaviorTypes": [
 		{
-			"behaviorId": "Pin",
-			"name": "Pin",
-			"sid": 631042868120997
+			"behaviorId": "scrollto",
+			"name": "ScrollTo",
+			"sid": 990072144818701
 		}
 	],
 	"effectTypes": [],
 	"image": {
-		"width": 64,
-		"height": 64,
+		"width": 1,
+		"height": 1,
 		"originX": 0.5,
 		"originY": 0.5,
 		"originalSource": "",
 		"exportFormat": "png",
 		"exportQuality": 0.8,
-		"imageSpriteId": 4979556,
+		"imageSpriteId": 2746425,
 		"useCollisionPoly": true
 	}
 }
