@@ -15,6 +15,18 @@
 			"type": "number",
 			"desc": "",
 			"sid": 607575723801225
+		},
+		{
+			"name": "NinetyTurns",
+			"type": "number",
+			"desc": "",
+			"sid": 768733119552928
+		},
+		{
+			"name": "TurnId",
+			"type": "number",
+			"desc": "",
+			"sid": 560189611147781
 		}
 	],
 	"behaviorTypes": [],

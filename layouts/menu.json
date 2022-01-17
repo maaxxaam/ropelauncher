@@ -51,7 +51,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v0.1 alpha",
+						"text": "v2 alpha",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 24,

@@ -114,11 +114,13 @@
 					"uid": 37,
 					"instanceVariables": {
 						"Clockwise": true,
-						"TurnAngle": 270
+						"TurnAngle": 270,
+						"NinetyTurns": 2,
+						"TurnId": 3
 					},
 					"behaviors": {},
 					"world": {
-						"x": 2945,
+						"x": 3134,
 						"y": 1534,
 						"width": 50,
 						"height": 50,
@@ -143,42 +145,12 @@
 						"enable-collisions": true,
 						"live-preview": false
 					},
-					"uid": 38,
-					"instanceVariables": {
-						"Clockwise": true,
-						"TurnAngle": 180
-					},
-					"behaviors": {},
-					"world": {
-						"x": 3326,
-						"y": 1538,
-						"width": 50,
-						"height": 50,
-						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 0,
-						"zElevation": 0
-					}
-				},
-				{
-					"type": "Pole",
-					"properties": {
-						"initially-visible": true,
-						"initial-animation": "Animation 1",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
-					},
 					"uid": 39,
 					"instanceVariables": {
 						"Clockwise": true,
-						"TurnAngle": 90
+						"TurnAngle": 90,
+						"NinetyTurns": 1,
+						"TurnId": 2
 					},
 					"behaviors": {},
 					"world": {
@@ -210,7 +182,9 @@
 					"uid": 40,
 					"instanceVariables": {
 						"Clockwise": true,
-						"TurnAngle": 0
+						"TurnAngle": 0,
+						"NinetyTurns": 1,
+						"TurnId": 1
 					},
 					"behaviors": {},
 					"world": {
@@ -231,38 +205,6 @@
 					}
 				},
 				{
-					"type": "Pole",
-					"properties": {
-						"initially-visible": true,
-						"initial-animation": "Animation 1",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
-					},
-					"uid": 41,
-					"instanceVariables": {
-						"Clockwise": false,
-						"TurnAngle": 180
-					},
-					"behaviors": {},
-					"world": {
-						"x": 2555,
-						"y": 1156,
-						"width": 50,
-						"height": 50,
-						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 0,
-						"zElevation": 0
-					}
-				},
-				{
 					"type": "Car2",
 					"properties": {
 						"initially-visible": true,
@@ -273,17 +215,13 @@
 					},
 					"uid": 42,
 					"instanceVariables": {
-						"Trail": -2
+						"Trail": -2,
+						"CarSpeed": 400
 					},
 					"behaviors": {
 						"BoundToLayout": {
 							"properties": {
 								"bound-by": "edge"
-							}
-						},
-						"ScrollTo": {
-							"properties": {
-								"enabled": false
 							}
 						},
 						"Tween": {
@@ -293,16 +231,21 @@
 						},
 						"Car": {
 							"properties": {
-								"max-speed": 350,
-								"acceleration": 200,
+								"max-speed": 400,
+								"acceleration": 400,
 								"deceleration": 300,
-								"steer-speed": 85,
-								"drift-recover": 45,
+								"steer-speed": 110,
+								"drift-recover": 50,
 								"friction": 0.4,
 								"turn-while-stopped": false,
 								"set-angle": true,
 								"default-controls": true,
 								"enabled": true
+							}
+						},
+						"Pin": {
+							"properties": {
+								"destroy": false
 							}
 						}
 					},
@@ -374,12 +317,14 @@
 					"uid": 79,
 					"instanceVariables": {
 						"Clockwise": false,
-						"TurnAngle": 90
+						"TurnAngle": 90,
+						"NinetyTurns": 2,
+						"TurnId": 4
 					},
 					"behaviors": {},
 					"world": {
-						"x": 2050,
-						"y": 1148,
+						"x": 2310,
+						"y": 1151,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -403,47 +348,17 @@
 						"enable-collisions": true,
 						"live-preview": false
 					},
-					"uid": 80,
-					"instanceVariables": {
-						"Clockwise": true,
-						"TurnAngle": 180
-					},
-					"behaviors": {},
-					"world": {
-						"x": 1656,
-						"y": 2301,
-						"width": 50,
-						"height": 50,
-						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 0,
-						"zElevation": 0
-					}
-				},
-				{
-					"type": "Pole",
-					"properties": {
-						"initially-visible": true,
-						"initial-animation": "Animation 1",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
-					},
 					"uid": 81,
 					"instanceVariables": {
 						"Clockwise": true,
-						"TurnAngle": 270
+						"TurnAngle": 270,
+						"NinetyTurns": 2,
+						"TurnId": 5
 					},
 					"behaviors": {},
 					"world": {
-						"x": 1159,
-						"y": 2297,
+						"x": 1396,
+						"y": 2307,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -454,7 +369,7 @@
 							1,
 							1
 						],
-						"angle": 3.141592653589793,
+						"angle": 1.5707963267948966,
 						"zElevation": 0
 					}
 				}

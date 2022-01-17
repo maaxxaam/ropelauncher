@@ -9,6 +9,12 @@
 			"type": "number",
 			"desc": "",
 			"sid": 249203281949651
+		},
+		{
+			"name": "CarSpeed",
+			"type": "number",
+			"desc": "",
+			"sid": 416830870736636
 		}
 	],
 	"behaviorTypes": [
@@ -16,11 +22,6 @@
 			"behaviorId": "bound",
 			"name": "BoundToLayout",
 			"sid": 952108723898195
-		},
-		{
-			"behaviorId": "scrollto",
-			"name": "ScrollTo",
-			"sid": 506923050802504
 		},
 		{
 			"behaviorId": "Tween",
@@ -31,6 +32,11 @@
 			"behaviorId": "Car",
 			"name": "Car",
 			"sid": 672776114892879
+		},
+		{
+			"behaviorId": "Pin",
+			"name": "Pin",
+			"sid": 160319281014572
 		}
 	],
 	"effectTypes": [],

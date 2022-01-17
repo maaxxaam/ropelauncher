@@ -255,7 +255,12 @@
 			"GameScore",
 			"SettBut",
 			"mmtext",
-			"LvlBut"
+			"LvlBut",
+			"adzone",
+			"interface_zone",
+			"ideal",
+			"score_point",
+			"score_ui"
 		],
 		"subfolders": []
 	},
@@ -302,6 +307,14 @@
 					"name": "devtodev.js",
 					"type": "application/javascript",
 					"sid": 867712184254847,
+					"script-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "imports.js",
+					"type": "application/javascript",
+					"sid": 618319651232878,
 					"script-info": {
 						"purpose": "imports-for-events"
 					}
@@ -414,7 +427,7 @@
 		"subfolders": [
 			{
 				"items": [
-					"Ease 1"
+					"Ease1"
 				],
 				"subfolders": []
 			}
@@ -422,7 +435,7 @@
 	},
 	"properties": {
 		"description": "",
-		"version": "1.0.0.0",
+		"version": "v2-alpha",
 		"author": "maaxxaam",
 		"authorEmail": "maxfocus.mch@gmail.com",
 		"authorWebsite": "",

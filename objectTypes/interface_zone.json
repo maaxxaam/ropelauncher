@@ -1,0 +1,20 @@
+{
+	"name": "interface_zone",
+	"plugin-id": "TiledBg",
+	"sid": 855694096930624,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"image": {
+		"width": 64,
+		"height": 64,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 3971233,
+		"useCollisionPoly": true
+	}
+}
