@@ -17,9 +17,6 @@
 		"imageSpriteId": 5300648,
 		"useCollisionPoly": true
 	},
-<<<<<<< Updated upstream
-	"tile-collision-polys": {}
-=======
 	"tile-collision-polys": {
 		"323": {
 			"collisionPoly": {
@@ -37,5 +34,4 @@
 			"useCollisionPoly": false
 		}
 	}
->>>>>>> Stashed changes
 }
