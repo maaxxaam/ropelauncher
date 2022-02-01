@@ -1227,23 +1227,6 @@
 					"id": "else",
 					"objectClass": "System",
 					"sid": 378136475292770
-				},
-				{
-					"id": "is-overlapping-another-object",
-					"objectClass": "Car2",
-					"sid": 834931923726098,
-					"parameters": {
-						"object": "Turns"
-					},
-					"isInverted": true
-				},
-				{
-					"id": "compare-boolean-eventvar",
-					"objectClass": "System",
-					"sid": 798992274936256,
-					"parameters": {
-						"variable": "started_turn"
-					}
 				}
 			],
 			"actions": [
@@ -1255,32 +1238,6 @@
 					"parameters": {
 						"control": "accelerate"
 					}
-				},
-				{
-					"id": "add-to-eventvar",
-					"objectClass": "System",
-					"sid": 878531344864629,
-					"parameters": {
-						"variable": "LvlScore",
-						"value": "1"
-					}
-				},
-				{
-					"id": "set-text",
-					"objectClass": "score_ui",
-					"sid": 722814192880835,
-					"parameters": {
-						"text": "LvlScore"
-					}
-				},
-				{
-					"id": "set-boolean-eventvar",
-					"objectClass": "System",
-					"sid": 715876465935985,
-					"parameters": {
-						"variable": "started_turn",
-						"value": "false"
-					}
 				}
 			],
 			"sid": 786882474764362,
@@ -1291,9 +1248,18 @@
 						{
 							"id": "is-overlapping-another-object",
 							"objectClass": "Car2",
-							"sid": 831781304349921,
+							"sid": 778723139721719,
 							"parameters": {
-								"object": "ideal"
+								"object": "Turns"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 420469971829784,
+							"parameters": {
+								"variable": "started_turn"
 							}
 						}
 					],
@@ -1301,7 +1267,7 @@
 						{
 							"id": "add-to-eventvar",
 							"objectClass": "System",
-							"sid": 249540077158915,
+							"sid": 319990909165492,
 							"parameters": {
 								"variable": "LvlScore",
 								"value": "1"
@@ -1310,31 +1276,75 @@
 						{
 							"id": "set-text",
 							"objectClass": "score_ui",
-							"sid": 833064374172207,
+							"sid": 903084742889625,
 							"parameters": {
 								"text": "LvlScore"
 							}
 						},
 						{
-							"id": "set-acceleration",
-							"objectClass": "Car2",
-							"sid": 347485362422080,
-							"behaviorType": "Car",
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 590172219286228,
 							"parameters": {
-								"acceleration": "Car2.CarSpeed + 150"
-							}
-						},
-						{
-							"id": "set-max-speed",
-							"objectClass": "Car2",
-							"sid": 483451066652460,
-							"behaviorType": "Car",
-							"parameters": {
-								"max-speed": "Car2.CarSpeed + 150"
+								"variable": "started_turn",
+								"value": "false"
 							}
 						}
 					],
-					"sid": 737641620615627
+					"sid": 154514450761287,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "Car2",
+									"sid": 483145893431750,
+									"parameters": {
+										"object": "ideal"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 680419677309938,
+									"parameters": {
+										"variable": "LvlScore",
+										"value": "1"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "score_ui",
+									"sid": 469658015595555,
+									"parameters": {
+										"text": "LvlScore"
+									}
+								},
+								{
+									"id": "set-acceleration",
+									"objectClass": "Car2",
+									"sid": 869294514375312,
+									"behaviorType": "Car",
+									"parameters": {
+										"acceleration": "Car2.CarSpeed + 150"
+									}
+								},
+								{
+									"id": "set-max-speed",
+									"objectClass": "Car2",
+									"sid": 834296817170794,
+									"behaviorType": "Car",
+									"parameters": {
+										"max-speed": "Car2.CarSpeed + 150"
+									}
+								}
+							],
+							"sid": 946856611291593
+						}
+					]
 				}
 			]
 		},
