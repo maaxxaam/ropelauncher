@@ -301,7 +301,7 @@
 							"properties": {
 								"max-speed": 400,
 								"acceleration": 400,
-								"deceleration": 300,
+								"deceleration": 50,
 								"steer-speed": 110,
 								"drift-recover": 50,
 								"friction": 0.4,
