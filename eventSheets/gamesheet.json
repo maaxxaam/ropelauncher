@@ -866,29 +866,6 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "is-moving",
-					"objectClass": "Car2",
-					"sid": 198437559846316,
-					"behaviorType": "Car"
-				}
-			],
-			"actions": [
-				{
-					"id": "set-position",
-					"objectClass": "cam_follow",
-					"sid": 385937995294653,
-					"parameters": {
-						"x": "Car2.X + Car2.Car.VectorX/5",
-						"y": "Car2.Y + Car2.Car.VectorY/3"
-					}
-				}
-			],
-			"sid": 300078525979333
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
 					"id": "on-key-released",
 					"objectClass": "Keyboard",
 					"sid": 877449549200027,
@@ -908,6 +885,29 @@
 				}
 			],
 			"sid": 627027623658666
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-moving",
+					"objectClass": "Car2",
+					"sid": 198437559846316,
+					"behaviorType": "Car"
+				}
+			],
+			"actions": [
+				{
+					"id": "set-position",
+					"objectClass": "cam_follow",
+					"sid": 366886446358994,
+					"parameters": {
+						"x": "Car2.X + Car2.Car.VectorX/5 * (1 - flag_center_cam)",
+						"y": "Car2.Y + Car2.Car.VectorY/3 * (1 - flag_center_cam)"
+					}
+				}
+			],
+			"sid": 300078525979333
 		},
 		{
 			"eventType": "block",
@@ -1359,6 +1359,16 @@
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 824593646920047
+		},
+		{
+			"eventType": "variable",
+			"name": "flag_center_cam",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 758744027886712
 		},
 		{
 			"eventType": "variable",

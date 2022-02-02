@@ -84,6 +84,30 @@
 						}
 					],
 					"sid": 431265818969713
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "dev_flags",
+							"sid": 454987068146774,
+							"parameters": {
+								"unique-id": "56"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 231084155777698,
+							"parameters": {
+								"variable": "flag_center_cam"
+							}
+						}
+					],
+					"sid": 796631337785866
 				}
 			]
 		}

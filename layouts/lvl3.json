@@ -87,8 +87,8 @@
 						"tile-y-spacing": 0
 					},
 					"world": {
-						"x": 0,
-						"y": 0,
+						"x": 256,
+						"y": 256,
 						"width": 4913,
 						"height": 4304,
 						"originX": 0,
@@ -120,8 +120,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 900,
-						"y": 848,
+						"x": 1158,
+						"y": 1105,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -154,8 +154,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 1151,
-						"y": 3708,
+						"x": 1409,
+						"y": 3965,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -188,8 +188,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 2559,
-						"y": 643,
+						"x": 2817,
+						"y": 900,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -222,8 +222,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 3550,
-						"y": 2193,
+						"x": 3808,
+						"y": 2450,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -256,8 +256,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 2948,
-						"y": 1538,
+						"x": 3206,
+						"y": 1795,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -318,8 +318,8 @@
 						}
 					},
 					"world": {
-						"x": 972,
-						"y": 3011,
+						"x": 1224,
+						"y": 3268,
 						"width": 131,
 						"height": 70,
 						"originX": 0.5,
@@ -391,8 +391,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 2172,
-						"y": 3707,
+						"x": 2430,
+						"y": 3964,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -425,8 +425,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 1152,
-						"y": 2314,
+						"x": 1410,
+						"y": 2571,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -459,8 +459,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 1884,
-						"y": 1678,
+						"x": 2142,
+						"y": 1935,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,
@@ -493,8 +493,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": 2570,
-						"y": 2821,
+						"x": 2828,
+						"y": 3078,
 						"width": 50,
 						"height": 50,
 						"originX": 0.5,

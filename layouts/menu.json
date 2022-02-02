@@ -51,7 +51,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v3.1 alpha",
+						"text": "v3.2 alpha",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 24,
@@ -324,7 +324,7 @@
 					},
 					"world": {
 						"x": 28,
-						"y": 878,
+						"y": 875,
 						"width": 677,
 						"height": 46,
 						"originX": 0,
@@ -359,6 +359,40 @@
 					"world": {
 						"x": 27,
 						"y": 983,
+						"width": 682,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
+					}
+				},
+				{
+					"type": "dev_flags",
+					"properties": {
+						"type": "checkbox",
+						"text": "Центрировать камеру",
+						"tooltip": "",
+						"initially-visible": true,
+						"enabled": true,
+						"auto-font-size": false,
+						"checked": false,
+						"id": ""
+					},
+					"uid": 56,
+					"instanceVariables": {},
+					"behaviors": {
+						"Persist": {
+							"properties": {}
+						}
+					},
+					"world": {
+						"x": 26,
+						"y": 1084,
 						"width": 682,
 						"height": 46,
 						"originX": 0,
