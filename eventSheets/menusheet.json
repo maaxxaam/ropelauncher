@@ -24,6 +24,68 @@
 				}
 			],
 			"sid": 594997690382650
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "dev_flags",
+					"sid": 942722235703445
+				}
+			],
+			"actions": [],
+			"sid": 802764029037448,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "dev_flags",
+							"sid": 779017503553347,
+							"parameters": {
+								"unique-id": "12"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 375839814868963,
+							"parameters": {
+								"variable": "flag_invert_controls"
+							}
+						}
+					],
+					"sid": 540780902540317
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "dev_flags",
+							"sid": 393421905596016,
+							"parameters": {
+								"unique-id": "41"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 406417507475258,
+							"parameters": {
+								"variable": "flag_cam_angle_follow"
+							}
+						}
+					],
+					"sid": 431265818969713
+				}
+			]
 		}
 	],
 	"sid": 188176345997916

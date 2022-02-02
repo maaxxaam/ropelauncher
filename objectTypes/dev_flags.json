@@ -1,0 +1,14 @@
+{
+	"name": "dev_flags",
+	"plugin-id": "Button",
+	"sid": 662807962964576,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Persist",
+			"name": "Persist",
+			"sid": 411757650592281
+		}
+	]
+}

@@ -51,7 +51,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v2 alpha",
+						"text": "v3.1 alpha",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 24,
@@ -301,6 +301,74 @@
 						],
 						"angle": 0,
 						"zElevation": 0
+					}
+				},
+				{
+					"type": "dev_flags",
+					"properties": {
+						"type": "checkbox",
+						"text": "Инвертировать управление",
+						"tooltip": "",
+						"initially-visible": true,
+						"enabled": true,
+						"auto-font-size": false,
+						"checked": true,
+						"id": ""
+					},
+					"uid": 12,
+					"instanceVariables": {},
+					"behaviors": {
+						"Persist": {
+							"properties": {}
+						}
+					},
+					"world": {
+						"x": 28,
+						"y": 878,
+						"width": 677,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
+					}
+				},
+				{
+					"type": "dev_flags",
+					"properties": {
+						"type": "checkbox",
+						"text": "Поворот камеры",
+						"tooltip": "",
+						"initially-visible": true,
+						"enabled": true,
+						"auto-font-size": false,
+						"checked": false,
+						"id": ""
+					},
+					"uid": 41,
+					"instanceVariables": {},
+					"behaviors": {
+						"Persist": {
+							"properties": {}
+						}
+					},
+					"world": {
+						"x": 27,
+						"y": 983,
+						"width": 682,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
 					}
 				}
 			],

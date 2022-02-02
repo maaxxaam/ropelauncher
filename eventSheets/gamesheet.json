@@ -277,27 +277,6 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "on-key-pressed",
-					"objectClass": "Keyboard",
-					"sid": 763813914464495,
-					"parameters": {
-						"key": 82
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "restart-layout",
-					"objectClass": "System",
-					"sid": 781107925353791
-				}
-			],
-			"sid": 232104393945384
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
 					"id": "is-moving",
 					"objectClass": "Car2",
 					"sid": 790420976361589,
@@ -1143,10 +1122,10 @@
 				{
 					"id": "set-eventvar-value",
 					"objectClass": "System",
-					"sid": 796748168936681,
+					"sid": 275029846611404,
 					"parameters": {
 						"variable": "motion",
-						"value": "max(motion, Touch.SpeedAt(0))"
+						"value": "max((motion=-Infinity?0:motion), Touch.SpeedAt(0))"
 					}
 				},
 				{
@@ -1170,10 +1149,10 @@
 				{
 					"id": "set-steer-speed",
 					"objectClass": "Car2",
-					"sid": 877150680616167,
+					"sid": 993876965965693,
 					"behaviorType": "Car",
 					"parameters": {
-						"steer-speed": "((roundToDp(ln(abs(round((SwipeZone.X - 360)*(motion=-Infinity?0:motion))))<1?1:ln(abs(round((SwipeZone.X - 360)*(motion=-Infinity?0:motion)))), 3) - 7) * 25) * sign(SwipeZone.X - 360)"
+						"steer-speed": "((roundToDp(ln(abs(round((SwipeZone.X - 360)*motion)))<1?1:ln(abs(round((SwipeZone.X - 360)*motion))), 3) - 7) * 25) * sign(SwipeZone.X - 360) * (-2 * flag_invert_controls + 1)"
 					}
 				},
 				{
@@ -1370,6 +1349,115 @@
 				}
 			],
 			"sid": 252726039717465
+		},
+		{
+			"eventType": "variable",
+			"name": "flag_cam_angle_follow",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 824593646920047
+		},
+		{
+			"eventType": "variable",
+			"name": "flag_invert_controls",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 213516776672200
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 498958083191221
+				},
+				{
+					"id": "is-on-screen",
+					"objectClass": "Car2",
+					"sid": 865778928692912
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 226693454934649,
+					"parameters": {
+						"variable": "flag_cam_angle_follow"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-layer-angle",
+					"objectClass": "System",
+					"sid": 555419199273479,
+					"parameters": {
+						"layer": "0",
+						"angle": "Car2.Angle + 90"
+					}
+				}
+			],
+			"sid": 384944017700124
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 609609898302434,
+					"parameters": {
+						"object": "lvl_restart"
+					}
+				},
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 214923739643307,
+					"parameters": {
+						"key": 82
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "restart-layout",
+					"objectClass": "System",
+					"sid": 683703083139792
+				}
+			],
+			"sid": 794172737112218,
+			"isOrBlock": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 606309814180509,
+					"parameters": {
+						"object": "pause_menu"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 758902602569689,
+					"parameters": {
+						"layout": "Menu"
+					}
+				}
+			],
+			"sid": 251655774174458
 		}
 	],
 	"sid": 528873411861220

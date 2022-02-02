@@ -143,6 +143,14 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "Button",
+			"name": "Button",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "bound",
 			"name": "Bound to layout",
@@ -229,6 +237,14 @@
 			"author": "Chadori",
 			"version": "3.1.1.2",
 			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Persist",
+			"name": "Persist",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
 		}
 	],
 	"uniqueId": "j211m18wkv4",
@@ -269,7 +285,10 @@
 			"ideal",
 			"score_point",
 			"score_ui",
-			"SwipeZone"
+			"SwipeZone",
+			"dev_flags",
+			"lvl_restart",
+			"pause_menu"
 		],
 		"subfolders": []
 	},
@@ -444,7 +463,7 @@
 	},
 	"properties": {
 		"description": "",
-		"version": "v2-alpha",
+		"version": "v3.1-alpha",
 		"author": "maaxxaam",
 		"authorEmail": "maxfocus.mch@gmail.com",
 		"authorWebsite": "",
