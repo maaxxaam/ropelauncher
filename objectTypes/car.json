@@ -1,44 +1,48 @@
 {
 	"name": "Car",
 	"plugin-id": "Sprite",
-	"sid": 955281878094493,
+	"sid": 238911985306016,
 	"isGlobal": false,
-	"instanceVariables": [],
+	"instanceVariables": [
+		{
+			"name": "Trail",
+			"type": "number",
+			"desc": "",
+			"sid": 249203281949651
+		},
+		{
+			"name": "CarSpeed",
+			"type": "number",
+			"desc": "",
+			"sid": 416830870736636
+		},
+		{
+			"name": "CarSpeedBasic",
+			"type": "number",
+			"desc": "",
+			"sid": 857509283208276
+		}
+	],
 	"behaviorTypes": [
 		{
 			"behaviorId": "bound",
 			"name": "BoundToLayout",
-			"sid": 993661780247238
-		},
-		{
-			"behaviorId": "Bullet",
-			"name": "Bullet",
-			"sid": 721464189769028
-		},
-		{
-			"behaviorId": "Orbit",
-			"name": "Orbit",
-			"sid": 521673495603470
-		},
-		{
-			"behaviorId": "Rotate",
-			"name": "Rotate",
-			"sid": 283671008350763
-		},
-		{
-			"behaviorId": "scrollto",
-			"name": "ScrollTo",
-			"sid": 441165479681876
-		},
-		{
-			"behaviorId": "Pin",
-			"name": "Pin",
-			"sid": 140767623436278
+			"sid": 952108723898195
 		},
 		{
 			"behaviorId": "Tween",
 			"name": "Tween",
-			"sid": 595281019385410
+			"sid": 843296125530563
+		},
+		{
+			"behaviorId": "Car",
+			"name": "Car",
+			"sid": 672776114892879
+		},
+		{
+			"behaviorId": "Pin",
+			"name": "Pin",
+			"sid": 160319281014572
 		}
 	],
 	"effectTypes": [],
@@ -47,19 +51,61 @@
 			{
 				"frames": [
 					{
-						"width": 100,
-						"height": 50,
+						"width": 131,
+						"height": 70,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 7533042,
+						"imageSpriteId": 8377565,
+						"collisionPoly": {
+							"points": [
+								0.9618320610687023,
+								0.07142857142857142,
+								1,
+								0.5,
+								0.9618320610687023,
+								0.9142857142857143,
+								0.5,
+								0.9714285714285714,
+								0.06106870229007633,
+								0.8857142857142857,
+								0.007633587786259555,
+								0.5,
+								0.06106870229007633,
+								0.1,
+								0.5,
+								0.014285714285714285
+							]
+						},
 						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "LeftBackTrail",
+								"x": 0.1297709923664122,
+								"y": 0.14285714285714285
+							},
+							{
+								"name": "RightBackTrail",
+								"x": 0.1297709923664122,
+								"y": 0.8571428571428573
+							},
+							{
+								"name": "LeftFrontTrail",
+								"x": 0.816793893129771,
+								"y": 0.14285714285714285
+							},
+							{
+								"name": "RightFrontTrail",
+								"x": 0.816793893129771,
+								"y": 0.8571428571428571
+							}
+						],
 						"duration": 1
 					}
 				],
-				"sid": 279773550518022,
+				"sid": 765634219857229,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

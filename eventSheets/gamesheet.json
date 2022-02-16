@@ -13,6 +13,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "has_ideal_bonus",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 872765238696032
+		},
+		{
+			"eventType": "variable",
 			"name": "Speed",
 			"type": "number",
 			"initialValue": "0",
@@ -25,7 +35,7 @@
 			"eventType": "variable",
 			"name": "LvlScore",
 			"type": "number",
-			"initialValue": "-1",
+			"initialValue": "0",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -42,16 +52,6 @@
 			"sid": 854686913018689
 		},
 		{
-			"eventType": "variable",
-			"name": "inTouches",
-			"type": "number",
-			"initialValue": "0",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 383812493846018
-		},
-		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -63,7 +63,7 @@
 			"actions": [
 				{
 					"id": "move-to-top",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 254084424532482
 				},
 				{
@@ -72,7 +72,7 @@
 					"sid": 358013970452926,
 					"parameters": {
 						"variable": "DesAngle",
-						"value": "Car2.Angle"
+						"value": "Car.Angle"
 					}
 				},
 				{
@@ -80,7 +80,7 @@
 					"objectClass": "System",
 					"sid": 588533667299294,
 					"parameters": {
-						"object": "Car2",
+						"object": "Car",
 						"time-scale": "0"
 					}
 				},
@@ -89,13 +89,13 @@
 					"objectClass": "cam_follow",
 					"sid": 436324322341443,
 					"parameters": {
-						"object": "Car2",
+						"object": "Car",
 						"image-point-optional": "0"
 					}
 				},
 				{
 					"id": "add-child",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 612713030652429,
 					"parameters": {
 						"child": "cam_follow",
@@ -109,137 +109,477 @@
 					}
 				},
 				{
+					"id": "move-to-object",
+					"objectClass": "Car",
+					"sid": 171489283887117,
+					"parameters": {
+						"where": "behind",
+						"object": "scenery"
+					}
+				},
+				{
 					"callFunction": "do_timer",
 					"sid": 359539936734947
 				},
 				{
-					"id": "spawn-another-object",
-					"objectClass": "Car2",
-					"sid": 289640410829991,
-					"parameters": {
-						"object": "Particles",
-						"layer": "Car2.LayerName",
-						"image-point": "\"LeftBackTrail\"",
-						"create-hierarchy": false
-					}
-				},
-				{
-					"id": "set-angle",
-					"objectClass": "Particles",
-					"sid": 616387091349847,
-					"parameters": {
-						"angle": "Car2.Angle - 180"
-					}
-				},
-				{
-					"id": "pin-to-object-properties",
-					"objectClass": "Particles",
-					"sid": 180659918291318,
-					"behaviorType": "Pin",
-					"parameters": {
-						"pin-to": "Car2",
-						"x": true,
-						"y": true,
-						"angle": true,
-						"width-type": "no",
-						"height-type": "no",
-						"z": false
-					}
-				},
-				{
-					"id": "set-rate",
-					"objectClass": "Particles",
-					"sid": 517972234257490,
-					"parameters": {
-						"rate": "0"
-					}
-				},
-				{
-					"id": "move-to-object",
-					"objectClass": "Particles",
-					"sid": 691923753067029,
-					"parameters": {
-						"where": "behind",
-						"object": "Car2"
-					}
-				},
-				{
-					"id": "spawn-another-object",
-					"objectClass": "Car2",
-					"sid": 802719506692183,
-					"parameters": {
-						"object": "Particles",
-						"layer": "Car2.LayerName",
-						"image-point": "\"RightBackTrail\"",
-						"create-hierarchy": false
-					}
-				},
-				{
-					"id": "set-angle",
-					"objectClass": "Particles",
-					"sid": 721446411194338,
-					"parameters": {
-						"angle": "Car2.Angle - 180"
-					}
-				},
-				{
-					"id": "pin-to-object-properties",
-					"objectClass": "Particles",
-					"sid": 958644679613396,
-					"behaviorType": "Pin",
-					"parameters": {
-						"pin-to": "Car2",
-						"x": true,
-						"y": true,
-						"angle": true,
-						"width-type": "no",
-						"height-type": "no",
-						"z": false
-					}
-				},
-				{
-					"id": "set-rate",
-					"objectClass": "Particles",
-					"sid": 736770755585656,
-					"parameters": {
-						"rate": "0"
-					}
-				},
-				{
-					"id": "move-to-object",
-					"objectClass": "Particles",
-					"sid": 593301169532937,
-					"parameters": {
-						"where": "behind",
-						"object": "Car2"
-					}
+					"callFunction": "PlaceTireEffects",
+					"sid": 599696852187898
 				},
 				{
 					"callFunction": "PlaceDriftZones",
 					"sid": 151066115383564
 				},
 				{
-					"type": "script",
-					"script": "//alert(map_corners_to_pos(148) + \" \" + map_corners_to_clock(148) + \" \" + test_tile_for_corner(1));\n//alert(test_tile_for_corner(100));\n//alert(test_tile_for_corner(1));"
+					"id": "move-to-object",
+					"objectClass": "LevelLight",
+					"sid": 748838774466109,
+					"parameters": {
+						"where": "in-front",
+						"object": "Car"
+					}
 				}
 			],
-			"sid": 515440288879850
+			"sid": 515440288879850,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 863626839444245,
+							"parameters": {
+								"object": "scenery"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 526757512851981,
+							"parameters": {
+								"object": "scenery",
+								"expression": "scenery.AnimationName",
+								"comparison": 0,
+								"value": "\"Tree2\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "scenery",
+							"sid": 739359440917497,
+							"parameters": {
+								"angle": "random(0, 360)"
+							}
+						},
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 530646331456672,
+							"disabled": true,
+							"parameters": {
+								"message": "scenery.Angle"
+							}
+						}
+					],
+					"sid": 275767945633297
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 329043249306011,
+							"parameters": {
+								"object": "scenery"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 350043766134767,
+							"parameters": {
+								"object": "scenery",
+								"expression": "scenery.AnimationName",
+								"comparison": 0,
+								"value": "\"Tree1\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "scenery",
+							"sid": 751288654529534,
+							"parameters": {
+								"angle": "random(0, 360)"
+							}
+						},
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 403260501861934,
+							"disabled": true,
+							"parameters": {
+								"message": "scenery.Angle"
+							}
+						}
+					],
+					"sid": 714575164109380
+				},
+				{
+					"eventType": "comment",
+					"text": "Turn off moving obstacles if they are disabled"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 175549517331788,
+							"parameters": {
+								"variable": "flag_dynamic_obstacles"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [],
+					"sid": 263040460745615,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 583700633942635,
+									"parameters": {
+										"object": "Obstacle",
+										"expression": "Obstacle.Moving",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Obstacle",
+									"sid": 602365787369424,
+									"parameters": {
+										"instance-variable": "Moving",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "Obstacle",
+									"sid": 276892104496257,
+									"parameters": {
+										"animation": "\"rock\"&choose(\"1\", \"2\", \"3\")",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 333716577271007
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 629415196916888
+						}
+					],
+					"actions": [],
+					"sid": 231869550416525,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 870727525378206,
+									"parameters": {
+										"object": "Obstacle",
+										"expression": "Obstacle.Moving",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-active",
+									"objectClass": "Obstacle",
+									"sid": 943365466022978,
+									"behaviorType": "Sine",
+									"parameters": {
+										"state": "active"
+									}
+								}
+							],
+							"sid": 212844736112533
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "Hide static obstacles if they are disabled"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 564759667303585,
+							"parameters": {
+								"variable": "flag_static_obstacles"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 174780462532516,
+							"parameters": {
+								"object": "Obstacle",
+								"expression": "Obstacle.Moving",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "Obstacle",
+							"sid": 261644785815531,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 607538592892213
+				},
+				{
+					"eventType": "comment",
+					"text": "Turn moving bonuses into static if they are disabled"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 440607728103966,
+							"parameters": {
+								"variable": "flag_dynamic_obstacles"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [],
+					"sid": 965767737321887,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 190288553217853,
+									"parameters": {
+										"object": "Bonus",
+										"expression": "Bonus.Moving",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Bonus",
+									"sid": 931473539006948,
+									"parameters": {
+										"instance-variable": "Moving",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "Bonus",
+									"sid": 878459051652200,
+									"parameters": {
+										"animation": "\"Static\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 520919525920556
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 966771964488045
+						}
+					],
+					"actions": [],
+					"sid": 441644156030615,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 768428732395293,
+									"parameters": {
+										"object": "Bonus",
+										"expression": "Bonus.Moving",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-active",
+									"objectClass": "Bonus",
+									"sid": 472452379195856,
+									"behaviorType": "Sine",
+									"parameters": {
+										"state": "active"
+									}
+								}
+							],
+							"sid": 102696978986324
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "Hide static bonuses if they are disabled"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 878918739493915,
+							"parameters": {
+								"variable": "flag_static_obstacles"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 164764702701021,
+							"parameters": {
+								"object": "Bonus",
+								"expression": "Bonus.Moving",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "Bonus",
+							"sid": 148145890578047,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 606589347167187
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 475588498720362,
+							"parameters": {
+								"object": "score_ui",
+								"instance": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "score_ui",
+							"sid": 164204619314747,
+							"parameters": {
+								"text": "bonus_points"
+							}
+						}
+					],
+					"sid": 538015274574563
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 547410938535777,
+							"parameters": {
+								"object": "score_ui",
+								"instance": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "score_ui",
+							"sid": 923812508343254,
+							"parameters": {
+								"text": "LvlScore"
+							}
+						}
+					],
+					"sid": 466628006598106
+				}
+			]
 		},
 		{
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "pick-nth-instance",
+					"id": "pick-by-comparison",
 					"objectClass": "System",
-					"sid": 578979777615454,
+					"sid": 980742843819439,
 					"parameters": {
 						"object": "roads",
-						"instance": "1"
+						"expression": "roads.back",
+						"comparison": 0,
+						"value": "0"
 					}
 				},
 				{
 					"id": "is-overlapping-another-object",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 377815285178596,
 					"parameters": {
 						"object": "roads"
@@ -248,8 +588,9 @@
 				},
 				{
 					"id": "is-overlapping-another-object",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 820751043265699,
+					"disabled": true,
 					"parameters": {
 						"object": "Turns"
 					},
@@ -258,17 +599,8 @@
 			],
 			"actions": [
 				{
-					"id": "destroy",
-					"objectClass": "Car2",
-					"sid": 199845335588837
-				},
-				{
-					"id": "alert",
-					"objectClass": "Browser",
-					"sid": 895548545048312,
-					"parameters": {
-						"message": "\"Хорошая была попытка! Нажми [R] для перезапуска или [ESC] для выхода в меню\""
-					}
+					"callFunction": "GameOver",
+					"sid": 789709497906417
 				}
 			],
 			"sid": 412178629026609
@@ -278,7 +610,7 @@
 			"conditions": [
 				{
 					"id": "is-moving",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 790420976361589,
 					"behaviorType": "Car"
 				},
@@ -287,9 +619,9 @@
 					"objectClass": "System",
 					"sid": 994657812960453,
 					"parameters": {
-						"angle-1": "Car2.Angle",
+						"angle-1": "Car.Angle",
 						"within": "7",
-						"angle-2": "Car2.Car.MovingAngle"
+						"angle-2": "Car.Car.MovingAngle"
 					},
 					"isInverted": true
 				}
@@ -304,17 +636,27 @@
 							"id": "trigger-once-while-true",
 							"objectClass": "System",
 							"sid": 526074013773479
+						},
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 607889280627842,
+							"parameters": {
+								"name": "\"TireMarks\"",
+								"start-index": "1",
+								"end-index": "2"
+							}
 						}
 					],
 					"actions": [
 						{
 							"id": "spawn-another-object",
-							"objectClass": "Car2",
-							"sid": 762479167965690,
+							"objectClass": "Car",
+							"sid": 444743677001484,
 							"parameters": {
 								"object": "DriftMarks",
-								"layer": "Car2.LayerName",
-								"image-point": "\"LeftBackTrail\"",
+								"layer": "Car.LayerName",
+								"image-point": "loopindex(\"TireMarks\")",
 								"create-hierarchy": false
 							}
 						},
@@ -329,47 +671,19 @@
 						{
 							"id": "move-to-object",
 							"objectClass": "DriftMarks",
-							"sid": 705666813613337,
+							"sid": 332064358999430,
 							"parameters": {
 								"where": "behind",
-								"object": "Particles"
-							}
-						},
-						{
-							"id": "spawn-another-object",
-							"objectClass": "Car2",
-							"sid": 896026116522376,
-							"parameters": {
-								"object": "DriftMarks",
-								"layer": "Car2.LayerName",
-								"image-point": "\"RightBackTrail\"",
-								"create-hierarchy": false
-							}
-						},
-						{
-							"id": "set-angle",
-							"objectClass": "DriftMarks",
-							"sid": 698850271235966,
-							"parameters": {
-								"angle": "0"
-							}
-						},
-						{
-							"id": "move-to-object",
-							"objectClass": "DriftMarks",
-							"sid": 219569952067814,
-							"parameters": {
-								"where": "behind",
-								"object": "Particles"
+								"object": "Car"
 							}
 						},
 						{
 							"id": "add-to-instvar",
-							"objectClass": "Car2",
-							"sid": 732859638844109,
+							"objectClass": "Car",
+							"sid": 114604870151758,
 							"parameters": {
 								"instance-variable": "Trail",
-								"value": "2"
+								"value": "1"
 							}
 						},
 						{
@@ -387,12 +701,22 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 303534659675817,
+							"parameters": {
+								"name": "\"SpawnTireMarks\"",
+								"start-index": "0",
+								"end-index": "1"
+							}
+						},
+						{
 							"id": "pick-nth-instance",
 							"objectClass": "System",
-							"sid": 938204645814275,
+							"sid": 534051973393622,
 							"parameters": {
 								"object": "DriftMarks",
-								"instance": "Car2.Trail"
+								"instance": "Car.Trail + loopindex(\"SpawnTireMarks\")"
 							}
 						}
 					],
@@ -400,11 +724,11 @@
 						{
 							"id": "push-point",
 							"objectClass": "DriftMarks",
-							"sid": 520406483853695,
+							"sid": 704476524749170,
 							"behaviorType": "TrailRenderer",
 							"parameters": {
-								"x": "Car2.ImagePointX(\"LeftBackTrail\")",
-								"y": "Car2.ImagePointY(\"LeftBackTrail\")",
+								"x": "Car.ImagePointX(loopindex(\"SpawnTireMarks\") + 1)",
+								"y": "Car.ImagePointY(loopindex(\"SpawnTireMarks\") + 1)",
 								"angle": "0",
 								"angle-towards-new-position": true
 							}
@@ -421,7 +745,7 @@
 							"sid": 232132253262337,
 							"parameters": {
 								"object": "DriftMarks",
-								"instance": "Car2.Trail + 1"
+								"instance": "Car.Trail + 1"
 							}
 						}
 					],
@@ -432,14 +756,15 @@
 							"sid": 661391505654221,
 							"behaviorType": "TrailRenderer",
 							"parameters": {
-								"x": "Car2.ImagePointX(\"RightBackTrail\")",
-								"y": "Car2.ImagePointY(\"RightBackTrail\")",
+								"x": "Car.ImagePointX(\"RightBackTrail\")",
+								"y": "Car.ImagePointY(\"RightBackTrail\")",
 								"angle": "0",
 								"angle-towards-new-position": true
 							}
 						}
 					],
-					"sid": 287601679230949
+					"sid": 287601679230949,
+					"disabled": true
 				}
 			]
 		},
@@ -474,12 +799,14 @@
 			"eventType": "function-block",
 			"conditions": [
 				{
-					"id": "pick-nth-instance",
+					"id": "pick-by-comparison",
 					"objectClass": "System",
-					"sid": 551561064434378,
+					"sid": 421120456862227,
 					"parameters": {
 						"object": "roads",
-						"instance": "1"
+						"expression": "roads.back",
+						"comparison": 0,
+						"value": "0"
 					}
 				},
 				{
@@ -490,6 +817,16 @@
 						"name": "\"roadX\"",
 						"start-index": "0",
 						"end-index": "roads.TileWidth - 1"
+					}
+				},
+				{
+					"id": "compare-two-values",
+					"objectClass": "System",
+					"sid": 984410203102257,
+					"parameters": {
+						"first-value": "LayoutName",
+						"comparison": 1,
+						"second-value": "\"ParkingLot\""
 					}
 				}
 			],
@@ -891,7 +1228,7 @@
 			"conditions": [
 				{
 					"id": "is-moving",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 198437559846316,
 					"behaviorType": "Car"
 				}
@@ -902,12 +1239,144 @@
 					"objectClass": "cam_follow",
 					"sid": 366886446358994,
 					"parameters": {
-						"x": "Car2.X + Car2.Car.VectorX/5 * (1 - flag_center_cam)",
-						"y": "Car2.Y + Car2.Car.VectorY/3 * (1 - flag_center_cam)"
+						"x": "Car.X + Car.Car.VectorX/5 * (1 - flag_center_cam)",
+						"y": "Car.Y + Car.Car.VectorY/3 * (1 - flag_center_cam)"
 					}
 				}
 			],
-			"sid": 300078525979333
+			"sid": 300078525979333,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "Total_coef",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 723996342082370
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 370562024173436,
+							"parameters": {
+								"name": "\"Tires\"",
+								"start-index": "1",
+								"end-index": "4"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 577056860638750,
+							"parameters": {
+								"object": "roads",
+								"expression": "roads.back",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 131723033042293,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-tile-at",
+									"objectClass": "roads",
+									"sid": 649534674988241,
+									"parameters": {
+										"tile-x": "roads.PositionToTileX(roads.SnapX(Car.ImagePointX(loopindex(\"Tires\"))))",
+										"tile-y": "roads.PositionToTileY(roads.SnapY(Car.ImagePointY(loopindex(\"Tires\"))))",
+										"comparison": 0,
+										"tile": "48"
+									}
+								},
+								{
+									"id": "compare-tile-at",
+									"objectClass": "roads",
+									"sid": 671185465345265,
+									"parameters": {
+										"tile-x": "roads.PositionToTileX(roads.SnapX(Car.ImagePointX(loopindex(\"Tires\"))))",
+										"tile-y": "roads.PositionToTileY(roads.SnapY(Car.ImagePointY(loopindex(\"Tires\"))))",
+										"comparison": 0,
+										"tile": "245"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "subtract-from-eventvar",
+									"objectClass": "System",
+									"sid": 774628789088423,
+									"parameters": {
+										"variable": "Total_coef",
+										"value": "0.125"
+									}
+								}
+							],
+							"sid": 593909228984840,
+							"isOrBlock": true
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 330461246183447,
+							"parameters": {
+								"variable": "has_ideal_bonus"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 739647732650768,
+							"parameters": {
+								"variable": "Total_coef",
+								"value": "0.3"
+							}
+						}
+					],
+					"sid": 681832970131107
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "Car",
+							"sid": 417011833958008,
+							"parameters": {
+								"instance-variable": "CarSpeed",
+								"value": "Car.CarSpeedBasic * Total_coef"
+							}
+						},
+						{
+							"id": "set-max-speed",
+							"objectClass": "Car",
+							"sid": 958645506892488,
+							"behaviorType": "Car",
+							"parameters": {
+								"max-speed": "lerp(Car.Car.MaxSpeed, Car.CarSpeed, 0.03)"
+							}
+						}
+					],
+					"sid": 390279062658008
+				}
+			]
 		},
 		{
 			"eventType": "block",
@@ -1025,7 +1494,7 @@
 					"objectClass": "System",
 					"sid": 166994928725296,
 					"parameters": {
-						"object": "Car2",
+						"object": "Car",
 						"time-scale": "1"
 					}
 				},
@@ -1103,20 +1572,12 @@
 			"actions": [
 				{
 					"id": "set-acceleration",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 834079267358272,
+					"disabled": true,
 					"behaviorType": "Car",
 					"parameters": {
-						"acceleration": "lerp(Car2.Car.MaxSpeed, Car2.CarSpeed, 0.01)"
-					}
-				},
-				{
-					"id": "set-max-speed",
-					"objectClass": "Car2",
-					"sid": 746439386531591,
-					"behaviorType": "Car",
-					"parameters": {
-						"max-speed": "lerp(Car2.Car.MaxSpeed, Car2.CarSpeed, 0.01)"
+						"acceleration": "lerp(Car.Car.MaxSpeed, Car.CarSpeed, 0.01)"
 					}
 				},
 				{
@@ -1129,17 +1590,8 @@
 					}
 				},
 				{
-					"id": "set-text",
-					"objectClass": "score_ui",
-					"sid": 944426709193044,
-					"disabled": true,
-					"parameters": {
-						"text": "motion"
-					}
-				},
-				{
 					"id": "simulate-control",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 419602780086858,
 					"behaviorType": "Car",
 					"parameters": {
@@ -1148,7 +1600,7 @@
 				},
 				{
 					"id": "set-steer-speed",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 993876965965693,
 					"behaviorType": "Car",
 					"parameters": {
@@ -1157,7 +1609,7 @@
 				},
 				{
 					"id": "simulate-control",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 974626587124035,
 					"behaviorType": "Car",
 					"parameters": {
@@ -1172,7 +1624,7 @@
 					"conditions": [
 						{
 							"id": "is-overlapping-another-object",
-							"objectClass": "Car2",
+							"objectClass": "Car",
 							"sid": 755201450989210,
 							"parameters": {
 								"object": "Turns"
@@ -1193,6 +1645,15 @@
 								"variable": "started_turn",
 								"value": "true"
 							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 190890533381889,
+							"parameters": {
+								"variable": "has_ideal_bonus",
+								"value": "false"
+							}
 						}
 					],
 					"sid": 795765778019773
@@ -1206,12 +1667,21 @@
 					"id": "else",
 					"objectClass": "System",
 					"sid": 378136475292770
+				},
+				{
+					"id": "pick-nth-instance",
+					"objectClass": "System",
+					"sid": 968574366820398,
+					"parameters": {
+						"object": "score_ui",
+						"instance": "0"
+					}
 				}
 			],
 			"actions": [
 				{
 					"id": "simulate-control",
-					"objectClass": "Car2",
+					"objectClass": "Car",
 					"sid": 987299123425934,
 					"behaviorType": "Car",
 					"parameters": {
@@ -1226,7 +1696,7 @@
 					"conditions": [
 						{
 							"id": "is-overlapping-another-object",
-							"objectClass": "Car2",
+							"objectClass": "Car",
 							"sid": 778723139721719,
 							"parameters": {
 								"object": "Turns"
@@ -1277,7 +1747,7 @@
 							"conditions": [
 								{
 									"id": "is-overlapping-another-object",
-									"objectClass": "Car2",
+									"objectClass": "Car",
 									"sid": 483145893431750,
 									"parameters": {
 										"object": "ideal"
@@ -1304,20 +1774,21 @@
 								},
 								{
 									"id": "set-acceleration",
-									"objectClass": "Car2",
+									"objectClass": "Car",
 									"sid": 869294514375312,
+									"disabled": true,
 									"behaviorType": "Car",
 									"parameters": {
-										"acceleration": "Car2.CarSpeed + 150"
+										"acceleration": "Car.CarSpeed + 150"
 									}
 								},
 								{
-									"id": "set-max-speed",
-									"objectClass": "Car2",
-									"sid": 834296817170794,
-									"behaviorType": "Car",
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 948421499034559,
 									"parameters": {
-										"max-speed": "Car2.CarSpeed + 150"
+										"variable": "has_ideal_bonus",
+										"value": "true"
 									}
 								}
 							],
@@ -1364,7 +1835,7 @@
 			"eventType": "variable",
 			"name": "flag_center_cam",
 			"type": "boolean",
-			"initialValue": "false",
+			"initialValue": "true",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -1381,39 +1852,116 @@
 			"sid": 213516776672200
 		},
 		{
+			"eventType": "variable",
+			"name": "flag_static_bonuses",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 368295215401342
+		},
+		{
+			"eventType": "variable",
+			"name": "flag_static_obstacles",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 567014638030267
+		},
+		{
+			"eventType": "variable",
+			"name": "flag_dynamic_bonuses",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 544405760193672
+		},
+		{
+			"eventType": "variable",
+			"name": "flag_dynamic_obstacles",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 718701669878364
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
 					"id": "every-tick",
 					"objectClass": "System",
 					"sid": 498958083191221
-				},
-				{
-					"id": "is-on-screen",
-					"objectClass": "Car2",
-					"sid": 865778928692912
-				},
-				{
-					"id": "compare-boolean-eventvar",
-					"objectClass": "System",
-					"sid": 226693454934649,
-					"parameters": {
-						"variable": "flag_cam_angle_follow"
-					}
 				}
 			],
-			"actions": [
+			"actions": [],
+			"sid": 384944017700124,
+			"children": [
 				{
-					"id": "set-layer-angle",
-					"objectClass": "System",
-					"sid": 555419199273479,
-					"parameters": {
-						"layer": "0",
-						"angle": "Car2.Angle + 90"
-					}
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-on-screen",
+							"objectClass": "Car",
+							"sid": 197624113506859
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 441496080757247,
+							"parameters": {
+								"variable": "flag_cam_angle_follow"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-angle",
+							"objectClass": "System",
+							"sid": 566920042479080,
+							"parameters": {
+								"layer": "0",
+								"angle": "Car.Angle + 90"
+							}
+						}
+					],
+					"sid": 431002357501327
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 789810842805303,
+							"parameters": {
+								"object": "roads",
+								"expression": "roads.back",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "score_ui",
+							"sid": 278691291578544,
+							"parameters": {
+								"text": "roads.TileAt(roads.PositionToTileX(roads.SnapX(Car.ImagePointX(1))), roads.PositionToTiley(roads.Snapy(Car.ImagePointy(1)))) "
+							}
+						}
+					],
+					"sid": 394269044133024,
+					"disabled": true
 				}
-			],
-			"sid": 384944017700124
+			]
 		},
 		{
 			"eventType": "block",
@@ -1468,6 +2016,234 @@
 				}
 			],
 			"sid": 251655774174458
+		},
+		{
+			"functionName": "PlaceTireEffects",
+			"functionDescription": "",
+			"functionCategory": "Car",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "for",
+					"objectClass": "System",
+					"sid": 287886272885324,
+					"parameters": {
+						"name": "\"TireImagePoints\"",
+						"start-index": "1",
+						"end-index": "4"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "spawn-another-object",
+					"objectClass": "Car",
+					"sid": 326251537675877,
+					"parameters": {
+						"object": "Particles",
+						"layer": "Car.LayerName",
+						"image-point": "loopindex(\"TireImagePoints\")",
+						"create-hierarchy": false
+					}
+				},
+				{
+					"id": "set-angle",
+					"objectClass": "Particles",
+					"sid": 796201090403998,
+					"parameters": {
+						"angle": "Car.Angle - 180"
+					}
+				},
+				{
+					"id": "pin-to-object-properties",
+					"objectClass": "Particles",
+					"sid": 666343567353154,
+					"behaviorType": "Pin",
+					"parameters": {
+						"pin-to": "Car",
+						"x": true,
+						"y": true,
+						"angle": true,
+						"width-type": "no",
+						"height-type": "no",
+						"z": false
+					}
+				},
+				{
+					"id": "set-rate",
+					"objectClass": "Particles",
+					"sid": 507137042452326,
+					"parameters": {
+						"rate": "0"
+					}
+				},
+				{
+					"id": "move-to-object",
+					"objectClass": "Particles",
+					"sid": 438397655445576,
+					"parameters": {
+						"where": "behind",
+						"object": "Car"
+					}
+				}
+			],
+			"sid": 106802536567130
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "Car",
+					"sid": 524660324732640,
+					"parameters": {
+						"object": "Obstacle"
+					}
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "Obstacle",
+					"sid": 187921159145389
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "GameOver",
+					"sid": 297817077002275
+				}
+			],
+			"sid": 536250306048691
+		},
+		{
+			"eventType": "variable",
+			"name": "bonus_points",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 964462098444223
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "Car",
+					"sid": 219797985910387,
+					"parameters": {
+						"object": "Bonus"
+					}
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "Bonus",
+					"sid": 158630039676986
+				}
+			],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 268437825612302,
+					"parameters": {
+						"variable": "bonus_points",
+						"value": "1"
+					}
+				}
+			],
+			"sid": 746870235743867,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "Bonus",
+							"sid": 897899358152368,
+							"parameters": {
+								"instance-variable": "Moving"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 651086360480261,
+							"parameters": {
+								"variable": "bonus_points",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 263903070180835
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 335004969839580
+						},
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 511602695483053,
+							"parameters": {
+								"object": "score_ui",
+								"instance": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "score_ui",
+							"sid": 619611278740433,
+							"parameters": {
+								"text": "bonus_points"
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "Bonus",
+							"sid": 551724869833101
+						}
+					],
+					"sid": 505321115962545
+				}
+			]
+		},
+		{
+			"functionName": "GameOver",
+			"functionDescription": "",
+			"functionCategory": "Level",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Car",
+					"sid": 199845335588837
+				},
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 895548545048312,
+					"parameters": {
+						"message": "\"Хорошая была попытка! Нажми [R] для перезапуска или [ESC] для выхода в меню\""
+					}
+				}
+			],
+			"sid": 697708918401467
 		}
 	],
 	"sid": 528873411861220

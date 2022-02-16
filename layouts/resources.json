@@ -46,87 +46,6 @@
 					}
 				},
 				{
-					"type": "Car",
-					"properties": {
-						"initially-visible": true,
-						"initial-animation": "Animation 1",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
-					},
-					"uid": 2,
-					"instanceVariables": {},
-					"behaviors": {
-						"BoundToLayout": {
-							"properties": {
-								"bound-by": "edge"
-							}
-						},
-						"Bullet": {
-							"properties": {
-								"speed": 400,
-								"acceleration": 0,
-								"gravity": 0,
-								"bounce-off-solids": false,
-								"set-angle": true,
-								"step": false,
-								"enabled": true
-							}
-						},
-						"Orbit": {
-							"properties": {
-								"speed": 180,
-								"acceleration": 20,
-								"primary-axis": 100,
-								"secondary-axis": 100,
-								"offset-angle": 0,
-								"match-rotation": false,
-								"enabled": false,
-								"live-preview": false
-							}
-						},
-						"Rotate": {
-							"properties": {
-								"speed": 60,
-								"acceleration": 0,
-								"enabled": false,
-								"live-preview": false
-							}
-						},
-						"ScrollTo": {
-							"properties": {
-								"enabled": true
-							}
-						},
-						"Pin": {
-							"properties": {
-								"destroy": false
-							}
-						},
-						"Tween": {
-							"properties": {
-								"enabled": true
-							}
-						}
-					},
-					"world": {
-						"x": 273,
-						"y": 178,
-						"width": 100,
-						"height": 50,
-						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 4.71238898038469,
-						"zElevation": 0
-					}
-				},
-				{
 					"type": "DriftMarks",
 					"properties": {
 						"initially-visible": true,
@@ -228,8 +147,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 829,
-						"y": 402,
+						"x": 858,
+						"y": 408,
 						"width": 640,
 						"height": 640,
 						"originX": 0.5,
@@ -245,7 +164,7 @@
 					}
 				},
 				{
-					"type": "Car2",
+					"type": "Car",
 					"properties": {
 						"initially-visible": true,
 						"initial-animation": "Animation 1",
@@ -256,7 +175,8 @@
 					"uid": 48,
 					"instanceVariables": {
 						"Trail": -2,
-						"CarSpeed": 400
+						"CarSpeed": 400,
+						"CarSpeedBasic": 0
 					},
 					"behaviors": {
 						"BoundToLayout": {
@@ -369,6 +289,108 @@
 						"y": 472,
 						"width": 100,
 						"height": 100,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "Obstacle",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Rock1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 10,
+					"instanceVariables": {
+						"Moving": false
+					},
+					"behaviors": {
+						"Sine": {
+							"properties": {
+								"movement": "forwards-backwards",
+								"wave": "sine",
+								"period": 4,
+								"period-random": 0,
+								"period-offset": 0,
+								"period-offset-random": 0,
+								"magnitude": 50,
+								"magnitude-random": 0,
+								"enabled": false,
+								"live-preview": false
+							}
+						},
+						"Tween": {
+							"properties": {
+								"enabled": true
+							}
+						}
+					},
+					"world": {
+						"x": 267,
+						"y": 64,
+						"width": 89,
+						"height": 72,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "Bonus",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Static",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 114,
+					"instanceVariables": {
+						"Moving": false
+					},
+					"behaviors": {
+						"Sine": {
+							"properties": {
+								"movement": "forwards-backwards",
+								"wave": "sine",
+								"period": 4,
+								"period-random": 0,
+								"period-offset": 0,
+								"period-offset-random": 0,
+								"magnitude": 160,
+								"magnitude-random": 0,
+								"enabled": false,
+								"live-preview": false
+							}
+						},
+						"Tween": {
+							"properties": {
+								"enabled": true
+							}
+						}
+					},
+					"world": {
+						"x": 526,
+						"y": 158,
+						"width": 28,
+						"height": 28,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [

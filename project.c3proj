@@ -139,7 +139,7 @@
 			"id": "Eponesh_GameScore",
 			"name": "GameScore",
 			"author": "Eponesh",
-			"version": "1.0.25",
+			"version": "1.0.26",
 			"bundled": false
 		},
 		{
@@ -151,41 +151,9 @@
 			"bundled": false
 		},
 		{
-			"type": "behavior",
-			"id": "bound",
-			"name": "Bound to layout",
-			"author": "Scirra",
-			"version": "r276.2",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
-			"id": "Bullet",
-			"name": "Bullet",
-			"author": "Scirra",
-			"version": "r276.2",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
-			"id": "Orbit",
-			"name": "Orbit",
-			"author": "Scirra",
-			"version": "r276.2",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
-			"id": "Rotate",
-			"name": "Rotate",
-			"author": "Scirra",
-			"version": "r276.2",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
-			"id": "scrollto",
-			"name": "Scroll To",
+			"type": "plugin",
+			"id": "shadowlight",
+			"name": "Shadow light",
 			"author": "Scirra",
 			"version": "r276.2",
 			"bundled": false
@@ -194,6 +162,14 @@
 			"type": "behavior",
 			"id": "Pin",
 			"name": "Pin",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "bound",
+			"name": "Bound to layout",
 			"author": "Scirra",
 			"version": "r276.2",
 			"bundled": false
@@ -224,6 +200,14 @@
 		},
 		{
 			"type": "behavior",
+			"id": "scrollto",
+			"name": "Scroll To",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
 			"id": "DragnDrop",
 			"name": "Drag & Drop",
 			"author": "Scirra",
@@ -245,24 +229,52 @@
 			"author": "Scirra",
 			"version": "r276.2",
 			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "shadowcaster",
+			"name": "Shadow caster",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Sin",
+			"name": "Sine",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "blurhorizontal",
+			"name": "Blur horizontal",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "blurvertical",
+			"name": "Blur vertical",
+			"author": "Scirra",
+			"version": "r276.2",
+			"bundled": false
 		}
 	],
 	"uniqueId": "j211m18wkv4",
 	"objectTypes": {
 		"items": [
-			"Car",
 			"Pole",
 			"TiledBackground",
 			"Touch",
 			"LocalStorage",
 			"AJAX",
-			"Turn90",
 			"dbgtxt",
-			"Turn180",
-			"Road",
 			"Browser",
 			"Keyboard",
-			"Car2",
+			"Car",
 			"DriftMarks",
 			"Particles",
 			"roads",
@@ -288,7 +300,11 @@
 			"SwipeZone",
 			"dev_flags",
 			"lvl_restart",
-			"pause_menu"
+			"pause_menu",
+			"LevelLight",
+			"scenery",
+			"Obstacle",
+			"Bonus"
 		],
 		"subfolders": []
 	},
@@ -307,7 +323,8 @@
 			"Lvl2",
 			"Lvl3",
 			"Resources",
-			"Menu"
+			"Menu",
+			"ParkingLot"
 		],
 		"subfolders": []
 	},
@@ -463,7 +480,7 @@
 	},
 	"properties": {
 		"description": "",
-		"version": "v3.2-alpha",
+		"version": "v4-alpha",
 		"author": "maaxxaam",
 		"authorEmail": "maxfocus.mch@gmail.com",
 		"authorWebsite": "",

@@ -11,15 +11,25 @@
 					"parameters": {
 						"object": "LvlBut"
 					}
+				},
+				{
+					"id": "pick-overlapping-point",
+					"objectClass": "System",
+					"sid": 401241684657173,
+					"parameters": {
+						"object": "mmtext",
+						"x": "LvlBut.X",
+						"y": "LvlBut.Y"
+					}
 				}
 			],
 			"actions": [
 				{
 					"id": "go-to-layout-by-name",
 					"objectClass": "System",
-					"sid": 857209978216130,
+					"sid": 747582275308883,
 					"parameters": {
-						"layout": "\"Lvl\"&LvlBut.IID+1"
+						"layout": "mmtext.Text"
 					}
 				}
 			],
@@ -108,6 +118,102 @@
 						}
 					],
 					"sid": 796631337785866
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "dev_flags",
+							"sid": 601405449856071,
+							"parameters": {
+								"unique-id": "2"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 852405033520660,
+							"parameters": {
+								"variable": "flag_static_obstacles"
+							}
+						}
+					],
+					"sid": 711660461526306
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "dev_flags",
+							"sid": 572753635807000,
+							"parameters": {
+								"unique-id": "105"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 252616701866058,
+							"parameters": {
+								"variable": "flag_dynamic_obstacles"
+							}
+						}
+					],
+					"sid": 505287772156479
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "dev_flags",
+							"sid": 337741674376753,
+							"parameters": {
+								"unique-id": "106"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 330493737160291,
+							"parameters": {
+								"variable": "flag_static_bonuses"
+							}
+						}
+					],
+					"sid": 248867297136229
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "dev_flags",
+							"sid": 267266767893376,
+							"parameters": {
+								"unique-id": "107"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "toggle-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 163499739737380,
+							"parameters": {
+								"variable": "flag_dynamic_bonuses"
+							}
+						}
+					],
+					"sid": 572712917976827
 				}
 			]
 		}

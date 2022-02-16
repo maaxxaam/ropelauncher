@@ -6,8 +6,6 @@
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"members": [
-		"Turn180",
-		"Turn90",
 		"drift_zone"
 	]
 }

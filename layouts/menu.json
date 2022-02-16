@@ -9,7 +9,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "Drift game",
+						"text": "Untitled drift game",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 48,
@@ -51,7 +51,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v3.2 alpha",
+						"text": "v4 alpha",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 24,
@@ -75,7 +75,7 @@
 					"behaviors": {},
 					"world": {
 						"x": 17,
-						"y": 1169,
+						"y": 1190,
 						"width": 703,
 						"height": 109,
 						"originX": 0,
@@ -103,8 +103,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 120,
-						"y": 629,
+						"x": 129,
+						"y": 295,
 						"width": 200,
 						"height": 200,
 						"originX": 0.5,
@@ -132,8 +132,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 351,
-						"y": 630,
+						"x": 360,
+						"y": 296,
 						"width": 200,
 						"height": 200,
 						"originX": 0.5,
@@ -161,8 +161,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 583,
-						"y": 630,
+						"x": 592,
+						"y": 296,
 						"width": 200,
 						"height": 200,
 						"originX": 0.5,
@@ -203,8 +203,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 19,
-						"y": 529,
+						"x": 31,
+						"y": 195,
 						"width": 199,
 						"height": 198,
 						"originX": 0,
@@ -245,8 +245,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 251,
-						"y": 535,
+						"x": 261,
+						"y": 196,
 						"width": 199,
 						"height": 198,
 						"originX": 0,
@@ -287,8 +287,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 486,
-						"y": 534,
+						"x": 494,
+						"y": 197,
 						"width": 199,
 						"height": 198,
 						"originX": 0,
@@ -324,7 +324,7 @@
 					},
 					"world": {
 						"x": 28,
-						"y": 875,
+						"y": 1024,
 						"width": 677,
 						"height": 46,
 						"originX": 0,
@@ -358,7 +358,7 @@
 					},
 					"world": {
 						"x": 27,
-						"y": 983,
+						"y": 1088,
 						"width": 682,
 						"height": 46,
 						"originX": 0,
@@ -380,7 +380,7 @@
 						"initially-visible": true,
 						"enabled": true,
 						"auto-font-size": false,
-						"checked": false,
+						"checked": true,
 						"id": ""
 					},
 					"uid": 56,
@@ -392,7 +392,7 @@
 					},
 					"world": {
 						"x": 26,
-						"y": 1084,
+						"y": 1153,
 						"width": 682,
 						"height": 46,
 						"originX": 0,
@@ -403,6 +403,213 @@
 							1,
 							1
 						]
+					}
+				},
+				{
+					"type": "dev_flags",
+					"properties": {
+						"type": "checkbox",
+						"text": "Недвижимые препятствия",
+						"tooltip": "",
+						"initially-visible": true,
+						"enabled": true,
+						"auto-font-size": false,
+						"checked": true,
+						"id": ""
+					},
+					"uid": 2,
+					"instanceVariables": {},
+					"behaviors": {
+						"Persist": {
+							"properties": {}
+						}
+					},
+					"world": {
+						"x": 31,
+						"y": 864,
+						"width": 677,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
+					}
+				},
+				{
+					"type": "dev_flags",
+					"properties": {
+						"type": "checkbox",
+						"text": "Подвижные препятствия",
+						"tooltip": "",
+						"initially-visible": true,
+						"enabled": true,
+						"auto-font-size": false,
+						"checked": false,
+						"id": ""
+					},
+					"uid": 105,
+					"instanceVariables": {},
+					"behaviors": {
+						"Persist": {
+							"properties": {}
+						}
+					},
+					"world": {
+						"x": 30,
+						"y": 928,
+						"width": 682,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
+					}
+				},
+				{
+					"type": "dev_flags",
+					"properties": {
+						"type": "checkbox",
+						"text": "Недвижимые бонусы",
+						"tooltip": "",
+						"initially-visible": true,
+						"enabled": true,
+						"auto-font-size": false,
+						"checked": true,
+						"id": ""
+					},
+					"uid": 106,
+					"instanceVariables": {},
+					"behaviors": {
+						"Persist": {
+							"properties": {}
+						}
+					},
+					"world": {
+						"x": 29,
+						"y": 691,
+						"width": 677,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
+					}
+				},
+				{
+					"type": "dev_flags",
+					"properties": {
+						"type": "checkbox",
+						"text": "Подвижные бонусы",
+						"tooltip": "",
+						"initially-visible": true,
+						"enabled": true,
+						"auto-font-size": false,
+						"checked": false,
+						"id": ""
+					},
+					"uid": 107,
+					"instanceVariables": {},
+					"behaviors": {
+						"Persist": {
+							"properties": {}
+						}
+					},
+					"world": {
+						"x": 30,
+						"y": 756,
+						"width": 682,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
+					}
+				},
+				{
+					"type": "LvlBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 108,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 359,
+						"y": 518,
+						"width": 200,
+						"height": 200,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "mmtext",
+					"properties": {
+						"text": "ParkingLot",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 24,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							0,
+							0,
+							0,
+							1
+						],
+						"horizontal-alignment": "center",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 109,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 259,
+						"y": 419,
+						"width": 199,
+						"height": 198,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
 					}
 				}
 			],

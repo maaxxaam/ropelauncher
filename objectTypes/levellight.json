@@ -1,0 +1,18 @@
+{
+	"name": "LevelLight",
+	"plugin-id": "shadowlight",
+	"sid": 532604012175406,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "blurhorizontal",
+			"name": "BlurHorizontal"
+		},
+		{
+			"effectId": "blurvertical",
+			"name": "BlurVertical"
+		}
+	]
+}
