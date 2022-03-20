@@ -1,21 +1,21 @@
 {
-	"name": "dev_flags",
-	"plugin-id": "Button",
-	"sid": 662807962964576,
+	"name": "dev_dropdown",
+	"plugin-id": "List",
+	"sid": 456165595448513,
 	"isGlobal": false,
 	"instanceVariables": [
 		{
 			"name": "flag",
 			"type": "string",
 			"desc": "",
-			"sid": 610415352789108
+			"sid": 769778897137899
 		}
 	],
 	"behaviorTypes": [
 		{
 			"behaviorId": "Persist",
 			"name": "Persist",
-			"sid": 411757650592281
+			"sid": 549832818410490
 		}
 	]
 }

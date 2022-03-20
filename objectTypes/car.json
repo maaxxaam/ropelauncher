@@ -43,6 +43,11 @@
 			"behaviorId": "Pin",
 			"name": "Pin",
 			"sid": 160319281014572
+		},
+		{
+			"behaviorId": "Flash",
+			"name": "Flash",
+			"sid": 156196229929090
 		}
 	],
 	"effectTypes": [],

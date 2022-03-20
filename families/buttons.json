@@ -13,6 +13,9 @@
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"members": [
-		"SettBut"
+		"SettBut",
+		"MainBut",
+		"TabBut",
+		"ModeBut"
 	]
 }

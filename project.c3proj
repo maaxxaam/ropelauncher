@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 27602,
+	"savedWithRelease": 28503,
 	"name": "SlingTest",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -11,7 +11,7 @@
 			"id": "Sprite",
 			"name": "Sprite",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -19,7 +19,7 @@
 			"id": "TiledBg",
 			"name": "Tiled Background",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -27,7 +27,7 @@
 			"id": "Touch",
 			"name": "Touch",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -35,7 +35,7 @@
 			"id": "LocalStorage",
 			"name": "Local storage",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -43,7 +43,7 @@
 			"id": "AJAX",
 			"name": "AJAX",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -51,7 +51,7 @@
 			"id": "Text",
 			"name": "Text",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -59,7 +59,7 @@
 			"id": "Browser",
 			"name": "Browser",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -67,7 +67,7 @@
 			"id": "Keyboard",
 			"name": "Keyboard",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -75,7 +75,7 @@
 			"id": "Particles",
 			"name": "Particles",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -83,7 +83,7 @@
 			"id": "Tilemap",
 			"name": "Tilemap",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -99,7 +99,7 @@
 			"id": "Mouse",
 			"name": "Mouse",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -107,15 +107,7 @@
 			"id": "Audio",
 			"name": "Audio",
 			"author": "Scirra",
-			"version": "r276.2",
-			"bundled": false
-		},
-		{
-			"type": "plugin",
-			"id": "maaxxaam_devtodev",
-			"name": "devtodev SDK",
-			"author": "maaxxaam",
-			"version": "0.0.0.3",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -123,7 +115,7 @@
 			"id": "GameAnalytics",
 			"name": "GameAnalytics",
 			"author": "GameAnalytics",
-			"version": "3.0.12",
+			"version": "3.0.13",
 			"bundled": false
 		},
 		{
@@ -131,7 +123,7 @@
 			"id": "PlatformInfo",
 			"name": "Platform info",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -139,7 +131,7 @@
 			"id": "Eponesh_GameScore",
 			"name": "GameScore",
 			"author": "Eponesh",
-			"version": "1.0.26",
+			"version": "1.0.27",
 			"bundled": false
 		},
 		{
@@ -147,7 +139,7 @@
 			"id": "Button",
 			"name": "Button",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -155,7 +147,31 @@
 			"id": "shadowlight",
 			"name": "Shadow light",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Dictionary",
+			"name": "Dictionary",
+			"author": "Scirra",
+			"version": "r285.3",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "List",
+			"name": "List",
+			"author": "Scirra",
+			"version": "r285.3",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "sliderbar",
+			"name": "Slider bar",
+			"author": "Scirra",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -163,7 +179,7 @@
 			"id": "Pin",
 			"name": "Pin",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -171,7 +187,7 @@
 			"id": "bound",
 			"name": "Bound to layout",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -179,7 +195,7 @@
 			"id": "Tween",
 			"name": "Tween",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -187,7 +203,15 @@
 			"id": "Car",
 			"name": "Car",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Flash",
+			"name": "Flash",
+			"author": "Scirra",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -203,7 +227,7 @@
 			"id": "scrollto",
 			"name": "Scroll To",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -211,7 +235,7 @@
 			"id": "DragnDrop",
 			"name": "Drag & Drop",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -227,7 +251,7 @@
 			"id": "Persist",
 			"name": "Persist",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -235,7 +259,7 @@
 			"id": "shadowcaster",
 			"name": "Shadow caster",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -243,7 +267,7 @@
 			"id": "Sin",
 			"name": "Sine",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -251,7 +275,7 @@
 			"id": "blurhorizontal",
 			"name": "Blur horizontal",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -259,7 +283,7 @@
 			"id": "blurvertical",
 			"name": "Blur vertical",
 			"author": "Scirra",
-			"version": "r276.2",
+			"version": "r285.3",
 			"bundled": false
 		}
 	],
@@ -285,7 +309,6 @@
 			"ValerypopoffTouchPlus",
 			"Mouse",
 			"Audio",
-			"devtodevSDK",
 			"GameAnalytics",
 			"PlatformInfo",
 			"GameScore",
@@ -304,7 +327,16 @@
 			"LevelLight",
 			"scenery",
 			"Obstacle",
-			"Bonus"
+			"Bonus",
+			"BackToMainBut",
+			"PlayLvlBut",
+			"flags",
+			"MainBut",
+			"TabBut",
+			"ModeBut",
+			"dev_dropdown",
+			"SettDesc",
+			"dev_slider"
 		],
 		"subfolders": []
 	},
@@ -461,7 +493,13 @@
 			"subfolders": []
 		},
 		"general": {
-			"items": [],
+			"items": [
+				{
+					"name": "Flags_defaults.json",
+					"type": "application/json",
+					"sid": 726763313289019
+				}
+			],
 			"subfolders": []
 		}
 	},
@@ -480,12 +518,14 @@
 	},
 	"properties": {
 		"description": "",
-		"version": "v4-alpha",
+		"version": "v5-alpha",
 		"author": "maaxxaam",
 		"authorEmail": "maxfocus.mch@gmail.com",
 		"authorWebsite": "",
 		"appId": "",
 		"pixelRounding": false,
+		"zAxisScale": "normalized",
+		"fov": 0.7853981633974483,
 		"useLoaderLayout": false,
 		"fullscreenMode": "letterbox-scale",
 		"fullscreenQuality": "high",

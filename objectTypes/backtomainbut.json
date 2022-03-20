@@ -1,16 +1,9 @@
 {
-	"name": "LvlBut",
+	"name": "BackToMainBut",
 	"plugin-id": "Sprite",
-	"sid": 564965883487446,
+	"sid": 687619705610825,
 	"isGlobal": false,
-	"instanceVariables": [
-		{
-			"name": "SendToLvl",
-			"type": "string",
-			"desc": "",
-			"sid": 812170572496937
-		}
-	],
+	"instanceVariables": [],
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
@@ -18,19 +11,19 @@
 			{
 				"frames": [
 					{
-						"width": 200,
-						"height": 200,
+						"width": 128,
+						"height": 128,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 9995130,
+						"imageSpriteId": 7478188,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 795903937172925,
+				"sid": 212746801214025,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

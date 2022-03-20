@@ -13,27 +13,114 @@
 					}
 				},
 				{
-					"id": "pick-overlapping-point",
-					"objectClass": "System",
-					"sid": 401241684657173,
+					"id": "pick-by-unique-id",
+					"objectClass": "mmtext",
+					"sid": 901929901540268,
 					"parameters": {
-						"object": "mmtext",
-						"x": "LvlBut.X",
-						"y": "LvlBut.Y"
+						"unique-id": "506"
 					}
 				}
 			],
 			"actions": [
 				{
-					"id": "go-to-layout-by-name",
-					"objectClass": "System",
-					"sid": 747582275308883,
+					"id": "set-instvar-value",
+					"objectClass": "PlayLvlBut",
+					"sid": 531453922889911,
 					"parameters": {
-						"layout": "mmtext.Text"
+						"instance-variable": "SelectedLvl",
+						"value": "LvlBut.SendToLvl"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "mmtext",
+					"sid": 939790570317264,
+					"parameters": {
+						"text": "\"LVL: \"&PlayLvlBut.SelectedLvl&newline&\n\"MODE: \"&PlayLvlBut.SelectedMode"
 					}
 				}
 			],
 			"sid": 594997690382650
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-touched-object",
+					"objectClass": "Touch",
+					"sid": 570882151297669,
+					"parameters": {
+						"object": "ModeBut"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 575459157930406,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-opacity",
+							"objectClass": "ModeBut",
+							"sid": 686628921625097,
+							"parameters": {
+								"comparison": 0,
+								"opacity": "100"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "mmtext",
+							"sid": 421098494590583,
+							"parameters": {
+								"unique-id": "506"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "mmtext",
+							"sid": 465585716267788,
+							"parameters": {
+								"text": "\"LVL: \"&PlayLvlBut.SelectedLvl&newline&\n\"MODE: \"&PlayLvlBut.SelectedMode"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "PlayLvlBut",
+							"sid": 695314881464344,
+							"parameters": {
+								"instance-variable": "SelectedMode",
+								"value": "ModeBut.AnimationPrefix"
+							}
+						}
+					],
+					"sid": 522947727501307
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 799283392660007
+						}
+					],
+					"actions": [
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 818638502965637,
+							"parameters": {
+								"message": "\"Режим еще не готов.\""
+							}
+						}
+					],
+					"sid": 883622172783421
+				}
+			]
 		},
 		{
 			"eventType": "block",
@@ -44,178 +131,538 @@
 					"sid": 942722235703445
 				}
 			],
+			"actions": [
+				{
+					"id": "set-key",
+					"objectClass": "flags",
+					"sid": 915772203207128,
+					"parameters": {
+						"key": "dev_flags.flag",
+						"value": "1 - flags.Get(dev_flags.flag)"
+					}
+				}
+			],
+			"sid": 802764029037448
+		},
+		{
+			"functionName": "ShowLayer",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "LayerToShow",
+					"type": "string",
+					"initialValue": "MainScreen",
+					"comment": "",
+					"sid": 496728908709219
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [],
-			"sid": 802764029037448,
+			"sid": 792712191426755,
 			"children": [
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "pick-by-unique-id",
-							"objectClass": "dev_flags",
-							"sid": 779017503553347,
-							"parameters": {
-								"unique-id": "12"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "toggle-boolean-eventvar",
+							"id": "for",
 							"objectClass": "System",
-							"sid": 375839814868963,
+							"sid": 301023751541440,
 							"parameters": {
-								"variable": "flag_invert_controls"
+								"name": "\"Layers\"",
+								"start-index": "0",
+								"end-index": "5"
 							}
 						}
 					],
-					"sid": 540780902540317
-				},
-				{
-					"eventType": "block",
-					"conditions": [
+					"actions": [],
+					"sid": 292555577451078,
+					"children": [
 						{
-							"id": "pick-by-unique-id",
-							"objectClass": "dev_flags",
-							"sid": 393421905596016,
-							"parameters": {
-								"unique-id": "41"
-							}
-						}
-					],
-					"actions": [
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 111786073169178,
+									"parameters": {
+										"first-value": "loopindex(\"Layers\")",
+										"comparison": 0,
+										"second-value": "LayerIndex(LayerToShow)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 502329092266314,
+									"parameters": {
+										"layer": "loopindex(\"Layers\")",
+										"visibility": "visible"
+									}
+								}
+							],
+							"sid": 482892566384628,
+							"isOrBlock": true
+						},
 						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 406417507475258,
-							"parameters": {
-								"variable": "flag_cam_angle_follow"
-							}
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 152097810064974
+								}
+							],
+							"actions": [
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 590300919552771,
+									"parameters": {
+										"layer": "loopindex(\"Layers\")",
+										"visibility": "invisible"
+									}
+								}
+							],
+							"sid": 505371041512172
 						}
-					],
-					"sid": 431265818969713
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "dev_flags",
-							"sid": 454987068146774,
-							"parameters": {
-								"unique-id": "56"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 231084155777698,
-							"parameters": {
-								"variable": "flag_center_cam"
-							}
-						}
-					],
-					"sid": 796631337785866
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "dev_flags",
-							"sid": 601405449856071,
-							"parameters": {
-								"unique-id": "2"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 852405033520660,
-							"parameters": {
-								"variable": "flag_static_obstacles"
-							}
-						}
-					],
-					"sid": 711660461526306
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "dev_flags",
-							"sid": 572753635807000,
-							"parameters": {
-								"unique-id": "105"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 252616701866058,
-							"parameters": {
-								"variable": "flag_dynamic_obstacles"
-							}
-						}
-					],
-					"sid": 505287772156479
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "dev_flags",
-							"sid": 337741674376753,
-							"parameters": {
-								"unique-id": "106"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 330493737160291,
-							"parameters": {
-								"variable": "flag_static_bonuses"
-							}
-						}
-					],
-					"sid": 248867297136229
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "dev_flags",
-							"sid": 267266767893376,
-							"parameters": {
-								"unique-id": "107"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 163499739737380,
-							"parameters": {
-								"variable": "flag_dynamic_bonuses"
-							}
-						}
-					],
-					"sid": 572712917976827
+					]
 				}
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-loader-layout-complete",
+					"objectClass": "System",
+					"sid": 288608299871230
+				}
+			],
+			"actions": [
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 258741708000507,
+					"parameters": {
+						"tag": "\"flags\"",
+						"file": "Flags_defaults.json"
+					}
+				}
+			],
+			"sid": 175627941080754
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-completed",
+					"objectClass": "AJAX",
+					"sid": 707699902741537,
+					"parameters": {
+						"tag": "\"flags\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "load",
+					"objectClass": "flags",
+					"sid": 780328413206976,
+					"parameters": {
+						"json": "AJAX.LastData"
+					}
+				}
+			],
+			"sid": 922130125510119,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 596025855327995,
+							"parameters": {
+								"object": "dev_flags"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 980356342661649,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "flags",
+									"sid": 818932713146952,
+									"parameters": {
+										"key": "dev_flags.flag",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-checked",
+									"objectClass": "dev_flags",
+									"sid": 619719833915830,
+									"parameters": {
+										"state": "unchecked"
+									}
+								}
+							],
+							"sid": 633159009296907
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 598524018417693
+								}
+							],
+							"actions": [
+								{
+									"id": "set-checked",
+									"objectClass": "dev_flags",
+									"sid": 688110198874633,
+									"parameters": {
+										"state": "checked"
+									}
+								}
+							],
+							"sid": 295152092444366
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 932411752699087,
+							"parameters": {
+								"object": "dev_dropdown"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-selection",
+							"objectClass": "dev_dropdown",
+							"sid": 567302358539456,
+							"parameters": {
+								"index": "flags.Get(dev_dropdown.flag)"
+							}
+						}
+					],
+					"sid": 157770864420693
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 736896102996929,
+							"parameters": {
+								"object": "dev_slider"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-value",
+							"objectClass": "dev_slider",
+							"sid": 458154406019110,
+							"parameters": {
+								"value": "flags.Get(dev_slider.flag)"
+							}
+						}
+					],
+					"sid": 731816438797304
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 599219915197661,
+					"parameters": {
+						"object": "TabBut"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "ShowLayer",
+					"sid": 873384624573409,
+					"parameters": [
+						"TabBut.AnimationPrefix"
+					]
+				},
+				{
+					"id": "set-layer-visible",
+					"objectClass": "System",
+					"sid": 788277729723334,
+					"parameters": {
+						"layer": "\"Settings_tabs\"",
+						"visibility": "visible"
+					}
+				}
+			],
+			"sid": 577810506236194
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 796782101411107,
+					"parameters": {
+						"object": "MainBut"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "ShowLayer",
+					"sid": 372038806473957,
+					"parameters": [
+						"MainBut.AnimationPrefix"
+					]
+				}
+			],
+			"sid": 111529230649513
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 526140673653153,
+					"parameters": {
+						"object": "BackToMainBut"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 801905099290304,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "layer-is-visible",
+							"objectClass": "System",
+							"sid": 449118800523401,
+							"parameters": {
+								"layer": "\"Settings_tabs\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ShowLayer",
+							"sid": 592256039864517,
+							"parameters": [
+								"\"Settings\""
+							]
+						},
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 431192078929091,
+							"parameters": {
+								"layer": "\"Settings_tabs\"",
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 858039362230031
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 403456748369596
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ShowLayer",
+							"sid": 251279092238474,
+							"parameters": [
+								"\"Title\""
+							]
+						}
+					],
+					"sid": 730491038121926
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 855504782777470
+				}
+			],
+			"actions": [
+				{
+					"type": "comment",
+					"text": "Make sure player sees title screen"
+				},
+				{
+					"callFunction": "ShowLayer",
+					"sid": 245501339733932,
+					"parameters": [
+						"\"Title\""
+					]
+				},
+				{
+					"id": "set-layer-visible",
+					"objectClass": "System",
+					"sid": 273239725466242,
+					"parameters": {
+						"layer": "\"Settings_tabs\"",
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-css-style",
+					"objectClass": "dev_flags",
+					"sid": 533635127753369,
+					"parameters": {
+						"property-name": "\"color\"",
+						"value": "\"white\""
+					}
+				}
+			],
+			"sid": 164745292780112
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 183954696454867,
+					"parameters": {
+						"object": "PlayLvlBut"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 898896960694562,
+					"parameters": {
+						"variable": "game_mode",
+						"value": "PlayLvlBut.SelectedMode"
+					}
+				},
+				{
+					"id": "go-to-layout-by-name",
+					"objectClass": "System",
+					"sid": 854716785184270,
+					"parameters": {
+						"layout": "PlayLvlBut.SelectedLvl"
+					}
+				}
+			],
+			"sid": 331287905267945
+		},
+		{
+			"eventType": "variable",
+			"name": "game_mode",
+			"type": "string",
+			"initialValue": "FreeRoam",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 782284201201050
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-selection-changed",
+					"objectClass": "dev_dropdown",
+					"sid": 550443383463539
+				}
+			],
+			"actions": [
+				{
+					"id": "set-key",
+					"objectClass": "flags",
+					"sid": 443549425152664,
+					"parameters": {
+						"key": "dev_dropdown.flag",
+						"value": "dev_dropdown.SelectedIndex"
+					}
+				}
+			],
+			"sid": 446485304179642
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-changed",
+					"objectClass": "dev_slider",
+					"sid": 346961030331640
+				},
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "SettDesc",
+					"sid": 198270160533244,
+					"parameters": {
+						"unique-id": "515"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-key",
+					"objectClass": "flags",
+					"sid": 715127319357252,
+					"parameters": {
+						"key": "dev_slider.flag",
+						"value": "dev_slider.Value"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "SettDesc",
+					"sid": 965013894923493,
+					"parameters": {
+						"text": "\"Жизней: \"&flags.Get(\"difficulty_lives\")"
+					}
+				}
+			],
+			"sid": 715918632717891
 		}
 	],
 	"sid": 188176345997916

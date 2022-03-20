@@ -366,6 +366,9 @@
 							"properties": {
 								"destroy": false
 							}
+						},
+						"Flash": {
+							"properties": {}
 						}
 					},
 					"world": {
@@ -5843,6 +5846,7 @@
 			"sid": 524646169372255,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
 			"color": [
 				1,
 				1,
@@ -6023,6 +6027,7 @@
 			"sid": 566688648510051,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
 			"color": [
 				1,
 				1,

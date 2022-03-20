@@ -320,6 +320,9 @@
 							"properties": {
 								"destroy": false
 							}
+						},
+						"Flash": {
+							"properties": {}
 						}
 					},
 					"sceneGraphData": {
@@ -2894,6 +2897,7 @@
 			"sid": 183199583320546,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
 			"color": [
 				1,
 				1,
@@ -3001,7 +3005,7 @@
 				{
 					"type": "score_ui",
 					"properties": {
-						"text": "0",
+						"text": "👛999",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 40,
@@ -3024,9 +3028,9 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 127,
+						"x": 262,
 						"y": 8,
-						"width": 223,
+						"width": 158,
 						"height": 115,
 						"originX": 0,
 						"originY": 0,
@@ -3150,7 +3154,7 @@
 				{
 					"type": "score_ui",
 					"properties": {
-						"text": "0",
+						"text": "🚗999",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 40,
@@ -3173,9 +3177,51 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 349,
+						"x": 421,
 						"y": 8,
-						"width": 237,
+						"width": 165,
+						"height": 115,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "score_ui",
+					"properties": {
+						"text": "5❤",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 40,
+						"line-height": 0,
+						"bold": true,
+						"italic": false,
+						"color": [
+							0.16862745098039217,
+							1,
+							0,
+							1
+						],
+						"horizontal-alignment": "center",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 516,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 132,
+						"y": 6,
+						"width": 120,
 						"height": 115,
 						"originX": 0,
 						"originY": 0,
@@ -3193,6 +3239,7 @@
 			"sid": 420015520376984,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
 			"color": [
 				1,
 				1,
@@ -3219,7 +3266,14 @@
 		}
 	],
 	"sid": 563518863736736,
-	"nonworld-instances": [],
+	"nonworld-instances": [
+		{
+			"type": "flags",
+			"properties": {},
+			"uid": 499,
+			"instanceVariables": {}
+		}
+	],
 	"effectTypes": [],
 	"width": 4096,
 	"height": 4096,

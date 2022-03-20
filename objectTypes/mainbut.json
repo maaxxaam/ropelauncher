@@ -1,0 +1,164 @@
+{
+	"name": "MainBut",
+	"plugin-id": "Sprite",
+	"sid": 701918247831031,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [],
+		"subfolders": [
+			{
+				"items": [
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 2531166,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 504205085477197,
+						"name": "LevelsIIdle",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 3860036,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 857209307535931,
+						"name": "LevelsHover",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 2180788,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 767699769392158,
+						"name": "LevelsTap",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					}
+				],
+				"subfolders": [],
+				"name": "Levels"
+			},
+			{
+				"items": [
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 9029270,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 302006814115393,
+						"name": "SettingsIdle",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 1855726,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 822224051384248,
+						"name": "SettingsHover",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 8121095,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 483916272067800,
+						"name": "SettingsTap",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					}
+				],
+				"subfolders": [],
+				"name": "Settings"
+			}
+		]
+	}
+}

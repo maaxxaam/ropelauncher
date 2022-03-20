@@ -2,7 +2,7 @@
 	"name": "Menu",
 	"layers": [
 		{
-			"name": "Layer 0",
+			"name": "Title",
 			"overriden": 0,
 			"subLayers": [],
 			"instances": [
@@ -51,7 +51,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v4 alpha",
+						"text": "v5 alpha",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 24,
@@ -91,6 +91,102 @@
 					}
 				},
 				{
+					"type": "MainBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "SettingsIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 500,
+					"instanceVariables": {
+						"AnimationPrefix": "Settings"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 369,
+						"y": 558,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "MainBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "LevelsIIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 501,
+					"instanceVariables": {
+						"AnimationPrefix": "Levels"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 367,
+						"y": 341,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				}
+			],
+			"sid": 490304435632555,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				1,
+				1,
+				1,
+				1
+			],
+			"isTransparent": false,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "Levels",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
+				{
 					"type": "LvlBut",
 					"properties": {
 						"initially-visible": true,
@@ -100,7 +196,9 @@
 						"live-preview": false
 					},
 					"uid": 34,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"SendToLvl": "Lvl1"
+					},
 					"behaviors": {},
 					"world": {
 						"x": 129,
@@ -129,7 +227,9 @@
 						"live-preview": false
 					},
 					"uid": 61,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"SendToLvl": "Lvl2"
+					},
 					"behaviors": {},
 					"world": {
 						"x": 360,
@@ -158,7 +258,9 @@
 						"live-preview": false
 					},
 					"uid": 62,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"SendToLvl": "Lvl3"
+					},
 					"behaviors": {},
 					"world": {
 						"x": 592,
@@ -203,8 +305,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 31,
-						"y": 195,
+						"x": 28,
+						"y": 197,
 						"width": 199,
 						"height": 198,
 						"originX": 0,
@@ -246,7 +348,7 @@
 					"behaviors": {},
 					"world": {
 						"x": 261,
-						"y": 196,
+						"y": 199,
 						"width": 199,
 						"height": 198,
 						"originX": 0,
@@ -304,244 +406,6 @@
 					}
 				},
 				{
-					"type": "dev_flags",
-					"properties": {
-						"type": "checkbox",
-						"text": "Инвертировать управление",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": false,
-						"checked": true,
-						"id": ""
-					},
-					"uid": 12,
-					"instanceVariables": {},
-					"behaviors": {
-						"Persist": {
-							"properties": {}
-						}
-					},
-					"world": {
-						"x": 28,
-						"y": 1024,
-						"width": 677,
-						"height": 46,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
-					"type": "dev_flags",
-					"properties": {
-						"type": "checkbox",
-						"text": "Поворот камеры",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": false,
-						"checked": false,
-						"id": ""
-					},
-					"uid": 41,
-					"instanceVariables": {},
-					"behaviors": {
-						"Persist": {
-							"properties": {}
-						}
-					},
-					"world": {
-						"x": 27,
-						"y": 1088,
-						"width": 682,
-						"height": 46,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
-					"type": "dev_flags",
-					"properties": {
-						"type": "checkbox",
-						"text": "Центрировать камеру",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": false,
-						"checked": true,
-						"id": ""
-					},
-					"uid": 56,
-					"instanceVariables": {},
-					"behaviors": {
-						"Persist": {
-							"properties": {}
-						}
-					},
-					"world": {
-						"x": 26,
-						"y": 1153,
-						"width": 682,
-						"height": 46,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
-					"type": "dev_flags",
-					"properties": {
-						"type": "checkbox",
-						"text": "Недвижимые препятствия",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": false,
-						"checked": true,
-						"id": ""
-					},
-					"uid": 2,
-					"instanceVariables": {},
-					"behaviors": {
-						"Persist": {
-							"properties": {}
-						}
-					},
-					"world": {
-						"x": 31,
-						"y": 864,
-						"width": 677,
-						"height": 46,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
-					"type": "dev_flags",
-					"properties": {
-						"type": "checkbox",
-						"text": "Подвижные препятствия",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": false,
-						"checked": false,
-						"id": ""
-					},
-					"uid": 105,
-					"instanceVariables": {},
-					"behaviors": {
-						"Persist": {
-							"properties": {}
-						}
-					},
-					"world": {
-						"x": 30,
-						"y": 928,
-						"width": 682,
-						"height": 46,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
-					"type": "dev_flags",
-					"properties": {
-						"type": "checkbox",
-						"text": "Недвижимые бонусы",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": false,
-						"checked": true,
-						"id": ""
-					},
-					"uid": 106,
-					"instanceVariables": {},
-					"behaviors": {
-						"Persist": {
-							"properties": {}
-						}
-					},
-					"world": {
-						"x": 29,
-						"y": 691,
-						"width": 677,
-						"height": 46,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
-					"type": "dev_flags",
-					"properties": {
-						"type": "checkbox",
-						"text": "Подвижные бонусы",
-						"tooltip": "",
-						"initially-visible": true,
-						"enabled": true,
-						"auto-font-size": false,
-						"checked": false,
-						"id": ""
-					},
-					"uid": 107,
-					"instanceVariables": {},
-					"behaviors": {
-						"Persist": {
-							"properties": {}
-						}
-					},
-					"world": {
-						"x": 30,
-						"y": 756,
-						"width": 682,
-						"height": 46,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						]
-					}
-				},
-				{
 					"type": "LvlBut",
 					"properties": {
 						"initially-visible": true,
@@ -551,7 +415,9 @@
 						"live-preview": false
 					},
 					"uid": 108,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"SendToLvl": "ParkingLot"
+					},
 					"behaviors": {},
 					"world": {
 						"x": 359,
@@ -611,11 +477,208 @@
 						"angle": 0,
 						"zElevation": 0
 					}
+				},
+				{
+					"type": "BackToMainBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 497,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 658,
+						"y": 64,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "PlayLvlBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 498,
+					"instanceVariables": {
+						"SelectedLvl": "ParkingLot",
+						"SelectedMode": "FreeRoam"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 360,
+						"y": 1232,
+						"width": 192,
+						"height": 96,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "mmtext",
+					"properties": {
+						"text": "LVL: ParkingLot\nMODE: FreeRoam",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 16,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							0,
+							0,
+							0,
+							1
+						],
+						"horizontal-alignment": "center",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 506,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 483,
+						"y": 1183,
+						"width": 199,
+						"height": 94,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ModeBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "FreeRoamIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 507,
+					"instanceVariables": {
+						"AnimationPrefix": "FreeRoam"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 219,
+						"y": 777,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ModeBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "RaceIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 508,
+					"instanceVariables": {
+						"AnimationPrefix": "Race"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 342,
+						"y": 923,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							0.5
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ModeBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "GhostIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 509,
+					"instanceVariables": {
+						"AnimationPrefix": "Ghost"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 480,
+						"y": 1070,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							0.5
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
 				}
 			],
-			"sid": 490304435632555,
+			"sid": 734175628729340,
 			"effectTypes": [],
-			"isInitiallyVisible": true,
+			"isInitiallyVisible": false,
+			"isInitiallyInteractive": true,
 			"color": [
 				1,
 				1,
@@ -623,9 +686,817 @@
 				1
 			],
 			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": false,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "Settings",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
+				{
+					"type": "BackToMainBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 502,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 658,
+						"y": 64,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "TabBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "CameraIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 503,
+					"instanceVariables": {
+						"AnimationPrefix": "Camera"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 318,
+						"y": 292,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "TabBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "MovementIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 504,
+					"instanceVariables": {
+						"AnimationPrefix": "Movement"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 323,
+						"y": 461,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "TabBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "DifficultyIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 505,
+					"instanceVariables": {
+						"AnimationPrefix": "Difficulty"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 323,
+						"y": 633,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				}
+			],
+			"sid": 702605119621522,
+			"effectTypes": [],
+			"isInitiallyVisible": false,
+			"isInitiallyInteractive": true,
+			"color": [
 				1,
 				1,
 				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": false,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "Settings_tabs",
+			"overriden": 0,
+			"subLayers": [
+				{
+					"name": "Camera",
+					"overriden": 0,
+					"subLayers": [],
+					"instances": [
+						{
+							"type": "dev_flags",
+							"properties": {
+								"type": "checkbox",
+								"text": "Поворот камеры",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"auto-font-size": false,
+								"checked": false,
+								"id": ""
+							},
+							"uid": 41,
+							"instanceVariables": {
+								"flag": "cam_angle_follow"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 27,
+								"y": 1088,
+								"width": 682,
+								"height": 46,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "dev_flags",
+							"properties": {
+								"type": "checkbox",
+								"text": "Центрировать камеру",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"auto-font-size": false,
+								"checked": true,
+								"id": ""
+							},
+							"uid": 56,
+							"instanceVariables": {
+								"flag": "cam_center"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 26,
+								"y": 1153,
+								"width": 682,
+								"height": 46,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "dev_dropdown",
+							"properties": {
+								"items": "Далеко\nСредне\nБлизко",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"type": "dropdown-list",
+								"multi-select": false,
+								"auto-font-size": true,
+								"id": ""
+							},
+							"uid": 510,
+							"instanceVariables": {
+								"flag": "cam_scale"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 321,
+								"y": 1004,
+								"width": 253,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Масштаб камеры:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 512,
+							"instanceVariables": {},
+							"behaviors": {},
+							"world": {
+								"x": 21,
+								"y": 998,
+								"width": 283,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						}
+					],
+					"sid": 912706146197362,
+					"effectTypes": [],
+					"isInitiallyVisible": false,
+					"isInitiallyInteractive": true,
+					"color": [
+						1,
+						1,
+						1,
+						1
+					],
+					"backgroundColor": [
+						0.3686274509803922,
+						0.3686274509803922,
+						0.3686274509803922,
+						1
+					],
+					"isTransparent": true,
+					"parallaxX": 1,
+					"parallaxY": 1,
+					"scaleRate": 1,
+					"forceOwnTexture": false,
+					"renderingMode": "3d",
+					"drawOrder": "z-order",
+					"useRenderCells": false,
+					"blendMode": "normal",
+					"zElevation": 0,
+					"global": false
+				},
+				{
+					"name": "Movement",
+					"overriden": 0,
+					"subLayers": [],
+					"instances": [
+						{
+							"type": "dev_flags",
+							"properties": {
+								"type": "checkbox",
+								"text": "Инвертировать управление",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"auto-font-size": false,
+								"checked": true,
+								"id": ""
+							},
+							"uid": 12,
+							"instanceVariables": {
+								"flag": "controls_invert"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 28,
+								"y": 1024,
+								"width": 677,
+								"height": 46,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "dev_dropdown",
+							"properties": {
+								"items": "Маленькая\nСредняя\nБольшая",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"type": "dropdown-list",
+								"multi-select": false,
+								"auto-font-size": true,
+								"id": ""
+							},
+							"uid": 511,
+							"instanceVariables": {
+								"flag": "controls_car_scale"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 324,
+								"y": 945,
+								"width": 218,
+								"height": 50,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Размер машинки:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 513,
+							"instanceVariables": {},
+							"behaviors": {},
+							"world": {
+								"x": 24,
+								"y": 939,
+								"width": 283,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						}
+					],
+					"sid": 564390275803379,
+					"effectTypes": [],
+					"isInitiallyVisible": false,
+					"isInitiallyInteractive": true,
+					"color": [
+						1,
+						1,
+						1,
+						1
+					],
+					"backgroundColor": [
+						0.3686274509803922,
+						0.3686274509803922,
+						0.3686274509803922,
+						1
+					],
+					"isTransparent": true,
+					"parallaxX": 1,
+					"parallaxY": 1,
+					"scaleRate": 1,
+					"forceOwnTexture": false,
+					"renderingMode": "3d",
+					"drawOrder": "z-order",
+					"useRenderCells": false,
+					"blendMode": "normal",
+					"zElevation": 0,
+					"global": false
+				},
+				{
+					"name": "Difficulty",
+					"overriden": 0,
+					"subLayers": [],
+					"instances": [
+						{
+							"type": "dev_flags",
+							"properties": {
+								"type": "checkbox",
+								"text": "Недвижимые препятствия",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"auto-font-size": false,
+								"checked": true,
+								"id": ""
+							},
+							"uid": 2,
+							"instanceVariables": {
+								"flag": "bonuses_static_enabled"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 31,
+								"y": 864,
+								"width": 677,
+								"height": 46,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "dev_flags",
+							"properties": {
+								"type": "checkbox",
+								"text": "Подвижные препятствия",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"auto-font-size": false,
+								"checked": false,
+								"id": ""
+							},
+							"uid": 105,
+							"instanceVariables": {
+								"flag": "bonuses_dynamic_enabled"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 30,
+								"y": 928,
+								"width": 682,
+								"height": 46,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "dev_flags",
+							"properties": {
+								"type": "checkbox",
+								"text": "Недвижимые бонусы",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"auto-font-size": false,
+								"checked": true,
+								"id": ""
+							},
+							"uid": 106,
+							"instanceVariables": {
+								"flag": "obstacles_static_enabled"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 29,
+								"y": 691,
+								"width": 677,
+								"height": 46,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "dev_flags",
+							"properties": {
+								"type": "checkbox",
+								"text": "Подвижные бонусы",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"auto-font-size": false,
+								"checked": false,
+								"id": ""
+							},
+							"uid": 107,
+							"instanceVariables": {
+								"flag": "obstacles_dynamic_enabled"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 30,
+								"y": 756,
+								"width": 682,
+								"height": 46,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 3,
+								"minimum": 0,
+								"maximum": 5,
+								"step": 1,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 514,
+							"instanceVariables": {
+								"flag": "difficulty_lives"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 36,
+								"y": 530,
+								"width": 437,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Жизней: 3",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 515,
+							"instanceVariables": {},
+							"behaviors": {},
+							"world": {
+								"x": 36,
+								"y": 461,
+								"width": 283,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						}
+					],
+					"sid": 946644506877103,
+					"effectTypes": [],
+					"isInitiallyVisible": false,
+					"isInitiallyInteractive": true,
+					"color": [
+						1,
+						1,
+						1,
+						1
+					],
+					"backgroundColor": [
+						0.3686274509803922,
+						0.3686274509803922,
+						0.3686274509803922,
+						1
+					],
+					"isTransparent": true,
+					"parallaxX": 1,
+					"parallaxY": 1,
+					"scaleRate": 1,
+					"forceOwnTexture": false,
+					"renderingMode": "3d",
+					"drawOrder": "z-order",
+					"useRenderCells": false,
+					"blendMode": "normal",
+					"zElevation": 0,
+					"global": false
+				}
+			],
+			"instances": [
+				{
+					"type": "BackToMainBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 17,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 657,
+						"y": 64,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				}
+			],
+			"sid": 789892675756501,
+			"effectTypes": [],
+			"isInitiallyVisible": false,
+			"isInitiallyInteractive": true,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
 				1
 			],
 			"isTransparent": false,

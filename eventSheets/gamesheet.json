@@ -13,6 +13,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "Lives",
+			"type": "number",
+			"initialValue": "3",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 813717106884652
+		},
+		{
+			"eventType": "variable",
 			"name": "has_ideal_bonus",
 			"type": "boolean",
 			"initialValue": "false",
@@ -61,6 +71,23 @@
 				}
 			],
 			"actions": [
+				{
+					"id": "set-scale",
+					"objectClass": "Car",
+					"sid": 259994083976612,
+					"parameters": {
+						"scale": "flags.Get(\"controls_car_scale\") = 0 ? 0.75 :\nflags.Get(\"controls_car_scale\") = 1 ? 1 : 1.25\n"
+					}
+				},
+				{
+					"id": "set-layer-scale",
+					"objectClass": "System",
+					"sid": 436491115264419,
+					"parameters": {
+						"layer": "\"Level\"",
+						"scale": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
+					}
+				},
 				{
 					"id": "move-to-top",
 					"objectClass": "Car",
@@ -237,13 +264,14 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 175549517331788,
+							"id": "compare-value",
+							"objectClass": "flags",
+							"sid": 237296457063379,
 							"parameters": {
-								"variable": "flag_dynamic_obstacles"
-							},
-							"isInverted": true
+								"key": "\"obstacles_dynamic_enabled\"",
+								"comparison": 0,
+								"value": "0"
+							}
 						}
 					],
 					"actions": [],
@@ -338,13 +366,14 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 564759667303585,
+							"id": "compare-value",
+							"objectClass": "flags",
+							"sid": 926003344190119,
 							"parameters": {
-								"variable": "flag_static_obstacles"
-							},
-							"isInverted": true
+								"key": "\"obstacles_static_enabled\"",
+								"comparison": 0,
+								"value": "0"
+							}
 						},
 						{
 							"id": "pick-by-comparison",
@@ -378,13 +407,14 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 440607728103966,
+							"id": "compare-value",
+							"objectClass": "flags",
+							"sid": 591478007893494,
 							"parameters": {
-								"variable": "flag_dynamic_obstacles"
-							},
-							"isInverted": true
+								"key": "\"bonuses_dynamic_enabled\"",
+								"comparison": 0,
+								"value": "0"
+							}
 						}
 					],
 					"actions": [],
@@ -479,13 +509,14 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 878918739493915,
+							"id": "compare-value",
+							"objectClass": "flags",
+							"sid": 989163872867660,
 							"parameters": {
-								"variable": "flag_static_obstacles"
-							},
-							"isInverted": true
+								"key": "\"bonuses_static_enabled\"",
+								"comparison": 0,
+								"value": "0"
+							}
 						},
 						{
 							"id": "pick-by-comparison",
@@ -517,6 +548,31 @@
 						{
 							"id": "pick-nth-instance",
 							"objectClass": "System",
+							"sid": 557098337914072,
+							"parameters": {
+								"object": "score_ui",
+								"instance": "2"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "score_ui",
+							"sid": 533755586127328,
+							"parameters": {
+								"text": "lives&\"❤\""
+							}
+						}
+					],
+					"sid": 632762003142762
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
 							"sid": 475588498720362,
 							"parameters": {
 								"object": "score_ui",
@@ -528,9 +584,9 @@
 						{
 							"id": "set-text",
 							"objectClass": "score_ui",
-							"sid": 164204619314747,
+							"sid": 595053859182484,
 							"parameters": {
-								"text": "bonus_points"
+								"text": "\"👛\"&bonus_points"
 							}
 						}
 					],
@@ -553,9 +609,9 @@
 						{
 							"id": "set-text",
 							"objectClass": "score_ui",
-							"sid": 923812508343254,
+							"sid": 885291062513927,
 							"parameters": {
-								"text": "LvlScore"
+								"text": "\"🚗\"&LvlScore"
 							}
 						}
 					],
@@ -1237,10 +1293,10 @@
 				{
 					"id": "set-position",
 					"objectClass": "cam_follow",
-					"sid": 366886446358994,
+					"sid": 775807865719217,
 					"parameters": {
-						"x": "Car.X + Car.Car.VectorX/5 * (1 - flag_center_cam)",
-						"y": "Car.Y + Car.Car.VectorY/3 * (1 - flag_center_cam)"
+						"x": "Car.X + Car.Car.VectorX/5 * (1 - flags.Get(\"cam_center\"))",
+						"y": "Car.Y + Car.Car.VectorY/3 * (1 - flags.Get(\"cam_center\"))"
 					}
 				}
 			],
@@ -1601,10 +1657,10 @@
 				{
 					"id": "set-steer-speed",
 					"objectClass": "Car",
-					"sid": 993876965965693,
+					"sid": 546867013887041,
 					"behaviorType": "Car",
 					"parameters": {
-						"steer-speed": "((roundToDp(ln(abs(round((SwipeZone.X - 360)*motion)))<1?1:ln(abs(round((SwipeZone.X - 360)*motion))), 3) - 7) * 25) * sign(SwipeZone.X - 360) * (-2 * flag_invert_controls + 1)"
+						"steer-speed": "((roundToDp(ln(abs(round((SwipeZone.X - 360)*motion)))<1?1:ln(abs(round((SwipeZone.X - 360)*motion))), 3) - 7) * 25) * sign(SwipeZone.X - 360) * (-2 * flags.Get(\"controls_invert\")+ 1)"
 					}
 				},
 				{
@@ -1725,9 +1781,9 @@
 						{
 							"id": "set-text",
 							"objectClass": "score_ui",
-							"sid": 903084742889625,
+							"sid": 393912241856550,
 							"parameters": {
-								"text": "LvlScore"
+								"text": "\"🚗\"&LvlScore"
 							}
 						},
 						{
@@ -1767,9 +1823,9 @@
 								{
 									"id": "set-text",
 									"objectClass": "score_ui",
-									"sid": 469658015595555,
+									"sid": 804371347452496,
 									"parameters": {
-										"text": "LvlScore"
+										"text": "\"🚗\"&LvlScore"
 									}
 								},
 								{
@@ -1822,76 +1878,6 @@
 			"sid": 252726039717465
 		},
 		{
-			"eventType": "variable",
-			"name": "flag_cam_angle_follow",
-			"type": "boolean",
-			"initialValue": "false",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 824593646920047
-		},
-		{
-			"eventType": "variable",
-			"name": "flag_center_cam",
-			"type": "boolean",
-			"initialValue": "true",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 758744027886712
-		},
-		{
-			"eventType": "variable",
-			"name": "flag_invert_controls",
-			"type": "boolean",
-			"initialValue": "true",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 213516776672200
-		},
-		{
-			"eventType": "variable",
-			"name": "flag_static_bonuses",
-			"type": "boolean",
-			"initialValue": "true",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 368295215401342
-		},
-		{
-			"eventType": "variable",
-			"name": "flag_static_obstacles",
-			"type": "boolean",
-			"initialValue": "true",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 567014638030267
-		},
-		{
-			"eventType": "variable",
-			"name": "flag_dynamic_bonuses",
-			"type": "boolean",
-			"initialValue": "false",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 544405760193672
-		},
-		{
-			"eventType": "variable",
-			"name": "flag_dynamic_obstacles",
-			"type": "boolean",
-			"initialValue": "false",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 718701669878364
-		},
-		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -1912,11 +1898,13 @@
 							"sid": 197624113506859
 						},
 						{
-							"id": "compare-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 441496080757247,
+							"id": "compare-value",
+							"objectClass": "flags",
+							"sid": 747738164827550,
 							"parameters": {
-								"variable": "flag_cam_angle_follow"
+								"key": "\"cam_angle_follow\"",
+								"comparison": 0,
+								"value": "1"
 							}
 						}
 					],
@@ -2104,18 +2092,103 @@
 					}
 				},
 				{
+					"id": "is-flashing",
+					"objectClass": "Car",
+					"sid": 494200373013321,
+					"behaviorType": "Flash",
+					"isInverted": true
+				},
+				{
 					"id": "is-visible",
 					"objectClass": "Obstacle",
 					"sid": 187921159145389
 				}
 			],
-			"actions": [
+			"actions": [],
+			"sid": 536250306048691,
+			"children": [
 				{
-					"callFunction": "GameOver",
-					"sid": 297817077002275
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 551703625422140,
+							"parameters": {
+								"variable": "Lives",
+								"comparison": 4,
+								"value": "0"
+							}
+						},
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 647148228501753,
+							"parameters": {
+								"object": "score_ui",
+								"instance": "2"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-eventvar",
+							"objectClass": "System",
+							"sid": 870437981737835,
+							"parameters": {
+								"variable": "Lives",
+								"value": "1"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "score_ui",
+							"sid": 232934894144801,
+							"parameters": {
+								"text": "Lives&\"❤\""
+							}
+						},
+						{
+							"id": "flash",
+							"objectClass": "Car",
+							"sid": 284646522051476,
+							"behaviorType": "Flash",
+							"parameters": {
+								"on-time": "0.1",
+								"off-time": "0.1",
+								"duration": "2"
+							}
+						},
+						{
+							"id": "move-to-object",
+							"objectClass": "Obstacle",
+							"sid": 473377802558579,
+							"parameters": {
+								"where": "behind",
+								"object": "Car"
+							}
+						}
+					],
+					"sid": 252295671944824
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 257785609352263
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "GameOver",
+							"sid": 452433963343635
+						}
+					],
+					"sid": 415985376271514
 				}
-			],
-			"sid": 536250306048691
+			]
 		},
 		{
 			"eventType": "variable",
@@ -2204,9 +2277,9 @@
 						{
 							"id": "set-text",
 							"objectClass": "score_ui",
-							"sid": 619611278740433,
+							"sid": 298021469571673,
 							"parameters": {
-								"text": "bonus_points"
+								"text": "\"👛\"&bonus_points"
 							}
 						},
 						{
