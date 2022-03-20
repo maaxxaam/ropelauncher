@@ -89,6 +89,15 @@
 					}
 				},
 				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 672535164683277,
+					"parameters": {
+						"variable": "Lives",
+						"value": "flags.Get(\"difficulty_lives\")"
+					}
+				},
+				{
 					"id": "move-to-top",
 					"objectClass": "Car",
 					"sid": 254084424532482
