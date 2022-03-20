@@ -11450,8 +11450,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetScale,
 		C3.Plugins.Dictionary.Exps.Get,
 		C3.Plugins.System.Acts.SetLayerScale,
-		C3.Plugins.Sprite.Acts.MoveToTop,
 		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.Sprite.Acts.MoveToTop,
 		C3.Plugins.Sprite.Exps.Angle,
 		C3.Plugins.System.Acts.SetObjectTimescale,
 		C3.Plugins.TiledBg.Acts.SetPosToObject,
@@ -11818,6 +11818,10 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => ((((n0.ExpObject("cam_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("cam_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("difficulty_lives");
 		},
 		p => {
 			const n0 = p._GetNode(0);
