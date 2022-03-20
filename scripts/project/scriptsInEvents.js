@@ -38,12 +38,12 @@ function map_corners_to_circle(tile) {
 
 const scriptsInEvents = {
 
-		async Gamesheet_Event23_Act2(runtime, localVars)
+		async Gamesheet_Event24_Act2(runtime, localVars)
 		{
 			localVars.is_corner = test_tile_for_corner(localVars.tile);
 		},
 
-		async Gamesheet_Event24_Act3(runtime, localVars)
+		async Gamesheet_Event25_Act3(runtime, localVars)
 		{
 			localVars.clock_id = map_corners_to_clock(localVars.tile);
 			localVars.pos_id = map_corners_to_pos(localVars.tile);
