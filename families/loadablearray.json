@@ -1,0 +1,16 @@
+{
+	"name": "LoadableArray",
+	"plugin-id": "Arr",
+	"sid": 488203578810455,
+	"instanceVariables": [
+		{
+			"name": "tag",
+			"type": "string",
+			"desc": "",
+			"sid": 758146092410756
+		}
+	],
+	"members": [
+		"TileToConditionData"
+	]
+}

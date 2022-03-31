@@ -1,0 +1,21 @@
+{
+	"name": "Button",
+	"plugin-id": "Sprite",
+	"sid": 203310662369037,
+	"instanceVariables": [
+		{
+			"name": "AnimationPrefix",
+			"type": "string",
+			"desc": "",
+			"sid": 777369516922966
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"SettBut",
+		"MainBut",
+		"TabBut",
+		"ModeBut"
+	]
+}

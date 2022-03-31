@@ -1,0 +1,73 @@
+{
+	"name": "car_edge_collision",
+	"plugin-id": "Sprite",
+	"sid": 700696280873751,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "ToCheckpoint",
+			"type": "number",
+			"desc": "",
+			"sid": 413779376436639
+		},
+		{
+			"name": "AtNode",
+			"type": "number",
+			"desc": "",
+			"sid": 176744710082669
+		},
+		{
+			"name": "Moving",
+			"type": "boolean",
+			"desc": "",
+			"sid": 138947962801838
+		},
+		{
+			"name": "AttachedToCarUID",
+			"type": "number",
+			"desc": "",
+			"sid": 514442189681169
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Pathfinding",
+			"name": "Pathfinding",
+			"sid": 380090648469181
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 835326526237048
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 140,
+						"height": 80,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 6895723,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 856427948408408,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 0
+			}
+		],
+		"subfolders": []
+	}
+}

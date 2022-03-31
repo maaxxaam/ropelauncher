@@ -1,0 +1,27 @@
+{
+	"name": "CarAI",
+	"plugin-id": "Text",
+	"sid": 979622661596367,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "NearestCheckpoint",
+			"type": "number",
+			"desc": "",
+			"sid": 902112850118127
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Pathfinding",
+			"name": "Pathfinding",
+			"sid": 494696050289833
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 472109029092624
+		}
+	],
+	"effectTypes": []
+}

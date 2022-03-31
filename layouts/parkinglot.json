@@ -110,7 +110,7 @@
 					"type": "Car",
 					"properties": {
 						"initially-visible": true,
-						"initial-animation": "Animation 1",
+						"initial-animation": "NoColliding",
 						"initial-frame": 0,
 						"enable-collisions": true,
 						"live-preview": false
@@ -118,8 +118,21 @@
 					"uid": 117,
 					"instanceVariables": {
 						"Trail": -2,
+						"second_frame": 0,
+						"Player": true,
+						"Recording": true,
+						"Flying": false,
 						"CarSpeed": 400,
-						"CarSpeedBasic": 400
+						"CarSpeedBasic": 400,
+						"CarAccel": 0,
+						"CarAccelBasic": 400,
+						"CarDecel": 0,
+						"CarDecelBasic": 50,
+						"CarRecover": 0,
+						"CarRecoverBasic": 50,
+						"SteerCoef": 1,
+						"Mass": 1000,
+						"Collided": false
 					},
 					"behaviors": {
 						"BoundToLayout": {
@@ -153,6 +166,15 @@
 						},
 						"Flash": {
 							"properties": {}
+						},
+						"Spline": {
+							"properties": {
+								"activated": "yes",
+								"speed": 400,
+								"set-angle": "no",
+								"looping": "no",
+								"tension": 0.5
+							}
 						}
 					},
 					"sceneGraphData": {
@@ -183,8 +205,8 @@
 					"world": {
 						"x": 2880,
 						"y": 2280,
-						"width": 131,
-						"height": 70,
+						"width": 140,
+						"height": 80,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [

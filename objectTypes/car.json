@@ -11,16 +11,94 @@
 			"sid": 249203281949651
 		},
 		{
+			"name": "second_frame",
+			"type": "number",
+			"desc": "Variable to check if this is the 2nd frame. Used for performance-impacting actions.",
+			"sid": 128645196935548
+		},
+		{
+			"name": "Player",
+			"type": "boolean",
+			"desc": "Whether or not this car is meant to be controlled by player.",
+			"sid": 597820458057379
+		},
+		{
+			"name": "Recording",
+			"type": "boolean",
+			"desc": "True if we are recording this car's movement.",
+			"sid": 221226140946122
+		},
+		{
+			"name": "Flying",
+			"type": "boolean",
+			"desc": "Whether is this car flying due to a jump.",
+			"sid": 933729751449480
+		},
+		{
 			"name": "CarSpeed",
 			"type": "number",
-			"desc": "",
+			"desc": "Car's current Max Speed",
 			"sid": 416830870736636
 		},
 		{
 			"name": "CarSpeedBasic",
 			"type": "number",
-			"desc": "",
+			"desc": "Car's basic value for Max Speed",
 			"sid": 857509283208276
+		},
+		{
+			"name": "CarAccel",
+			"type": "number",
+			"desc": "Car's current Acceleration",
+			"sid": 123563200867218
+		},
+		{
+			"name": "CarAccelBasic",
+			"type": "number",
+			"desc": "Car's basic value for Acceleration",
+			"sid": 127284875562227
+		},
+		{
+			"name": "CarDecel",
+			"type": "number",
+			"desc": "Car's current Deceleration",
+			"sid": 874704130118943
+		},
+		{
+			"name": "CarDecelBasic",
+			"type": "number",
+			"desc": "Car's basic value for Deceleration",
+			"sid": 866424901388478
+		},
+		{
+			"name": "CarRecover",
+			"type": "number",
+			"desc": "Car's current Drift Recover",
+			"sid": 221685104639204
+		},
+		{
+			"name": "CarRecoverBasic",
+			"type": "number",
+			"desc": "Car's basic value for Drift Recover",
+			"sid": 916824927937107
+		},
+		{
+			"name": "SteerCoef",
+			"type": "number",
+			"desc": "Car's basic coefficient for Steer Speed",
+			"sid": 481992251439922
+		},
+		{
+			"name": "Mass",
+			"type": "number",
+			"desc": "Car's mass. Used during collision resolution.",
+			"sid": 858914804778265
+		},
+		{
+			"name": "Collided",
+			"type": "boolean",
+			"desc": "",
+			"sid": 312331239399442
 		}
 	],
 	"behaviorTypes": [
@@ -35,7 +113,7 @@
 			"sid": 843296125530563
 		},
 		{
-			"behaviorId": "Car",
+			"behaviorId": "CarPlus",
 			"name": "Car",
 			"sid": 672776114892879
 		},
@@ -48,6 +126,11 @@
 			"behaviorId": "Flash",
 			"name": "Flash",
 			"sid": 156196229929090
+		},
+		{
+			"behaviorId": "mcube_rexspline",
+			"name": "Spline",
+			"sid": 348805045883610
 		}
 	],
 	"effectTypes": [],
@@ -56,62 +139,127 @@
 			{
 				"frames": [
 					{
-						"width": 131,
-						"height": 70,
+						"width": 140,
+						"height": 80,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 8377565,
+						"imageSpriteId": 9871869,
 						"collisionPoly": {
 							"points": [
-								0.9618320610687023,
-								0.07142857142857142,
-								1,
-								0.5,
-								0.9618320610687023,
-								0.9142857142857143,
-								0.5,
-								0.9714285714285714,
-								0.06106870229007633,
-								0.8857142857142857,
-								0.007633587786259555,
-								0.5,
-								0.06106870229007633,
-								0.1,
-								0.5,
-								0.014285714285714285
+								0.8421427045549668,
+								0.11000003814697264,
+								0.9221426827566965,
+								0.22499999999999995,
+								0.9264286586216518,
+								0.7774999618530273,
+								0.8728571210588726,
+								0.8724999427795409,
+								0.18071430751255582,
+								0.8525000572204591,
+								0.07214290073939733,
+								0.7299999237060547,
+								0.06642859322684151,
+								0.24499998092651368,
+								0.17714287894112724,
+								0.13750009536743163
 							]
 						},
 						"useCollisionPoly": true,
 						"imagePoints": [
 							{
 								"name": "LeftBackTrail",
-								"x": 0.1297709923664122,
-								"y": 0.14285714285714285
+								"x": 0.15357142857142858,
+								"y": 0.1875
 							},
 							{
 								"name": "RightBackTrail",
-								"x": 0.1297709923664122,
-								"y": 0.8571428571428573
+								"x": 0.15357142857142858,
+								"y": 0.8125000000000002
 							},
 							{
 								"name": "LeftFrontTrail",
-								"x": 0.816793893129771,
-								"y": 0.14285714285714285
+								"x": 0.7964285714285714,
+								"y": 0.1875
 							},
 							{
 								"name": "RightFrontTrail",
-								"x": 0.816793893129771,
-								"y": 0.8571428571428571
+								"x": 0.7964285714285714,
+								"y": 0.8125
 							}
 						],
 						"duration": 1
 					}
 				],
 				"sid": 765634219857229,
-				"name": "Animation 1",
+				"name": "NoColliding",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 140,
+						"height": 80,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 784887,
+						"collisionPoly": {
+							"points": [
+								0.1798521835949954,
+								0.841249966621399,
+								0.10499506113480539,
+								0.740625,
+								0.10098461228974011,
+								0.2571875333786012,
+								0.1511122652949121,
+								0.1740625500679017,
+								0.7987601836846799,
+								0.1915624499320983,
+								0.900352000022421,
+								0.29875006675720217,
+								0.9056989591948841,
+								0.7231250166893005,
+								0.8021020204193738,
+								0.8171874165534974
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "LeftBackTrail",
+								"x": 0.8241581632653061,
+								"y": 0.7734375
+							},
+							{
+								"name": "RightBackTrail",
+								"x": 0.8241581632653061,
+								"y": 0.22656249999999983
+							},
+							{
+								"name": "LeftFrontTrail",
+								"x": 0.22262755102040824,
+								"y": 0.7734375
+							},
+							{
+								"name": "RightFrontTrail",
+								"x": 0.22262755102040824,
+								"y": 0.2265625
+							}
+						],
+						"duration": 1
+					}
+				],
+				"sid": 534691737122014,
+				"name": "Colliding",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

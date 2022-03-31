@@ -39,12 +39,12 @@
 					"objectClass": "Touch",
 					"sid": 472772595553118,
 					"parameters": {
-						"object": "Buttons"
+						"object": "Button"
 					}
 				},
 				{
 					"id": "is-on-screen",
-					"objectClass": "Buttons",
+					"objectClass": "Button",
 					"sid": 166040165340706
 				}
 			],
@@ -116,12 +116,12 @@
 					"objectClass": "System",
 					"sid": 269361284964291,
 					"parameters": {
-						"object": "Buttons"
+						"object": "Button"
 					}
 				},
 				{
 					"id": "is-on-screen",
-					"objectClass": "Buttons",
+					"objectClass": "Button",
 					"sid": 333168185593767
 				}
 			],
@@ -136,17 +136,17 @@
 							"objectClass": "Touch",
 							"sid": 598964739731520,
 							"parameters": {
-								"object": "Buttons"
+								"object": "Button"
 							}
 						}
 					],
 					"actions": [
 						{
 							"id": "set-animation",
-							"objectClass": "Buttons",
+							"objectClass": "Button",
 							"sid": 810685919490558,
 							"parameters": {
-								"animation": "Buttons.AnimationPrefix&\"Tap\"",
+								"animation": "Button.AnimationPrefix&\"Tap\"",
 								"from": "beginning"
 							}
 						}
@@ -166,17 +166,17 @@
 							"objectClass": "Mouse",
 							"sid": 326397937446697,
 							"parameters": {
-								"object": "Buttons"
+								"object": "Button"
 							}
 						}
 					],
 					"actions": [
 						{
 							"id": "set-animation",
-							"objectClass": "Buttons",
+							"objectClass": "Button",
 							"sid": 424447305265132,
 							"parameters": {
-								"animation": "Buttons.AnimationPrefix&\"Hover\"",
+								"animation": "Button.AnimationPrefix&\"Hover\"",
 								"from": "beginning"
 							}
 						}
@@ -195,10 +195,10 @@
 					"actions": [
 						{
 							"id": "set-animation",
-							"objectClass": "Buttons",
+							"objectClass": "Button",
 							"sid": 489207661496558,
 							"parameters": {
-								"animation": "Buttons.AnimationPrefix&\"Idle\"",
+								"animation": "Button.AnimationPrefix&\"Idle\"",
 								"from": "beginning"
 							}
 						}
@@ -666,7 +666,8 @@
 					"sid": 301718773726286
 				}
 			],
-			"sid": 674746645293579
+			"sid": 674746645293579,
+			"disabled": true
 		}
 	],
 	"sid": 936943754957788

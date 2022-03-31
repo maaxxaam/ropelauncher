@@ -107,6 +107,38 @@
 					}
 				},
 				{
+					"type": "checkpoint",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Check",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 524,
+					"instanceVariables": {
+						"IsStart": false,
+						"checkpointID": 3
+					},
+					"behaviors": {},
+					"world": {
+						"x": 1551,
+						"y": 1857,
+						"width": 512,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 1.5707963267948966,
+						"zElevation": 0
+					}
+				},
+				{
 					"type": "Pole",
 					"properties": {
 						"initially-visible": true,
@@ -280,7 +312,7 @@
 					"type": "Car",
 					"properties": {
 						"initially-visible": true,
-						"initial-animation": "Animation 1",
+						"initial-animation": "NoColliding",
 						"initial-frame": 0,
 						"enable-collisions": true,
 						"live-preview": false
@@ -288,8 +320,21 @@
 					"uid": 25,
 					"instanceVariables": {
 						"Trail": -2,
+						"second_frame": 0,
+						"Player": true,
+						"Recording": true,
+						"Flying": false,
 						"CarSpeed": 400,
-						"CarSpeedBasic": 400
+						"CarSpeedBasic": 400,
+						"CarAccel": 0,
+						"CarAccelBasic": 400,
+						"CarDecel": 0,
+						"CarDecelBasic": 50,
+						"CarRecover": 0,
+						"CarRecoverBasic": 50,
+						"SteerCoef": 1,
+						"Mass": 1000,
+						"Collided": false
 					},
 					"behaviors": {
 						"BoundToLayout": {
@@ -309,7 +354,7 @@
 								"deceleration": 50,
 								"steer-speed": -120,
 								"drift-recover": 50,
-								"friction": 0.4,
+								"friction": 0.1,
 								"turn-while-stopped": false,
 								"set-angle": true,
 								"default-controls": true,
@@ -323,6 +368,15 @@
 						},
 						"Flash": {
 							"properties": {}
+						},
+						"Spline": {
+							"properties": {
+								"activated": "no",
+								"speed": 400,
+								"set-angle": "no",
+								"looping": "no",
+								"tension": 0.5
+							}
 						}
 					},
 					"sceneGraphData": {
@@ -353,8 +407,8 @@
 					"world": {
 						"x": 3128,
 						"y": 2286,
-						"width": 131,
-						"height": 70,
+						"width": 140,
+						"height": 80,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -486,6 +540,38 @@
 							1
 						],
 						"angle": 5.906518196917837,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "checkpoint",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Check",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 525,
+					"instanceVariables": {
+						"IsStart": false,
+						"checkpointID": 5
+					},
+					"behaviors": {},
+					"world": {
+						"x": 2032,
+						"y": 3269,
+						"width": 512,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 1.5707963267948966,
 						"zElevation": 0
 					}
 				},
@@ -1445,8 +1531,8 @@
 						}
 					},
 					"world": {
-						"x": 1299,
-						"y": 1973,
+						"x": 1295,
+						"y": 2000,
 						"width": 73,
 						"height": 68,
 						"originX": 0.5,
@@ -2892,6 +2978,38 @@
 						"angle": 0,
 						"zElevation": 0
 					}
+				},
+				{
+					"type": "checkpoint",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Start",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 526,
+					"instanceVariables": {
+						"IsStart": true,
+						"checkpointID": 0
+					},
+					"behaviors": {},
+					"world": {
+						"x": 3122,
+						"y": 2142,
+						"width": 512,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
 				}
 			],
 			"sid": 183199583320546,
@@ -3234,6 +3352,35 @@
 						"angle": 0,
 						"zElevation": 0
 					}
+				},
+				{
+					"type": "JumpBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 520,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 649,
+						"y": 1194,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
 				}
 			],
 			"sid": 420015520376984,
@@ -3271,6 +3418,40 @@
 			"type": "flags",
 			"properties": {},
 			"uid": 499,
+			"instanceVariables": {
+				"tag": "flags"
+			}
+		},
+		{
+			"type": "Recording",
+			"properties": {
+				"width": 0,
+				"height": 10,
+				"depth": 1
+			},
+			"uid": 517,
+			"instanceVariables": {}
+		},
+		{
+			"type": "TileToConditionData",
+			"properties": {
+				"width": 324,
+				"height": 7,
+				"depth": 1
+			},
+			"uid": 519,
+			"instanceVariables": {
+				"tag": "tiles"
+			}
+		},
+		{
+			"type": "Collisions",
+			"properties": {
+				"width": 0,
+				"height": 1,
+				"depth": 1
+			},
+			"uid": 523,
 			"instanceVariables": {}
 		}
 	],

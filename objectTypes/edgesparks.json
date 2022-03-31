@@ -1,0 +1,26 @@
+{
+	"name": "EdgeSparks",
+	"plugin-id": "Particles",
+	"sid": 751868513700107,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Pin",
+			"name": "Pin",
+			"sid": 239665409105128
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 64,
+		"height": 64,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 5407551,
+		"useCollisionPoly": true
+	}
+}

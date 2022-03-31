@@ -1,0 +1,16 @@
+{
+	"name": "LoadableDict",
+	"plugin-id": "Dictionary",
+	"sid": 887244494109265,
+	"instanceVariables": [
+		{
+			"name": "tag",
+			"type": "string",
+			"desc": "",
+			"sid": 758674933565915
+		}
+	],
+	"members": [
+		"flags"
+	]
+}
