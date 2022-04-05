@@ -1911,9 +1911,18 @@
 				{
 					"id": "set-layer-angle",
 					"objectClass": "System",
-					"sid": 500523706512232,
+					"sid": 972851169738657,
 					"parameters": {
-						"layer": "\"Map\"",
+						"layer": "\"Level\"",
+						"angle": "Car.Angle + 90"
+					}
+				},
+				{
+					"id": "set-layer-angle",
+					"objectClass": "System",
+					"sid": 104143970661163,
+					"parameters": {
+						"layer": "\"Layout\"",
 						"angle": "Car.Angle + 90"
 					}
 				}
