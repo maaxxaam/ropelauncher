@@ -13933,10 +13933,12 @@ self.C3_ExpressionFuncs = [
 			return () => multiply(multiply((((f0(((((Math.log(Math.abs(Math.round(((n1.ExpObject() - 360) * v2.GetValue()))))) < (1) ? 1 : 0)) ? (1) : (Math.log(Math.abs(Math.round(((n3.ExpObject() - 360) * v4.GetValue())))))), 3) - 7) * 25) * Math.sign((n5.ExpObject() - 360))), add(multiply((-2), n6.ExpObject("controls_invert")), 1)), n7.ExpInstVar());
 		},
 		() => "cam_angle_follow",
+		() => "Level",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 90);
 		},
+		() => "Layout",
 		() => "GUI",
 		() => 0.1,
 		() => "Replays",
@@ -14020,7 +14022,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() - 1);
 		},
-		() => "Level",
 		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
