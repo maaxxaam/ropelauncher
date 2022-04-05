@@ -131,8 +131,7 @@
 						"CarRecover": 0,
 						"CarRecoverBasic": 50,
 						"SteerCoef": 1,
-						"Mass": 1000,
-						"Collided": false
+						"Mass": 1000
 					},
 					"behaviors": {
 						"BoundToLayout": {

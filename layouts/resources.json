@@ -178,20 +178,19 @@
 					"instanceVariables": {
 						"Trail": -2,
 						"second_frame": 0,
-						"Player": true,
+						"Player": false,
 						"Recording": true,
 						"Flying": false,
 						"CarSpeed": 400,
-						"CarSpeedBasic": 0,
-						"CarAccel": 0,
+						"CarSpeedBasic": 400,
+						"CarAccel": 400,
 						"CarAccelBasic": 400,
-						"CarDecel": 0,
+						"CarDecel": 50,
 						"CarDecelBasic": 50,
-						"CarRecover": 0,
+						"CarRecover": 50,
 						"CarRecoverBasic": 50,
 						"SteerCoef": 1,
-						"Mass": 1000,
-						"Collided": false
+						"Mass": 1000
 					},
 					"behaviors": {
 						"BoundToLayout": {
@@ -441,7 +440,7 @@
 					},
 					"uid": 518,
 					"instanceVariables": {
-						"ToCheckpoint": 0,
+						"ToCheckpoint": 1,
 						"AtNode": 0,
 						"Moving": false,
 						"AttachedToCarUID": 0

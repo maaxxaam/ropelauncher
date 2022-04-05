@@ -183,6 +183,14 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "AdvancedRandom",
+			"name": "Advanced Random",
+			"author": "Scirra",
+			"version": "r285.3",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "Pin",
 			"name": "Pin",
@@ -211,7 +219,7 @@
 			"id": "CarPlus",
 			"name": "Car+",
 			"author": "Scirra, maaxxaam",
-			"version": "0.0.1.3",
+			"version": "0.0.1.8",
 			"bundled": false
 		},
 		{
@@ -376,7 +384,7 @@
 			"EdgeSparks",
 			"CarAI",
 			"checkpoint",
-			"Collisions"
+			"AdvancedRandom"
 		],
 		"subfolders": []
 	},

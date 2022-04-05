@@ -25,8 +25,30 @@
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 3441352,
+						"imageSpriteId": 5039879,
 						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "Image Point 1",
+								"x": 0,
+								"y": 0.5
+							},
+							{
+								"name": "Image Point 2",
+								"x": 0.5,
+								"y": 0
+							},
+							{
+								"name": "Image Point 3",
+								"x": 1,
+								"y": 0.5
+							},
+							{
+								"name": "Image Point 4",
+								"x": 0.5,
+								"y": 1
+							}
+						],
 						"duration": 1
 					}
 				],

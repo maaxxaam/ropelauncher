@@ -2,6 +2,10 @@ import { Vector2 } from './Vector2.js'
 
 function lerp(a,b,f) { return (b-a)*f+a; };
 
+function Point(x, y) {
+	return {x:x, y:y}
+}
+
 function test_tile_for_corner(tile) {
 	var no_extra_bits = (tile & ~151) == 0;
 	var has_148 = (tile & 148) == 148;
@@ -39,68 +43,204 @@ function map_corners_to_circle(tile) {
 	return res;
 }
 
-function sprite_collision_points(sprite1_UID, sprite2_UID, precision, runtime, mode) {
-	if (mode != "all" && mode != "first") { 
-		if (typeof mode == "undefined") mode = "all";
-		else throw "Unknown operating mode: can do 'all' or 'first'";
-	};
+function project_point_onto_vector(vector, point) {
+	const dot_over_len2 = Vector2.dot(vector, point) / (vector.x * vector.x + vector.y * vector.y);
+	let res_point = new Point(vector.x * dot_over_len2, vector.y * dot_over_len2);
+	res_point.len_sqr = Vector2.dot(vector, point);
+	return res_point;
+}
+
+function project_line_onto_vector(vector, point1, point2) {
+	return [project_point_onto_vector(vector, point1), project_point_onto_vector(vector, point2)];
+}
+
+function line_intersection_point(edge1, edge2) {
+	let edge1vec = Vector2.subtract(edge1[0], edge1[1]);
+	let edge2vec = Vector2.subtract(edge2[0], edge2[1]);
+	let edgeCross = Vector2.cross(edge1vec, edge2vec);
+	let edge1cross = Vector2.cross(edge1[0], edge1[1]);
+	let edge2cross = Vector2.cross(edge2[0], edge2[1]);
+	let fin = Vector2.subtract(Vector2.multiply(edge2vec, edge1cross), Vector2.multiply(edge1vec, edge2cross));
+	return Vector2.divide(fin, edgeCross);
+}
+
+function vertices_clockwise_sort(vertices) {
+	// calc centroid
+	let centroid = Point(0, 0);
+	for (let point of vertices) Vector2.add(centroid, point);
+	centroid = Vector2.divide(centroid, vertices.length);
 	
-	if (typeof sprite1_UID == "number") var sprite1 = runtime.getInstanceByUid(sprite1_UID);
-	else var sprite1 = sprite1_UID;
-	if (typeof sprite2_UID == "number") var sprite2 = runtime.getInstanceByUid(sprite2_UID);
-	else var sprite2 = sprite2_UID;
-	
+	return vertices.sort(function(a, b) {
+    	return Math.atan2(a.y - centroid.y, a.x - centroid.x)
+        	 - Math.atan2(b.y - centroid.y, b.x - centroid.x);
+	});
+}
+
+function edge_right_side(edge, point) {
+	let edgeVec = Vector2.subtract(edge[1], edge[0]);
+	let pointVec = Vector2.subtract(point, edge[0]);
+	return Vector2.cross(edgeVec, pointVec) > 0
+}
+
+function simple_sutherland_hodgman_clipping(edgeInc, edgeClip, del) {
+	let res = [];
+	if (edge_right_side(edgeClip, edgeInc[1])) {
+		if (!del) {
+			res.push(line_intersection_point(edgeInc, edgeClip));
+		}
+		res.push(edgeInc[1]);
+	} else if (edge_right_side(edgeClip, edgeInc[0])) {
+		if (!del) res.push(edgeInc[1]);
+		res.push(line_intersection_point(edgeInc, edgeClip));
+	} else {
+		res = edgeInc;
+	}
+	return res;
+}
+
+function cannot_get_poly(sprite) {
+	return (typeof(sprite.getPolyPoint) == "undefined" || typeof(sprite.getPolyPointCount) == "undefined")
+}
+
+function get_polygon_normals(sprite) {
 	// Check if we can access needed Sprite functions
-	if (typeof(sprite1.getPolyPoint) == "undefined" || typeof(sprite2.getPolyPoint) == "undefined") {
-		console.log("Cannot find Sprite collision point: one of the objects doesn't have getPolyPoint() function. Object UIDs: ", sprite1_UID, sprite2_UID);
-		throw "Not a Sprite: cannot access getPolyPoint()";
-	};
-	if (typeof(sprite1.getPolyPointCount) == "undefined" || typeof(sprite2.getPolyPointCount) == "undefined") {
-		console.log("Cannot find Sprite collision point: one of the objects doesn't have getPolyPointCount() function. Object UIDs: ", sprite1_UID, sprite2_UID);
-		throw "Not a Sprite: cannot access getPolyPointCount()";
-	};
+	if (cannot_get_poly(sprite)) throw "Not a Sprite: cannot access collision polygon";
+	var normals = [];
 	
-	if (mode == "all") {
-		var results = [];
+	for (let i = 0; i < sprite.getPolyPointCount(); i++) {
+		let [edge1, edge2] = [Point(0, 0), Point(0,0)];
+		[edge1.x, edge1.y] = sprite.getPolyPoint(i);
+		[edge2.x, edge2.y] = sprite.getPolyPoint(i + 1);
+		let perpendicular = Vector2.normalize(new Vector2(edge1.y - edge2.y, edge2.x - edge1.x));
+		normals.push(perpendicular);
 	}
 	
-	for (let i = 0; i < sprite1.getPolyPointCount(); i++) {
-		const [edge1x, edge1y] = sprite1.getPolyPoint(i);
-		const [edge2x, edge2y] = sprite1.getPolyPoint(i + 1);
-		const dist = Math.sqrt(((edge2x - edge1x) * (edge2x - edge1x)) + ((edge2y - edge1y) * (edge2y - edge1y)));
-		
-		for (let progress = 0; progress <= dist; progress += precision) {
-			let pointx = lerp(edge1x, edge2x, parseFloat(progress)/dist);
-			let pointy = lerp(edge1y, edge2y, parseFloat(progress)/dist);
-			if (sprite2.containsPoint(pointx, pointy)) {
-				if (mode == "all") results.push([pointx, pointy]);
-				else return [pointx, pointy];
+	return normals;
+}
+
+function project_collision_onto_vector(sprite, vector) {
+	let [edge1, edge2] = [Point(0, 0), Point(0,0)];
+	
+	let proj = [new Point(Infinity, Infinity), new Point(-Infinity, -Infinity)];
+	proj[0].len_sqr = Infinity;
+	proj[1].len_sqr = 0;
+	for (let i = 0; i < sprite.getPolyPointCount(); i++) {
+		[edge1.x, edge1.y] = sprite.getPolyPoint(i);
+		[edge2.x, edge2.y] = sprite.getPolyPoint(i + 1);
+		if (edge2.x < edge1.x || (edge1.x == edge2.x && edge2.y < edge1.y)) { // swap edges
+			let [temp1, temp2] = [edge1.x, edge1.y];
+			[edge1.x, edge1.y] = [edge2.x, edge2.y];
+			[edge2.x, edge2.y] = [temp1, temp2];
+		}
+		const [point1, point2] = project_line_onto_vector(vector, edge1, edge2);
+		if (proj[0].len_sqr > point1.len_sqr) proj[0] = point1;
+		if (proj[1].len_sqr < point2.len_sqr) proj[1] = point2;
+	}
+	return proj;
+}
+
+export function SAT_collision(sprite1, sprite2) {	
+	let col_normal = Vector2(0, 0);
+	let overlap = Vector2(Infinity, Infinity);
+	overlap.len_sqr = Infinity;
+	
+	// Check if we can access needed Sprite functions
+	if (cannot_get_poly(sprite1) || cannot_get_poly(sprite2)) throw "Not a Sprite: cannot access collision polygon";
+	
+	var normals = get_polygon_normals(sprite1).concat(get_polygon_normals(sprite2));
+	
+	for (let normal of normals) {
+		let [edge1, edge2] = [Point(0, 0), Point(0,0)];
+		// find projection of sprite1 onto normal
+		let proj1 = project_collision_onto_vector(sprite1, normal);
+		// find projection of sprite2 onto normal
+		let proj2 = project_collision_onto_vector(sprite2, normal);
+		// see if they overlap
+		// !IMPORTANT! The following math works assuming all coordinates have the same sign
+		let over1 = proj1[0].len_sqr > proj2[0].len_sqr ? proj1[0] : proj2[0];
+		let over2 = proj1[1].len_sqr < proj2[1].len_sqr ? proj1[1] : proj2[1];
+		if (over1.len_sqr > over2.len_sqr) { // no overlap
+			return {collided: false};
+		} else {
+			let overVec = Vector2.subtract(over2, over1);
+			overVec.len_sqr = Vector2.dot(overVec, overVec);
+			if (overVec.len_sqr < overlap.len_sqr) {
+				overlap = overVec;
+				col_normal = normal;
 			}
 		}
 	}
-	if (mode == "all") return results;
-	else return [NaN, NaN];
+	return {collided: true, normal: col_normal, overlap: overlap};
 }
 
-function collision_at_poly(x, y, sprite_UID, runtime) {
-	if (typeof sprite_UID == "number") var sprite = runtime.getInstanceByUid(sprite1_UID);
-	else var sprite = sprite_UID;
-	
-	// Check if we can access needed Sprite functions
-	if (typeof(sprite.getPolyPoint) == "undefined") {
-		console.log("Cannot perform poly check: the object doesn't have getPolyPoint() function. Object UID: ", sprite_UID);
-		throw "Not a Sprite: cannot access getPolyPoint()";
-	};
-	if (typeof(sprite.getPolyPointCount) == "undefined") {
-		console.log("Cannot perform poly check: the object doesn't have getPolyPointCount() function. Object UID: ", sprite_UID);
-		throw "Not a Sprite: cannot access getPolyPointCount()";
-	};
+function furthest_point_from_vector(sprite, vector) {
+	let farthest = new Point(0, 0);
+	farthest.len_sqr = 0;
 	
 	for (let i = 0; i < sprite.getPolyPointCount(); i++) {
-		let [polyx, polyy] = sprite.getPolyPoint(i);
-		if (x == polyx && polyy == y) return true;
+		let point = new Point(0, 0);
+		[point.x, point.y] = sprite.getPolyPoint(i);
+		
+		let projected = project_point_onto_vector(point, vector);
+		if (projected.len_sqr > farthest.len_sqr) { 
+			farthest = point;
+			farthest.len_sqr = projected.len_sqr;
+			farthest.index = i;
+		}
 	}
-	return false;
+	return farthest;
+}
+
+function orthogonal_neighbour_edge(sprite, point, index, normal) {
+	let res = new Point(0, 0);
+	let edge1 = new Point(0, 0);
+	let edge2 = new Point(0, 0);
+	edge1.index = index == 0 ? sprite.getPolyPointCount() : index - 1;
+	[edge1.x, edge1.y] = sprite.getPolyPoint(edge1.index);
+	[edge2.x, edge2.y] = sprite.getPolyPoint(index + 1);
+	edge2.index = index + 1;
+	// choose the one most orthogonal based on dot product (maybe incorrect but works fine)
+	edge1.dot = Vector2.dot(Vector2.subtract(point, edge1), normal);
+	edge2.dot = Vector2.dot(Vector2.subtract(edge2, point), normal);
+	return Math.abs(edge1.dot) < Math.abs(edge2.dot) ? [edge1, point] : [point, edge2];
+}
+
+export function get_collision_point(sprite1, sprite2, collision_data) {
+	// Check if we can access needed Sprite functions
+	if (cannot_get_poly(sprite1) || cannot_get_poly(sprite2)) throw "Not a Sprite: cannot access collision polygon";
+	
+	// get colliding edges (sort of)
+	let point10 = furthest_point_from_vector(sprite1, collision_data.normal);
+	let point20 = furthest_point_from_vector(sprite2, collision_data.normal);
+	let point11 = Point(0, 0);
+	[point10, point11] = orthogonal_neighbour_edge(sprite1, point10, point10.index, collision_data.normal);
+	let point21 = Point(0, 0);
+	[point20, point21] = orthogonal_neighbour_edge(sprite2, point20, point20.index, collision_data.normal);
+	
+	// choose reference and incident faces
+	// choose the one most orthogonal based on dot product (maybe incorrect but works fine)
+	if (Math.abs(point11.dot) < Math.abs(point21.dot)) {
+		var ref_sprite = sprite1;
+		var inc_sprite = sprite2;
+		var ref = [point10, point11];
+		var inc = [point20, point21];
+	} else {
+		var inc_sprite = sprite1;
+		var ref_sprite = sprite2;
+		var inc = [point10, point11];
+		var ref = [point20, point21];
+	}
+	
+	// adjacent face clipping
+	let point00 = Vector2(0, 0);
+	let point30 = Vector2(0, 0);
+	[point30.x, point30.y] =  ref_sprite.getPolyPoint((ref[0].index + 2) % ref_sprite.getPolyPointCount());
+	[point00.x, point00.y] =  ref_sprite.getPolyPoint(ref[0].index == 0 ? ref_sprite.getPolyPointCount() - 1 : ref[0].index - 1);
+	inc = simple_sutherland_hodgman_clipping(inc, [point00, ref[0]]);
+	inc = simple_sutherland_hodgman_clipping(inc, [ref[1], point30]);
+	let [result] = simple_sutherland_hodgman_clipping(inc, [ref[0], ref[1]], true);
+	
+	return result;
 }
 
 function point_between_points(x1, y1, x2, y2, x3, y3) {
@@ -114,7 +254,8 @@ function point_between_points(x1, y1, x2, y2, x3, y3) {
 	let dl = Vector2.subtract(point2, point1);
 	
 	// Check if point lies on a line
-	if (Vector2.cross(dc, dl) != 0) return false;
+	let cross = Vector2.cross(dc, dl);
+	if (cross >= 1e-10 && cross <= -1e-10) return false;
 	
 	// Check if point lies between two points
 	if (Math.abs(dl.x) >= Math.abs(dl.y))
@@ -127,88 +268,31 @@ function point_between_points(x1, y1, x2, y2, x3, y3) {
 			point2.y <= currPoint.y && currPoint.y <= point1.y;
 }
 
-function get_collisiion_edge(x, y, sprite_UID, runtime) {
-	if (typeof sprite_UID == "number") var sprite = runtime.getInstanceByUid(sprite1_UID);
-	else var sprite = sprite_UID;
+export function car_collision_resolution(car1, car2, collision_data, collision_point) {
+	let cars = [car1, car2];
+	let [vels, avs, invmasses, astarts, avecs] = [[], [], [], [], []];
 	
-	// Check if we can access needed Sprite functions
-	if (typeof(sprite.getPolyPoint) == "undefined") {
-		console.log("Cannot find egde: the object doesn't have getPolyPoint() function. Object UID: ", sprite_UID);
-		throw "Not a Sprite: cannot access getPolyPoint()";
-	};
-	if (typeof(sprite.getPolyPointCount) == "undefined") {
-		console.log("Cannot find edge: the object doesn't have getPolyPointCount() function. Object UID: ", sprite_UID);
-		throw "Not a Sprite: cannot access getPolyPointCount()";
-	};
-	
-	for (let i = 0; i < sprite.getPolyPointCount(); i++) {
-		const [edge1x, edge1y] = sprite.getPolyPoint(i);
-		const [edge2x, edge2y] = sprite.getPolyPoint(i + 1);
-		if (point_between_points(edge1x, edge1y, x, y, edge2x, edge2y)) return i;
+	for (let car of cars) { 
+		vels.push(Vector2(car.behaviors.Car.vectorX, car.behaviors.Car.vectorY));
+		avecs.push(Vector2.subtract(collision_point, Vector2(car.x, car.y)));
+		invmasses.push(1 / car.instVars.Mass);
+		astarts.push(car.behaviors.Car.steering ? car.behaviors.Car.steerSpeed : 0)
 	}
-	return 0;
-}
+	
+	const normal = collision_data.normal;
+	const rel_vel = Vector2.subtract(vels[0], vels[1]);
+	const I = 1000000;
+	const eps = 1.1; // > 1 - more energy, < 1 - less energy 
+	
+	let up = Vector2.dot(Vector2.multiply(rel_vel, -(1 + eps)), normal);
+	let down = Vector2.dot(normal, Vector2.multiply(normal, (invmasses[0] + invmasses[1])));
+	for (let avec of avecs) down += Math.pow(Vector2.dot(avec, normal), 2)/I;
+	let j = up / down;
+	
+	let fin_vel1 = Vector2.add(vels[0], Vector2.multiply(normal, j*invmasses[0]));
+	let fin_vel2 = Vector2.subtract(vels[1], Vector2.multiply(normal, j*invmasses[1]));
+	
+	for (let i = 0; i < 2; i++) avs.push(astarts[i] + Vector2.dot(avecs[i], Vector2.multiply(normal, j)) / I);
 
-export function car_collision_resolution(car1_UID, car2_UID, runtime) {
-	if (typeof car1_UID == "number") var car1 = runtime.getInstanceByUid(car1_UID);
-	else var car1 = car1_UID;
-	if (typeof car2_UID == "number") var car2 = runtime.getInstanceByUid(car2_UID);
-	else var car2 = car2_UID;
-	console.log(runtime.gameTime);
-	let car1_col = car1.getChildAt(0);
-	let car2_col = car2.getChildAt(0);
-	console.log(car1_col, car2_col);
-	
-	// find correct edge to base a normal off
-	let [carx, cary] = sprite_collision_points(car1_col, car2_col, 5, runtime, "first");
-	let isFirstCarPoint = collision_at_poly(carx, cary, car1_col, runtime);
-	if (isFirstCarPoint) {
-		[carx, cary] = sprite_collision_points(car2_col, car1_col, 5, runtime, "first");
-		let edge = get_collisiion_edge(carx, cary, car2_col, runtime);
-		console.log(edge);
-		var distance_tangent = Vector2.normalize(new Vector2(car2_col.getPolyPointX(edge+1) - car2_col.getPolyPointX(edge), car2_col.getPolyPointY(edge+1) - car2_col.getPolyPointY(edge)));
-	}
-	else {
-		let edge = get_collisiion_edge(carx, cary, car1_col, runtime);
-		console.log(edge);
-		var distance_tangent = Vector2.normalize(new Vector2(car1_col.getPolyPointX(edge+1) - car1_col.getPolyPointX(edge), car1_col.getPolyPointY(edge+1) - car1_col.getPolyPointY(edge)));
-	}
-	
-	//console.log("Distance tangent:", distance_tangent.x, distance_tangent.y);
-	const distance_vector = Vector2.rotateDegree(distance_tangent, 90);
-	//console.log("Distance vector:", distance_vector.x, distance_vector.y);
-	
-	const velocity1 = Vector2(car1.behaviors.Car.vectorX, car1.behaviors.Car.vectorY);
-	console.log("Velocity1:", velocity1.x, velocity1.y, car1.behaviors.Car.speed);
-	const velocity2 = Vector2(car2.behaviors.Car.vectorX, car2.behaviors.Car.vectorY);
-	console.log("Velocity2:", velocity2.x, velocity2.y, car2.behaviors.Car.speed);
-	
-	let dist_vel1 = Vector2.dot(velocity1, distance_vector);
-	//console.log("Distance projection 1:", dist_vel1);
-	let dist_vel2 = Vector2.dot(velocity2, distance_vector);
-	//console.log("Distance projection 2:", dist_vel2);
-	
-	let tan_vel1 = Vector2.dot(velocity1, distance_tangent);
-	//console.log("Tangent projection 1:", tan_vel1);
-	let tan_vel2 = Vector2.dot(velocity2, distance_tangent);
-	//console.log("Tangent projection 2:", tan_vel2);
-	
-	let mass1 = car1.instVars.Mass;
-	let mass2 = car2.instVars.Mass;
-	
-	const eps = 1.25; // > 1 - more energy, < 1 - less energy 
-	let resolved_vel1 = (mass2 * dist_vel2 * (eps + 1) + dist_vel1 * (mass1 - eps * mass2))/(mass1 + mass2);
-	let resolved_vel2 = (mass1 * dist_vel1 * (eps + 1) - dist_vel2 * (mass1 - eps * mass2))/(mass1 + mass2);
-
-	//console.log("Resolved speed 1:", resolved_vel1);
-	//console.log("Resolved speed 2:", resolved_vel2);
-	
-	let vx1 = resolved_vel1 * distance_vector.x + tan_vel1 * distance_tangent.x;
-	let vy1 = resolved_vel1 * distance_vector.y + tan_vel1 * distance_tangent.y;
-	console.log("Final velocity 1:", vx1, vy1);
-	let vx2 = resolved_vel2 * distance_vector.x + tan_vel2 * distance_tangent.x;
-	let vy2 = resolved_vel2 * distance_vector.y + tan_vel2 * distance_tangent.y;
-	console.log("Final velocity 2:", vx2, vy2);
-	//debugger;
-	return [vx1, vy1, vx2, vy2];
+	return [fin_vel1.x, fin_vel1.y, avs[0], fin_vel2.x, fin_vel2.y, avs[1]];
 }

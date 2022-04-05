@@ -10,6 +10,7 @@
         "obstacles_dynamic_enabled": 0,
         "bonuses_static_enabled": 1,
         "bonuses_dynamic_enabled": 0,
-        "difficulty_lives": 3
+        "difficulty_lives": 3,
+        "difficulty_enemies": 3
     }
 }

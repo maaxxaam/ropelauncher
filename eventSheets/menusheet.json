@@ -97,26 +97,76 @@
 							}
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 830283524682247,
+					"children": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 875914712755035,
-							"parameters": {
-								"variable": "game_mode",
-								"value": "PlayLvlBut.SelectedMode"
-							}
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "PlayLvlBut",
+									"sid": 877320800637059,
+									"parameters": {
+										"instance-variable": "SelectedLvl",
+										"comparison": 0,
+										"value": "\"ParkingLot\""
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "PlayLvlBut",
+									"sid": 930908537039897,
+									"parameters": {
+										"instance-variable": "SelectedMode",
+										"comparison": 0,
+										"value": "\"Race\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "alert",
+									"objectClass": "Browser",
+									"sid": 731596195287617,
+									"parameters": {
+										"message": "\"Режим \"\"Схватка\"\" еще не готов.\""
+									}
+								}
+							],
+							"sid": 125798044822733
 						},
 						{
-							"id": "go-to-layout-by-name",
-							"objectClass": "System",
-							"sid": 644841623243479,
-							"parameters": {
-								"layout": "PlayLvlBut.SelectedLvl"
-							}
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 915149665408207
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 743873348596375,
+									"parameters": {
+										"variable": "game_mode",
+										"value": "PlayLvlBut.SelectedMode"
+									}
+								},
+								{
+									"id": "go-to-layout-by-name",
+									"objectClass": "System",
+									"sid": 633058201877270,
+									"parameters": {
+										"layout": "PlayLvlBut.SelectedLvl"
+									}
+								}
+							],
+							"sid": 817208911599011
 						}
-					],
-					"sid": 830283524682247
+					]
 				},
 				{
 					"eventType": "block",
@@ -197,20 +247,20 @@
 							],
 							"actions": [
 								{
-									"id": "set-text",
-									"objectClass": "mmtext",
-									"sid": 331483507038729,
-									"parameters": {
-										"text": "\"LVL: \"&PlayLvlBut.SelectedLvl&newline&\n\"MODE: \"&PlayLvlBut.SelectedMode"
-									}
-								},
-								{
 									"id": "set-instvar-value",
 									"objectClass": "PlayLvlBut",
 									"sid": 943649924396660,
 									"parameters": {
 										"instance-variable": "SelectedMode",
 										"value": "ModeBut.AnimationPrefix"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "mmtext",
+									"sid": 298854076981161,
+									"parameters": {
+										"text": "\"LVL: \"&PlayLvlBut.SelectedLvl&newline&\n\"MODE: \"&PlayLvlBut.SelectedMode"
 									}
 								}
 							],

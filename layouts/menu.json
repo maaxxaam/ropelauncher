@@ -637,7 +637,7 @@
 							1,
 							1,
 							1,
-							0.5
+							1
 						],
 						"angle": 0,
 						"zElevation": 0
@@ -1204,7 +1204,7 @@
 							"type": "dev_flags",
 							"properties": {
 								"type": "checkbox",
-								"text": "Недвижимые препятствия",
+								"text": "Недвижимые бонусы",
 								"tooltip": "",
 								"initially-visible": true,
 								"enabled": true,
@@ -1240,7 +1240,7 @@
 							"type": "dev_flags",
 							"properties": {
 								"type": "checkbox",
-								"text": "Подвижные препятствия",
+								"text": "Подвижные бонусы",
 								"tooltip": "",
 								"initially-visible": true,
 								"enabled": true,
@@ -1276,7 +1276,7 @@
 							"type": "dev_flags",
 							"properties": {
 								"type": "checkbox",
-								"text": "Недвижимые бонусы",
+								"text": "Недвижимые препятствия",
 								"tooltip": "",
 								"initially-visible": true,
 								"enabled": true,
@@ -1312,7 +1312,7 @@
 							"type": "dev_flags",
 							"properties": {
 								"type": "checkbox",
-								"text": "Подвижные бонусы",
+								"text": "Подвижные препятствия",
 								"tooltip": "",
 								"initially-visible": true,
 								"enabled": true,

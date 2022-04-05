@@ -93,12 +93,6 @@
 			"type": "number",
 			"desc": "Car's mass. Used during collision resolution.",
 			"sid": 858914804778265
-		},
-		{
-			"name": "Collided",
-			"type": "boolean",
-			"desc": "",
-			"sid": 312331239399442
 		}
 	],
 	"behaviorTypes": [
