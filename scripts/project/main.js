@@ -1,4 +1,3 @@
-
 // Import any other script files here, e.g.:
 // import * as myModule from "./mymodule.js";
 
@@ -7,13 +6,7 @@ runOnStartup(async runtime =>
 	// Code to run on the loading screen.
 	// Note layouts, objects etc. are not yet available.
 	
-	//add devtodev script to the page
-	var script = document.createElement("script");
-	var d2dURL = "https://cdn.devtodev.com/sdk/web/v1/devtodevsdk.js";
-	script.src = d2dURL;
-	document.head.appendChild(script);
-	
-	runtime.addEventListener("beforeprojectstart", () => OnBeforeProjectStart(runtime));
+	//runtime.addEventListener("beforeprojectstart", () => OnBeforeProjectStart(runtime));
 });
 
 async function OnBeforeProjectStart(runtime)
@@ -21,12 +14,11 @@ async function OnBeforeProjectStart(runtime)
 	// Code to run just before 'On start of layout' on
 	// the first layout. Loading has finished and initial
 	// instances are created and available to use here.
-	//devtodev.setDebugLog(true);
 	
 	//runtime.addEventListener("tick", () => Tick(runtime));
 }
 
 function Tick(runtime)
 {
-	// Code to run every tick
+	// Tick
 }
