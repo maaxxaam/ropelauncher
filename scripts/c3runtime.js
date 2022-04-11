@@ -8591,39 +8591,6 @@ this._mode="";this._propSet.clear();this._pinImagePoint=""},Pin(objectClass,mode
 }
 
 {
-'use strict';const C3=self.C3;C3.Behaviors.bound=class BoundBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}};
-
-}
-
-{
-'use strict';const C3=self.C3;C3.Behaviors.bound.Type=class BoundType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}};
-
-}
-
-{
-'use strict';const C3=self.C3;const MODE=0;
-C3.Behaviors.bound.Instance=class BoundInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._mode=0;if(properties)this._mode=properties[MODE];this._StartTicking2()}Release(){super.Release()}SaveToJson(){return{"m":this._mode}}LoadFromJson(o){this._mode=o["m"]}Tick2(){const wi=this._inst.GetWorldInfo();const bbox=wi.GetBoundingBox();const layout=wi.GetLayout();let isChanged=false;if(this._mode===0){if(wi.GetX()<0){wi.SetX(0);isChanged=true}if(wi.GetY()<0){wi.SetY(0);
-isChanged=true}if(wi.GetX()>layout.GetWidth()){wi.SetX(layout.GetWidth());isChanged=true}if(wi.GetY()>layout.GetHeight()){wi.SetY(layout.GetHeight());isChanged=true}}else{if(bbox.getLeft()<0){wi.OffsetX(-bbox.getLeft());isChanged=true}if(bbox.getTop()<0){wi.OffsetY(-bbox.getTop());isChanged=true}if(bbox.getRight()>layout.GetWidth()){wi.OffsetX(-(bbox.getRight()-layout.GetWidth()));isChanged=true}if(bbox.getBottom()>layout.GetHeight()){wi.OffsetY(-(bbox.getBottom()-layout.GetHeight()));isChanged=true}}if(isChanged)wi.SetBboxChanged()}GetPropertyValueByIndex(index){switch(index){case MODE:return this._mode}}SetPropertyValueByIndex(index,
-value){switch(index){case MODE:this._mode=value;break}}};
-
-}
-
-{
-'use strict';const C3=self.C3;C3.Behaviors.bound.Cnds={};
-
-}
-
-{
-'use strict';const C3=self.C3;C3.Behaviors.bound.Acts={};
-
-}
-
-{
-'use strict';const C3=self.C3;C3.Behaviors.bound.Exps={};
-
-}
-
-{
 'use strict';const C3=self.C3;C3.Behaviors.Tween=class TweenBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}};
 
 }
@@ -9054,12 +9021,10 @@ C3.Behaviors.CarPlus.Instance = class CarPlusInstance extends C3.SDKBehaviorInst
         }
 
         const turnFactor = this._turnWhileStopped ? 1 : Math.abs(this._s) / this._maxSpeed;
-        if (this._spin == 0)
-        {
-            if (left && !right) this._a = C3.clampAngle(this._a - this._steerSpeed * dt * turnFactor);
-            if (right && !left) this._a = C3.clampAngle(this._a + this._steerSpeed * dt * turnFactor);
-        }
-        else
+
+        if (left && !right) this._a = C3.clampAngle(this._a - this._steerSpeed * dt * turnFactor);
+        if (right && !left) this._a = C3.clampAngle(this._a + this._steerSpeed * dt * turnFactor);
+        if (this._spin !== 0)
         {
             this._a = C3.clampAngle(this._a + this._spin * dt);
             this._m = C3.clampAngle(this._m + this._spin * dt);
@@ -13317,7 +13282,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text,
 		C3.Plugins.Browser,
 		C3.Plugins.Keyboard,
-		C3.Behaviors.bound,
 		C3.Behaviors.Tween,
 		C3.Behaviors.CarPlus,
 		C3.Behaviors.Flash,
@@ -13371,7 +13335,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
-		C3.Plugins.Particles.Acts.SetRate,
 		C3.Plugins.System.Cnds.CompareBoolVar,
 		C3.Plugins.System.Cnds.PickAll,
 		C3.Behaviors.CarPlus.Acts.SimulateControl,
@@ -13404,7 +13367,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Acts.SetAcceleration,
 		C3.Behaviors.CarPlus.Exps.Acceleration,
 		C3.Plugins.System.Acts.Wait,
-		C3.Plugins.System.Acts.SetObjectTimescale,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
 		C3.Plugins.TiledBg.Acts.SetX,
@@ -13451,7 +13413,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Plugins.Sprite.Cnds.PickParent,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
-		C3.ScriptsInEvents.Gamesheet_Event65_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event60_Act1,
 		C3.Plugins.Sprite.Cnds.PickByUID,
 		C3.Plugins.Sprite.Cnds.PickNthChild,
 		C3.Behaviors.Pathfinding.Acts.FindPath,
@@ -13468,27 +13430,35 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Exps.MovingAngle,
 		C3.Plugins.System.Cnds.IsBetweenAngles,
 		C3.Behaviors.CarPlus.Cnds.CompareSpeed,
-		C3.ScriptsInEvents.Gamesheet_Event86,
-		C3.Plugins.Browser.Acts.Alert,
+		C3.ScriptsInEvents.Gamesheet_Event79,
+		C3.Behaviors.CarPlus.Cnds.IsEnabled,
+		C3.Plugins.System.Cnds.AngleWithin,
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Plugins.Sprite.Exps.LayerName,
+		C3.Plugins.Sprite.Exps.IID,
+		C3.Behaviors.Pin.Exps.PinnedUID,
+		C3.Plugins.Sprite.Exps.UID,
+		C3.Plugins.Particles.Acts.SetRate,
+		C3.Behaviors.skymenTrail.Acts.PushPoint,
+		C3.Plugins.Sprite.Cnds.PickChildren,
+		C3.Plugins.Particles.Acts.Destroy,
+		C3.Plugins.Browser.Acts.Alert,
 		C3.Plugins.Particles.Acts.SetAngle,
 		C3.Behaviors.Pin.Acts.PinByProperties,
 		C3.Plugins.Particles.Acts.ZMoveToObject,
 		C3.Plugins.Tilemap.Exps.MapDisplayWidth,
 		C3.Plugins.Tilemap.Exps.MapDisplayHeight,
-		C3.ScriptsInEvents.Gamesheet_Event92_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event96_Act2,
 		C3.Plugins.Tilemap.Exps.TileToPositionX,
 		C3.Plugins.Tilemap.Exps.TileToPositionY,
 		C3.Plugins.Sprite.Acts.SetScale,
 		C3.Plugins.Sprite.Acts.MoveToTop,
 		C3.Plugins.Sprite.Acts.AddChild,
-		C3.Plugins.Sprite.Exps.UID,
 		C3.Plugins.TiledBg.Acts.SetPosToObject,
 		C3.Plugins.System.Exps.layoutname,
-		C3.ScriptsInEvents.Gamesheet_Event100_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event104_Act2,
 		C3.Plugins.Sprite.Acts.SetSize,
-		C3.ScriptsInEvents.Gamesheet_Event101_Act3,
+		C3.ScriptsInEvents.Gamesheet_Event105_Act3,
 		C3.Plugins.Sprite.Exps.Width,
 		C3.Plugins.Tilemap.Exps.TileWidth,
 		C3.Plugins.Sprite.Exps.Height,
@@ -13496,6 +13466,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.TiledBg.Exps.Y,
 		C3.Plugins.Keyboard.Cnds.IsKeyDown,
 		C3.Plugins.System.Acts.SetLayoutScale,
+		C3.Plugins.System.Acts.SetTimescale,
+		C3.Plugins.Sprite.Cnds.OnCreated,
+		C3.Plugins.Sprite.Exps.Count,
 		C3.ScriptsInEvents.Devtodev_Event2,
 		C3.ScriptsInEvents.Devtodev_Event4,
 		C3.ScriptsInEvents.Devtodev_Event6,
@@ -13528,11 +13501,12 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Button.Acts.SetChecked,
 		C3.Plugins.List.Acts.Select,
 		C3.Plugins.sliderbar.Acts.SetValue,
+		C3.Plugins.Browser.Cnds.OnUpdateFound,
+		C3.Plugins.Browser.Cnds.OnUpdateReady,
 		C3.Plugins.System.Acts.ToggleBoolVar,
 		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Audio.Acts.PlayByName,
-		C3.Plugins.Sprite.Exps.IID,
 		C3.Plugins.Eponesh_GameScore.Acts.PlayerToggle,
 		C3.Plugins.Eponesh_GameScore.Acts.PlayerSync,
 		C3.Plugins.Audio.Cnds.IsTagPlaying,
@@ -13559,11 +13533,13 @@ self.C3_JsPropNameTable = [
 	{dbgtxt: 0},
 	{Browser: 0},
 	{Keyboard: 0},
-	{Trail: 0},
+	{TrailLeft: 0},
+	{TrailRight: 0},
 	{second_frame: 0},
 	{Player: 0},
 	{Recording: 0},
 	{Flying: 0},
+	{Drifting: 0},
 	{CarSpeed: 0},
 	{CarSpeedBasic: 0},
 	{CarAccel: 0},
@@ -13574,7 +13550,6 @@ self.C3_JsPropNameTable = [
 	{CarRecoverBasic: 0},
 	{SteerCoef: 0},
 	{Mass: 0},
-	{BoundToLayout: 0},
 	{Tween: 0},
 	{Car: 0},
 	{Flash: 0},
@@ -13796,12 +13771,13 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-		() => "Map",
+		() => "Level",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => ((((n0.ExpObject("cam_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("cam_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
 		},
+		() => "Layout",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("difficulty_lives");
@@ -13933,12 +13909,10 @@ self.C3_ExpressionFuncs = [
 			return () => multiply(multiply((((f0(((((Math.log(Math.abs(Math.round(((n1.ExpObject() - 360) * v2.GetValue()))))) < (1) ? 1 : 0)) ? (1) : (Math.log(Math.abs(Math.round(((n3.ExpObject() - 360) * v4.GetValue())))))), 3) - 7) * 25) * Math.sign((n5.ExpObject() - 360))), add(multiply((-2), n6.ExpObject("controls_invert")), 1)), n7.ExpInstVar());
 		},
 		() => "cam_angle_follow",
-		() => "Level",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 90);
 		},
-		() => "Layout",
 		() => "GUI",
 		() => 0.1,
 		() => "Replays",
@@ -14017,6 +13991,11 @@ self.C3_ExpressionFuncs = [
 			return () => (1 - n0.ExpInstVar());
 		},
 		() => "CarAI",
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => (n0.ExpObject() + f1((-128), 128));
+		},
 		() => "pathNodes",
 		p => {
 			const n0 = p._GetNode(0);
@@ -14040,7 +14019,12 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => ((n0.ExpObject() + f1(512)) - 256);
+			return () => ((n0.ExpObject() + f1(256)) - 128);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (((((n0.ExpBehavior() - 1)) < (n1.ExpInstVar()) ? 1 : 0)) ? (1) : (0));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -14067,6 +14051,15 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() * 0.33);
+		},
+		() => 100,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(2);
 		},
 		() => "Хорошая была попытка! Нажми [R] для перезапуска или [ESC] для выхода в меню",
 		() => "TireImagePoints",
@@ -14175,6 +14168,8 @@ self.C3_ExpressionFuncs = [
 			return () => (n0.ExpObject() + ((((((v1.GetValue() % 2)) === (1) ? 1 : 0)) ? (128) : (0)) * (v2.GetValue() - 2)));
 		},
 		() => 0.2,
+		() => 500,
+		() => 499,
 		() => "flags",
 		() => "tiles",
 		() => "Title",
@@ -14190,7 +14185,6 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => (((("LVL: " + n0.ExpInstVar()) + "\n") + "MODE: ") + n1.ExpInstVar());
 		},
-		() => 100,
 		() => "Режим еще не готов.",
 		() => "Settings",
 		() => "Flags",
@@ -14223,6 +14217,8 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => n0.ExpObject(n1.ExpInstVar());
 		},
+		() => "Найдено обновление! Оно загрузится автоматчически в фоне",
+		() => "Обновление загружено! Обновите страницу, чтобы играть в новую версию",
 		() => "Click",
 		p => {
 			const n0 = p._GetNode(0);
