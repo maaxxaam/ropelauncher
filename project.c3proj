@@ -200,14 +200,6 @@
 		},
 		{
 			"type": "behavior",
-			"id": "bound",
-			"name": "Bound to layout",
-			"author": "Scirra",
-			"version": "r285.3",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
 			"id": "Tween",
 			"name": "Tween",
 			"author": "Scirra",
@@ -219,7 +211,7 @@
 			"id": "CarPlus",
 			"name": "Car+",
 			"author": "Scirra, maaxxaam",
-			"version": "0.0.1.8",
+			"version": "0.0.2.0",
 			"bundled": false
 		},
 		{

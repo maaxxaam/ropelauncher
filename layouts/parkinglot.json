@@ -117,11 +117,13 @@
 					},
 					"uid": 117,
 					"instanceVariables": {
-						"Trail": -2,
+						"TrailLeft": -2,
+						"TrailRight": -2,
 						"second_frame": 0,
 						"Player": true,
 						"Recording": true,
 						"Flying": false,
+						"Drifting": false,
 						"CarSpeed": 400,
 						"CarSpeedBasic": 400,
 						"CarAccel": 0,
@@ -134,11 +136,6 @@
 						"Mass": 1000
 					},
 					"behaviors": {
-						"BoundToLayout": {
-							"properties": {
-								"bound-by": "edge"
-							}
-						},
 						"Tween": {
 							"properties": {
 								"enabled": true

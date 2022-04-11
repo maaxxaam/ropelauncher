@@ -77,7 +77,7 @@
 							1,
 							1,
 							1,
-							0.3
+							0.15
 						],
 						"angle": 0,
 						"zElevation": 0
@@ -176,11 +176,13 @@
 					},
 					"uid": 48,
 					"instanceVariables": {
-						"Trail": -2,
+						"TrailLeft": -2,
+						"TrailRight": -2,
 						"second_frame": 0,
 						"Player": false,
 						"Recording": true,
 						"Flying": false,
+						"Drifting": false,
 						"CarSpeed": 400,
 						"CarSpeedBasic": 400,
 						"CarAccel": 400,
@@ -193,11 +195,6 @@
 						"Mass": 1000
 					},
 					"behaviors": {
-						"BoundToLayout": {
-							"properties": {
-								"bound-by": "edge"
-							}
-						},
 						"Tween": {
 							"properties": {
 								"enabled": true
@@ -440,7 +437,7 @@
 					},
 					"uid": 518,
 					"instanceVariables": {
-						"ToCheckpoint": 1,
+						"ToCheckpoint": 0,
 						"AtNode": 0,
 						"Moving": false,
 						"AttachedToCarUID": 0

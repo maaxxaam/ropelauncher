@@ -4701,6 +4701,294 @@
 								"angle": 0.6966513642580292,
 								"zElevation": 0
 							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Start",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 524,
+							"instanceVariables": {
+								"IsStart": true,
+								"checkpointID": 0
+							},
+							"behaviors": {},
+							"world": {
+								"x": 775,
+								"y": 1573,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 531,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 1
+							},
+							"behaviors": {},
+							"world": {
+								"x": 796,
+								"y": 796,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 532,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 3
+							},
+							"behaviors": {},
+							"world": {
+								"x": 3835,
+								"y": 3016,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 533,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 4
+							},
+							"behaviors": {},
+							"world": {
+								"x": 2860,
+								"y": 3006,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 535,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 5
+							},
+							"behaviors": {},
+							"world": {
+								"x": 2819,
+								"y": 1832,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 536,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 6
+							},
+							"behaviors": {},
+							"world": {
+								"x": 1828,
+								"y": 1817,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 537,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 7
+							},
+							"behaviors": {},
+							"world": {
+								"x": 1782,
+								"y": 2996,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 538,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 8
+							},
+							"behaviors": {},
+							"world": {
+								"x": 797,
+								"y": 2971,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 539,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 2
+							},
+							"behaviors": {},
+							"world": {
+								"x": 3667,
+								"y": 618,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 1.5707963267948966,
+								"zElevation": 0
+							}
 						}
 					],
 					"sid": 889010854404028,

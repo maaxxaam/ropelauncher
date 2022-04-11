@@ -5,10 +5,16 @@
 	"isGlobal": false,
 	"instanceVariables": [
 		{
-			"name": "Trail",
+			"name": "TrailLeft",
 			"type": "number",
 			"desc": "",
 			"sid": 249203281949651
+		},
+		{
+			"name": "TrailRight",
+			"type": "number",
+			"desc": "",
+			"sid": 138827206917301
 		},
 		{
 			"name": "second_frame",
@@ -33,6 +39,12 @@
 			"type": "boolean",
 			"desc": "Whether is this car flying due to a jump.",
 			"sid": 933729751449480
+		},
+		{
+			"name": "Drifting",
+			"type": "boolean",
+			"desc": "",
+			"sid": 422720650623240
 		},
 		{
 			"name": "CarSpeed",
@@ -96,11 +108,6 @@
 		}
 	],
 	"behaviorTypes": [
-		{
-			"behaviorId": "bound",
-			"name": "BoundToLayout",
-			"sid": 952108723898195
-		},
 		{
 			"behaviorId": "Tween",
 			"name": "Tween",

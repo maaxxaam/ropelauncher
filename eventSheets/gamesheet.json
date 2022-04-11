@@ -93,9 +93,18 @@
 				{
 					"id": "set-layer-scale",
 					"objectClass": "System",
-					"sid": 600839491885411,
+					"sid": 814681009362879,
 					"parameters": {
-						"layer": "\"Map\"",
+						"layer": "\"Level\"",
+						"scale": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
+					}
+				},
+				{
+					"id": "set-layer-scale",
+					"objectClass": "System",
+					"sid": 699358182700617,
+					"parameters": {
+						"layer": "\"Layout\"",
 						"scale": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
 					}
 				},
@@ -130,13 +139,11 @@
 				{
 					"id": "wait-for-previous-actions",
 					"objectClass": "System",
-					"sid": 450421481292698,
-					"disabled": true
+					"sid": 450421481292698
 				},
 				{
 					"callFunction": "PlaceTireEffects",
-					"sid": 599696852187898,
-					"disabled": true
+					"sid": 599696852187898
 				},
 				{
 					"id": "wait-for-previous-actions",
@@ -854,207 +861,6 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "is-enabled",
-					"objectClass": "Car",
-					"sid": 950660360105775,
-					"behaviorType": "Car"
-				},
-				{
-					"id": "is-moving",
-					"objectClass": "Car",
-					"sid": 790420976361589,
-					"behaviorType": "Car"
-				},
-				{
-					"id": "is-boolean-instance-variable-set",
-					"objectClass": "Car",
-					"sid": 437242887951306,
-					"disabled": true,
-					"parameters": {
-						"instance-variable": "Player"
-					}
-				},
-				{
-					"id": "is-within-angle",
-					"objectClass": "System",
-					"sid": 994657812960453,
-					"parameters": {
-						"angle-1": "Car.Angle",
-						"within": "7",
-						"angle-2": "Car.Car.MovingAngle"
-					},
-					"isInverted": true
-				}
-			],
-			"actions": [],
-			"sid": 134775696802758,
-			"disabled": true,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 526074013773479
-						},
-						{
-							"id": "for",
-							"objectClass": "System",
-							"sid": 607889280627842,
-							"parameters": {
-								"name": "\"TireMarks\"",
-								"start-index": "1",
-								"end-index": "2"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "spawn-another-object",
-							"objectClass": "Car",
-							"sid": 444743677001484,
-							"parameters": {
-								"object": "DriftMarks",
-								"layer": "Car.LayerName",
-								"image-point": "loopindex(\"TireMarks\")",
-								"create-hierarchy": false
-							}
-						},
-						{
-							"id": "set-angle",
-							"objectClass": "DriftMarks",
-							"sid": 717406201239684,
-							"parameters": {
-								"angle": "0"
-							}
-						},
-						{
-							"id": "move-to-object",
-							"objectClass": "DriftMarks",
-							"sid": 332064358999430,
-							"parameters": {
-								"where": "behind",
-								"object": "Car"
-							}
-						},
-						{
-							"id": "add-to-instvar",
-							"objectClass": "Car",
-							"sid": 114604870151758,
-							"parameters": {
-								"instance-variable": "Trail",
-								"value": "1"
-							}
-						},
-						{
-							"id": "set-rate",
-							"objectClass": "Particles",
-							"sid": 650651101205570,
-							"parameters": {
-								"rate": "100"
-							}
-						}
-					],
-					"sid": 208950274237038,
-					"disabled": true
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "for",
-							"objectClass": "System",
-							"sid": 303534659675817,
-							"parameters": {
-								"name": "\"SpawnTireMarks\"",
-								"start-index": "0",
-								"end-index": "1"
-							}
-						},
-						{
-							"id": "pick-nth-instance",
-							"objectClass": "System",
-							"sid": 534051973393622,
-							"parameters": {
-								"object": "DriftMarks",
-								"instance": "Car.Trail + loopindex(\"SpawnTireMarks\")"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "push-point",
-							"objectClass": "DriftMarks",
-							"sid": 704476524749170,
-							"behaviorType": "TrailRenderer",
-							"parameters": {
-								"x": "Car.ImagePointX(loopindex(\"SpawnTireMarks\") + 1)",
-								"y": "Car.ImagePointY(loopindex(\"SpawnTireMarks\") + 1)",
-								"angle": "0",
-								"angle-towards-new-position": true
-							}
-						}
-					],
-					"sid": 989803393651898,
-					"disabled": true
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-nth-instance",
-							"objectClass": "System",
-							"sid": 232132253262337,
-							"parameters": {
-								"object": "DriftMarks",
-								"instance": "Car.Trail + 1"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "push-point",
-							"objectClass": "DriftMarks",
-							"sid": 661391505654221,
-							"behaviorType": "TrailRenderer",
-							"parameters": {
-								"x": "Car.ImagePointX(\"RightBackTrail\")",
-								"y": "Car.ImagePointY(\"RightBackTrail\")",
-								"angle": "0",
-								"angle-towards-new-position": true
-							}
-						}
-					],
-					"sid": 287601679230949
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "else",
-					"objectClass": "System",
-					"sid": 210392600392291
-				}
-			],
-			"actions": [
-				{
-					"id": "set-rate",
-					"objectClass": "Particles",
-					"sid": 387634424418858,
-					"parameters": {
-						"rate": "0"
-					}
-				}
-			],
-			"sid": 901237640377648
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
 					"id": "compare-boolean-eventvar",
 					"objectClass": "System",
 					"sid": 725598072013512,
@@ -1324,6 +1130,14 @@
 									"parameters": {
 										"variable": "has_ideal_bonus"
 									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Car",
+									"sid": 383052343334711,
+									"parameters": {
+										"instance-variable": "Player"
+									}
 								}
 							],
 							"actions": [
@@ -1492,6 +1306,7 @@
 					"id": "set-object-time-scale",
 					"objectClass": "System",
 					"sid": 166994928725296,
+					"disabled": true,
 					"parameters": {
 						"object": "Car",
 						"time-scale": "1"
@@ -2879,10 +2694,10 @@
 						{
 							"id": "pick-by-comparison",
 							"objectClass": "System",
-							"sid": 225937124601091,
+							"sid": 933685758559963,
 							"parameters": {
-								"object": "drift_zone",
-								"expression": "drift_zone.TurnId",
+								"object": "checkpoint",
+								"expression": "checkpoint.checkpointID",
 								"comparison": 0,
 								"value": "car_edge_collision.ToCheckpoint"
 							}
@@ -2935,22 +2750,22 @@
 						{
 							"id": "find-path",
 							"objectClass": "car_edge_collision",
-							"sid": 461829117568583,
-							"disabled": true,
+							"sid": 108705219301954,
 							"behaviorType": "Pathfinding",
 							"parameters": {
-								"x": "checkpoint.X + random(-256, 256)",
-								"y": "checkpoint.Y + random(-256, 256)"
+								"x": "checkpoint.X + random(-128, 128)",
+								"y": "checkpoint.Y + random(-128, 128)"
 							}
 						},
 						{
 							"id": "find-path",
 							"objectClass": "car_edge_collision",
 							"sid": 772565888214239,
+							"disabled": true,
 							"behaviorType": "Pathfinding",
 							"parameters": {
-								"x": "drift_zone.X",
-								"y": "drift_zone.Y"
+								"x": "checkpoint.X",
+								"y": "checkpoint.Y"
 							}
 						}
 					],
@@ -3088,14 +2903,26 @@
 						},
 						{
 							"eventType": "block",
-							"conditions": [],
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "car_edge_collision",
+									"sid": 234020974936350,
+									"parameters": {
+										"instance-variable": "AtNode",
+										"comparison": 5,
+										"value": "car_edge_collision.Pathfinding.NodeCount - 1"
+									}
+								}
+							],
 							"actions": [
 								{
-									"id": "set-text",
-									"objectClass": "dbgtxt",
-									"sid": 553245313201668,
+									"id": "set-instvar-value",
+									"objectClass": "car_edge_collision",
+									"sid": 744275001350696,
 									"parameters": {
-										"text": "roundToDp(AngleToNode, 2)&\" \"&roundToDp(Car.Angle, 2)"
+										"instance-variable": "AtNode",
+										"value": "car_edge_collision.Pathfinding.NodeCount - 1"
 									}
 								}
 							],
@@ -3143,10 +2970,10 @@
 										{
 											"id": "compare-instance-variable",
 											"objectClass": "car_edge_collision",
-											"sid": 183614546595218,
+											"sid": 425651388950800,
 											"parameters": {
 												"instance-variable": "AtNode",
-												"comparison": 0,
+												"comparison": 5,
 												"value": "car_edge_collision.Pathfinding.NodeCount - 1"
 											}
 										},
@@ -3158,19 +2985,21 @@
 									],
 									"actions": [
 										{
-											"id": "stop",
-											"objectClass": "Car",
-											"sid": 773407107933307,
-											"disabled": true,
-											"behaviorType": "Car"
-										},
-										{
 											"id": "add-to-instvar",
 											"objectClass": "car_edge_collision",
 											"sid": 871922210669956,
 											"parameters": {
 												"instance-variable": "ToCheckpoint",
 												"value": "1"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "car_edge_collision",
+											"sid": 930733137493245,
+											"parameters": {
+												"instance-variable": "AtNode",
+												"value": "0"
 											}
 										}
 									],
@@ -3186,10 +3015,10 @@
 												{
 													"id": "pick-by-comparison",
 													"objectClass": "System",
-													"sid": 355326458486274,
+													"sid": 682001584332751,
 													"parameters": {
-														"object": "drift_zone",
-														"expression": "drift_zone.TurnId",
+														"object": "checkpoint",
+														"expression": "checkpoint.checkpointID",
 														"comparison": 0,
 														"value": "car_edge_collision.ToCheckpoint"
 													}
@@ -3209,11 +3038,11 @@
 												{
 													"id": "find-path",
 													"objectClass": "car_edge_collision",
-													"sid": 427415390728009,
+													"sid": 583548578557535,
 													"behaviorType": "Pathfinding",
 													"parameters": {
-														"x": "drift_zone.X + random(512) - 256",
-														"y": "drift_zone.Y + random(512) - 256"
+														"x": "checkpoint.X + random(256) - 128",
+														"y": "checkpoint.Y + random(256) - 128"
 													}
 												}
 											],
@@ -3226,81 +3055,41 @@
 													"id": "else",
 													"objectClass": "System",
 													"sid": 504788212896710
+												},
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 126807744872434,
+													"parameters": {
+														"object": "checkpoint",
+														"expression": "checkpoint.checkpointID",
+														"comparison": 0,
+														"value": "0"
+													}
 												}
 											],
 											"actions": [
 												{
 													"id": "set-instvar-value",
 													"objectClass": "car_edge_collision",
-													"sid": 347561040353199,
+													"sid": 507243447490343,
 													"parameters": {
 														"instance-variable": "ToCheckpoint",
-														"value": "1"
+														"value": "0"
+													}
+												},
+												{
+													"id": "find-path",
+													"objectClass": "car_edge_collision",
+													"sid": 710275827325229,
+													"behaviorType": "Pathfinding",
+													"parameters": {
+														"x": "checkpoint.X + random(256) - 128",
+														"y": "checkpoint.Y + random(256) - 128"
 													}
 												}
 											],
-											"sid": 543907017454712,
-											"children": [
-												{
-													"eventType": "block",
-													"conditions": [
-														{
-															"id": "pick-by-comparison",
-															"objectClass": "System",
-															"sid": 340171810418359,
-															"parameters": {
-																"object": "drift_zone",
-																"expression": "drift_zone.TurnId",
-																"comparison": 0,
-																"value": "car_edge_collision.ToCheckpoint"
-															}
-														}
-													],
-													"actions": [
-														{
-															"id": "find-path",
-															"objectClass": "car_edge_collision",
-															"sid": 121049719514693,
-															"behaviorType": "Pathfinding",
-															"parameters": {
-																"x": "drift_zone.X + random(512) - 256",
-																"y": "drift_zone.Y + random(512) - 256"
-															}
-														}
-													],
-													"sid": 522382411277757
-												},
-												{
-													"eventType": "block",
-													"conditions": [
-														{
-															"id": "pick-by-comparison",
-															"objectClass": "System",
-															"sid": 449669130772451,
-															"parameters": {
-																"object": "checkpoint",
-																"expression": "checkpoint.checkpointID",
-																"comparison": 0,
-																"value": "car_edge_collision.ToCheckpoint"
-															}
-														}
-													],
-													"actions": [
-														{
-															"id": "find-path",
-															"objectClass": "car_edge_collision",
-															"sid": 304949603463223,
-															"behaviorType": "Pathfinding",
-															"parameters": {
-																"x": "checkpoint.X",
-																"y": "checkpoint.Y"
-															}
-														}
-													],
-													"sid": 822352882104994,
-													"disabled": true
-												}
-											]
+											"sid": 543907017454712
 										}
 									]
 								},
@@ -3321,16 +3110,17 @@
 										{
 											"id": "add-to-instvar",
 											"objectClass": "car_edge_collision",
-											"sid": 906086329036974,
+											"sid": 478664802837210,
 											"parameters": {
 												"instance-variable": "AtNode",
-												"value": "1"
+												"value": "Self.Pathfinding.NodeCount - 1 < Self.AtNode ? 1 : 0"
 											}
 										}
 									],
 									"sid": 110710944958091
 								}
-							]
+							],
+							"isOrBlock": true
 						},
 						{
 							"eventType": "comment",
@@ -3443,15 +3233,6 @@
 											],
 											"actions": [
 												{
-													"id": "alert",
-													"objectClass": "Browser",
-													"sid": 435982295161885,
-													"disabled": true,
-													"parameters": {
-														"message": "\"left\""
-													}
-												},
-												{
 													"id": "simulate-control",
 													"objectClass": "Car",
 													"sid": 794075159616840,
@@ -3497,15 +3278,6 @@
 												}
 											],
 											"actions": [
-												{
-													"id": "alert",
-													"objectClass": "Browser",
-													"sid": 630325982009372,
-													"disabled": true,
-													"parameters": {
-														"message": "\"right\""
-													}
-												},
 												{
 													"id": "simulate-control",
 													"objectClass": "Car",
@@ -3598,7 +3370,285 @@
 		},
 		{
 			"eventType": "script",
-			"script": "// let's perform collision checks for cars! yay!\nconst dt = runtime.dt;\nconst all_cars = runtime.objects.Car.getAllInstances();\nfor (let index1 = 0; index1 < all_cars.length - 1; index1++) {\n\tfor (let index2 = 0; index2 < all_cars.length; index2++) {\n\t\tif (index1 == index2) continue;\n\t\t\n\t\tlet cars = [all_cars[index1], all_cars[index2]];\n\t\tlet [cols, vecs, angdiffs] = [[], [], []];\n\t\tfor (let car of cars) {\n\t\t\tcols.push(car.getChildAt(0));\n\t\t\tvecs.push([car.behaviors.Car.vectorX, car.behaviors.Car.vectorY]);\n\t\t\tangdiffs.push(car.behaviors.Car.facingAngle - car.angle);\n\t\t\tcar.x += car.behaviors.Car.vectorX * dt;\n\t\t\tcar.y += car.behaviors.Car.vectorY * dt;\n\t\t\tcar.angle = car.behaviors.Car.facingAngle;\n\t\t}\n\t\tconst col_data = SAT_collision(cols[0], cols[1]);\n\t\tif (col_data.collided) {\n\t\t\tconst point = get_collision_point(cols[0], cols[1], col_data);\n\t\t\tlet new_v = [[0, 0], [0, 0]];\n\t\t\tlet new_av = [0, 0];\n\t\t\t[new_v[0][0], new_v[0][1], new_av[0], new_v[1][0], new_v[1][1], new_av[1]] = car_collision_resolution(cars[0], cars[1], col_data, point, runtime);\n\t\t\tfor (let i = 0; i < 2; i++) {\n\t\t\t\tcars[i].setAnimation(\"Colliding\");\n\t\t\t\tcars[i].x -= col_data.overlap.x / 2 * (-i * 2 + 1);\n\t\t\t\tcars[i].y -= col_data.overlap.y / 2 * (-i * 2 + 1);\n\t\t\t\tcars[i].behaviors.Car.setImpulse(new_v[i][0], new_v[i][1]);\n\t\t\t\tcars[i].behaviors.Car.setVector(new_v[i][0], new_v[i][1]);\n\t\t\t\t//cars[i].behaviors.Car.spin = new_av[i];\n\t\t\t}\n\t\t} else for (let car of cars) car.setAnimation(\"NoColliding\");\n\t\t\n\t\tfor (let i = 0; i < 2; i++) {\n\t\t\tcars[i].x -= vecs[i][0] * dt;\n\t\t\tcars[i].y -= vecs[i][1] * dt;\n\t\t\tcars[i].angle -= angdiffs[i];\n\t\t}\n\t}\n}"
+			"script": "// let's perform collision checks for cars! yay!\nconst dt = runtime.dt;\nconst all_cars = runtime.objects.Car.getAllInstances();\nfor (let index1 = 0; index1 < all_cars.length; index1++) {\n\tfor (let index2 = 0; index2 < all_cars.length; index2++) {\n\t\tif (index1 == index2) continue;\n\t\t\n\t\tlet cars = [all_cars[index1], all_cars[index2]];\n\t\tlet [cols, vecs, angdiffs] = [[], [], []];\n\t\tfor (let car of cars) {\n\t\t\tcols.push(car.getChildAt(0));\n\t\t\tvecs.push([car.behaviors.Car.vectorX, car.behaviors.Car.vectorY]);\n\t\t\tangdiffs.push(car.behaviors.Car.facingAngle - car.angle);\n\t\t\tcar.x += car.behaviors.Car.vectorX * dt;\n\t\t\tcar.y += car.behaviors.Car.vectorY * dt;\n\t\t\tcar.angle = car.behaviors.Car.facingAngle;\n\t\t}\n\t\tconst col_data = SAT_collision(cols[0], cols[1]);\n\t\tif (col_data.collided) {\n\t\t\tconst point = get_collision_point(cols[0], cols[1], col_data);\n\t\t\tlet new_v = [[0, 0], [0, 0]];\n\t\t\tlet new_av = [0, 0];\n\t\t\t[new_v[0][0], new_v[0][1], new_av[0], new_v[1][0], new_v[1][1], new_av[1]] = car_collision_resolution(cars[0], cars[1], col_data, point, runtime);\n\t\t\tfor (let i = 0; i < 2; i++) {\n\t\t\t\tcars[i].x -= col_data.overlap.x / 2 * (-i * 2 + 1) * ((col_data.obj === cars[0]) * 2 - 1);\n\t\t\t\tcars[i].y -= col_data.overlap.y / 2 * (-i * 2 + 1) * ((col_data.obj === cars[0]) * 2 - 1);\n\t\t\t\tcars[i].behaviors.Car.setImpulse(new_v[i][0], new_v[i][1]);\n\t\t\t\tcars[i].behaviors.Car.setVector(new_v[i][0], new_v[i][1]);\n\t\t\t\tcars[i].behaviors.Car.spin = new_av[i] * (-i * 2 + 1);\n\t\t\t}\n\t\t}\n\t\t\n\t\tfor (let i = 0; i < 2; i++) {\n\t\t\tcars[i].x -= vecs[i][0] * dt;\n\t\t\tcars[i].y -= vecs[i][1] * dt;\n\t\t\tcars[i].angle -= angdiffs[i];\n\t\t}\n\t}\n}"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 457580313827259,
+					"parameters": {
+						"object": "Car"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 221676494028414,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-enabled",
+							"objectClass": "Car",
+							"sid": 733945694557976,
+							"behaviorType": "Car"
+						},
+						{
+							"id": "is-moving",
+							"objectClass": "Car",
+							"sid": 541725153845777,
+							"behaviorType": "Car"
+						},
+						{
+							"id": "is-within-angle",
+							"objectClass": "System",
+							"sid": 721681803202160,
+							"parameters": {
+								"angle-1": "Car.Angle",
+								"within": "7",
+								"angle-2": "Car.Car.MovingAngle"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [],
+					"sid": 936633859692382,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Car",
+									"sid": 228156379686161,
+									"parameters": {
+										"instance-variable": "Drifting"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Car",
+									"sid": 352041226920022,
+									"parameters": {
+										"instance-variable": "Drifting",
+										"value": "true"
+									}
+								},
+								{
+									"id": "spawn-another-object",
+									"objectClass": "Car",
+									"sid": 518561070610922,
+									"parameters": {
+										"object": "DriftMarks",
+										"layer": "Car.LayerName",
+										"image-point": "1",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "Car",
+									"sid": 781071927929947,
+									"parameters": {
+										"instance-variable": "TrailLeft",
+										"value": "DriftMarks.IID"
+									}
+								},
+								{
+									"id": "spawn-another-object",
+									"objectClass": "Car",
+									"sid": 388861702274289,
+									"parameters": {
+										"object": "DriftMarks",
+										"layer": "Car.LayerName",
+										"image-point": "2",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "Car",
+									"sid": 161657001581806,
+									"parameters": {
+										"instance-variable": "TrailRight",
+										"value": "DriftMarks.IID"
+									}
+								}
+							],
+							"sid": 505971153672934,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 648353176157973,
+											"parameters": {
+												"object": "Particles",
+												"expression": "Particles.Pin.PinnedUID",
+												"comparison": 0,
+												"value": "Car.UID"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-rate",
+											"objectClass": "Particles",
+											"sid": 391330765258693,
+											"parameters": {
+												"rate": "100"
+											}
+										}
+									],
+									"sid": 323072104442720
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 691044268247382
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "Car",
+							"sid": 443933807759890,
+							"parameters": {
+								"instance-variable": "Drifting",
+								"value": "false"
+							}
+						}
+					],
+					"sid": 224612138966522,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 712825495251892,
+									"parameters": {
+										"object": "Particles",
+										"expression": "Particles.Pin.PinnedUID",
+										"comparison": 0,
+										"value": "Car.UID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-rate",
+									"objectClass": "Particles",
+									"sid": 458151845805522,
+									"parameters": {
+										"rate": "0"
+									}
+								}
+							],
+							"sid": 904281616787890
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 882004288862153,
+					"parameters": {
+						"object": "Car"
+					}
+				},
+				{
+					"id": "is-boolean-instance-variable-set",
+					"objectClass": "Car",
+					"sid": 776814762250373,
+					"parameters": {
+						"instance-variable": "Drifting"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 207082203138324,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 228863416520493,
+							"parameters": {
+								"object": "DriftMarks",
+								"instance": "Car.TrailLeft"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "push-point",
+							"objectClass": "DriftMarks",
+							"sid": 912800325404503,
+							"behaviorType": "TrailRenderer",
+							"parameters": {
+								"x": "Car.ImagePointX(1)",
+								"y": "Car.ImagePointY(1)",
+								"angle": "0",
+								"angle-towards-new-position": true
+							}
+						}
+					],
+					"sid": 441722833093916
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 328509639074608,
+							"parameters": {
+								"object": "DriftMarks",
+								"instance": "Car.TrailRight"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "push-point",
+							"objectClass": "DriftMarks",
+							"sid": 253900538252406,
+							"behaviorType": "TrailRenderer",
+							"parameters": {
+								"x": "Car.ImagePointX(2)",
+								"y": "Car.ImagePointY(2)",
+								"angle": "0",
+								"angle-towards-new-position": true
+							}
+						}
+					],
+					"sid": 863784516082383
+				}
+			]
 		},
 		{
 			"functionName": "GameOver",
@@ -3619,6 +3669,26 @@
 						"comparison": 0,
 						"value": "1"
 					}
+				},
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 106426866688719,
+					"parameters": {
+						"object": "Particles",
+						"expression": "Particles.Pin.PinnedUID",
+						"comparison": 0,
+						"value": "Car.UID"
+					}
+				},
+				{
+					"id": "pick-children",
+					"objectClass": "Car",
+					"sid": 868223799529901,
+					"parameters": {
+						"child": "car_edge_collision",
+						"which": "own"
+					}
 				}
 			],
 			"actions": [
@@ -3628,9 +3698,19 @@
 					"sid": 674287031613541
 				},
 				{
+					"id": "destroy",
+					"objectClass": "Particles",
+					"sid": 598382801858775
+				},
+				{
+					"id": "destroy",
+					"objectClass": "car_edge_collision",
+					"sid": 942348303561293
+				},
+				{
 					"id": "alert",
 					"objectClass": "Browser",
-					"sid": 327520600344066,
+					"sid": 631396347521442,
 					"parameters": {
 						"message": "\"Хорошая была попытка! Нажми [R] для перезапуска или [ESC] для выхода в меню\""
 					}
@@ -3646,81 +3726,97 @@
 			"functionIsAsync": false,
 			"functionParameters": [],
 			"eventType": "function-block",
-			"conditions": [
+			"conditions": [],
+			"actions": [],
+			"sid": 597562021221741,
+			"children": [
 				{
-					"id": "for-each",
-					"objectClass": "System",
-					"sid": 734795272509469,
-					"disabled": true,
-					"parameters": {
-						"object": "Car"
-					}
-				},
-				{
-					"id": "for",
-					"objectClass": "System",
-					"sid": 285384126355012,
-					"parameters": {
-						"name": "\"TireImagePoints\"",
-						"start-index": "1",
-						"end-index": "4"
-					}
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 616696973845896,
+							"parameters": {
+								"object": "Car"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 255288339155328,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 593044341247061,
+									"parameters": {
+										"name": "\"TireImagePoints\"",
+										"start-index": "1",
+										"end-index": "2"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "spawn-another-object",
+									"objectClass": "Car",
+									"sid": 301589384528769,
+									"parameters": {
+										"object": "Particles",
+										"layer": "Car.LayerName",
+										"image-point": "loopindex(\"TireImagePoints\")",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "Particles",
+									"sid": 151348902195508,
+									"parameters": {
+										"angle": "Car.Angle - 180"
+									}
+								},
+								{
+									"id": "pin-to-object-properties",
+									"objectClass": "Particles",
+									"sid": 174827126620237,
+									"behaviorType": "Pin",
+									"parameters": {
+										"pin-to": "Car",
+										"x": true,
+										"y": true,
+										"angle": true,
+										"width-type": "no",
+										"height-type": "no",
+										"z": false
+									}
+								},
+								{
+									"id": "set-rate",
+									"objectClass": "Particles",
+									"sid": 285489618975742,
+									"parameters": {
+										"rate": "0"
+									}
+								},
+								{
+									"id": "move-to-object",
+									"objectClass": "Particles",
+									"sid": 665805654244296,
+									"parameters": {
+										"where": "behind",
+										"object": "Car"
+									}
+								}
+							],
+							"sid": 797430383919879
+						}
+					]
 				}
-			],
-			"actions": [
-				{
-					"id": "spawn-another-object",
-					"objectClass": "Car",
-					"sid": 503901406542028,
-					"parameters": {
-						"object": "Particles",
-						"layer": "Car.LayerName",
-						"image-point": "loopindex(\"TireImagePoints\")",
-						"create-hierarchy": false
-					}
-				},
-				{
-					"id": "set-angle",
-					"objectClass": "Particles",
-					"sid": 974288645606343,
-					"parameters": {
-						"angle": "Car.Angle - 180"
-					}
-				},
-				{
-					"id": "pin-to-object-properties",
-					"objectClass": "Particles",
-					"sid": 627333519370769,
-					"behaviorType": "Pin",
-					"parameters": {
-						"pin-to": "Car",
-						"x": true,
-						"y": true,
-						"angle": true,
-						"width-type": "no",
-						"height-type": "no",
-						"z": false
-					}
-				},
-				{
-					"id": "set-rate",
-					"objectClass": "Particles",
-					"sid": 375143200843982,
-					"parameters": {
-						"rate": "0"
-					}
-				},
-				{
-					"id": "move-to-object",
-					"objectClass": "Particles",
-					"sid": 419726917784365,
-					"parameters": {
-						"where": "behind",
-						"object": "Car"
-					}
-				}
-			],
-			"sid": 597562021221741
+			]
 		},
 		{
 			"functionName": "PlaceCars",
@@ -4631,6 +4727,146 @@
 				}
 			],
 			"sid": 610789275688945
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "key-is-down",
+					"objectClass": "Keyboard",
+					"sid": 963961327981002,
+					"parameters": {
+						"key": 16
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 620051023579981,
+					"parameters": {
+						"time-scale": "4"
+					}
+				}
+			],
+			"sid": 269343334982765
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "else",
+					"objectClass": "System",
+					"sid": 205474253222319
+				}
+			],
+			"actions": [
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 347123067371427,
+					"parameters": {
+						"time-scale": "1"
+					}
+				}
+			],
+			"sid": 319628953843936
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "DriftMarks",
+					"sid": 697573029330549
+				}
+			],
+			"actions": [
+				{
+					"id": "set-angle",
+					"objectClass": "DriftMarks",
+					"sid": 379683087994991,
+					"parameters": {
+						"angle": "0"
+					}
+				},
+				{
+					"id": "move-to-object",
+					"objectClass": "DriftMarks",
+					"sid": 668683319012045,
+					"parameters": {
+						"where": "behind",
+						"object": "Car"
+					}
+				}
+			],
+			"sid": 111980000100809,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 713069174565136,
+							"parameters": {
+								"first-value": "DriftMarks.Count",
+								"comparison": 4,
+								"second-value": "500"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 656376326181600,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-nth-instance",
+									"objectClass": "System",
+									"sid": 957436064580120,
+									"parameters": {
+										"object": "DriftMarks",
+										"instance": "500"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "DriftMarks",
+									"sid": 573288620528505
+								}
+							],
+							"sid": 131250572611253
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-nth-instance",
+									"objectClass": "System",
+									"sid": 240261164235450,
+									"parameters": {
+										"object": "DriftMarks",
+										"instance": "499"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "DriftMarks",
+									"sid": 327003146228980
+								}
+							],
+							"sid": 821517699206464
+						}
+					]
+				}
+			]
 		}
 	],
 	"sid": 528873411861220

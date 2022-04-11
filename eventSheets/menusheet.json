@@ -805,6 +805,48 @@
 					"sid": 135447258478414
 				}
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-update-found-sw",
+					"objectClass": "Browser",
+					"sid": 825026913342695
+				}
+			],
+			"actions": [
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 307004022587502,
+					"parameters": {
+						"message": "\"Найдено обновление! Оно загрузится автоматчически в фоне\""
+					}
+				}
+			],
+			"sid": 794707421428266
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-update-ready-sw",
+					"objectClass": "Browser",
+					"sid": 439691144520236
+				}
+			],
+			"actions": [
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 913267405851219,
+					"parameters": {
+						"message": "\"Обновление загружено! Обновите страницу, чтобы играть в новую версию\""
+					}
+				}
+			],
+			"sid": 404718528823276
 		}
 	],
 	"sid": 188176345997916

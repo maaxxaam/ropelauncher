@@ -46,7 +46,7 @@ function map_corners_to_circle(tile) {
 function project_point_onto_vector(vector, point) {
 	const dot_over_len2 = Vector2.dot(vector, point) / (vector.x * vector.x + vector.y * vector.y);
 	let res_point = new Point(vector.x * dot_over_len2, vector.y * dot_over_len2);
-	res_point.len_sqr = Vector2.dot(vector, point);
+	res_point.len_sqr = Math.abs(Vector2.dot(vector, point));
 	return res_point;
 }
 
@@ -148,6 +148,8 @@ export function SAT_collision(sprite1, sprite2) {
 	if (cannot_get_poly(sprite1) || cannot_get_poly(sprite2)) throw "Not a Sprite: cannot access collision polygon";
 	
 	var normals = get_polygon_normals(sprite1).concat(get_polygon_normals(sprite2));
+	let half = sprite1.getPolyPointCount();
+	let obj = sprite1;
 	
 	for (let normal of normals) {
 		let [edge1, edge2] = [Point(0, 0), Point(0,0)];
@@ -167,10 +169,11 @@ export function SAT_collision(sprite1, sprite2) {
 			if (overVec.len_sqr < overlap.len_sqr) {
 				overlap = overVec;
 				col_normal = normal;
+				obj = normals.indexOf(normal) < half ? sprite1 : sprite2;
 			}
 		}
 	}
-	return {collided: true, normal: col_normal, overlap: overlap};
+	return {collided: true, normal: col_normal, overlap: overlap, obj: obj};
 }
 
 function furthest_point_from_vector(sprite, vector) {
@@ -182,6 +185,8 @@ function furthest_point_from_vector(sprite, vector) {
 		[point.x, point.y] = sprite.getPolyPoint(i);
 		
 		let projected = project_point_onto_vector(point, vector);
+		//debugger;
+		
 		if (projected.len_sqr > farthest.len_sqr) { 
 			farthest = point;
 			farthest.len_sqr = projected.len_sqr;
@@ -211,7 +216,7 @@ export function get_collision_point(sprite1, sprite2, collision_data) {
 	
 	// get colliding edges (sort of)
 	let point10 = furthest_point_from_vector(sprite1, collision_data.normal);
-	let point20 = furthest_point_from_vector(sprite2, collision_data.normal);
+	let point20 = furthest_point_from_vector(sprite2, Vector2.inverse(collision_data.normal));
 	let point11 = Point(0, 0);
 	[point10, point11] = orthogonal_neighbour_edge(sprite1, point10, point10.index, collision_data.normal);
 	let point21 = Point(0, 0);
