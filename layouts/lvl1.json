@@ -448,7 +448,7 @@
 							"uid": 525,
 							"instanceVariables": {
 								"IsStart": false,
-								"checkpointID": 6
+								"checkpointID": 7
 							},
 							"behaviors": {},
 							"world": {
@@ -2948,7 +2948,7 @@
 							"uid": 73,
 							"instanceVariables": {
 								"IsStart": false,
-								"checkpointID": 2
+								"checkpointID": 3
 							},
 							"behaviors": {},
 							"world": {
@@ -2980,7 +2980,7 @@
 							"uid": 529,
 							"instanceVariables": {
 								"IsStart": false,
-								"checkpointID": 3
+								"checkpointID": 4
 							},
 							"behaviors": {},
 							"world": {
@@ -3012,7 +3012,7 @@
 							"uid": 530,
 							"instanceVariables": {
 								"IsStart": false,
-								"checkpointID": 4
+								"checkpointID": 5
 							},
 							"behaviors": {},
 							"world": {
@@ -3044,7 +3044,7 @@
 							"uid": 534,
 							"instanceVariables": {
 								"IsStart": false,
-								"checkpointID": 5
+								"checkpointID": 6
 							},
 							"behaviors": {},
 							"world": {
@@ -3061,6 +3061,38 @@
 									1
 								],
 								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 553,
+							"instanceVariables": {
+								"IsStart": false,
+								"checkpointID": 2
+							},
+							"behaviors": {},
+							"world": {
+								"x": 2810,
+								"y": 775,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 4.699667819618439,
 								"zElevation": 0
 							}
 						}

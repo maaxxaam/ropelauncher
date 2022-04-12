@@ -9,6 +9,12 @@
 			"type": "string",
 			"desc": "",
 			"sid": 560351853908185
+		},
+		{
+			"name": "txt",
+			"type": "number",
+			"desc": "",
+			"sid": 164916439231726
 		}
 	],
 	"behaviorTypes": [

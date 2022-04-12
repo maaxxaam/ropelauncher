@@ -27,6 +27,24 @@
 			"type": "number",
 			"desc": "",
 			"sid": 514442189681169
+		},
+		{
+			"name": "Lap",
+			"type": "number",
+			"desc": "",
+			"sid": 694406704039426
+		},
+		{
+			"name": "randx",
+			"type": "number",
+			"desc": "",
+			"sid": 265989524199062
+		},
+		{
+			"name": "randy",
+			"type": "number",
+			"desc": "",
+			"sid": 702122587010875
 		}
 	],
 	"behaviorTypes": [

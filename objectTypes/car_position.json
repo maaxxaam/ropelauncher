@@ -1,14 +1,14 @@
 {
-	"name": "SettDesc",
+	"name": "car_position",
 	"plugin-id": "Text",
-	"sid": 925879121394927,
+	"sid": 979622661596367,
 	"isGlobal": false,
 	"instanceVariables": [],
 	"behaviorTypes": [
 		{
-			"behaviorId": "Persist",
-			"name": "Persist",
-			"sid": 699188113368911
+			"behaviorId": "Pin",
+			"name": "Pin",
+			"sid": 906892370713592
 		}
 	],
 	"effectTypes": []

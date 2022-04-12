@@ -1,7 +1,7 @@
 {
-	"name": "pause_menu",
+	"name": "ResumeBut",
 	"plugin-id": "Sprite",
-	"sid": 172945630474731,
+	"sid": 106555117207141,
 	"isGlobal": false,
 	"instanceVariables": [],
 	"behaviorTypes": [],
@@ -18,12 +18,12 @@
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 6951326,
+						"imageSpriteId": 4798581,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 774797246246822,
+				"sid": 128975266331727,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

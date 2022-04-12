@@ -1,6 +1,10 @@
 import { Vector2 } from './Vector2.js'
 
+export var Vector = Vector2;
+
 function lerp(a,b,f) { return (b-a)*f+a; };
+
+export function clamp(low, a, high) { return a < low ? low : (a > high ? high : a); };
 
 function Point(x, y) {
 	return {x:x, y:y}
@@ -260,7 +264,7 @@ function point_between_points(x1, y1, x2, y2, x3, y3) {
 	
 	// Check if point lies on a line
 	let cross = Vector2.cross(dc, dl);
-	if (cross >= 1e-10 && cross <= -1e-10) return false;
+	if (cross >= 1e-10 && cross <= -1e-10) return false; // allow floating-point errors
 	
 	// Check if point lies between two points
 	if (Math.abs(dl.x) >= Math.abs(dl.y))

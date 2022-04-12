@@ -478,9 +478,9 @@
 						{
 							"id": "pick-by-unique-id",
 							"objectClass": "SettDesc",
-							"sid": 567033643086084,
+							"sid": 686366085139252,
 							"parameters": {
-								"unique-id": "515"
+								"unique-id": "dev_slider.txt"
 							}
 						}
 					],
@@ -497,9 +497,9 @@
 						{
 							"id": "set-text",
 							"objectClass": "SettDesc",
-							"sid": 273885406398734,
+							"sid": 261359037619390,
 							"parameters": {
-								"text": "\"Жизней: \"&flags.Get(\"difficulty_lives\")"
+								"text": "flags.Get(dev_slider.flag)"
 							}
 						}
 					],
@@ -790,6 +790,14 @@
 							"parameters": {
 								"object": "dev_slider"
 							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "SettDesc",
+							"sid": 633682929126427,
+							"parameters": {
+								"unique-id": "dev_slider.txt"
+							}
 						}
 					],
 					"actions": [
@@ -799,6 +807,14 @@
 							"sid": 407784181862609,
 							"parameters": {
 								"value": "flags.Get(dev_slider.flag)"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "SettDesc",
+							"sid": 857551890621067,
+							"parameters": {
+								"text": "flags.Get(dev_slider.flag)"
 							}
 						}
 					],

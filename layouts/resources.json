@@ -440,7 +440,10 @@
 						"ToCheckpoint": 0,
 						"AtNode": 0,
 						"Moving": false,
-						"AttachedToCarUID": 0
+						"AttachedToCarUID": 0,
+						"Lap": 0,
+						"randx": 0,
+						"randy": 0
 					},
 					"behaviors": {
 						"Pathfinding": {
@@ -530,12 +533,12 @@
 					}
 				},
 				{
-					"type": "CarAI",
+					"type": "car_position",
 					"properties": {
-						"text": "I AM POWER!",
+						"text": "5",
 						"enable-bbcode": true,
 						"font": "Arial",
-						"size": 12,
+						"size": 30,
 						"line-height": 0,
 						"bold": false,
 						"italic": false,
@@ -546,39 +549,212 @@
 							1
 						],
 						"horizontal-alignment": "center",
+						"vertical-alignment": "top",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "bottom"
+					},
+					"uid": 522,
+					"instanceVariables": {},
+					"behaviors": {
+						"Pin": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
+					"world": {
+						"x": 373,
+						"y": 227,
+						"width": 140,
+						"height": 140,
+						"originX": 0.5,
+						"originY": 1,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "pause_back",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 554,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 1063,
+						"y": 705,
+						"width": 600,
+						"height": 800,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ToMenuBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 555,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 840,
+						"y": 993,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "RestartBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 556,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 1041,
+						"y": 991,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ResumeBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 557,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 1266,
+						"y": 994,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ReplayBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 558,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 968,
+						"y": 1231,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "PauseTxt",
+					"properties": {
+						"text": "Поражение!",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 48,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "center",
 						"vertical-alignment": "center",
 						"wrapping": "word",
 						"initially-visible": true,
 						"origin": "center"
 					},
-					"uid": 522,
-					"instanceVariables": {
-						"NearestCheckpoint": 0
-					},
-					"behaviors": {
-						"Pathfinding": {
-							"properties": {
-								"cell-size": 64,
-								"cell-border": 80,
-								"obstacles": "solids",
-								"max-speed": 0,
-								"acceleration": 0,
-								"deceleration": 0,
-								"rotate-speed": 0,
-								"rotate-object": false,
-								"diagonals": false,
-								"enabled": true
-							}
-						},
-						"Timer": {
-							"properties": {}
-						}
-					},
+					"uid": 559,
+					"instanceVariables": {},
+					"behaviors": {},
 					"world": {
-						"x": 599,
-						"y": 444,
-						"width": 200,
-						"height": 180,
+						"x": 1067,
+						"y": 552,
+						"width": 600,
+						"height": 500,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [

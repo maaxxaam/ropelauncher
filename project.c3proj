@@ -374,9 +374,15 @@
 			"TileToConditionData",
 			"JumpBut",
 			"EdgeSparks",
-			"CarAI",
+			"car_position",
 			"checkpoint",
-			"AdvancedRandom"
+			"AdvancedRandom",
+			"pause_back",
+			"ToMenuBut",
+			"RestartBut",
+			"ResumeBut",
+			"ReplayBut",
+			"PauseTxt"
 		],
 		"subfolders": []
 	},
@@ -581,7 +587,7 @@
 	},
 	"properties": {
 		"description": "",
-		"version": "v6-alpha",
+		"version": "v7-alpha",
 		"author": "maaxxaam",
 		"authorEmail": "maxfocus.mch@gmail.com",
 		"authorWebsite": "",
