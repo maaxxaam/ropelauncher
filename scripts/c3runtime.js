@@ -13312,9 +13312,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.AdvancedRandom,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.System.Acts.SetBoolVar,
-		C3.Plugins.System.Acts.SetLayerScale,
-		C3.Plugins.Dictionary.Exps.Get,
 		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.Dictionary.Exps.Get,
+		C3.Plugins.System.Acts.SetLayerScale,
 		C3.Behaviors.Pathfinding.Acts.RegenerateMap,
 		C3.Plugins.System.Acts.WaitForPreviousActions,
 		C3.Plugins.shadowlight.Acts.ZMoveToObject,
@@ -13378,12 +13378,16 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.TiledBg.Exps.X,
 		C3.Plugins.System.Cnds.TriggerOnce,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
-		C3.Plugins.Sprite.Cnds.IsOnScreen,
 		C3.Plugins.System.Acts.SetLayerAngle,
 		C3.Plugins.Sprite.Exps.Angle,
+		C3.Plugins.Text.Acts.SetAngle,
+		C3.Plugins.System.Exps.layerangle,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.Keyboard.Cnds.OnKey,
 		C3.Plugins.System.Acts.RestartLayout,
+		C3.Behaviors.CarPlus.Cnds.IsEnabled,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Plugins.Sprite.Exps.Count,
 		C3.Plugins.Sprite.Cnds.OnCollision,
 		C3.Plugins.Sprite.Cnds.IsVisible,
 		C3.Plugins.Sprite.Acts.ZMoveToObject,
@@ -13396,13 +13400,12 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.mcube_rexspline.Exps.CurSegP0,
 		C3.Behaviors.Tween.Acts.TweenOneProperty,
 		C3.Behaviors.mcube_rexspline.Cnds.OnHitTarget,
-		C3.Behaviors.CarPlus.Acts.SetEnabled,
-		C3.Behaviors.CarPlus.Acts.SetSpeed,
-		C3.Plugins.Arr.Exps.Width,
-		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Behaviors.mcube_rexspline.Acts.SetEnabled,
+		C3.Behaviors.CarPlus.Acts.SetEnabled,
+		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Behaviors.mcube_rexspline.Acts.CleanAll,
 		C3.Behaviors.Sin.Acts.SetPhase,
+		C3.Plugins.Arr.Exps.Width,
 		C3.Behaviors.mcube_rexspline.Acts.AddPoint,
 		C3.Behaviors.mcube_rexspline.Acts.Start,
 		C3.Plugins.System.Cnds.Every,
@@ -13413,25 +13416,23 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Plugins.Sprite.Cnds.PickParent,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
-		C3.ScriptsInEvents.Gamesheet_Event60_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event65_Act1,
 		C3.Plugins.Sprite.Cnds.PickByUID,
 		C3.Plugins.Sprite.Cnds.PickNthChild,
-		C3.Behaviors.Pathfinding.Acts.FindPath,
-		C3.Behaviors.Pathfinding.Cnds.OnPathFound,
-		C3.Behaviors.Pathfinding.Exps.NodeCount,
-		C3.Plugins.System.Acts.CreateObject,
-		C3.Behaviors.Pathfinding.Exps.NodeXAt,
-		C3.Behaviors.Pathfinding.Exps.NodeYAt,
+		C3.Behaviors.CarPlus.Acts.SetDefaultControls,
 		C3.Plugins.System.Cnds.EveryTick,
-		C3.Plugins.System.Cnds.Compare,
 		C3.Plugins.Sprite.Acts.AddInstanceVar,
-		C3.Plugins.Sprite.Cnds.PickDistance,
 		C3.Plugins.System.Exps.anglediff,
 		C3.Behaviors.CarPlus.Exps.MovingAngle,
 		C3.Plugins.System.Cnds.IsBetweenAngles,
 		C3.Behaviors.CarPlus.Cnds.CompareSpeed,
-		C3.ScriptsInEvents.Gamesheet_Event79,
-		C3.Behaviors.CarPlus.Cnds.IsEnabled,
+		C3.Plugins.Text.Cnds.CompareText,
+		C3.Plugins.Browser.Acts.Alert,
+		C3.Plugins.Text.Exps.Text,
+		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
+		C3.Behaviors.CarPlus.Acts.Stop,
+		C3.ScriptsInEvents.Gamesheet_Event88,
+		C3.ScriptsInEvents.Gamesheet_Event89,
 		C3.Plugins.System.Cnds.AngleWithin,
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Plugins.Sprite.Exps.LayerName,
@@ -13442,13 +13443,13 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.skymenTrail.Acts.PushPoint,
 		C3.Plugins.Sprite.Cnds.PickChildren,
 		C3.Plugins.Particles.Acts.Destroy,
-		C3.Plugins.Browser.Acts.Alert,
 		C3.Plugins.Particles.Acts.SetAngle,
 		C3.Behaviors.Pin.Acts.PinByProperties,
 		C3.Plugins.Particles.Acts.ZMoveToObject,
 		C3.Plugins.Tilemap.Exps.MapDisplayWidth,
 		C3.Plugins.Tilemap.Exps.MapDisplayHeight,
-		C3.ScriptsInEvents.Gamesheet_Event96_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event106_Act2,
+		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.Tilemap.Exps.TileToPositionX,
 		C3.Plugins.Tilemap.Exps.TileToPositionY,
 		C3.Plugins.Sprite.Acts.SetScale,
@@ -13456,19 +13457,20 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.AddChild,
 		C3.Plugins.TiledBg.Acts.SetPosToObject,
 		C3.Plugins.System.Exps.layoutname,
-		C3.ScriptsInEvents.Gamesheet_Event104_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event114_Act2,
 		C3.Plugins.Sprite.Acts.SetSize,
-		C3.ScriptsInEvents.Gamesheet_Event105_Act3,
+		C3.ScriptsInEvents.Gamesheet_Event115_Act3,
 		C3.Plugins.Sprite.Exps.Width,
 		C3.Plugins.Tilemap.Exps.TileWidth,
 		C3.Plugins.Sprite.Exps.Height,
 		C3.Plugins.Tilemap.Exps.TileHeight,
+		C3.Plugins.Sprite.Cnds.PickDistance,
 		C3.Plugins.TiledBg.Exps.Y,
 		C3.Plugins.Keyboard.Cnds.IsKeyDown,
 		C3.Plugins.System.Acts.SetLayoutScale,
 		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.Sprite.Cnds.OnCreated,
-		C3.Plugins.Sprite.Exps.Count,
+		C3.Plugins.Text.Acts.Destroy,
 		C3.ScriptsInEvents.Devtodev_Event2,
 		C3.ScriptsInEvents.Devtodev_Event4,
 		C3.ScriptsInEvents.Devtodev_Event6,
@@ -13503,6 +13505,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.sliderbar.Acts.SetValue,
 		C3.Plugins.Browser.Cnds.OnUpdateFound,
 		C3.Plugins.Browser.Cnds.OnUpdateReady,
+		C3.Plugins.Sprite.Cnds.IsOnScreen,
 		C3.Plugins.System.Acts.ToggleBoolVar,
 		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
@@ -13606,26 +13609,37 @@ self.C3_JsPropNameTable = [
 	{ModeBut: 0},
 	{dev_dropdown: 0},
 	{SettDesc: 0},
+	{txt: 0},
 	{dev_slider: 0},
 	{ToCheckpoint: 0},
 	{AtNode: 0},
 	{AttachedToCarUID: 0},
+	{Lap: 0},
+	{randx: 0},
+	{randy: 0},
 	{Pathfinding: 0},
 	{Timer: 0},
 	{car_edge_collision: 0},
 	{TileToConditionData: 0},
 	{JumpBut: 0},
 	{EdgeSparks: 0},
-	{NearestCheckpoint: 0},
-	{CarAI: 0},
+	{car_position: 0},
 	{IsStart: 0},
 	{checkpointID: 0},
 	{checkpoint: 0},
 	{AdvancedRandom: 0},
+	{pause_back: 0},
+	{ToMenuBut: 0},
+	{RestartBut: 0},
+	{ResumeBut: 0},
+	{ReplayBut: 0},
+	{PauseTxt: 0},
 	{Turns: 0},
 	{Button: 0},
 	{LoadableArray: 0},
 	{LoadableDict: 0},
+	{RaceLaps: 0},
+	{RaceEnded: 0},
 	{RaceStarted: 0},
 	{AdsDisabled: 0},
 	{Lives: 0},
@@ -13643,6 +13657,8 @@ self.C3_JsPropNameTable = [
 	{motion: 0},
 	{bonus_points: 0},
 	{Car_UID: 0},
+	{posy: 0},
+	{posx: 0},
 	{close_enough: 0},
 	{AngleToNode: 0},
 	{your_car: 0},
@@ -13652,6 +13668,7 @@ self.C3_JsPropNameTable = [
 	{clock_id: 0},
 	{circle_id: 0},
 	{pos_id: 0},
+	{Mode: 0},
 	{playerID: 0},
 	{platformType: 0},
 	{Level: 0},
@@ -13771,6 +13788,10 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("difficulty_laps");
+		},
 		() => "Level",
 		p => {
 			const n0 = p._GetNode(0);
@@ -13913,7 +13934,12 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 90);
 		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("Level");
+		},
 		() => "GUI",
+		() => "Pause",
 		() => 0.1,
 		() => "Replays",
 		p => {
@@ -13930,16 +13956,6 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject(n1.ExpBehavior(), 2);
 		},
 		() => 0.02,
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject((n1.ExpObject() - 1), 4);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject((n1.ExpObject() - 1), 5);
-		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject(0, 0);
@@ -13993,47 +14009,27 @@ self.C3_ExpressionFuncs = [
 		() => "CarAI",
 		p => {
 			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => (n0.ExpObject() + f1((-128), 128));
-		},
-		() => "pathNodes",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpBehavior() - 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpBehavior(f1("pathNodes"));
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() + n1.ExpInstVar());
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
 			const n3 = p._GetNode(3);
-			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			return () => C3.distanceTo(n0.ExpBehavior(n1.ExpInstVar()), n2.ExpBehavior(n3.ExpInstVar()), n4.ExpObject(), n5.ExpObject());
+			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject());
 		},
 		() => 256,
 		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => ((n0.ExpObject() + f1(256)) - 128);
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0((-128), 128);
 		},
 		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (((((n0.ExpBehavior() - 1)) < (n1.ExpInstVar()) ? 1 : 0)) ? (1) : (0));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
 			const n2 = p._GetNode(2);
 			const n3 = p._GetNode(3);
-			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			return () => (C3.toDegrees(C3.angleTo(n0.ExpBehavior(n1.ExpInstVar()), n2.ExpBehavior(n3.ExpInstVar()), n4.ExpObject(), n5.ExpObject())) + 180);
+			return () => (C3.toDegrees(C3.angleTo(v0.GetValue(), v1.GetValue(), n2.ExpObject(), n3.ExpObject())) + 180);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -14052,6 +14048,13 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() * 0.33);
 		},
+		() => "Вы победили!",
+		() => "RaceWin",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (("Вы проиграли, заняв только " + n0.ExpObject()) + " место :-(");
+		},
+		() => "RaceLoss",
 		() => 100,
 		p => {
 			const n0 = p._GetNode(0);
@@ -14170,6 +14173,20 @@ self.C3_ExpressionFuncs = [
 		() => 0.2,
 		() => 500,
 		() => 499,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => and("Круг ", (n0.ExpInstVar() + 1));
+		},
+		() => 0.75,
+		() => 0.01,
+		() => 700,
+		() => "LeftBut",
+		() => "MidBut",
+		() => "Txt",
+		() => "RightBut",
+		() => "Пауза",
+		() => "Победа!",
+		() => "Поражение!",
 		() => "flags",
 		() => "tiles",
 		() => "Title",
@@ -14193,10 +14210,10 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => subtract(1, n0.ExpObject(n1.ExpInstVar()));
 		},
-		() => 515,
 		p => {
 			const n0 = p._GetNode(0);
-			return () => and("Жизней: ", n0.ExpObject("difficulty_lives"));
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar());
 		},
 		() => "Layers",
 		p => {
@@ -14211,11 +14228,6 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpInstVar_Family();
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject(n1.ExpInstVar());
 		},
 		() => "Найдено обновление! Оно загрузится автоматчически в фоне",
 		() => "Обновление загружено! Обновите страницу, чтобы играть в новую версию",
