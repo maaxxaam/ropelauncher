@@ -3312,15 +3312,6 @@
 							}
 						},
 						{
-							"id": "is-touching-object",
-							"objectClass": "Touch",
-							"sid": 957977750563608,
-							"parameters": {
-								"object": "JumpBut"
-							},
-							"isInverted": true
-						},
-						{
 							"id": "compare-eventvar",
 							"objectClass": "System",
 							"sid": 981565806324316,
