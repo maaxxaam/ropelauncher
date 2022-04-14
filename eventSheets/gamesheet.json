@@ -608,10 +608,10 @@
 						{
 							"id": "pick-nth-instance",
 							"objectClass": "System",
-							"sid": 557098337914072,
+							"sid": 439556661012432,
 							"parameters": {
 								"object": "score_ui",
-								"instance": "2"
+								"instance": "0"
 							}
 						}
 					],
@@ -625,8 +625,7 @@
 							}
 						}
 					],
-					"sid": 632762003142762,
-					"disabled": true
+					"sid": 632762003142762
 				}
 			]
 		},
@@ -1306,6 +1305,7 @@
 							"id": "pick-nth-instance",
 							"objectClass": "System",
 							"sid": 208155969460825,
+							"disabled": true,
 							"parameters": {
 								"object": "score_ui",
 								"instance": "0"
@@ -1675,10 +1675,10 @@
 								{
 									"id": "pick-nth-instance",
 									"objectClass": "System",
-									"sid": 130350709203921,
+									"sid": 868420893231576,
 									"parameters": {
 										"object": "score_ui",
-										"instance": "2"
+										"instance": "0"
 									}
 								}
 							],
@@ -3310,6 +3310,15 @@
 							"parameters": {
 								"object": "SwipeZone"
 							}
+						},
+						{
+							"id": "is-touching-object",
+							"objectClass": "Touch",
+							"sid": 957977750563608,
+							"parameters": {
+								"object": "JumpBut"
+							},
+							"isInverted": true
 						},
 						{
 							"id": "compare-eventvar",

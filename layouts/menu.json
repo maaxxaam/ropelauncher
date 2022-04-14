@@ -113,7 +113,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v8 alpha",
+						"text": "v8.01 alpha",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 24,
