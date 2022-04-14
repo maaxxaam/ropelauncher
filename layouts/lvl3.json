@@ -4296,7 +4296,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4347,7 +4347,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4398,7 +4398,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4449,7 +4449,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4500,7 +4500,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4551,7 +4551,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4602,7 +4602,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4653,7 +4653,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4704,7 +4704,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4755,7 +4755,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4806,7 +4806,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4857,7 +4857,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4908,7 +4908,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -4959,7 +4959,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5010,7 +5010,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5061,7 +5061,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5112,7 +5112,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5163,7 +5163,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5214,7 +5214,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5265,7 +5265,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5316,7 +5316,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5367,7 +5367,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5418,7 +5418,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5469,7 +5469,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5520,7 +5520,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5571,7 +5571,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5622,7 +5622,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5673,7 +5673,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5724,7 +5724,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5775,7 +5775,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5826,7 +5826,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5877,7 +5877,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5928,7 +5928,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -5979,7 +5979,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -6030,7 +6030,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -6081,7 +6081,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -6132,7 +6132,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -6183,7 +6183,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false

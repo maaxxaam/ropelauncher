@@ -1444,7 +1444,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1495,7 +1495,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1546,7 +1546,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1597,7 +1597,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1648,7 +1648,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1699,7 +1699,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1750,7 +1750,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1801,7 +1801,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1852,7 +1852,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1903,7 +1903,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1954,7 +1954,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2005,7 +2005,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2056,7 +2056,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2107,7 +2107,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2158,7 +2158,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2209,7 +2209,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Static",
+								"initial-animation": "Nitro",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2260,7 +2260,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2311,7 +2311,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2362,7 +2362,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2413,7 +2413,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2464,7 +2464,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -2515,7 +2515,7 @@
 							"type": "Bonus",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Moving",
+								"initial-animation": "Rocket",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -3236,48 +3236,6 @@
 					}
 				},
 				{
-					"type": "score_ui",
-					"properties": {
-						"text": "👛999",
-						"enable-bbcode": true,
-						"font": "Arial",
-						"size": 40,
-						"line-height": 0,
-						"bold": true,
-						"italic": false,
-						"color": [
-							0.16862745098039217,
-							1,
-							0,
-							1
-						],
-						"horizontal-alignment": "center",
-						"vertical-alignment": "center",
-						"wrapping": "word",
-						"initially-visible": true,
-						"origin": "top-left"
-					},
-					"uid": 38,
-					"instanceVariables": {},
-					"behaviors": {},
-					"world": {
-						"x": 262,
-						"y": 8,
-						"width": 158,
-						"height": 115,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 0,
-						"zElevation": 0
-					}
-				},
-				{
 					"type": "SwipeZone",
 					"properties": {
 						"initially-visible": true,
@@ -3327,23 +3285,42 @@
 					}
 				},
 				{
-					"type": "lvl_restart",
+					"type": "NitroBar",
 					"properties": {
+						"left-margin": 32,
+						"right-margin": 32,
+						"top-margin": 32,
+						"bottom-margin": 32,
+						"edges": "stretch",
+						"fill": "tile",
 						"initially-visible": true,
-						"initial-animation": "Animation 1",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
+						"origin": "left",
+						"seams": "overlap"
 					},
-					"uid": 54,
+					"uid": 38,
 					"instanceVariables": {},
-					"behaviors": {},
+					"behaviors": {
+						"Tween": {
+							"properties": {
+								"enabled": true
+							}
+						}
+					},
+					"effects": {
+						"AdjustHSL": {
+							"parameters": {
+								"hue": 0,
+								"saturation": 1,
+								"luminosity": 1
+							}
+						}
+					},
 					"world": {
-						"x": 656,
+						"x": 128,
 						"y": 64,
-						"width": 128,
+						"width": 460,
 						"height": 128,
-						"originX": 0.5,
+						"originX": 0,
 						"originY": 0.5,
 						"color": [
 							1,
@@ -3387,48 +3364,6 @@
 				{
 					"type": "score_ui",
 					"properties": {
-						"text": "🚗999",
-						"enable-bbcode": true,
-						"font": "Arial",
-						"size": 40,
-						"line-height": 0,
-						"bold": true,
-						"italic": false,
-						"color": [
-							0.16862745098039217,
-							1,
-							0,
-							1
-						],
-						"horizontal-alignment": "center",
-						"vertical-alignment": "center",
-						"wrapping": "word",
-						"initially-visible": true,
-						"origin": "top-left"
-					},
-					"uid": 112,
-					"instanceVariables": {},
-					"behaviors": {},
-					"world": {
-						"x": 421,
-						"y": 8,
-						"width": 165,
-						"height": 115,
-						"originX": 0,
-						"originY": 0,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 0,
-						"zElevation": 0
-					}
-				},
-				{
-					"type": "score_ui",
-					"properties": {
 						"text": "5❤",
 						"enable-bbcode": true,
 						"font": "Arial",
@@ -3452,10 +3387,10 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 132,
-						"y": 6,
-						"width": 120,
-						"height": 115,
+						"x": 590,
+						"y": 0,
+						"width": 128,
+						"height": 128,
 						"originX": 0,
 						"originY": 0,
 						"color": [

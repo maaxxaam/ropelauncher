@@ -191,6 +191,14 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "NinePatch",
+			"name": "9-patch",
+			"author": "Scirra",
+			"version": "r285.3",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "Pin",
 			"name": "Pin",
@@ -317,6 +325,14 @@
 			"author": "Scirra",
 			"version": "r285.3",
 			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "hsladjust",
+			"name": "Adjust HSL",
+			"author": "Scirra",
+			"version": "r285.3",
+			"bundled": false
 		}
 	],
 	"uniqueId": "j211m18wkv4",
@@ -354,7 +370,6 @@
 			"score_ui",
 			"SwipeZone",
 			"dev_flags",
-			"lvl_restart",
 			"pause_menu",
 			"LevelLight",
 			"scenery",
@@ -382,7 +397,8 @@
 			"RestartBut",
 			"ResumeBut",
 			"ReplayBut",
-			"PauseTxt"
+			"PauseTxt",
+			"NitroBar"
 		],
 		"subfolders": []
 	},

@@ -53,16 +53,6 @@
 		},
 		{
 			"eventType": "variable",
-			"name": "has_ideal_bonus",
-			"type": "boolean",
-			"initialValue": "false",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 872765238696032
-		},
-		{
-			"eventType": "variable",
 			"name": "Speed",
 			"type": "number",
 			"initialValue": "0",
@@ -129,6 +119,28 @@
 					}
 				},
 				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 653482658606803,
+					"parameters": {
+						"variable": "NitroCharge",
+						"value": "0"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 608085690447967,
+					"parameters": {
+						"variable": "NitroState",
+						"value": "0"
+					}
+				},
+				{
+					"callFunction": "NitroChanged",
+					"sid": 891336781107510
+				},
+				{
 					"id": "set-layer-scale",
 					"objectClass": "System",
 					"sid": 814681009362879,
@@ -163,12 +175,14 @@
 				},
 				{
 					"callFunction": "PlaceDriftZones",
-					"sid": 256532380267772
+					"sid": 256532380267772,
+					"disabled": true
 				},
 				{
 					"id": "wait-for-previous-actions",
 					"objectClass": "System",
-					"sid": 422176973640270
+					"sid": 422176973640270,
+					"disabled": true
 				},
 				{
 					"callFunction": "PlaceCars",
@@ -449,9 +463,9 @@
 						{
 							"id": "compare-value",
 							"objectClass": "flags",
-							"sid": 591478007893494,
+							"sid": 613750456156920,
 							"parameters": {
-								"key": "\"bonuses_dynamic_enabled\"",
+								"key": "\"bonuses_rockets_enabled\"",
 								"comparison": 0,
 								"value": "0"
 							}
@@ -466,12 +480,12 @@
 								{
 									"id": "pick-by-comparison",
 									"objectClass": "System",
-									"sid": 190288553217853,
+									"sid": 810097910379749,
 									"parameters": {
 										"object": "Bonus",
-										"expression": "Bonus.Moving",
+										"expression": "Bonus.AnimationName",
 										"comparison": 0,
-										"value": "1"
+										"value": "\"Rocket\""
 									}
 								}
 							],
@@ -488,9 +502,9 @@
 								{
 									"id": "set-animation",
 									"objectClass": "Bonus",
-									"sid": 878459051652200,
+									"sid": 927528614282927,
 									"parameters": {
-										"animation": "\"Static\"",
+										"animation": "\"Nitro\"",
 										"from": "beginning"
 									}
 								}
@@ -551,9 +565,9 @@
 						{
 							"id": "compare-value",
 							"objectClass": "flags",
-							"sid": 989163872867660,
+							"sid": 856741261432126,
 							"parameters": {
-								"key": "\"bonuses_static_enabled\"",
+								"key": "\"bonuses_nitro_enabled\"",
 								"comparison": 0,
 								"value": "0"
 							}
@@ -575,9 +589,15 @@
 							"id": "set-visible",
 							"objectClass": "Bonus",
 							"sid": 148145890578047,
+							"disabled": true,
 							"parameters": {
 								"visibility": "invisible"
 							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "Bonus",
+							"sid": 914371191052290
 						}
 					],
 					"sid": 606589347167187
@@ -605,57 +625,8 @@
 							}
 						}
 					],
-					"sid": 632762003142762
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-nth-instance",
-							"objectClass": "System",
-							"sid": 475588498720362,
-							"parameters": {
-								"object": "score_ui",
-								"instance": "1"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-text",
-							"objectClass": "score_ui",
-							"sid": 595053859182484,
-							"parameters": {
-								"text": "\"👛\"&bonus_points"
-							}
-						}
-					],
-					"sid": 538015274574563
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-nth-instance",
-							"objectClass": "System",
-							"sid": 547410938535777,
-							"parameters": {
-								"object": "score_ui",
-								"instance": "0"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-text",
-							"objectClass": "score_ui",
-							"sid": 885291062513927,
-							"parameters": {
-								"text": "\"🚗\"&LvlScore"
-							}
-						}
-					],
-					"sid": 466628006598106
+					"sid": 632762003142762,
+					"disabled": true
 				}
 			]
 		},
@@ -966,19 +937,21 @@
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "compare-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 810388146101602,
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Car",
+									"sid": 775246386837850,
 									"parameters": {
-										"variable": "has_ideal_bonus"
+										"instance-variable": "Player"
 									}
 								},
 								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "Car",
-									"sid": 383052343334711,
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 528988527452348,
 									"parameters": {
-										"instance-variable": "Player"
+										"variable": "NitroState",
+										"comparison": 4,
+										"value": "0"
 									}
 								}
 							],
@@ -986,14 +959,23 @@
 								{
 									"id": "add-to-eventvar",
 									"objectClass": "System",
-									"sid": 795613104772047,
+									"sid": 588708299947543,
 									"parameters": {
 										"variable": "max_speed_coef",
-										"value": "0.3"
+										"value": "flags.Get(\"difficulty_nitro_boost\") + (NitroState = 2 ? flags.Get(\"difficulty_nitro_extra_boost\") : 0)"
+									}
+								},
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 344857904221488,
+									"parameters": {
+										"variable": "accel_coef",
+										"value": "2 * (flags.Get(\"difficulty_nitro_boost\") + (NitroState = 2 ? flags.Get(\"difficulty_nitro_extra_boost\") : 0))"
 									}
 								}
 							],
-							"sid": 690636128945910
+							"sid": 967319426609464
 						},
 						{
 							"eventType": "block",
@@ -1183,16 +1165,6 @@
 		},
 		{
 			"eventType": "variable",
-			"name": "started_turn",
-			"type": "boolean",
-			"initialValue": "false",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 134072866457235
-		},
-		{
-			"eventType": "variable",
 			"name": "motion",
 			"type": "number",
 			"initialValue": "0",
@@ -1299,48 +1271,7 @@
 							}
 						}
 					],
-					"sid": 249043995918472,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-overlapping-another-object",
-									"objectClass": "Car",
-									"sid": 359275444290891,
-									"parameters": {
-										"object": "Turns"
-									}
-								},
-								{
-									"id": "trigger-once-while-true",
-									"objectClass": "System",
-									"sid": 582313636138050
-								}
-							],
-							"actions": [
-								{
-									"id": "set-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 277769459950777,
-									"parameters": {
-										"variable": "started_turn",
-										"value": "true"
-									}
-								},
-								{
-									"id": "set-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 839830562162074,
-									"parameters": {
-										"variable": "has_ideal_bonus",
-										"value": "false"
-									}
-								}
-							],
-							"sid": 972254025181419
-						}
-					]
+					"sid": 249043995918472
 				},
 				{
 					"eventType": "block",
@@ -1392,114 +1323,7 @@
 							}
 						}
 					],
-					"sid": 530704483037550,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-overlapping-another-object",
-									"objectClass": "Car",
-									"sid": 865736573259910,
-									"parameters": {
-										"object": "Turns"
-									},
-									"isInverted": true
-								},
-								{
-									"id": "compare-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 147779830704588,
-									"parameters": {
-										"variable": "started_turn"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "add-to-eventvar",
-									"objectClass": "System",
-									"sid": 457628643626159,
-									"parameters": {
-										"variable": "LvlScore",
-										"value": "1"
-									}
-								},
-								{
-									"id": "set-text",
-									"objectClass": "score_ui",
-									"sid": 750646838534342,
-									"parameters": {
-										"text": "\"🚗\"&LvlScore"
-									}
-								},
-								{
-									"id": "set-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 722814984631342,
-									"parameters": {
-										"variable": "started_turn",
-										"value": "false"
-									}
-								}
-							],
-							"sid": 244650466706432,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "is-overlapping-another-object",
-											"objectClass": "Car",
-											"sid": 131005829082256,
-											"parameters": {
-												"object": "ideal"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "add-to-eventvar",
-											"objectClass": "System",
-											"sid": 221960725855766,
-											"parameters": {
-												"variable": "LvlScore",
-												"value": "1"
-											}
-										},
-										{
-											"id": "set-text",
-											"objectClass": "score_ui",
-											"sid": 390723716982364,
-											"parameters": {
-												"text": "\"🚗\"&LvlScore"
-											}
-										},
-										{
-											"id": "set-acceleration",
-											"objectClass": "Car",
-											"sid": 532135793190058,
-											"disabled": true,
-											"behaviorType": "Car",
-											"parameters": {
-												"acceleration": "Car.CarSpeed + 150"
-											}
-										},
-										{
-											"id": "set-boolean-eventvar",
-											"objectClass": "System",
-											"sid": 659048410125183,
-											"parameters": {
-												"variable": "has_ideal_bonus",
-												"value": "true"
-											}
-										}
-									],
-									"sid": 222784861764907
-								}
-							]
-						}
-					]
+					"sid": 530704483037550
 				},
 				{
 					"eventType": "block",
@@ -1600,14 +1424,6 @@
 				{
 					"eventType": "block",
 					"conditions": [
-						{
-							"id": "on-tap-object",
-							"objectClass": "Touch",
-							"sid": 538430733258344,
-							"parameters": {
-								"object": "lvl_restart"
-							}
-						},
 						{
 							"id": "on-tap-object",
 							"objectClass": "Touch",
@@ -1921,7 +1737,7 @@
 		},
 		{
 			"eventType": "variable",
-			"name": "bonus_points",
+			"name": "NitroCharge",
 			"type": "number",
 			"initialValue": "0",
 			"comment": "",
@@ -1953,11 +1769,11 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "is-boolean-instance-variable-set",
-							"objectClass": "Car",
-							"sid": 465857910762751,
+							"id": "is-animation-playing",
+							"objectClass": "Bonus",
+							"sid": 238481162742189,
 							"parameters": {
-								"instance-variable": "Player"
+								"animation": "\"Rocket\""
 							}
 						}
 					],
@@ -1965,41 +1781,52 @@
 						{
 							"id": "add-to-eventvar",
 							"objectClass": "System",
-							"sid": 166757990896237,
+							"sid": 995785134537596,
+							"disabled": true,
 							"parameters": {
-								"variable": "bonus_points",
+								"variable": "NitroCharge",
 								"value": "1"
 							}
 						}
 					],
-					"sid": 927283055220444,
-					"children": [
+					"sid": 862892440629221
+				},
+				{
+					"eventType": "block",
+					"conditions": [
 						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "Bonus",
-									"sid": 991598338553719,
-									"parameters": {
-										"instance-variable": "Moving"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "add-to-eventvar",
-									"objectClass": "System",
-									"sid": 901374768091185,
-									"parameters": {
-										"variable": "bonus_points",
-										"value": "1"
-									}
-								}
-							],
-							"sid": 984672844511339
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "Car",
+							"sid": 465857910762751,
+							"parameters": {
+								"instance-variable": "Player"
+							}
+						},
+						{
+							"id": "is-animation-playing",
+							"objectClass": "Bonus",
+							"sid": 654363564068292,
+							"parameters": {
+								"animation": "\"Nitro\""
+							}
 						}
-					]
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 111574373256714,
+							"parameters": {
+								"variable": "NitroCharge",
+								"value": "clamp(NitroCharge + flags.Get(\"difficulty_nitro_refill\"), 0, 100)"
+							}
+						},
+						{
+							"callFunction": "NitroChanged",
+							"sid": 538382088095181
+						}
+					],
+					"sid": 927283055220444
 				},
 				{
 					"eventType": "block",
@@ -2007,34 +1834,17 @@
 						{
 							"id": "trigger-once-while-true",
 							"objectClass": "System",
-							"sid": 335004969839580
-						},
-						{
-							"id": "pick-nth-instance",
-							"objectClass": "System",
-							"sid": 511602695483053,
-							"parameters": {
-								"object": "score_ui",
-								"instance": "1"
-							}
+							"sid": 294413402385392
 						}
 					],
 					"actions": [
 						{
-							"id": "set-text",
-							"objectClass": "score_ui",
-							"sid": 298021469571673,
-							"parameters": {
-								"text": "\"👛\"&bonus_points"
-							}
-						},
-						{
 							"id": "destroy",
 							"objectClass": "Bonus",
-							"sid": 551724869833101
+							"sid": 119785878002064
 						}
 					],
-					"sid": 505321115962545
+					"sid": 450830539586907
 				}
 			]
 		},
@@ -2386,16 +2196,6 @@
 								"x": "Recording.Width - 1",
 								"y": "2",
 								"value": "Car.Angle"
-							}
-						},
-						{
-							"id": "set-at-xy",
-							"objectClass": "Recording",
-							"sid": 546437086308440,
-							"parameters": {
-								"x": "Recording.Width - 1",
-								"y": "3",
-								"value": "has_ideal_bonus"
 							}
 						},
 						{
@@ -3289,6 +3089,16 @@
 								"variable": "RaceEnded"
 							},
 							"isInverted": true
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 189394555398929,
+							"parameters": {
+								"variable": "game_mode",
+								"comparison": 0,
+								"value": "\"Race\""
+							}
 						}
 					],
 					"actions": [],
@@ -3472,6 +3282,302 @@
 				}
 			],
 			"sid": 121200756819461
+		},
+		{
+			"eventType": "variable",
+			"name": "NitroState",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 542760795339966
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Nitrous",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tap-object",
+							"objectClass": "Touch",
+							"sid": 841843254043696,
+							"parameters": {
+								"object": "SwipeZone"
+							}
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 981565806324316,
+							"parameters": {
+								"variable": "NitroCharge",
+								"comparison": 4,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 498409207826978,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 574889884645141,
+									"parameters": {
+										"variable": "NitroState",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "tween-value",
+									"objectClass": "NitroBar",
+									"sid": 130970816840176,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"PerfectQTE\"",
+										"start-value": "0",
+										"end-value": "30",
+										"time": "1",
+										"ease": "easeinoutsine",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "yes"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 247854406736451,
+									"parameters": {
+										"variable": "NitroState",
+										"value": "1"
+									}
+								}
+							],
+							"sid": 802565007239751
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 823685277917861,
+									"parameters": {
+										"variable": "NitroState",
+										"comparison": 0,
+										"value": "1"
+									}
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 214525072193509,
+									"parameters": {
+										"first-value": "NitroBar.Tween.Value(\"PerfectQTE\")",
+										"comparison": 5,
+										"second-value": "20"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "stop-all-tweens",
+									"objectClass": "NitroBar",
+									"sid": 715689080699809,
+									"behaviorType": "Tween"
+								},
+								{
+									"id": "set-effect-parameter",
+									"objectClass": "NitroBar",
+									"sid": 845903467178377,
+									"parameters": {
+										"effect": "\"AdjustHSL\"",
+										"parameter-index": "0",
+										"value": "30"
+									}
+								},
+								{
+									"id": "set-effect-parameter",
+									"objectClass": "NitroBar",
+									"sid": 710278218570903,
+									"parameters": {
+										"effect": "\"AdjustHSL\"",
+										"parameter-index": "2",
+										"value": "110"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 302689571092592,
+									"parameters": {
+										"variable": "NitroState",
+										"value": "2"
+									}
+								}
+							],
+							"sid": 771196771063840
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-playing",
+							"objectClass": "NitroBar",
+							"sid": 596700319283639,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"PerfectQTE\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "NitroBar",
+							"sid": 515613974502431,
+							"parameters": {
+								"effect": "\"AdjustHSL\"",
+								"parameter-index": "0",
+								"value": "Self.Tween.Value(\"PerfectQTE\")"
+							}
+						}
+					],
+					"sid": 283418350082540
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 758149531702668,
+							"parameters": {
+								"variable": "NitroState",
+								"comparison": 1,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 207135247844216,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 967508338735115,
+									"parameters": {
+										"variable": "NitroCharge",
+										"comparison": 4,
+										"value": "0"
+									}
+								},
+								{
+									"id": "every-x-seconds",
+									"objectClass": "System",
+									"sid": 219040892974942,
+									"disabled": true,
+									"parameters": {
+										"interval-seconds": "dt"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "subtract-from-eventvar",
+									"objectClass": "System",
+									"sid": 739942859607628,
+									"parameters": {
+										"variable": "NitroCharge",
+										"value": "flags.Get(\"difficulty_nitro_consumption\") * dt * (1 + (NitroState = 2 ? flags.Get(\"difficulty_nitro_extra_coef\") : 0))"
+									}
+								},
+								{
+									"callFunction": "NitroChanged",
+									"sid": 818903763358340
+								}
+							],
+							"sid": 517111887666095
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 544520811927454
+								}
+							],
+							"actions": [
+								{
+									"id": "stop-all-tweens",
+									"objectClass": "NitroBar",
+									"sid": 793898924969459,
+									"behaviorType": "Tween"
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 433661810697601,
+									"parameters": {
+										"variable": "NitroCharge",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 653482084304613,
+									"parameters": {
+										"variable": "NitroState",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-effect-parameter",
+									"objectClass": "NitroBar",
+									"sid": 295258652084984,
+									"parameters": {
+										"effect": "\"AdjustHSL\"",
+										"parameter-index": "0",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-effect-parameter",
+									"objectClass": "NitroBar",
+									"sid": 746279422324882,
+									"parameters": {
+										"effect": "\"AdjustHSL\"",
+										"parameter-index": "2",
+										"value": "100"
+									}
+								}
+							],
+							"sid": 329669942008563
+						}
+					]
+				}
+			],
+			"sid": 664422197213966
 		},
 		{
 			"eventType": "script",
@@ -5400,6 +5506,27 @@
 					"sid": 166544438180878
 				}
 			]
+		},
+		{
+			"functionName": "NitroChanged",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "NitroBar",
+					"sid": 897949687430350,
+					"parameters": {
+						"width": "4.6 * NitroCharge"
+					}
+				}
+			],
+			"sid": 305702894274554
 		}
 	],
 	"sid": 528873411861220

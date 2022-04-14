@@ -36,7 +36,7 @@
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 8291805,
+						"imageSpriteId": 8124074,
 						"collisionPoly": {
 							"points": [
 								0.18913851963000353,
@@ -60,7 +60,7 @@
 					}
 				],
 				"sid": 476017106808162,
-				"name": "Static",
+				"name": "Nitro",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,
@@ -77,7 +77,7 @@
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 9616310,
+						"imageSpriteId": 5325035,
 						"collisionPoly": {
 							"points": [
 								0.18913851963000353,
@@ -101,7 +101,7 @@
 					}
 				],
 				"sid": 707836316540349,
-				"name": "Moving",
+				"name": "Rocket",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

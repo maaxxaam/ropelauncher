@@ -8,10 +8,15 @@
         "cam_center": 1,
         "obstacles_static_enabled": 0,
         "obstacles_dynamic_enabled": 0,
-        "bonuses_static_enabled": 1,
-        "bonuses_dynamic_enabled": 0,
+        "bonuses_nitro_enabled": 1,
+        "bonuses_rockets_enabled": 0,
         "difficulty_lives": 3,
         "difficulty_enemies": 3,
-        "difficulty_laps": 3
+        "difficulty_laps": 3,
+        "difficulty_nitro_refill": 20,
+        "difficulty_nitro_consumption": 25,
+        "difficulty_nitro_boost": 0.2,
+        "difficulty_nitro_extra_coef": 0.25,
+        "difficulty_nitro_extra_boost": 0.1
     }
 }
