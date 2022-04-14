@@ -13395,8 +13395,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.Else,
 		C3.Behaviors.Sin.Acts.SetEnabled,
 		C3.Plugins.Sprite.Acts.Destroy,
-		C3.Plugins.System.Cnds.PickNth,
-		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
 		C3.Plugins.System.Cnds.CompareBoolVar,
@@ -13431,6 +13429,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Exps.Deceleration,
 		C3.Behaviors.CarPlus.Acts.SetAcceleration,
 		C3.Behaviors.CarPlus.Exps.Acceleration,
+		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
@@ -13441,6 +13440,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Plugins.System.Exps.roundtodp,
 		C3.Plugins.TiledBg.Exps.X,
+		C3.Plugins.System.Cnds.PickNth,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
 		C3.Plugins.System.Acts.SetLayerAngle,
 		C3.Plugins.Sprite.Exps.Angle,
@@ -13496,7 +13496,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text.Exps.Text,
 		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
 		C3.Behaviors.CarPlus.Acts.Stop,
-		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Behaviors.Tween.Acts.TweenValue,
 		C3.Behaviors.Tween.Exps.Value,
 		C3.Behaviors.Tween.Acts.StopAllTweens,
@@ -13580,6 +13579,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Browser.Cnds.OnUpdateReady,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
 		C3.Plugins.System.Acts.ToggleBoolVar,
+		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Audio.Acts.PlayByName,
 		C3.Plugins.Eponesh_GameScore.Acts.PlayerToggle,
@@ -13900,10 +13900,6 @@ self.C3_ExpressionFuncs = [
 		() => "Nitro",
 		() => "bonuses_nitro_enabled",
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and(v0.GetValue(), "❤");
-		},
-		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
@@ -14013,8 +14009,12 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "GUI",
 		() => "Pause",
-		() => 0.1,
 		() => 2,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and(v0.GetValue(), "❤");
+		},
+		() => 0.1,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
