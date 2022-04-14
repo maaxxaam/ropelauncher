@@ -3256,6 +3256,19 @@ self["C3_Shaders"]["blurvertical"] = {
 	animated: false,
 	parameters: [["intensity",0,"percent"]]
 };
+self["C3_Shaders"]["hsladjust"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nprecision mediump float;\nuniform float huerotate;\nuniform float satadjust;\nuniform float lumadjust;\nvec3 rgb_to_hsl(vec3 color)\n{\nvec3 hsl = vec3(0.0, 0.0, 0.0);\nfloat fmin = min(min(color.r, color.g), color.b);\nfloat fmax = max(max(color.r, color.g), color.b);\nfloat delta = fmax - fmin;\nhsl.z = (fmax + fmin) / 2.0;\nif (delta == 0.0)\n{\nhsl.x = 0.0;\nhsl.y = 0.0;\n}\nelse\n{\nif (hsl.z < 0.5)\nhsl.y = delta / (fmax + fmin);\nelse\nhsl.y = delta / (2.0 - fmax - fmin);\nfloat dR = (((fmax - color.r) / 6.0) + (delta / 2.0)) / delta;\nfloat dG = (((fmax - color.g) / 6.0) + (delta / 2.0)) / delta;\nfloat dB = (((fmax - color.b) / 6.0) + (delta / 2.0)) / delta;\nif (color.r == fmax)\nhsl.x = dB - dG;\nelse if (color.g == fmax)\nhsl.x = (1.0 / 3.0) + dR - dB;\nelse if (color.b == fmax)\nhsl.x = (2.0 / 3.0) + dG - dR;\nif (hsl.x < 0.0)\nhsl.x += 1.0;\nelse if (hsl.x > 1.0)\nhsl.x -= 1.0;\n}\nreturn hsl;\n}\nfloat hue_to_rgb(float f1, float f2, float hue)\n{\nif (hue < 0.0)\nhue += 1.0;\nelse if (hue > 1.0)\nhue -= 1.0;\nfloat ret;\nif ((6.0 * hue) < 1.0)\nret = f1 + (f2 - f1) * 6.0 * hue;\nelse if ((2.0 * hue) < 1.0)\nret = f2;\nelse if ((3.0 * hue) < 2.0)\nret = f1 + (f2 - f1) * ((2.0 / 3.0) - hue) * 6.0;\nelse\nret = f1;\nreturn ret;\n}\nvec3 hsl_to_rgb(vec3 hsl)\n{\nvec3 rgb = vec3(hsl.z);\nif (hsl.y != 0.0)\n{\nfloat f2;\nif (hsl.z < 0.5)\nf2 = hsl.z * (1.0 + hsl.y);\nelse\nf2 = (hsl.z + hsl.y) - (hsl.y * hsl.z);\nfloat f1 = 2.0 * hsl.z - f2;\nrgb.r = hue_to_rgb(f1, f2, hsl.x + (1.0 / 3.0));\nrgb.g = hue_to_rgb(f1, f2, hsl.x);\nrgb.b = hue_to_rgb(f1, f2, hsl.x - (1.0 / 3.0));\n}\nreturn rgb;\n}\nvoid main(void)\n{\nvec4 front = texture2D(samplerFront, vTex);\nvec3 rgb = rgb_to_hsl(front.rgb) + vec3((huerotate > 0.5 ? huerotate - 1.0 : huerotate), 0, (lumadjust - 1.0) * front.a);\nrgb.y *= satadjust;\nrgb = hsl_to_rgb(rgb);\ngl_FragColor = vec4(rgb, front.a);\n}",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nhuerotate : f32;\nsatadjust : f32;\nlumadjust : f32;\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@stage(fragment)\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar huerotate : f32 = shaderParams.huerotate;\nif (huerotate > 0.5)\n{\nhuerotate = huerotate - 1.0;\n}\nvar rgb : vec3<f32> = c3_RGBtoHSL(front.rgb) + vec3<f32>(huerotate, 0.0, (shaderParams.lumadjust - 1.0) * front.a);\nrgb.y = rgb.y * shaderParams.satadjust;\nrgb = c3_HSLtoRGB(rgb);\nvar output : FragmentOutput;\noutput.color = vec4<f32>(rgb, front.a);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: true,
+	animated: false,
+	parameters: [["huerotate",0,"percent"],["satadjust",0,"percent"],["lumadjust",0,"percent"]]
+};
 
 }
 
@@ -8544,6 +8557,57 @@ Permutation(i){const arr=this._permutation;const len=arr.length;i=i%len;if(i<0)i
 }
 
 {
+'use strict';const C3=self.C3;C3.Plugins.NinePatch=class NinePatchPlugin extends C3.SDKPluginBase{constructor(opts){super(opts)}Release(){super.Release()}};
+
+}
+
+{
+'use strict';const C3=self.C3;
+C3.Plugins.NinePatch.Type=class NinePatchType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass);this._textureSet=null;this._drawable=null}Release(){this.ReleaseTextures();super.Release()}OnCreate(){this.GetImageInfo().LoadAsset(this._runtime)}async LoadTextures(renderer){const imageInfo=this.GetImageInfo();this._drawable=await imageInfo.ExtractImageToCanvas()}CreatePatch(lm,rm,tm,bm){if(this._textureSet||!this._drawable)return;this._textureSet=new self.NinePatchTextureSet(this);this._textureSet.CreateTextures(this._drawable,
+lm,rm,tm,bm)}ReleaseTextures(){if(this._textureSet){this._textureSet.Release();this._textureSet=null}}GetTextureSet(){return this._textureSet}};
+
+}
+
+{
+'use strict';const C3=self.C3;const LEFT_MARGIN=0;const RIGHT_MARGIN=1;const TOP_MARGIN=2;const BOTTOM_MARGIN=3;const EDGES=4;const FILL=5;const INITIALLY_VISIBLE=6;const ORIGIN=7;const SEAMS=8;const tempRect1=C3.New(C3.Rect);const tempRect2=C3.New(C3.Rect);const tempQuad=C3.New(C3.Quad);
+C3.Plugins.NinePatch.Instance=class NinePatchInstance extends C3.SDKWorldInstanceBase{constructor(inst,properties){super(inst);this._leftMargin=16;this._rightMargin=16;this._topMargin=16;this._bottomMargin=16;this._edges=1;this._fill=1;this._isSeamless=true;this._callback3d=null;if(properties){this._leftMargin=properties[LEFT_MARGIN];this._rightMargin=properties[RIGHT_MARGIN];this._topMargin=properties[TOP_MARGIN];this._bottomMargin=properties[BOTTOM_MARGIN];this._edges=properties[EDGES];this._fill=
+properties[FILL];this._isSeamless=!!properties[SEAMS];this.GetWorldInfo().SetVisible(!!properties[INITIALLY_VISIBLE])}this._sdkType.CreatePatch(this._leftMargin,this._rightMargin,this._topMargin,this._bottomMargin)}Release(){super.Release()}_Set3DCallback(cb){this._callback3d=cb}Draw(renderer){const wi=this.GetWorldInfo();const bquad=wi.GetBoundingQuad();this._Draw(renderer,bquad.getTlx(),bquad.getTly(),wi.GetWidth(),wi.GetHeight())}_Draw(renderer,myx,myy,myw,myh){let textureSet=this._sdkType.GetTextureSet();
+if(!textureSet){this._sdkType.CreatePatch(this._leftMargin,this._rightMargin,this._topMargin,this._bottomMargin);textureSet=this._sdkType.GetTextureSet();if(!textureSet)return}const lm=this._leftMargin;const rm=this._rightMargin;const tm=this._topMargin;const bm=this._bottomMargin;const iw=textureSet.GetImageWidth();const ih=textureSet.GetImageHeight();const re=iw-rm;const be=ih-bm;const s=this._isSeamless?1:0;const edges=this._edges;const fill=this._fill;if(lm>0&&tm>0)this._DrawPatch(renderer,textureSet.GetTexture(),
+0,0,lm+s,tm+s,myx,myy,lm+s,tm+s);if(rm>0&&tm>0)this._DrawPatch(renderer,textureSet.GetTexture(),re-s,0,rm+s,tm+s,myx+myw-rm-s,myy,rm+s,tm+s);if(rm>0&&bm>0)this._DrawPatch(renderer,textureSet.GetTexture(),re-s,be-s,rm+s,bm+s,myx+myw-rm-s,myy+myh-bm-s,rm+s,bm+s);if(lm>0&&bm>0)this._DrawPatch(renderer,textureSet.GetTexture(),0,be-s,lm+s,bm+s,myx,myy+myh-bm-s,lm+s,bm+s);if(edges===0){const off=fill===2?0:s;if(lm>0&&be>tm)this._TilePatch(renderer,textureSet.GetLeftTexture(),myx,myy+tm,lm+off,myh-tm-bm,
+0,0);if(rm>0&&be>tm)this._TilePatch(renderer,textureSet.GetRightTexture(),myx+myw-rm-off,myy+tm,rm+off,myh-tm-bm,off,0);if(tm>0&&re>lm)this._TilePatch(renderer,textureSet.GetTopTexture(),myx+lm,myy,myw-lm-rm,tm+off,0,0);if(bm>0&&re>lm)this._TilePatch(renderer,textureSet.GetBottomTexture(),myx+lm,myy+myh-bm-off,myw-lm-rm,bm+off,0,off)}else if(edges===1){if(lm>0&&be>tm)this._DrawPatch(renderer,textureSet.GetTexture(),0,tm,lm,be-tm,myx,myy+tm,lm,myh-tm-bm);if(rm>0&&be>tm)this._DrawPatch(renderer,textureSet.GetTexture(),
+re,tm,rm,be-tm,myx+myw-rm,myy+tm,rm,myh-tm-bm);if(tm>0&&re>lm)this._DrawPatch(renderer,textureSet.GetTexture(),lm,0,re-lm,tm,myx+lm,myy,myw-lm-rm,tm);if(bm>0&&re>lm)this._DrawPatch(renderer,textureSet.GetTexture(),lm,be,re-lm,bm,myx+lm,myy+myh-bm,myw-lm-rm,bm)}if(be>tm&&re>lm)if(fill===0)this._TilePatch(renderer,textureSet.GetFillTexture(),myx+lm,myy+tm,myw-lm-rm,myh-tm-bm,0,0);else if(fill===1)this._DrawPatch(renderer,textureSet.GetTexture(),lm,tm,re-lm,be-tm,myx+lm,myy+tm,myw-lm-rm,myh-tm-bm)}_DrawPatch(renderer,
+tex,sx,sy,sw,sh,dx,dy,dw,dh){const texW=tex.GetWidth();const texH=tex.GetHeight();renderer.SetTexture(tex);tempRect1.set(dx,dy,dx+dw,dy+dh);tempRect2.set(sx/texW,sy/texH,(sx+sw)/texW,(sy+sh)/texH);if(this._callback3d===null){const wi=this.GetWorldInfo();const bquad=wi.GetBoundingQuad();const offX=bquad.getTlx();const offY=bquad.getTly();tempRect1.offset(-offX,-offY);tempQuad.setFromRotatedRect(tempRect1,wi.GetAngle());tempQuad.offset(offX,offY);renderer.Quad3(tempQuad,tempRect2)}else this._callback3d(tempRect1,
+tempRect2)}_TilePatch(renderer,tex,dx,dy,dw,dh,ox,oy){const texW=tex.GetWidth();const texH=tex.GetHeight();renderer.SetTexture(tex);tempRect1.set(dx,dy,dx+dw,dy+dh);tempRect2.set(-ox/texW,-oy/texH,(dw-ox)/texW,(dh-oy)/texH);if(this._callback3d===null){const wi=this.GetWorldInfo();const bquad=wi.GetBoundingQuad();const offX=bquad.getTlx();const offY=bquad.getTly();tempRect1.offset(-offX,-offY);tempQuad.setFromRotatedRect(tempRect1,wi.GetAngle());tempQuad.offset(offX,offY);renderer.Quad3(tempQuad,tempRect2)}else this._callback3d(tempRect1,
+tempRect2)}GetCurrentImageInfo(){this._objectClass.GetImageInfo()}GetPropertyValueByIndex(index){}SetPropertyValueByIndex(index,value){}};
+
+}
+
+{
+'use strict';const C3=self.C3;C3.Plugins.NinePatch.Cnds={};
+
+}
+
+{
+'use strict';const C3=self.C3;C3.Plugins.NinePatch.Acts={SetEffect(effect){this.GetWorldInfo().SetBlendMode(effect);this._runtime.UpdateRender()}};
+
+}
+
+{
+'use strict';const C3=self.C3;C3.Plugins.NinePatch.Exps={};
+
+}
+
+{
+'use strict';const C3=self.C3;function CloneDrawable(drawable){const canvas=C3.CreateCanvas(drawable.width,drawable.height);const ctx=canvas.getContext("2d");ctx.drawImage(drawable,0,0);return canvas}
+self.NinePatchTextureSet=class NinePatchTextureSet{constructor(sdkType){this._sdkType=sdkType;this._runtime=this._sdkType.GetRuntime();this._texture=null;this._fillTexture=null;this._leftTexture=null;this._rightTexture=null;this._topTexture=null;this._bottomTexture=null;this._imageWidth=0;this._imageHeight=0;this._renderer=this._runtime.GetRenderer();this._isLoading=false;this._wasReleased=false}Release(){if(!this._renderer.IsContextLost()){this._renderer.DeleteTexture(this._texture);this._renderer.DeleteTexture(this._fillTexture);
+this._renderer.DeleteTexture(this._leftTexture);this._renderer.DeleteTexture(this._rightTexture);this._renderer.DeleteTexture(this._topTexture);this._renderer.DeleteTexture(this._bottomTexture)}this._texture=null;this._fillTexture=null;this._leftTexture=null;this._rightTexture=null;this._topTexture=null;this._bottomTexture=null;this._sdkType=null;this._renderer=null;this._wasReleased=true}WasReleased(){return this._wasReleased}CreateTextures(drawable,lm,rm,tm,bm){this._SliceImage(drawable,lm,rm,tm,
+bm)}HasCreatedTextures(){return!!this._texture}_SliceImage(drawable,lm,rm,tm,bm){if(this._wasReleased)return;const iw=drawable.width;const ih=drawable.height;this._imageWidth=iw;this._imageHeight=ih;const re=iw-rm;const be=ih-bm;const sampling=this._runtime.GetSampling();const anisotropy=this._runtime.GetCanvasManager().GetTextureAnisotropy();this._texture=this._renderer.CreateStaticTexture(CloneDrawable(drawable),{sampling,anisotropy});if(re>lm&&be>tm)this._fillTexture=this._renderer.CreateStaticTexture(this._SliceSubImage(CloneDrawable(drawable),
+lm,tm,re,be),{wrapX:"repeat",wrapY:"repeat",sampling,anisotropy});if(lm>0&&be>tm)this._leftTexture=this._renderer.CreateStaticTexture(this._SliceSubImage(CloneDrawable(drawable),0,tm,lm,be),{wrapY:"repeat",sampling,anisotropy});if(rm>0&&be>tm)this._rightTexture=this._renderer.CreateStaticTexture(this._SliceSubImage(CloneDrawable(drawable),re,tm,iw,be),{wrapY:"repeat",sampling,anisotropy});if(tm>0&&re>lm)this._topTexture=this._renderer.CreateStaticTexture(this._SliceSubImage(CloneDrawable(drawable),
+lm,0,re,tm),{wrapX:"repeat",sampling,anisotropy});if(bm>0&&re>lm)this._bottomTexture=this._renderer.CreateStaticTexture(this._SliceSubImage(CloneDrawable(drawable),lm,be,re,ih),{wrapX:"repeat",sampling,anisotropy})}_SliceSubImage(drawable,x1,y1,x2,y2){const w=x2-x1;const h=y2-y1;const tmpCanvas=C3.CreateCanvas(w,h);const tmpCtx=tmpCanvas.getContext("2d");tmpCtx.drawImage(drawable,x1,y1,w,h,0,0,w,h);return tmpCanvas}GetImageWidth(){return this._imageWidth}GetImageHeight(){return this._imageHeight}GetTexture(){return this._texture}GetFillTexture(){return this._fillTexture}GetLeftTexture(){return this._leftTexture}GetRightTexture(){return this._rightTexture}GetTopTexture(){return this._topTexture}GetBottomTexture(){return this._bottomTexture}};
+
+}
+
+{
 'use strict';const C3=self.C3;C3.Behaviors.Pin=class PinBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}};
 
 }
@@ -13310,6 +13374,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Pathfinding,
 		C3.Behaviors.Timer,
 		C3.Plugins.AdvancedRandom,
+		C3.Plugins.NinePatch,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.System.Acts.SetVar,
@@ -13330,9 +13395,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.Else,
 		C3.Behaviors.Sin.Acts.SetEnabled,
 		C3.Plugins.Sprite.Acts.Destroy,
-		C3.Plugins.Sprite.Acts.SetVisible,
-		C3.Plugins.System.Cnds.PickNth,
-		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
 		C3.Plugins.System.Cnds.CompareBoolVar,
@@ -13357,6 +13419,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Exps.ImagePointY,
 		C3.Plugins.System.Acts.AddVar,
 		C3.Plugins.Arr.Exps.At,
+		C3.Plugins.System.Cnds.CompareVar,
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Behaviors.CarPlus.Acts.SetMaxSpeed,
 		C3.Behaviors.CarPlus.Exps.MaxSpeed,
@@ -13366,6 +13429,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Exps.Deceleration,
 		C3.Behaviors.CarPlus.Acts.SetAcceleration,
 		C3.Behaviors.CarPlus.Exps.Acceleration,
+		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
@@ -13376,7 +13440,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Plugins.System.Exps.roundtodp,
 		C3.Plugins.TiledBg.Exps.X,
-		C3.Plugins.System.Cnds.TriggerOnce,
+		C3.Plugins.System.Cnds.PickNth,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
 		C3.Plugins.System.Acts.SetLayerAngle,
 		C3.Plugins.Sprite.Exps.Angle,
@@ -13392,9 +13456,10 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.IsVisible,
 		C3.Plugins.Sprite.Acts.ZMoveToObject,
 		C3.Behaviors.Flash.Cnds.IsFlashing,
-		C3.Plugins.System.Cnds.CompareVar,
 		C3.Plugins.System.Acts.SubVar,
 		C3.Behaviors.Flash.Acts.Flash,
+		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
+		C3.Plugins.System.Cnds.TriggerOnce,
 		C3.Behaviors.mcube_rexspline.Cnds.OnHitAnyPoint,
 		C3.Behaviors.mcube_rexspline.Acts.SetSpeed,
 		C3.Behaviors.mcube_rexspline.Exps.CurSegP0,
@@ -13416,7 +13481,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Plugins.Sprite.Cnds.PickParent,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
-		C3.ScriptsInEvents.Gamesheet_Event65_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event60_Act1,
 		C3.Plugins.Sprite.Cnds.PickByUID,
 		C3.Plugins.Sprite.Cnds.PickNthChild,
 		C3.Behaviors.CarPlus.Acts.SetDefaultControls,
@@ -13431,8 +13496,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text.Exps.Text,
 		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
 		C3.Behaviors.CarPlus.Acts.Stop,
-		C3.ScriptsInEvents.Gamesheet_Event88,
-		C3.ScriptsInEvents.Gamesheet_Event89,
+		C3.Behaviors.Tween.Acts.TweenValue,
+		C3.Behaviors.Tween.Exps.Value,
+		C3.Behaviors.Tween.Acts.StopAllTweens,
+		C3.Plugins.NinePatch.Acts.SetEffectParam,
+		C3.Behaviors.Tween.Cnds.IsPlaying,
+		C3.Plugins.System.Exps.dt,
+		C3.ScriptsInEvents.Gamesheet_Event91,
+		C3.ScriptsInEvents.Gamesheet_Event92,
 		C3.Plugins.System.Cnds.AngleWithin,
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Plugins.Sprite.Exps.LayerName,
@@ -13448,7 +13519,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Particles.Acts.ZMoveToObject,
 		C3.Plugins.Tilemap.Exps.MapDisplayWidth,
 		C3.Plugins.Tilemap.Exps.MapDisplayHeight,
-		C3.ScriptsInEvents.Gamesheet_Event106_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event109_Act2,
 		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.Tilemap.Exps.TileToPositionX,
 		C3.Plugins.Tilemap.Exps.TileToPositionY,
@@ -13457,9 +13528,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.AddChild,
 		C3.Plugins.TiledBg.Acts.SetPosToObject,
 		C3.Plugins.System.Exps.layoutname,
-		C3.ScriptsInEvents.Gamesheet_Event114_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event117_Act2,
 		C3.Plugins.Sprite.Acts.SetSize,
-		C3.ScriptsInEvents.Gamesheet_Event115_Act3,
+		C3.ScriptsInEvents.Gamesheet_Event118_Act3,
 		C3.Plugins.Sprite.Exps.Width,
 		C3.Plugins.Tilemap.Exps.TileWidth,
 		C3.Plugins.Sprite.Exps.Height,
@@ -13471,6 +13542,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.Sprite.Cnds.OnCreated,
 		C3.Plugins.Text.Acts.Destroy,
+		C3.Plugins.NinePatch.Acts.SetWidth,
 		C3.ScriptsInEvents.Devtodev_Event2,
 		C3.ScriptsInEvents.Devtodev_Event4,
 		C3.ScriptsInEvents.Devtodev_Event6,
@@ -13515,7 +13587,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio.Cnds.IsTagPlaying,
 		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.Audio.Acts.Stop,
-		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
 		C3.Plugins.Eponesh_GameScore.Acts.PlayerSet,
 		C3.Plugins.Eponesh_GameScore.Cnds.IsAdsFullscreenPlaying,
 		C3.Plugins.Audio.Acts.SetSilent,
@@ -13589,7 +13660,6 @@ self.C3_JsPropNameTable = [
 	{flag: 0},
 	{Persist: 0},
 	{dev_flags: 0},
-	{lvl_restart: 0},
 	{pause_menu: 0},
 	{LevelLight: 0},
 	{ShadowCaster: 0},
@@ -13634,6 +13704,7 @@ self.C3_JsPropNameTable = [
 	{ResumeBut: 0},
 	{ReplayBut: 0},
 	{PauseTxt: 0},
+	{NitroBar: 0},
 	{Turns: 0},
 	{Button: 0},
 	{LoadableArray: 0},
@@ -13643,7 +13714,6 @@ self.C3_JsPropNameTable = [
 	{RaceStarted: 0},
 	{AdsDisabled: 0},
 	{Lives: 0},
-	{has_ideal_bonus: 0},
 	{Speed: 0},
 	{LvlScore: 0},
 	{DesAngle: 0},
@@ -13653,14 +13723,14 @@ self.C3_JsPropNameTable = [
 	{decel_coef: 0},
 	{steer_coef: 0},
 	{recover_coef: 0},
-	{started_turn: 0},
 	{motion: 0},
-	{bonus_points: 0},
+	{NitroCharge: 0},
 	{Car_UID: 0},
 	{posy: 0},
 	{posx: 0},
 	{close_enough: 0},
 	{AngleToNode: 0},
+	{NitroState: 0},
 	{your_car: 0},
 	{max_cars: 0},
 	{is_start: 0},
@@ -13792,6 +13862,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("difficulty_laps");
 		},
+		() => 0,
 		() => "Level",
 		p => {
 			const n0 = p._GetNode(0);
@@ -13814,7 +13885,6 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Tree1",
 		() => "obstacles_dynamic_enabled",
-		() => 0,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpInstVar();
@@ -13825,22 +13895,10 @@ self.C3_ExpressionFuncs = [
 			return () => and("rock", f0("1", "2", "3"));
 		},
 		() => "obstacles_static_enabled",
-		() => "bonuses_dynamic_enabled",
-		() => "Static",
-		() => "bonuses_static_enabled",
-		() => 2,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and(v0.GetValue(), "❤");
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and("👛", v0.GetValue());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and("🚗", v0.GetValue());
-		},
+		() => "bonuses_rockets_enabled",
+		() => "Rocket",
+		() => "Nitro",
+		() => "bonuses_nitro_enabled",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -13892,7 +13950,18 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => multiply(0.25, n0.ExpObject(v1.GetValue(), 6));
 		},
-		() => 0.3,
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			return () => add(n0.ExpObject("difficulty_nitro_boost"), ((((v1.GetValue()) === (2) ? 1 : 0)) ? (n2.ExpObject("difficulty_nitro_extra_boost")) : (0)));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			return () => multiply(2, add(n0.ExpObject("difficulty_nitro_boost"), ((((v1.GetValue()) === (2) ? 1 : 0)) ? (n2.ExpObject("difficulty_nitro_extra_boost")) : (0))));
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
@@ -13940,7 +14009,17 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "GUI",
 		() => "Pause",
+		() => 2,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and(v0.GetValue(), "❤");
+		},
 		() => 0.1,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => C3.clamp(add(v0.GetValue(), n1.ExpObject("difficulty_nitro_refill")), 0, 100);
+		},
 		() => "Replays",
 		p => {
 			const n0 = p._GetNode(0);
@@ -13979,11 +14058,6 @@ self.C3_ExpressionFuncs = [
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => n0.ExpObject(f1("replay"), 1);
 		},
-		() => 3,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => v0.GetValue();
-		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpBehavior();
@@ -14007,6 +14081,10 @@ self.C3_ExpressionFuncs = [
 			return () => (1 - n0.ExpInstVar());
 		},
 		() => "CarAI",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -14048,6 +14126,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() * 0.33);
 		},
+		() => "Race",
 		() => "Вы победили!",
 		() => "RaceWin",
 		p => {
@@ -14055,6 +14134,23 @@ self.C3_ExpressionFuncs = [
 			return () => (("Вы проиграли, заняв только " + n0.ExpObject()) + " место :-(");
 		},
 		() => "RaceLoss",
+		() => "Nitrous",
+		() => "PerfectQTE",
+		() => 30,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("PerfectQTE");
+		},
+		() => 20,
+		() => "AdjustHSL",
+		() => 110,
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const v2 = p._GetNode(2).GetVar();
+			const n3 = p._GetNode(3);
+			return () => multiply(multiply(n0.ExpObject("difficulty_nitro_consumption"), f1()), add(1, ((((v2.GetValue()) === (2) ? 1 : 0)) ? (n3.ExpObject("difficulty_nitro_extra_coef")) : (0))));
+		},
 		() => 100,
 		p => {
 			const n0 = p._GetNode(0);
@@ -14187,6 +14283,10 @@ self.C3_ExpressionFuncs = [
 		() => "Пауза",
 		() => "Победа!",
 		() => "Поражение!",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (4.6 * v0.GetValue());
+		},
 		() => "flags",
 		() => "tiles",
 		() => "Title",
@@ -14194,7 +14294,6 @@ self.C3_ExpressionFuncs = [
 		() => "color",
 		() => "white",
 		() => "MainButtons",
-		() => "Race",
 		() => "Режим \"Схватка\" еще не готов.",
 		() => 506,
 		p => {
@@ -14254,6 +14353,7 @@ self.C3_ExpressionFuncs = [
 		() => "sfx",
 		() => "extraanim",
 		() => "Off",
+		() => 3,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => ((((v0.GetValue()) === (2) ? 1 : 0)) ? (1) : (2));

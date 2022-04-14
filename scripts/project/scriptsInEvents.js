@@ -309,7 +309,7 @@ export function car_collision_resolution(car1, car2, collision_data, collision_p
 
 const scriptsInEvents = {
 
-		async Gamesheet_Event65_Act1(runtime, localVars)
+		async Gamesheet_Event60_Act1(runtime, localVars)
 		{
 			let obs = runtime.objects.Obstacle.getFirstPickedInstance();
 			let car = runtime.objects.car_edge_collision.getFirstPickedInstance();
@@ -319,7 +319,7 @@ const scriptsInEvents = {
 			new_spark.angleDegrees = car.angleDegrees - 180;
 		},
 
-		async Gamesheet_Event88(runtime, localVars)
+		async Gamesheet_Event91(runtime, localVars)
 		{
 			// let's perform collision checks for cars! yay!
 			if (!runtime.globalVars.RaceEnded) {
@@ -364,7 +364,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event89(runtime, localVars)
+		async Gamesheet_Event92(runtime, localVars)
 		{
 			// calculate car positions
 			function getCP(id) {
@@ -394,19 +394,19 @@ const scriptsInEvents = {
 			for (let index = 0; index < results.length; index++) results[index].txt.text = String(index + 1);
 		},
 
-		async Gamesheet_Event106_Act2(runtime, localVars)
+		async Gamesheet_Event109_Act2(runtime, localVars)
 		{
 			const tile = localVars.tile;
 			//console.log(tile);
 			localVars.is_start = ((tile == 1) || (tile == 19) || (tile == 37) || (tile == 55));
 		},
 
-		async Gamesheet_Event114_Act2(runtime, localVars)
+		async Gamesheet_Event117_Act2(runtime, localVars)
 		{
 			localVars.is_corner = test_tile_for_corner(localVars.tile);
 		},
 
-		async Gamesheet_Event115_Act3(runtime, localVars)
+		async Gamesheet_Event118_Act3(runtime, localVars)
 		{
 			localVars.clock_id = map_corners_to_clock(localVars.tile);
 			localVars.pos_id = map_corners_to_pos(localVars.tile);
