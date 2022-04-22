@@ -1,0 +1,83 @@
+{
+	"name": "rocket",
+	"plugin-id": "Sprite",
+	"sid": 665024782953490,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "ShooterUID",
+			"type": "number",
+			"desc": "",
+			"sid": 410668490500434
+		},
+		{
+			"name": "TargetUID",
+			"type": "number",
+			"desc": "",
+			"sid": 903275011031959
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Bullet",
+			"name": "Bullet",
+			"sid": 969265368611661
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 52,
+						"height": 32,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 8542640,
+						"collisionPoly": {
+							"points": [
+								0.0624997799213116,
+								5.960464477539063e-8,
+								0.3653850555419922,
+								0.3281251788139343,
+								0.5576924544114331,
+								0.07812482118606567,
+								0.9615382414597732,
+								0.10937511920928955,
+								0.9615385348980243,
+								0.8828126192092896,
+								0.5817308425903321,
+								0.8984373211860657,
+								0.35576937748835635,
+								0.7187501192092896,
+								0.028846300565279447,
+								1
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "Smoke",
+								"x": 0.19230769230769232,
+								"y": 0.5
+							}
+						],
+						"duration": 1
+					}
+				],
+				"sid": 554806747160121,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

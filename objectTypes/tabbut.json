@@ -233,6 +233,81 @@
 				],
 				"subfolders": [],
 				"name": "Difficulty"
+			},
+			{
+				"items": [
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 6696829,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 510277442575075,
+						"name": "CarsIdle",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 3587082,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 785419412722948,
+						"name": "CarsHover",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 9051676,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 914361450035117,
+						"name": "CarsTap",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					}
+				],
+				"subfolders": [],
+				"name": "Cars"
 			}
 		]
 	}

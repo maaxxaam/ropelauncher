@@ -1,0 +1,25 @@
+{
+	"name": "RocketTarget",
+	"plugin-id": "Sprite",
+	"sid": 308610090540065,
+	"instanceVariables": [
+		{
+			"name": "TargetName",
+			"type": "string",
+			"desc": "",
+			"sid": 651858414476689
+		},
+		{
+			"name": "Health",
+			"type": "number",
+			"desc": "",
+			"sid": 694043780877455
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"Car",
+		"Obstacle"
+	]
+}

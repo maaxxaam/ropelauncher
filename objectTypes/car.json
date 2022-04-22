@@ -105,6 +105,12 @@
 			"type": "number",
 			"desc": "Car's mass. Used during collision resolution.",
 			"sid": 858914804778265
+		},
+		{
+			"name": "Ammo",
+			"type": "number",
+			"desc": "",
+			"sid": 455250986931873
 		}
 	],
 	"behaviorTypes": [
@@ -119,11 +125,6 @@
 			"sid": 672776114892879
 		},
 		{
-			"behaviorId": "Pin",
-			"name": "Pin",
-			"sid": 160319281014572
-		},
-		{
 			"behaviorId": "Flash",
 			"name": "Flash",
 			"sid": 156196229929090
@@ -132,6 +133,11 @@
 			"behaviorId": "mcube_rexspline",
 			"name": "Spline",
 			"sid": 348805045883610
+		},
+		{
+			"behaviorId": "LOS",
+			"name": "LineOfSight",
+			"sid": 388974752248994
 		}
 	],
 	"effectTypes": [],
@@ -182,13 +188,13 @@
 							},
 							{
 								"name": "LeftFrontTrail",
-								"x": 0.7964285714285714,
-								"y": 0.1875
+								"x": 0.9321428571428567,
+								"y": 0.0625
 							},
 							{
 								"name": "RightFrontTrail",
-								"x": 0.7964285714285714,
-								"y": 0.8125
+								"x": 0.9321428571428567,
+								"y": 0.9375
 							},
 							{
 								"name": "Front",

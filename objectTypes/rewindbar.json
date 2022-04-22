@@ -1,0 +1,44 @@
+{
+	"name": "RewindBar",
+	"plugin-id": "NinePatch",
+	"sid": 257449066591337,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "Init_width",
+			"type": "number",
+			"desc": "",
+			"sid": 957944896591800
+		},
+		{
+			"name": "Time_to_decide",
+			"type": "number",
+			"desc": "",
+			"sid": 843799438484848
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 723063977835676
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "hsladjust",
+			"name": "AdjustHSL"
+		}
+	],
+	"image": {
+		"width": 64,
+		"height": 64,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 5408794,
+		"useCollisionPoly": true
+	}
+}

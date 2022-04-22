@@ -10,6 +10,12 @@ function Point(x, y) {
 	return {x:x, y:y}
 }
 
+export function layer_to_layer_px(x, y, layer_from, layer_to) { // assuming both point are visible, i guess
+let [cssx, cssy] = layer_from.layerToCssPx(x, y);
+let [fx, fy] = layer_to.cssPxToLayer(cssx, cssy);
+return [fx, fy];
+}
+
 function test_tile_for_corner(tile) {
 	var no_extra_bits = (tile & ~151) == 0;
 	var has_148 = (tile & 148) == 148;
@@ -48,9 +54,10 @@ function map_corners_to_circle(tile) {
 }
 
 function project_point_onto_vector(vector, point) {
-	const dot_over_len2 = Vector2.dot(vector, point) / (vector.x * vector.x + vector.y * vector.y);
-	let res_point = new Point(vector.x * dot_over_len2, vector.y * dot_over_len2);
-	res_point.len_sqr = Math.abs(Vector2.dot(vector, point));
+	const dot_over_len2 = Vector2.dot(vector, point) / Vector2.dot(vector, vector);
+	let res_point = Vector2.multiply(vector, dot_over_len2);
+	res_point.dot = Vector2.dot(vector, point);
+	res_point.len_sqr = Math.abs(res_point.dot);
 	return res_point;
 }
 
@@ -80,25 +87,33 @@ function vertices_clockwise_sort(vertices) {
 	});
 }
 
-function edge_right_side(edge, point) {
+function point_right_side(edge, point) {
 	let edgeVec = Vector2.subtract(edge[1], edge[0]);
+	let edgeRNormal = Vector2(edgeVec.y, -edgeVec.x);
 	let pointVec = Vector2.subtract(point, edge[0]);
-	return Vector2.cross(edgeVec, pointVec) > 0
+	return Math.sign(Vector2.cross(edgeVec, pointVec)) == Math.sign(Vector2.cross(edgeVec, edgeRNormal));
 }
 
 function simple_sutherland_hodgman_clipping(edgeInc, edgeClip, del) {
+	//debugger;
 	let res = [];
-	if (edge_right_side(edgeClip, edgeInc[1])) {
-		if (!del) {
-			res.push(line_intersection_point(edgeInc, edgeClip));
+	if (point_right_side(edgeClip, edgeInc[1])) {
+		if (!point_right_side(edgeClip, edgeInc[0])) {
+			if (!del) res.push(line_intersection_point(edgeInc, edgeClip));
+		} else {
+			if (!del) res.push(edgeInc[0])
 		}
 		res.push(edgeInc[1]);
-	} else if (edge_right_side(edgeClip, edgeInc[0])) {
-		if (!del) res.push(edgeInc[1]);
-		res.push(line_intersection_point(edgeInc, edgeClip));
+	} else if (point_right_side(edgeClip, edgeInc[0])) {
+		res.push(edgeInc[0]);
+		if (!del) res.push(line_intersection_point(edgeInc, edgeClip));
 	} else {
-		res = edgeInc;
+		//debugger;
+		//console.log("Nothing here");
+		return simple_sutherland_hodgman_clipping(edgeInc, edgeClip.reverse(), del);
+		//res = edgeInc;
 	}
+	
 	return res;
 }
 
@@ -115,7 +130,7 @@ function get_polygon_normals(sprite) {
 		let [edge1, edge2] = [Point(0, 0), Point(0,0)];
 		[edge1.x, edge1.y] = sprite.getPolyPoint(i);
 		[edge2.x, edge2.y] = sprite.getPolyPoint(i + 1);
-		let perpendicular = Vector2.normalize(new Vector2(edge1.y - edge2.y, edge2.x - edge1.x));
+		let perpendicular = Vector2.normalize(new Vector2(edge2.y - edge1.y, edge1.x - edge2.x));
 		normals.push(perpendicular);
 	}
 	
@@ -123,24 +138,39 @@ function get_polygon_normals(sprite) {
 }
 
 function project_collision_onto_vector(sprite, vector) {
-	let [edge1, edge2] = [Point(0, 0), Point(0,0)];
+	let point = Point(sprite.getPolyPointX(0), sprite.getPolyPointY(0));
 	
 	let proj = [new Point(Infinity, Infinity), new Point(-Infinity, -Infinity)];
-	proj[0].len_sqr = Infinity;
-	proj[1].len_sqr = 0;
-	for (let i = 0; i < sprite.getPolyPointCount(); i++) {
-		[edge1.x, edge1.y] = sprite.getPolyPoint(i);
-		[edge2.x, edge2.y] = sprite.getPolyPoint(i + 1);
-		if (edge2.x < edge1.x || (edge1.x == edge2.x && edge2.y < edge1.y)) { // swap edges
-			let [temp1, temp2] = [edge1.x, edge1.y];
-			[edge1.x, edge1.y] = [edge2.x, edge2.y];
-			[edge2.x, edge2.y] = [temp1, temp2];
-		}
-		const [point1, point2] = project_line_onto_vector(vector, edge1, edge2);
-		if (proj[0].len_sqr > point1.len_sqr) proj[0] = point1;
-		if (proj[1].len_sqr < point2.len_sqr) proj[1] = point2;
+	proj[0] = project_point_onto_vector(vector, point);
+	proj[1] = project_point_onto_vector(vector, point);
+	for (let i = 1; i < sprite.getPolyPointCount(); i++) {
+		[point.x, point.y] = sprite.getPolyPoint(i);
+		const projected = project_point_onto_vector(vector, point);
+		if (proj[0].dot > projected.dot) proj[0] = projected;
+		if (proj[1].dot < projected.dot) proj[1] = projected;
 	}
 	return proj;
+}
+
+function brings_closer(sprite1, sprite2, normal, from_1) {
+	let before = Vector2.distance(sprite1, sprite2);
+	let ops = [Vector2.add, Vector2.subtract];
+	if (!from_1) ops = ops.reverse();
+	let a1 = ops[0](sprite1, normal);
+	let a2 = ops[1](sprite2, normal);
+	let after = Vector2.distance(a1, a2);
+	return before > after;
+}
+
+export function close_projection_points(sprite1, sprite2, normal) {
+	let proj1 = project_collision_onto_vector(sprite1, normal);
+	// find projection of sprite2 onto normal
+	let proj2 = project_collision_onto_vector(sprite2, normal);
+	// see if they overlap
+	// !IMPORTANT! The following math works assuming all coordinates have the same sign
+	let over1 = proj1[0].dot > proj2[0].dot ? proj1[0] : proj2[0];
+	let over2 = proj1[1].dot < proj2[1].dot ? proj1[1] : proj2[1];
+	return [over1, over2];
 }
 
 export function SAT_collision(sprite1, sprite2) {	
@@ -152,48 +182,41 @@ export function SAT_collision(sprite1, sprite2) {
 	if (cannot_get_poly(sprite1) || cannot_get_poly(sprite2)) throw "Not a Sprite: cannot access collision polygon";
 	
 	var normals = get_polygon_normals(sprite1).concat(get_polygon_normals(sprite2));
-	let half = sprite1.getPolyPointCount();
+	const half = sprite1.getPolyPointCount() - 1; //normal amount = edges = points - 1
 	let obj = sprite1;
 	
-	for (let normal of normals) {
-		let [edge1, edge2] = [Point(0, 0), Point(0,0)];
-		// find projection of sprite1 onto normal
-		let proj1 = project_collision_onto_vector(sprite1, normal);
-		// find projection of sprite2 onto normal
-		let proj2 = project_collision_onto_vector(sprite2, normal);
+	for (let i = 0; i < normals.length; i++) {
+		const normal = normals[i];
 		// see if they overlap
 		// !IMPORTANT! The following math works assuming all coordinates have the same sign
-		let over1 = proj1[0].len_sqr > proj2[0].len_sqr ? proj1[0] : proj2[0];
-		let over2 = proj1[1].len_sqr < proj2[1].len_sqr ? proj1[1] : proj2[1];
-		if (over1.len_sqr > over2.len_sqr) { // no overlap
+		let [over1, over2] = close_projection_points(sprite1, sprite2, normal);
+		if (over1.dot > over2.dot) { // no overlap
 			return {collided: false};
 		} else {
 			let overVec = Vector2.subtract(over2, over1);
 			overVec.len_sqr = Vector2.dot(overVec, overVec);
-			if (overVec.len_sqr < overlap.len_sqr) {
+			if ((overVec.len_sqr < overlap.len_sqr) || (overVec.len_sqr == overlap.len_sqr && (brings_closer(sprite1, sprite2, normal, i < half)))) {
 				overlap = overVec;
 				col_normal = normal;
-				obj = normals.indexOf(normal) < half ? sprite1 : sprite2;
+				obj = i < half ? sprite1 : sprite2;
 			}
 		}
 	}
 	return {collided: true, normal: col_normal, overlap: overlap, obj: obj};
 }
 
-function furthest_point_from_vector(sprite, vector) {
-	let farthest = new Point(0, 0);
-	farthest.len_sqr = 0;
-	
+export function furthest_point_from_vector(sprite, vector) {
+	let farthest = new Point(-Infinity, -Infinity);
+	farthest.dot = -Infinity;
 	for (let i = 0; i < sprite.getPolyPointCount(); i++) {
 		let point = new Point(0, 0);
 		[point.x, point.y] = sprite.getPolyPoint(i);
 		
-		let projected = project_point_onto_vector(point, vector);
+		let dot = Vector2.dot(point, vector);
 		//debugger;
-		
-		if (projected.len_sqr > farthest.len_sqr) { 
+		if (dot > farthest.dot) { 
 			farthest = point;
-			farthest.len_sqr = projected.len_sqr;
+			farthest.dot = dot;
 			farthest.index = i;
 		}
 	}
@@ -204,23 +227,40 @@ function orthogonal_neighbour_edge(sprite, point, index, normal) {
 	let res = new Point(0, 0);
 	let edge1 = new Point(0, 0);
 	let edge2 = new Point(0, 0);
-	edge1.index = index == 0 ? sprite.getPolyPointCount() : index - 1;
+	edge1.index = index - 1;
+	if (index == 0) edge1.index += sprite.getPolyPointCount();
 	[edge1.x, edge1.y] = sprite.getPolyPoint(edge1.index);
 	[edge2.x, edge2.y] = sprite.getPolyPoint(index + 1);
 	edge2.index = index + 1;
 	// choose the one most orthogonal based on dot product (maybe incorrect but works fine)
-	edge1.dot = Vector2.dot(Vector2.subtract(point, edge1), normal);
-	edge2.dot = Vector2.dot(Vector2.subtract(edge2, point), normal);
-	return Math.abs(edge1.dot) < Math.abs(edge2.dot) ? [edge1, point] : [point, edge2];
+	const n1 = Vector2.normalize(Vector2.subtract(point, edge1));
+	const n2 = Vector2.normalize(Vector2.subtract(edge2, point));
+	edge1.dot = Vector2.dot(n1, normal);
+	edge2.dot = Vector2.dot(n2, normal);
+	if (Math.abs(edge1.dot) < Math.abs(edge2.dot)) {
+		point.dot = edge1.dot;
+		return [edge1, point];
+	} else {
+		point.dot = edge2.dot;
+		return [point, edge2];
+	}
 }
 
 export function get_collision_point(sprite1, sprite2, collision_data) {
 	// Check if we can access needed Sprite functions
 	if (cannot_get_poly(sprite1) || cannot_get_poly(sprite2)) throw "Not a Sprite: cannot access collision polygon";
+	// get colliding edges
 	
-	// get colliding edges (sort of)
-	let point10 = furthest_point_from_vector(sprite1, collision_data.normal);
-	let point20 = furthest_point_from_vector(sprite2, Vector2.inverse(collision_data.normal));
+	if (collision_data.obj === sprite1) {
+		var point10 = furthest_point_from_vector(sprite1, collision_data.normal);
+		var point20 = furthest_point_from_vector(sprite2, Vector2.inverse(collision_data.normal));
+	} else {
+		var point10 = furthest_point_from_vector(sprite1, Vector2.inverse(collision_data.normal));
+		var point20 = furthest_point_from_vector(sprite2, collision_data.normal);
+	}
+	
+	//var point10 = furthest_point_from_vector(sprite1, collision_data.normal);
+	//var point20 = furthest_point_from_vector(sprite2, collision_data.normal);
 	let point11 = Point(0, 0);
 	[point10, point11] = orthogonal_neighbour_edge(sprite1, point10, point10.index, collision_data.normal);
 	let point21 = Point(0, 0);
@@ -239,15 +279,25 @@ export function get_collision_point(sprite1, sprite2, collision_data) {
 		var inc = [point10, point11];
 		var ref = [point20, point21];
 	}
-	
+	//debugger;
+	//const inter = line_intersection_point(ref, inc);
+	//const inter_on_lines = point_between_points(ref[0].x, ref[0].y, inter.x, inter.y, ref[1].x, ref[1].y) && point_between_points(inc[0].x, inc[0].y, inter.x, inter.y, inc[1].x, inc[1].y)
 	// adjacent face clipping
+	
 	let point00 = Vector2(0, 0);
 	let point30 = Vector2(0, 0);
 	[point30.x, point30.y] =  ref_sprite.getPolyPoint((ref[0].index + 2) % ref_sprite.getPolyPointCount());
 	[point00.x, point00.y] =  ref_sprite.getPolyPoint(ref[0].index == 0 ? ref_sprite.getPolyPointCount() - 1 : ref[0].index - 1);
-	inc = simple_sutherland_hodgman_clipping(inc, [point00, ref[0]]);
-	inc = simple_sutherland_hodgman_clipping(inc, [ref[1], point30]);
-	let [result] = simple_sutherland_hodgman_clipping(inc, [ref[0], ref[1]], true);
+	let inter = simple_sutherland_hodgman_clipping(inc, [point00, ref[0]]);
+	inter = simple_sutherland_hodgman_clipping(inter, [point30, ref[1]]);
+	let result = simple_sutherland_hodgman_clipping(inter, [ref[0], ref[1]], true)[0];
+	result.ref = ref;
+	result.inc = inc;
+	result.p0 = point00;
+	result.p3 = point30;
+	result.cut = inter;
+	// try simple intersection instead
+	//let result = line_intersection_point(inc, ref);
 	
 	return result;
 }

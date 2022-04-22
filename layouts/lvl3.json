@@ -3589,6 +3589,8 @@
 							},
 							"uid": 314,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3640,6 +3642,8 @@
 							},
 							"uid": 315,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3691,6 +3695,8 @@
 							},
 							"uid": 316,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3742,6 +3748,8 @@
 							},
 							"uid": 317,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3793,6 +3801,8 @@
 							},
 							"uid": 318,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3844,6 +3854,8 @@
 							},
 							"uid": 319,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3870,8 +3882,8 @@
 							"world": {
 								"x": 2276,
 								"y": 2154,
-								"width": 89,
-								"height": 72,
+								"width": 105,
+								"height": 31,
 								"originX": 0.5,
 								"originY": 0.5,
 								"color": [
@@ -3895,6 +3907,8 @@
 							},
 							"uid": 320,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3921,8 +3935,8 @@
 							"world": {
 								"x": 4152,
 								"y": 2438,
-								"width": 89,
-								"height": 72,
+								"width": 105,
+								"height": 31,
 								"originX": 0.5,
 								"originY": 0.5,
 								"color": [
@@ -3946,6 +3960,8 @@
 							},
 							"uid": 321,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3972,8 +3988,8 @@
 							"world": {
 								"x": 3550,
 								"y": 4368,
-								"width": 89,
-								"height": 72,
+								"width": 105,
+								"height": 31,
 								"originX": 0.5,
 								"originY": 0.5,
 								"color": [
@@ -3997,6 +4013,8 @@
 							},
 							"uid": 322,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4048,6 +4066,8 @@
 							},
 							"uid": 323,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4074,8 +4094,8 @@
 							"world": {
 								"x": 3432,
 								"y": 2072,
-								"width": 89,
-								"height": 72,
+								"width": 105,
+								"height": 31,
 								"originX": 0.5,
 								"originY": 0.5,
 								"color": [
@@ -4099,6 +4119,8 @@
 							},
 							"uid": 324,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4150,6 +4172,8 @@
 							},
 							"uid": 325,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4201,6 +4225,8 @@
 							},
 							"uid": 326,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -4252,6 +4278,8 @@
 							},
 							"uid": 327,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {

@@ -117,6 +117,8 @@
 					},
 					"uid": 117,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"TrailLeft": -2,
 						"TrailRight": -2,
 						"second_frame": 0,
@@ -133,7 +135,8 @@
 						"CarRecover": 0,
 						"CarRecoverBasic": 50,
 						"SteerCoef": 1,
-						"Mass": 1000
+						"Mass": 1000,
+						"Ammo": 0
 					},
 					"behaviors": {
 						"Tween": {
@@ -155,11 +158,6 @@
 								"enabled": true
 							}
 						},
-						"Pin": {
-							"properties": {
-								"destroy": false
-							}
-						},
 						"Flash": {
 							"properties": {}
 						},
@@ -170,6 +168,14 @@
 								"set-angle": "no",
 								"looping": "no",
 								"tension": 0.5
+							}
+						},
+						"LineOfSight": {
+							"properties": {
+								"obstacles": "solids",
+								"range": 10000,
+								"cone-of-view": 360,
+								"use-collision-cells": true
 							}
 						}
 					},
@@ -2281,6 +2287,8 @@
 					},
 					"uid": 387,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2332,6 +2340,8 @@
 					},
 					"uid": 420,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2383,6 +2393,8 @@
 					},
 					"uid": 421,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2434,6 +2446,8 @@
 					},
 					"uid": 422,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2485,6 +2499,8 @@
 					},
 					"uid": 423,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2536,6 +2552,8 @@
 					},
 					"uid": 424,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2587,6 +2605,8 @@
 					},
 					"uid": 425,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2638,6 +2658,8 @@
 					},
 					"uid": 426,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2689,6 +2711,8 @@
 					},
 					"uid": 427,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2740,6 +2764,8 @@
 					},
 					"uid": 428,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2791,6 +2817,8 @@
 					},
 					"uid": 429,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2842,6 +2870,8 @@
 					},
 					"uid": 430,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": true
 					},
 					"behaviors": {
@@ -2893,6 +2923,8 @@
 					},
 					"uid": 431,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -2919,8 +2951,8 @@
 					"world": {
 						"x": 3477,
 						"y": 1891,
-						"width": 89,
-						"height": 72,
+						"width": 105,
+						"height": 31,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -2944,6 +2976,8 @@
 					},
 					"uid": 432,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -2970,8 +3004,8 @@
 					"world": {
 						"x": 1985,
 						"y": 427,
-						"width": 89,
-						"height": 72,
+						"width": 105,
+						"height": 31,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -2995,6 +3029,8 @@
 					},
 					"uid": 433,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3021,8 +3057,8 @@
 					"world": {
 						"x": 719,
 						"y": 1402,
-						"width": 89,
-						"height": 72,
+						"width": 105,
+						"height": 31,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3046,6 +3082,8 @@
 					},
 					"uid": 434,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3072,8 +3110,8 @@
 					"world": {
 						"x": -773,
 						"y": -62,
-						"width": 89,
-						"height": 72,
+						"width": 105,
+						"height": 31,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3097,6 +3135,8 @@
 					},
 					"uid": 435,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3148,6 +3188,8 @@
 					},
 					"uid": 436,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3199,6 +3241,8 @@
 					},
 					"uid": 437,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3225,8 +3269,8 @@
 					"world": {
 						"x": 2525,
 						"y": 664,
-						"width": 89,
-						"height": 72,
+						"width": 105,
+						"height": 31,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3250,6 +3294,8 @@
 					},
 					"uid": 438,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3276,8 +3322,8 @@
 					"world": {
 						"x": 1626,
 						"y": 3319,
-						"width": 89,
-						"height": 72,
+						"width": 105,
+						"height": 31,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3301,6 +3347,8 @@
 					},
 					"uid": 439,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3352,6 +3400,8 @@
 					},
 					"uid": 440,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3403,6 +3453,8 @@
 					},
 					"uid": 441,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3454,6 +3506,8 @@
 					},
 					"uid": 442,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3505,6 +3559,8 @@
 					},
 					"uid": 443,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3531,8 +3587,8 @@
 					"world": {
 						"x": 1842,
 						"y": 2639,
-						"width": 89,
-						"height": 72,
+						"width": 105,
+						"height": 31,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3556,6 +3612,8 @@
 					},
 					"uid": 444,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {
@@ -3582,8 +3640,8 @@
 					"world": {
 						"x": 1461,
 						"y": 2090,
-						"width": 89,
-						"height": 72,
+						"width": 105,
+						"height": 31,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3607,6 +3665,8 @@
 					},
 					"uid": 445,
 					"instanceVariables": {
+						"TargetName": "Car",
+						"Health": 3,
 						"Moving": false
 					},
 					"behaviors": {

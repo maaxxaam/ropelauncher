@@ -1,12 +1,13 @@
 {
     "c2dictionary": true,
     "data": {
-        "controls_invert": 1,
-        "controls_car_scale": 1,
-        "cam_scale": 1,
-        "cam_angle_follow": 0,
-        "cam_center": 1,
-        "obstacles_static_enabled": 0,
+        "controls_drift_mode": 0,
+        "controls_invert": 0,
+        "controls_car_scale": 0,
+        "cam_scale": 0,
+        "cam_angle_follow": 1,
+        "cam_center": 0,
+        "obstacles_static_enabled": 1,
         "obstacles_dynamic_enabled": 0,
         "bonuses_nitro_enabled": 1,
         "bonuses_rockets_enabled": 0,
@@ -15,8 +16,18 @@
         "difficulty_laps": 3,
         "difficulty_nitro_refill": 20,
         "difficulty_nitro_consumption": 25,
-        "difficulty_nitro_boost": 0.2,
+        "difficulty_nitro_boost_max_speed": 0.3,
+        "difficulty_nitro_boost_accel": 0.6,
         "difficulty_nitro_extra_coef": 0.25,
-        "difficulty_nitro_extra_boost": 0.1
+        "difficulty_nitro_extra_boost_max_speed": 0.3,
+        "difficulty_nitro_extra_boost_accel": 0.6,
+        "ai_max_speed": 400,
+        "player_max_speed": 400,
+        "ai_accel": 400,
+        "player_accel": 400,
+        "ai_decel": 50,
+        "player_decel": 50,
+        "ai_recover": 50,
+        "player_recover": 50
     }
 }

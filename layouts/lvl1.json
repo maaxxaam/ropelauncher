@@ -1145,6 +1145,8 @@
 							},
 							"uid": 49,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -1196,6 +1198,8 @@
 							},
 							"uid": 100,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -1220,8 +1224,8 @@
 								}
 							},
 							"world": {
-								"x": 3011,
-								"y": 1709,
+								"x": 3139,
+								"y": 1494,
 								"width": 73,
 								"height": 68,
 								"originX": 0.5,
@@ -1247,6 +1251,8 @@
 							},
 							"uid": 101,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -1298,6 +1304,8 @@
 							},
 							"uid": 102,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -1349,6 +1357,8 @@
 							},
 							"uid": 103,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -1400,6 +1410,8 @@
 							},
 							"uid": 104,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -2573,6 +2585,8 @@
 							},
 							"uid": 139,
 							"instanceVariables": {
+								"TargetName": "Obstacle",
+								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -2671,8 +2685,8 @@
 								}
 							},
 							"world": {
-								"x": 2982,
-								"y": 1730,
+								"x": 2976,
+								"y": 1725,
 								"width": 141,
 								"height": 141,
 								"originX": 0.5,
@@ -3161,6 +3175,32 @@
 			"subLayers": [],
 			"instances": [
 				{
+					"type": "DrawingCanvas",
+					"properties": {
+						"initially-visible": true,
+						"origin": "top-left",
+						"antialiasing": "off"
+					},
+					"uid": 589,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 0,
+						"y": 0,
+						"width": 720,
+						"height": 1280,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0
+					}
+				},
+				{
 					"type": "dbgtxt",
 					"properties": {
 						"text": "Text",
@@ -3431,6 +3471,139 @@
 						"angle": 0,
 						"zElevation": 0
 					}
+				},
+				{
+					"type": "NitroBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 580,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 84,
+						"y": 1194,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "interface_zone",
+					"properties": {
+						"initially-visible": true,
+						"origin": "top-left",
+						"wrap-horizontal": "repeat",
+						"wrap-vertical": "repeat",
+						"image-offset-x": 0,
+						"image-offset-y": 0,
+						"image-scale-x": 1,
+						"image-scale-y": 1,
+						"image-angle": 0
+					},
+					"uid": 593,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 239,
+						"y": 1133,
+						"width": 272,
+						"height": 128,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ShootBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 581,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 303,
+						"y": 1195,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "score_ui",
+					"properties": {
+						"text": "5",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 40,
+						"line-height": 0,
+						"bold": true,
+						"italic": false,
+						"color": [
+							0.16862745098039217,
+							1,
+							0,
+							1
+						],
+						"horizontal-alignment": "center",
+						"vertical-alignment": "center",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 594,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 378,
+						"y": 1132,
+						"width": 128,
+						"height": 128,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
 				}
 			],
 			"sid": 420015520376984,
@@ -3493,6 +3666,16 @@
 			"instanceVariables": {
 				"tag": "tiles"
 			}
+		},
+		{
+			"type": "ddraw",
+			"properties": {
+				"width": 100,
+				"height": 2,
+				"depth": 1
+			},
+			"uid": 590,
+			"instanceVariables": {}
 		}
 	],
 	"effectTypes": [],

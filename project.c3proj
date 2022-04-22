@@ -199,6 +199,14 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "DrawingCanvas",
+			"name": "Drawing canvas",
+			"author": "Scirra",
+			"version": "r285.3",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "Pin",
 			"name": "Pin",
@@ -236,6 +244,14 @@
 			"name": "Spline",
 			"author": "Massive Cube",
 			"version": "1.1.0.0",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "LOS",
+			"name": "Line of sight",
+			"author": "Scirra",
+			"version": "r285.3",
 			"bundled": false
 		},
 		{
@@ -306,6 +322,14 @@
 			"type": "behavior",
 			"id": "Timer",
 			"name": "Timer",
+			"author": "Scirra",
+			"version": "r285.3",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Bullet",
+			"name": "Bullet",
 			"author": "Scirra",
 			"version": "r285.3",
 			"bundled": false
@@ -398,7 +422,15 @@
 			"ResumeBut",
 			"ReplayBut",
 			"PauseTxt",
-			"NitroBar"
+			"NitroBar",
+			"NitroBut",
+			"ShootBut",
+			"rocket",
+			"DrawingCanvas",
+			"ddraw",
+			"cannon",
+			"RewindBut",
+			"RewindBar"
 		],
 		"subfolders": []
 	},
@@ -414,10 +446,10 @@
 	],
 	"families": {
 		"items": [
-			"Turns",
 			"Button",
 			"LoadableArray",
-			"LoadableDict"
+			"LoadableDict",
+			"RocketTarget"
 		],
 		"subfolders": []
 	},
@@ -435,7 +467,6 @@
 	"eventSheets": {
 		"items": [
 			"GameSheet",
-			"Devtodev",
 			"MenuSheet",
 			"AllEvents"
 		],
@@ -450,14 +481,6 @@
 					"sid": 329361097453268,
 					"script-info": {
 						"purpose": "main"
-					}
-				},
-				{
-					"name": "devtodev.js",
-					"type": "application/javascript",
-					"sid": 867712184254847,
-					"script-info": {
-						"purpose": "none"
 					}
 				},
 				{
@@ -603,7 +626,7 @@
 	},
 	"properties": {
 		"description": "",
-		"version": "v8.01-alpha",
+		"version": "v9-alpha",
 		"author": "maaxxaam",
 		"authorEmail": "maxfocus.mch@gmail.com",
 		"authorWebsite": "",
