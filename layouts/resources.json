@@ -193,7 +193,7 @@
 						"CarDecelBasic": 50,
 						"CarRecover": 50,
 						"CarRecoverBasic": 50,
-						"SteerCoef": 1,
+						"SteerCoef": 90,
 						"Mass": 1000,
 						"Ammo": 0
 					},

@@ -430,7 +430,10 @@
 			"ddraw",
 			"cannon",
 			"RewindBut",
-			"RewindBar"
+			"RewindBar",
+			"AccelBut",
+			"DecelBut",
+			"Wheel"
 		],
 		"subfolders": []
 	},
@@ -468,7 +471,8 @@
 		"items": [
 			"GameSheet",
 			"MenuSheet",
-			"AllEvents"
+			"AllEvents",
+			"EnemyAI"
 		],
 		"subfolders": []
 	},

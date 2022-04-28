@@ -308,6 +308,81 @@
 				],
 				"subfolders": [],
 				"name": "Cars"
+			},
+			{
+				"items": [
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 47077,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 429463426637482,
+						"name": "NitroIdle",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 9012926,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 551942585340492,
+						"name": "NitroHover",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 9201750,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 297559925057595,
+						"name": "NitroTap",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					}
+				],
+				"subfolders": [],
+				"name": "Nitro"
 			}
 		]
 	}

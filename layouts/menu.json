@@ -860,6 +860,37 @@
 						"angle": 0,
 						"zElevation": 0
 					}
+				},
+				{
+					"type": "TabBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "NitroIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 625,
+					"instanceVariables": {
+						"AnimationPrefix": "Nitro"
+					},
+					"behaviors": {},
+					"world": {
+						"x": 323,
+						"y": 963,
+						"width": 384,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
 				}
 			],
 			"sid": 702605119621522,
@@ -2072,11 +2103,1113 @@
 								"angle": 0,
 								"zElevation": 0
 							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 0.15,
+								"minimum": 0.05,
+								"maximum": 0.35,
+								"step": 0.01,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 637,
+							"instanceVariables": {
+								"flag": "cam_zoom_strength",
+								"txt": 639
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 36,
+								"y": 903,
+								"width": 437,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Сила зума:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 638,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 36,
+								"y": 854,
+								"width": 335,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Жизней:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 639,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 180,
+								"y": 855,
+								"width": 166,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_flags",
+							"properties": {
+								"type": "checkbox",
+								"text": "Зум при наборе скорости",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"auto-font-size": false,
+								"checked": true,
+								"id": ""
+							},
+							"uid": 640,
+							"instanceVariables": {
+								"flag": "cam_zoom_speed"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 27,
+								"y": 783,
+								"width": 682,
+								"height": 46,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
 						}
 					],
 					"sid": 912706146197362,
 					"effectTypes": [],
 					"isInitiallyVisible": false,
+					"isInitiallyInteractive": true,
+					"color": [
+						1,
+						1,
+						1,
+						1
+					],
+					"backgroundColor": [
+						0.3686274509803922,
+						0.3686274509803922,
+						0.3686274509803922,
+						1
+					],
+					"isTransparent": true,
+					"parallaxX": 1,
+					"parallaxY": 1,
+					"scaleRate": 1,
+					"forceOwnTexture": false,
+					"renderingMode": "3d",
+					"drawOrder": "z-order",
+					"useRenderCells": false,
+					"blendMode": "normal",
+					"zElevation": 0,
+					"global": false
+				},
+				{
+					"name": "Nitro",
+					"overriden": 0,
+					"subLayers": [],
+					"instances": [
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 0.2,
+								"minimum": 0.1,
+								"maximum": 3,
+								"step": 0.01,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 54,
+							"instanceVariables": {
+								"flag": "difficulty_nitro_boost_max_speed",
+								"txt": 567
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 22,
+								"y": 323,
+								"width": 602,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Нитро усиляет макс. скорость машины на     ",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 112,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 22,
+								"y": 274,
+								"width": 754,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "0,15",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 567,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 547,
+								"y": 275,
+								"width": 166,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 25,
+								"minimum": 5,
+								"maximum": 100,
+								"step": 1,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 568,
+							"instanceVariables": {
+								"flag": "difficulty_nitro_consumption",
+								"txt": 570
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 18,
+								"y": 197,
+								"width": 437,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Трата нитро:     %/сек",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 569,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 18,
+								"y": 148,
+								"width": 295,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "50",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 570,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 182,
+								"y": 148,
+								"width": 166,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 20,
+								"minimum": 5,
+								"maximum": 100,
+								"step": 1,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 571,
+							"instanceVariables": {
+								"flag": "difficulty_nitro_refill",
+								"txt": 573
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 13,
+								"y": 67,
+								"width": 450,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Один жетон нитро восполняет:     %",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 572,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 13,
+								"y": 18,
+								"width": 455,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "50",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 573,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 400,
+								"y": 19,
+								"width": 166,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 0.1,
+								"minimum": 0.05,
+								"maximum": 3,
+								"step": 0.01,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 574,
+							"instanceVariables": {
+								"flag": "difficulty_nitro_extra_boost_max_speed",
+								"txt": 576
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 27,
+								"y": 704,
+								"width": 602,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "QTE дает еще          усиления макс. скорости",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 575,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 27,
+								"y": 655,
+								"width": 617,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "0.15",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 576,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 214,
+								"y": 657,
+								"width": 77,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 0.25,
+								"minimum": 0,
+								"maximum": 2,
+								"step": 0.01,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 577,
+							"instanceVariables": {
+								"flag": "difficulty_nitro_extra_coef",
+								"txt": 579
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 23,
+								"y": 578,
+								"width": 606,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "QTE увеличивает потребление нитро в          раз",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 578,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 23,
+								"y": 529,
+								"width": 627,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "0.25",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 579,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 519,
+								"y": 530,
+								"width": 166,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 0.2,
+								"minimum": 0.1,
+								"maximum": 3,
+								"step": 0.01,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 583,
+							"instanceVariables": {
+								"flag": "difficulty_nitro_boost_accel",
+								"txt": 585
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 25,
+								"y": 451,
+								"width": 602,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Нитро усиляет ускорение машины на     ",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 584,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 25,
+								"y": 402,
+								"width": 553,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "0,15",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 585,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 495,
+								"y": 404,
+								"width": 166,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 0.1,
+								"minimum": 0.05,
+								"maximum": 3,
+								"step": 0.01,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 586,
+							"instanceVariables": {
+								"flag": "difficulty_nitro_extra_boost_accel",
+								"txt": 588
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 27,
+								"y": 832,
+								"width": 602,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "QTE дает еще          усиления ускорения",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 587,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 27,
+								"y": 783,
+								"width": 533,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "0.15",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 588,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 214,
+								"y": 785,
+								"width": 77,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						}
+					],
+					"sid": 457011019165006,
+					"effectTypes": [],
+					"isInitiallyVisible": true,
 					"isInitiallyInteractive": true,
 					"color": [
 						1,
@@ -2165,7 +3298,7 @@
 								}
 							},
 							"world": {
-								"x": 324,
+								"x": 368,
 								"y": 1136,
 								"width": 218,
 								"height": 50,
@@ -2226,909 +3359,6 @@
 							}
 						},
 						{
-							"type": "dev_slider",
-							"properties": {
-								"value": 0.2,
-								"minimum": 0.1,
-								"maximum": 3,
-								"step": 0.01,
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"id": ""
-							},
-							"uid": 54,
-							"instanceVariables": {
-								"flag": "difficulty_nitro_boost_max_speed",
-								"txt": 567
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 37,
-								"y": 319,
-								"width": 602,
-								"height": 75,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "Нитро усиляет макс. скорость машины на     ",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 112,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 37,
-								"y": 270,
-								"width": 754,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "0,15",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 567,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 562,
-								"y": 271,
-								"width": 166,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "dev_slider",
-							"properties": {
-								"value": 25,
-								"minimum": 5,
-								"maximum": 100,
-								"step": 1,
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"id": ""
-							},
-							"uid": 568,
-							"instanceVariables": {
-								"flag": "difficulty_nitro_consumption",
-								"txt": 570
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 33,
-								"y": 193,
-								"width": 437,
-								"height": 75,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "Трата нитро:     %/сек",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 569,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 33,
-								"y": 144,
-								"width": 295,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "50",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 570,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 197,
-								"y": 144,
-								"width": 166,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "dev_slider",
-							"properties": {
-								"value": 20,
-								"minimum": 5,
-								"maximum": 100,
-								"step": 1,
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"id": ""
-							},
-							"uid": 571,
-							"instanceVariables": {
-								"flag": "difficulty_nitro_refill",
-								"txt": 573
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 28,
-								"y": 63,
-								"width": 450,
-								"height": 75,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "Один жетон нитро восполняет:     %",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 572,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 28,
-								"y": 14,
-								"width": 455,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "50",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 573,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 415,
-								"y": 15,
-								"width": 166,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "dev_slider",
-							"properties": {
-								"value": 0.1,
-								"minimum": 0.05,
-								"maximum": 3,
-								"step": 0.01,
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"id": ""
-							},
-							"uid": 574,
-							"instanceVariables": {
-								"flag": "difficulty_nitro_extra_boost_max_speed",
-								"txt": 576
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 42,
-								"y": 700,
-								"width": 602,
-								"height": 75,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "QTE дает еще          усиления макс. скорости",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 575,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 42,
-								"y": 651,
-								"width": 617,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "0.15",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 576,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 229,
-								"y": 653,
-								"width": 77,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "dev_slider",
-							"properties": {
-								"value": 0.25,
-								"minimum": 0,
-								"maximum": 2,
-								"step": 0.01,
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"id": ""
-							},
-							"uid": 577,
-							"instanceVariables": {
-								"flag": "difficulty_nitro_extra_coef",
-								"txt": 579
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 38,
-								"y": 574,
-								"width": 606,
-								"height": 75,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "QTE увеличивает потребление нитро в          раз",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 578,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 38,
-								"y": 525,
-								"width": 627,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "0.25",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 579,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 534,
-								"y": 526,
-								"width": 166,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "dev_slider",
-							"properties": {
-								"value": 0.2,
-								"minimum": 0.1,
-								"maximum": 3,
-								"step": 0.01,
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"id": ""
-							},
-							"uid": 583,
-							"instanceVariables": {
-								"flag": "difficulty_nitro_boost_accel",
-								"txt": 585
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 40,
-								"y": 447,
-								"width": 602,
-								"height": 75,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "Нитро усиляет ускорение машины на     ",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 584,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 40,
-								"y": 398,
-								"width": 553,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "0,15",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 585,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 510,
-								"y": 400,
-								"width": 166,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "dev_slider",
-							"properties": {
-								"value": 0.1,
-								"minimum": 0.05,
-								"maximum": 3,
-								"step": 0.01,
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"id": ""
-							},
-							"uid": 586,
-							"instanceVariables": {
-								"flag": "difficulty_nitro_extra_boost_accel",
-								"txt": 588
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 42,
-								"y": 828,
-								"width": 602,
-								"height": 75,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "QTE дает еще          усиления ускорения",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 587,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 42,
-								"y": 779,
-								"width": 533,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "SettDesc",
-							"properties": {
-								"text": "0.15",
-								"enable-bbcode": true,
-								"font": "Arial",
-								"size": 20,
-								"line-height": 0,
-								"bold": false,
-								"italic": false,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"horizontal-alignment": "left",
-								"vertical-alignment": "center",
-								"wrapping": "word",
-								"initially-visible": true,
-								"origin": "top-left"
-							},
-							"uid": 588,
-							"instanceVariables": {},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 229,
-								"y": 781,
-								"width": 77,
-								"height": 44,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
 							"type": "dev_dropdown",
 							"properties": {
 								"items": "Тормозим\nУскоряемся\nНичего не делаем",
@@ -3150,7 +3380,7 @@
 								}
 							},
 							"world": {
-								"x": 324,
+								"x": 368,
 								"y": 1062,
 								"width": 218,
 								"height": 50,
@@ -3167,7 +3397,7 @@
 						{
 							"type": "SettDesc",
 							"properties": {
-								"text": "Во время дрифта:",
+								"text": "Во время дрифта (свайп):",
 								"enable-bbcode": true,
 								"font": "Arial",
 								"size": 20,
@@ -3196,7 +3426,476 @@
 							"world": {
 								"x": 24,
 								"y": 1056,
+								"width": 338,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_dropdown",
+							"properties": {
+								"items": "Кнопки и руль\nСвайп",
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"type": "dropdown-list",
+								"multi-select": false,
+								"auto-font-size": true,
+								"id": ""
+							},
+							"uid": 626,
+							"instanceVariables": {
+								"flag": "controls_scheme"
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 368,
+								"y": 980,
+								"width": 218,
+								"height": 50,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Схема управления:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 627,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 24,
+								"y": 974,
 								"width": 283,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 10,
+								"minimum": 0,
+								"maximum": 50,
+								"step": 1,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 628,
+							"instanceVariables": {
+								"flag": "controls_dead_zone",
+								"txt": 630
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 36,
+								"y": 873,
+								"width": 437,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Мертвая зона (px/град):",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 629,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 36,
+								"y": 824,
+								"width": 335,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Жизней:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 630,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 340,
+								"y": 825,
+								"width": 166,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 0.3,
+								"minimum": 0,
+								"maximum": 1,
+								"step": 0.01,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 631,
+							"instanceVariables": {
+								"flag": "controls_sensitivity",
+								"txt": 633
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 32,
+								"y": 747,
+								"width": 437,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Чувствительность:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 632,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 32,
+								"y": 698,
+								"width": 283,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Жизней:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 633,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 274,
+								"y": 699,
+								"width": 166,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "dev_slider",
+							"properties": {
+								"value": 2.718,
+								"minimum": 2.4,
+								"maximum": 3,
+								"step": 0.006,
+								"tooltip": "",
+								"initially-visible": true,
+								"enabled": true,
+								"id": ""
+							},
+							"uid": 634,
+							"instanceVariables": {
+								"flag": "controls_speed_factor",
+								"txt": 636
+							},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 27,
+								"y": 617,
+								"width": 437,
+								"height": 75,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Влияние силы свайпа:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 635,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 27,
+								"y": 568,
+								"width": 283,
+								"height": 44,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "SettDesc",
+							"properties": {
+								"text": "Жизней:",
+								"enable-bbcode": true,
+								"font": "Arial",
+								"size": 20,
+								"line-height": 0,
+								"bold": false,
+								"italic": false,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"horizontal-alignment": "left",
+								"vertical-alignment": "center",
+								"wrapping": "word",
+								"initially-visible": true,
+								"origin": "top-left"
+							},
+							"uid": 636,
+							"instanceVariables": {},
+							"behaviors": {
+								"Persist": {
+									"properties": {}
+								}
+							},
+							"world": {
+								"x": 318,
+								"y": 569,
+								"width": 166,
 								"height": 44,
 								"originX": 0,
 								"originY": 0,
