@@ -2,10 +2,6 @@
 	"name": "GameSheet",
 	"events": [
 		{
-			"eventType": "include",
-			"includeSheet": "EnemyAI"
-		},
-		{
 			"eventType": "variable",
 			"name": "Rewinding",
 			"type": "boolean",
@@ -1796,6 +1792,10 @@
 				}
 			],
 			"sid": 644029844609086
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "EnemyAI"
 		},
 		{
 			"eventType": "group",

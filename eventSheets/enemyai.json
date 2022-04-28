@@ -406,216 +406,31 @@
 							}
 						}
 					],
-					"sid": 873940142496052
-				},
-				{
-					"eventType": "variable",
-					"name": "close_enough",
-					"type": "number",
-					"initialValue": "256",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": true,
-					"sid": 640357064573364
-				},
-				{
-					"eventType": "variable",
-					"name": "AngleToNode",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": true,
-					"isConstant": false,
-					"sid": 831300042789542
-				},
-				{
-					"eventType": "comment",
-					"text": "If we are close to a pathfinding node"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 349338748564505,
-							"parameters": {
-								"first-value": "distance(checkpoint.X, checkpoint.Y, Car.X, Car.Y)",
-								"comparison": 3,
-								"second-value": "close_enough"
-							}
-						}
-					],
-					"actions": [],
-					"sid": 613991276812003,
+					"sid": 873940142496052,
 					"children": [
 						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-overlapping-another-object",
-									"objectClass": "car_edge_collision",
-									"sid": 967482482773340,
-									"parameters": {
-										"object": "checkpoint"
-									}
-								}
-							],
-							"actions": [],
-							"sid": 714984262357720,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-two-values",
-											"objectClass": "System",
-											"sid": 849386608749395,
-											"parameters": {
-												"first-value": "checkpoint.Count - 1",
-												"comparison": 4,
-												"second-value": "car_edge_collision.ToCheckpoint"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "add-to-instvar",
-											"objectClass": "car_edge_collision",
-											"sid": 935770295024751,
-											"parameters": {
-												"instance-variable": "ToCheckpoint",
-												"value": "1"
-											}
-										}
-									],
-									"sid": 137950997349676
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 550601827342747
-										}
-									],
-									"actions": [
-										{
-											"id": "add-to-instvar",
-											"objectClass": "car_edge_collision",
-											"sid": 818095576231207,
-											"parameters": {
-												"instance-variable": "Lap",
-												"value": "1"
-											}
-										},
-										{
-											"id": "set-instvar-value",
-											"objectClass": "car_edge_collision",
-											"sid": 974527238908929,
-											"parameters": {
-												"instance-variable": "ToCheckpoint",
-												"value": "0"
-											}
-										}
-									],
-									"sid": 364497220719419
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "trigger-once-while-true",
-											"objectClass": "System",
-											"sid": 393980416113751
-										}
-									],
-									"actions": [
-										{
-											"id": "set-instvar-value",
-											"objectClass": "car_edge_collision",
-											"sid": 633735770361431,
-											"parameters": {
-												"instance-variable": "randx",
-												"value": "random(-128, 128)"
-											}
-										},
-										{
-											"id": "set-instvar-value",
-											"objectClass": "car_edge_collision",
-											"sid": 844316065113695,
-											"parameters": {
-												"instance-variable": "randy",
-												"value": "random(-128, 128)"
-											}
-										}
-									],
-									"sid": 358073467980466
-								}
-							]
-						}
-					]
-				},
-				{
-					"eventType": "comment",
-					"text": "Moving to a Node"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "else",
-							"objectClass": "System",
-							"sid": 557491939732633
+							"eventType": "variable",
+							"name": "close_enough",
+							"type": "number",
+							"initialValue": "256",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": true,
+							"sid": 644650067961070
 						},
 						{
-							"id": "is-boolean-instance-variable-set",
-							"objectClass": "Car",
-							"sid": 740365181212944,
-							"parameters": {
-								"instance-variable": "Player"
-							},
-							"isInverted": true
+							"eventType": "variable",
+							"name": "AngleToNode",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": true,
+							"isConstant": false,
+							"sid": 193176329461371
 						},
-						{
-							"id": "pick-by-comparison",
-							"objectClass": "System",
-							"sid": 667177871878618,
-							"disabled": true,
-							"parameters": {
-								"object": "checkpoint",
-								"expression": "checkpoint.checkpointID",
-								"comparison": 0,
-								"value": "car_edge_collision.ToCheckpoint"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "alert",
-							"objectClass": "Browser",
-							"sid": 257710695802006,
-							"disabled": true,
-							"parameters": {
-								"message": "\"far enough\""
-							}
-						},
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 664005545579431,
-							"parameters": {
-								"variable": "AngleToNode",
-								"value": "angle(posx, posy, Car.X, Car.Y) + 180"
-							}
-						}
-					],
-					"sid": 752481833187333,
-					"children": [
 						{
 							"eventType": "comment",
-							"text": "Check if faced correctly"
+							"text": "If we are close to a pathfinding node"
 						},
 						{
 							"eventType": "block",
@@ -623,11 +438,156 @@
 								{
 									"id": "compare-two-values",
 									"objectClass": "System",
-									"sid": 210467185264145,
+									"sid": 912682112526009,
 									"parameters": {
-										"first-value": "anglediff(Car.Car.MovingAngle, AngleToNode)",
+										"first-value": "distance(checkpoint.X, checkpoint.Y, Car.X, Car.Y)",
 										"comparison": 3,
-										"second-value": "20"
+										"second-value": "close_enough"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 993793217404080,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-overlapping-another-object",
+											"objectClass": "car_edge_collision",
+											"sid": 342580739324074,
+											"parameters": {
+												"object": "checkpoint"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 537935720273758,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 852458484311219,
+													"parameters": {
+														"first-value": "checkpoint.Count - 1",
+														"comparison": 4,
+														"second-value": "car_edge_collision.ToCheckpoint"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "add-to-instvar",
+													"objectClass": "car_edge_collision",
+													"sid": 224976208538466,
+													"parameters": {
+														"instance-variable": "ToCheckpoint",
+														"value": "1"
+													}
+												}
+											],
+											"sid": 161460068254488
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 685185507321017
+												}
+											],
+											"actions": [
+												{
+													"id": "add-to-instvar",
+													"objectClass": "car_edge_collision",
+													"sid": 213051310782800,
+													"parameters": {
+														"instance-variable": "Lap",
+														"value": "1"
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "car_edge_collision",
+													"sid": 707285051455398,
+													"parameters": {
+														"instance-variable": "ToCheckpoint",
+														"value": "0"
+													}
+												}
+											],
+											"sid": 749541194009385
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "trigger-once-while-true",
+													"objectClass": "System",
+													"sid": 406207062866602
+												}
+											],
+											"actions": [
+												{
+													"id": "set-instvar-value",
+													"objectClass": "car_edge_collision",
+													"sid": 821309634628180,
+													"parameters": {
+														"instance-variable": "randx",
+														"value": "random(-128, 128)"
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "car_edge_collision",
+													"sid": 324191020349757,
+													"parameters": {
+														"instance-variable": "randy",
+														"value": "random(-128, 128)"
+													}
+												}
+											],
+											"sid": 746006983205082
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "Moving to a Node"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 497327540835021
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Car",
+									"sid": 691674046436850,
+									"parameters": {
+										"instance-variable": "Player"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 398617846924435,
+									"disabled": true,
+									"parameters": {
+										"object": "checkpoint",
+										"expression": "checkpoint.checkpointID",
+										"comparison": 0,
+										"value": "car_edge_collision.ToCheckpoint"
 									}
 								}
 							],
@@ -635,142 +595,106 @@
 								{
 									"id": "alert",
 									"objectClass": "Browser",
-									"sid": 776454130998190,
+									"sid": 889560857152635,
 									"disabled": true,
 									"parameters": {
-										"message": "\"accel\""
+										"message": "\"far enough\""
 									}
 								},
 								{
-									"id": "cast-ray",
-									"objectClass": "Car",
-									"sid": 395159555132039,
-									"disabled": true,
-									"behaviorType": "LineOfSight",
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 976234804364809,
 									"parameters": {
-										"from-x": "Self.ImagePointX(3)",
-										"from-y": "Self.ImagePointY(3)",
-										"to-x": "posx",
-										"to-y": "posy",
-										"use-collision-cells": true
-									}
-								},
-								{
-									"id": "simulate-control",
-									"objectClass": "Car",
-									"sid": 398341817535146,
-									"behaviorType": "Car",
-									"parameters": {
-										"control": "accelerate"
+										"variable": "AngleToNode",
+										"value": "angle(posx, posy, Car.X, Car.Y) + 180"
 									}
 								}
 							],
-							"sid": 251398935404389,
+							"sid": 751525880841498,
 							"children": [
 								{
 									"eventType": "comment",
-									"text": "Check if facing an obstacle"
+									"text": "Check if faced correctly"
 								},
 								{
 									"eventType": "block",
 									"conditions": [
 										{
-											"id": "ray-intersected",
-											"objectClass": "Car",
-											"sid": 366256004971642,
-											"behaviorType": "LineOfSight"
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 239108915806893,
+											"parameters": {
+												"first-value": "anglediff(Car.Car.MovingAngle, AngleToNode)",
+												"comparison": 3,
+												"second-value": "20"
+											}
 										}
 									],
 									"actions": [
 										{
-											"type": "script",
-											"script": "let car = runtime.objects.Car.getFirstPickedInstance();\n//console.log(car);\nlet ray = car.behaviors.LineOfSight.ray;\nlet hit = Vector(ray.hitX, ray.hitY);\nlet obj = runtime.getInstanceByUid(ray.hitUid);\nlet normal = Vector.normalize(Vector(-car.y + obj.y, car.x - obj.x));\nlet points = close_projection_points(car, obj, normal);\n// not sure I need this \"if\", left here for a safe measure\nif (points[0].dot <= points[1].dot) { //overlap\n\tlet overVec = Vector.subtract(points[1], points[0]);\n\tlet tempDest = Vector.add(hit, overVec);\n\t//alert(localVars.AngleToNode);\n\tcar.setAnimation(\"Colliding\");\n\tlocalVars.AngleToNode = C3.angleTo(tempDest.x, tempDest.y, car.x, car.y) * 180 / Math.PI + 180;\n\tconsole.log([car.x, car.y], [obj.x, obj.y], hit, normal, points, tempDest);\n\t//alert(localVars.AngleToNode);\n}",
-											"disabled": true
-										},
-										{
-											"type": "script",
-											"script": "let car = runtime.objects.Car.getFirstPickedInstance();\n//console.log(car);\nlet ray = car.behaviors.LineOfSight.ray;\nlet hit = Vector(ray.hitX, ray.hitY);\nlet obj = runtime.getInstanceByUid(ray.hitUid);\nlet normal = Vector.multiply(Vector.normalize(Vector(-car.y + obj.y, car.x - obj.x)), (Math.max(obj.width, obj.height) / 2 + car.height / 2 + 30));\nlet tempDest1 = Vector.add(obj, normal);\nlet tempDest2 = Vector.subtract(obj, normal);\ncar.setAnimation(\"Colliding\");\nlet tempDest = Vector.distance(car, tempDest1) < Vector.distance(car, tempDest2) ? tempDest1 : tempDest2;\n//alert(localVars.AngleToNode);\nlocalVars.AngleToNode = C3.angleTo(tempDest.x, tempDest.y, car.x, car.y) * 180 / Math.PI + 180;\n//alert(localVars.AngleToNode);\n"
-										},
-										{
-											"id": "set-eventvar-value",
-											"objectClass": "System",
-											"sid": 751340773769446,
+											"id": "alert",
+											"objectClass": "Browser",
+											"sid": 723784363671041,
 											"disabled": true,
 											"parameters": {
-												"variable": "AngleToNode",
-												"value": "angle(Car.LineOfSight.NormalX(Car.Height/2), Car.LineOfSight.NormalY(Car.Height/2), car.X, Car.y) + 180"
+												"message": "\"accel\""
+											}
+										},
+										{
+											"id": "cast-ray",
+											"objectClass": "Car",
+											"sid": 538233009338335,
+											"disabled": true,
+											"behaviorType": "LineOfSight",
+											"parameters": {
+												"from-x": "Self.ImagePointX(3)",
+												"from-y": "Self.ImagePointY(3)",
+												"to-x": "posx",
+												"to-y": "posy",
+												"use-collision-cells": true
 											}
 										},
 										{
 											"id": "simulate-control",
 											"objectClass": "Car",
-											"sid": 771403931922235,
-											"disabled": true,
+											"sid": 896321847921853,
 											"behaviorType": "Car",
 											"parameters": {
-												"control": "steer-left"
-											}
-										},
-										{
-											"id": "set-animation",
-											"objectClass": "Car",
-											"sid": 363873129823818,
-											"disabled": true,
-											"parameters": {
-												"animation": "\"Colliding\"",
-												"from": "beginning"
+												"control": "accelerate"
 											}
 										}
 									],
-									"sid": 176756213467912,
-									"disabled": true
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 466429215522910
-										}
-									],
-									"actions": [
-										{
-											"id": "cast-ray",
-											"objectClass": "Car",
-											"sid": 192438372706579,
-											"behaviorType": "LineOfSight",
-											"parameters": {
-												"from-x": "Self.ImagePointX(4)",
-												"from-y": "Self.ImagePointY(4)",
-												"to-x": "posx",
-												"to-y": "posy",
-												"use-collision-cells": true
-											}
-										}
-									],
-									"sid": 903876581780707,
-									"disabled": true,
+									"sid": 619027236184787,
 									"children": [
+										{
+											"eventType": "comment",
+											"text": "Check if facing an obstacle"
+										},
 										{
 											"eventType": "block",
 											"conditions": [
 												{
 													"id": "ray-intersected",
 													"objectClass": "Car",
-													"sid": 464518342942409,
+													"sid": 847702834966598,
 													"behaviorType": "LineOfSight"
 												}
 											],
 											"actions": [
 												{
 													"type": "script",
-													"script": "let car = runtime.objects.Car.getFirstPickedInstance();\n//console.log(car);\nlet ray = car.behaviors.LineOfSight.ray;\nlet hit = Vector(ray.hitX, ray.hitY);\nlet obj = runtime.getInstanceByUid(ray.hitUid);\nlet normal = Vector.multiply(Vector.normalize(Vector(-car.y + obj.y, car.x - obj.x)), (Math.max(obj.width, obj.height) / 2 + car.height / 2 + 30));\nlet tempDest1 = Vector.add(obj, normal);\nlet tempDest2 = Vector.subtract(obj, normal);\ncar.setAnimation(\"Colliding\");\nlet tempDest = Vector.distance(car, tempDest1) < Vector.distance(car, tempDest2) ? tempDest1 : tempDest2;\n//alert(localVars.AngleToNode);\n\nlocalVars.AngleToNode = C3.angleTo(tempDest.x, tempDest.y, car.x, car.y) * 180 / Math.PI + 180;\n//alert(localVars.AngleToNode);\n"
+													"script": "let car = runtime.objects.Car.getFirstPickedInstance();\n//console.log(car);\nlet ray = car.behaviors.LineOfSight.ray;\nlet hit = Vector(ray.hitX, ray.hitY);\nlet obj = runtime.getInstanceByUid(ray.hitUid);\nlet normal = Vector.normalize(Vector(-car.y + obj.y, car.x - obj.x));\nlet points = close_projection_points(car, obj, normal);\n// not sure I need this \"if\", left here for a safe measure\nif (points[0].dot <= points[1].dot) { //overlap\n\tlet overVec = Vector.subtract(points[1], points[0]);\n\tlet tempDest = Vector.add(hit, overVec);\n\t//alert(localVars.AngleToNode);\n\tcar.setAnimation(\"Colliding\");\n\tlocalVars.AngleToNode = C3.angleTo(tempDest.x, tempDest.y, car.x, car.y) * 180 / Math.PI + 180;\n\tconsole.log([car.x, car.y], [obj.x, obj.y], hit, normal, points, tempDest);\n\t//alert(localVars.AngleToNode);\n}",
+													"disabled": true
+												},
+												{
+													"type": "script",
+													"script": "let car = runtime.objects.Car.getFirstPickedInstance();\n//console.log(car);\nlet ray = car.behaviors.LineOfSight.ray;\nlet hit = Vector(ray.hitX, ray.hitY);\nlet obj = runtime.getInstanceByUid(ray.hitUid);\nlet normal = Vector.multiply(Vector.normalize(Vector(-car.y + obj.y, car.x - obj.x)), (Math.max(obj.width, obj.height) / 2 + car.height / 2 + 30));\nlet tempDest1 = Vector.add(obj, normal);\nlet tempDest2 = Vector.subtract(obj, normal);\ncar.setAnimation(\"Colliding\");\nlet tempDest = Vector.distance(car, tempDest1) < Vector.distance(car, tempDest2) ? tempDest1 : tempDest2;\n//alert(localVars.AngleToNode);\nlocalVars.AngleToNode = C3.angleTo(tempDest.x, tempDest.y, car.x, car.y) * 180 / Math.PI + 180;\n//alert(localVars.AngleToNode);\n"
 												},
 												{
 													"id": "set-eventvar-value",
 													"objectClass": "System",
-													"sid": 483301854891152,
+													"sid": 934984206888603,
 													"disabled": true,
 													"parameters": {
 														"variable": "AngleToNode",
@@ -780,17 +704,17 @@
 												{
 													"id": "simulate-control",
 													"objectClass": "Car",
-													"sid": 766215379841281,
+													"sid": 508536568305231,
 													"disabled": true,
 													"behaviorType": "Car",
 													"parameters": {
-														"control": "steer-right"
+														"control": "steer-left"
 													}
 												},
 												{
 													"id": "set-animation",
 													"objectClass": "Car",
-													"sid": 198188963722471,
+													"sid": 348734721631693,
 													"disabled": true,
 													"parameters": {
 														"animation": "\"Colliding\"",
@@ -798,7 +722,7 @@
 													}
 												}
 											],
-											"sid": 302114923652545,
+											"sid": 778883358569361,
 											"disabled": true
 										},
 										{
@@ -807,102 +731,271 @@
 												{
 													"id": "else",
 													"objectClass": "System",
-													"sid": 685549422851064
+													"sid": 109941187638568
 												}
 											],
 											"actions": [
 												{
-													"id": "set-animation",
+													"id": "cast-ray",
 													"objectClass": "Car",
-													"sid": 518370781289417,
+													"sid": 339529435476916,
+													"behaviorType": "LineOfSight",
 													"parameters": {
-														"animation": "\"NoColliding\"",
-														"from": "beginning"
+														"from-x": "Self.ImagePointX(4)",
+														"from-y": "Self.ImagePointY(4)",
+														"to-x": "posx",
+														"to-y": "posy",
+														"use-collision-cells": true
 													}
 												}
 											],
-											"sid": 837557165933759,
-											"disabled": true
+											"sid": 683476015262411,
+											"disabled": true,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "ray-intersected",
+															"objectClass": "Car",
+															"sid": 793148408067247,
+															"behaviorType": "LineOfSight"
+														}
+													],
+													"actions": [
+														{
+															"type": "script",
+															"script": "let car = runtime.objects.Car.getFirstPickedInstance();\n//console.log(car);\nlet ray = car.behaviors.LineOfSight.ray;\nlet hit = Vector(ray.hitX, ray.hitY);\nlet obj = runtime.getInstanceByUid(ray.hitUid);\nlet normal = Vector.multiply(Vector.normalize(Vector(-car.y + obj.y, car.x - obj.x)), (Math.max(obj.width, obj.height) / 2 + car.height / 2 + 30));\nlet tempDest1 = Vector.add(obj, normal);\nlet tempDest2 = Vector.subtract(obj, normal);\ncar.setAnimation(\"Colliding\");\nlet tempDest = Vector.distance(car, tempDest1) < Vector.distance(car, tempDest2) ? tempDest1 : tempDest2;\n//alert(localVars.AngleToNode);\n\nlocalVars.AngleToNode = C3.angleTo(tempDest.x, tempDest.y, car.x, car.y) * 180 / Math.PI + 180;\n//alert(localVars.AngleToNode);\n"
+														},
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 578716743378287,
+															"disabled": true,
+															"parameters": {
+																"variable": "AngleToNode",
+																"value": "angle(Car.LineOfSight.NormalX(Car.Height/2), Car.LineOfSight.NormalY(Car.Height/2), car.X, Car.y) + 180"
+															}
+														},
+														{
+															"id": "simulate-control",
+															"objectClass": "Car",
+															"sid": 979096583510350,
+															"disabled": true,
+															"behaviorType": "Car",
+															"parameters": {
+																"control": "steer-right"
+															}
+														},
+														{
+															"id": "set-animation",
+															"objectClass": "Car",
+															"sid": 521353808135100,
+															"disabled": true,
+															"parameters": {
+																"animation": "\"Colliding\"",
+																"from": "beginning"
+															}
+														}
+													],
+													"sid": 730638013656839,
+													"disabled": true
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "else",
+															"objectClass": "System",
+															"sid": 841626437943931
+														}
+													],
+													"actions": [
+														{
+															"id": "set-animation",
+															"objectClass": "Car",
+															"sid": 103329243718652,
+															"parameters": {
+																"animation": "\"NoColliding\"",
+																"from": "beginning"
+															}
+														}
+													],
+													"sid": 932500892428042,
+													"disabled": true
+												}
+											]
 										}
 									]
-								}
-							]
-						},
-						{
-							"eventType": "comment",
-							"text": "Turn if faced the wrong way"
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-two-values",
-									"objectClass": "System",
-									"sid": 327655687023465,
-									"parameters": {
-										"first-value": "anglediff(Car.Car.MovingAngle, AngleToNode)",
-										"comparison": 4,
-										"second-value": "3"
-									}
-								}
-							],
-							"actions": [],
-							"sid": 812992352184462,
-							"children": [
+								},
 								{
 									"eventType": "comment",
-									"text": "Turn left"
+									"text": "Turn if faced the wrong way"
 								},
 								{
 									"eventType": "block",
 									"conditions": [
 										{
-											"id": "is-between-angles",
+											"id": "compare-two-values",
 											"objectClass": "System",
-											"sid": 902037001976693,
+											"sid": 664979642597088,
 											"parameters": {
-												"angle": "AngleToNode - Car.Angle",
-												"first-angle": "0",
-												"second-angle": "180"
+												"first-value": "anglediff(Car.Car.MovingAngle, AngleToNode)",
+												"comparison": 4,
+												"second-value": "3"
 											}
 										}
 									],
-									"actions": [
+									"actions": [],
+									"sid": 410659885757864,
+									"children": [
 										{
-											"id": "simulate-control",
-											"objectClass": "Car",
-											"sid": 902761261149555,
-											"behaviorType": "Car",
-											"parameters": {
-												"control": "steer-right"
-											}
+											"eventType": "comment",
+											"text": "Turn left"
 										},
 										{
-											"id": "set-steer-speed",
-											"objectClass": "Car",
-											"sid": 616969467418969,
-											"disabled": true,
-											"behaviorType": "Car",
-											"parameters": {
-												"steer-speed": "Car.Angle - AngleToNode - 120"
-											}
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "is-between-angles",
+													"objectClass": "System",
+													"sid": 162123842899530,
+													"parameters": {
+														"angle": "AngleToNode - Car.Angle",
+														"first-angle": "0",
+														"second-angle": "180"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "simulate-control",
+													"objectClass": "Car",
+													"sid": 353681719515076,
+													"behaviorType": "Car",
+													"parameters": {
+														"control": "steer-right"
+													}
+												},
+												{
+													"id": "set-steer-speed",
+													"objectClass": "Car",
+													"sid": 595456428674207,
+													"disabled": true,
+													"behaviorType": "Car",
+													"parameters": {
+														"steer-speed": "Car.Angle - AngleToNode - 120"
+													}
+												},
+												{
+													"id": "set-speed",
+													"objectClass": "Car",
+													"sid": 959651002824342,
+													"disabled": true,
+													"behaviorType": "Car",
+													"parameters": {
+														"speed": "Car.Car.Speed - Car.Car.Deceleration / fps"
+													}
+												}
+											],
+											"sid": 598011758242463
 										},
 										{
-											"id": "set-speed",
-											"objectClass": "Car",
-											"sid": 786889036218010,
-											"disabled": true,
-											"behaviorType": "Car",
-											"parameters": {
-												"speed": "Car.Car.Speed - Car.Car.Deceleration / fps"
-											}
+											"eventType": "comment",
+											"text": "Turn right"
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 149065803252600
+												}
+											],
+											"actions": [
+												{
+													"id": "simulate-control",
+													"objectClass": "Car",
+													"sid": 656845440818295,
+													"disabled": true,
+													"behaviorType": "Car",
+													"parameters": {
+														"control": "brake"
+													}
+												},
+												{
+													"id": "set-steer-speed",
+													"objectClass": "Car",
+													"sid": 738346539846056,
+													"disabled": true,
+													"behaviorType": "Car",
+													"parameters": {
+														"steer-speed": "(AngleToNode - Car.Angle > 0 ? Car.Angle - AngleToNode + 180 : AngleToNode - Car.Angle) - 120"
+													}
+												},
+												{
+													"id": "simulate-control",
+													"objectClass": "Car",
+													"sid": 415486785664422,
+													"behaviorType": "Car",
+													"parameters": {
+														"control": "steer-left"
+													}
+												}
+											],
+											"sid": 136759620555978
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-speed",
+													"objectClass": "Car",
+													"sid": 276149194855211,
+													"behaviorType": "Car",
+													"parameters": {
+														"comparison": 2,
+														"speed": "Car.Car.MaxSpeed * 0.33"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "simulate-control",
+													"objectClass": "Car",
+													"sid": 996083473250884,
+													"behaviorType": "Car",
+													"parameters": {
+														"control": "accelerate"
+													}
+												}
+											],
+											"sid": 707797951146318
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 859153722697319
+												}
+											],
+											"actions": [
+												{
+													"id": "simulate-control",
+													"objectClass": "Car",
+													"sid": 734357598959222,
+													"behaviorType": "Car",
+													"parameters": {
+														"control": "brake"
+													}
+												}
+											],
+											"sid": 683455346316489
 										}
-									],
-									"sid": 876953791549288
-								},
-								{
-									"eventType": "comment",
-									"text": "Turn right"
+									]
 								},
 								{
 									"eventType": "block",
@@ -910,114 +1003,23 @@
 										{
 											"id": "else",
 											"objectClass": "System",
-											"sid": 444762125010263
+											"sid": 763533061030673
 										}
 									],
 									"actions": [
 										{
 											"id": "simulate-control",
 											"objectClass": "Car",
-											"sid": 910841755256678,
-											"disabled": true,
-											"behaviorType": "Car",
-											"parameters": {
-												"control": "brake"
-											}
-										},
-										{
-											"id": "set-steer-speed",
-											"objectClass": "Car",
-											"sid": 976881310174349,
-											"disabled": true,
-											"behaviorType": "Car",
-											"parameters": {
-												"steer-speed": "(AngleToNode - Car.Angle > 0 ? Car.Angle - AngleToNode + 180 : AngleToNode - Car.Angle) - 120"
-											}
-										},
-										{
-											"id": "simulate-control",
-											"objectClass": "Car",
-											"sid": 288756933997161,
-											"behaviorType": "Car",
-											"parameters": {
-												"control": "steer-left"
-											}
-										}
-									],
-									"sid": 261316099432145
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-speed",
-											"objectClass": "Car",
-											"sid": 443163030064218,
-											"behaviorType": "Car",
-											"parameters": {
-												"comparison": 2,
-												"speed": "Car.Car.MaxSpeed * 0.33"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "simulate-control",
-											"objectClass": "Car",
-											"sid": 364148081970784,
+											"sid": 197598579704876,
 											"behaviorType": "Car",
 											"parameters": {
 												"control": "accelerate"
 											}
 										}
 									],
-									"sid": 222376288082781
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 121909393800303
-										}
-									],
-									"actions": [
-										{
-											"id": "simulate-control",
-											"objectClass": "Car",
-											"sid": 777913214352771,
-											"behaviorType": "Car",
-											"parameters": {
-												"control": "brake"
-											}
-										}
-									],
-									"sid": 298963970532546
+									"sid": 352268406200634
 								}
 							]
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "else",
-									"objectClass": "System",
-									"sid": 906231675285327
-								}
-							],
-							"actions": [
-								{
-									"id": "simulate-control",
-									"objectClass": "Car",
-									"sid": 365478174216017,
-									"behaviorType": "Car",
-									"parameters": {
-										"control": "accelerate"
-									}
-								}
-							],
-							"sid": 504899871221963
 						}
 					]
 				}
