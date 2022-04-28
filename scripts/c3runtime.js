@@ -13611,7 +13611,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.PickAll,
 		C3.Behaviors.CarPlus.Acts.SimulateControl,
 		C3.Plugins.System.Cnds.IsGroupActive,
-		C3.Behaviors.CarPlus.Cnds.IsEnabled,
 		C3.Behaviors.CarPlus.Cnds.IsMoving,
 		C3.Plugins.System.Cnds.AngleWithin,
 		C3.Plugins.Sprite.Exps.Angle,
@@ -13625,9 +13624,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.skymenTrail.Acts.PushPoint,
 		C3.Plugins.Sprite.Exps.ImagePointX,
 		C3.Plugins.Sprite.Exps.ImagePointY,
-		C3.Plugins.Touch.Cnds.OnTapGestureObject,
-		C3.Plugins.Keyboard.Cnds.OnKey,
-		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Plugins.TiledBg.Acts.SetPos,
 		C3.Plugins.Sprite.Exps.X,
 		C3.Behaviors.CarPlus.Exps.VectorX,
@@ -13642,15 +13638,12 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Tilemap.Exps.SnapY,
 		C3.Plugins.System.Acts.AddVar,
 		C3.Plugins.Arr.Exps.At,
+		C3.Behaviors.CarPlus.Acts.SetDriftRecover,
+		C3.Behaviors.CarPlus.Acts.SetDeceleration,
 		C3.Plugins.System.Cnds.CompareVar,
 		C3.Behaviors.CarPlus.Acts.SetMaxSpeed,
 		C3.Behaviors.CarPlus.Exps.MaxSpeed,
-		C3.Behaviors.CarPlus.Acts.SetDriftRecover,
-		C3.Behaviors.CarPlus.Exps.DriftRecover,
-		C3.Behaviors.CarPlus.Acts.SetDeceleration,
-		C3.Behaviors.CarPlus.Exps.Deceleration,
 		C3.Behaviors.CarPlus.Acts.SetAcceleration,
-		C3.Behaviors.CarPlus.Exps.Acceleration,
 		C3.Behaviors.CarPlus.Cnds.CompareSpeed,
 		C3.Behaviors.CarPlus.Acts.SetSpeed,
 		C3.Behaviors.CarPlus.Exps.Speed,
@@ -13658,16 +13651,13 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text.Acts.SetAngle,
 		C3.Plugins.System.Exps.layerangle,
 		C3.Plugins.System.Cnds.TriggerOnce,
+		C3.Plugins.System.Acts.SetGroupActive,
 		C3.Plugins.System.Acts.SetLayerScale,
 		C3.Plugins.Sprite.Cnds.PickNthChild,
 		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.Text.Acts.Destroy,
-		C3.Plugins.Keyboard.Cnds.IsKeyDown,
-		C3.Plugins.System.Acts.SetLayoutScale,
-		C3.Plugins.System.Cnds.Compare,
-		C3.Plugins.Sprite.Exps.Count,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
 		C3.Plugins.TiledBg.Acts.SetX,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
@@ -13676,8 +13666,13 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.TiledBg.Exps.X,
 		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
+		C3.Plugins.Touch.Cnds.OnTapGestureObject,
+		C3.Plugins.Keyboard.Cnds.OnKey,
 		C3.Plugins.System.Acts.RestartLayout,
+		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Plugins.Keyboard.Cnds.OnKeyReleased,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Plugins.Sprite.Exps.Count,
 		C3.Plugins.System.Acts.GoToLayout,
 		C3.Plugins.Sprite.Cnds.OnCollision,
 		C3.Plugins.Sprite.Cnds.IsVisible,
@@ -13702,10 +13697,13 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Arr.Acts.Push,
 		C3.Plugins.Arr.Acts.SetXY,
 		C3.Behaviors.CarPlus.Exps.SteerSpeed,
+		C3.Behaviors.CarPlus.Exps.Acceleration,
+		C3.Behaviors.CarPlus.Exps.Deceleration,
+		C3.Behaviors.CarPlus.Exps.DriftRecover,
 		C3.Plugins.Sprite.Cnds.PickParent,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
-		C3.ScriptsInEvents.Gamesheet_Event104_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event100_Act1,
 		C3.Plugins.NinePatch.Acts.SetWidth,
 		C3.Behaviors.Tween.Acts.TweenValue,
 		C3.Behaviors.Tween.Exps.Value,
@@ -13714,8 +13712,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Tween.Cnds.IsPlaying,
 		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.System.Exps.dt,
-		C3.ScriptsInEvents.Gamesheet_Event115,
-		C3.ScriptsInEvents.Gamesheet_Event116,
+		C3.ScriptsInEvents.Gamesheet_Event111,
+		C3.ScriptsInEvents.Gamesheet_Event112,
 		C3.Behaviors.Pin.Exps.PinnedUID,
 		C3.Plugins.Sprite.Exps.UID,
 		C3.Plugins.Particles.Acts.Destroy,
@@ -13725,7 +13723,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Particles.Acts.ZMoveToObject,
 		C3.Plugins.Tilemap.Exps.MapDisplayWidth,
 		C3.Plugins.Tilemap.Exps.MapDisplayHeight,
-		C3.ScriptsInEvents.Gamesheet_Event127_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event123_Act2,
 		C3.Plugins.Tilemap.Exps.TileToPositionX,
 		C3.Plugins.Tilemap.Exps.TileToPositionY,
 		C3.Plugins.Sprite.Acts.SetScale,
@@ -13734,9 +13732,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.LOS.Acts.AddObstacle,
 		C3.Plugins.TiledBg.Acts.SetPosToObject,
 		C3.Plugins.System.Exps.layoutname,
-		C3.ScriptsInEvents.Gamesheet_Event133_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event129_Act2,
 		C3.Plugins.Sprite.Acts.SetSize,
-		C3.ScriptsInEvents.Gamesheet_Event134_Act3,
+		C3.ScriptsInEvents.Gamesheet_Event130_Act3,
 		C3.Plugins.Sprite.Exps.Width,
 		C3.Plugins.Tilemap.Exps.TileWidth,
 		C3.Plugins.Sprite.Exps.Height,
@@ -13810,6 +13808,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio.Acts.SetSilent,
 		C3.Plugins.Eponesh_GameScore.Cnds.OnAdsFullscreenClose,
 		C3.Behaviors.CarPlus.Acts.SetDefaultControls,
+		C3.Behaviors.CarPlus.Cnds.IsEnabled,
 		C3.Plugins.Text.Cnds.CompareText,
 		C3.Plugins.Text.Exps.Text,
 		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
@@ -14160,15 +14159,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject(2);
 		},
-		() => "jumpUp",
-		() => 1.5,
-		() => 0.5,
-		() => "jumpDown",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((((n0.ExpObject("controls_car_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("controls_car_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
-		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -14223,6 +14213,11 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
+			return () => (n0.ExpInstVar() * v1.GetValue());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
 			const n2 = p._GetNode(2);
 			return () => add(n0.ExpObject("difficulty_nitro_boost_max_speed"), ((((v1.GetValue()) === (2) ? 1 : 0)) ? (n2.ExpObject("difficulty_nitro_extra_boost_max_speed")) : (0)));
 		},
@@ -14234,11 +14229,6 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => (n0.ExpInstVar() * v1.GetValue());
-		},
-		p => {
-			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => C3.lerp(n0.ExpBehavior(), n1.ExpInstVar(), 0.03);
 		},
@@ -14247,6 +14237,7 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => C3.lerp(n0.ExpBehavior(), n1.ExpInstVar(), 0.01);
 		},
+		() => "Angle Follow",
 		() => "cam_angle_follow",
 		() => "Level",
 		p => {
@@ -14258,6 +14249,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("Level");
 		},
+		() => "Camera Zoom",
 		() => "cam_zoom_speed",
 		p => {
 			const n0 = p._GetNode(0);
@@ -14297,11 +14289,10 @@ self.C3_ExpressionFuncs = [
 		() => "RaceLoss",
 		() => "Поражение!",
 		() => "3",
+		() => 0.5,
 		() => "2",
 		() => "1",
 		() => "GO!",
-		() => "Debug",
-		() => 0.2,
 		() => "SwipeControls",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -14326,6 +14317,14 @@ self.C3_ExpressionFuncs = [
 			return () => multiply(multiply(multiply(((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))) * (v2.GetValue() / 360)), add(multiply((-2), n3.ExpObject("controls_invert")), 1)), n4.ExpObject("controls_sensitivity")), n5.ExpInstVar());
 		},
 		() => "controls_drift_mode",
+		() => "jumpUp",
+		() => 1.5,
+		() => "jumpDown",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((((n0.ExpObject("controls_car_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("controls_car_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
+		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
