@@ -114,7 +114,7 @@
 					"sid": 701490953042250,
 					"effectTypes": [],
 					"isInitiallyVisible": true,
-					"isInitiallyInteractive": true,
+					"isInitiallyInteractive": false,
 					"color": [
 						1,
 						1,
@@ -5022,7 +5022,7 @@
 					"sid": 889010854404028,
 					"effectTypes": [],
 					"isInitiallyVisible": true,
-					"isInitiallyInteractive": true,
+					"isInitiallyInteractive": false,
 					"color": [
 						1,
 						1,
@@ -5052,7 +5052,7 @@
 			"sid": 201841671198242,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
-			"isInitiallyInteractive": true,
+			"isInitiallyInteractive": false,
 			"color": [
 				1,
 				1,

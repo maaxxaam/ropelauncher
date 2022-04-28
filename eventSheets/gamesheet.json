@@ -751,14 +751,12 @@
 					"sid": 363656440748708,
 					"children": [
 						{
+							"eventType": "comment",
+							"text": "Apply smoke and tire effect when needed"
+						},
+						{
 							"eventType": "block",
 							"conditions": [
-								{
-									"id": "is-enabled",
-									"objectClass": "Car",
-									"sid": 585484980977441,
-									"behaviorType": "Car"
-								},
 								{
 									"id": "is-moving",
 									"objectClass": "Car",
@@ -786,18 +784,24 @@
 										{
 											"id": "is-boolean-instance-variable-set",
 											"objectClass": "Car",
-											"sid": 507358370859573,
+											"sid": 883233843029205,
 											"parameters": {
 												"instance-variable": "Drifting"
 											},
 											"isInverted": true
+										},
+										{
+											"id": "trigger-once-while-true",
+											"objectClass": "System",
+											"sid": 180009026018407,
+											"disabled": true
 										}
 									],
 									"actions": [
 										{
 											"id": "set-boolean-instvar",
 											"objectClass": "Car",
-											"sid": 634563907155103,
+											"sid": 307430689749189,
 											"parameters": {
 												"instance-variable": "Drifting",
 												"value": "true"
@@ -806,7 +810,7 @@
 										{
 											"id": "spawn-another-object",
 											"objectClass": "Car",
-											"sid": 677482191133322,
+											"sid": 164197240140162,
 											"parameters": {
 												"object": "DriftMarks",
 												"layer": "Car.LayerName",
@@ -817,7 +821,7 @@
 										{
 											"id": "set-instvar-value",
 											"objectClass": "Car",
-											"sid": 989741116415005,
+											"sid": 441950895036418,
 											"parameters": {
 												"instance-variable": "TrailLeft",
 												"value": "DriftMarks.IID"
@@ -826,7 +830,7 @@
 										{
 											"id": "spawn-another-object",
 											"objectClass": "Car",
-											"sid": 918824804993798,
+											"sid": 694959321328881,
 											"parameters": {
 												"object": "DriftMarks",
 												"layer": "Car.LayerName",
@@ -837,14 +841,14 @@
 										{
 											"id": "set-instvar-value",
 											"objectClass": "Car",
-											"sid": 116348120184973,
+											"sid": 812920226927225,
 											"parameters": {
 												"instance-variable": "TrailRight",
 												"value": "DriftMarks.IID"
 											}
 										}
 									],
-									"sid": 551879497810265,
+									"sid": 491083804638166,
 									"children": [
 										{
 											"eventType": "block",
@@ -852,7 +856,7 @@
 												{
 													"id": "pick-children",
 													"objectClass": "Car",
-													"sid": 481515499128960,
+													"sid": 637307856004490,
 													"parameters": {
 														"child": "Particles",
 														"which": "own"
@@ -863,15 +867,73 @@
 												{
 													"id": "set-rate",
 													"objectClass": "Particles",
-													"sid": 713822917614771,
+													"sid": 716427784068943,
 													"parameters": {
 														"rate": "100"
 													}
 												}
 											],
-											"sid": 363560143587717
+											"sid": 473123570596831
 										}
 									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-nth-instance",
+											"objectClass": "System",
+											"sid": 570874240868518,
+											"parameters": {
+												"object": "DriftMarks",
+												"instance": "Car.TrailLeft"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "push-point",
+											"objectClass": "DriftMarks",
+											"sid": 319392371126591,
+											"behaviorType": "TrailRenderer",
+											"parameters": {
+												"x": "Car.ImagePointX(1)",
+												"y": "Car.ImagePointY(1)",
+												"angle": "0",
+												"angle-towards-new-position": true
+											}
+										}
+									],
+									"sid": 954785796082059
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-nth-instance",
+											"objectClass": "System",
+											"sid": 979446813804035,
+											"parameters": {
+												"object": "DriftMarks",
+												"instance": "Car.TrailRight"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "push-point",
+											"objectClass": "DriftMarks",
+											"sid": 431687209132408,
+											"behaviorType": "TrailRenderer",
+											"parameters": {
+												"x": "Car.ImagePointX(2)",
+												"y": "Car.ImagePointY(2)",
+												"angle": "0",
+												"angle-towards-new-position": true
+											}
+										}
+									],
+									"sid": 151490638096923
 								}
 							]
 						},
@@ -923,203 +985,8 @@
 									"sid": 522718001379428
 								}
 							]
-						},
-						{
-							"eventType": "comment",
-							"text": "Apply smoke and tire effect when needed"
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "Car",
-									"sid": 298003469467587,
-									"parameters": {
-										"instance-variable": "Drifting"
-									}
-								}
-							],
-							"actions": [],
-							"sid": 946437064654798,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "pick-nth-instance",
-											"objectClass": "System",
-											"sid": 483719405731409,
-											"parameters": {
-												"object": "DriftMarks",
-												"instance": "Car.TrailLeft"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "push-point",
-											"objectClass": "DriftMarks",
-											"sid": 822870033205089,
-											"behaviorType": "TrailRenderer",
-											"parameters": {
-												"x": "Car.ImagePointX(1)",
-												"y": "Car.ImagePointY(1)",
-												"angle": "0",
-												"angle-towards-new-position": true
-											}
-										}
-									],
-									"sid": 918997693990784
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "pick-nth-instance",
-											"objectClass": "System",
-											"sid": 362221260488486,
-											"parameters": {
-												"object": "DriftMarks",
-												"instance": "Car.TrailRight"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "push-point",
-											"objectClass": "DriftMarks",
-											"sid": 467670404572209,
-											"behaviorType": "TrailRenderer",
-											"parameters": {
-												"x": "Car.ImagePointX(2)",
-												"y": "Car.ImagePointY(2)",
-												"angle": "0",
-												"angle-towards-new-position": true
-											}
-										}
-									],
-									"sid": 359121604026060
-								}
-							]
 						}
 					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-tap-object",
-							"objectClass": "Touch",
-							"sid": 495325693973706,
-							"parameters": {
-								"object": "JumpBut"
-							}
-						},
-						{
-							"id": "on-key-pressed",
-							"objectClass": "Keyboard",
-							"sid": 845605766865841,
-							"parameters": {
-								"key": 32
-							}
-						}
-					],
-					"actions": [],
-					"sid": 786241823756579,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-by-comparison",
-									"objectClass": "System",
-									"sid": 360238242859564,
-									"parameters": {
-										"object": "Car",
-										"expression": "Car.Player",
-										"comparison": 0,
-										"value": "1"
-									}
-								},
-								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "Car",
-									"sid": 699737363963954,
-									"parameters": {
-										"instance-variable": "Flying"
-									},
-									"isInverted": true
-								}
-							],
-							"actions": [
-								{
-									"id": "set-boolean-instvar",
-									"objectClass": "Car",
-									"sid": 986196352161118,
-									"parameters": {
-										"instance-variable": "Flying",
-										"value": "true"
-									}
-								},
-								{
-									"id": "tween-two-properties",
-									"objectClass": "Car",
-									"sid": 520323209109957,
-									"behaviorType": "Tween",
-									"parameters": {
-										"tags": "\"jumpUp\"",
-										"property": "scale",
-										"end-x": "1.5",
-										"end-y": "1.5",
-										"time": "0.5",
-										"ease": "default",
-										"destroy-on-complete": "no",
-										"loop": "no",
-										"ping-pong": "no"
-									}
-								},
-								{
-									"id": "wait-for-previous-actions",
-									"objectClass": "System",
-									"sid": 743625620821554
-								},
-								{
-									"id": "tween-two-properties",
-									"objectClass": "Car",
-									"sid": 117118592349166,
-									"behaviorType": "Tween",
-									"parameters": {
-										"tags": "\"jumpDown\"",
-										"property": "scale",
-										"end-x": "flags.Get(\"controls_car_scale\") = 0 ? 0.75 :\r\nflags.Get(\"controls_car_scale\") = 1 ? 1 : 1.25",
-										"end-y": "flags.Get(\"controls_car_scale\") = 0 ? 0.75 :\r\nflags.Get(\"controls_car_scale\") = 1 ? 1 : 1.25",
-										"time": "0.5",
-										"ease": "default",
-										"destroy-on-complete": "no",
-										"loop": "no",
-										"ping-pong": "no"
-									}
-								},
-								{
-									"id": "wait-for-previous-actions",
-									"objectClass": "System",
-									"sid": 657494483037104
-								},
-								{
-									"id": "set-boolean-instvar",
-									"objectClass": "Car",
-									"sid": 684306606820131,
-									"parameters": {
-										"instance-variable": "Flying",
-										"value": "false"
-									}
-								}
-							],
-							"sid": 837741235365745
-						}
-					],
-					"isOrBlock": true
 				},
 				{
 					"eventType": "comment",
@@ -1182,6 +1049,17 @@
 										"instance-variable": "Flying"
 									},
 									"isInverted": true
+								},
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 492763623200273,
+									"parameters": {
+										"object": "roads",
+										"expression": "roads.back",
+										"comparison": 0,
+										"value": "0"
+									}
 								}
 							],
 							"actions": [],
@@ -1259,17 +1137,6 @@
 												"start-index": "1",
 												"end-index": "4"
 											}
-										},
-										{
-											"id": "pick-by-comparison",
-											"objectClass": "System",
-											"sid": 430033492152479,
-											"parameters": {
-												"object": "roads",
-												"expression": "roads.back",
-												"comparison": 0,
-												"value": "0"
-											}
 										}
 									],
 									"actions": [
@@ -1325,6 +1192,42 @@
 											"parameters": {
 												"variable": "recover_coef",
 												"value": "0.25 * TileToConditionData.At(tile, 6)"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Car",
+											"sid": 709055956883047,
+											"parameters": {
+												"instance-variable": "CarRecover",
+												"value": "Car.CarRecoverBasic* recover_coef"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Car",
+											"sid": 990521148164801,
+											"parameters": {
+												"instance-variable": "CarDecel",
+												"value": "Car.CarDecelBasic * decel_coef"
+											}
+										},
+										{
+											"id": "set-drift-recover",
+											"objectClass": "Car",
+											"sid": 551696567317062,
+											"behaviorType": "Car",
+											"parameters": {
+												"drift-recover": "Car.CarRecover"
+											}
+										},
+										{
+											"id": "set-deceleration",
+											"objectClass": "Car",
+											"sid": 928062857817541,
+											"behaviorType": "Car",
+											"parameters": {
+												"deceleration": "Car.CarDecel"
 											}
 										}
 									],
@@ -1394,24 +1297,6 @@
 										{
 											"id": "set-instvar-value",
 											"objectClass": "Car",
-											"sid": 274420270905154,
-											"parameters": {
-												"instance-variable": "CarRecover",
-												"value": "Car.CarRecoverBasic* recover_coef"
-											}
-										},
-										{
-											"id": "set-instvar-value",
-											"objectClass": "Car",
-											"sid": 896451412618669,
-											"parameters": {
-												"instance-variable": "CarDecel",
-												"value": "Car.CarDecelBasic * decel_coef"
-											}
-										},
-										{
-											"id": "set-instvar-value",
-											"objectClass": "Car",
 											"sid": 954726559582315,
 											"parameters": {
 												"instance-variable": "CarAccel",
@@ -1428,30 +1313,12 @@
 											}
 										},
 										{
-											"id": "set-drift-recover",
-											"objectClass": "Car",
-											"sid": 896611170225930,
-											"behaviorType": "Car",
-											"parameters": {
-												"drift-recover": "lerp(Car.Car.DriftRecover, Car.CarRecover, 0.03)"
-											}
-										},
-										{
-											"id": "set-deceleration",
-											"objectClass": "Car",
-											"sid": 861065630915387,
-											"behaviorType": "Car",
-											"parameters": {
-												"deceleration": "lerp(Car.Car.Deceleration, Car.CarDecel, 0.03)"
-											}
-										},
-										{
 											"id": "set-acceleration",
 											"objectClass": "Car",
-											"sid": 760689911948802,
+											"sid": 440769720907764,
 											"behaviorType": "Car",
 											"parameters": {
-												"acceleration": "lerp(Car.Car.Acceleration, Car.CarAccel, 0.03)"
+												"acceleration": "Car.CarAccel"
 											}
 										}
 									],
@@ -1533,265 +1400,303 @@
 			"sid": 395466524120937
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "compare-value",
-					"objectClass": "flags",
-					"sid": 890303533509850,
-					"parameters": {
-						"key": "\"cam_angle_follow\"",
-						"comparison": 0,
-						"value": "1"
-					}
-				}
-			],
-			"actions": [],
-			"sid": 384944017700124,
+			"eventType": "group",
+			"disabled": false,
+			"title": "Angle Follow",
+			"description": "",
+			"isActiveOnStart": true,
 			"children": [
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "pick-by-comparison",
-							"objectClass": "System",
-							"sid": 703373664069926,
+							"id": "compare-value",
+							"objectClass": "flags",
+							"sid": 354099197728836,
 							"parameters": {
-								"object": "Car",
-								"expression": "Car.Player",
+								"key": "\"cam_angle_follow\"",
 								"comparison": 0,
 								"value": "1"
 							}
-						},
-						{
-							"id": "pick-all",
-							"objectClass": "System",
-							"sid": 146949085278918,
-							"parameters": {
-								"object": "car_position"
-							}
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 466476558396890,
+					"children": [
 						{
-							"id": "set-layer-angle",
-							"objectClass": "System",
-							"sid": 330844277319333,
-							"parameters": {
-								"layer": "\"Level\"",
-								"angle": "Car.Angle + 90"
-							}
-						},
-						{
-							"id": "set-layer-angle",
-							"objectClass": "System",
-							"sid": 761935531134450,
-							"parameters": {
-								"layer": "\"Layout\"",
-								"angle": "Car.Angle + 90"
-							}
-						},
-						{
-							"id": "set-angle",
-							"objectClass": "car_position",
-							"sid": 406256871839748,
-							"parameters": {
-								"angle": "LayerAngle(\"Level\")"
-							}
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 298905020007378,
+									"parameters": {
+										"object": "Car",
+										"expression": "Car.Player",
+										"comparison": 0,
+										"value": "1"
+									}
+								},
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 395542231076359,
+									"parameters": {
+										"object": "car_position"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-layer-angle",
+									"objectClass": "System",
+									"sid": 435450715524913,
+									"parameters": {
+										"layer": "\"Level\"",
+										"angle": "Car.Angle + 90"
+									}
+								},
+								{
+									"id": "set-layer-angle",
+									"objectClass": "System",
+									"sid": 627275694428352,
+									"parameters": {
+										"layer": "\"Layout\"",
+										"angle": "Car.Angle + 90"
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "car_position",
+									"sid": 299576122473835,
+									"parameters": {
+										"angle": "LayerAngle(\"Level\")"
+									}
+								}
+							],
+							"sid": 357960635203754
 						}
-					],
-					"sid": 349307497066095
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "else",
-					"objectClass": "System",
-					"sid": 235744258507226
-				},
-				{
-					"id": "trigger-once-while-true",
-					"objectClass": "System",
-					"sid": 598917181921448
-				}
-			],
-			"actions": [
-				{
-					"id": "set-layer-angle",
-					"objectClass": "System",
-					"sid": 828117932886346,
-					"parameters": {
-						"layer": "\"Level\"",
-						"angle": "0"
-					}
-				},
-				{
-					"id": "set-layer-angle",
-					"objectClass": "System",
-					"sid": 168706807812257,
-					"parameters": {
-						"layer": "\"Layout\"",
-						"angle": "0"
-					}
-				}
-			],
-			"sid": 914673005755405
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "compare-value",
-					"objectClass": "flags",
-					"sid": 850339704399933,
-					"parameters": {
-						"key": "\"cam_zoom_speed\"",
-						"comparison": 0,
-						"value": "1"
-					}
-				}
-			],
-			"actions": [],
-			"sid": 252607716949650,
-			"children": [
-				{
-					"eventType": "variable",
-					"name": "zoom_diameter",
-					"type": "number",
-					"initialValue": "0.15",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": true,
-					"sid": 844237985362359
-				},
-				{
-					"eventType": "variable",
-					"name": "zoom_speed",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 345880270122416
-				},
-				{
-					"eventType": "variable",
-					"name": "zoom_coef",
-					"type": "number",
-					"initialValue": "1",
-					"comment": "",
-					"isStatic": true,
-					"isConstant": false,
-					"sid": 287819069018484
+					]
 				},
 				{
 					"eventType": "block",
 					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 250542067473995
+						},
 						{
 							"id": "trigger-once-while-true",
 							"objectClass": "System",
-							"sid": 500454915100198
+							"sid": 293256236784906
 						}
 					],
 					"actions": [
 						{
-							"id": "set-eventvar-value",
+							"id": "set-layer-angle",
 							"objectClass": "System",
-							"sid": 184994975292937,
+							"sid": 252490266993777,
 							"parameters": {
-								"variable": "zoom_coef",
-								"value": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
+								"layer": "\"Level\"",
+								"angle": "0"
+							}
+						},
+						{
+							"id": "set-layer-angle",
+							"objectClass": "System",
+							"sid": 366975501683628,
+							"parameters": {
+								"layer": "\"Layout\"",
+								"angle": "0"
+							}
+						},
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 255322316613674,
+							"parameters": {
+								"group-name": "\"Angle Follow\"",
+								"state": "deactivated"
 							}
 						}
 					],
-					"sid": 796040813719398
-				},
+					"sid": 504715835750856
+				}
+			],
+			"sid": 188481962407898
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Camera Zoom",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "pick-by-comparison",
-							"objectClass": "System",
-							"sid": 191680250693123,
+							"id": "compare-value",
+							"objectClass": "flags",
+							"sid": 784913097599907,
 							"parameters": {
-								"object": "Car",
-								"expression": "Car.Player",
+								"key": "\"cam_zoom_speed\"",
 								"comparison": 0,
 								"value": "1"
 							}
 						}
 					],
+					"actions": [],
+					"sid": 289597689006324,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "zoom_diameter",
+							"type": "number",
+							"initialValue": "0.15",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": true,
+							"sid": 744163917603128
+						},
+						{
+							"eventType": "variable",
+							"name": "zoom_speed",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 641694822378105
+						},
+						{
+							"eventType": "variable",
+							"name": "zoom_coef",
+							"type": "number",
+							"initialValue": "1",
+							"comment": "",
+							"isStatic": true,
+							"isConstant": false,
+							"sid": 278432843985750
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 286030553010157
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 158117803420239,
+									"parameters": {
+										"variable": "zoom_coef",
+										"value": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
+									}
+								}
+							],
+							"sid": 286550563052318
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 516970418507244,
+									"parameters": {
+										"object": "Car",
+										"expression": "Car.Player",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 871314079937249,
+									"parameters": {
+										"variable": "zoom_speed",
+										"value": "(Car.Car.Speed - Car.CarSpeedBasic / 2) / Car.CarSpeedBasic"
+									}
+								},
+								{
+									"id": "set-layer-scale",
+									"objectClass": "System",
+									"sid": 938506311721281,
+									"parameters": {
+										"layer": "\"Level\"",
+										"scale": "zoom_coef - (flags.Get(\"cam_zoom_strength\")* zoom_speed)"
+									}
+								},
+								{
+									"id": "set-layer-scale",
+									"objectClass": "System",
+									"sid": 605722641698856,
+									"parameters": {
+										"layer": "\"Layout\"",
+										"scale": "zoom_coef - (flags.Get(\"cam_zoom_strength\")* zoom_speed)"
+									}
+								}
+							],
+							"sid": 517646456053000
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 843983571370227
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 438215667669355
+						}
+					],
 					"actions": [
 						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 956228339966637,
-							"parameters": {
-								"variable": "zoom_speed",
-								"value": "(Car.Car.Speed - Car.CarSpeedBasic / 2) / Car.CarSpeedBasic"
-							}
-						},
-						{
 							"id": "set-layer-scale",
 							"objectClass": "System",
-							"sid": 796542067609039,
+							"sid": 324828879192779,
 							"parameters": {
 								"layer": "\"Level\"",
-								"scale": "zoom_coef - (flags.Get(\"cam_zoom_strength\")* zoom_speed)"
+								"scale": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
 							}
 						},
 						{
 							"id": "set-layer-scale",
 							"objectClass": "System",
-							"sid": 353944694336455,
+							"sid": 991921834744434,
 							"parameters": {
 								"layer": "\"Layout\"",
-								"scale": "zoom_coef - (flags.Get(\"cam_zoom_strength\")* zoom_speed)"
+								"scale": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
+							}
+						},
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 864872203627946,
+							"parameters": {
+								"group-name": "\"Camera Zoom\"",
+								"state": "deactivated"
 							}
 						}
 					],
-					"sid": 330551896492921
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "else",
-					"objectClass": "System",
-					"sid": 501971968761903
-				},
-				{
-					"id": "trigger-once-while-true",
-					"objectClass": "System",
-					"sid": 767598699425021
+					"sid": 340913808764496
 				}
 			],
-			"actions": [
-				{
-					"id": "set-layer-scale",
-					"objectClass": "System",
-					"sid": 814681009362879,
-					"parameters": {
-						"layer": "\"Level\"",
-						"scale": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
-					}
-				},
-				{
-					"id": "set-layer-scale",
-					"objectClass": "System",
-					"sid": 699358182700617,
-					"parameters": {
-						"layer": "\"Layout\"",
-						"scale": "flags.Get(\"cam_scale\") = 0 ? 0.75 :\r\nflags.Get(\"cam_scale\") = 1 ? 1 : 1.25"
-					}
-				}
-			],
-			"sid": 644029844609086
+			"sid": 129155182535214
 		},
 		{
 			"eventType": "include",
@@ -2000,6 +1905,15 @@
 										"layer": "\"GUI\"",
 										"image-point": "\"RightBut\"",
 										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 606623444501885,
+									"parameters": {
+										"variable": "RaceEnded",
+										"value": "true"
 									}
 								}
 							],
@@ -2286,116 +2200,6 @@
 						}
 					],
 					"sid": 726635467225390
-				},
-				{
-					"eventType": "group",
-					"disabled": false,
-					"title": "Debug",
-					"description": "",
-					"isActiveOnStart": true,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "key-is-down",
-									"objectClass": "Keyboard",
-									"sid": 676890518880027,
-									"parameters": {
-										"key": 90
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-layout-scale",
-									"objectClass": "System",
-									"sid": 935249982967248,
-									"parameters": {
-										"scale": "0.2"
-									}
-								}
-							],
-							"sid": 798730320549331
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "else",
-									"objectClass": "System",
-									"sid": 954317057077242
-								}
-							],
-							"actions": [
-								{
-									"id": "set-layout-scale",
-									"objectClass": "System",
-									"sid": 262819091748651,
-									"parameters": {
-										"scale": "1"
-									}
-								}
-							],
-							"sid": 588618551746063
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "key-is-down",
-									"objectClass": "Keyboard",
-									"sid": 160143524653370,
-									"parameters": {
-										"key": 16
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-time-scale",
-									"objectClass": "System",
-									"sid": 512676045898383,
-									"parameters": {
-										"time-scale": "4"
-									}
-								}
-							],
-							"sid": 239375499576273
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "else",
-									"objectClass": "System",
-									"sid": 672595805278182
-								},
-								{
-									"id": "compare-two-values",
-									"objectClass": "System",
-									"sid": 129475881330596,
-									"parameters": {
-										"first-value": "pause_back.Count",
-										"comparison": 0,
-										"second-value": "0"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-time-scale",
-									"objectClass": "System",
-									"sid": 117279299331495,
-									"parameters": {
-										"time-scale": "1"
-									}
-								}
-							],
-							"sid": 228547551021955
-						}
-					],
-					"sid": 215102542087528
 				},
 				{
 					"eventType": "group",
@@ -2714,6 +2518,122 @@
 						{
 							"id": "on-tap-object",
 							"objectClass": "Touch",
+							"sid": 873881267660330,
+							"parameters": {
+								"object": "JumpBut"
+							}
+						},
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 170741180337333,
+							"parameters": {
+								"key": 32
+							}
+						}
+					],
+					"actions": [],
+					"sid": 358158994857364,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 707226792512568,
+									"parameters": {
+										"object": "Car",
+										"expression": "Car.Player",
+										"comparison": 0,
+										"value": "1"
+									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Car",
+									"sid": 729397224473516,
+									"parameters": {
+										"instance-variable": "Flying"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Car",
+									"sid": 283539472122277,
+									"parameters": {
+										"instance-variable": "Flying",
+										"value": "true"
+									}
+								},
+								{
+									"id": "tween-two-properties",
+									"objectClass": "Car",
+									"sid": 812185262615856,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"jumpUp\"",
+										"property": "scale",
+										"end-x": "1.5",
+										"end-y": "1.5",
+										"time": "0.5",
+										"ease": "default",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								},
+								{
+									"id": "wait-for-previous-actions",
+									"objectClass": "System",
+									"sid": 750204673223581
+								},
+								{
+									"id": "tween-two-properties",
+									"objectClass": "Car",
+									"sid": 554119085386582,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"jumpDown\"",
+										"property": "scale",
+										"end-x": "flags.Get(\"controls_car_scale\") = 0 ? 0.75 :\r\nflags.Get(\"controls_car_scale\") = 1 ? 1 : 1.25",
+										"end-y": "flags.Get(\"controls_car_scale\") = 0 ? 0.75 :\r\nflags.Get(\"controls_car_scale\") = 1 ? 1 : 1.25",
+										"time": "0.5",
+										"ease": "default",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								},
+								{
+									"id": "wait-for-previous-actions",
+									"objectClass": "System",
+									"sid": 884707843093203
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Car",
+									"sid": 381741347883675,
+									"parameters": {
+										"instance-variable": "Flying",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 433412442618472
+						}
+					],
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tap-object",
+							"objectClass": "Touch",
 							"sid": 270802273205703,
 							"parameters": {
 								"object": "ResumeBut"
@@ -2731,10 +2651,13 @@
 							}
 						},
 						{
-							"id": "is-enabled",
-							"objectClass": "Car",
-							"sid": 379294827541584,
-							"behaviorType": "Car"
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 424550357554320,
+							"parameters": {
+								"variable": "RaceEnded"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
@@ -4258,6 +4181,15 @@
 					"disabled": true,
 					"parameters": {
 						"message": "\"gameover\""
+					}
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 726103463692964,
+					"parameters": {
+						"variable": "RaceEnded",
+						"value": "true"
 					}
 				}
 			],
