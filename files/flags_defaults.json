@@ -16,7 +16,7 @@
         "obstacles_static_enabled": 1,
         "obstacles_dynamic_enabled": 0,
         "bonuses_nitro_enabled": 1,
-        "bonuses_rockets_enabled": 0,
+        "bonuses_rockets_enabled": 1,
         "difficulty_lives": 3,
         "difficulty_enemies": 3,
         "difficulty_laps": 3,
@@ -34,6 +34,7 @@
         "ai_decel": 50,
         "player_decel": 50,
         "ai_recover": 50,
+        "ai_steer": 90,
         "player_recover": 50
     }
 }

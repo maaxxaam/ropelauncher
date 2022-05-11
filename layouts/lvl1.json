@@ -109,6 +109,237 @@
 								],
 								"zElevation": 0
 							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Start",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 526,
+							"instanceVariables": {
+								"checkID": 0,
+								"IsStart": true,
+								"checkpointID": 0
+							},
+							"behaviors": {},
+							"world": {
+								"x": 3328,
+								"y": 2110,
+								"width": 512,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									0
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 42,
+							"instanceVariables": {
+								"checkID": 1,
+								"IsStart": false,
+								"checkpointID": 1
+							},
+							"behaviors": {},
+							"world": {
+								"x": 3212,
+								"y": 953,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 73,
+							"instanceVariables": {
+								"checkID": 3,
+								"IsStart": false,
+								"checkpointID": 3
+							},
+							"behaviors": {},
+							"world": {
+								"x": 2428,
+								"y": 1068,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 3.141592653589793,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 529,
+							"instanceVariables": {
+								"checkID": 4,
+								"IsStart": false,
+								"checkpointID": 4
+							},
+							"behaviors": {},
+							"world": {
+								"x": 2176,
+								"y": 1753,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 0,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 530,
+							"instanceVariables": {
+								"checkID": 5,
+								"IsStart": false,
+								"checkpointID": 5
+							},
+							"behaviors": {},
+							"world": {
+								"x": 948,
+								"y": 2050,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 4.71238898038469,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 534,
+							"instanceVariables": {
+								"checkID": 6,
+								"IsStart": false,
+								"checkpointID": 6
+							},
+							"behaviors": {},
+							"world": {
+								"x": 907,
+								"y": 3296,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 3.141592653589793,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 553,
+							"instanceVariables": {
+								"checkID": 2,
+								"IsStart": false,
+								"checkpointID": 2
+							},
+							"behaviors": {},
+							"world": {
+								"x": 2835,
+								"y": 896,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 4.699667819618439,
+								"zElevation": 0
+							}
 						}
 					],
 					"sid": 950322535817103,
@@ -315,45 +546,6 @@
 							}
 						},
 						{
-							"type": "cam_follow",
-							"properties": {
-								"initially-visible": true,
-								"origin": "center",
-								"wrap-horizontal": "repeat",
-								"wrap-vertical": "repeat",
-								"image-offset-x": 0,
-								"image-offset-y": 0,
-								"image-scale-x": 1,
-								"image-scale-y": 1,
-								"image-angle": 0
-							},
-							"uid": 31,
-							"instanceVariables": {},
-							"behaviors": {
-								"ScrollTo": {
-									"properties": {
-										"enabled": true
-									}
-								}
-							},
-							"world": {
-								"x": 982,
-								"y": 1990,
-								"width": 100,
-								"height": 100,
-								"originX": 0.5,
-								"originY": 0.5,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
 							"type": "LevelLight",
 							"properties": {
 								"light-height": 1000,
@@ -447,16 +639,17 @@
 							},
 							"uid": 525,
 							"instanceVariables": {
+								"checkID": 7,
 								"IsStart": false,
 								"checkpointID": 7
 							},
 							"behaviors": {},
 							"world": {
-								"x": 3146,
-								"y": 3480,
-								"width": 512,
+								"x": 3143,
+								"y": 3321,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -2885,230 +3078,6 @@
 								"angle": 0,
 								"zElevation": 0
 							}
-						},
-						{
-							"type": "checkpoint",
-							"properties": {
-								"initially-visible": false,
-								"initial-animation": "Start",
-								"initial-frame": 0,
-								"enable-collisions": true,
-								"live-preview": false
-							},
-							"uid": 526,
-							"instanceVariables": {
-								"IsStart": true,
-								"checkpointID": 0
-							},
-							"behaviors": {},
-							"world": {
-								"x": 3328,
-								"y": 2110,
-								"width": 512,
-								"height": 128,
-								"originX": 0.5,
-								"originY": 0.5,
-								"color": [
-									1,
-									1,
-									1,
-									0
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "checkpoint",
-							"properties": {
-								"initially-visible": false,
-								"initial-animation": "Check",
-								"initial-frame": 0,
-								"enable-collisions": true,
-								"live-preview": false
-							},
-							"uid": 42,
-							"instanceVariables": {
-								"IsStart": false,
-								"checkpointID": 1
-							},
-							"behaviors": {},
-							"world": {
-								"x": 3333,
-								"y": 948,
-								"width": 512,
-								"height": 128,
-								"originX": 0.5,
-								"originY": 0.5,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "checkpoint",
-							"properties": {
-								"initially-visible": false,
-								"initial-animation": "Check",
-								"initial-frame": 0,
-								"enable-collisions": true,
-								"live-preview": false
-							},
-							"uid": 73,
-							"instanceVariables": {
-								"IsStart": false,
-								"checkpointID": 3
-							},
-							"behaviors": {},
-							"world": {
-								"x": 2304,
-								"y": 953,
-								"width": 512,
-								"height": 128,
-								"originX": 0.5,
-								"originY": 0.5,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "checkpoint",
-							"properties": {
-								"initially-visible": false,
-								"initial-animation": "Check",
-								"initial-frame": 0,
-								"enable-collisions": true,
-								"live-preview": false
-							},
-							"uid": 529,
-							"instanceVariables": {
-								"IsStart": false,
-								"checkpointID": 4
-							},
-							"behaviors": {},
-							"world": {
-								"x": 2294,
-								"y": 1776,
-								"width": 512,
-								"height": 128,
-								"originX": 0.5,
-								"originY": 0.5,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "checkpoint",
-							"properties": {
-								"initially-visible": false,
-								"initial-animation": "Check",
-								"initial-frame": 0,
-								"enable-collisions": true,
-								"live-preview": false
-							},
-							"uid": 530,
-							"instanceVariables": {
-								"IsStart": false,
-								"checkpointID": 5
-							},
-							"behaviors": {},
-							"world": {
-								"x": 923,
-								"y": 1923,
-								"width": 512,
-								"height": 128,
-								"originX": 0.5,
-								"originY": 0.5,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 1.5707963267948966,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "checkpoint",
-							"properties": {
-								"initially-visible": false,
-								"initial-animation": "Check",
-								"initial-frame": 0,
-								"enable-collisions": true,
-								"live-preview": false
-							},
-							"uid": 534,
-							"instanceVariables": {
-								"IsStart": false,
-								"checkpointID": 6
-							},
-							"behaviors": {},
-							"world": {
-								"x": 774,
-								"y": 3287,
-								"width": 512,
-								"height": 128,
-								"originX": 0.5,
-								"originY": 0.5,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 0,
-								"zElevation": 0
-							}
-						},
-						{
-							"type": "checkpoint",
-							"properties": {
-								"initially-visible": false,
-								"initial-animation": "Check",
-								"initial-frame": 0,
-								"enable-collisions": true,
-								"live-preview": false
-							},
-							"uid": 553,
-							"instanceVariables": {
-								"IsStart": false,
-								"checkpointID": 2
-							},
-							"behaviors": {},
-							"world": {
-								"x": 2810,
-								"y": 775,
-								"width": 512,
-								"height": 128,
-								"originX": 0.5,
-								"originY": 0.5,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								],
-								"angle": 4.699667819618439,
-								"zElevation": 0
-							}
 						}
 					],
 					"sid": 183199583320546,
@@ -3168,6 +3137,39 @@
 			"blendMode": "normal",
 			"zElevation": 0,
 			"global": false
+		},
+		{
+			"name": "Templates",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [],
+			"sid": 772282652267245,
+			"effectTypes": [],
+			"isInitiallyVisible": false,
+			"isInitiallyInteractive": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": true
 		},
 		{
 			"name": "GUI",
@@ -3647,8 +3649,8 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 296,
-						"y": 1197,
+						"x": 471,
+						"y": 1196,
 						"width": 128,
 						"height": 128,
 						"originX": 0.5,
@@ -3676,7 +3678,7 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 461,
+						"x": 283,
 						"y": 1197,
 						"width": 128,
 						"height": 128,
@@ -3740,7 +3742,9 @@
 				"depth": 1
 			},
 			"uid": 517,
-			"instanceVariables": {}
+			"instanceVariables": {
+				"CarID": 0
+			}
 		},
 		{
 			"type": "TileToConditionData",
@@ -3763,6 +3767,40 @@
 			},
 			"uid": 590,
 			"instanceVariables": {}
+		},
+		{
+			"type": "trails",
+			"properties": {
+				"width": 4,
+				"height": 1,
+				"depth": 1
+			},
+			"uid": 31,
+			"instanceVariables": {}
+		},
+		{
+			"type": "CarOwnership",
+			"properties": {
+				"width": 10,
+				"height": 1,
+				"depth": 1
+			},
+			"uid": 645,
+			"instanceVariables": {
+				"tag": "ownership"
+			}
+		},
+		{
+			"type": "CarChars",
+			"properties": {
+				"width": 5,
+				"height": 7,
+				"depth": 3
+			},
+			"uid": 646,
+			"instanceVariables": {
+				"tag": "cars"
+			}
 		}
 	],
 	"effectTypes": [],

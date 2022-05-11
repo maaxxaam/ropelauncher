@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 28503,
+	"savedWithRelease": 29303,
 	"name": "SlingTest",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -11,7 +11,7 @@
 			"id": "Sprite",
 			"name": "Sprite",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -19,7 +19,7 @@
 			"id": "TiledBg",
 			"name": "Tiled Background",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -27,7 +27,7 @@
 			"id": "Touch",
 			"name": "Touch",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -35,7 +35,7 @@
 			"id": "LocalStorage",
 			"name": "Local storage",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -43,7 +43,7 @@
 			"id": "AJAX",
 			"name": "AJAX",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -51,7 +51,7 @@
 			"id": "Text",
 			"name": "Text",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -59,7 +59,7 @@
 			"id": "Browser",
 			"name": "Browser",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -67,7 +67,7 @@
 			"id": "Keyboard",
 			"name": "Keyboard",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -75,7 +75,7 @@
 			"id": "Particles",
 			"name": "Particles",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -83,7 +83,7 @@
 			"id": "Tilemap",
 			"name": "Tilemap",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -99,7 +99,7 @@
 			"id": "Mouse",
 			"name": "Mouse",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -107,7 +107,7 @@
 			"id": "Audio",
 			"name": "Audio",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -123,7 +123,7 @@
 			"id": "PlatformInfo",
 			"name": "Platform info",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -139,7 +139,7 @@
 			"id": "Button",
 			"name": "Button",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -147,7 +147,7 @@
 			"id": "shadowlight",
 			"name": "Shadow light",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -155,7 +155,7 @@
 			"id": "Dictionary",
 			"name": "Dictionary",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -163,7 +163,7 @@
 			"id": "List",
 			"name": "List",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -171,7 +171,7 @@
 			"id": "sliderbar",
 			"name": "Slider bar",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -179,7 +179,7 @@
 			"id": "Arr",
 			"name": "Array",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -187,7 +187,7 @@
 			"id": "AdvancedRandom",
 			"name": "Advanced Random",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -195,7 +195,7 @@
 			"id": "NinePatch",
 			"name": "9-patch",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -203,7 +203,7 @@
 			"id": "DrawingCanvas",
 			"name": "Drawing canvas",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -211,7 +211,7 @@
 			"id": "Pin",
 			"name": "Pin",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -219,7 +219,7 @@
 			"id": "Tween",
 			"name": "Tween",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -235,7 +235,7 @@
 			"id": "Flash",
 			"name": "Flash",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -251,7 +251,7 @@
 			"id": "LOS",
 			"name": "Line of sight",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -264,10 +264,26 @@
 		},
 		{
 			"type": "behavior",
+			"id": "Timer",
+			"name": "Timer",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Fade",
+			"name": "Fade",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
 			"id": "scrollto",
 			"name": "Scroll To",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -275,7 +291,7 @@
 			"id": "DragnDrop",
 			"name": "Drag & Drop",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -291,7 +307,7 @@
 			"id": "Persist",
 			"name": "Persist",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -299,7 +315,7 @@
 			"id": "shadowcaster",
 			"name": "Shadow caster",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -307,23 +323,7 @@
 			"id": "Sin",
 			"name": "Sine",
 			"author": "Scirra",
-			"version": "r285.3",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
-			"id": "Pathfinding",
-			"name": "Pathfinding",
-			"author": "Scirra",
-			"version": "r285.3",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
-			"id": "Timer",
-			"name": "Timer",
-			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -331,7 +331,7 @@
 			"id": "Bullet",
 			"name": "Bullet",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -339,7 +339,7 @@
 			"id": "blurhorizontal",
 			"name": "Blur horizontal",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -347,7 +347,7 @@
 			"id": "blurvertical",
 			"name": "Blur vertical",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		},
 		{
@@ -355,7 +355,7 @@
 			"id": "hsladjust",
 			"name": "Adjust HSL",
 			"author": "Scirra",
-			"version": "r285.3",
+			"version": "r293.3",
 			"bundled": false
 		}
 	],
@@ -433,7 +433,25 @@
 			"RewindBar",
 			"AccelBut",
 			"DecelBut",
-			"Wheel"
+			"Wheel",
+			"trails",
+			"coin_txt",
+			"tempGoal",
+			"CarOwnership",
+			"CarChars",
+			"garage_car",
+			"garage_bar_back",
+			"garage_bar",
+			"garage_car_name",
+			"garage_upgrade_char",
+			"garage_switch",
+			"garage_buy",
+			"garage_car_price",
+			"garage_bar_max",
+			"prompt_back",
+			"prompt_yes",
+			"prompt_no",
+			"prompt_message"
 		],
 		"subfolders": []
 	},
@@ -442,7 +460,8 @@
 		{
 			"members": [
 				"Car",
-				"Recording"
+				"Recording",
+				"trails"
 			],
 			"selectMode": "normal"
 		}
@@ -452,7 +471,8 @@
 			"Button",
 			"LoadableArray",
 			"LoadableDict",
-			"RocketTarget"
+			"RocketTarget",
+			"AIGoal"
 		],
 		"subfolders": []
 	},
@@ -472,7 +492,8 @@
 			"GameSheet",
 			"MenuSheet",
 			"AllEvents",
-			"EnemyAI"
+			"EnemyAI",
+			"LevelInits"
 		],
 		"subfolders": []
 	},
@@ -511,17 +532,26 @@
 				{
 					"name": "Click.webm",
 					"type": "audio/webm; codecs=opus",
-					"sid": 462633506088436
+					"sid": 462633506088436,
+					"file-info": {
+						"purpose": "none"
+					}
 				},
 				{
 					"name": "Victory.webm",
 					"type": "audio/webm; codecs=opus",
-					"sid": 915894721182521
+					"sid": 915894721182521,
+					"file-info": {
+						"purpose": "none"
+					}
 				},
 				{
 					"name": "Background.webm",
 					"type": "audio/webm; codecs=opus",
-					"sid": 639354427885837
+					"sid": 639354427885837,
+					"file-info": {
+						"purpose": "none"
+					}
 				}
 			],
 			"subfolders": []
@@ -604,12 +634,34 @@
 				{
 					"name": "Flags_defaults.json",
 					"type": "application/json",
-					"sid": 726763313289019
+					"sid": 726763313289019,
+					"file-info": {
+						"purpose": "none"
+					}
 				},
 				{
-					"name": "TilesToConditions.json",
+					"name": "Tiles_to_conditions.json",
 					"type": "application/json",
-					"sid": 439020388287075
+					"sid": 439020388287075,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Car_data.json",
+					"type": "application/json",
+					"sid": 671171256130918,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Ownership_default.json",
+					"type": "application/json",
+					"sid": 687222545628093,
+					"file-info": {
+						"purpose": "none"
+					}
 				}
 			],
 			"subfolders": []
@@ -630,7 +682,7 @@
 	},
 	"properties": {
 		"description": "",
-		"version": "v9-alpha",
+		"version": "v11-alpha",
 		"author": "maaxxaam",
 		"authorEmail": "maxfocus.mch@gmail.com",
 		"authorWebsite": "",

@@ -3,5 +3,12 @@
 	"plugin-id": "Arr",
 	"sid": 309513233625873,
 	"isGlobal": false,
-	"instanceVariables": []
+	"instanceVariables": [
+		{
+			"name": "CarID",
+			"type": "number",
+			"desc": "",
+			"sid": 971937997881374
+		}
+	]
 }

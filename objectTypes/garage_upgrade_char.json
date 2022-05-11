@@ -1,20 +1,14 @@
 {
-	"name": "checkpoint",
+	"name": "garage_upgrade_char",
 	"plugin-id": "Sprite",
-	"sid": 448786386933016,
+	"sid": 861923239911319,
 	"isGlobal": false,
 	"instanceVariables": [
 		{
-			"name": "IsStart",
-			"type": "boolean",
-			"desc": "",
-			"sid": 459895257415111
-		},
-		{
-			"name": "checkpointID",
+			"name": "charID",
 			"type": "number",
 			"desc": "",
-			"sid": 546451926027592
+			"sid": 333756162817307
 		}
 	],
 	"behaviorTypes": [],
@@ -24,20 +18,20 @@
 			{
 				"frames": [
 					{
-						"width": 640,
-						"height": 128,
-						"originX": 0.3,
-						"originY": 0.5,
+						"width": 64,
+						"height": 64,
+						"originX": 1,
+						"originY": 0,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 8963285,
+						"imageSpriteId": 1790540,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 778377883897525,
-				"name": "Check",
+				"sid": 141398373503430,
+				"name": "Avail",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,
@@ -47,32 +41,20 @@
 			{
 				"frames": [
 					{
-						"width": 512,
-						"height": 128,
-						"originX": 0.5,
-						"originY": 0.5,
+						"width": 64,
+						"height": 64,
+						"originX": 1,
+						"originY": 0,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 1069953,
-						"collisionPoly": {
-							"points": [
-								1,
-								0,
-								1,
-								1,
-								0,
-								1,
-								0,
-								0
-							]
-						},
+						"imageSpriteId": 5578942,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 691115796056925,
-				"name": "Start",
+				"sid": 791656976088754,
+				"name": "NoAvail",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

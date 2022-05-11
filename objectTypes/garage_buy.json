@@ -1,45 +1,36 @@
 {
-	"name": "DriftMarks",
+	"name": "garage_buy",
 	"plugin-id": "Sprite",
-	"sid": 692355240855707,
+	"sid": 429485408341362,
 	"isGlobal": false,
-	"instanceVariables": [],
-	"behaviorTypes": [
+	"instanceVariables": [
 		{
-			"behaviorId": "skymenTrail",
-			"name": "TrailRenderer",
-			"sid": 295824548097133
-		},
-		{
-			"behaviorId": "Timer",
-			"name": "Timer",
-			"sid": 565044878156804
-		},
-		{
-			"behaviorId": "Fade",
-			"name": "Fade",
-			"sid": 338807680734193
+			"name": "State",
+			"type": "number",
+			"desc": "0 - buy, 1 - can choose, 2 - chosen",
+			"sid": 843139232771254
 		}
 	],
+	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 16,
-						"height": 16,
+						"width": 256,
+						"height": 128,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 4651244,
+						"imageSpriteId": 9552854,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 429518274034331,
+				"sid": 649745789753070,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

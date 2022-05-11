@@ -2,6 +2,39 @@
 	"name": "Lvl3",
 	"layers": [
 		{
+			"name": "Templates",
+			"overriden": 1,
+			"subLayers": [],
+			"instances": [],
+			"sid": 673313949426800,
+			"effectTypes": [],
+			"isInitiallyVisible": false,
+			"isInitiallyInteractive": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
 			"name": "Map",
 			"overriden": 0,
 			"subLayers": [
@@ -121,6 +154,7 @@
 							},
 							"uid": 540,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": true,
 								"checkpointID": 0
 							},
@@ -153,6 +187,7 @@
 							},
 							"uid": 541,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 1
 							},
@@ -160,9 +195,9 @@
 							"world": {
 								"x": 1278,
 								"y": 2868,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -185,6 +220,7 @@
 							},
 							"uid": 542,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 3
 							},
@@ -192,9 +228,9 @@
 							"world": {
 								"x": 2420,
 								"y": 1823,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -217,6 +253,7 @@
 							},
 							"uid": 543,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 5
 							},
@@ -224,9 +261,9 @@
 							"world": {
 								"x": 892,
 								"y": 798,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -249,6 +286,7 @@
 							},
 							"uid": 544,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 7
 							},
@@ -256,9 +294,9 @@
 							"world": {
 								"x": 3477,
 								"y": 1757,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -281,6 +319,7 @@
 							},
 							"uid": 545,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 9
 							},
@@ -288,9 +327,9 @@
 							"world": {
 								"x": 4355,
 								"y": 2771,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -313,6 +352,7 @@
 							},
 							"uid": 546,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 11
 							},
@@ -320,9 +360,9 @@
 							"world": {
 								"x": 3454,
 								"y": 4058,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -345,6 +385,7 @@
 							},
 							"uid": 547,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 2
 							},
@@ -352,9 +393,9 @@
 							"world": {
 								"x": 2249,
 								"y": 2677,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -377,6 +418,7 @@
 							},
 							"uid": 548,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 4
 							},
@@ -384,9 +426,9 @@
 							"world": {
 								"x": 1079,
 								"y": 1659,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -409,6 +451,7 @@
 							},
 							"uid": 549,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 6
 							},
@@ -416,9 +459,9 @@
 							"world": {
 								"x": 3275,
 								"y": 645,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -441,6 +484,7 @@
 							},
 							"uid": 550,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 8
 							},
@@ -448,9 +492,9 @@
 							"world": {
 								"x": 4179,
 								"y": 1924,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -473,6 +517,7 @@
 							},
 							"uid": 551,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 10
 							},
@@ -480,9 +525,9 @@
 							"world": {
 								"x": 3629,
 								"y": 2942,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -505,6 +550,7 @@
 							},
 							"uid": 552,
 							"instanceVariables": {
+								"checkID": -1,
 								"IsStart": false,
 								"checkpointID": 12
 							},
@@ -512,9 +558,9 @@
 							"world": {
 								"x": 1465,
 								"y": 4221,
-								"width": 512,
+								"width": 640,
 								"height": 128,
-								"originX": 0.5,
+								"originX": 0.3,
 								"originY": 0.5,
 								"color": [
 									1,

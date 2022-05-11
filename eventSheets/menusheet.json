@@ -2,6 +2,56 @@
 	"name": "MenuSheet",
 	"events": [
 		{
+			"eventType": "variable",
+			"name": "MenuState",
+			"type": "string",
+			"initialValue": "Default",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 117088745873456
+		},
+		{
+			"eventType": "variable",
+			"name": "MENU_DEFAULT",
+			"type": "string",
+			"initialValue": "Default",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 487520058084010
+		},
+		{
+			"eventType": "variable",
+			"name": "MENU_PROMPT",
+			"type": "string",
+			"initialValue": "Prompt",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 393311558931739
+		},
+		{
+			"eventType": "variable",
+			"name": "ChosenCar",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 629049993021322
+		},
+		{
+			"eventType": "variable",
+			"name": "Coins",
+			"type": "number",
+			"initialValue": "10000",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 640203807504181
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -26,7 +76,45 @@
 					"sid": 708129663027651,
 					"parameters": {
 						"tag": "\"tiles\"",
-						"file": "TilesToConditions.json"
+						"file": "Tiles_to_conditions.json"
+					}
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 218943792359867,
+					"parameters": {
+						"tag": "\"ownership\"",
+						"file": "Ownership_default.json"
+					}
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 702395310462474,
+					"parameters": {
+						"tag": "\"cars\"",
+						"file": "Car_data.json"
+					}
+				},
+				{
+					"id": "map-function",
+					"objectClass": "Functions",
+					"sid": 303834832615510,
+					"parameters": {
+						"name": "\"Garage\"",
+						"string": "\"BuyCar\"",
+						"function": "BuyCar"
+					}
+				},
+				{
+					"id": "map-function",
+					"objectClass": "Functions",
+					"sid": 628620622150711,
+					"parameters": {
+						"name": "\"Garage\"",
+						"string": "\"UpgradeCar\"",
+						"function": "UpgradeCar"
 					}
 				}
 			],
@@ -42,6 +130,10 @@
 				}
 			],
 			"actions": [
+				{
+					"callFunction": "CoinsChanged",
+					"sid": 908075644430505
+				},
 				{
 					"type": "comment",
 					"text": "Make sure player sees title screen"
@@ -85,6 +177,71 @@
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tap-object",
+							"objectClass": "Touch",
+							"sid": 977349041828157,
+							"parameters": {
+								"object": "garage_switch"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 913930533729817,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "index",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 977410851042492
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 449163617100936
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 164920201690465,
+									"parameters": {
+										"variable": "index",
+										"value": "(garage_car.shownID + garage_switch.direction + CarChars.Depth) % CarChars.Depth"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "garage_car",
+									"sid": 344106142111643,
+									"parameters": {
+										"instance-variable": "shownID",
+										"value": "index"
+									}
+								},
+								{
+									"callFunction": "ShowCar",
+									"sid": 537665162116620,
+									"parameters": [
+										"index"
+									]
+								}
+							],
+							"sid": 400785495272710
+						}
+					]
+				},
 				{
 					"eventType": "block",
 					"conditions": [
@@ -342,7 +499,43 @@
 							]
 						}
 					],
-					"sid": 894476351084431
+					"sid": 894476351084431,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "MainBut",
+									"sid": 996336472368605,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Garage\""
+									}
+								},
+								{
+									"id": "pick-nth-instance",
+									"objectClass": "System",
+									"sid": 983618465885014,
+									"parameters": {
+										"object": "garage_car",
+										"instance": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "ShowCar",
+									"sid": 607977611437077,
+									"parameters": [
+										"garage_car.shownID"
+									]
+								}
+							],
+							"sid": 919128812942412
+						}
+					]
 				},
 				{
 					"eventType": "block",
@@ -534,11 +727,11 @@
 						{
 							"id": "for",
 							"objectClass": "System",
-							"sid": 385907036478917,
+							"sid": 969714975314147,
 							"parameters": {
 								"name": "\"Layers\"",
 								"start-index": "0",
-								"end-index": "7"
+								"end-index": "9"
 							}
 						}
 					],
@@ -863,6 +1056,1125 @@
 				}
 			],
 			"sid": 404718528823276
+		},
+		{
+			"functionName": "ShowCar",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "carID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 311581331094618
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 136059255837554,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "max_upgrade_tier",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 940901239780203
+				},
+				{
+					"eventType": "variable",
+					"name": "upgrade_tier",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 408293397149495
+				},
+				{
+					"eventType": "variable",
+					"name": "owned",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 863954758613256
+				},
+				{
+					"eventType": "variable",
+					"name": "char_line",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 653904812463451
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 498285524307301
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 437341036001293,
+							"parameters": {
+								"variable": "owned",
+								"value": "CarOwnership.At(0, 0, carID)"
+							}
+						}
+					],
+					"sid": 556748318484926
+				},
+				{
+					"eventType": "comment",
+					"text": "Show buy button if not purchased"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 693810824258400,
+							"parameters": {
+								"variable": "owned",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "garage_buy",
+							"sid": 381093461031019,
+							"parameters": {
+								"instance-variable": "State",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "garage_buy",
+							"sid": 800112463169965,
+							"disabled": true,
+							"parameters": {
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "garage_car_price",
+							"sid": 547067671869756,
+							"disabled": true,
+							"parameters": {
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "garage_car_price",
+							"sid": 104758647703586,
+							"parameters": {
+								"text": "\"👛 \"&CarChars.At(0, 3, carID)"
+							}
+						}
+					],
+					"sid": 763821087665214
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 142294711120409
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 272608647124427,
+							"parameters": {
+								"variable": "ChosenCar",
+								"comparison": 0,
+								"value": "garage_car.shownID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "garage_buy",
+							"sid": 200056164578478,
+							"parameters": {
+								"instance-variable": "State",
+								"value": "2"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "garage_car_price",
+							"sid": 362288164519589,
+							"parameters": {
+								"text": "\"Выбрано\""
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "garage_buy",
+							"sid": 204584640425945,
+							"disabled": true,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "garage_car_price",
+							"sid": 181386722715626,
+							"disabled": true,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 914584415802559
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 240717462548191
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "garage_buy",
+							"sid": 648440510982111,
+							"parameters": {
+								"instance-variable": "State",
+								"value": "1"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "garage_car_price",
+							"sid": 628104307275854,
+							"parameters": {
+								"text": "\"Выбрать\""
+							}
+						}
+					],
+					"sid": 242955646276229
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 848336690467325,
+							"parameters": {
+								"name": "\"car_chars\"",
+								"start-index": "0",
+								"end-index": "4"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 249996156532608,
+							"parameters": {
+								"object": "garage_bar",
+								"expression": "garage_bar.charID",
+								"comparison": 0,
+								"value": "loopindex(\"car_chars\")"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 451357421333186,
+							"parameters": {
+								"object": "garage_bar_max",
+								"expression": "garage_bar_max.charID",
+								"comparison": 0,
+								"value": "loopindex(\"car_chars\")"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 411517760392630,
+							"parameters": {
+								"object": "garage_upgrade_char",
+								"expression": "garage_upgrade_char.charID",
+								"comparison": 0,
+								"value": "loopindex(\"car_chars\")"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 974028194062032,
+							"parameters": {
+								"variable": "upgrade_tier",
+								"value": "CarOwnership.At(1, garage_bar.charID, carID)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 601868069077506,
+							"parameters": {
+								"variable": "char_line",
+								"value": "2 * garage_bar.charID + 1"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 871351287341160,
+							"parameters": {
+								"variable": "max_upgrade_tier",
+								"value": "CarChars.At(char_line, 1, carID)"
+							}
+						},
+						{
+							"id": "set-width",
+							"objectClass": "garage_bar",
+							"sid": 630697681489492,
+							"parameters": {
+								"width": "((CarChars.At(char_line, 0, carID) + (upgrade_tier = 0 ? 0 : CarChars.At(char_line, upgrade_tier + 1, carID))) - garage_bar.lval) / (garage_bar.hval - garage_bar.lval) * 624"
+							}
+						},
+						{
+							"id": "set-width",
+							"objectClass": "garage_bar_max",
+							"sid": 845526952898887,
+							"parameters": {
+								"width": "((CarChars.At(char_line, 0, carID) + (max_upgrade_tier = 0 ? 0 : CarChars.At(char_line, max_upgrade_tier + 1, carID))) - garage_bar_max.lval) / (garage_bar_max.hval - garage_bar_max.lval) * 624"
+							}
+						}
+					],
+					"sid": 576372655299546,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 905137418207308,
+									"parameters": {
+										"variable": "max_upgrade_tier",
+										"comparison": 0,
+										"value": "upgrade_tier"
+									}
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 760631811732212,
+									"parameters": {
+										"variable": "owned",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "garage_upgrade_char",
+									"sid": 853443239014106,
+									"parameters": {
+										"animation": "\"NoAvail\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 974734432549383,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 305846938748888
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 299915766867812,
+									"parameters": {
+										"variable": "max_upgrade_tier",
+										"comparison": 4,
+										"value": "upgrade_tier"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "garage_upgrade_char",
+									"sid": 199750494949350,
+									"parameters": {
+										"animation": "\"Avail\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 142385200348249
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 324172535305707,
+							"parameters": {
+								"object": "garage_car",
+								"instance": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "garage_car",
+							"sid": 297655508044742,
+							"parameters": {
+								"animation": "CarChars.At(0, 0, carID)",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 246712420369439
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 508708925302432,
+							"parameters": {
+								"object": "garage_car_name",
+								"instance": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "garage_car_name",
+							"sid": 413776098186194,
+							"parameters": {
+								"text": "CarChars.At(0, 4, carID)"
+							}
+						}
+					],
+					"sid": 506840963835175
+				}
+			]
+		},
+		{
+			"functionName": "CoinsChanged",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-all",
+					"objectClass": "System",
+					"sid": 268388626509789,
+					"parameters": {
+						"object": "coin_txt"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "coin_txt",
+					"sid": 122539013001485,
+					"parameters": {
+						"text": "\"Coins: \"&Coins"
+					}
+				}
+			],
+			"sid": 883561806101036
+		},
+		{
+			"functionName": "BuyCar",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "number",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "carID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 942694399754787
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 660105375418881,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 269001143745815,
+							"parameters": {
+								"variable": "Coins",
+								"comparison": 5,
+								"value": "CarChars.At(0, 3, carID)"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-eventvar",
+							"objectClass": "System",
+							"sid": 947286736814858,
+							"parameters": {
+								"variable": "Coins",
+								"value": "CarChars.At(0, 3, carID)"
+							}
+						},
+						{
+							"callFunction": "CoinsChanged",
+							"sid": 782248568916387
+						},
+						{
+							"id": "set-at-xyz",
+							"objectClass": "CarOwnership",
+							"sid": 681046081788916,
+							"parameters": {
+								"x": "0",
+								"y": "0",
+								"z": "carID",
+								"value": "1"
+							}
+						},
+						{
+							"callFunction": "ShowCar",
+							"sid": 784052290706652,
+							"parameters": [
+								"carID"
+							]
+						},
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 983037319465605,
+							"parameters": {
+								"value": "1"
+							}
+						}
+					],
+					"sid": 660497388488934
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 188440863589679
+						}
+					],
+					"actions": [
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 170611410602843,
+							"parameters": {
+								"value": "0"
+							}
+						}
+					],
+					"sid": 829111861082263
+				}
+			]
+		},
+		{
+			"functionName": "UpgradeCar",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "number",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "carID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 255382305445955
+				},
+				{
+					"name": "charID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 410065838772107
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 836570297823269,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 812807003025000,
+							"parameters": {
+								"variable": "Coins",
+								"comparison": 5,
+								"value": "CarChars.At(2 * charID + 2, CarOwnership.At(1, charID, carID) + 2, carID)"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-eventvar",
+							"objectClass": "System",
+							"sid": 783744138361614,
+							"parameters": {
+								"variable": "Coins",
+								"value": "CarChars.At(2 * charID + 2, CarOwnership.At(1, charID, carID) + 2, carID)"
+							}
+						},
+						{
+							"callFunction": "CoinsChanged",
+							"sid": 341904236149852
+						},
+						{
+							"id": "set-at-xyz",
+							"objectClass": "CarOwnership",
+							"sid": 934500465404622,
+							"parameters": {
+								"x": "1",
+								"y": "charID",
+								"z": "carID",
+								"value": "CarOwnership.At(1, charID, carID) + 1"
+							}
+						},
+						{
+							"id": "set-at-xyz",
+							"objectClass": "CarOwnership",
+							"sid": 613861893387087,
+							"parameters": {
+								"x": "2",
+								"y": "charID",
+								"z": "carID",
+								"value": "CarChars.At(2 * charID + 1, 0, carID) + CarChars.At(2 * charID + 1, CarOwnership.At(1, charID, carID) + 1, carID)"
+							}
+						},
+						{
+							"callFunction": "ShowCar",
+							"sid": 206050269312229,
+							"parameters": [
+								"carID"
+							]
+						},
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 462886427229002,
+							"parameters": {
+								"value": "CarOwnership.At(1, charID, carID)"
+							}
+						}
+					],
+					"sid": 349983159909399
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 140413980250136
+						}
+					],
+					"actions": [
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 746495729109465,
+							"parameters": {
+								"value": "0"
+							}
+						}
+					],
+					"sid": 631702661699829
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 615722401496838,
+					"parameters": {
+						"variable": "MenuState",
+						"comparison": 0,
+						"value": "MENU_PROMPT"
+					}
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 201867473226640
+				}
+			],
+			"actions": [
+				{
+					"id": "set-group-active",
+					"objectClass": "System",
+					"sid": 706521436431270,
+					"parameters": {
+						"group-name": "\"MainButtons\"",
+						"state": "deactivated"
+					}
+				}
+			],
+			"sid": 342649526677113
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "else",
+					"objectClass": "System",
+					"sid": 849026916605556
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 328147340375987
+				}
+			],
+			"actions": [
+				{
+					"id": "set-group-active",
+					"objectClass": "System",
+					"sid": 832050583653208,
+					"parameters": {
+						"group-name": "\"MainButtons\"",
+						"state": "activated"
+					}
+				}
+			],
+			"sid": 142293719144283
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 522752365568311,
+					"parameters": {
+						"object": "garage_buy"
+					}
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "garage_buy",
+					"sid": 537786867750235
+				},
+				{
+					"id": "pick-nth-instance",
+					"objectClass": "System",
+					"sid": 639527384892445,
+					"parameters": {
+						"object": "garage_car",
+						"instance": "0"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 778659353018680,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "garage_buy",
+							"sid": 124515679708244,
+							"parameters": {
+								"instance-variable": "State",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 859397249960085,
+							"parameters": {
+								"object-to-create": "prompt_back",
+								"layer": "\"Garage\"",
+								"x": "360",
+								"y": "640",
+								"create-hierarchy": true,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "prompt_back",
+							"sid": 532864858865132,
+							"parameters": {
+								"instance-variable": "function_to_call",
+								"value": "\"BuyCar\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "prompt_back",
+							"sid": 410244268276868,
+							"parameters": {
+								"instance-variable": "param1",
+								"value": "garage_car.shownID"
+							}
+						}
+					],
+					"sid": 772783855950103,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 437919035895616,
+									"parameters": {
+										"object": "prompt_message"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "prompt_message",
+									"sid": 216776873556084,
+									"parameters": {
+										"text": "\"Купить машину \"\"\"&garage_car_name.Text&\"\"\"?\"&newline&\"Стоимость: \"&CarChars.At(0, 3, garage_car.shownID)"
+									}
+								}
+							],
+							"sid": 482274861501695
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "garage_buy",
+							"sid": 204318573514428,
+							"parameters": {
+								"instance-variable": "State",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 133795003633423,
+							"parameters": {
+								"variable": "ChosenCar",
+								"value": "garage_car.shownID"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "garage_buy",
+							"sid": 373561121940673,
+							"parameters": {
+								"instance-variable": "State",
+								"value": "2"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "garage_car_price",
+							"sid": 607343121797055,
+							"parameters": {
+								"text": "\"Выбрано\""
+							}
+						}
+					],
+					"sid": 108567282733409
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 837414047423593,
+					"parameters": {
+						"object": "garage_upgrade_char"
+					}
+				},
+				{
+					"id": "is-animation-playing",
+					"objectClass": "garage_upgrade_char",
+					"sid": 429478498529166,
+					"parameters": {
+						"animation": "\"Avail\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 606198942058314,
+					"parameters": {
+						"object-to-create": "prompt_back",
+						"layer": "\"Garage\"",
+						"x": "360",
+						"y": "640",
+						"create-hierarchy": true,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "prompt_back",
+					"sid": 576077234899257,
+					"parameters": {
+						"instance-variable": "function_to_call",
+						"value": "\"UpgradeCar\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "prompt_back",
+					"sid": 888937283238395,
+					"parameters": {
+						"instance-variable": "param1",
+						"value": "garage_car.shownID"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "prompt_back",
+					"sid": 399786155628228,
+					"parameters": {
+						"instance-variable": "param2",
+						"value": "garage_upgrade_char.charID"
+					}
+				}
+			],
+			"sid": 676612784521915,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-last-created",
+							"objectClass": "System",
+							"sid": 694560838649138,
+							"parameters": {
+								"object": "prompt_message"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "prompt_message",
+							"sid": 604908086277693,
+							"parameters": {
+								"text": "\"Купить улучшение для машины \"\"\"&garage_car_name.Text&\"\"\"?\"&newline&\"Стоимость: \"&CarChars.At(garage_upgrade_char.charID * 2 + 2, CarOwnership.At(1, garage_upgrade_char.charID, garage_car.shownID) + 2, garage_car.shownID)"
+							}
+						}
+					],
+					"sid": 796961496817067
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 586785472749403,
+					"parameters": {
+						"object": "prompt_yes"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 417666042872022,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "val",
+					"type": "number",
+					"initialValue": "-1",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 637132172354655
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 559646509154385
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let prompt = runtime.objects.prompt_back.getFirstInstance();\nlocalVars.val = runtime.callFunction(prompt.instVars.function_to_call, prompt.instVars.param1, prompt.instVars.param2);"
+						},
+						{
+							"id": "destroy",
+							"objectClass": "prompt_back",
+							"sid": 587461434377217
+						}
+					],
+					"sid": 593237645097633
+				},
+				{
+					"eventType": "comment",
+					"text": "Not enough coins - function have returned 0"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 362147315856182,
+							"parameters": {
+								"variable": "val",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 344728029193135,
+							"parameters": {
+								"message": "\"Не хватает средств!\""
+							}
+						}
+					],
+					"sid": 251001491661804
+				},
+				{
+					"eventType": "comment",
+					"text": "Success"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 390142226009129
+						}
+					],
+					"actions": [
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 402293783287332,
+							"disabled": true,
+							"parameters": {
+								"message": "\"Успешная покупка! \""
+							}
+						}
+					],
+					"sid": 215776673678856
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 138951326182424,
+					"parameters": {
+						"object": "prompt_no"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "prompt_back",
+					"sid": 583139424219803
+				}
+			],
+			"sid": 101655602285942
 		}
 	],
 	"sid": 188176345997916

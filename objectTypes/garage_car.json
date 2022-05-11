@@ -1,0 +1,150 @@
+{
+	"name": "garage_car",
+	"plugin-id": "Sprite",
+	"sid": 361418907530480,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "shownID",
+			"type": "number",
+			"desc": "",
+			"sid": 395256412600268
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 121,
+						"height": 70,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 6961957,
+						"collisionPoly": {
+							"points": [
+								0.9618320610687023,
+								0.07142857142857142,
+								1,
+								0.5,
+								0.9618320610687023,
+								0.9142857142857143,
+								0.5,
+								0.9714285714285714,
+								0.06106870229007633,
+								0.8857142857142857,
+								0.007633587786259555,
+								0.5,
+								0.06106870229007633,
+								0.1,
+								0.5,
+								0.014285714285714285
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 931998497944648,
+				"name": "Red",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 131,
+						"height": 70,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5715563,
+						"collisionPoly": {
+							"points": [
+								0.9618320610687023,
+								0.07142857142857142,
+								1,
+								0.5,
+								0.9618320610687023,
+								0.9142857142857143,
+								0.5,
+								0.9714285714285714,
+								0.06106870229007633,
+								0.8857142857142857,
+								0.007633587786259555,
+								0.5,
+								0.06106870229007633,
+								0.1,
+								0.5,
+								0.014285714285714285
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 131346259690349,
+				"name": "Green",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 131,
+						"height": 70,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 4009501,
+						"collisionPoly": {
+							"points": [
+								0.9618320610687023,
+								0.07142857142857142,
+								1,
+								0.5,
+								0.9618320610687023,
+								0.9142857142857143,
+								0.5,
+								0.9714285714285714,
+								0.06106870229007633,
+								0.8857142857142857,
+								0.007633587786259555,
+								0.5,
+								0.06106870229007633,
+								0.1,
+								0.5,
+								0.014285714285714285
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 636047080987748,
+				"name": "Blue",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

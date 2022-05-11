@@ -1,45 +1,48 @@
 {
-	"name": "DriftMarks",
+	"name": "prompt_back",
 	"plugin-id": "Sprite",
-	"sid": 692355240855707,
+	"sid": 701276677221839,
 	"isGlobal": false,
-	"instanceVariables": [],
-	"behaviorTypes": [
+	"instanceVariables": [
 		{
-			"behaviorId": "skymenTrail",
-			"name": "TrailRenderer",
-			"sid": 295824548097133
+			"name": "function_to_call",
+			"type": "string",
+			"desc": "",
+			"sid": 959444988423819
 		},
 		{
-			"behaviorId": "Timer",
-			"name": "Timer",
-			"sid": 565044878156804
+			"name": "param1",
+			"type": "number",
+			"desc": "",
+			"sid": 618656030686888
 		},
 		{
-			"behaviorId": "Fade",
-			"name": "Fade",
-			"sid": 338807680734193
+			"name": "param2",
+			"type": "number",
+			"desc": "",
+			"sid": 646218403534080
 		}
 	],
+	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 16,
-						"height": 16,
+						"width": 512,
+						"height": 512,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 4651244,
+						"imageSpriteId": 7054500,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 429518274034331,
+				"sid": 953248059007461,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

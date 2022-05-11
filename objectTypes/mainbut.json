@@ -158,6 +158,81 @@
 				],
 				"subfolders": [],
 				"name": "Settings"
+			},
+			{
+				"items": [
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 2681355,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 364261979016109,
+						"name": "GarageIdle",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 7056153,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 231418358203963,
+						"name": "GarageHover",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 4897928,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 950378259930171,
+						"name": "GarageTap",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					}
+				],
+				"subfolders": [],
+				"name": "Garage"
 			}
 		]
 	}

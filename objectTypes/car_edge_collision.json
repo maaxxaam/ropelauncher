@@ -11,22 +11,10 @@
 			"sid": 413779376436639
 		},
 		{
-			"name": "AtNode",
-			"type": "number",
-			"desc": "",
-			"sid": 176744710082669
-		},
-		{
 			"name": "Moving",
 			"type": "boolean",
 			"desc": "",
 			"sid": 138947962801838
-		},
-		{
-			"name": "AttachedToCarUID",
-			"type": "number",
-			"desc": "",
-			"sid": 514442189681169
 		},
 		{
 			"name": "Lap",
@@ -45,20 +33,15 @@
 			"type": "number",
 			"desc": "",
 			"sid": 702122587010875
-		}
-	],
-	"behaviorTypes": [
-		{
-			"behaviorId": "Pathfinding",
-			"name": "Pathfinding",
-			"sid": 380090648469181
 		},
 		{
-			"behaviorId": "Timer",
-			"name": "Timer",
-			"sid": 835326526237048
+			"name": "GoalUID",
+			"type": "number",
+			"desc": "",
+			"sid": 503866247437685
 		}
 	],
+	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
 		"items": [

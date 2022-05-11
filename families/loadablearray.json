@@ -11,6 +11,8 @@
 		}
 	],
 	"members": [
-		"TileToConditionData"
+		"TileToConditionData",
+		"CarOwnership",
+		"CarChars"
 	]
 }

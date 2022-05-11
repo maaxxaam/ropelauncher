@@ -1,7 +1,7 @@
 {
-	"name": "car_position",
+	"name": "garage_car_name",
 	"plugin-id": "Text",
-	"sid": 979622661596367,
+	"sid": 342633948037015,
 	"isGlobal": false,
 	"instanceVariables": [],
 	"behaviorTypes": [],

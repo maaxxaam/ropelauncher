@@ -1,0 +1,19 @@
+{
+	"name": "AIGoal",
+	"plugin-id": "Sprite",
+	"sid": 429660397534278,
+	"instanceVariables": [
+		{
+			"name": "checkID",
+			"type": "number",
+			"desc": "",
+			"sid": 528566370263939
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"checkpoint",
+		"tempGoal"
+	]
+}

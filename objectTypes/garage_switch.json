@@ -1,45 +1,36 @@
 {
-	"name": "DriftMarks",
+	"name": "garage_switch",
 	"plugin-id": "Sprite",
-	"sid": 692355240855707,
+	"sid": 703629331964764,
 	"isGlobal": false,
-	"instanceVariables": [],
-	"behaviorTypes": [
+	"instanceVariables": [
 		{
-			"behaviorId": "skymenTrail",
-			"name": "TrailRenderer",
-			"sid": 295824548097133
-		},
-		{
-			"behaviorId": "Timer",
-			"name": "Timer",
-			"sid": 565044878156804
-		},
-		{
-			"behaviorId": "Fade",
-			"name": "Fade",
-			"sid": 338807680734193
+			"name": "direction",
+			"type": "number",
+			"desc": "",
+			"sid": 635244465716351
 		}
 	],
+	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 16,
-						"height": 16,
+						"width": 128,
+						"height": 128,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 4651244,
+						"imageSpriteId": 6899554,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 429518274034331,
+				"sid": 273911108043456,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,
