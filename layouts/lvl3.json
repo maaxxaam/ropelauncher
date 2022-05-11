@@ -154,7 +154,7 @@
 							},
 							"uid": 540,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 0,
 								"IsStart": true,
 								"checkpointID": 0
 							},
@@ -187,14 +187,14 @@
 							},
 							"uid": 541,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 1,
 								"IsStart": false,
 								"checkpointID": 1
 							},
 							"behaviors": {},
 							"world": {
-								"x": 1278,
-								"y": 2868,
+								"x": 1436,
+								"y": 2901,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -205,7 +205,7 @@
 									1,
 									1
 								],
-								"angle": 0,
+								"angle": 3.141592653589793,
 								"zElevation": 0
 							}
 						},
@@ -220,14 +220,14 @@
 							},
 							"uid": 542,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 3,
 								"IsStart": false,
 								"checkpointID": 3
 							},
 							"behaviors": {},
 							"world": {
-								"x": 2420,
-								"y": 1823,
+								"x": 2285,
+								"y": 1880,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -253,14 +253,14 @@
 							},
 							"uid": 543,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 5,
 								"IsStart": false,
 								"checkpointID": 5
 							},
 							"behaviors": {},
 							"world": {
-								"x": 892,
-								"y": 798,
+								"x": 1058,
+								"y": 885,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -271,7 +271,7 @@
 									1,
 									1
 								],
-								"angle": 0,
+								"angle": 3.141592653589793,
 								"zElevation": 0
 							}
 						},
@@ -286,14 +286,14 @@
 							},
 							"uid": 544,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 7,
 								"IsStart": false,
 								"checkpointID": 7
 							},
 							"behaviors": {},
 							"world": {
-								"x": 3477,
-								"y": 1757,
+								"x": 3584,
+								"y": 1680,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -304,7 +304,7 @@
 									1,
 									1
 								],
-								"angle": 0,
+								"angle": 3.141592653589793,
 								"zElevation": 0
 							}
 						},
@@ -319,14 +319,14 @@
 							},
 							"uid": 545,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 9,
 								"IsStart": false,
 								"checkpointID": 9
 							},
 							"behaviors": {},
 							"world": {
-								"x": 4355,
-								"y": 2771,
+								"x": 4195,
+								"y": 2702,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -352,14 +352,14 @@
 							},
 							"uid": 546,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 11,
 								"IsStart": false,
 								"checkpointID": 11
 							},
 							"behaviors": {},
 							"world": {
-								"x": 3454,
-								"y": 4058,
+								"x": 3303,
+								"y": 4007,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -385,14 +385,14 @@
 							},
 							"uid": 547,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 2,
 								"IsStart": false,
 								"checkpointID": 2
 							},
 							"behaviors": {},
 							"world": {
-								"x": 2249,
-								"y": 2677,
+								"x": 2180,
+								"y": 2540,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -418,14 +418,14 @@
 							},
 							"uid": 548,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 4,
 								"IsStart": false,
 								"checkpointID": 4
 							},
 							"behaviors": {},
 							"world": {
-								"x": 1079,
-								"y": 1659,
+								"x": 1131,
+								"y": 1525,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -451,14 +451,14 @@
 							},
 							"uid": 549,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 6,
 								"IsStart": false,
 								"checkpointID": 6
 							},
 							"behaviors": {},
 							"world": {
-								"x": 3275,
-								"y": 645,
+								"x": 3208,
+								"y": 758,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -469,7 +469,7 @@
 									1,
 									1
 								],
-								"angle": 1.5707963267948966,
+								"angle": 4.71238898038469,
 								"zElevation": 0
 							}
 						},
@@ -484,14 +484,14 @@
 							},
 							"uid": 550,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 8,
 								"IsStart": false,
 								"checkpointID": 8
 							},
 							"behaviors": {},
 							"world": {
-								"x": 4179,
-								"y": 1924,
+								"x": 4100,
+								"y": 2055,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -502,7 +502,7 @@
 									1,
 									1
 								],
-								"angle": 1.5707963267948966,
+								"angle": 4.71238898038469,
 								"zElevation": 0
 							}
 						},
@@ -517,14 +517,14 @@
 							},
 							"uid": 551,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 10,
 								"IsStart": false,
 								"checkpointID": 10
 							},
 							"behaviors": {},
 							"world": {
-								"x": 3629,
-								"y": 2942,
+								"x": 3700,
+								"y": 3091,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -535,7 +535,7 @@
 									1,
 									1
 								],
-								"angle": 1.5707963267948966,
+								"angle": 4.71238898038469,
 								"zElevation": 0
 							}
 						},
@@ -550,14 +550,14 @@
 							},
 							"uid": 552,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 12,
 								"IsStart": false,
 								"checkpointID": 12
 							},
 							"behaviors": {},
 							"world": {
-								"x": 1465,
-								"y": 4221,
+								"x": 1529,
+								"y": 4098,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,

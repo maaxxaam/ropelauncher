@@ -183,6 +183,264 @@
 						{
 							"id": "on-tap-object",
 							"objectClass": "Touch",
+							"sid": 189009715053374,
+							"parameters": {
+								"object": "garage_buy"
+							}
+						},
+						{
+							"id": "is-visible",
+							"objectClass": "garage_buy",
+							"sid": 108953980155678
+						},
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 930446532912627,
+							"parameters": {
+								"object": "garage_car",
+								"instance": "0"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 639736717427287,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "garage_buy",
+									"sid": 366443095359121,
+									"parameters": {
+										"instance-variable": "State",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 420631175454667,
+									"parameters": {
+										"object-to-create": "prompt_back",
+										"layer": "\"Garage\"",
+										"x": "360",
+										"y": "640",
+										"create-hierarchy": true,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "prompt_back",
+									"sid": 989241886751416,
+									"parameters": {
+										"instance-variable": "function_to_call",
+										"value": "\"BuyCar\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "prompt_back",
+									"sid": 126087999373017,
+									"parameters": {
+										"instance-variable": "param1",
+										"value": "garage_car.shownID"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 353206134561881,
+									"parameters": {
+										"variable": "MenuState",
+										"value": "MENU_PROMPT"
+									}
+								}
+							],
+							"sid": 190396435071181,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 416498730624069,
+											"parameters": {
+												"object": "prompt_message"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-text",
+											"objectClass": "prompt_message",
+											"sid": 876138153600603,
+											"parameters": {
+												"text": "\"Купить машину \"\"\"&garage_car_name.Text&\"\"\"?\"&newline&\"Стоимость: \"&CarChars.At(0, 3, garage_car.shownID)"
+											}
+										}
+									],
+									"sid": 183920079534498
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "garage_buy",
+									"sid": 527434530231353,
+									"parameters": {
+										"instance-variable": "State",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 402481737744152,
+									"parameters": {
+										"variable": "ChosenCar",
+										"value": "garage_car.shownID"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "garage_buy",
+									"sid": 892403000707736,
+									"parameters": {
+										"instance-variable": "State",
+										"value": "2"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "garage_car_price",
+									"sid": 172858767517329,
+									"parameters": {
+										"text": "\"Выбрано\""
+									}
+								}
+							],
+							"sid": 135153142571823
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tap-object",
+							"objectClass": "Touch",
+							"sid": 924419568854543,
+							"parameters": {
+								"object": "garage_upgrade_char"
+							}
+						},
+						{
+							"id": "is-animation-playing",
+							"objectClass": "garage_upgrade_char",
+							"sid": 151131795924268,
+							"parameters": {
+								"animation": "\"Avail\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 643185418769559,
+							"parameters": {
+								"object-to-create": "prompt_back",
+								"layer": "\"Garage\"",
+								"x": "360",
+								"y": "640",
+								"create-hierarchy": true,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "prompt_back",
+							"sid": 894355833012553,
+							"parameters": {
+								"instance-variable": "function_to_call",
+								"value": "\"UpgradeCar\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "prompt_back",
+							"sid": 763109836351536,
+							"parameters": {
+								"instance-variable": "param1",
+								"value": "garage_car.shownID"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "prompt_back",
+							"sid": 613582528170290,
+							"parameters": {
+								"instance-variable": "param2",
+								"value": "garage_upgrade_char.charID"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 793315119194468,
+							"parameters": {
+								"variable": "MenuState",
+								"value": "MENU_PROMPT"
+							}
+						}
+					],
+					"sid": 257098175723298,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 767035969339323,
+									"parameters": {
+										"object": "prompt_message"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "prompt_message",
+									"sid": 817531341526980,
+									"parameters": {
+										"text": "\"Купить улучшение для машины \"\"\"&garage_car_name.Text&\"\"\"?\"&newline&\"Стоимость: \"&CarChars.At(garage_upgrade_char.charID * 2 + 2, CarOwnership.At(1, garage_upgrade_char.charID, garage_car.shownID) + 2, garage_car.shownID)"
+									}
+								}
+							],
+							"sid": 643213755963299
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tap-object",
+							"objectClass": "Touch",
 							"sid": 977349041828157,
 							"parameters": {
 								"object": "garage_switch"
@@ -1763,25 +2021,43 @@
 						"comparison": 0,
 						"value": "MENU_PROMPT"
 					}
-				},
-				{
-					"id": "trigger-once-while-true",
-					"objectClass": "System",
-					"sid": 201867473226640
 				}
 			],
-			"actions": [
+			"actions": [],
+			"sid": 342649526677113,
+			"children": [
 				{
-					"id": "set-group-active",
-					"objectClass": "System",
-					"sid": 706521436431270,
-					"parameters": {
-						"group-name": "\"MainButtons\"",
-						"state": "deactivated"
-					}
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 581183724209856
+						}
+					],
+					"actions": [
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 927135827678044,
+							"parameters": {
+								"group-name": "\"MainButtons\"",
+								"state": "deactivated"
+							}
+						},
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 941302298859293,
+							"disabled": true,
+							"parameters": {
+								"message": "\"Prompt on\""
+							}
+						}
+					],
+					"sid": 609772499375234
 				}
-			],
-			"sid": 342649526677113
+			]
 		},
 		{
 			"eventType": "block",
@@ -1790,263 +2066,41 @@
 					"id": "else",
 					"objectClass": "System",
 					"sid": 849026916605556
-				},
-				{
-					"id": "trigger-once-while-true",
-					"objectClass": "System",
-					"sid": 328147340375987
-				}
-			],
-			"actions": [
-				{
-					"id": "set-group-active",
-					"objectClass": "System",
-					"sid": 832050583653208,
-					"parameters": {
-						"group-name": "\"MainButtons\"",
-						"state": "activated"
-					}
-				}
-			],
-			"sid": 142293719144283
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-tap-object",
-					"objectClass": "Touch",
-					"sid": 522752365568311,
-					"parameters": {
-						"object": "garage_buy"
-					}
-				},
-				{
-					"id": "is-visible",
-					"objectClass": "garage_buy",
-					"sid": 537786867750235
-				},
-				{
-					"id": "pick-nth-instance",
-					"objectClass": "System",
-					"sid": 639527384892445,
-					"parameters": {
-						"object": "garage_car",
-						"instance": "0"
-					}
 				}
 			],
 			"actions": [],
-			"sid": 778659353018680,
+			"sid": 142293719144283,
 			"children": [
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-instance-variable",
-							"objectClass": "garage_buy",
-							"sid": 124515679708244,
-							"parameters": {
-								"instance-variable": "State",
-								"comparison": 0,
-								"value": "0"
-							}
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 891913983311364
 						}
 					],
 					"actions": [
 						{
-							"id": "create-object",
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 559180946124244,
+							"disabled": true,
+							"parameters": {
+								"message": "\"Prompt off\""
+							}
+						},
+						{
+							"id": "set-group-active",
 							"objectClass": "System",
-							"sid": 859397249960085,
+							"sid": 558546018945796,
 							"parameters": {
-								"object-to-create": "prompt_back",
-								"layer": "\"Garage\"",
-								"x": "360",
-								"y": "640",
-								"create-hierarchy": true,
-								"template-name": "\"\""
-							}
-						},
-						{
-							"id": "set-instvar-value",
-							"objectClass": "prompt_back",
-							"sid": 532864858865132,
-							"parameters": {
-								"instance-variable": "function_to_call",
-								"value": "\"BuyCar\""
-							}
-						},
-						{
-							"id": "set-instvar-value",
-							"objectClass": "prompt_back",
-							"sid": 410244268276868,
-							"parameters": {
-								"instance-variable": "param1",
-								"value": "garage_car.shownID"
+								"group-name": "\"MainButtons\"",
+								"state": "activated"
 							}
 						}
 					],
-					"sid": 772783855950103,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-last-created",
-									"objectClass": "System",
-									"sid": 437919035895616,
-									"parameters": {
-										"object": "prompt_message"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-text",
-									"objectClass": "prompt_message",
-									"sid": 216776873556084,
-									"parameters": {
-										"text": "\"Купить машину \"\"\"&garage_car_name.Text&\"\"\"?\"&newline&\"Стоимость: \"&CarChars.At(0, 3, garage_car.shownID)"
-									}
-								}
-							],
-							"sid": 482274861501695
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-instance-variable",
-							"objectClass": "garage_buy",
-							"sid": 204318573514428,
-							"parameters": {
-								"instance-variable": "State",
-								"comparison": 0,
-								"value": "1"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 133795003633423,
-							"parameters": {
-								"variable": "ChosenCar",
-								"value": "garage_car.shownID"
-							}
-						},
-						{
-							"id": "set-instvar-value",
-							"objectClass": "garage_buy",
-							"sid": 373561121940673,
-							"parameters": {
-								"instance-variable": "State",
-								"value": "2"
-							}
-						},
-						{
-							"id": "set-text",
-							"objectClass": "garage_car_price",
-							"sid": 607343121797055,
-							"parameters": {
-								"text": "\"Выбрано\""
-							}
-						}
-					],
-					"sid": 108567282733409
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-tap-object",
-					"objectClass": "Touch",
-					"sid": 837414047423593,
-					"parameters": {
-						"object": "garage_upgrade_char"
-					}
-				},
-				{
-					"id": "is-animation-playing",
-					"objectClass": "garage_upgrade_char",
-					"sid": 429478498529166,
-					"parameters": {
-						"animation": "\"Avail\""
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "create-object",
-					"objectClass": "System",
-					"sid": 606198942058314,
-					"parameters": {
-						"object-to-create": "prompt_back",
-						"layer": "\"Garage\"",
-						"x": "360",
-						"y": "640",
-						"create-hierarchy": true,
-						"template-name": "\"\""
-					}
-				},
-				{
-					"id": "set-instvar-value",
-					"objectClass": "prompt_back",
-					"sid": 576077234899257,
-					"parameters": {
-						"instance-variable": "function_to_call",
-						"value": "\"UpgradeCar\""
-					}
-				},
-				{
-					"id": "set-instvar-value",
-					"objectClass": "prompt_back",
-					"sid": 888937283238395,
-					"parameters": {
-						"instance-variable": "param1",
-						"value": "garage_car.shownID"
-					}
-				},
-				{
-					"id": "set-instvar-value",
-					"objectClass": "prompt_back",
-					"sid": 399786155628228,
-					"parameters": {
-						"instance-variable": "param2",
-						"value": "garage_upgrade_char.charID"
-					}
-				}
-			],
-			"sid": 676612784521915,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-last-created",
-							"objectClass": "System",
-							"sid": 694560838649138,
-							"parameters": {
-								"object": "prompt_message"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-text",
-							"objectClass": "prompt_message",
-							"sid": 604908086277693,
-							"parameters": {
-								"text": "\"Купить улучшение для машины \"\"\"&garage_car_name.Text&\"\"\"?\"&newline&\"Стоимость: \"&CarChars.At(garage_upgrade_char.charID * 2 + 2, CarOwnership.At(1, garage_upgrade_char.charID, garage_car.shownID) + 2, garage_car.shownID)"
-							}
-						}
-					],
-					"sid": 796961496817067
+					"sid": 475085210979602
 				}
 			]
 		},
@@ -2093,6 +2147,15 @@
 							"id": "destroy",
 							"objectClass": "prompt_back",
 							"sid": 587461434377217
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 298526157011450,
+							"parameters": {
+								"variable": "MenuState",
+								"value": "MENU_DEFAULT"
+							}
 						}
 					],
 					"sid": 593237645097633
@@ -2172,6 +2235,15 @@
 					"id": "destroy",
 					"objectClass": "prompt_back",
 					"sid": 583139424219803
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 890107028480528,
+					"parameters": {
+						"variable": "MenuState",
+						"value": "MENU_DEFAULT"
+					}
 				}
 			],
 			"sid": 101655602285942

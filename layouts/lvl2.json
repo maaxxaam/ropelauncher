@@ -4774,7 +4774,7 @@
 							},
 							"uid": 524,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 0,
 								"IsStart": true,
 								"checkpointID": 0
 							},
@@ -4807,14 +4807,14 @@
 							},
 							"uid": 531,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 1,
 								"IsStart": false,
 								"checkpointID": 1
 							},
 							"behaviors": {},
 							"world": {
-								"x": 796,
-								"y": 796,
+								"x": 922,
+								"y": 849,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -4825,7 +4825,7 @@
 									1,
 									1
 								],
-								"angle": 0,
+								"angle": 3.141592653589793,
 								"zElevation": 0
 							}
 						},
@@ -4840,14 +4840,14 @@
 							},
 							"uid": 532,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 3,
 								"IsStart": false,
 								"checkpointID": 3
 							},
 							"behaviors": {},
 							"world": {
-								"x": 3835,
-								"y": 3016,
+								"x": 3705,
+								"y": 2919,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -4873,14 +4873,14 @@
 							},
 							"uid": 533,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 5,
 								"IsStart": false,
-								"checkpointID": 4
+								"checkpointID": 5
 							},
 							"behaviors": {},
 							"world": {
-								"x": 2860,
-								"y": 3006,
+								"x": 2975,
+								"y": 2932,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -4891,7 +4891,7 @@
 									1,
 									1
 								],
-								"angle": 0,
+								"angle": 3.141592653589793,
 								"zElevation": 0
 							}
 						},
@@ -4906,14 +4906,14 @@
 							},
 							"uid": 535,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 6,
 								"IsStart": false,
-								"checkpointID": 5
+								"checkpointID": 6
 							},
 							"behaviors": {},
 							"world": {
-								"x": 2819,
-								"y": 1832,
+								"x": 2673,
+								"y": 1869,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -4939,14 +4939,14 @@
 							},
 							"uid": 536,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 8,
 								"IsStart": false,
-								"checkpointID": 6
+								"checkpointID": 8
 							},
 							"behaviors": {},
 							"world": {
-								"x": 1828,
-								"y": 1817,
+								"x": 1958,
+								"y": 1872,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -4957,7 +4957,7 @@
 									1,
 									1
 								],
-								"angle": 0,
+								"angle": 3.141592653589793,
 								"zElevation": 0
 							}
 						},
@@ -4972,14 +4972,14 @@
 							},
 							"uid": 537,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 9,
 								"IsStart": false,
-								"checkpointID": 7
+								"checkpointID": 9
 							},
 							"behaviors": {},
 							"world": {
-								"x": 1782,
-								"y": 2996,
+								"x": 1672,
+								"y": 2950,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -5005,14 +5005,14 @@
 							},
 							"uid": 538,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 11,
 								"IsStart": false,
-								"checkpointID": 8
+								"checkpointID": 11
 							},
 							"behaviors": {},
 							"world": {
-								"x": 797,
-								"y": 2971,
+								"x": 915,
+								"y": 2935,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
@@ -5023,7 +5023,7 @@
 									1,
 									1
 								],
-								"angle": 0,
+								"angle": 3.141592653589793,
 								"zElevation": 0
 							}
 						},
@@ -5038,14 +5038,113 @@
 							},
 							"uid": 539,
 							"instanceVariables": {
-								"checkID": -1,
+								"checkID": 2,
 								"IsStart": false,
 								"checkpointID": 2
 							},
 							"behaviors": {},
 							"world": {
-								"x": 3667,
-								"y": 618,
+								"x": 3593,
+								"y": 745,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 4.71238898038469,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 618,
+							"instanceVariables": {
+								"checkID": 7,
+								"IsStart": false,
+								"checkpointID": 7
+							},
+							"behaviors": {},
+							"world": {
+								"x": 2214,
+								"y": 1732,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 4.71238898038469,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 619,
+							"instanceVariables": {
+								"checkID": 4,
+								"IsStart": false,
+								"checkpointID": 4
+							},
+							"behaviors": {},
+							"world": {
+								"x": 3354,
+								"y": 3039,
+								"width": 640,
+								"height": 128,
+								"originX": 0.3,
+								"originY": 0.5,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"angle": 1.5707963267948966,
+								"zElevation": 0
+							}
+						},
+						{
+							"type": "checkpoint",
+							"properties": {
+								"initially-visible": false,
+								"initial-animation": "Check",
+								"initial-frame": 0,
+								"enable-collisions": true,
+								"live-preview": false
+							},
+							"uid": 679,
+							"instanceVariables": {
+								"checkID": 10,
+								"IsStart": false,
+								"checkpointID": 10
+							},
+							"behaviors": {},
+							"world": {
+								"x": 1308,
+								"y": 3047,
 								"width": 640,
 								"height": 128,
 								"originX": 0.3,
