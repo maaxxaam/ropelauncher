@@ -359,7 +359,7 @@ export function car_collision_resolution(car1, car2, collision_data, collision_p
 
 const scriptsInEvents = {
 
-		async Gamesheet_Event100_Act1(runtime, localVars)
+		async Gamesheet_Event103_Act1(runtime, localVars)
 		{
 			const obs = runtime.objects.Obstacle.getFirstPickedInstance();
 			const car = runtime.objects.car_edge_collision.getFirstPickedInstance();
@@ -401,10 +401,10 @@ const scriptsInEvents = {
 			
 		},
 
-		async Gamesheet_Event111(runtime, localVars)
+		async Gamesheet_Event114(runtime, localVars)
 		{
 			// let's perform collision checks for cars! yay!
-			if (!runtime.globalVars.RaceEnded) {
+			if (runtime.globalVars.GameState == runtime.globalVars.GAME_ACTIVE) {
 			const dt = runtime.dt;
 			const all_cars = runtime.objects.Car.getAllInstances();
 			for (let index1 = 0; index1 < all_cars.length; index1++) {
@@ -447,7 +447,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event112(runtime, localVars)
+		async Gamesheet_Event115(runtime, localVars)
 		{
 			// calculate car positions
 			function getCP(id) {
@@ -465,7 +465,7 @@ const scriptsInEvents = {
 				let car = all_cars[index];
 				let [posx, posy] = car.getImagePoint("Front");
 				let col = car.getChildAt(0);
-				let txt = car.getChildAt(1);
+				let txt = col.getChildAt(0);
 				let newCP = getCP(col.instVars.ToCheckpoint);
 				let oldCP = getCP((CPs - 1 + col.instVars.ToCheckpoint) % CPs);
 				let completion_fraction = Vector.distance(Vector(posx, posy), Vector(oldCP.x, oldCP.y)) / Vector.distance(Vector(oldCP.x, oldCP.y), Vector(newCP.x, newCP.y));
@@ -477,19 +477,25 @@ const scriptsInEvents = {
 			for (let index = 0; index < results.length; index++) results[index].txt.text = String(index + 1);
 		},
 
-		async Gamesheet_Event123_Act2(runtime, localVars)
+		async Menusheet_Event64_Act1(runtime, localVars)
+		{
+			let prompt = runtime.objects.prompt_back.getFirstInstance();
+			localVars.val = runtime.callFunction(prompt.instVars.function_to_call, prompt.instVars.param1, prompt.instVars.param2);
+		},
+
+		async Levelinits_Event8_Act2(runtime, localVars)
 		{
 			const tile = localVars.tile;
 			//console.log(tile);
 			localVars.is_start = ((tile == 1) || (tile == 19) || (tile == 37) || (tile == 55));
 		},
 
-		async Gamesheet_Event129_Act2(runtime, localVars)
+		async Levelinits_Event16_Act2(runtime, localVars)
 		{
 			localVars.is_corner = test_tile_for_corner(localVars.tile);
 		},
 
-		async Gamesheet_Event130_Act3(runtime, localVars)
+		async Levelinits_Event17_Act3(runtime, localVars)
 		{
 			localVars.clock_id = map_corners_to_clock(localVars.tile);
 			localVars.pos_id = map_corners_to_pos(localVars.tile);
