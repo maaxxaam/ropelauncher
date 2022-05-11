@@ -477,7 +477,7 @@ const scriptsInEvents = {
 			for (let index = 0; index < results.length; index++) results[index].txt.text = String(index + 1);
 		},
 
-		async Menusheet_Event64_Act1(runtime, localVars)
+		async Menusheet_Event66_Act1(runtime, localVars)
 		{
 			let prompt = runtime.objects.prompt_back.getFirstInstance();
 			localVars.val = runtime.callFunction(prompt.instVars.function_to_call, prompt.instVars.param1, prompt.instVars.param2);

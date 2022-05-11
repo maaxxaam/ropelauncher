@@ -12915,6 +12915,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.AJAX.Acts.RequestFile,
 		C3.Plugins.System.Acts.SetLayerVisible,
 		C3.Plugins.Button.Acts.SetCSSStyle,
+		C3.Plugins.System.Cnds.PickLastCreated,
+		C3.Plugins.Text.Exps.Text,
 		C3.Plugins.Arr.Exps.Depth,
 		C3.Plugins.System.Acts.GoToLayoutByName,
 		C3.Plugins.Touch.Cnds.OnTouchObject,
@@ -12941,9 +12943,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Browser.Cnds.OnUpdateReady,
 		C3.Plugins.Arr.Acts.SetXYZ,
 		C3.Plugins.System.Acts.SetFunctionReturnValue,
-		C3.Plugins.System.Cnds.PickLastCreated,
-		C3.Plugins.Text.Exps.Text,
-		C3.ScriptsInEvents.Menusheet_Event64_Act1,
+		C3.ScriptsInEvents.Menusheet_Event66_Act1,
 		C3.Plugins.System.Acts.ToggleBoolVar,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Audio.Acts.PlayByName,
@@ -13879,6 +13879,26 @@ self.C3_ExpressionFuncs = [
 		() => "color",
 		() => "white",
 		() => "MainButtons",
+		() => 640,
+		() => "Prompt",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => and((((("Купить машину \"" + n0.ExpObject()) + "\"?") + "\n") + "Стоимость: "), n1.ExpObject(0, 3, n2.ExpInstVar()));
+		},
+		() => "Выбрано",
+		() => "Avail",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const n4 = p._GetNode(4);
+			const n5 = p._GetNode(5);
+			const n6 = p._GetNode(6);
+			return () => and((((("Купить улучшение для машины \"" + n0.ExpObject()) + "\"?") + "\n") + "Стоимость: "), n1.ExpObject(((n2.ExpInstVar() * 2) + 2), add(n3.ExpObject(1, n4.ExpInstVar(), n5.ExpInstVar()), 2), n6.ExpInstVar()));
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -13934,7 +13954,6 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => and("👛 ", n0.ExpObject(0, 3, v1.GetValue()));
 		},
-		() => "Выбрано",
 		() => "Выбрать",
 		() => "car_chars",
 		p => {
@@ -13972,7 +13991,6 @@ self.C3_ExpressionFuncs = [
 			return () => multiply(divide(subtract(add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue())))), n8.ExpInstVar()), (n9.ExpInstVar() - n10.ExpInstVar())), 624);
 		},
 		() => "NoAvail",
-		() => "Avail",
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
@@ -14020,24 +14038,7 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			return () => n0.ExpObject(1, v1.GetValue(), v2.GetValue());
 		},
-		() => "Prompt",
-		() => 640,
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			return () => and((((("Купить машину \"" + n0.ExpObject()) + "\"?") + "\n") + "Стоимость: "), n1.ExpObject(0, 3, n2.ExpInstVar()));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			const n6 = p._GetNode(6);
-			return () => and((((("Купить улучшение для машины \"" + n0.ExpObject()) + "\"?") + "\n") + "Стоимость: "), n1.ExpObject(((n2.ExpInstVar() * 2) + 2), add(n3.ExpObject(1, n4.ExpInstVar(), n5.ExpInstVar()), 2), n6.ExpInstVar()));
-		},
+		() => "Default",
 		() => "Не хватает средств!",
 		() => "Click",
 		p => {
