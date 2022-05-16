@@ -8204,6 +8204,29 @@ canvasInst._ApplyCurrentDrawingBlendMode(renderer);layout.RestoreTransform(resto
 }
 
 {
+'use strict';{const C3=self.C3;C3.Plugins.gamepad=class GamepadPlugin extends C3.SDKPluginBase{constructor(opts){super(opts);this._isSupported=false;this._runtime.AddLoadPromise(this._runtime.PostComponentMessageToDOMAsync("gamepad","is-supported").then(result=>this._isSupported=!!result))}Release(){super.Release()}IsSupported(){return this._isSupported}}}{const C3=self.C3;C3.Plugins.gamepad.Type=class GamepadType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass)}Release(){super.Release()}OnCreate(){}}}
+{const C3=self.C3;const DOM_COMPONENT_ID="gamepad";class GamepadState{constructor(index,id){this._index=index;this._id=id;this._state=new GamepadInputState;this._oldState=new GamepadInputState;this._buttonsPressed=[];this._buttonsReleased=[]}GetID(){return this._id}Update(buttonData,axisData){const temp=this._oldState;this._oldState=this._state;this._state=temp;this._state.Update(buttonData,axisData);C3.resizeArray(this._buttonsPressed,this._state.GetButtonCount(),false);C3.resizeArray(this._buttonsReleased,
+this._state.GetButtonCount(),false);for(let i=0,len=this._state.GetButtonCount();i<len;++i){const oldVal=this._oldState.GetButtonAt(i);const newVal=this._state.GetButtonAt(i);if(newVal>=.5&&oldVal<.5)this._buttonsPressed[i]=true;if(newVal<.5&&oldVal>=.5)this._buttonsReleased[i]=true}}GetButtonCount(){return this._state.GetButtonCount()}GetAxisCount(){return this._state.GetAxisCount()}HasButtonBecomePressed(i){i=Math.floor(i);if(i<0||i>=this._buttonsPressed.length)return false;return this._buttonsPressed[i]}HasButtonBecomeReleased(i){i=
+Math.floor(i);if(i<0||i>=this._buttonsReleased.length)return false;return this._buttonsReleased[i]}ResetButtonPressAndReleaseFlags(){this._buttonsPressed.fill(false);this._buttonsReleased.fill(false)}GetButtonAt(i){return this._state.GetButtonAt(i)}IsButtonDown(i){return this._state.GetButtonAt(i)>=.5}GetAxisAt(i){return this._state.GetAxisAt(i)}}class GamepadInputState{constructor(){this._buttons=[];this._axes=[]}Update(buttonData,axisData){const buttons=this._buttons;let i=0;for(let len=buttonData.length;i<
+len;++i){const b=buttonData[i];if(i===buttons.length)buttons.push(b["value"]);else buttons[i]=b["value"]}if(i<buttons.length)C3.truncateArray(buttons,i);C3.shallowAssignArray(this._axes,axisData)}GetButtonCount(){return this._buttons.length}GetAxisCount(){return this._axes.length}GetButtonAt(i){i=Math.floor(i);if(i<0||i>=this._buttons.length)return 0;return this._buttons[i]}GetAxisAt(i){i=Math.floor(i);if(i<0||i>=this._axes.length)return 0;return this._axes[i]}}C3.Plugins.gamepad.Instance=class GamepadInstance extends C3.SDKInstanceBase{constructor(inst,
+properties){super(inst,DOM_COMPONENT_ID);this._deadZone=25;this._lastButton=0;this._lastIndex=-1;this._gamepads=new Map;if(properties)this._deadZone=properties[0];this.AddDOMMessageHandler("gamepad-connected",e=>this._OnGamepadConnected(e));this.AddDOMMessageHandler("gamepad-disconnected",e=>this._OnGamepadDisconnected(e));this.AddDOMMessageHandler("input-update",e=>this._OnInputUpdate(e));const rt=this.GetRuntime().Dispatcher();this._disposables=new C3.CompositeDisposable(C3.Disposable.From(rt,"tick2",
+()=>this._OnTick2()));this.PostToDOM("ready")}Release(){super.Release()}_OnGamepadConnected(e){const index=e["index"];this._lastIndex=index;const id=e["id"];if(this._gamepads.has(index))return;this._gamepads.set(index,new GamepadState(index,id));this.Trigger(C3.Plugins.gamepad.Cnds.OnGamepadConnected);this._lastIndex=-1}_OnGamepadDisconnected(e){const index=e["index"];this._lastIndex=index;this.Trigger(C3.Plugins.gamepad.Cnds.OnGamepadDisconnected);this._gamepads.delete(index);this._lastIndex=-1}_OnInputUpdate(arr){for(const data of arr)this._OnGamepadInputUpdate(data)}_OnGamepadInputUpdate(data){const index=
+data["index"];if(!this._gamepads.has(index))this._OnGamepadConnected(data);const info=this._gamepads.get(index);info.Update(data["buttons"],data["axes"]);for(let i=0,len=info.GetButtonCount();i<len;++i)if(info.HasButtonBecomePressed(i))this._lastButton=i}_GetGamepadByIndex(index){return this._gamepads.get(Math.floor(index))||null}_OnTick2(){for(const state of this._gamepads.values())state.ResetButtonPressAndReleaseFlags()}GetDebuggerProperties(){const prefix="plugins.gamepad";return[{title:prefix+
+".name",properties:[{name:prefix+".debugger.last-button",value:this._lastButton}]}]}}}
+{const C3=self.C3;C3.Plugins.gamepad.Cnds={SupportsGamepad(){return this.GetPlugin().IsSupported()},OnGamepadConnected(){return true},OnGamepadDisconnected(){return true},IsButtonDown(gamepadIndex,buttonIndex){const info=this._GetGamepadByIndex(gamepadIndex);if(!info)return false;const ret=info.IsButtonDown(buttonIndex);if(ret)this._lastButton=buttonIndex;return ret},OnButtonDown(gamepadIndex,buttonIndex){const info=this._GetGamepadByIndex(gamepadIndex);if(!info)return false;const ret=info.HasButtonBecomePressed(buttonIndex);
+if(ret)this._lastButton=buttonIndex;return ret},OnButtonUp(gamepadIndex,buttonIndex){const info=this._GetGamepadByIndex(gamepadIndex);if(!info)return false;const ret=info.HasButtonBecomeReleased(buttonIndex);if(ret)this._lastButton=buttonIndex;return ret},HasGamepads(){return this._gamepads.size>0},CompareAxis(gamepadIndex,axisIndex,cmp,value){axisIndex=Math.floor(axisIndex);const info=this._GetGamepadByIndex(gamepadIndex);if(!info)return false;let axisValue=info.GetAxisAt(axisIndex);let otherValue=
+0;if(axisIndex%2===0)otherValue=info.GetAxisAt(axisIndex+1);else otherValue=info.GetAxisAt(axisIndex-1);axisValue*=100;otherValue*=100;if(Math.hypot(axisValue,otherValue)<=this._deadZone)axisValue=0;return C3.compare(axisValue,cmp,value)},OnAnyButtonDown(gamepadIndex){const info=this._GetGamepadByIndex(gamepadIndex);if(!info)return false;for(let i=0,len=info.GetButtonCount();i<len;++i)if(info.HasButtonBecomePressed(i)){this._lastButton=i;return true}return false},OnAnyButtonUp(gamepadIndex){const info=
+this._GetGamepadByIndex(gamepadIndex);if(!info)return false;for(let i=0,len=info.GetButtonCount();i<len;++i)if(info.HasButtonBecomeReleased(i)){this._lastButton=i;return true}return false},IsButtonIndexDown(gamepadIndex,buttonIndex){buttonIndex=Math.floor(buttonIndex);const info=this._GetGamepadByIndex(gamepadIndex);if(!info)return false;const ret=info.IsButtonDown(buttonIndex);if(ret)this._lastButton=buttonIndex;return ret},OnButtonIndexDown(gamepadIndex,buttonIndex){buttonIndex=Math.floor(buttonIndex);
+const info=this._GetGamepadByIndex(gamepadIndex);if(!info)return false;const ret=info.HasButtonBecomePressed(buttonIndex);if(ret)this._lastButton=buttonIndex;return ret},OnButtonIndexUp(gamepadIndex,buttonIndex){buttonIndex=Math.floor(buttonIndex);const info=this._GetGamepadByIndex(gamepadIndex);if(!info)return false;const ret=info.HasButtonBecomeReleased(buttonIndex);if(ret)this._lastButton=buttonIndex;return ret}}}
+{const C3=self.C3;C3.Plugins.gamepad.Acts={Vibrate(gamepadIndex,duration,weakMag,strongMag){this.PostToDOM("vibrate",{"index":gamepadIndex,"duration":duration,"weakMag":C3.clamp(weakMag/100,0,1),"strongMag":C3.clamp(strongMag/100,0,1)})},ResetVibrate(gamepadIndex){this.PostToDOM("reset-vibrate",{"index":gamepadIndex})}}}
+{const C3=self.C3;C3.Plugins.gamepad.Exps={GamepadCount(){return this._gamepads.size},GamepadID(gamepadIndex){const gamepad=this._GetGamepadByIndex(gamepadIndex);if(gamepad)return gamepad.GetID();else return""},GamepadIndex(){return this._lastIndex},GamepadAxes(gamepadIndex){const gamepad=this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return"";let str="";for(let i=0,len=gamepad.GetAxisCount();i<len;++i)str+=`Axis ${i}: ${Math.round(gamepad.GetAxisAt(i)*100)}\n`;return str},GamepadButtons(gamepadIndex){const gamepad=
+this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return"";let str="";for(let i=0,len=gamepad.GetButtonCount();i<len;++i)str+=`Button ${i}: ${Math.round(gamepad.GetButtonAt(i)*100)}\n`;return str},RawButton(gamepadIndex,buttonIndex){const gamepad=this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return 0;return gamepad.GetButtonAt(Math.floor(buttonIndex))},RawAxis(gamepadIndex,axisIndex){const gamepad=this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return 0;return gamepad.GetAxisAt(Math.floor(axisIndex))},
+RawButtonCount(gamepadIndex){const gamepad=this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return 0;return gamepad.GetButtonCount()},RawAxisCount(gamepadIndex){const gamepad=this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return 0;return gamepad.GetAxisCount()},Button(gamepadIndex,buttonIndex){const gamepad=this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return 0;return gamepad.GetButtonAt(Math.floor(buttonIndex))*100},Axis(gamepadIndex,axisIndex){axisIndex=Math.floor(axisIndex);const gamepad=
+this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return 0;let axisValue=gamepad.GetAxisAt(axisIndex);let otherValue=0;if(axisIndex%2===0)otherValue=gamepad.GetAxisAt(axisIndex+1);else otherValue=gamepad.GetAxisAt(axisIndex-1);axisValue*=100;otherValue*=100;if(Math.hypot(axisValue,otherValue)<=this._deadZone)axisValue=0;return axisValue},LastButton(){return this._lastButton}}};
+
+}
+
+{
 'use strict';{const C3=self.C3;C3.Behaviors.Pin=class PinBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.Pin.Type=class PinType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
 {const C3=self.C3;C3.Behaviors.Pin.Instance=class PinInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._pinInst=null;this._pinUid=-1;this._mode="";this._propSet=new Set;this._pinDist=0;this._pinAngle=0;this._pinImagePoint=0;this._dx=0;this._dy=0;this._dWidth=0;this._dHeight=0;this._dAngle=0;this._dz=0;this._lastKnownAngle=0;this._destroy=false;if(properties)this._destroy=properties[0];const rt=this._runtime.Dispatcher();this._disposables=new C3.CompositeDisposable(C3.Disposable.From(rt,
 "instancedestroy",e=>this._OnInstanceDestroyed(e.instance)),C3.Disposable.From(rt,"afterload",e=>this._OnAfterLoad()))}Release(){this._pinInst=null;super.Release()}_SetPinInst(inst){if(inst){this._pinInst=inst;this._StartTicking2()}else{this._pinInst=null;this._StopTicking2()}}_Pin(objectClass,mode,propList){if(!objectClass)return;const otherInst=objectClass.GetFirstPicked(this._inst);if(!otherInst)return;this._mode=mode;this._SetPinInst(otherInst);const myWi=this._inst.GetWorldInfo();const otherWi=
@@ -12702,6 +12725,14 @@ this._dy);const bounceAngle=collisionEngine.CalculateBounceAngle(this._inst,this
 }
 
 {
+'use strict';{const C3=self.C3;C3.Behaviors.solid=class SolidBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.solid.Type=class SolidType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
+{const C3=self.C3;const ENABLE=0;const TAGS=1;const EMPTY_SET=new Set;C3.Behaviors.solid.Instance=class SolidInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this.SetEnabled(true);if(properties){this.SetEnabled(properties[ENABLE]);this.SetTags(properties[TAGS])}}Release(){super.Release()}SetEnabled(e){this._inst._SetSolidEnabled(!!e)}IsEnabled(){return this._inst._IsSolidEnabled()}SetTags(tagList){const savedDataMap=this._inst.GetSavedDataMap();if(!tagList.trim()){savedDataMap.delete("solidTags");
+return}let solidTags=savedDataMap.get("solidTags");if(!solidTags){solidTags=new Set;savedDataMap.set("solidTags",solidTags)}solidTags.clear();for(const tag of tagList.split(" "))if(tag)solidTags.add(tag.toLowerCase())}GetTags(){return this._inst.GetSavedDataMap().get("solidTags")||EMPTY_SET}SaveToJson(){return{"e":this.IsEnabled()}}LoadFromJson(o){this.SetEnabled(o["e"])}GetPropertyValueByIndex(index){switch(index){case ENABLE:return this.IsEnabled()}}SetPropertyValueByIndex(index,value){switch(index){case ENABLE:this.SetEnabled(value);
+break}}GetDebuggerProperties(){return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:"behaviors.solid.properties.enabled.name",value:this.IsEnabled(),onedit:v=>this.SetEnabled(v)}]}]}}}{const C3=self.C3;C3.Behaviors.solid.Cnds={IsEnabled(){return this.IsEnabled()}}}{const C3=self.C3;C3.Behaviors.solid.Acts={SetEnabled(e){this.SetEnabled(e)},SetTags(tagList){this.SetTags(tagList)}}}{const C3=self.C3;C3.Behaviors.solid.Exps={}};
+
+}
+
+{
 const C3 = self.C3;
 self.C3_GetObjectRefTable = function () {
 	return [
@@ -12746,8 +12777,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.NinePatch,
 		C3.Behaviors.Bullet,
 		C3.Plugins.DrawingCanvas,
+		C3.Plugins.gamepad,
+		C3.Behaviors.solid,
 		C3.Plugins.System.Cnds.OnLayoutStart,
-		C3.Plugins.System.Acts.MapFunction,
 		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.Dictionary.Exps.Get,
@@ -12769,6 +12801,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.PickNth,
 		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.TiledBg.Acts.Destroy,
+		C3.Plugins.System.Cnds.CompareBoolVar,
+		C3.Plugins.System.Acts.MapFunction,
+		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
 		C3.Plugins.System.Cnds.CompareVar,
@@ -12826,22 +12861,21 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.Text.Acts.Destroy,
+		C3.Plugins.Touch.Cnds.IsTouchingObject,
+		C3.Plugins.System.Cnds.PickOverlappingPoint,
+		C3.Plugins.Touch.Exps.X,
+		C3.Plugins.Touch.Exps.Y,
+		C3.Plugins.Sprite.Acts.SetTowardPosition,
+		C3.Plugins.Sprite.Cnds.IsBetweenAngles,
+		C3.Plugins.System.Exps.max,
+		C3.Plugins.Touch.Exps.SpeedAt,
+		C3.Plugins.Touch.Exps.TouchIndex,
+		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
 		C3.Plugins.TiledBg.Acts.SetX,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
-		C3.Plugins.System.Exps.max,
-		C3.Plugins.Touch.Exps.SpeedAt,
 		C3.Plugins.TiledBg.Exps.X,
-		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
-		C3.Plugins.Touch.Cnds.OnTapGestureObject,
-		C3.Plugins.Keyboard.Cnds.OnKey,
-		C3.Plugins.System.Acts.RestartLayout,
-		C3.Behaviors.Tween.Acts.TweenTwoProperties,
-		C3.Plugins.Keyboard.Cnds.OnKeyReleased,
-		C3.Plugins.System.Cnds.Compare,
-		C3.Plugins.Sprite.Exps.Count,
-		C3.Plugins.System.Acts.GoToLayout,
 		C3.Plugins.Sprite.Cnds.OnCollision,
 		C3.Plugins.Sprite.Cnds.IsVisible,
 		C3.Plugins.Sprite.Acts.AddInstanceVar,
@@ -12874,15 +12908,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
 		C3.ScriptsInEvents.Gamesheet_Event103_Act1,
 		C3.Plugins.NinePatch.Acts.SetWidth,
-		C3.Behaviors.Tween.Acts.TweenValue,
-		C3.Behaviors.Tween.Exps.Value,
-		C3.Behaviors.Tween.Acts.StopAllTweens,
-		C3.Plugins.NinePatch.Acts.SetEffectParam,
 		C3.Behaviors.Tween.Cnds.IsPlaying,
+		C3.Plugins.NinePatch.Acts.SetEffectParam,
+		C3.Behaviors.Tween.Exps.Value,
 		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.System.Exps.dt,
-		C3.ScriptsInEvents.Gamesheet_Event114,
-		C3.ScriptsInEvents.Gamesheet_Event115,
+		C3.Behaviors.Tween.Acts.StopAllTweens,
+		C3.ScriptsInEvents.Gamesheet_Event111,
+		C3.ScriptsInEvents.Gamesheet_Event112,
 		C3.Behaviors.Pin.Exps.PinnedUID,
 		C3.Plugins.Particles.Acts.Destroy,
 		C3.Plugins.Browser.Acts.Alert,
@@ -12892,8 +12925,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.CallMappedFunction,
 		C3.Behaviors.Bullet.Cnds.IsEnabled,
 		C3.Behaviors.Flash.Cnds.IsFlashing,
+		C3.Behaviors.scrollto.Acts.Shake,
 		C3.Plugins.Sprite.Acts.SubInstanceVar,
-		C3.Behaviors.Bullet.Acts.SetSpeed,
 		C3.Plugins.DrawingCanvas.Acts.ClearCanvas,
 		C3.Plugins.System.Exps.rgba,
 		C3.Plugins.DrawingCanvas.Acts.Line,
@@ -12902,19 +12935,21 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.NinePatch.Acts.Destroy,
 		C3.Plugins.NinePatch.Cnds.IsOnScreen,
 		C3.Plugins.NinePatch.Cnds.CompareWidth,
-		C3.Plugins.Touch.Cnds.IsTouchingObject,
-		C3.Plugins.System.Cnds.PickOverlappingPoint,
-		C3.Plugins.Touch.Exps.X,
-		C3.Plugins.Touch.Exps.Y,
-		C3.Plugins.Sprite.Acts.SetTowardPosition,
-		C3.Plugins.Sprite.Cnds.IsBetweenAngles,
-		C3.Plugins.Touch.Exps.TouchIndex,
 		C3.Behaviors.Timer.Cnds.OnTimer,
 		C3.Behaviors.Fade.Acts.StartFade,
+		C3.Plugins.System.Acts.RestartLayout,
+		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Plugins.Sprite.Exps.Count,
+		C3.Behaviors.Tween.Acts.TweenTwoProperties,
+		C3.Behaviors.Tween.Acts.TweenValue,
+		C3.Behaviors.Bullet.Acts.SetSpeed,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.AJAX.Acts.RequestFile,
+		C3.Plugins.System.Acts.MapFunctionDefault,
 		C3.Plugins.System.Acts.SetLayerVisible,
 		C3.Plugins.Button.Acts.SetCSSStyle,
+		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.System.Cnds.PickLastCreated,
 		C3.Plugins.Text.Exps.Text,
 		C3.Plugins.Arr.Exps.Depth,
@@ -12944,20 +12979,16 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Arr.Acts.SetXYZ,
 		C3.Plugins.System.Acts.SetFunctionReturnValue,
 		C3.ScriptsInEvents.Menusheet_Event66_Act1,
+		C3.Plugins.Keyboard.Cnds.OnKey,
 		C3.Plugins.System.Acts.ToggleBoolVar,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Audio.Acts.PlayByName,
-		C3.Plugins.Sprite.Exps.IID,
-		C3.Plugins.Eponesh_GameScore.Acts.PlayerToggle,
-		C3.Plugins.Eponesh_GameScore.Acts.PlayerSync,
-		C3.Plugins.Audio.Cnds.IsTagPlaying,
-		C3.Plugins.System.Cnds.CompareBoolVar,
-		C3.Plugins.Audio.Acts.Play,
-		C3.Plugins.Audio.Acts.Stop,
-		C3.Plugins.Eponesh_GameScore.Acts.PlayerSet,
-		C3.Plugins.Eponesh_GameScore.Cnds.IsAdsFullscreenPlaying,
-		C3.Plugins.Audio.Acts.SetSilent,
-		C3.Plugins.Eponesh_GameScore.Cnds.OnAdsFullscreenClose,
+		C3.Plugins.Keyboard.Cnds.OnAnyKeyReleased,
+		C3.Plugins.System.Exps.layoutname,
+		C3.Plugins.Dictionary.Cnds.HasKey,
+		C3.Plugins.Keyboard.Exps.LastKeyCode,
+		C3.Plugins.gamepad.Cnds.OnAnyButtonDown,
+		C3.Plugins.gamepad.Exps.LastButton,
 		C3.Behaviors.CarPlus.Acts.SetDefaultControls,
 		C3.Behaviors.CarPlus.Cnds.IsEnabled,
 		C3.Plugins.Text.Cnds.CompareText,
@@ -12971,14 +13002,15 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Particles.Acts.ZMoveToObject,
 		C3.Plugins.Tilemap.Exps.MapDisplayWidth,
 		C3.Plugins.Tilemap.Exps.MapDisplayHeight,
-		C3.ScriptsInEvents.Levelinits_Event8_Act2,
+		C3.ScriptsInEvents.Levelinits_Event8_Act4,
 		C3.Plugins.Tilemap.Exps.TileToPositionX,
 		C3.Plugins.Tilemap.Exps.TileToPositionY,
+		C3.ScriptsInEvents.Levelinits_Event9_Act3,
 		C3.Plugins.Sprite.Acts.SetScale,
 		C3.Plugins.Sprite.Acts.MoveToTop,
 		C3.Behaviors.LOS.Acts.AddObstacle,
+		C3.Plugins.Sprite.Exps.IID,
 		C3.Plugins.TiledBg.Acts.SetPosToObject,
-		C3.Plugins.System.Exps.layoutname,
 		C3.ScriptsInEvents.Levelinits_Event16_Act2,
 		C3.Plugins.Sprite.Acts.SetSize,
 		C3.ScriptsInEvents.Levelinits_Event17_Act3,
@@ -13048,6 +13080,8 @@ self.C3_JsPropNameTable = [
 	{PlatformInfo: 0},
 	{GameScore: 0},
 	{AnimationPrefix: 0},
+	{onclick: 0},
+	{click_param: 0},
 	{SettBut: 0},
 	{mmtext: 0},
 	{SendToLvl: 0},
@@ -13149,6 +13183,11 @@ self.C3_JsPropNameTable = [
 	{prompt_yes: 0},
 	{prompt_no: 0},
 	{prompt_message: 0},
+	{game_keyboard_controls: 0},
+	{Gamepad: 0},
+	{Solid: 0},
+	{borders: 0},
+	{garage_value: 0},
 	{Button: 0},
 	{LoadableArray: 0},
 	{LoadableDict: 0},
@@ -13161,6 +13200,7 @@ self.C3_JsPropNameTable = [
 	{GAME_OVER: 0},
 	{GAME_ACTIVE: 0},
 	{GAME_START: 0},
+	{FirstTime: 0},
 	{RaceLaps: 0},
 	{AdsDisabled: 0},
 	{Lives: 0},
@@ -13186,6 +13226,7 @@ self.C3_JsPropNameTable = [
 	{Name: 0},
 	{UID: 0},
 	{CarUID: 0},
+	{SlowsDown: 0},
 	{ObstacleUID: 0},
 	{MenuState: 0},
 	{MENU_DEFAULT: 0},
@@ -13203,6 +13244,8 @@ self.C3_JsPropNameTable = [
 	{SFX: 0},
 	{ExtraAnimation: 0},
 	{Music: 0},
+	{ButtonUID: 0},
+	{ButtonParam: 0},
 	{Filename: 0},
 	{Expression: 0},
 	{Car_UID: 0},
@@ -13212,6 +13255,9 @@ self.C3_JsPropNameTable = [
 	{your_car: 0},
 	{max_cars: 0},
 	{is_start: 0},
+	{lv1: 0},
+	{lv2: 0},
+	{tile_rotation: 0},
 	{is_corner: 0},
 	{clock_id: 0},
 	{circle_id: 0},
@@ -13316,9 +13362,6 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-		() => "destruction",
-		() => "CarDamage",
-		() => "ObstacleDamage",
 		() => "RaceStart",
 		() => 1,
 		p => {
@@ -13359,6 +13402,18 @@ self.C3_ExpressionFuncs = [
 			return () => and(v0.GetValue(), "❤");
 		},
 		() => "controls_scheme",
+		() => "destruction",
+		() => "Car",
+		() => "Obstacle",
+		() => "onclick",
+		() => "Restart",
+		() => "ToMenu",
+		() => "Replay",
+		() => "PauseSwitch",
+		() => "UseNitro",
+		() => "Jump",
+		() => "Shoot",
+		() => "Rewind",
 		() => "RaceActive",
 		() => "Car Mechanics",
 		() => 7,
@@ -13514,7 +13569,8 @@ self.C3_ExpressionFuncs = [
 		() => "GUI",
 		p => {
 			const n0 = p._GetNode(0);
-			return () => and("Круг ", (n0.ExpInstVar() + 1));
+			const v1 = p._GetNode(1).GetVar();
+			return () => and((and("Круг ", (n0.ExpInstVar() + 1)) + " / "), v1.GetValue());
 		},
 		() => 0.75,
 		() => "",
@@ -13539,6 +13595,43 @@ self.C3_ExpressionFuncs = [
 		() => "2",
 		() => "1",
 		() => "GO!",
+		() => "TestControls",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("GUI");
+		},
+		() => 180,
+		() => 359.99,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((((n0.ExpObject()) > (90) ? 1 : 0)) ? (180) : (359));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => subtract(270, n0.ExpObject("controls_dead_zone"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => add(270, n0.ExpObject("controls_dead_zone"));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const f3 = p._GetNode(3).GetBoundMethod();
+			const f4 = p._GetNode(4).GetBoundMethod();
+			return () => f0(((((v1.GetValue()) < (1) ? 1 : 0)) ? (1) : (v2.GetValue())), f3(f4()));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const n4 = p._GetNode(4);
+			const n5 = p._GetNode(5);
+			return () => multiply(multiply(multiply((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))), divide(multiply((270 - n2.ExpObject()), subtract(multiply(2, n3.ExpObject("controls_invert")), 1)), 90)), n4.ExpInstVar()), n5.ExpObject("controls_sensitivity"));
+		},
+		() => 270,
 		() => "SwipeControls",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -13563,20 +13656,12 @@ self.C3_ExpressionFuncs = [
 			return () => multiply(multiply(multiply(((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))) * (v2.GetValue() / 360)), add(multiply((-2), n3.ExpObject("controls_invert")), 1)), n4.ExpObject("controls_sensitivity")), n5.ExpInstVar());
 		},
 		() => "controls_drift_mode",
-		() => "jumpUp",
-		() => "jumpDown",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((((n0.ExpObject("controls_car_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("controls_car_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
-		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
 			return () => C3.clamp(add(v0.GetValue(), n1.ExpObject("difficulty_nitro_refill")), 0, 100);
 		},
 		() => "Replays",
-		() => "Rewind",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -13594,7 +13679,6 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject(subtract((n1.ExpObject() - 1), n2.ExpBehavior()), 2);
 		},
 		() => 0.02,
-		() => "Replay",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -13701,14 +13785,11 @@ self.C3_ExpressionFuncs = [
 			return () => (4.6 * v0.GetValue());
 		},
 		() => "PerfectQTE",
-		() => 30,
+		() => "AdjustHSL",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpBehavior("PerfectQTE");
 		},
-		() => 20,
-		() => "AdjustHSL",
-		() => 110,
 		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
@@ -13717,29 +13798,23 @@ self.C3_ExpressionFuncs = [
 			return () => multiply(multiply(n0.ExpObject("difficulty_nitro_consumption"), f1()), add(1, ((((v2.GetValue()) === (2) ? 1 : 0)) ? (n3.ExpObject("difficulty_nitro_extra_coef")) : (0))));
 		},
 		() => "Хорошая была попытка! Нажми [R] для перезапуска или [ESC] для выхода в меню",
+		() => 30,
 		() => "destroy_marks",
 		() => "Rockets & Obstacles",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() + "Damage");
-		},
+		() => "Spikes",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpInstVar_Family();
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => and(n0.ExpInstVar(), "❤");
-		},
-		p => {
-			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() * 0.25);
 		},
-		() => "Missile",
+		() => 20,
+		() => 0.4,
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			return () => f0((n1.ExpBehavior() + 50), 300);
+			const n0 = p._GetNode(0);
+			return () => and(n0.ExpInstVar(), "❤");
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -13829,48 +13904,27 @@ self.C3_ExpressionFuncs = [
 		() => "Bar",
 		() => "Отмотать время?",
 		() => "rewind_timer",
-		() => 150,
-		() => "TestControls",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("GUI");
-		},
-		() => 180,
-		() => 359.99,
+		() => "Buttons",
+		() => "jumpUp",
+		() => "jumpDown",
 		p => {
 			const n0 = p._GetNode(0);
-			return () => ((((n0.ExpObject()) > (90) ? 1 : 0)) ? (180) : (359));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => subtract(270, n0.ExpObject("controls_dead_zone"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => add(270, n0.ExpObject("controls_dead_zone"));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			const f3 = p._GetNode(3).GetBoundMethod();
-			const f4 = p._GetNode(4).GetBoundMethod();
-			return () => f0(((((v1.GetValue()) < (1) ? 1 : 0)) ? (1) : (v2.GetValue())), f3(f4()));
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			return () => multiply(multiply(multiply((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))), divide(multiply((270 - n2.ExpObject()), subtract(multiply(2, n3.ExpObject("controls_invert")), 1)), 90)), n4.ExpInstVar()), n5.ExpObject("controls_sensitivity"));
+			return () => ((((n0.ExpObject("controls_car_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("controls_car_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
 		},
-		() => 270,
+		() => 110,
+		() => "Missile",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0((n1.ExpBehavior() + 100), 300);
+		},
+		() => 150,
 		() => "flags",
 		() => "tiles",
 		() => "ownership",
 		() => "cars",
+		() => "keyboard",
 		() => "Garage",
 		() => "BuyCar",
 		() => "UpgradeCar",
@@ -13990,6 +14044,17 @@ self.C3_ExpressionFuncs = [
 			const n10 = p._GetNode(10);
 			return () => multiply(divide(subtract(add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue())))), n8.ExpInstVar()), (n9.ExpInstVar() - n10.ExpInstVar())), 624);
 		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			const n4 = p._GetNode(4);
+			const v5 = p._GetNode(5).GetVar();
+			const v6 = p._GetNode(6).GetVar();
+			const v7 = p._GetNode(7).GetVar();
+			return () => add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue()))));
+		},
 		() => "NoAvail",
 		p => {
 			const n0 = p._GetNode(0);
@@ -14053,25 +14118,20 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar_Family() + "Idle");
 		},
+		() => "Menu",
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => ((v0.GetValue()) ? ("On") : ("Off"));
-		},
-		() => "music",
-		() => "Music",
-		() => -10,
-		() => "sfx",
-		() => "extraanim",
-		() => "Off",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => ((((v0.GetValue()) === (2) ? 1 : 0)) ? (1) : (2));
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0()).toString();
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => ((((v0.GetValue()) === (1) ? 1 : 0)) ? ("On") : ("Off"));
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject((f1()).toString());
 		},
-		() => "speed",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0);
+		},
 		() => "Вы победили!",
 		p => {
 			const n0 = p._GetNode(0);
@@ -14202,6 +14262,14 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject(f1("roadX"), f2("roadY"));
 		},
 		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("roadX");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("roadY");
+		},
+		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => n0.ExpObject(f1("roadX"));
@@ -14210,6 +14278,10 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => n0.ExpObject(f1("roadY"));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (270 + v0.GetValue());
 		},
 		p => {
 			const n0 = p._GetNode(0);

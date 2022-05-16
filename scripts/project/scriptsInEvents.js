@@ -6,6 +6,16 @@ function lerp(a,b,f) { return (b-a)*f+a; };
 
 export function clamp(low, a, high) { return a < low ? low : (a > high ? high : a); };
 
+export function tile_degrees(integer) {
+	let horizontal = -((integer & ITilemapInstance.TILE_FLIPPED_HORIZONTAL) >> 31);
+	let vertical = (integer & ITilemapInstance.TILE_FLIPPED_VERTICAL) >> 30;
+	let diagonal = (integer & ITilemapInstance.TILE_FLIPPED_DIAGONAL) >> 29;
+	if (horizontal & diagonal) return 90;
+	else if (horizontal & vertical) return 180;
+	else if (vertical & diagonal) return 270;
+	else return 0;
+};
+
 function Point(x, y) {
 	return {x:x, y:y}
 }
@@ -401,7 +411,7 @@ const scriptsInEvents = {
 			
 		},
 
-		async Gamesheet_Event114(runtime, localVars)
+		async Gamesheet_Event111(runtime, localVars)
 		{
 			// let's perform collision checks for cars! yay!
 			if (runtime.globalVars.GameState == runtime.globalVars.GAME_ACTIVE) {
@@ -447,7 +457,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event115(runtime, localVars)
+		async Gamesheet_Event112(runtime, localVars)
 		{
 			// calculate car positions
 			function getCP(id) {
@@ -456,25 +466,26 @@ const scriptsInEvents = {
 					if (checkpoint.instVars.checkpointID == id) { return checkpoint; }
 				}
 			}
-			
-			const dt = runtime.dt;
-			const all_cars = runtime.objects.Car.getAllInstances();
-			const CPs = runtime.objects.checkpoint.getAllInstances().length;
-			let results = [];
-			for (let index = 0; index < all_cars.length; index++) {
-				let car = all_cars[index];
-				let [posx, posy] = car.getImagePoint("Front");
-				let col = car.getChildAt(0);
-				let txt = col.getChildAt(0);
-				let newCP = getCP(col.instVars.ToCheckpoint);
-				let oldCP = getCP((CPs - 1 + col.instVars.ToCheckpoint) % CPs);
-				let completion_fraction = Vector.distance(Vector(posx, posy), Vector(oldCP.x, oldCP.y)) / Vector.distance(Vector(oldCP.x, oldCP.y), Vector(newCP.x, newCP.y));
-				let pos = (col.instVars.Lap) * CPs + col.instVars.ToCheckpoint + completion_fraction;
-				//console.log(col, pos);
-				results.push({txt: txt, pos: pos});
+			if (runtime.layout.name != "ParkingLot") {
+				const dt = runtime.dt;
+				const all_cars = runtime.objects.Car.getAllInstances();
+				const CPs = runtime.objects.checkpoint.getAllInstances().length;
+				let results = [];
+				for (let index = 0; index < all_cars.length; index++) {
+					let car = all_cars[index];
+					let [posx, posy] = car.getImagePoint("Front");
+					let col = car.getChildAt(0);
+					let txt = col.getChildAt(0);
+					let newCP = getCP(col.instVars.ToCheckpoint);
+					let oldCP = getCP((CPs - 1 + col.instVars.ToCheckpoint) % CPs);
+					let completion_fraction = Vector.distance(Vector(posx, posy), Vector(oldCP.x, oldCP.y)) / Vector.distance(Vector(oldCP.x, oldCP.y), Vector(newCP.x, newCP.y));
+					let pos = (col.instVars.Lap) * CPs + col.instVars.ToCheckpoint + completion_fraction;
+					//console.log(col, pos);
+					results.push({txt: txt, pos: pos});
+				}
+				results = results.sort((a, b) => {return b.pos - a.pos});
+				for (let index = 0; index < results.length; index++) results[index].txt.text = String(index + 1);
 			}
-			results = results.sort((a, b) => {return b.pos - a.pos});
-			for (let index = 0; index < results.length; index++) results[index].txt.text = String(index + 1);
 		},
 
 		async Menusheet_Event66_Act1(runtime, localVars)
@@ -483,11 +494,18 @@ const scriptsInEvents = {
 			localVars.val = runtime.callFunction(prompt.instVars.function_to_call, prompt.instVars.param1, prompt.instVars.param2);
 		},
 
-		async Levelinits_Event8_Act2(runtime, localVars)
+		async Levelinits_Event8_Act4(runtime, localVars)
 		{
 			const tile = localVars.tile;
 			//console.log(tile);
 			localVars.is_start = ((tile == 1) || (tile == 19) || (tile == 37) || (tile == 55));
+		},
+
+		async Levelinits_Event9_Act3(runtime, localVars)
+		{
+			let tmap = runtime.objects.roads.getFirstPickedInstance();
+			let ttile = tmap.getTileAt(localVars.lv1, localVars.lv2);
+			localVars.tile_rotation = tile_degrees(ttile);
 		},
 
 		async Levelinits_Event16_Act2(runtime, localVars)
