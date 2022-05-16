@@ -111,6 +111,61 @@
 							}
 						},
 						{
+							"type": "borders",
+							"properties": {
+								"initially-visible": true,
+								"tile-width": 128,
+								"tile-height": 128,
+								"tile-x-offset": 0,
+								"tile-y-offset": 0,
+								"tile-x-spacing": 0,
+								"tile-y-spacing": 0,
+								"tile-x-drawing-offset": 0,
+								"tile-y-drawing-offset": 0,
+								"drawing-mode": "top-to-right"
+							},
+							"uid": 681,
+							"instanceVariables": {},
+							"behaviors": {
+								"Solid": {
+									"properties": {
+										"enabled": true,
+										"tags": ""
+									}
+								}
+							},
+							"ownData": {
+								"tilemapData": {
+									"width": 36,
+									"height": 36,
+									"max-width": 144,
+									"max-height": 144,
+									"data": "36x1,108x2,36x1,108x2,36x1,108x2,12x1,18x2,6x1,108x2,12x1,18x2,6x1,108x2,12x1,18x2,6x1,108x2,12x1,18x2,6x1,108x2,12x1,18x2,6x1,108x2,12x1,18x2,6x1,108x2,12x1,6x2,6x1,6x2,6x1,108x2,12x1,6x2,6x1,6x2,6x1,108x2,12x1,6x2,6x1,6x2,6x1,108x2,12x1,6x2,6x1,6x2,6x1,108x2,12x1,6x2,6x1,6x2,6x1,108x2,12x1,6x2,6x1,6x2,6x1,108x2,3x1,15x2,6x1,6x2,6x1,108x2,3x1,15x2,6x1,6x2,6x1,108x2,3x1,15x2,6x1,6x2,6x1,108x2,3x1,15x2,6x1,6x2,6x1,108x2,3x1,15x2,6x1,6x2,6x1,108x2,3x1,15x2,6x1,6x2,6x1,108x2,3x1,6x2,15x1,6x2,6x1,108x2,3x1,6x2,15x1,6x2,6x1,108x2,3x1,27x2,6x1,108x2,3x1,27x2,6x1,108x2,3x1,27x2,6x1,108x2,3x1,27x2,6x1,108x2,3x1,27x2,6x1,108x2,3x1,27x2,6x1,108x2,36x1,108x2,36x1,108x2,36x1,108x2,36x1,108x2,36x1,108x2,36x1,108x2,36x1,108x2,3x1,141x2,3x1,141x2,3x1,141x2,3x1,141x2,3x1,141x2,3x1,141x2,3x1,141x2,3x1,141x2,3x1,141x2,3x1,141x2,3x1,14109x2"
+								},
+								"tile-width": 128,
+								"tile-height": 128,
+								"tile-x-offset": 0,
+								"tile-y-offset": 0,
+								"tile-x-spacing": 0,
+								"tile-y-spacing": 0
+							},
+							"world": {
+								"x": 0,
+								"y": 0,
+								"width": 4608,
+								"height": 4608,
+								"originX": 0,
+								"originY": 0,
+								"color": [
+									1,
+									1,
+									1,
+									1
+								],
+								"zElevation": 0
+							}
+						},
+						{
 							"type": "checkpoint",
 							"properties": {
 								"initially-visible": false,
@@ -1331,7 +1386,7 @@
 							"type": "Obstacle",
 							"properties": {
 								"initially-visible": true,
-								"initial-animation": "Barrel2",
+								"initial-animation": "Spikes",
 								"initial-frame": 0,
 								"enable-collisions": true,
 								"live-preview": false
@@ -1340,7 +1395,7 @@
 							"instanceVariables": {
 								"TargetName": "Obstacle",
 								"Health": 3,
-								"Moving": true
+								"Moving": false
 							},
 							"behaviors": {
 								"Sine": {
@@ -1364,12 +1419,12 @@
 								}
 							},
 							"world": {
-								"x": 2312,
-								"y": 1266,
-								"width": 48,
-								"height": 70,
+								"x": 2178,
+								"y": 1500,
+								"width": 220,
+								"height": 39,
 								"originX": 0.5,
-								"originY": 0.5,
+								"originY": 0.8717948717948718,
 								"color": [
 									1,
 									1,
@@ -3413,7 +3468,11 @@
 						"live-preview": false
 					},
 					"uid": 55,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Pause",
+						"onclick": "PauseSwitch",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 64,
@@ -3484,7 +3543,11 @@
 						"live-preview": false
 					},
 					"uid": 520,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Jump",
+						"onclick": "Jump",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 649,
@@ -3513,7 +3576,11 @@
 						"live-preview": false
 					},
 					"uid": 580,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Nitro",
+						"onclick": "UseNitro",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 84,
@@ -3575,7 +3642,11 @@
 						"live-preview": false
 					},
 					"uid": 581,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Shoot",
+						"onclick": "Shoot",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 81,
@@ -3646,7 +3717,11 @@
 						"live-preview": false
 					},
 					"uid": 622,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 471,
@@ -3675,7 +3750,11 @@
 						"live-preview": false
 					},
 					"uid": 623,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 283,
@@ -3800,6 +3879,14 @@
 			"uid": 646,
 			"instanceVariables": {
 				"tag": "cars"
+			}
+		},
+		{
+			"type": "game_keyboard_controls",
+			"properties": {},
+			"uid": 117,
+			"instanceVariables": {
+				"tag": "keyboard"
 			}
 		}
 	],

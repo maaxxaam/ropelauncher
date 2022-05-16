@@ -6,6 +6,16 @@ function lerp(a,b,f) { return (b-a)*f+a; };
 
 export function clamp(low, a, high) { return a < low ? low : (a > high ? high : a); };
 
+export function tile_degrees(integer) {
+	let horizontal = -((integer & ITilemapInstance.TILE_FLIPPED_HORIZONTAL) >> 31);
+	let vertical = (integer & ITilemapInstance.TILE_FLIPPED_VERTICAL) >> 30;
+	let diagonal = (integer & ITilemapInstance.TILE_FLIPPED_DIAGONAL) >> 29;
+	if (horizontal & diagonal) return 90;
+	else if (horizontal & vertical) return 180;
+	else if (vertical & diagonal) return 270;
+	else return 0;
+};
+
 function Point(x, y) {
 	return {x:x, y:y}
 }

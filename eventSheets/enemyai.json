@@ -326,14 +326,6 @@
 					}
 				},
 				{
-					"id": "is-boolean-instance-variable-set",
-					"objectClass": "car_edge_collision",
-					"sid": 170709316319862,
-					"parameters": {
-						"instance-variable": "Moving"
-					}
-				},
-				{
 					"id": "pick-by-comparison",
 					"objectClass": "System",
 					"sid": 698698357974774,
@@ -342,6 +334,16 @@
 						"expression": "AIGoal.UID",
 						"comparison": 0,
 						"value": "car_edge_collision.GoalUID"
+					}
+				},
+				{
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 595440268977263,
+					"parameters": {
+						"variable": "GameState",
+						"comparison": 0,
+						"value": "GAME_ACTIVE"
 					}
 				}
 			],

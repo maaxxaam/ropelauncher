@@ -196,6 +196,49 @@
 				"repeatCount": 1,
 				"repeatTo": 0,
 				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 220,
+						"height": 39,
+						"originX": 0.5,
+						"originY": 0.8717948717948718,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 6056401,
+						"collisionPoly": {
+							"points": [
+								0,
+								0,
+								0.5,
+								0,
+								1,
+								0,
+								1,
+								0.8717948717948718,
+								1,
+								1,
+								0.5,
+								1,
+								0,
+								1,
+								0,
+								0.8717948717948718
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 338241891637787,
+				"name": "Spikes",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
 			}
 		],
 		"subfolders": []

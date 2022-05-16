@@ -56,9 +56,72 @@
 						"\"Click\"",
 						"SFX"
 					]
+				},
+				{
+					"callFunction": "ButtonProxy",
+					"sid": 932125957110733,
+					"parameters": [
+						"Button.UID",
+						"Button.click_param"
+					]
 				}
 			],
 			"sid": 940687657309202
+		},
+		{
+			"functionName": "ButtonProxy",
+			"functionDescription": "",
+			"functionCategory": "Proxies",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ButtonUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 672040522431946
+				},
+				{
+					"name": "ButtonParam",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 983299647604209
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 667768738601670,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Button",
+							"sid": 333375996342317,
+							"parameters": {
+								"unique-id": "ButtonUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "call-mapped-function",
+							"objectClass": "Functions",
+							"sid": 503210533210461,
+							"parameters": {
+								"name": "\"onclick\"",
+								"string": "Button.onclick",
+								"forward-params": "1"
+							}
+						}
+					],
+					"sid": 505836044621335
+				}
+			]
 		},
 		{
 			"eventType": "block",
@@ -82,7 +145,8 @@
 					}
 				}
 			],
-			"sid": 124697664816028
+			"sid": 124697664816028,
+			"disabled": true
 		},
 		{
 			"eventType": "block",
@@ -280,6 +344,7 @@
 			],
 			"actions": [],
 			"sid": 477010559639837,
+			"disabled": true,
 			"children": [
 				{
 					"eventType": "block",
@@ -331,6 +396,7 @@
 						}
 					],
 					"sid": 604359223511584,
+					"disabled": true,
 					"children": [
 						{
 							"eventType": "block",
@@ -366,7 +432,8 @@
 									}
 								}
 							],
-							"sid": 978881221503096
+							"sid": 978881221503096,
+							"disabled": true
 						},
 						{
 							"eventType": "block",
@@ -399,7 +466,8 @@
 									}
 								}
 							],
-							"sid": 809437055105573
+							"sid": 809437055105573,
+							"disabled": true
 						}
 					]
 				},
@@ -452,7 +520,8 @@
 							}
 						}
 					],
-					"sid": 560932688379192
+					"sid": 560932688379192,
+					"disabled": true
 				},
 				{
 					"eventType": "block",
@@ -504,6 +573,7 @@
 						}
 					],
 					"sid": 388229401740255,
+					"disabled": true,
 					"children": [
 						{
 							"eventType": "block",
@@ -518,7 +588,8 @@
 								}
 							],
 							"actions": [],
-							"sid": 730733248176328
+							"sid": 730733248176328,
+							"disabled": true
 						},
 						{
 							"eventType": "block",
@@ -530,7 +601,8 @@
 								}
 							],
 							"actions": [],
-							"sid": 141642944475527
+							"sid": 141642944475527,
+							"disabled": true
 						}
 					]
 				},
@@ -585,7 +657,8 @@
 							}
 						}
 					],
-					"sid": 523993315715942
+					"sid": 523993315715942,
+					"disabled": true
 				}
 			]
 		},
@@ -608,7 +681,8 @@
 					}
 				}
 			],
-			"sid": 526433316224888
+			"sid": 526433316224888,
+			"disabled": true
 		},
 		{
 			"eventType": "block",
@@ -629,45 +703,82 @@
 					}
 				}
 			],
-			"sid": 769846554908381
+			"sid": 769846554908381,
+			"disabled": true
 		},
 		{
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "on-ads-fullscreen-close",
-					"objectClass": "GameScore",
-					"sid": 305695147477661
-				},
+					"id": "on-any-key-released",
+					"objectClass": "Keyboard",
+					"sid": 976099722126342
+				}
+			],
+			"actions": [],
+			"sid": 497995349142007,
+			"children": [
 				{
-					"id": "is-ads-sticky-available",
-					"objectClass": "GameScore",
-					"sid": 205848292995428
-				},
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 696565935233037,
+							"parameters": {
+								"first-value": "LayoutName",
+								"comparison": 1,
+								"second-value": "\"Menu\""
+							}
+						},
+						{
+							"id": "has-key",
+							"objectClass": "game_keyboard_controls",
+							"sid": 904655324904373,
+							"parameters": {
+								"key": "str(Keyboard.LastKeyCode)"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "call-mapped-function",
+							"objectClass": "Functions",
+							"sid": 711102591424144,
+							"parameters": {
+								"name": "\"onclick\"",
+								"string": "game_keyboard_controls.Get(str(Keyboard.LastKeyCode))",
+								"forward-params": "0"
+							}
+						}
+					],
+					"sid": 685340593747596
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
 				{
-					"id": "is-on-mobile",
-					"objectClass": "PlatformInfo",
-					"sid": 686052690129150
-				},
-				{
-					"id": "compare-boolean-eventvar",
-					"objectClass": "System",
-					"sid": 596988433072394,
+					"id": "on-any-button-pressed",
+					"objectClass": "Gamepad",
+					"sid": 187022890609580,
 					"parameters": {
-						"variable": "AdsDisabled"
-					},
-					"isInverted": true
+						"gamepad": "0"
+					}
 				}
 			],
 			"actions": [
 				{
-					"id": "ads-show-sticky",
-					"objectClass": "GameScore",
-					"sid": 301718773726286
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 356510018889001,
+					"parameters": {
+						"message": "Gamepad.LastButton(0)"
+					}
 				}
 			],
-			"sid": 674746645293579,
-			"disabled": true
+			"sid": 104526680856725
 		}
 	],
 	"sid": 936943754957788

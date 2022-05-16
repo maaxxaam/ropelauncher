@@ -1,0 +1,16 @@
+{
+	"name": "garage_value",
+	"plugin-id": "Text",
+	"sid": 992146399751722,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "charID",
+			"type": "number",
+			"desc": "",
+			"sid": 377238726614486
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": []
+}

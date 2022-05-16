@@ -59,7 +59,9 @@
 					},
 					"uid": 500,
 					"instanceVariables": {
-						"AnimationPrefix": "Settings"
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
@@ -90,7 +92,9 @@
 					},
 					"uid": 501,
 					"instanceVariables": {
-						"AnimationPrefix": "Levels"
+						"AnimationPrefix": "Levels",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
@@ -113,7 +117,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v11 alpha",
+						"text": "v11.1 alpha",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 24,
@@ -163,7 +167,9 @@
 					},
 					"uid": 48,
 					"instanceVariables": {
-						"AnimationPrefix": "Garage"
+						"AnimationPrefix": "Garage",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
@@ -270,6 +276,9 @@
 					},
 					"uid": 34,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"SendToLvl": "Lvl1"
 					},
 					"behaviors": {},
@@ -301,6 +310,9 @@
 					},
 					"uid": 61,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"SendToLvl": "Lvl2"
 					},
 					"behaviors": {},
@@ -332,6 +344,9 @@
 					},
 					"uid": 62,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"SendToLvl": "Lvl3"
 					},
 					"behaviors": {},
@@ -489,6 +504,9 @@
 					},
 					"uid": 108,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"SendToLvl": "ParkingLot"
 					},
 					"behaviors": {},
@@ -561,7 +579,11 @@
 						"live-preview": false
 					},
 					"uid": 497,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 658,
@@ -591,6 +613,9 @@
 					},
 					"uid": 498,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"SelectedLvl": "ParkingLot",
 						"SelectedMode": "FreeRoam"
 					},
@@ -665,14 +690,16 @@
 					},
 					"uid": 507,
 					"instanceVariables": {
-						"AnimationPrefix": "FreeRoam"
+						"AnimationPrefix": "FreeRoam",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
-						"x": 219,
-						"y": 777,
-						"width": 384,
-						"height": 128,
+						"x": 177.4268925425238,
+						"y": 763.1422975141746,
+						"width": 300.8537850850476,
+						"height": 100.2845950283492,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -696,14 +723,16 @@
 					},
 					"uid": 508,
 					"instanceVariables": {
-						"AnimationPrefix": "Race"
+						"AnimationPrefix": "Race",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
-						"x": 342,
-						"y": 923,
-						"width": 384,
-						"height": 128,
+						"x": 172.979335066425,
+						"y": 904.659778355475,
+						"width": 302.4240526997446,
+						"height": 100.80801756658153,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -727,14 +756,49 @@
 					},
 					"uid": 509,
 					"instanceVariables": {
-						"AnimationPrefix": "Ghost"
+						"AnimationPrefix": "Ghost",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
-						"x": 480,
-						"y": 1070,
-						"width": 384,
-						"height": 128,
+						"x": 524,
+						"y": 765,
+						"width": 305.9803915286076,
+						"height": 101.99346384286919,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							0.5
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ModeBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "EndlessIdle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 684,
+					"instanceVariables": {
+						"AnimationPrefix": "Endless",
+						"onclick": "",
+						"click_param": ""
+					},
+					"behaviors": {},
+					"world": {
+						"x": 521,
+						"y": 905,
+						"width": 302.4240526997446,
+						"height": 100.80801756658153,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -791,7 +855,11 @@
 						"live-preview": false
 					},
 					"uid": 502,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 658,
@@ -821,7 +889,9 @@
 					},
 					"uid": 503,
 					"instanceVariables": {
-						"AnimationPrefix": "Camera"
+						"AnimationPrefix": "Camera",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
@@ -852,7 +922,9 @@
 					},
 					"uid": 504,
 					"instanceVariables": {
-						"AnimationPrefix": "Movement"
+						"AnimationPrefix": "Movement",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
@@ -883,7 +955,9 @@
 					},
 					"uid": 505,
 					"instanceVariables": {
-						"AnimationPrefix": "Difficulty"
+						"AnimationPrefix": "Difficulty",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
@@ -914,7 +988,9 @@
 					},
 					"uid": 597,
 					"instanceVariables": {
-						"AnimationPrefix": "Cars"
+						"AnimationPrefix": "Cars",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
@@ -945,7 +1021,9 @@
 					},
 					"uid": 625,
 					"instanceVariables": {
-						"AnimationPrefix": "Nitro"
+						"AnimationPrefix": "Nitro",
+						"onclick": "",
+						"click_param": ""
 					},
 					"behaviors": {},
 					"world": {
@@ -1009,7 +1087,11 @@
 						"live-preview": false
 					},
 					"uid": 644,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 653,
@@ -1647,6 +1729,9 @@
 					},
 					"uid": 659,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"charID": 0
 					},
 					"behaviors": {},
@@ -1678,6 +1763,9 @@
 					},
 					"uid": 660,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"charID": 1
 					},
 					"behaviors": {},
@@ -1709,6 +1797,9 @@
 					},
 					"uid": 661,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"charID": 2
 					},
 					"behaviors": {},
@@ -1740,6 +1831,9 @@
 					},
 					"uid": 662,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"charID": 3
 					},
 					"behaviors": {},
@@ -1771,6 +1865,9 @@
 					},
 					"uid": 663,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"charID": 4
 					},
 					"behaviors": {},
@@ -1802,6 +1899,9 @@
 					},
 					"uid": 664,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"direction": 1
 					},
 					"behaviors": {},
@@ -1833,6 +1933,9 @@
 					},
 					"uid": 665,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"direction": -1
 					},
 					"behaviors": {},
@@ -1864,6 +1967,9 @@
 					},
 					"uid": 666,
 					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": "",
 						"State": 0
 					},
 					"behaviors": {},
@@ -2017,9 +2123,9 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 326,
+						"x": 247,
 						"y": 601,
-						"width": 276,
+						"width": 355,
 						"height": 62,
 						"originX": 0,
 						"originY": 0,
@@ -2059,9 +2165,9 @@
 					"instanceVariables": {},
 					"behaviors": {},
 					"world": {
-						"x": 326,
+						"x": 281,
 						"y": 700,
-						"width": 276,
+						"width": 321,
 						"height": 62,
 						"originX": 0,
 						"originY": 0,
@@ -2231,6 +2337,226 @@
 						"y": 47,
 						"width": 271,
 						"height": 57,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_value",
+					"properties": {
+						"text": "Text",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 24,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "top",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 420,
+					"instanceVariables": {
+						"charID": 0
+					},
+					"behaviors": {},
+					"world": {
+						"x": 60,
+						"y": 611,
+						"width": 227,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_value",
+					"properties": {
+						"text": "Text",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 24,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "top",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 698,
+					"instanceVariables": {
+						"charID": 1
+					},
+					"behaviors": {},
+					"world": {
+						"x": 60,
+						"y": 712,
+						"width": 227,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_value",
+					"properties": {
+						"text": "Text",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 24,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "top",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 699,
+					"instanceVariables": {
+						"charID": 2
+					},
+					"behaviors": {},
+					"world": {
+						"x": 60,
+						"y": 811,
+						"width": 227,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_value",
+					"properties": {
+						"text": "Text",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 24,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "top",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 700,
+					"instanceVariables": {
+						"charID": 3
+					},
+					"behaviors": {},
+					"world": {
+						"x": 60,
+						"y": 910,
+						"width": 227,
+						"height": 46,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_value",
+					"properties": {
+						"text": "Text",
+						"enable-bbcode": true,
+						"font": "Arial",
+						"size": 24,
+						"line-height": 0,
+						"bold": false,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "top",
+						"wrapping": "word",
+						"initially-visible": true,
+						"origin": "top-left"
+					},
+					"uid": 701,
+					"instanceVariables": {
+						"charID": 4
+					},
+					"behaviors": {},
+					"world": {
+						"x": 60,
+						"y": 1011,
+						"width": 227,
+						"height": 46,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -2614,9 +2940,9 @@
 								}
 							},
 							"world": {
-								"x": 369,
+								"x": 13.630657398821427,
 								"y": 281,
-								"width": 342,
+								"width": 697.3693426011786,
 								"height": 75,
 								"originX": 0,
 								"originY": 0,
@@ -2698,9 +3024,9 @@
 								}
 							},
 							"world": {
-								"x": 369,
+								"x": 13.630657398821427,
 								"y": 423,
-								"width": 342,
+								"width": 697.3693426011786,
 								"height": 75,
 								"originX": 0,
 								"originY": 0,
@@ -2782,9 +3108,9 @@
 								}
 							},
 							"world": {
-								"x": 369,
+								"x": 13.630657398821427,
 								"y": 562,
-								"width": 342,
+								"width": 697.3693426011786,
 								"height": 75,
 								"originX": 0,
 								"originY": 0,
@@ -2866,9 +3192,9 @@
 								}
 							},
 							"world": {
-								"x": 369,
+								"x": 13.630657398821427,
 								"y": 699,
-								"width": 342,
+								"width": 697.3693426011786,
 								"height": 75,
 								"originX": 0,
 								"originY": 0,
@@ -2996,9 +3322,9 @@
 								}
 							},
 							"world": {
-								"x": 369,
+								"x": 13.630657398821427,
 								"y": 851,
-								"width": 342,
+								"width": 697.3693426011786,
 								"height": 75,
 								"originX": 0,
 								"originY": 0,
@@ -5681,7 +6007,11 @@
 						"live-preview": false
 					},
 					"uid": 17,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 657,

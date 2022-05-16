@@ -216,6 +216,26 @@
 										},
 										{
 											"eventType": "variable",
+											"name": "lv1",
+											"type": "number",
+											"initialValue": "0",
+											"comment": "",
+											"isStatic": false,
+											"isConstant": false,
+											"sid": 659197556832452
+										},
+										{
+											"eventType": "variable",
+											"name": "lv2",
+											"type": "number",
+											"initialValue": "0",
+											"comment": "",
+											"isStatic": false,
+											"isConstant": false,
+											"sid": 191728955842030
+										},
+										{
+											"eventType": "variable",
 											"name": "tile",
 											"type": "number",
 											"initialValue": "0",
@@ -223,6 +243,16 @@
 											"isStatic": false,
 											"isConstant": false,
 											"sid": 708620185504794
+										},
+										{
+											"eventType": "variable",
+											"name": "tile_rotation",
+											"type": "number",
+											"initialValue": "0",
+											"comment": "",
+											"isStatic": false,
+											"isConstant": false,
+											"sid": 909946774900821
 										},
 										{
 											"eventType": "block",
@@ -257,6 +287,24 @@
 													"parameters": {
 														"variable": "tile",
 														"value": "roads.TileAt(loopindex(\"roadX\"), loopindex(\"roadY\"))"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 368707550211197,
+													"parameters": {
+														"variable": "lv1",
+														"value": "loopindex(\"roadX\")"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 845653178698248,
+													"parameters": {
+														"variable": "lv2",
+														"value": "loopindex(\"roadY\")"
 													}
 												},
 												{
@@ -309,6 +357,18 @@
 																"y": "roads.TileToPositionY(loopindex(\"roadY\"))",
 																"create-hierarchy": false,
 																"template-name": "\"\""
+															}
+														},
+														{
+															"type": "script",
+															"script": "let tmap = runtime.objects.roads.getFirstPickedInstance();\nlet ttile = tmap.getTileAt(localVars.lv1, localVars.lv2);\nlocalVars.tile_rotation = tile_degrees(ttile);"
+														},
+														{
+															"id": "set-angle",
+															"objectClass": "Car",
+															"sid": 236258947429467,
+															"parameters": {
+																"angle": "270 + tile_rotation"
 															}
 														},
 														{

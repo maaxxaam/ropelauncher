@@ -207,6 +207,14 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "gamepad",
+			"name": "Gamepad",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "Pin",
 			"name": "Pin",
@@ -335,6 +343,14 @@
 			"bundled": false
 		},
 		{
+			"type": "behavior",
+			"id": "solid",
+			"name": "Solid",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
 			"type": "effect",
 			"id": "blurhorizontal",
 			"name": "Blur horizontal",
@@ -451,7 +467,11 @@
 			"prompt_back",
 			"prompt_yes",
 			"prompt_no",
-			"prompt_message"
+			"prompt_message",
+			"game_keyboard_controls",
+			"Gamepad",
+			"borders",
+			"garage_value"
 		],
 		"subfolders": []
 	},
@@ -659,6 +679,14 @@
 					"name": "Ownership_default.json",
 					"type": "application/json",
 					"sid": 687222545628093,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Keyboard_mapping_default.json",
+					"type": "application/json",
+					"sid": 280743589371615,
 					"file-info": {
 						"purpose": "none"
 					}

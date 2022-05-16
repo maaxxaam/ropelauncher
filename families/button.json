@@ -8,6 +8,18 @@
 			"type": "string",
 			"desc": "",
 			"sid": 777369516922966
+		},
+		{
+			"name": "onclick",
+			"type": "string",
+			"desc": "",
+			"sid": 888979994212747
+		},
+		{
+			"name": "click_param",
+			"type": "string",
+			"desc": "",
+			"sid": 773028482647085
 		}
 	],
 	"behaviorTypes": [],
@@ -16,6 +28,25 @@
 		"SettBut",
 		"MainBut",
 		"TabBut",
-		"ModeBut"
+		"ModeBut",
+		"DecelBut",
+		"AccelBut",
+		"BackToMainBut",
+		"ReplayBut",
+		"ResumeBut",
+		"RewindBut",
+		"ShootBut",
+		"ToMenuBut",
+		"JumpBut",
+		"NitroBut",
+		"LvlBut",
+		"pause_menu",
+		"prompt_no",
+		"prompt_yes",
+		"garage_switch",
+		"garage_upgrade_char",
+		"RestartBut",
+		"PlayLvlBut",
+		"garage_buy"
 	]
 }

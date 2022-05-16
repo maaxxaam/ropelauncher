@@ -233,6 +233,81 @@
 				],
 				"subfolders": [],
 				"name": "FreeRoam"
+			},
+			{
+				"items": [
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 6766864,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 807962226002122,
+						"name": "EndlessIdle",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 1321312,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 955901598759017,
+						"name": "EndlessHover",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					},
+					{
+						"frames": [
+							{
+								"width": 384,
+								"height": 128,
+								"originX": 0.5,
+								"originY": 0.5,
+								"originalSource": "",
+								"exportFormat": "png",
+								"exportQuality": 0.8,
+								"imageSpriteId": 8877245,
+								"useCollisionPoly": true,
+								"duration": 1
+							}
+						],
+						"sid": 911060587880274,
+						"name": "EndlessTap",
+						"isLooping": false,
+						"isPingPong": false,
+						"repeatCount": 1,
+						"repeatTo": 0,
+						"speed": 5
+					}
+				],
+				"subfolders": [],
+				"name": "Endless"
 			}
 		]
 	}

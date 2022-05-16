@@ -11,12 +11,6 @@
 			"sid": 413779376436639
 		},
 		{
-			"name": "Moving",
-			"type": "boolean",
-			"desc": "",
-			"sid": 138947962801838
-		},
-		{
 			"name": "Lap",
 			"type": "number",
 			"desc": "",

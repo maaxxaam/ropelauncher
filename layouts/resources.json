@@ -472,7 +472,11 @@
 						"live-preview": false
 					},
 					"uid": 555,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "ToMenu",
+						"onclick": "ToMenu",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 840,
@@ -501,7 +505,11 @@
 						"live-preview": false
 					},
 					"uid": 556,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Restart",
+						"onclick": "Restart",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 1041,
@@ -530,7 +538,11 @@
 						"live-preview": false
 					},
 					"uid": 557,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Resume",
+						"onclick": "PauseSwitch",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 1266,
@@ -559,7 +571,11 @@
 						"live-preview": false
 					},
 					"uid": 558,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Replay",
+						"onclick": "Replay",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 968,
@@ -714,7 +730,11 @@
 						"live-preview": false
 					},
 					"uid": 596,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Rewind",
+						"onclick": "Rewind",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 418,
@@ -787,7 +807,7 @@
 				{
 					"type": "car_position",
 					"properties": {
-						"text": "5",
+						"text": "",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 30,
@@ -952,7 +972,6 @@
 					"uid": 641,
 					"instanceVariables": {
 						"ToCheckpoint": 1,
-						"Moving": false,
 						"Lap": 0,
 						"randx": 0,
 						"randy": 0,
@@ -1223,7 +1242,11 @@
 						"live-preview": false
 					},
 					"uid": 606,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"sceneGraphData": {
 						"parent-uid": 600,
@@ -1277,7 +1300,11 @@
 						"live-preview": false
 					},
 					"uid": 607,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"AnimationPrefix": "Settings",
+						"onclick": "",
+						"click_param": ""
+					},
 					"behaviors": {},
 					"sceneGraphData": {
 						"parent-uid": 600,

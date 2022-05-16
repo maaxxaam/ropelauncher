@@ -2,6 +2,10 @@
 	"name": "MenuSheet",
 	"events": [
 		{
+			"eventType": "include",
+			"includeSheet": "AllEvents"
+		},
+		{
 			"eventType": "variable",
 			"name": "MenuState",
 			"type": "string",
@@ -98,6 +102,15 @@
 					}
 				},
 				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 601443576823213,
+					"parameters": {
+						"tag": "\"keyboard\"",
+						"file": "Keyboard_mapping_default.json"
+					}
+				},
+				{
 					"id": "map-function",
 					"objectClass": "Functions",
 					"sid": 303834832615510,
@@ -115,6 +128,15 @@
 						"name": "\"Garage\"",
 						"string": "\"UpgradeCar\"",
 						"function": "UpgradeCar"
+					}
+				},
+				{
+					"id": "map-function-default",
+					"objectClass": "Functions",
+					"sid": 817279132267001,
+					"parameters": {
+						"name": "\"onclick\"",
+						"function": "Empty"
 					}
 				}
 			],
@@ -1580,6 +1602,17 @@
 						{
 							"id": "pick-by-comparison",
 							"objectClass": "System",
+							"sid": 490544435416930,
+							"parameters": {
+								"object": "garage_value",
+								"expression": "garage_value.charID",
+								"comparison": 0,
+								"value": "loopindex(\"car_chars\")"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
 							"sid": 411517760392630,
 							"parameters": {
 								"object": "garage_upgrade_char",
@@ -1631,6 +1664,14 @@
 							"sid": 845526952898887,
 							"parameters": {
 								"width": "((CarChars.At(char_line, 0, carID) + (max_upgrade_tier = 0 ? 0 : CarChars.At(char_line, max_upgrade_tier + 1, carID))) - garage_bar_max.lval) / (garage_bar_max.hval - garage_bar_max.lval) * 624"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "garage_value",
+							"sid": 890106533853136,
+							"parameters": {
+								"text": "CarChars.At(char_line, 0, carID) + (upgrade_tier = 0 ? 0 : CarChars.At(char_line, upgrade_tier + 1, carID))"
 							}
 						}
 					],
@@ -2247,6 +2288,18 @@
 				}
 			],
 			"sid": 101655602285942
+		},
+		{
+			"functionName": "Empty",
+			"functionDescription": "",
+			"functionCategory": "Buttons",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 490698248633316
 		}
 	],
 	"sid": 188176345997916
