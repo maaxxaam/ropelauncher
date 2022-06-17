@@ -8227,6 +8227,17 @@ this._GetGamepadByIndex(gamepadIndex);if(!gamepad)return 0;let axisValue=gamepad
 }
 
 {
+'use strict';{const C3=self.C3;const DOM_COMPONENT_ID="file-chooser";C3.Plugins.filechooser=class FileChooserPlugin extends C3.SDKDOMPluginBase{constructor(opts){super(opts,DOM_COMPONENT_ID);this.AddElementMessageHandler("change",(sdkInst,e)=>sdkInst._OnChange(e))}Release(){super.Release()}}}{const C3=self.C3;C3.Plugins.filechooser.Type=class FileChooserType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass)}Release(){super.Release()}OnCreate(){}}}
+{const C3=self.C3;const ACCEPT=0;const SELECT=1;const INITIALLY_VISIBLE=2;const ID=3;const CLASS_NAME=4;const SINGLE=0;const MULTIPLE=1;const DOM_COMPONENT_ID="file-chooser";C3.Plugins.filechooser.Instance=class FileChooserInstance extends C3.SDKDOMInstanceBase{constructor(inst,properties){super(inst,DOM_COMPONENT_ID);this._accept="";this._isMultiSelect=false;this._id="";this._className="";this._files=[];if(properties){this._accept=properties[ACCEPT];this._isMultiSelect=properties[SELECT]!==SINGLE;
+this.GetWorldInfo().SetVisible(properties[INITIALLY_VISIBLE]);this._id=properties[ID];this._className=properties[CLASS_NAME]}this.CreateElement({"id":this._id,"className":this._className})}Release(){super.Release()}GetElementState(){return{"accept":this._accept,"isMultiSelect":this._isMultiSelect}}_GetFileAt(index){index=Math.floor(index);if(index<0||index>=this._files.length)return null;return this._files[index]}async _OnChange(e){this._files=e["files"];await this.TriggerAsync(C3.Plugins.filechooser.Cnds.OnChanged)}Draw(renderer){}GetPropertyValueByIndex(index){switch(index){case ACCEPT:return this._accept;
+case SELECT:return this._isMultiSelect?MULTIPLE:SINGLE}}SetPropertyValueByIndex(index,value){switch(index,value){case ACCEPT:if(this._accept===value)return;this._accept=value;this.UpdateElementState();break;case SELECT:if(this._isMultiSelect===(value!==SINGLE))return;this._isMultiSelect=value!==SINGLE;this.UpdateElementState();break}}}}{const C3=self.C3;C3.Plugins.filechooser.Cnds={OnChanged(){return true}}}
+{const C3=self.C3;C3.Plugins.filechooser.Acts={ReleaseFile(f){URL.revokeObjectURL(f)},Click(){this._PostToDOMElementMaybeSync("click")},Clear(){this.PostToDOMElement("clear")}}}
+{const C3=self.C3;const urlCache=new WeakMap;C3.Plugins.filechooser.Exps={FileCount(){return this._files.length},FileNameAt(i){const file=this._GetFileAt(i);return file?file["name"]||"":""},FileSizeAt(i){const file=this._GetFileAt(i);return file?file["size"]||0:0},FileTypeAt(i){const file=this._GetFileAt(i);return file?file["type"]||"":""},FileURLAt(i){const file=this._GetFileAt(i);if(!file)return"";let url=urlCache.get(file);if(url)return url;url=URL.createObjectURL(file);urlCache.set(file,url);
+return url}}};
+
+}
+
+{
 'use strict';{const C3=self.C3;C3.Behaviors.Pin=class PinBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.Pin.Type=class PinType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
 {const C3=self.C3;C3.Behaviors.Pin.Instance=class PinInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._pinInst=null;this._pinUid=-1;this._mode="";this._propSet=new Set;this._pinDist=0;this._pinAngle=0;this._pinImagePoint=0;this._dx=0;this._dy=0;this._dWidth=0;this._dHeight=0;this._dAngle=0;this._dz=0;this._lastKnownAngle=0;this._destroy=false;if(properties)this._destroy=properties[0];const rt=this._runtime.Dispatcher();this._disposables=new C3.CompositeDisposable(C3.Disposable.From(rt,
 "instancedestroy",e=>this._OnInstanceDestroyed(e.instance)),C3.Disposable.From(rt,"afterload",e=>this._OnAfterLoad()))}Release(){this._pinInst=null;super.Release()}_SetPinInst(inst){if(inst){this._pinInst=inst;this._StartTicking2()}else{this._pinInst=null;this._StopTicking2()}}_Pin(objectClass,mode,propList){if(!objectClass)return;const otherInst=objectClass.GetFirstPicked(this._inst);if(!otherInst)return;this._mode=mode;this._SetPinInst(otherInst);const myWi=this._inst.GetWorldInfo();const otherWi=
@@ -12779,41 +12790,38 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.DrawingCanvas,
 		C3.Plugins.gamepad,
 		C3.Behaviors.solid,
+		C3.Plugins.filechooser,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.Dictionary.Exps.Get,
 		C3.Plugins.System.Acts.WaitForPreviousActions,
 		C3.Plugins.shadowlight.Acts.ZMoveToObject,
-		C3.Plugins.System.Cnds.ForEach,
-		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
-		C3.Plugins.Sprite.Acts.SetAngle,
-		C3.Plugins.System.Exps.random,
-		C3.Plugins.System.Cnds.PickByComparison,
-		C3.Plugins.Dictionary.Cnds.CompareValue,
-		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
-		C3.Plugins.Sprite.Acts.SetAnim,
-		C3.Plugins.System.Exps.choose,
-		C3.Plugins.System.Cnds.Else,
+		C3.Plugins.System.Cnds.PickAll,
 		C3.Behaviors.Sin.Acts.SetEnabled,
-		C3.Plugins.Sprite.Acts.Destroy,
-		C3.Plugins.Sprite.Exps.AnimationName,
 		C3.Plugins.System.Cnds.PickNth,
 		C3.Plugins.Text.Acts.SetText,
+		C3.Plugins.PlatformInfo.Cnds.IsOnMobile,
+		C3.Plugins.System.Cnds.IsPreview,
 		C3.Plugins.TiledBg.Acts.Destroy,
+		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.System.Cnds.Else,
+		C3.Plugins.Dictionary.Cnds.CompareValue,
 		C3.Plugins.System.Cnds.CompareBoolVar,
 		C3.Plugins.System.Acts.MapFunction,
 		C3.Plugins.System.Acts.SetBoolVar,
+		C3.Plugins.System.Cnds.PickByComparison,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
 		C3.Plugins.System.Cnds.CompareVar,
-		C3.Plugins.System.Cnds.PickAll,
 		C3.Behaviors.CarPlus.Acts.SimulateControl,
 		C3.Plugins.System.Cnds.IsGroupActive,
+		C3.Plugins.System.Cnds.ForEach,
 		C3.Behaviors.CarPlus.Cnds.IsMoving,
 		C3.Plugins.System.Cnds.AngleWithin,
 		C3.Plugins.Sprite.Exps.Angle,
 		C3.Behaviors.CarPlus.Exps.MovingAngle,
+		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
 		C3.Plugins.System.Cnds.For,
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Plugins.Sprite.Exps.LayerName,
@@ -12841,6 +12849,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Behaviors.CarPlus.Acts.SetDriftRecover,
 		C3.Behaviors.CarPlus.Acts.SetDeceleration,
+		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
+		C3.Behaviors.CV_BoundedDragnDrop.Exps.yOrigin,
+		C3.Plugins.TiledBg.Exps.Y,
 		C3.Behaviors.CarPlus.Acts.SetMaxSpeed,
 		C3.Behaviors.CarPlus.Exps.MaxSpeed,
 		C3.Behaviors.CarPlus.Acts.SetAcceleration,
@@ -12867,17 +12878,18 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Touch.Exps.Y,
 		C3.Plugins.Sprite.Acts.SetTowardPosition,
 		C3.Plugins.Sprite.Cnds.IsBetweenAngles,
+		C3.Plugins.Sprite.Acts.SetAngle,
 		C3.Plugins.System.Exps.max,
 		C3.Plugins.Touch.Exps.SpeedAt,
 		C3.Plugins.Touch.Exps.TouchIndex,
 		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
 		C3.Plugins.TiledBg.Acts.SetX,
-		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
 		C3.Plugins.TiledBg.Exps.X,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
 		C3.Plugins.Sprite.Cnds.OnCollision,
 		C3.Plugins.Sprite.Cnds.IsVisible,
+		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
 		C3.Plugins.Sprite.Acts.AddInstanceVar,
 		C3.Behaviors.mcube_rexspline.Cnds.OnHitAnyPoint,
 		C3.Behaviors.mcube_rexspline.Acts.SetSpeed,
@@ -12906,7 +12918,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.PickParent,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
-		C3.ScriptsInEvents.Gamesheet_Event103_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event113_Act1,
 		C3.Plugins.NinePatch.Acts.SetWidth,
 		C3.Behaviors.Tween.Cnds.IsPlaying,
 		C3.Plugins.NinePatch.Acts.SetEffectParam,
@@ -12914,8 +12926,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.System.Exps.dt,
 		C3.Behaviors.Tween.Acts.StopAllTweens,
-		C3.ScriptsInEvents.Gamesheet_Event111,
-		C3.ScriptsInEvents.Gamesheet_Event112,
+		C3.ScriptsInEvents.Gamesheet_Event121,
+		C3.ScriptsInEvents.Gamesheet_Event122,
 		C3.Behaviors.Pin.Exps.PinnedUID,
 		C3.Plugins.Particles.Acts.Destroy,
 		C3.Plugins.Browser.Acts.Alert,
@@ -12944,13 +12956,21 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Behaviors.Tween.Acts.TweenValue,
 		C3.Behaviors.Bullet.Acts.SetSpeed,
+		C3.Plugins.System.Exps.tokenat,
+		C3.Plugins.System.Acts.CreateObjectByName,
+		C3.Plugins.System.Cnds.PickLastCreated,
+		C3.Plugins.Sprite.Acts.SetAnim,
+		C3.Plugins.Sprite.Exps.ObjectTypeName,
+		C3.Plugins.System.Exps.left,
+		C3.Plugins.System.Exps.int,
+		C3.Plugins.System.Exps.right,
+		C3.Plugins.System.Exps.len,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.AJAX.Acts.RequestFile,
 		C3.Plugins.System.Acts.MapFunctionDefault,
 		C3.Plugins.System.Acts.SetLayerVisible,
 		C3.Plugins.Button.Acts.SetCSSStyle,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
-		C3.Plugins.System.Cnds.PickLastCreated,
 		C3.Plugins.Text.Exps.Text,
 		C3.Plugins.Arr.Exps.Depth,
 		C3.Plugins.System.Acts.GoToLayoutByName,
@@ -12995,7 +13015,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
 		C3.Behaviors.CarPlus.Acts.Stop,
 		C3.Plugins.System.Cnds.EveryTick,
-		C3.Plugins.Sprite.Exps.ObjectTypeName,
+		C3.Plugins.System.Exps.random,
 		C3.Plugins.System.Cnds.IsBetweenAngles,
 		C3.Plugins.Particles.Acts.SetAngle,
 		C3.Plugins.Sprite.Acts.AddChild,
@@ -13018,8 +13038,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Tilemap.Exps.TileWidth,
 		C3.Plugins.Sprite.Exps.Height,
 		C3.Plugins.Tilemap.Exps.TileHeight,
-		C3.Plugins.Sprite.Cnds.PickDistance,
-		C3.Plugins.TiledBg.Exps.Y
+		C3.Plugins.Sprite.Cnds.PickDistance
 	];
 };
 self.C3_JsPropNameTable = [
@@ -13102,8 +13121,8 @@ self.C3_JsPropNameTable = [
 	{scenery: 0},
 	{Moving: 0},
 	{Sine: 0},
-	{Obstacle: 0},
-	{Bonus: 0},
+	{Old_Obstacle: 0},
+	{Old_Bonus: 0},
 	{BackToMainBut: 0},
 	{SelectedLvl: 0},
 	{SelectedMode: 0},
@@ -13188,11 +13207,23 @@ self.C3_JsPropNameTable = [
 	{Solid: 0},
 	{borders: 0},
 	{garage_value: 0},
+	{snapped_start: 0},
+	{snapped_end: 0},
+	{road: 0},
+	{decor: 0},
+	{obstacle: 0},
+	{bonus: 0},
+	{background: 0},
+	{FileChooser: 0},
+	{restX: 0},
+	{restY: 0},
+	{MotionCircle: 0},
 	{Button: 0},
 	{LoadableArray: 0},
 	{LoadableDict: 0},
 	{RocketTarget: 0},
 	{AIGoal: 0},
+	{MapElement: 0},
 	{GameState: 0},
 	{GAME_PAUSE: 0},
 	{GAME_REPLAY: 0},
@@ -13215,6 +13246,7 @@ self.C3_JsPropNameTable = [
 	{decel_coef: 0},
 	{steer_coef: 0},
 	{recover_coef: 0},
+	{motion_influence: 0},
 	{motion: 0},
 	{zoom_diameter: 0},
 	{zoom_speed: 0},
@@ -13228,6 +13260,13 @@ self.C3_JsPropNameTable = [
 	{CarUID: 0},
 	{SlowsDown: 0},
 	{ObstacleUID: 0},
+	{object_animation: 0},
+	{object_type: 0},
+	{new_uid: 0},
+	{object_string: 0},
+	{x: 0},
+	{y: 0},
+	{new_angle: 0},
 	{MenuState: 0},
 	{MENU_DEFAULT: 0},
 	{MENU_PROMPT: 0},
@@ -13373,35 +13412,12 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("difficulty_lives");
 		},
-		() => "Tree2",
-		() => "Tree1",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0, 360);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpInstVar();
-		},
-		() => "obstacles_dynamic_enabled",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => and("rock", f0("1", "2", "3"));
-		},
-		() => "obstacles_static_enabled",
-		() => "bonuses_rockets_enabled",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject();
-		},
-		() => "Rocket",
-		() => "Nitro",
-		() => "bonuses_nitro_enabled",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => and(v0.GetValue(), "❤");
 		},
 		() => "controls_scheme",
+		() => 2,
 		() => "destruction",
 		() => "Car",
 		() => "Obstacle",
@@ -13414,8 +13430,16 @@ self.C3_ExpressionFuncs = [
 		() => "Jump",
 		() => "Shoot",
 		() => "Rewind",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpInstVar();
+		},
 		() => "RaceActive",
 		() => "Car Mechanics",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject();
+		},
 		() => 7,
 		p => {
 			const n0 = p._GetNode(0);
@@ -13514,6 +13538,16 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
+			return () => ((C3.clamp((n0.ExpBehavior() - n1.ExpObject()), 0, 350) + 50) / 400);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => (v0.GetValue() * v1.GetValue());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
 			return () => C3.lerp(n0.ExpBehavior(), n1.ExpInstVar(), 0.03);
 		},
 		p => {
@@ -13595,7 +13629,7 @@ self.C3_ExpressionFuncs = [
 		() => "2",
 		() => "1",
 		() => "GO!",
-		() => "TestControls",
+		() => "LeverControls",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("GUI");
@@ -13656,6 +13690,14 @@ self.C3_ExpressionFuncs = [
 			return () => multiply(multiply(multiply(((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))) * (v2.GetValue() / 360)), add(multiply((-2), n3.ExpObject("controls_invert")), 1)), n4.ExpObject("controls_sensitivity")), n5.ExpInstVar());
 		},
 		() => "controls_drift_mode",
+		() => "MotionControls",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => C3.lerp(n0.ExpObject(), n1.ExpInstVar(), 0.12);
+		},
+		() => "Rocket",
+		() => "Nitro",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
@@ -13696,7 +13738,6 @@ self.C3_ExpressionFuncs = [
 			return () => ((((v0.GetValue()) === ("Rewind") ? 1 : 0)) ? ("RaceActive") : ("RaceOver"));
 		},
 		() => 0.1,
-		() => 2,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (-n0.ExpBehavior());
@@ -13920,6 +13961,27 @@ self.C3_ExpressionFuncs = [
 			return () => f0((n1.ExpBehavior() + 100), 300);
 		},
 		() => 150,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue(), 0, "_");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue(), 1, "_");
+		},
+		() => "road",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			const f3 = p._GetNode(3).GetBoundMethod();
+			const v4 = p._GetNode(4).GetVar();
+			const f5 = p._GetNode(5).GetBoundMethod();
+			const v6 = p._GetNode(6).GetVar();
+			return () => (((((f0(v1.GetValue(), 1)) === ("l") ? 1 : 0)) ? ((-1)) : (1)) * f2(f3(v4.GetValue(), (f5(v6.GetValue()) - 1))));
+		},
 		() => "flags",
 		() => "tiles",
 		() => "ownership",

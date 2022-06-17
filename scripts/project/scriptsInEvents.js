@@ -369,7 +369,7 @@ export function car_collision_resolution(car1, car2, collision_data, collision_p
 
 const scriptsInEvents = {
 
-		async Gamesheet_Event103_Act1(runtime, localVars)
+		async Gamesheet_Event113_Act1(runtime, localVars)
 		{
 			const obs = runtime.objects.Obstacle.getFirstPickedInstance();
 			const car = runtime.objects.car_edge_collision.getFirstPickedInstance();
@@ -411,7 +411,7 @@ const scriptsInEvents = {
 			
 		},
 
-		async Gamesheet_Event111(runtime, localVars)
+		async Gamesheet_Event121(runtime, localVars)
 		{
 			// let's perform collision checks for cars! yay!
 			if (runtime.globalVars.GameState == runtime.globalVars.GAME_ACTIVE) {
@@ -457,7 +457,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event112(runtime, localVars)
+		async Gamesheet_Event122(runtime, localVars)
 		{
 			// calculate car positions
 			function getCP(id) {
