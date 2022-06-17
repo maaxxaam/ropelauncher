@@ -3680,7 +3680,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Barrel2",
@@ -3733,7 +3733,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Barrel2",
@@ -3786,7 +3786,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Barrel1",
@@ -3839,7 +3839,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Barrel1",
@@ -3892,7 +3892,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Barrel1",
@@ -3945,7 +3945,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rock1",
@@ -3998,7 +3998,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Spikes",
@@ -4051,7 +4051,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rock1",
@@ -4104,7 +4104,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rock3",
@@ -4157,7 +4157,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rock1",
@@ -4210,7 +4210,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rock3",
@@ -4263,7 +4263,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rock2",
@@ -4316,7 +4316,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Barrel1",
@@ -4369,7 +4369,7 @@
 							}
 						},
 						{
-							"type": "Obstacle",
+							"type": "Old_Obstacle",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rock3",
@@ -4422,7 +4422,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -4473,7 +4473,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -4524,7 +4524,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -4575,7 +4575,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -4626,7 +4626,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -4677,7 +4677,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -4728,7 +4728,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -4779,7 +4779,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -4830,7 +4830,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -4881,7 +4881,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -4932,7 +4932,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -4983,7 +4983,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5034,7 +5034,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5085,7 +5085,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5136,7 +5136,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5187,7 +5187,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5238,7 +5238,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5289,7 +5289,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5340,7 +5340,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5391,7 +5391,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5442,7 +5442,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5493,7 +5493,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5544,7 +5544,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5595,7 +5595,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5646,7 +5646,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5697,7 +5697,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5748,7 +5748,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5799,7 +5799,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5850,7 +5850,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5901,7 +5901,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -5952,7 +5952,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -6003,7 +6003,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Nitro",
@@ -6054,7 +6054,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -6105,7 +6105,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -6156,7 +6156,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -6207,7 +6207,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -6258,7 +6258,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",
@@ -6309,7 +6309,7 @@
 							}
 						},
 						{
-							"type": "Bonus",
+							"type": "Old_Bonus",
 							"properties": {
 								"initially-visible": true,
 								"initial-animation": "Rocket",

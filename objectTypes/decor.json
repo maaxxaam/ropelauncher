@@ -1,0 +1,186 @@
+{
+	"name": "decor",
+	"plugin-id": "Sprite",
+	"sid": 832204049753113,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 141,
+						"height": 141,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 2004582,
+						"collisionPoly": {
+							"points": [
+								0.11347517730496454,
+								0.11347517730496454,
+								0.5,
+								0,
+								0.8723404255319149,
+								0.12056737588652482,
+								0.9929078014184397,
+								0.5,
+								0.8723404255319149,
+								0.8723404255319149,
+								0.5,
+								0.9858156028368794,
+								0.12056737588652482,
+								0.8723404255319149,
+								0,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 636224065759981,
+				"name": "Tree1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 214,
+						"height": 212,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 2194863,
+						"collisionPoly": {
+							"points": [
+								0.11214953271028037,
+								0.11320754716981132,
+								0.5,
+								0,
+								0.8785046728971962,
+								0.1179245283018868,
+								0.9953271028037384,
+								0.5,
+								0.8785046728971962,
+								0.8773584905660378,
+								0.5,
+								0.9952830188679245,
+								0.11682242990654206,
+								0.8773584905660378,
+								0,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 189888731322545,
+				"name": "Tree2",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 1219786,
+						"collisionPoly": {
+							"points": [
+								0.0078125,
+								0.0078125,
+								0.5,
+								0,
+								0.984375,
+								0.0078125,
+								0.9921875,
+								0.5,
+								0.984375,
+								0.984375,
+								0.5,
+								0.9921875,
+								0.0078125,
+								0.984375,
+								0,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 396638015246267,
+				"name": "Tent1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5752575,
+						"collisionPoly": {
+							"points": [
+								0.0078125,
+								0.0078125,
+								0.5,
+								0,
+								0.984375,
+								0.0078125,
+								0.9921875,
+								0.5,
+								0.984375,
+								0.984375,
+								0.5,
+								0.9921875,
+								0.0078125,
+								0.984375,
+								0,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 421517156091898,
+				"name": "Tent2",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

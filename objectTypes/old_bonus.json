@@ -1,0 +1,114 @@
+{
+	"name": "Old_Bonus",
+	"plugin-id": "Sprite",
+	"sid": 757710186359000,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "Moving",
+			"type": "boolean",
+			"desc": "",
+			"sid": 863206663302103
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Sin",
+			"name": "Sine",
+			"sid": 123494174352713
+		},
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 426981358298513
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 28,
+						"height": 28,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 8124074,
+						"collisionPoly": {
+							"points": [
+								0.18913851963000353,
+								0.3749999823393646,
+								0.5168538182862245,
+								0.05092589943497269,
+								0.9419475655430712,
+								0.35648146382084567,
+								0.762172341793217,
+								0.8680555378949205,
+								0.3745317494824585,
+								0.8055556085374618,
+								0.21161048689138579,
+								0.9513889595314311,
+								0.0449437630756964,
+								0.7268518341912167
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 476017106808162,
+				"name": "Nitro",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 28,
+						"height": 28,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5325035,
+						"collisionPoly": {
+							"points": [
+								0.18913851963000353,
+								0.3749999823393646,
+								0.5168538182862245,
+								0.05092589943497269,
+								0.9419475655430712,
+								0.35648146382084567,
+								0.762172341793217,
+								0.8680555378949205,
+								0.3745317494824585,
+								0.8055556085374618,
+								0.21161048689138579,
+								0.9513889595314311,
+								0.0449437630756964,
+								0.7268518341912167
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 707836316540349,
+				"name": "Rocket",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

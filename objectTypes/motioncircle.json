@@ -1,0 +1,39 @@
+{
+	"name": "MotionCircle",
+	"plugin-id": "TiledBg",
+	"sid": 640097175063458,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "restX",
+			"type": "number",
+			"desc": "",
+			"sid": 672357226970931
+		},
+		{
+			"name": "restY",
+			"type": "number",
+			"desc": "",
+			"sid": 956141823720876
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "CV_BoundedDragnDrop",
+			"name": "BoundedDragDrop",
+			"sid": 360549749920990
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 192,
+		"height": 192,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 3330790,
+		"useCollisionPoly": true
+	}
+}

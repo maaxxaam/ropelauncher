@@ -20,6 +20,6 @@
 	"effectTypes": [],
 	"members": [
 		"Car",
-		"Obstacle"
+		"Old_Obstacle"
 	]
 }

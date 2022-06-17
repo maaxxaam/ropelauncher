@@ -1,8 +1,8 @@
 {
     "c2dictionary": true,
     "data": {
-        "controls_drift_mode": 0,
-        "controls_scheme": 0,
+        "controls_drift_mode": 1,
+        "controls_scheme": 2,
         "controls_speed_factor": 2.718,
         "controls_dead_zone": 15,
         "controls_sensitivity": 0.3,

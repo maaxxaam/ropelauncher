@@ -1,0 +1,14 @@
+{
+	"name": "MapElement",
+	"plugin-id": "Sprite",
+	"sid": 641709591779281,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"road",
+		"decor",
+		"bonus",
+		"obstacle"
+	]
+}

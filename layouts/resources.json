@@ -279,7 +279,7 @@
 					}
 				},
 				{
-					"type": "Obstacle",
+					"type": "Old_Obstacle",
 					"properties": {
 						"initially-visible": true,
 						"initial-animation": "Rock1",
@@ -332,7 +332,7 @@
 					}
 				},
 				{
-					"type": "Bonus",
+					"type": "Old_Bonus",
 					"properties": {
 						"initially-visible": true,
 						"initial-animation": "Nitro",
@@ -1413,6 +1413,66 @@
 						],
 						"angle": 0,
 						"zElevation": 0
+					}
+				},
+				{
+					"type": "road",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "l0",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 3,
+					"instanceVariables": {
+						"TurnAngle": 0,
+						"snapped_start": 0,
+						"snapped_end": 0
+					},
+					"behaviors": {},
+					"world": {
+						"x": 1001,
+						"y": 2102,
+						"width": 192,
+						"height": 202,
+						"originX": 0.5,
+						"originY": 0.9752475247524752,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "FileChooser",
+					"properties": {
+						"accept": "",
+						"select": "single",
+						"initially-visible": true,
+						"id": "",
+						"class": ""
+					},
+					"uid": 15,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 924,
+						"y": 1610,
+						"width": 200,
+						"height": 25,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
 					}
 				}
 			],

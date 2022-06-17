@@ -215,6 +215,14 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "filechooser",
+			"name": "File chooser",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "Pin",
 			"name": "Pin",
@@ -413,8 +421,8 @@
 			"pause_menu",
 			"LevelLight",
 			"scenery",
-			"Obstacle",
-			"Bonus",
+			"Old_Obstacle",
+			"Old_Bonus",
 			"BackToMainBut",
 			"PlayLvlBut",
 			"flags",
@@ -471,7 +479,14 @@
 			"game_keyboard_controls",
 			"Gamepad",
 			"borders",
-			"garage_value"
+			"garage_value",
+			"road",
+			"decor",
+			"obstacle",
+			"bonus",
+			"background",
+			"FileChooser",
+			"MotionCircle"
 		],
 		"subfolders": []
 	},
@@ -492,12 +507,14 @@
 			"LoadableArray",
 			"LoadableDict",
 			"RocketTarget",
-			"AIGoal"
+			"AIGoal",
+			"MapElement"
 		],
 		"subfolders": []
 	},
 	"layouts": {
 		"items": [
+			"Loaded_lvl",
 			"Lvl1",
 			"Lvl2",
 			"Lvl3",

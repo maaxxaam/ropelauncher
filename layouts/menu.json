@@ -117,7 +117,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v11.1 alpha",
+						"text": "v12 alpha",
 						"enable-bbcode": true,
 						"font": "Arial",
 						"size": 24,
@@ -4924,7 +4924,7 @@
 						{
 							"type": "dev_dropdown",
 							"properties": {
-								"items": "Кнопки и руль\nСвайп",
+								"items": "Кнопки и руль\nСвайп\nДвижение кругом (бета)",
 								"tooltip": "",
 								"initially-visible": true,
 								"enabled": true,
@@ -5428,154 +5428,6 @@
 					"overriden": 0,
 					"subLayers": [],
 					"instances": [
-						{
-							"type": "dev_flags",
-							"properties": {
-								"type": "checkbox",
-								"text": "Жетоны нитро",
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"auto-font-size": false,
-								"checked": true,
-								"id": "",
-								"class": ""
-							},
-							"uid": 2,
-							"instanceVariables": {
-								"flag": "bonuses_nitro_enabled"
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 27,
-								"y": 560,
-								"width": 361,
-								"height": 46,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "dev_flags",
-							"properties": {
-								"type": "checkbox",
-								"text": "Жетоны ракет",
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"auto-font-size": false,
-								"checked": false,
-								"id": "",
-								"class": ""
-							},
-							"uid": 105,
-							"instanceVariables": {
-								"flag": "bonuses_rockets_enabled"
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 422,
-								"y": 560,
-								"width": 343,
-								"height": 46,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "dev_flags",
-							"properties": {
-								"type": "checkbox",
-								"text": "Недвижимые препятствия",
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"auto-font-size": false,
-								"checked": true,
-								"id": "",
-								"class": ""
-							},
-							"uid": 106,
-							"instanceVariables": {
-								"flag": "obstacles_static_enabled"
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 29,
-								"y": 421,
-								"width": 677,
-								"height": 46,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
-						{
-							"type": "dev_flags",
-							"properties": {
-								"type": "checkbox",
-								"text": "Подвижные препятствия",
-								"tooltip": "",
-								"initially-visible": true,
-								"enabled": true,
-								"auto-font-size": false,
-								"checked": false,
-								"id": "",
-								"class": ""
-							},
-							"uid": 107,
-							"instanceVariables": {
-								"flag": "obstacles_dynamic_enabled"
-							},
-							"behaviors": {
-								"Persist": {
-									"properties": {}
-								}
-							},
-							"world": {
-								"x": 30,
-								"y": 486,
-								"width": 682,
-								"height": 46,
-								"originX": 0,
-								"originY": 0,
-								"color": [
-									1,
-									1,
-									1,
-									1
-								]
-							}
-						},
 						{
 							"type": "dev_slider",
 							"properties": {

@@ -1,65 +1,135 @@
 {
-	"name": "Bonus",
+	"name": "bonus",
 	"plugin-id": "Sprite",
-	"sid": 757710186359000,
+	"sid": 316059218058438,
 	"isGlobal": false,
-	"instanceVariables": [
-		{
-			"name": "Moving",
-			"type": "boolean",
-			"desc": "",
-			"sid": 863206663302103
-		}
-	],
-	"behaviorTypes": [
-		{
-			"behaviorId": "Sin",
-			"name": "Sine",
-			"sid": 123494174352713
-		},
-		{
-			"behaviorId": "Tween",
-			"name": "Tween",
-			"sid": 426981358298513
-		}
-	],
+	"instanceVariables": [],
+	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 28,
-						"height": 28,
+						"width": 60,
+						"height": 46,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 8124074,
+						"imageSpriteId": 5788246,
 						"collisionPoly": {
 							"points": [
-								0.18913851963000353,
-								0.3749999823393646,
-								0.5168538182862245,
-								0.05092589943497269,
-								0.9419475655430712,
-								0.35648146382084567,
-								0.762172341793217,
-								0.8680555378949205,
-								0.3745317494824585,
-								0.8055556085374618,
-								0.21161048689138579,
-								0.9513889595314311,
-								0.0449437630756964,
-								0.7268518341912167
+								0.2222222222222222,
+								0.2857142857142857,
+								0.5,
+								0.1111111111111111,
+								0.7901234567901234,
+								0.25396825396825395,
+								0.9382716049382716,
+								0.5,
+								0.8641975308641975,
+								0.8253968253968254,
+								0.5,
+								0.9047619047619048,
+								0.13580246913580246,
+								0.8095238095238095,
+								0.024691358024691357,
+								0.5
 							]
 						},
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 476017106808162,
+				"sid": 506352549088430,
+				"name": "Coin",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 65,
+						"height": 72,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 1531414,
+						"collisionPoly": {
+							"points": [
+								0.5172413793103449,
+								0.46875,
+								0.5,
+								0.4895833333333333,
+								0.632183908045977,
+								0.3229166666666667,
+								0.735632183908046,
+								0.5,
+								0.6091954022988506,
+								0.6458333333333334,
+								0.5,
+								0.75,
+								0.20689655172413793,
+								0.8020833333333334,
+								0.4827586206896552,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 871435501657494,
+				"name": "Rocket",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 30,
+						"height": 49,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 8226054,
+						"collisionPoly": {
+							"points": [
+								0.4146341463414634,
+								0.25,
+								0.5,
+								0.16176470588235295,
+								0.5121951219512195,
+								0.27941176470588236,
+								0.8048780487804879,
+								0.5,
+								0.7804878048780488,
+								0.8676470588235294,
+								0.5,
+								0.9705882352941176,
+								0.14634146341463414,
+								0.8970588235294118,
+								0.04878048780487805,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 425575883336196,
 				"name": "Nitro",
 				"isLooping": false,
 				"isPingPong": false,
@@ -70,38 +140,40 @@
 			{
 				"frames": [
 					{
-						"width": 28,
-						"height": 28,
+						"width": 30,
+						"height": 48,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 5325035,
+						"imageSpriteId": 3957797,
 						"collisionPoly": {
 							"points": [
-								0.18913851963000353,
-								0.3749999823393646,
-								0.5168538182862245,
-								0.05092589943497269,
-								0.9419475655430712,
-								0.35648146382084567,
-								0.762172341793217,
-								0.8680555378949205,
-								0.3745317494824585,
-								0.8055556085374618,
-								0.21161048689138579,
-								0.9513889595314311,
-								0.0449437630756964,
-								0.7268518341912167
+								0.4,
+								0.25,
+								0.5,
+								0.15625,
+								0.55,
+								0.265625,
+								0.675,
+								0.5,
+								0.7,
+								0.8125,
+								0.5,
+								0.953125,
+								0.3,
+								0.796875,
+								0.25,
+								0.5
 							]
 						},
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 707836316540349,
-				"name": "Rocket",
+				"sid": 210599842979224,
+				"name": "Bonus",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

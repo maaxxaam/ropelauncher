@@ -490,7 +490,7 @@
 															"sid": 661594632675105,
 															"behaviorType": "LineOfSight",
 															"parameters": {
-																"obstacle": "Obstacle"
+																"obstacle": "Old_Obstacle"
 															}
 														},
 														{

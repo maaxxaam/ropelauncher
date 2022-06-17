@@ -295,314 +295,33 @@
 			"sid": 515440288879850,
 			"children": [
 				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "for-each",
-							"objectClass": "System",
-							"sid": 863626839444245,
-							"parameters": {
-								"object": "scenery"
-							}
-						}
-					],
-					"actions": [],
-					"sid": 275767945633297,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-animation-playing",
-									"objectClass": "scenery",
-									"sid": 753853388333397,
-									"parameters": {
-										"animation": "\"Tree2\""
-									}
-								},
-								{
-									"id": "is-animation-playing",
-									"objectClass": "scenery",
-									"sid": 699474411523154,
-									"parameters": {
-										"animation": "\"Tree1\""
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-angle",
-									"objectClass": "scenery",
-									"sid": 181133331728695,
-									"parameters": {
-										"angle": "random(0, 360)"
-									}
-								}
-							],
-							"sid": 828365848589729,
-							"isOrBlock": true
-						}
-					]
-				},
-				{
 					"eventType": "comment",
-					"text": "Turn off moving obstacles if they are disabled"
+					"text": "Disable all moving bonuses"
 				},
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "pick-by-comparison",
+							"id": "pick-all",
 							"objectClass": "System",
-							"sid": 478747386383941,
+							"sid": 855884843894486,
 							"parameters": {
-								"object": "Obstacle",
-								"expression": "Obstacle.Moving",
-								"comparison": 0,
-								"value": "1"
-							}
-						}
-					],
-					"actions": [],
-					"sid": 499641763662359,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-value",
-									"objectClass": "flags",
-									"sid": 447137473222525,
-									"parameters": {
-										"key": "\"obstacles_dynamic_enabled\"",
-										"comparison": 0,
-										"value": "0"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-boolean-instvar",
-									"objectClass": "Obstacle",
-									"sid": 264788568154962,
-									"parameters": {
-										"instance-variable": "Moving",
-										"value": "false"
-									}
-								},
-								{
-									"id": "set-animation",
-									"objectClass": "Obstacle",
-									"sid": 671225531907116,
-									"parameters": {
-										"animation": "\"rock\"&choose(\"1\", \"2\", \"3\")",
-										"from": "beginning"
-									}
-								}
-							],
-							"sid": 498036860872335
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "else",
-									"objectClass": "System",
-									"sid": 383253697425476
-								}
-							],
-							"actions": [
-								{
-									"id": "set-active",
-									"objectClass": "Obstacle",
-									"sid": 171149453422169,
-									"behaviorType": "Sine",
-									"parameters": {
-										"state": "active"
-									}
-								}
-							],
-							"sid": 197732819968811
-						}
-					]
-				},
-				{
-					"eventType": "comment",
-					"text": "Hide static obstacles if they are disabled"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-value",
-							"objectClass": "flags",
-							"sid": 926003344190119,
-							"parameters": {
-								"key": "\"obstacles_static_enabled\"",
-								"comparison": 0,
-								"value": "0"
-							}
-						},
-						{
-							"id": "pick-by-comparison",
-							"objectClass": "System",
-							"sid": 174780462532516,
-							"parameters": {
-								"object": "Obstacle",
-								"expression": "Obstacle.Moving",
-								"comparison": 0,
-								"value": "0"
+								"object": "Old_Bonus"
 							}
 						}
 					],
 					"actions": [
 						{
-							"id": "destroy",
-							"objectClass": "Obstacle",
-							"sid": 421158355766519
-						}
-					],
-					"sid": 607538592892213
-				},
-				{
-					"eventType": "comment",
-					"text": "Turn moving bonuses into static if they are disabled"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-value",
-							"objectClass": "flags",
-							"sid": 613750456156920,
+							"id": "set-active",
+							"objectClass": "Old_Bonus",
+							"sid": 945037223365546,
+							"behaviorType": "Sine",
 							"parameters": {
-								"key": "\"bonuses_rockets_enabled\"",
-								"comparison": 0,
-								"value": "0"
+								"state": "inactive"
 							}
 						}
 					],
-					"actions": [],
-					"sid": 965767737321887,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-by-comparison",
-									"objectClass": "System",
-									"sid": 810097910379749,
-									"parameters": {
-										"object": "Bonus",
-										"expression": "Bonus.AnimationName",
-										"comparison": 0,
-										"value": "\"Rocket\""
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-boolean-instvar",
-									"objectClass": "Bonus",
-									"sid": 931473539006948,
-									"parameters": {
-										"instance-variable": "Moving",
-										"value": "false"
-									}
-								},
-								{
-									"id": "set-animation",
-									"objectClass": "Bonus",
-									"sid": 927528614282927,
-									"parameters": {
-										"animation": "\"Nitro\"",
-										"from": "beginning"
-									}
-								}
-							],
-							"sid": 520919525920556
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "else",
-							"objectClass": "System",
-							"sid": 966771964488045
-						}
-					],
-					"actions": [],
-					"sid": 441644156030615,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-by-comparison",
-									"objectClass": "System",
-									"sid": 768428732395293,
-									"parameters": {
-										"object": "Bonus",
-										"expression": "Bonus.Moving",
-										"comparison": 0,
-										"value": "1"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-active",
-									"objectClass": "Bonus",
-									"sid": 472452379195856,
-									"behaviorType": "Sine",
-									"parameters": {
-										"state": "active"
-									}
-								}
-							],
-							"sid": 102696978986324
-						}
-					]
-				},
-				{
-					"eventType": "comment",
-					"text": "Hide static bonuses if they are disabled"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-value",
-							"objectClass": "flags",
-							"sid": 856741261432126,
-							"parameters": {
-								"key": "\"bonuses_nitro_enabled\"",
-								"comparison": 0,
-								"value": "0"
-							}
-						},
-						{
-							"id": "pick-by-comparison",
-							"objectClass": "System",
-							"sid": 164764702701021,
-							"parameters": {
-								"object": "Bonus",
-								"expression": "Bonus.Moving",
-								"comparison": 0,
-								"value": "0"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "destroy",
-							"objectClass": "Bonus",
-							"sid": 914371191052290
-						}
-					],
-					"sid": 606589347167187
+					"sid": 326008994642412
 				},
 				{
 					"eventType": "block",
@@ -630,27 +349,68 @@
 					"sid": 632762003142762
 				},
 				{
+					"eventType": "comment",
+					"text": "Adapt to selected control scheme"
+				},
+				{
+					"eventType": "comment",
+					"text": "Hide all unnecessary buttons if running on a PC"
+				},
+				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-value",
-							"objectClass": "flags",
-							"sid": 922058109634750,
-							"parameters": {
-								"key": "\"controls_scheme\"",
-								"comparison": 0,
-								"value": "0"
-							}
+							"id": "is-on-mobile",
+							"objectClass": "PlatformInfo",
+							"sid": 960303867827611,
+							"isInverted": true
+						},
+						{
+							"id": "is-in-preview",
+							"objectClass": "System",
+							"sid": 868063745775295,
+							"isInverted": true
 						}
 					],
 					"actions": [
 						{
 							"id": "destroy",
 							"objectClass": "SwipeZone",
-							"sid": 719797038330725
+							"sid": 649405829703244
+						},
+						{
+							"id": "destroy",
+							"objectClass": "Wheel",
+							"sid": 404066192366895
+						},
+						{
+							"id": "destroy",
+							"objectClass": "AccelBut",
+							"sid": 827406048959979
+						},
+						{
+							"id": "destroy",
+							"objectClass": "DecelBut",
+							"sid": 490791982872109
+						},
+						{
+							"id": "destroy",
+							"objectClass": "NitroBut",
+							"sid": 171829485010025
+						},
+						{
+							"id": "destroy",
+							"objectClass": "ShootBut",
+							"sid": 378391729528732,
+							"disabled": true
+						},
+						{
+							"id": "destroy",
+							"objectClass": "JumpBut",
+							"sid": 917349379089595
 						}
 					],
-					"sid": 979768128826583
+					"sid": 367938848174951
 				},
 				{
 					"eventType": "block",
@@ -658,27 +418,92 @@
 						{
 							"id": "else",
 							"objectClass": "System",
-							"sid": 987746397262003
+							"sid": 487593717215167
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 979768128826583,
+					"children": [
 						{
-							"id": "destroy",
-							"objectClass": "Wheel",
-							"sid": 739756318324340
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "flags",
+									"sid": 773546795135685,
+									"parameters": {
+										"key": "\"controls_scheme\"",
+										"comparison": 1,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "SwipeZone",
+									"sid": 354241834673477
+								}
+							],
+							"sid": 206359666491697
 						},
 						{
-							"id": "destroy",
-							"objectClass": "AccelBut",
-							"sid": 924776688248257
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "flags",
+									"sid": 851805553920611,
+									"parameters": {
+										"key": "\"controls_scheme\"",
+										"comparison": 1,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "Wheel",
+									"sid": 335900785614982
+								},
+								{
+									"id": "destroy",
+									"objectClass": "AccelBut",
+									"sid": 702405456305830
+								},
+								{
+									"id": "destroy",
+									"objectClass": "DecelBut",
+									"sid": 992037490612652
+								}
+							],
+							"sid": 901095798876073
 						},
 						{
-							"id": "destroy",
-							"objectClass": "DecelBut",
-							"sid": 153204840588619
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "flags",
+									"sid": 487058321946122,
+									"parameters": {
+										"key": "\"controls_scheme\"",
+										"comparison": 1,
+										"value": "2"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "MotionCircle",
+									"sid": 340956767698294
+								}
+							],
+							"sid": 505161912729957
 						}
-					],
-					"sid": 330459291627549
+					]
 				},
 				{
 					"eventType": "comment",
@@ -1443,6 +1268,72 @@
 												}
 											],
 											"sid": 647915255672103
+										},
+										{
+											"eventType": "comment",
+											"text": "Lower acceleration when using motion circle"
+										},
+										{
+											"eventType": "variable",
+											"name": "motion_influence",
+											"type": "number",
+											"initialValue": "0",
+											"comment": "",
+											"isStatic": false,
+											"isConstant": false,
+											"sid": 312438125907713
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-value",
+													"objectClass": "flags",
+													"sid": 292420712286445,
+													"parameters": {
+														"key": "\"controls_scheme\"",
+														"comparison": 0,
+														"value": "2"
+													}
+												},
+												{
+													"id": "isdragging0",
+													"objectClass": "MotionCircle",
+													"sid": 367482113552987,
+													"behaviorType": "BoundedDragDrop"
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 946980627501058,
+													"parameters": {
+														"variable": "motion_influence",
+														"value": "(clamp(MotionCircle.BoundedDragDrop.yOrigin - MotionCircle.Y, 0, 350) + 50) / 400"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 112490350198182,
+													"parameters": {
+														"variable": "accel_coef",
+														"value": "accel_coef * motion_influence"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 871333324963456,
+													"disabled": true,
+													"parameters": {
+														"variable": "max_speed_coef",
+														"value": "max_speed_coef * max(motion_influence, 0.25)"
+													}
+												}
+											],
+											"sid": 873767178396877
 										},
 										{
 											"eventType": "block",
@@ -2484,7 +2375,7 @@
 				{
 					"eventType": "group",
 					"disabled": false,
-					"title": "TestControls",
+					"title": "LeverControls",
 					"description": "",
 					"isActiveOnStart": true,
 					"children": [
@@ -2523,6 +2414,33 @@
 								}
 							],
 							"sid": 502771085816125
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 106782013684867,
+									"parameters": {
+										"variable": "NitroState",
+										"comparison": 4,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "simulate-control",
+									"objectClass": "Car",
+									"sid": 449040861207782,
+									"behaviorType": "Car",
+									"parameters": {
+										"control": "accelerate"
+									}
+								}
+							],
+							"sid": 154917260626839
 						},
 						{
 							"eventType": "block",
@@ -2845,9 +2763,51 @@
 									"eventType": "block",
 									"conditions": [
 										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 811871477439823,
+											"parameters": {
+												"variable": "NitroState",
+												"comparison": 4,
+												"value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car",
+											"sid": 855852973717341,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "accelerate"
+											}
+										}
+									],
+									"sid": 984279168196460
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 239595116238269
+										},
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 317709972235917,
+											"parameters": {
+												"variable": "NitroState",
+												"comparison": 0,
+												"value": "0"
+											}
+										},
+										{
 											"id": "compare-value",
 											"objectClass": "flags",
-											"sid": 705892284374136,
+											"sid": 393029457057929,
 											"parameters": {
 												"key": "\"controls_drift_mode\"",
 												"comparison": 0,
@@ -2859,14 +2819,14 @@
 										{
 											"id": "simulate-control",
 											"objectClass": "Car",
-											"sid": 729348792211350,
+											"sid": 428194521320440,
 											"behaviorType": "Car",
 											"parameters": {
 												"control": "brake"
 											}
 										}
 									],
-									"sid": 914386672904126
+									"sid": 321395546877904
 								},
 								{
 									"eventType": "block",
@@ -2875,20 +2835,60 @@
 											"id": "else",
 											"objectClass": "System",
 											"sid": 113951808885763
-										}
-									],
-									"actions": [
+										},
 										{
-											"id": "simulate-control",
-											"objectClass": "Car",
-											"sid": 748357377111571,
-											"behaviorType": "Car",
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 151818662524489,
 											"parameters": {
-												"control": "accelerate"
+												"variable": "NitroState",
+												"comparison": 0,
+												"value": "0"
 											}
 										}
 									],
-									"sid": 118345751755873
+									"actions": [],
+									"sid": 118345751755873,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-value",
+													"objectClass": "flags",
+													"sid": 464296154391218,
+													"parameters": {
+														"key": "\"controls_drift_mode\"",
+														"comparison": 0,
+														"value": "1"
+													}
+												},
+												{
+													"id": "compare-value",
+													"objectClass": "flags",
+													"sid": 731752811210574,
+													"parameters": {
+														"key": "\"controls_drift_mode\"",
+														"comparison": 0,
+														"value": "2"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "simulate-control",
+													"objectClass": "Car",
+													"sid": 512159550583711,
+													"behaviorType": "Car",
+													"parameters": {
+														"control": "accelerate"
+													}
+												}
+											],
+											"sid": 612245364927343,
+											"isOrBlock": true
+										}
+									]
 								}
 							]
 						},
@@ -2931,9 +2931,41 @@
 									"eventType": "block",
 									"conditions": [
 										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 542192011395174,
+											"parameters": {
+												"variable": "NitroState",
+												"comparison": 4,
+												"value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car",
+											"sid": 950861835889515,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "accelerate"
+											}
+										}
+									],
+									"sid": 739599097188380
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 781113814501350
+										},
+										{
 											"id": "compare-value",
 											"objectClass": "flags",
-											"sid": 726378403227382,
+											"sid": 542147204831832,
 											"parameters": {
 												"key": "\"controls_drift_mode\"",
 												"comparison": 1,
@@ -2945,14 +2977,14 @@
 										{
 											"id": "simulate-control",
 											"objectClass": "Car",
-											"sid": 523763073975496,
+											"sid": 237632410684010,
 											"behaviorType": "Car",
 											"parameters": {
 												"control": "accelerate"
 											}
 										}
 									],
-									"sid": 105223095828104
+									"sid": 248236470381434
 								},
 								{
 									"eventType": "block",
@@ -3003,6 +3035,395 @@
 						}
 					],
 					"sid": 165125792413525
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "MotionControls",
+					"description": "",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "isdragging0",
+									"objectClass": "MotionCircle",
+									"sid": 190996767894371,
+									"behaviorType": "BoundedDragDrop",
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "MotionCircle",
+									"sid": 517184389881860,
+									"parameters": {
+										"x": "lerp(Self.X, Self.restX, 0.12)",
+										"y": "lerp(Self.Y, Self.restY, 0.12)"
+									}
+								}
+							],
+							"sid": 373314225472259
+						},
+						{
+							"eventType": "variable",
+							"name": "motion_len",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": true,
+							"isConstant": false,
+							"sid": 251109731564371
+						},
+						{
+							"eventType": "variable",
+							"name": "motion_speed",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 946626873024686
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "isdragging0",
+									"objectClass": "MotionCircle",
+									"sid": 302326559270419,
+									"behaviorType": "BoundedDragDrop"
+								},
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 438874076254459,
+									"parameters": {
+										"object": "Car",
+										"expression": "Car.Player",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 236934267132962,
+									"parameters": {
+										"variable": "motion",
+										"value": "max((motion < 1 ? 1 : motion), Touch.SpeedAt(0))"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 419430382433734,
+									"parameters": {
+										"variable": "motion_len",
+										"value": "abs(MotionCircle.X - 360) < flags.Get(\"controls_dead_zone\") ? 0 : MotionCircle.X - 360"
+									}
+								},
+								{
+									"id": "set-steer-speed",
+									"objectClass": "Car",
+									"sid": 481541090522025,
+									"behaviorType": "Car",
+									"parameters": {
+										"steer-speed": "ln(motion)/ln(flags.Get(\"controls_speed_factor\")) * (motion_len / 360) * (-2 * flags.Get(\"controls_invert\")+ 1) * flags.Get(\"controls_sensitivity\") * Self.SteerCoef"
+									}
+								},
+								{
+									"id": "simulate-control",
+									"objectClass": "Car",
+									"sid": 464912041770293,
+									"behaviorType": "Car",
+									"parameters": {
+										"control": "steer-right"
+									}
+								}
+							],
+							"sid": 733812283991011,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 475767025630076,
+											"parameters": {
+												"variable": "NitroState",
+												"comparison": 4,
+												"value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car",
+											"sid": 733257083581409,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "accelerate"
+											}
+										}
+									],
+									"sid": 149647284359521
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 341322364934247
+										},
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 798499166171791,
+											"parameters": {
+												"variable": "NitroState",
+												"comparison": 0,
+												"value": "0"
+											}
+										},
+										{
+											"id": "compare-value",
+											"objectClass": "flags",
+											"sid": 443174407679190,
+											"parameters": {
+												"key": "\"controls_drift_mode\"",
+												"comparison": 0,
+												"value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car",
+											"sid": 744391637297154,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "brake"
+											}
+										}
+									],
+									"sid": 867365606827736
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 109041842658520
+										},
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 987376058751816,
+											"parameters": {
+												"variable": "NitroState",
+												"comparison": 0,
+												"value": "0"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 780461208941715,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-value",
+													"objectClass": "flags",
+													"sid": 576654725626934,
+													"parameters": {
+														"key": "\"controls_drift_mode\"",
+														"comparison": 0,
+														"value": "1"
+													}
+												},
+												{
+													"id": "compare-value",
+													"objectClass": "flags",
+													"sid": 491728452997637,
+													"parameters": {
+														"key": "\"controls_drift_mode\"",
+														"comparison": 0,
+														"value": "2"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "simulate-control",
+													"objectClass": "Car",
+													"sid": 759583792536692,
+													"behaviorType": "Car",
+													"parameters": {
+														"control": "accelerate"
+													}
+												}
+											],
+											"sid": 978140955608127,
+											"isOrBlock": true
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "isdragging0",
+									"objectClass": "MotionCircle",
+									"sid": 557933407523963,
+									"behaviorType": "BoundedDragDrop",
+									"isInverted": true
+								},
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 422235249974678,
+									"parameters": {
+										"object": "Car",
+										"expression": "Car.Player",
+										"comparison": 0,
+										"value": "1"
+									}
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 371505172478270,
+									"parameters": {
+										"variable": "GameState",
+										"comparison": 0,
+										"value": "GAME_ACTIVE"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 124136751546774,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 654295542001839,
+											"parameters": {
+												"variable": "NitroState",
+												"comparison": 4,
+												"value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car",
+											"sid": 791633511675153,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "accelerate"
+											}
+										}
+									],
+									"sid": 362121879535947
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 966700093329248
+										},
+										{
+											"id": "compare-value",
+											"objectClass": "flags",
+											"sid": 444669301249336,
+											"parameters": {
+												"key": "\"controls_drift_mode\"",
+												"comparison": 1,
+												"value": "1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car",
+											"sid": 121867030657971,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "accelerate"
+											}
+										}
+									],
+									"sid": 359977477852215
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 159917414521516
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Car",
+											"sid": 397371363473922,
+											"behaviorType": "Car",
+											"parameters": {
+												"control": "brake"
+											}
+										}
+									],
+									"sid": 435381371609602
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "ondragstart1",
+									"objectClass": "MotionCircle",
+									"sid": 311710274239215,
+									"behaviorType": "BoundedDragDrop"
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 643212637297889,
+									"parameters": {
+										"variable": "motion",
+										"value": "0"
+									}
+								}
+							],
+							"sid": 702106927961499
+						}
+					],
+					"sid": 962180712939326
 				}
 			],
 			"sid": 331973970547161
@@ -3015,12 +3436,12 @@
 					"objectClass": "Car",
 					"sid": 219797985910387,
 					"parameters": {
-						"object": "Bonus"
+						"object": "Old_Bonus"
 					}
 				},
 				{
 					"id": "is-visible",
-					"objectClass": "Bonus",
+					"objectClass": "Old_Bonus",
 					"sid": 158630039676986
 				}
 			],
@@ -3032,7 +3453,7 @@
 					"conditions": [
 						{
 							"id": "is-animation-playing",
-							"objectClass": "Bonus",
+							"objectClass": "Old_Bonus",
 							"sid": 238481162742189,
 							"parameters": {
 								"animation": "\"Rocket\""
@@ -3087,7 +3508,7 @@
 						},
 						{
 							"id": "is-animation-playing",
-							"objectClass": "Bonus",
+							"objectClass": "Old_Bonus",
 							"sid": 654363564068292,
 							"parameters": {
 								"animation": "\"Nitro\""
@@ -3123,7 +3544,7 @@
 					"actions": [
 						{
 							"id": "destroy",
-							"objectClass": "Bonus",
+							"objectClass": "Old_Bonus",
 							"sid": 119785878002064
 						}
 					],
@@ -3317,14 +3738,14 @@
 											"objectClass": "System",
 											"sid": 708547865446529,
 											"parameters": {
-												"object": "Obstacle"
+												"object": "Old_Obstacle"
 											}
 										}
 									],
 									"actions": [
 										{
 											"id": "set-magnitude",
-											"objectClass": "Obstacle",
+											"objectClass": "Old_Obstacle",
 											"sid": 820090559324957,
 											"behaviorType": "Sine",
 											"parameters": {
@@ -3550,14 +3971,14 @@
 									"objectClass": "System",
 									"sid": 886177709674595,
 									"parameters": {
-										"object": "Obstacle"
+										"object": "Old_Obstacle"
 									}
 								}
 							],
 							"actions": [
 								{
 									"id": "set-cycle-position",
-									"objectClass": "Obstacle",
+									"objectClass": "Old_Obstacle",
 									"sid": 923041202704778,
 									"behaviorType": "Sine",
 									"parameters": {
@@ -3696,14 +4117,14 @@
 									"objectClass": "System",
 									"sid": 953773374705483,
 									"parameters": {
-										"object": "Obstacle"
+										"object": "Old_Obstacle"
 									}
 								}
 							],
 							"actions": [
 								{
 									"id": "set-magnitude",
-									"objectClass": "Obstacle",
+									"objectClass": "Old_Obstacle",
 									"sid": 988811198165684,
 									"behaviorType": "Sine",
 									"parameters": {
@@ -3923,12 +4344,12 @@
 							"objectClass": "car_edge_collision",
 							"sid": 157436948294115,
 							"parameters": {
-								"object": "Obstacle"
+								"object": "Old_Obstacle"
 							}
 						},
 						{
 							"id": "is-visible",
-							"objectClass": "Obstacle",
+							"objectClass": "Old_Obstacle",
 							"sid": 979177918711675
 						},
 						{
@@ -4389,12 +4810,12 @@
 							"objectClass": "Car",
 							"sid": 715123249365497,
 							"parameters": {
-								"object": "Obstacle"
+								"object": "Old_Obstacle"
 							}
 						},
 						{
 							"id": "is-visible",
-							"objectClass": "Obstacle",
+							"objectClass": "Old_Obstacle",
 							"sid": 613810017143771
 						},
 						{
@@ -4411,7 +4832,7 @@
 					"actions": [
 						{
 							"id": "move-to-object",
-							"objectClass": "Obstacle",
+							"objectClass": "Old_Obstacle",
 							"sid": 215479430255839,
 							"parameters": {
 								"where": "behind",
@@ -4426,7 +4847,7 @@
 							"conditions": [
 								{
 									"id": "is-animation-playing",
-									"objectClass": "Obstacle",
+									"objectClass": "Old_Obstacle",
 									"sid": 677411994891626,
 									"parameters": {
 										"animation": "\"Spikes\""
@@ -4808,7 +5229,7 @@
 					"conditions": [
 						{
 							"id": "pick-by-unique-id",
-							"objectClass": "Obstacle",
+							"objectClass": "Old_Obstacle",
 							"sid": 673522303530915,
 							"parameters": {
 								"unique-id": "ObstacleUID"
@@ -4818,7 +5239,7 @@
 					"actions": [
 						{
 							"id": "destroy",
-							"objectClass": "Obstacle",
+							"objectClass": "Old_Obstacle",
 							"sid": 302273943697315
 						}
 					],
@@ -5720,6 +6141,293 @@
 				}
 			],
 			"sid": 199615438626828
+		},
+		{
+			"functionName": "LoadObject",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "object_string",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 394069737273130
+				},
+				{
+					"name": "x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 658262756612789
+				},
+				{
+					"name": "y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 547188347650974
+				},
+				{
+					"name": "new_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 288906130701436
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 268951606556859,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "object_animation",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 446855592607436
+				},
+				{
+					"eventType": "variable",
+					"name": "object_type",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 971090584334327
+				},
+				{
+					"eventType": "variable",
+					"name": "new_uid",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 956526802778304
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 402180824537367,
+							"parameters": {
+								"variable": "object_type",
+								"value": "tokenat(object_string, 0, \"_\")"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 292403622691825,
+							"parameters": {
+								"variable": "object_animation",
+								"value": "tokenat(object_string, 1, \"_\")"
+							}
+						},
+						{
+							"id": "create-object-by-name",
+							"objectClass": "System",
+							"sid": 776103612365147,
+							"parameters": {
+								"object-name": "object_type",
+								"layer": "\"Level\"",
+								"x": "x",
+								"y": "y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 296065986444184,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 185710001610105,
+									"parameters": {
+										"object": "MapElement"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 982238962592454,
+									"parameters": {
+										"variable": "new_uid",
+										"value": "MapElement.UID"
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "MapElement",
+									"sid": 605590277119424,
+									"parameters": {
+										"angle": "new_angle"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "MapElement",
+									"sid": 497940979024950,
+									"parameters": {
+										"animation": "object_animation",
+										"from": "beginning"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "MapElement",
+									"sid": 606690637022197,
+									"parameters": {
+										"x": "x",
+										"y": "y"
+									}
+								}
+							],
+							"sid": 856540145579726,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 427657273967910,
+											"parameters": {
+												"first-value": "MapElement.ObjectTypeName",
+												"comparison": 0,
+												"second-value": "\"road\""
+											}
+										},
+										{
+											"id": "pick-by-unique-id",
+											"objectClass": "road",
+											"sid": 124122253932787,
+											"parameters": {
+												"unique-id": "new_uid"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-instvar-value",
+											"objectClass": "road",
+											"sid": 523526170677837,
+											"parameters": {
+												"instance-variable": "TurnAngle",
+												"value": "(left(object_animation, 1) = \"l\" ? -1 : 1) * int(right(object_animation, len(object_animation)-1))"
+											}
+										}
+									],
+									"sid": 619949294541043
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"functionName": "LoadMap",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 332265380590125,
+			"disabled": true
+		},
+		{
+			"eventType": "comment",
+			"text": "Load from project files"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-two-values",
+					"objectClass": "System",
+					"sid": 321882623645262,
+					"parameters": {
+						"first-value": "0",
+						"comparison": 0,
+						"second-value": "1"
+					}
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 306441074877111
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "const MapUrl = await runtime.assets.getProjectFileUrl(\"map.json\");"
+				},
+				{
+					"id": "request-url",
+					"objectClass": "AJAX",
+					"sid": 908192948574945,
+					"parameters": {
+						"tag": "\"map\"",
+						"url": "\"fetch here\""
+					}
+				}
+			],
+			"sid": 139700561871511,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-changed",
+					"objectClass": "FileChooser",
+					"sid": 805087179929706
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 455251285273711,
+					"parameters": {
+						"type": "log",
+						"message": "FileChooser.FileURLAt(0)"
+					}
+				},
+				{
+					"id": "request-url",
+					"objectClass": "AJAX",
+					"sid": 676453313829521,
+					"parameters": {
+						"tag": "\"map\"",
+						"url": "FileChooser.FileURLAt(0)"
+					}
+				}
+			],
+			"sid": 653421714794771,
+			"disabled": true
 		}
 	],
 	"sid": 528873411861220
