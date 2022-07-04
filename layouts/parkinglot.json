@@ -3,7 +3,7 @@
 	"layers": [
 		{
 			"name": "Templates",
-			"overriden": 1,
+			"overriden": 0,
 			"subLayers": [],
 			"instances": [],
 			"sid": 214203572174611,
@@ -2298,8 +2298,6 @@
 							},
 							"uid": 387,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2351,8 +2349,6 @@
 							},
 							"uid": 421,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2404,8 +2400,6 @@
 							},
 							"uid": 422,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2457,8 +2451,6 @@
 							},
 							"uid": 423,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2510,8 +2502,6 @@
 							},
 							"uid": 424,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2563,8 +2553,6 @@
 							},
 							"uid": 425,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2616,8 +2604,6 @@
 							},
 							"uid": 426,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2669,8 +2655,6 @@
 							},
 							"uid": 427,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2722,8 +2706,6 @@
 							},
 							"uid": 428,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2775,8 +2757,6 @@
 							},
 							"uid": 429,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2828,8 +2808,6 @@
 							},
 							"uid": 430,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -2881,8 +2859,6 @@
 							},
 							"uid": 431,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -2934,8 +2910,6 @@
 							},
 							"uid": 432,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -2987,8 +2961,6 @@
 							},
 							"uid": 433,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3040,8 +3012,6 @@
 							},
 							"uid": 434,
 							"instanceVariables": {
-								"TargetName": "Car",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3093,8 +3063,6 @@
 							},
 							"uid": 435,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3146,8 +3114,6 @@
 							},
 							"uid": 436,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3199,8 +3165,6 @@
 							},
 							"uid": 437,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3252,8 +3216,6 @@
 							},
 							"uid": 438,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3305,8 +3267,6 @@
 							},
 							"uid": 439,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3358,8 +3318,6 @@
 							},
 							"uid": 440,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3411,8 +3369,6 @@
 							},
 							"uid": 441,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3464,8 +3420,6 @@
 							},
 							"uid": 442,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3517,8 +3471,6 @@
 							},
 							"uid": 443,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3570,8 +3522,6 @@
 							},
 							"uid": 444,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3623,8 +3573,6 @@
 							},
 							"uid": 445,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -6776,7 +6724,7 @@
 			"instances": [],
 			"sid": 399868877570137,
 			"effectTypes": [],
-			"isInitiallyVisible": true,
+			"isInitiallyVisible": false,
 			"isInitiallyInteractive": true,
 			"color": [
 				1,

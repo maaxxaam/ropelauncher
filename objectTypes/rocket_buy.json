@@ -1,0 +1,37 @@
+{
+	"name": "rocket_buy",
+	"plugin-id": "Sprite",
+	"sid": 489881080711212,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 325,
+						"height": 202,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 4700023,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 160718559411775,
+				"name": "Default",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

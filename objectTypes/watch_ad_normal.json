@@ -1,0 +1,49 @@
+{
+	"name": "watch_ad_normal",
+	"plugin-id": "Sprite",
+	"sid": 878040903913190,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 932,
+						"height": 350,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 2497908,
+						"collisionPoly": {
+							"points": [
+								0,
+								0.18285696847098215,
+								1,
+								0,
+								1,
+								0.8114286150251115,
+								0,
+								1
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 673566898607039,
+				"name": "Default",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

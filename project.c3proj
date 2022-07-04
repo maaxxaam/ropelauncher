@@ -88,14 +88,6 @@
 		},
 		{
 			"type": "plugin",
-			"id": "ValerypopoffTouchPlusPlugin",
-			"name": "Valerypopoff Touch Plus",
-			"author": "Valera Popov",
-			"version": "1.1.7",
-			"bundled": false
-		},
-		{
-			"type": "plugin",
 			"id": "Mouse",
 			"name": "Mouse",
 			"author": "Scirra",
@@ -218,6 +210,14 @@
 			"type": "plugin",
 			"id": "filechooser",
 			"name": "File chooser",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Timeline",
+			"name": "Timeline controller",
 			"author": "Scirra",
 			"version": "r293.3",
 			"bundled": false
@@ -381,6 +381,54 @@
 			"author": "Scirra",
 			"version": "r293.3",
 			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "Mikal_Rotate",
+			"name": "Rotate",
+			"author": "Mikal",
+			"version": "1.0.0.0",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "glowhorizontal",
+			"name": "Glow horizontal",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "glowvertical",
+			"name": "Glow vertical",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "brightness",
+			"name": "Brightness",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "pixellate",
+			"name": "Pixellate",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "exposure",
+			"name": "Exposure",
+			"author": "Scirra",
+			"version": "r293.3",
+			"bundled": false
 		}
 	],
 	"uniqueId": "j211m18wkv4",
@@ -402,7 +450,6 @@
 			"cam_follow",
 			"DriftBut",
 			"vis_bar",
-			"ValerypopoffTouchPlus",
 			"Mouse",
 			"Audio",
 			"GameAnalytics",
@@ -463,7 +510,7 @@
 			"tempGoal",
 			"CarOwnership",
 			"CarChars",
-			"garage_car",
+			"garage_car_choice",
 			"garage_bar_back",
 			"garage_bar",
 			"garage_car_name",
@@ -486,7 +533,64 @@
 			"bonus",
 			"background",
 			"FileChooser",
-			"MotionCircle"
+			"MotionCircle",
+			"mm_back",
+			"Level_data",
+			"border",
+			"garage_car",
+			"garage_back",
+			"garage_bar2",
+			"garage_bar3",
+			"garage_bar4",
+			"garage_bar5",
+			"araboto_test",
+			"to_game_no_text",
+			"settings_back",
+			"credits_title",
+			"logo",
+			"sound_off",
+			"sound_on",
+			"music_off",
+			"music_on",
+			"volume_slider",
+			"volume_slider_back",
+			"slider_handle",
+			"keyboard_tips",
+			"swipe_rest",
+			"swipe_car",
+			"swipe_finger",
+			"TimelineController",
+			"option_on",
+			"option_off",
+			"multi_choice_option",
+			"heart",
+			"NitroLevel",
+			"DrawNitrous",
+			"remove_ads",
+			"plus_blue",
+			"position_text",
+			"money_icon_static",
+			"garage_upgrade_price",
+			"money_back",
+			"to_shop",
+			"car_choice_but",
+			"rocket_buy",
+			"jump_buy",
+			"hand_anim_",
+			"plus_static",
+			"Rocket_counter",
+			"NitroLines",
+			"speed_empty",
+			"DrawSpeed",
+			"speed_full",
+			"loss_background",
+			"win_background",
+			"next_level",
+			"watch_ad_normal",
+			"Victory_info",
+			"black_cover",
+			"please_wait",
+			"timer"
 		],
 		"subfolders": []
 	},
@@ -508,7 +612,8 @@
 			"LoadableDict",
 			"RocketTarget",
 			"AIGoal",
-			"MapElement"
+			"MapElement",
+			"UpgradeBar"
 		],
 		"subfolders": []
 	},
@@ -530,7 +635,8 @@
 			"MenuSheet",
 			"AllEvents",
 			"EnemyAI",
-			"LevelInits"
+			"LevelInits",
+			"Tests"
 		],
 		"subfolders": []
 	},
@@ -585,7 +691,7 @@
 				{
 					"name": "Background.webm",
 					"type": "audio/webm; codecs=opus",
-					"sid": 639354427885837,
+					"sid": 250211860804863,
 					"file-info": {
 						"purpose": "none"
 					}
@@ -602,7 +708,48 @@
 			"subfolders": []
 		},
 		"font": {
-			"items": [],
+			"items": [
+				{
+					"name": "Araboto Black 400.ttf",
+					"type": "application/font-sfnt",
+					"sid": 261523514621342,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Araboto Normal 400.ttf",
+					"type": "application/font-sfnt",
+					"sid": 597371338739806,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Roboto-Black.ttf",
+					"type": "application/font-sfnt",
+					"sid": 617564971062864,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Roboto-Bold.ttf",
+					"type": "application/font-sfnt",
+					"sid": 736834951968806,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Roboto-Medium.ttf",
+					"type": "application/font-sfnt",
+					"sid": 843431232513177,
+					"file-info": {
+						"purpose": "none"
+					}
+				}
+			],
 			"subfolders": []
 		},
 		"icon": {
@@ -707,6 +854,22 @@
 					"file-info": {
 						"purpose": "none"
 					}
+				},
+				{
+					"name": "map_826805593.json",
+					"type": "application/json",
+					"sid": 331170890238981,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "map_966518302.json",
+					"type": "application/json",
+					"sid": 699486407076714,
+					"file-info": {
+						"purpose": "none"
+					}
 				}
 			],
 			"subfolders": []
@@ -714,7 +877,7 @@
 	},
 	"timelines": {
 		"items": [
-			"Timeline 1"
+			"MobileControlsTips"
 		],
 		"subfolders": [
 			{

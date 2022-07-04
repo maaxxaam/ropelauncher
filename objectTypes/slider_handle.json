@@ -1,0 +1,56 @@
+{
+	"name": "slider_handle",
+	"plugin-id": "Sprite",
+	"sid": 570794304432614,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "percent",
+			"type": "number",
+			"desc": "",
+			"sid": 302144401380968
+		},
+		{
+			"name": "temp_volume_storage",
+			"type": "number",
+			"desc": "",
+			"sid": 939648210258957
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "CV_BoundedDragnDrop",
+			"name": "BoundedDragDrop",
+			"sid": 651049885522350
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 85,
+						"height": 85,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 4449865,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 903595732071872,
+				"name": "Default",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

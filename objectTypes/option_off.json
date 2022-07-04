@@ -1,0 +1,67 @@
+{
+	"name": "option_off",
+	"plugin-id": "Sprite",
+	"sid": 591805848216459,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "option",
+			"type": "string",
+			"desc": "",
+			"sid": 451491993389188
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 169,
+						"height": 118,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 3088181,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 610876604862145,
+				"name": "active",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 169,
+						"height": 118,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 6614816,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 426368737121653,
+				"name": "inactive",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

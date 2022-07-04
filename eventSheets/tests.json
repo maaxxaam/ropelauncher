@@ -1,0 +1,45 @@
+{
+	"name": "Tests",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 965074925189971
+				}
+			],
+			"actions": [
+				{
+					"id": "fill-ellipse",
+					"objectClass": "DrawNitrous",
+					"sid": 390985678934122,
+					"parameters": {
+						"x": "50",
+						"y": "50",
+						"radius-x": "25",
+						"radius-y": "25",
+						"color": "rgba(0, 255, 0, 50)",
+						"edge": "smooth"
+					}
+				},
+				{
+					"id": "fill-ellipse",
+					"objectClass": "DrawNitrous",
+					"sid": 171646573358427,
+					"parameters": {
+						"x": "25",
+						"y": "50",
+						"radius-x": "25",
+						"radius-y": "25",
+						"color": "rgba(0, 0, 255, 50)",
+						"edge": "smooth"
+					}
+				}
+			],
+			"sid": 690087177261851
+		}
+	],
+	"sid": 242690546426458
+}

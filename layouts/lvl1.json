@@ -177,14 +177,15 @@
 							"uid": 720,
 							"instanceVariables": {
 								"checkID": 0,
-								"IsStart": true,
-								"checkpointID": 0
+								"IsEnd": true,
+								"checkpointID": 0,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 3328,
 								"y": 2110,
-								"width": 512,
+								"width": 768,
 								"height": 128,
 								"originX": 0.5,
 								"originY": 0.5,
@@ -210,16 +211,17 @@
 							"uid": 721,
 							"instanceVariables": {
 								"checkID": 1,
-								"IsStart": false,
-								"checkpointID": 1
+								"IsEnd": false,
+								"checkpointID": 1,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 3212,
 								"y": 953,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -243,16 +245,17 @@
 							"uid": 722,
 							"instanceVariables": {
 								"checkID": 3,
-								"IsStart": false,
-								"checkpointID": 3
+								"IsEnd": false,
+								"checkpointID": 3,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 2428,
 								"y": 1068,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -276,16 +279,17 @@
 							"uid": 723,
 							"instanceVariables": {
 								"checkID": 4,
-								"IsStart": false,
-								"checkpointID": 4
+								"IsEnd": false,
+								"checkpointID": 4,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 2176,
 								"y": 1753,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -309,16 +313,17 @@
 							"uid": 724,
 							"instanceVariables": {
 								"checkID": 5,
-								"IsStart": false,
-								"checkpointID": 5
+								"IsEnd": false,
+								"checkpointID": 5,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 948,
 								"y": 2050,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -342,16 +347,17 @@
 							"uid": 725,
 							"instanceVariables": {
 								"checkID": 6,
-								"IsStart": false,
-								"checkpointID": 6
+								"IsEnd": false,
+								"checkpointID": 6,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 907,
 								"y": 3296,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -375,16 +381,17 @@
 							"uid": 726,
 							"instanceVariables": {
 								"checkID": 2,
-								"IsStart": false,
-								"checkpointID": 2
+								"IsEnd": false,
+								"checkpointID": 2,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 2835,
 								"y": 896,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -695,16 +702,17 @@
 							"uid": 734,
 							"instanceVariables": {
 								"checkID": 7,
-								"IsStart": false,
-								"checkpointID": 7
+								"IsEnd": false,
+								"checkpointID": 7,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 3143,
 								"y": 3321,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -1393,8 +1401,6 @@
 							},
 							"uid": 753,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -1446,8 +1452,6 @@
 							},
 							"uid": 754,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -1499,8 +1503,6 @@
 							},
 							"uid": 755,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -1552,8 +1554,6 @@
 							},
 							"uid": 756,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -1605,8 +1605,6 @@
 							},
 							"uid": 757,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": true
 							},
 							"behaviors": {
@@ -1658,8 +1656,6 @@
 							},
 							"uid": 758,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -2833,8 +2829,6 @@
 							},
 							"uid": 781,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 3,
 								"Moving": false
 							},
 							"behaviors": {
@@ -3195,7 +3189,7 @@
 		},
 		{
 			"name": "Templates",
-			"overriden": 1,
+			"overriden": 0,
 			"subLayers": [],
 			"instances": [],
 			"sid": 491484174996685,
@@ -3462,7 +3456,7 @@
 					"type": "pause_menu",
 					"properties": {
 						"initially-visible": true,
-						"initial-animation": "Animation 1",
+						"initial-animation": "Static",
 						"initial-frame": 0,
 						"enable-collisions": true,
 						"live-preview": false
@@ -3471,14 +3465,22 @@
 					"instanceVariables": {
 						"AnimationPrefix": "Pause",
 						"onclick": "PauseSwitch",
-						"click_param": ""
+						"click_param": "",
+						"ClickMode": 0
 					},
 					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
 					"world": {
 						"x": 64,
 						"y": 64,
-						"width": 128,
-						"height": 128,
+						"width": 166,
+						"height": 184,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3514,7 +3516,9 @@
 						"origin": "top-left"
 					},
 					"uid": 709,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"purpose": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 590,
@@ -3546,14 +3550,22 @@
 					"instanceVariables": {
 						"AnimationPrefix": "Jump",
 						"onclick": "Jump",
-						"click_param": ""
+						"click_param": "",
+						"ClickMode": 0
 					},
 					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
 					"world": {
 						"x": 649,
 						"y": 1194,
-						"width": 128,
-						"height": 128,
+						"width": 331,
+						"height": 229,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3570,7 +3582,7 @@
 					"type": "NitroBut",
 					"properties": {
 						"initially-visible": true,
-						"initial-animation": "Animation 1",
+						"initial-animation": "NotFull",
 						"initial-frame": 0,
 						"enable-collisions": true,
 						"live-preview": false
@@ -3579,14 +3591,22 @@
 					"instanceVariables": {
 						"AnimationPrefix": "Nitro",
 						"onclick": "UseNitro",
-						"click_param": ""
+						"click_param": "",
+						"ClickMode": 0
 					},
 					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
 					"world": {
 						"x": 84,
 						"y": 1194,
-						"width": 128,
-						"height": 128,
+						"width": 223,
+						"height": 449,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3645,14 +3665,22 @@
 					"instanceVariables": {
 						"AnimationPrefix": "Shoot",
 						"onclick": "Shoot",
-						"click_param": ""
+						"click_param": "",
+						"ClickMode": 0
 					},
 					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
 					"world": {
 						"x": 81,
 						"y": 894,
-						"width": 128,
-						"height": 128,
+						"width": 331,
+						"height": 229,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
@@ -3688,7 +3716,9 @@
 						"origin": "top-left"
 					},
 					"uid": 714,
-					"instanceVariables": {},
+					"instanceVariables": {
+						"purpose": ""
+					},
 					"behaviors": {},
 					"world": {
 						"x": 16,
@@ -3720,9 +3750,17 @@
 					"instanceVariables": {
 						"AnimationPrefix": "Settings",
 						"onclick": "",
-						"click_param": ""
+						"click_param": "",
+						"ClickMode": 0
 					},
 					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
 					"world": {
 						"x": 471,
 						"y": 1196,
@@ -3753,9 +3791,17 @@
 					"instanceVariables": {
 						"AnimationPrefix": "Settings",
 						"onclick": "",
-						"click_param": ""
+						"click_param": "",
+						"ClickMode": 0
 					},
 					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
 					"world": {
 						"x": 283,
 						"y": 1197,
@@ -3776,7 +3822,7 @@
 			],
 			"sid": 588321177416022,
 			"effectTypes": [],
-			"isInitiallyVisible": true,
+			"isInitiallyVisible": false,
 			"isInitiallyInteractive": true,
 			"color": [
 				1,

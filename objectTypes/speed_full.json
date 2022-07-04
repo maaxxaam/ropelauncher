@@ -1,0 +1,37 @@
+{
+	"name": "speed_full",
+	"plugin-id": "Sprite",
+	"sid": 268570426251010,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 306,
+						"height": 640,
+						"originX": -0.5317647058823529,
+						"originY": 0.6275000000000001,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 2847749,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 483643288491607,
+				"name": "Default",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

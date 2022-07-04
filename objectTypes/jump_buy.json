@@ -1,0 +1,37 @@
+{
+	"name": "jump_buy",
+	"plugin-id": "Sprite",
+	"sid": 768990439398269,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 325,
+						"height": 202,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 726344,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 997224634441572,
+				"name": "Default",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

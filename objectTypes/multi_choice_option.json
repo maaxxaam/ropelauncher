@@ -1,0 +1,165 @@
+{
+	"name": "multi_choice_option",
+	"plugin-id": "Sprite",
+	"sid": 890364219535271,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "option",
+			"type": "string",
+			"desc": "",
+			"sid": 131450980187192
+		},
+		{
+			"name": "option_value",
+			"type": "number",
+			"desc": "",
+			"sid": 464954924306593
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 278,
+						"height": 113,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 7126543,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 528005626060997,
+				"name": "ZoomFar_active",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 278,
+						"height": 113,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 7520292,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 750037133074587,
+				"name": "ZoomFar_inactive",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 278,
+						"height": 113,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 4056255,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 509831941894978,
+				"name": "ZoomMed_active",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 278,
+						"height": 113,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 4803757,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 529347261885642,
+				"name": "ZoomMed_inactive",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 278,
+						"height": 113,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5403714,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 417681535226363,
+				"name": "ZoomNear_active",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 278,
+						"height": 113,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 2320874,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 385862673483239,
+				"name": "ZoomNear_inactive",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

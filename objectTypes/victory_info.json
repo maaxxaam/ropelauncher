@@ -1,0 +1,21 @@
+{
+	"name": "Victory_info",
+	"plugin-id": "Text",
+	"sid": 200469548743955,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "number",
+			"type": "number",
+			"desc": "",
+			"sid": 210979758651970
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "Mikal_Rotate",
+			"name": "Rotate"
+		}
+	]
+}

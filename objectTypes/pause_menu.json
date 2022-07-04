@@ -11,20 +11,27 @@
 			{
 				"frames": [
 					{
-						"width": 128,
-						"height": 128,
+						"width": 166,
+						"height": 184,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 6951326,
+						"imageSpriteId": 7796978,
 						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "Static",
+								"x": 0.7710843373493976,
+								"y": 0.8315217391304348
+							}
+						],
 						"duration": 1
 					}
 				],
 				"sid": 774797246246822,
-				"name": "Animation 1",
+				"name": "Static",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

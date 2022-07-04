@@ -1,14 +1,14 @@
 {
 	"name": "garage_car",
 	"plugin-id": "Sprite",
-	"sid": 361418907530480,
+	"sid": 629165648854821,
 	"isGlobal": false,
 	"instanceVariables": [
 		{
 			"name": "shownID",
 			"type": "number",
 			"desc": "",
-			"sid": 395256412600268
+			"sid": 830855877009559
 		}
 	],
 	"behaviorTypes": [],
@@ -18,40 +18,40 @@
 			{
 				"frames": [
 					{
-						"width": 121,
-						"height": 70,
+						"width": 941,
+						"height": 510,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 6961957,
+						"imageSpriteId": 7922666,
 						"collisionPoly": {
 							"points": [
-								0.9618320610687023,
-								0.07142857142857142,
 								1,
-								0.5,
-								0.9618320610687023,
-								0.9142857142857143,
-								0.5,
-								0.9714285714285714,
-								0.06106870229007633,
-								0.8857142857142857,
-								0.007633587786259555,
-								0.5,
-								0.06106870229007633,
-								0.1,
-								0.5,
-								0.014285714285714285
+								0.05981416957026712,
+								1,
+								0.491869918699187,
+								1,
+								0.9095238095238095,
+								0.52375,
+								0.9671312427409988,
+								0.0573854961832061,
+								0.8807200929152148,
+								0.0006106870229007766,
+								0.491869918699187,
+								0.0573854961832061,
+								0.0886178861788618,
+								0.52375,
+								0.002206736353077816
 							]
 						},
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 931998497944648,
-				"name": "Red",
+				"sid": 314055185856469,
+				"name": "DeepBlue",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,
@@ -61,83 +61,169 @@
 			{
 				"frames": [
 					{
-						"width": 131,
-						"height": 70,
+						"width": 941,
+						"height": 510,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 5715563,
+						"imageSpriteId": 6142103,
 						"collisionPoly": {
 							"points": [
-								0.9618320610687023,
-								0.07142857142857142,
 								1,
-								0.5,
-								0.9618320610687023,
-								0.9142857142857143,
-								0.5,
-								0.9714285714285714,
-								0.06106870229007633,
-								0.8857142857142857,
-								0.007633587786259555,
-								0.5,
-								0.06106870229007633,
-								0.1,
-								0.5,
-								0.014285714285714285
+								0.05210772833723652,
+								1,
+								0.48770491803278687,
+								1,
+								0.9087822014051522,
+								0.52375,
+								0.9668618266978922,
+								0.0573854961832061,
+								0.8797423887587822,
+								0.0006106870229007766,
+								0.48770491803278687,
+								0.0573854961832061,
+								0.08114754098360656,
+								0.52375,
+								0
 							]
 						},
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 131346259690349,
+				"sid": 325195329546062,
+				"name": "Violet",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 941,
+						"height": 510,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5665745,
+						"collisionPoly": {
+							"points": [
+								1,
+								0.05981416957026712,
+								1,
+								0.491869918699187,
+								1,
+								0.9095238095238095,
+								0.52375,
+								0.9671312427409988,
+								0.0573854961832061,
+								0.8807200929152148,
+								0.0006106870229007766,
+								0.491869918699187,
+								0.0573854961832061,
+								0.0886178861788618,
+								0.52375,
+								0.002206736353077816
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 304328689269389,
+				"name": "Start",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 941,
+						"height": 510,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5921647,
+						"collisionPoly": {
+							"points": [
+								1,
+								0.05210772833723652,
+								1,
+								0.48770491803278687,
+								1,
+								0.9087822014051522,
+								0.52375,
+								0.9668618266978922,
+								0.0573854961832061,
+								0.8797423887587822,
+								0.0006106870229007766,
+								0.48770491803278687,
+								0.0573854961832061,
+								0.08114754098360656,
+								0.52375,
+								0
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 501302044105291,
+				"name": "Yellow",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 941,
+						"height": 510,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 7935386,
+						"collisionPoly": {
+							"points": [
+								1,
+								0.05210772833723652,
+								1,
+								0.48770491803278687,
+								1,
+								0.9087822014051522,
+								0.52375,
+								0.9668618266978922,
+								0.0573854961832061,
+								0.8797423887587822,
+								0.0006106870229007766,
+								0.48770491803278687,
+								0.0573854961832061,
+								0.08114754098360656,
+								0.52375,
+								0
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 658932885809155,
 				"name": "Green",
-				"isLooping": false,
-				"isPingPong": false,
-				"repeatCount": 1,
-				"repeatTo": 0,
-				"speed": 5
-			},
-			{
-				"frames": [
-					{
-						"width": 131,
-						"height": 70,
-						"originX": 0.5,
-						"originY": 0.5,
-						"originalSource": "",
-						"exportFormat": "png",
-						"exportQuality": 0.8,
-						"imageSpriteId": 4009501,
-						"collisionPoly": {
-							"points": [
-								0.9618320610687023,
-								0.07142857142857142,
-								1,
-								0.5,
-								0.9618320610687023,
-								0.9142857142857143,
-								0.5,
-								0.9714285714285714,
-								0.06106870229007633,
-								0.8857142857142857,
-								0.007633587786259555,
-								0.5,
-								0.06106870229007633,
-								0.1,
-								0.5,
-								0.014285714285714285
-							]
-						},
-						"useCollisionPoly": true,
-						"duration": 1
-					}
-				],
-				"sid": 636047080987748,
-				"name": "Blue",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

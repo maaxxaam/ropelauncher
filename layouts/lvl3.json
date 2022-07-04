@@ -3,7 +3,7 @@
 	"layers": [
 		{
 			"name": "Templates",
-			"overriden": 1,
+			"overriden": 0,
 			"subLayers": [],
 			"instances": [],
 			"sid": 673313949426800,
@@ -210,14 +210,15 @@
 							"uid": 540,
 							"instanceVariables": {
 								"checkID": 0,
-								"IsStart": true,
-								"checkpointID": 0
+								"IsEnd": true,
+								"checkpointID": 0,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 1278,
 								"y": 3145,
-								"width": 512,
+								"width": 768,
 								"height": 128,
 								"originX": 0.5,
 								"originY": 0.5,
@@ -243,16 +244,17 @@
 							"uid": 541,
 							"instanceVariables": {
 								"checkID": 1,
-								"IsStart": false,
-								"checkpointID": 1
+								"IsEnd": false,
+								"checkpointID": 1,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 1436,
 								"y": 2901,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -276,16 +278,17 @@
 							"uid": 542,
 							"instanceVariables": {
 								"checkID": 3,
-								"IsStart": false,
-								"checkpointID": 3
+								"IsEnd": false,
+								"checkpointID": 3,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 2285,
 								"y": 1880,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -309,16 +312,17 @@
 							"uid": 543,
 							"instanceVariables": {
 								"checkID": 5,
-								"IsStart": false,
-								"checkpointID": 5
+								"IsEnd": false,
+								"checkpointID": 5,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 1058,
 								"y": 885,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -342,16 +346,17 @@
 							"uid": 544,
 							"instanceVariables": {
 								"checkID": 7,
-								"IsStart": false,
-								"checkpointID": 7
+								"IsEnd": false,
+								"checkpointID": 7,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 3584,
 								"y": 1680,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -375,16 +380,17 @@
 							"uid": 545,
 							"instanceVariables": {
 								"checkID": 9,
-								"IsStart": false,
-								"checkpointID": 9
+								"IsEnd": false,
+								"checkpointID": 9,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 4195,
 								"y": 2702,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -408,16 +414,17 @@
 							"uid": 546,
 							"instanceVariables": {
 								"checkID": 11,
-								"IsStart": false,
-								"checkpointID": 11
+								"IsEnd": false,
+								"checkpointID": 11,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 3303,
 								"y": 4007,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -441,16 +448,17 @@
 							"uid": 547,
 							"instanceVariables": {
 								"checkID": 2,
-								"IsStart": false,
-								"checkpointID": 2
+								"IsEnd": false,
+								"checkpointID": 2,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 2180,
 								"y": 2540,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -474,16 +482,17 @@
 							"uid": 548,
 							"instanceVariables": {
 								"checkID": 4,
-								"IsStart": false,
-								"checkpointID": 4
+								"IsEnd": false,
+								"checkpointID": 4,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 1131,
 								"y": 1525,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -507,16 +516,17 @@
 							"uid": 549,
 							"instanceVariables": {
 								"checkID": 6,
-								"IsStart": false,
-								"checkpointID": 6
+								"IsEnd": false,
+								"checkpointID": 6,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 3208,
 								"y": 758,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -540,16 +550,17 @@
 							"uid": 550,
 							"instanceVariables": {
 								"checkID": 8,
-								"IsStart": false,
-								"checkpointID": 8
+								"IsEnd": false,
+								"checkpointID": 8,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 4100,
 								"y": 2055,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -573,16 +584,17 @@
 							"uid": 551,
 							"instanceVariables": {
 								"checkID": 10,
-								"IsStart": false,
-								"checkpointID": 10
+								"IsEnd": false,
+								"checkpointID": 10,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 3700,
 								"y": 3091,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -606,16 +618,17 @@
 							"uid": 552,
 							"instanceVariables": {
 								"checkID": 12,
-								"IsStart": false,
-								"checkpointID": 12
+								"IsEnd": false,
+								"checkpointID": 12,
+								"isStart": false
 							},
 							"behaviors": {},
 							"world": {
 								"x": 1529,
 								"y": 4098,
-								"width": 640,
+								"width": 768,
 								"height": 128,
-								"originX": 0.3,
+								"originX": 0.25,
 								"originY": 0.5,
 								"color": [
 									1,
@@ -3690,8 +3703,6 @@
 							},
 							"uid": 314,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3743,8 +3754,6 @@
 							},
 							"uid": 315,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3796,8 +3805,6 @@
 							},
 							"uid": 316,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3849,8 +3856,6 @@
 							},
 							"uid": 317,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3902,8 +3907,6 @@
 							},
 							"uid": 318,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -3955,8 +3958,6 @@
 							},
 							"uid": 319,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4008,8 +4009,6 @@
 							},
 							"uid": 320,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4061,8 +4060,6 @@
 							},
 							"uid": 321,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4114,8 +4111,6 @@
 							},
 							"uid": 322,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4167,8 +4162,6 @@
 							},
 							"uid": 323,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4220,8 +4213,6 @@
 							},
 							"uid": 324,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4273,8 +4264,6 @@
 							},
 							"uid": 325,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -4326,8 +4315,6 @@
 							},
 							"uid": 326,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": true
 							},
 							"behaviors": {
@@ -4379,8 +4366,6 @@
 							},
 							"uid": 327,
 							"instanceVariables": {
-								"TargetName": "Obstacle",
-								"Health": 1,
 								"Moving": false
 							},
 							"behaviors": {
@@ -6573,7 +6558,7 @@
 			],
 			"sid": 566688648510051,
 			"effectTypes": [],
-			"isInitiallyVisible": true,
+			"isInitiallyVisible": false,
 			"isInitiallyInteractive": true,
 			"color": [
 				1,

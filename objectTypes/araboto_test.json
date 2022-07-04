@@ -1,0 +1,21 @@
+{
+	"name": "araboto_test",
+	"plugin-id": "Text",
+	"sid": 314054514800792,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "purpose",
+			"type": "string",
+			"desc": "",
+			"sid": 716596322470719
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "Mikal_Rotate",
+			"name": "Rotate"
+		}
+	]
+}

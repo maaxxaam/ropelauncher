@@ -11,20 +11,20 @@
 			{
 				"frames": [
 					{
-						"width": 128,
-						"height": 128,
+						"width": 166,
+						"height": 142,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 7478188,
+						"imageSpriteId": 6984103,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
 				"sid": 212746801214025,
-				"name": "Animation 1",
+				"name": "GameIdle",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

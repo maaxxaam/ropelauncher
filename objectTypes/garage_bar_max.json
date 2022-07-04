@@ -5,19 +5,19 @@
 	"isGlobal": false,
 	"instanceVariables": [
 		{
-			"name": "charID",
+			"name": "char_ID",
 			"type": "number",
 			"desc": "",
 			"sid": 334171219380582
 		},
 		{
-			"name": "lval",
+			"name": "low_value",
 			"type": "number",
 			"desc": "",
 			"sid": 166163577350582
 		},
 		{
-			"name": "hval",
+			"name": "high_value",
 			"type": "number",
 			"desc": "",
 			"sid": 328062182007213
@@ -26,14 +26,14 @@
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"image": {
-		"width": 48,
-		"height": 48,
+		"width": 612,
+		"height": 32,
 		"originX": 0.5,
 		"originY": 0.5,
 		"originalSource": "",
 		"exportFormat": "png",
 		"exportQuality": 0.8,
-		"imageSpriteId": 9521544,
+		"imageSpriteId": 7971702,
 		"useCollisionPoly": true
 	}
 }

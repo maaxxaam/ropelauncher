@@ -1,0 +1,39 @@
+{
+	"name": "garage_bar3",
+	"plugin-id": "NinePatch",
+	"sid": 133768134853438,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "charID",
+			"type": "number",
+			"desc": "",
+			"sid": 509379591367111
+		},
+		{
+			"name": "lval",
+			"type": "number",
+			"desc": "",
+			"sid": 182058493984610
+		},
+		{
+			"name": "hval",
+			"type": "number",
+			"desc": "",
+			"sid": 871596035377663
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"image": {
+		"width": 559,
+		"height": 24,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 294586,
+		"useCollisionPoly": true
+	}
+}

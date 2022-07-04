@@ -1,0 +1,37 @@
+{
+	"name": "swipe_rest",
+	"plugin-id": "Sprite",
+	"sid": 243604234641966,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 510,
+						"height": 792,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 2706427,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 571412151996352,
+				"name": "Default",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

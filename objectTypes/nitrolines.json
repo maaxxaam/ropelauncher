@@ -1,0 +1,26 @@
+{
+	"name": "NitroLines",
+	"plugin-id": "TiledBg",
+	"sid": 562429571699543,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 184029741612311
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 691,
+		"height": 2562,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 658575,
+		"useCollisionPoly": true
+	}
+}

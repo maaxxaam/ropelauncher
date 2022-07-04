@@ -1,0 +1,26 @@
+{
+	"name": "black_cover",
+	"plugin-id": "TiledBg",
+	"sid": 967035945375748,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Fade",
+			"name": "Fade",
+			"sid": 687020844337554
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 2,
+		"height": 2,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 7760426,
+		"useCollisionPoly": true
+	}
+}

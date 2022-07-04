@@ -75,6 +75,12 @@ function project_line_onto_vector(vector, point1, point2) {
 	return [project_point_onto_vector(vector, point1), project_point_onto_vector(vector, point2)];
 }
 
+export function distance_line_point(edge1, edge2, point){
+	const edge_vector = Vector2.subtract(edge2, edge1);
+	const other_vector = Vector2.subtract(point, edge1);
+	return Vector2.cross(edge_vector, other_vector)/Vector2.distance(edge2, edge1);
+}
+
 function line_intersection_point(edge1, edge2) {
 	let edge1vec = Vector2.subtract(edge1[0], edge1[1]);
 	let edge2vec = Vector2.subtract(edge2[0], edge2[1]);

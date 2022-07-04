@@ -33,6 +33,12 @@
 			"type": "number",
 			"desc": "",
 			"sid": 503866247437685
+		},
+		{
+			"name": "Searching",
+			"type": "boolean",
+			"desc": "",
+			"sid": 318855328203402
 		}
 	],
 	"behaviorTypes": [],
@@ -49,7 +55,7 @@
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 4324565,
+						"imageSpriteId": 9121504,
 						"collisionPoly": {
 							"points": [
 								0,
@@ -75,7 +81,50 @@
 					}
 				],
 				"sid": 856427948408408,
-				"name": "Animation 1",
+				"name": "You",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 0
+			},
+			{
+				"frames": [
+					{
+						"width": 140,
+						"height": 80,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 9429406,
+						"collisionPoly": {
+							"points": [
+								0,
+								0.2,
+								0.14285714285714285,
+								0,
+								0.8571428571428571,
+								0,
+								1,
+								0.2,
+								1,
+								0.8,
+								0.8571428571428571,
+								1,
+								0.14285714285714285,
+								1,
+								0,
+								0.8
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 777191554487614,
+				"name": "Enemy",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

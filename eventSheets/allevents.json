@@ -32,145 +32,14 @@
 			"sid": 624754048191963
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-tap-object",
-					"objectClass": "Touch",
-					"sid": 472772595553118,
-					"parameters": {
-						"object": "Button"
-					}
-				},
-				{
-					"id": "is-on-screen",
-					"objectClass": "Button",
-					"sid": 166040165340706
-				}
-			],
-			"actions": [
-				{
-					"callFunction": "PlayIf",
-					"sid": 240166573990326,
-					"parameters": [
-						"\"Click\"",
-						"SFX"
-					]
-				},
-				{
-					"callFunction": "ButtonProxy",
-					"sid": 932125957110733,
-					"parameters": [
-						"Button.UID",
-						"Button.click_param"
-					]
-				}
-			],
-			"sid": 940687657309202
-		},
-		{
-			"functionName": "ButtonProxy",
-			"functionDescription": "",
-			"functionCategory": "Proxies",
-			"functionReturnType": "none",
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "ButtonUID",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"sid": 672040522431946
-				},
-				{
-					"name": "ButtonParam",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 983299647604209
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 667768738601670,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "Button",
-							"sid": 333375996342317,
-							"parameters": {
-								"unique-id": "ButtonUID"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "call-mapped-function",
-							"objectClass": "Functions",
-							"sid": 503210533210461,
-							"parameters": {
-								"name": "\"onclick\"",
-								"string": "Button.onclick",
-								"forward-params": "1"
-							}
-						}
-					],
-					"sid": 505836044621335
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-key-pressed",
-					"objectClass": "Keyboard",
-					"sid": 176024193756268,
-					"parameters": {
-						"key": 77
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "toggle-boolean-eventvar",
-					"objectClass": "System",
-					"sid": 441744587974503,
-					"parameters": {
-						"variable": "Music"
-					}
-				}
-			],
-			"sid": 124697664816028,
-			"disabled": true
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-key-pressed",
-					"objectClass": "Keyboard",
-					"sid": 232093746319636,
-					"parameters": {
-						"key": 83
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "toggle-boolean-eventvar",
-					"objectClass": "System",
-					"sid": 245384607366767,
-					"parameters": {
-						"variable": "SFX"
-					}
-				}
-			],
-			"sid": 283161554395941
+			"eventType": "variable",
+			"name": "VolumeLevel",
+			"type": "number",
+			"initialValue": "100",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 631404521753858
 		},
 		{
 			"eventType": "block",
@@ -204,18 +73,73 @@
 							}
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 855953674985525,
+					"children": [
 						{
-							"id": "set-animation",
-							"objectClass": "Button",
-							"sid": 810685919490558,
-							"parameters": {
-								"animation": "Button.AnimationPrefix&\"Tap\"",
-								"from": "beginning"
-							}
+							"eventType": "comment",
+							"text": "Standard mode based on animation prefix and idle/hover/tap animations on sprite"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "Button",
+									"sid": 529943493277328,
+									"parameters": {
+										"instance-variable": "ClickMode",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Button",
+									"sid": 270476990727889,
+									"parameters": {
+										"animation": "Button.AnimationPrefix&\"Tap\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 432634398538873
+						},
+						{
+							"eventType": "comment",
+							"text": "Effect-based button animation"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "Button",
+									"sid": 138986335141989,
+									"parameters": {
+										"instance-variable": "ClickMode",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-parameter",
+									"objectClass": "Button",
+									"sid": 177747194601159,
+									"parameters": {
+										"effect": "\"Exposure\"",
+										"parameter-index": "0",
+										"value": "-25"
+									}
+								}
+							],
+							"sid": 682517746069893
 						}
-					],
-					"sid": 855953674985525
+					]
 				},
 				{
 					"eventType": "block",
@@ -234,18 +158,73 @@
 							}
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 816410682569186,
+					"children": [
 						{
-							"id": "set-animation",
-							"objectClass": "Button",
-							"sid": 424447305265132,
-							"parameters": {
-								"animation": "Button.AnimationPrefix&\"Hover\"",
-								"from": "beginning"
-							}
+							"eventType": "comment",
+							"text": "Standard mode based on animation prefix and idle/hover/tap animations on sprite"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "Button",
+									"sid": 984793105672820,
+									"parameters": {
+										"instance-variable": "ClickMode",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Button",
+									"sid": 286761886006154,
+									"parameters": {
+										"animation": "Button.AnimationPrefix&\"Hover\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 263453713808050
+						},
+						{
+							"eventType": "comment",
+							"text": "Effect-based button animation"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "Button",
+									"sid": 371146237126611,
+									"parameters": {
+										"instance-variable": "ClickMode",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-parameter",
+									"objectClass": "Button",
+									"sid": 357112946050644,
+									"parameters": {
+										"effect": "\"Exposure\"",
+										"parameter-index": "0",
+										"value": "25"
+									}
+								}
+							],
+							"sid": 276064369086912
 						}
-					],
-					"sid": 816410682569186
+					]
 				},
 				{
 					"eventType": "block",
@@ -256,18 +235,73 @@
 							"sid": 464999572643859
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 846331647471808,
+					"children": [
 						{
-							"id": "set-animation",
-							"objectClass": "Button",
-							"sid": 489207661496558,
-							"parameters": {
-								"animation": "Button.AnimationPrefix&\"Idle\"",
-								"from": "beginning"
-							}
+							"eventType": "comment",
+							"text": "Standard mode based on animation prefix and idle/hover/tap animations on sprite"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "Button",
+									"sid": 433041750867109,
+									"parameters": {
+										"instance-variable": "ClickMode",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Button",
+									"sid": 262339749834656,
+									"parameters": {
+										"animation": "Button.AnimationPrefix&\"Idle\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 832531266340058
+						},
+						{
+							"eventType": "comment",
+							"text": "Effect-based button animation"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "Button",
+									"sid": 823485155190651,
+									"parameters": {
+										"instance-variable": "ClickMode",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-parameter",
+									"objectClass": "Button",
+									"sid": 906026536435767,
+									"parameters": {
+										"effect": "\"Exposure\"",
+										"parameter-index": "0",
+										"value": "0"
+									}
+								}
+							],
+							"sid": 305409778706696
 						}
-					],
-					"sid": 846331647471808
+					]
 				}
 			]
 		},
@@ -336,375 +370,123 @@
 				{
 					"id": "on-tap-object",
 					"objectClass": "Touch",
-					"sid": 226869733806022,
+					"sid": 379876807540352,
 					"parameters": {
-						"object": "SettBut"
+						"object": "Button"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 755970759296707,
+					"parameters": {
+						"layer": "Button.LayerName"
 					}
 				}
 			],
-			"actions": [],
-			"sid": 477010559639837,
-			"disabled": true,
+			"actions": [
+				{
+					"callFunction": "PlayIf",
+					"sid": 618933744119680,
+					"parameters": [
+						"\"Click\"",
+						"SFX"
+					]
+				},
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 367786858525414,
+					"disabled": true,
+					"parameters": {
+						"message": "Button.ObjectTypeName"
+					}
+				}
+			],
+			"sid": 297546058481376,
 			"children": [
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 647098655001547,
+							"id": "compare-instance-variable",
+							"objectClass": "Button",
+							"sid": 902542323404672,
 							"parameters": {
-								"first-value": "SettBut.IID",
-								"comparison": 0,
-								"second-value": "0"
+								"instance-variable": "onclick",
+								"comparison": 1,
+								"value": "\"\""
 							}
 						}
 					],
 					"actions": [
 						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 596969427043958,
-							"parameters": {
-								"variable": "Music"
-							}
-						},
-						{
-							"id": "set-animation",
-							"objectClass": "SettBut",
-							"sid": 456112731158386,
-							"parameters": {
-								"animation": "Music ? \"On\" : \"Off\"",
-								"from": "beginning"
-							}
-						},
-						{
-							"id": "player-toggle",
-							"objectClass": "GameScore",
-							"sid": 951453170156991,
-							"parameters": {
-								"key": "\"music\""
-							}
-						},
-						{
-							"id": "player-sync",
-							"objectClass": "GameScore",
-							"sid": 596842855833307,
-							"parameters": {
-								"override": false
-							}
+							"callFunction": "ButtonProxy",
+							"sid": 675945920610122,
+							"parameters": [
+								"Button.UID",
+								"Button.click_param"
+							]
 						}
 					],
-					"sid": 604359223511584,
-					"disabled": true,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-tag-playing",
-									"objectClass": "Audio",
-									"sid": 251247133153132,
-									"parameters": {
-										"tag": "\"Music\""
-									},
-									"isInverted": true
-								},
-								{
-									"id": "compare-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 386206408586653,
-									"parameters": {
-										"variable": "Music"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "play",
-									"objectClass": "Audio",
-									"sid": 997725110087250,
-									"parameters": {
-										"audio-file": "Background",
-										"loop": "looping",
-										"volume": "-10",
-										"tag-optional": "\"Music\""
-									}
-								}
-							],
-							"sid": 978881221503096,
-							"disabled": true
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-tag-playing",
-									"objectClass": "Audio",
-									"sid": 399694148756535,
-									"parameters": {
-										"tag": "\"Music\""
-									}
-								},
-								{
-									"id": "compare-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 134465851316772,
-									"parameters": {
-										"variable": "Music"
-									},
-									"isInverted": true
-								}
-							],
-							"actions": [
-								{
-									"id": "stop",
-									"objectClass": "Audio",
-									"sid": 727211454621399,
-									"parameters": {
-										"tag": "\"Music\""
-									}
-								}
-							],
-							"sid": 809437055105573,
-							"disabled": true
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 245026751938489,
-							"parameters": {
-								"first-value": "SettBut.IID",
-								"comparison": 0,
-								"second-value": "1"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 145642936155276,
-							"parameters": {
-								"variable": "SFX"
-							}
-						},
-						{
-							"id": "set-animation",
-							"objectClass": "SettBut",
-							"sid": 860622881891233,
-							"parameters": {
-								"animation": "SFX ? \"On\" : \"Off\"",
-								"from": "beginning"
-							}
-						},
-						{
-							"id": "player-toggle",
-							"objectClass": "GameScore",
-							"sid": 926666093317204,
-							"parameters": {
-								"key": "\"sfx\""
-							}
-						},
-						{
-							"id": "player-sync",
-							"objectClass": "GameScore",
-							"sid": 744908372733051,
-							"parameters": {
-								"override": false
-							}
-						}
-					],
-					"sid": 560932688379192,
-					"disabled": true
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 181994039768345,
-							"parameters": {
-								"first-value": "SettBut.IID",
-								"comparison": 0,
-								"second-value": "2"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "toggle-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 903207625570580,
-							"parameters": {
-								"variable": "ExtraAnimation"
-							}
-						},
-						{
-							"id": "set-animation",
-							"objectClass": "SettBut",
-							"sid": 945564651150620,
-							"parameters": {
-								"animation": "ExtraAnimation ? \"On\" : \"Off\"",
-								"from": "beginning"
-							}
-						},
-						{
-							"id": "player-toggle",
-							"objectClass": "GameScore",
-							"sid": 547653725933575,
-							"parameters": {
-								"key": "\"extraanim\""
-							}
-						},
-						{
-							"id": "player-sync",
-							"objectClass": "GameScore",
-							"sid": 894414462813819,
-							"parameters": {
-								"override": false
-							}
-						}
-					],
-					"sid": 388229401740255,
-					"disabled": true,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-animation-playing",
-									"objectClass": "SettBut",
-									"sid": 305210730448603,
-									"parameters": {
-										"animation": "\"Off\""
-									}
-								}
-							],
-							"actions": [],
-							"sid": 730733248176328,
-							"disabled": true
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "else",
-									"objectClass": "System",
-									"sid": 646503656523520
-								}
-							],
-							"actions": [],
-							"sid": 141642944475527,
-							"disabled": true
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 433689158777389,
-							"parameters": {
-								"first-value": "SettBut.IID",
-								"comparison": 0,
-								"second-value": "3"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 764062445072733,
-							"parameters": {
-								"variable": "Speed",
-								"value": "Speed = 2 ? 1 : 2"
-							}
-						},
-						{
-							"id": "set-animation",
-							"objectClass": "SettBut",
-							"sid": 510401006043380,
-							"parameters": {
-								"animation": "Speed = 1 ? \"On\" : \"Off\"",
-								"from": "beginning"
-							}
-						},
-						{
-							"id": "player-set",
-							"objectClass": "GameScore",
-							"sid": 740307215982884,
-							"parameters": {
-								"key": "\"speed\"",
-								"value": "Speed"
-							}
-						},
-						{
-							"id": "player-sync",
-							"objectClass": "GameScore",
-							"sid": 705726985032121,
-							"parameters": {
-								"override": false
-							}
-						}
-					],
-					"sid": 523993315715942,
-					"disabled": true
+					"sid": 318516433795891
 				}
 			]
 		},
 		{
-			"eventType": "block",
-			"conditions": [
+			"functionName": "ButtonProxy",
+			"functionDescription": "",
+			"functionCategory": "Proxies",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
 				{
-					"id": "is-ads-fullscreen-playing",
-					"objectClass": "GameScore",
-					"sid": 521616342084020
+					"name": "ButtonUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 672040522431946
+				},
+				{
+					"name": "ButtonParam",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 983299647604209
 				}
 			],
-			"actions": [
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 618586800193662,
+			"children": [
 				{
-					"id": "set-silent",
-					"objectClass": "Audio",
-					"sid": 525820834549582,
-					"parameters": {
-						"mode": "silent"
-					}
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Button",
+							"sid": 610149625850377,
+							"parameters": {
+								"unique-id": "ButtonUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "call-mapped-function",
+							"objectClass": "Functions",
+							"sid": 636793588031801,
+							"parameters": {
+								"name": "\"onclick\"",
+								"string": "Button.onclick",
+								"forward-params": "1"
+							}
+						}
+					],
+					"sid": 456844021524293
 				}
-			],
-			"sid": 526433316224888,
-			"disabled": true
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-ads-fullscreen-close",
-					"objectClass": "GameScore",
-					"sid": 171438030473778
-				}
-			],
-			"actions": [
-				{
-					"id": "set-silent",
-					"objectClass": "Audio",
-					"sid": 466209090657785,
-					"parameters": {
-						"mode": "not-silent"
-					}
-				}
-			],
-			"sid": 769846554908381,
-			"disabled": true
+			]
 		},
 		{
 			"eventType": "block",
@@ -779,6 +561,2841 @@
 				}
 			],
 			"sid": 104526680856725
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 403814333763445,
+					"parameters": {
+						"layer": "\"Settings\""
+					}
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 596323306070650
+				}
+			],
+			"actions": [],
+			"sid": 100491337276322,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 226324674246918,
+							"parameters": {
+								"first-value": "LayoutName",
+								"comparison": 0,
+								"second-value": "\"Menu\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 921458873729320,
+							"parameters": {
+								"object-to-create": "to_game_no_text",
+								"layer": "\"Settings\"",
+								"x": "360",
+								"y": "1195",
+								"create-hierarchy": true,
+								"template-name": "\"to_menu\""
+							}
+						},
+						{
+							"callFunction": "ChangeSettingsTab",
+							"sid": 328837520376543,
+							"parameters": [
+								"\"Controls\""
+							]
+						}
+					],
+					"sid": 326187717666287
+				},
+				{
+					"eventType": "comment",
+					"text": "Levels"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 192109811070965
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 221544586613530,
+							"parameters": {
+								"object-to-create": "to_game_no_text",
+								"layer": "\"Settings\"",
+								"x": "360",
+								"y": "795",
+								"create-hierarchy": true,
+								"template-name": "\"to_game\""
+							}
+						},
+						{
+							"callFunction": "ChangeSettingsTab",
+							"sid": 806765129570425,
+							"parameters": [
+								"\"Pause\""
+							]
+						}
+					],
+					"sid": 213911283294091,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 140281327282990,
+									"parameters": {
+										"object": "TabBut",
+										"expression": "TabBut.AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Pause\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-visible",
+									"objectClass": "TabBut",
+									"sid": 211807383786366,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								}
+							],
+							"sid": 297344661476953
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 493472670753821,
+					"parameters": {
+						"layer": "\"Settings\""
+					},
+					"isInverted": true
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 650342352056171
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "to_game_no_text",
+					"sid": 102373562337984
+				}
+			],
+			"sid": 777899793870127
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 813852955689374,
+					"parameters": {
+						"object": "TabBut"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 973209155973813,
+					"parameters": {
+						"layer": "\"Settings\""
+					}
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "TabBut",
+					"sid": 642180605612272
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "ChangeSettingsTab",
+					"sid": 405802971063348,
+					"parameters": [
+						"TabBut.AnimationPrefix"
+					]
+				}
+			],
+			"sid": 647733003843008
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 199709014410126,
+					"parameters": {
+						"object": "to_game_no_text"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 766413346150934,
+					"parameters": {
+						"layer": "to_game_no_text.LayerName"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-layer-visible",
+					"objectClass": "System",
+					"sid": 396177943277954,
+					"parameters": {
+						"layer": "\"Settings\"",
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 800904156051879,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 587925397225521,
+							"parameters": {
+								"first-value": "LayoutName",
+								"comparison": 0,
+								"second-value": "\"Menu\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 650915489275178,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-children",
+							"objectClass": "to_game_no_text",
+							"sid": 956780177488775,
+							"parameters": {
+								"child": "araboto_test",
+								"which": "own"
+							}
+						},
+						{
+							"id": "compare-text",
+							"objectClass": "araboto_test",
+							"sid": 758370712202568,
+							"parameters": {
+								"text-to-compare": "\"В МЕНЮ\"",
+								"case-sensitivity": "ignore-case"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ShowLayer",
+							"sid": 323034886888369,
+							"parameters": [
+								"\"Title\""
+							]
+						},
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 471179534387211,
+							"parameters": {
+								"layer": "\"Title\"",
+								"visibility": "visible"
+							}
+						}
+					],
+					"sid": 962008063611661
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 744617826529837
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 395498162243145,
+							"parameters": {
+								"layer": "\"GUI\"",
+								"visibility": "visible"
+							}
+						}
+					],
+					"sid": 992996492593741
+				}
+			]
+		},
+		{
+			"functionName": "ChangeSettingsTab",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "TabName",
+					"type": "string",
+					"initialValue": "Controls",
+					"comment": "",
+					"sid": 959876630711202
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 318468555053378,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 793733657285238,
+							"parameters": {
+								"object": "TabBut",
+								"expression": "TabBut.AnimationPrefix",
+								"comparison": 0,
+								"value": "TabName"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "TabBut",
+							"sid": 955850545124391,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "logo",
+							"sid": 920050042481433
+						},
+						{
+							"id": "destroy",
+							"objectClass": "credits_title",
+							"sid": 805678196301425
+						},
+						{
+							"id": "destroy",
+							"objectClass": "sound_off",
+							"sid": 103962159283906
+						},
+						{
+							"id": "destroy",
+							"objectClass": "sound_on",
+							"sid": 339248910190764
+						},
+						{
+							"id": "destroy",
+							"objectClass": "music_off",
+							"sid": 164882177845131
+						},
+						{
+							"id": "destroy",
+							"objectClass": "music_on",
+							"sid": 340450207233437
+						},
+						{
+							"id": "destroy",
+							"objectClass": "volume_slider_back",
+							"sid": 932803604365981
+						},
+						{
+							"id": "destroy",
+							"objectClass": "keyboard_tips",
+							"sid": 827869412653310
+						},
+						{
+							"id": "stop-timeline-by-tags",
+							"objectClass": "TimelineController",
+							"sid": 904436747890329,
+							"parameters": {
+								"tags": "\"MobileTips\""
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "swipe_rest",
+							"sid": 589637783475535,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "swipe_car",
+							"sid": 922790143878814,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "swipe_finger",
+							"sid": 192671407610664,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "option_off",
+							"sid": 750977712000057,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "option_on",
+							"sid": 767898059767422,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "multi_choice_option",
+							"sid": 665020222735407,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 994328712194523,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 879992697523596,
+									"parameters": {
+										"object": "RestartBut",
+										"expression": "RestartBut.LayerName",
+										"comparison": 0,
+										"value": "\"Settings\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "RestartBut",
+									"sid": 391909118758726
+								}
+							],
+							"sid": 760092306465258
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 258614108072340,
+									"parameters": {
+										"object": "ToMenuBut",
+										"expression": "ToMenuBut.LayerName",
+										"comparison": 0,
+										"value": "\"Settings\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "ToMenuBut",
+									"sid": 906539884815011
+								}
+							],
+							"sid": 433521219176952
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 795889165445772,
+									"parameters": {
+										"object": "settings_back"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "settings_back",
+									"sid": 631563822852408,
+									"parameters": {
+										"animation": "TabBut.AnimationPrefix",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 892578261504017
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 497178371111099,
+									"parameters": {
+										"object": "araboto_test",
+										"expression": "araboto_test.purpose",
+										"comparison": 0,
+										"value": "\"credits_text\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "araboto_test",
+									"sid": 913473048995127
+								}
+							],
+							"sid": 675748009467870
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "TabBut",
+									"sid": 742389005778004,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Controls\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-visible",
+									"objectClass": "option_off",
+									"sid": 643590922628723,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "option_on",
+									"sid": 697518654027132,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "multi_choice_option",
+									"sid": 149223442014573,
+									"parameters": {
+										"visibility": "visible"
+									}
+								}
+							],
+							"sid": 196584317266895,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 283398949948259,
+											"parameters": {
+												"object": "to_game_no_text"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-y",
+											"objectClass": "to_game_no_text",
+											"sid": 791988678574233,
+											"parameters": {
+												"y": "1195"
+											}
+										}
+									],
+									"sid": 723753161964154
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 755886089409277,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 676047900455415,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Credits\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 285532491809386,
+											"parameters": {
+												"x": "655"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 641793632311264,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 249458423203908
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 173096033451187,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 727823873596261,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Sounds\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 823609588286951,
+											"parameters": {
+												"x": "535"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 409696982689350,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 200111453126591
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 378775014079182,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 137000656361095,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Pause\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 103264272970221,
+											"parameters": {
+												"x": "70"
+											}
+										}
+									],
+									"sid": 803885285881491,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 892612641465611,
+													"parameters": {
+														"first-value": "LayoutName",
+														"comparison": 0,
+														"second-value": "\"Menu\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-visible",
+													"objectClass": "TabBut",
+													"sid": 678629240230303,
+													"parameters": {
+														"visibility": "invisible"
+													}
+												}
+											],
+											"sid": 196726451037915
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 425573839991666
+												}
+											],
+											"actions": [
+												{
+													"id": "set-visible",
+													"objectClass": "TabBut",
+													"sid": 889886530788464,
+													"parameters": {
+														"visibility": "visible"
+													}
+												}
+											],
+											"sid": 884184558597460
+										}
+									]
+								},
+								{
+									"eventType": "comment",
+									"text": "Android, IOS"
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-on-mobile",
+											"objectClass": "PlatformInfo",
+											"sid": 655169737757252
+										},
+										{
+											"id": "is-in-preview",
+											"objectClass": "System",
+											"sid": 336258658984861
+										}
+									],
+									"actions": [
+										{
+											"id": "alert",
+											"objectClass": "Browser",
+											"sid": 766220736972186,
+											"disabled": true,
+											"parameters": {
+												"message": "\"starting swipe animation...\""
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "swipe_rest",
+											"sid": 914431746845564,
+											"parameters": {
+												"visibility": "visible"
+											}
+										},
+										{
+											"id": "move-to-top",
+											"objectClass": "swipe_finger",
+											"sid": 793230004592341,
+											"disabled": true
+										},
+										{
+											"id": "move-to-top",
+											"objectClass": "swipe_rest",
+											"sid": 791552144992658,
+											"disabled": true
+										},
+										{
+											"id": "move-to-top",
+											"objectClass": "swipe_car",
+											"sid": 938563804956589,
+											"disabled": true
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "swipe_car",
+											"sid": 814296784476068,
+											"parameters": {
+												"visibility": "visible"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "swipe_finger",
+											"sid": 934664129058271,
+											"parameters": {
+												"visibility": "visible"
+											}
+										},
+										{
+											"id": "set-instance",
+											"objectClass": "TimelineController",
+											"sid": 892915078031109,
+											"parameters": {
+												"object-class": "swipe_car",
+												"track-id": "\"car\""
+											}
+										},
+										{
+											"id": "set-instance",
+											"objectClass": "TimelineController",
+											"sid": 335181936780675,
+											"parameters": {
+												"object-class": "swipe_finger",
+												"track-id": "\"finger\""
+											}
+										},
+										{
+											"id": "play-timeline",
+											"objectClass": "TimelineController",
+											"sid": 260819616642091,
+											"parameters": {
+												"timeline": "MobileControlsTips",
+												"tags": "\"MobileTips\""
+											}
+										}
+									],
+									"sid": 992751887613018,
+									"isOrBlock": true
+								},
+								{
+									"eventType": "comment",
+									"text": "Linux, Windows, macOS, Chrome OS"
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 591095628974970
+										}
+									],
+									"actions": [
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 242282579644977,
+											"parameters": {
+												"object-to-create": "keyboard_tips",
+												"layer": "\"Settings\"",
+												"x": "360",
+												"y": "900",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										}
+									],
+									"sid": 388712975854233
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "TabBut",
+									"sid": 458965932073785,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Credits\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 831115341937925,
+									"parameters": {
+										"object-to-create": "araboto_test",
+										"layer": "\"Settings\"",
+										"x": "50",
+										"y": "520",
+										"create-hierarchy": false,
+										"template-name": "\"credits_text\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 190854593104373,
+									"parameters": {
+										"object-to-create": "logo",
+										"layer": "\"Settings\"",
+										"x": "360",
+										"y": "315",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 406245047014103,
+									"parameters": {
+										"object-to-create": "credits_title",
+										"layer": "\"Settings\"",
+										"x": "130",
+										"y": "470",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								}
+							],
+							"sid": 559605792420259,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 225516769624970,
+											"parameters": {
+												"object": "to_game_no_text"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-y",
+											"objectClass": "to_game_no_text",
+											"sid": 435138460892478,
+											"parameters": {
+												"y": "1040"
+											}
+										}
+									],
+									"sid": 561151366333935
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 910980299424611,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 498002502814873,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Sounds\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 793502897572146,
+											"parameters": {
+												"x": "310"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 312504579089679,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 323883878918168
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 828243329960192,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 187777930326591,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Controls\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 577419946878355,
+											"parameters": {
+												"x": "190"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 127926603775606,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 684853304932083
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 453216325861655,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 156493330268144,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Pause\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 860463507001296,
+											"parameters": {
+												"x": "70"
+											}
+										}
+									],
+									"sid": 595656819620792,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 229399474381071,
+													"parameters": {
+														"first-value": "LayoutName",
+														"comparison": 0,
+														"second-value": "\"Menu\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-visible",
+													"objectClass": "TabBut",
+													"sid": 380327786591509,
+													"parameters": {
+														"visibility": "invisible"
+													}
+												}
+											],
+											"sid": 247597743518597
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 526376172660556
+												}
+											],
+											"actions": [
+												{
+													"id": "set-visible",
+													"objectClass": "TabBut",
+													"sid": 781532220819178,
+													"parameters": {
+														"visibility": "visible"
+													}
+												}
+											],
+											"sid": 871098415525639
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "TabBut",
+									"sid": 198802216840469,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Sounds\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 969674417086564,
+									"parameters": {
+										"object-to-create": "sound_off",
+										"layer": "\"Settings\"",
+										"x": "200",
+										"y": "650",
+										"create-hierarchy": true,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 777662483029901,
+									"parameters": {
+										"object-to-create": "sound_on",
+										"layer": "\"Settings\"",
+										"x": "520",
+										"y": "650",
+										"create-hierarchy": true,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 806222695117166,
+									"parameters": {
+										"object-to-create": "music_off",
+										"layer": "\"Settings\"",
+										"x": "200",
+										"y": "410",
+										"create-hierarchy": true,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 325281792572166,
+									"parameters": {
+										"object-to-create": "music_on",
+										"layer": "\"Settings\"",
+										"x": "520",
+										"y": "410",
+										"create-hierarchy": true,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 521068436738977,
+									"parameters": {
+										"object-to-create": "volume_slider_back",
+										"layer": "\"Settings\"",
+										"x": "360",
+										"y": "900",
+										"create-hierarchy": true,
+										"template-name": "\"\""
+									}
+								}
+							],
+							"sid": 383777587779370,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 664737005821086,
+											"parameters": {
+												"object": "to_game_no_text"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-y",
+											"objectClass": "to_game_no_text",
+											"sid": 756590498124624,
+											"parameters": {
+												"y": "1040"
+											}
+										}
+									],
+									"sid": 608324583308428
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 208600429984883,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 997169708246672,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Credits\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 460010550905759,
+											"parameters": {
+												"x": "655"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 990822097377749,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 677281908136562
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 751207980056481,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 301304961508528,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Controls\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 947258863969022,
+											"parameters": {
+												"x": "190"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 887085172087796,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 356576787028599
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 103568828392576,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 245980732583849,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Pause\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 108357098376550,
+											"parameters": {
+												"x": "70"
+											}
+										}
+									],
+									"sid": 425845418246392,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 989287376083960,
+													"parameters": {
+														"first-value": "LayoutName",
+														"comparison": 0,
+														"second-value": "\"Menu\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-visible",
+													"objectClass": "TabBut",
+													"sid": 629307954997716,
+													"parameters": {
+														"visibility": "invisible"
+													}
+												}
+											],
+											"sid": 694410784005445
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 914639609056920
+												}
+											],
+											"actions": [
+												{
+													"id": "set-visible",
+													"objectClass": "TabBut",
+													"sid": 966708814010406,
+													"parameters": {
+														"visibility": "visible"
+													}
+												}
+											],
+											"sid": 732795694934036
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "TabBut",
+									"sid": 942274475109232,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Pause\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 380711027280944,
+									"parameters": {
+										"object-to-create": "RestartBut",
+										"layer": "\"Settings\"",
+										"x": "360",
+										"y": "580",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "RestartBut",
+									"sid": 837619305904470,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"value": "\"Settings\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "RestartBut",
+									"sid": 145673218404358,
+									"parameters": {
+										"instance-variable": "ClickMode",
+										"value": "1"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "RestartBut",
+									"sid": 272973663032555,
+									"parameters": {
+										"animation": "\"Settings\"",
+										"from": "beginning"
+									}
+								},
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 470323232448687,
+									"parameters": {
+										"object-to-create": "ToMenuBut",
+										"layer": "\"Settings\"",
+										"x": "360",
+										"y": "360",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								}
+							],
+							"sid": 571176428346845,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 905776089337359,
+											"parameters": {
+												"object": "to_game_no_text"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-y",
+											"objectClass": "to_game_no_text",
+											"sid": 482885100543748,
+											"parameters": {
+												"y": "795"
+											}
+										}
+									],
+									"sid": 926443062276221
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 187343520066842,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 313570391986523,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Credits\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 679636049075620,
+											"parameters": {
+												"x": "655"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 825410873972831,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 595260427423777
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 607713378968492,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 965662892915779,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Sounds\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 605707686726417,
+											"parameters": {
+												"x": "535"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 733413277109231,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 544502901075761
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 692672338190269,
+											"parameters": {
+												"object": "TabBut"
+											}
+										},
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 877254099753583,
+											"parameters": {
+												"object": "TabBut",
+												"expression": "TabBut.AnimationPrefix",
+												"comparison": 0,
+												"value": "\"Controls\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "TabBut",
+											"sid": 766737332603013,
+											"parameters": {
+												"x": "425"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "TabBut",
+											"sid": 590405569244289,
+											"parameters": {
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 834113493702945
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "slider_handle",
+					"sid": 387017652847962
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "slider_handle",
+					"sid": 409484042819308,
+					"parameters": {
+						"instance-variable": "percent",
+						"value": "(self.BoundedDragDrop.xMaxBoundPos - self.BoundedDragDrop.xMinBoundPos) / 100"
+					}
+				},
+				{
+					"id": "set-x",
+					"objectClass": "slider_handle",
+					"sid": 116511492925998,
+					"parameters": {
+						"x": "min(Self.BoundedDragDrop.xMinBoundPos + Self.percent * VolumeLevel, Self.BoundedDragDrop.xMaxBoundPos)"
+					}
+				}
+			],
+			"sid": 533676972821492,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-last-created",
+							"objectClass": "System",
+							"sid": 944523331250958,
+							"parameters": {
+								"object": "volume_slider"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-width",
+							"objectClass": "volume_slider",
+							"sid": 687952620301284,
+							"parameters": {
+								"width": "slider_handle.X - Self.x"
+							}
+						}
+					],
+					"sid": 397462238328002
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "sound_off",
+					"sid": 563934588028598
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "sound_off",
+					"sid": 127575895630646,
+					"parameters": {
+						"animation": "SFX ? \"inactive\" : \"active\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 802481984576767
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "sound_on",
+					"sid": 446488016428068
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "sound_on",
+					"sid": 759083713373777,
+					"parameters": {
+						"animation": "SFX ? \"active\" : \"inactive\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 610090452904532
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "music_off",
+					"sid": 486881152744394
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "music_off",
+					"sid": 582309929512931,
+					"parameters": {
+						"animation": "Music ? \"inactive\" : \"active\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 157334708427531
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "music_on",
+					"sid": 386207848370108
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "music_on",
+					"sid": 974346959782001,
+					"parameters": {
+						"animation": "Music ? \"active\" : \"inactive\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 769667462781710
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 237261482536805,
+					"parameters": {
+						"object": "sound_off"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 444892995022605,
+					"parameters": {
+						"layer": "sound_off.LayerName"
+					}
+				},
+				{
+					"id": "is-animation-playing",
+					"objectClass": "sound_off",
+					"sid": 784856917329582,
+					"parameters": {
+						"animation": "\"inactive\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 749961581572012,
+					"parameters": {
+						"variable": "SFX",
+						"value": "false"
+					}
+				},
+				{
+					"id": "stop",
+					"objectClass": "Audio",
+					"sid": 957843111851633,
+					"parameters": {
+						"tag": "\"Click\""
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "sound_off",
+					"sid": 180630677259960,
+					"parameters": {
+						"animation": "\"active\"",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "sound_on",
+					"sid": 468808373849703,
+					"parameters": {
+						"animation": "\"inactive\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 496346324046936
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 881879854674665,
+					"parameters": {
+						"object": "sound_on"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 333353554697297,
+					"parameters": {
+						"layer": "sound_on.LayerName"
+					}
+				},
+				{
+					"id": "is-animation-playing",
+					"objectClass": "sound_on",
+					"sid": 720586285328618,
+					"parameters": {
+						"animation": "\"inactive\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 159374009034421,
+					"parameters": {
+						"variable": "SFX",
+						"value": "true"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "sound_off",
+					"sid": 710373943169662,
+					"parameters": {
+						"animation": "\"inactive\"",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "sound_on",
+					"sid": 218821018194971,
+					"parameters": {
+						"animation": "\"active\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 643735829792247
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 891026915588777,
+					"parameters": {
+						"object": "music_off"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 310016075028164,
+					"parameters": {
+						"layer": "music_off.LayerName"
+					}
+				},
+				{
+					"id": "is-animation-playing",
+					"objectClass": "music_off",
+					"sid": 421539545813114,
+					"parameters": {
+						"animation": "\"inactive\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 669234538615483,
+					"parameters": {
+						"variable": "Music",
+						"value": "false"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "music_off",
+					"sid": 148819802441928,
+					"parameters": {
+						"animation": "\"active\"",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "music_on",
+					"sid": 881599253073445,
+					"parameters": {
+						"animation": "\"inactive\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 506733584383464
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 610504583940817,
+					"parameters": {
+						"object": "music_on"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 513558547976062,
+					"parameters": {
+						"layer": "music_on.LayerName"
+					}
+				},
+				{
+					"id": "is-animation-playing",
+					"objectClass": "music_on",
+					"sid": 807724788038288,
+					"parameters": {
+						"animation": "\"inactive\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 705048267533729,
+					"parameters": {
+						"variable": "Music",
+						"value": "true"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "music_off",
+					"sid": 427639106175184,
+					"parameters": {
+						"animation": "\"inactive\"",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "music_on",
+					"sid": 660354292053575,
+					"parameters": {
+						"animation": "\"active\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 679699082829322
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 457965470349968,
+					"parameters": {
+						"variable": "Music"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 564239728197535,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 270852299792262
+						}
+					],
+					"actions": [
+						{
+							"id": "play",
+							"objectClass": "Audio",
+							"sid": 970489759667764,
+							"parameters": {
+								"audio-file": "Background",
+								"loop": "looping",
+								"volume": "0",
+								"tag-optional": "\"Background\""
+							}
+						}
+					],
+					"sid": 896690683289792
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 267711725057288,
+					"parameters": {
+						"variable": "Music"
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [],
+			"sid": 977377933350471,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 446729777194442
+						}
+					],
+					"actions": [
+						{
+							"id": "stop",
+							"objectClass": "Audio",
+							"sid": 862658924072135,
+							"parameters": {
+								"tag": "\"Background\""
+							}
+						}
+					],
+					"sid": 489253468933612
+				}
+			]
+		},
+		{
+			"functionName": "ChangeVolume",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "NewLevel",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 153500107452446
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-master-volume",
+					"objectClass": "Audio",
+					"sid": 411585345495365,
+					"parameters": {
+						"db": "-10*(100 - NewLevel) / 40"
+					}
+				}
+			],
+			"sid": 592442296826837,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 865094996921604,
+							"parameters": {
+								"variable": "NewLevel",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-silent",
+							"objectClass": "Audio",
+							"sid": 871980208160298,
+							"parameters": {
+								"mode": "silent"
+							}
+						}
+					],
+					"sid": 953863749268415
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 836816913015752,
+							"parameters": {
+								"variable": "NewLevel",
+								"comparison": 4,
+								"value": "0"
+							}
+						},
+						{
+							"id": "is-silent",
+							"objectClass": "Audio",
+							"sid": 897326002133853
+						}
+					],
+					"actions": [
+						{
+							"id": "set-silent",
+							"objectClass": "Audio",
+							"sid": 546374707985769,
+							"parameters": {
+								"mode": "not-silent"
+							}
+						}
+					],
+					"sid": 417910909523023
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "isdragging0",
+					"objectClass": "slider_handle",
+					"sid": 744412307175682,
+					"behaviorType": "BoundedDragDrop"
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "slider_handle",
+					"sid": 122464341620297,
+					"parameters": {
+						"instance-variable": "temp_volume_storage",
+						"value": "(Self.X - Self.BoundedDragDrop.xMinBoundPos) / Self.percent"
+					}
+				}
+			],
+			"sid": 420162325355083,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-between-values",
+							"objectClass": "System",
+							"sid": 683664887279270,
+							"parameters": {
+								"value": "slider_handle.temp_volume_storage",
+								"lower-bound": "VolumeLevel - 5",
+								"upper-bound": "VolumeLevel + 5"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeVolume",
+							"sid": 727084776193147,
+							"parameters": [
+								"slider_handle.temp_volume_storage"
+							]
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 621624036684935,
+							"parameters": {
+								"variable": "VolumeLevel",
+								"value": "slider_handle.temp_volume_storage"
+							}
+						}
+					],
+					"sid": 352441138766066
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-last-created",
+							"objectClass": "System",
+							"sid": 658051665022247,
+							"parameters": {
+								"object": "volume_slider"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-width",
+							"objectClass": "volume_slider",
+							"sid": 979872319450052,
+							"parameters": {
+								"width": "max(slider_handle.X - Self.x, 48)"
+							}
+						}
+					],
+					"sid": 588912473544923
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "slider_handle",
+							"sid": 367661057316632,
+							"parameters": {
+								"instance-variable": "temp_volume_storage",
+								"comparison": 2,
+								"value": "3"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "volume_slider",
+							"sid": 615758335547545,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 184653563472801
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 581314953083988
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "volume_slider",
+							"sid": 776088491618989,
+							"parameters": {
+								"visibility": "visible"
+							}
+						}
+					],
+					"sid": 709589795083427
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "ondrop2",
+					"objectClass": "slider_handle",
+					"sid": 398896482512736,
+					"behaviorType": "BoundedDragDrop"
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "slider_handle",
+					"sid": 984886135461855,
+					"parameters": {
+						"instance-variable": "temp_volume_storage",
+						"value": "Self.temp_volume_storage > 50 ? ceil(Self.temp_volume_storage) : floor(Self.temp_volume_storage)"
+					}
+				},
+				{
+					"callFunction": "ChangeVolume",
+					"sid": 390544928263231,
+					"parameters": [
+						"slider_handle.temp_volume_storage"
+					]
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 739563761498918,
+					"parameters": {
+						"variable": "VolumeLevel",
+						"value": "slider_handle.temp_volume_storage"
+					}
+				}
+			],
+			"sid": 912955930973424
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-destroyed",
+					"objectClass": "swipe_rest",
+					"sid": 333030795401393
+				}
+			],
+			"actions": [],
+			"sid": 918046186905828
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-visible",
+					"objectClass": "option_off",
+					"sid": 433972970673185
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 676349077081439
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "option_off",
+					"sid": 100674787300950,
+					"parameters": {
+						"animation": "flags.Get(Self.option) = 0 ? \"active\" : \"inactive\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 146661094606373
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-visible",
+					"objectClass": "option_on",
+					"sid": 168601315981459
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 469860256616252
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "option_on",
+					"sid": 935184473295501,
+					"parameters": {
+						"animation": "flags.Get(Self.option) = 1 ? \"active\" : \"inactive\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 316599687154214
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-visible",
+					"objectClass": "multi_choice_option",
+					"sid": 759139606570646
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 274899048454152
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "multi_choice_option",
+					"sid": 532961265818690,
+					"parameters": {
+						"animation": "flags.Get(Self.option) = Self.option_value ? (tokenat(Self.AnimationName, 0, \"_\")&\"active\") : (tokenat(Self.AnimationName, 0, \"_\")&\"inactive\")",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 829093143271767
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 510591588677763,
+					"parameters": {
+						"object": "multi_choice_option"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 782212094901393,
+					"parameters": {
+						"layer": "multi_choice_option.LayerName"
+					}
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "multi_choice_option",
+					"sid": 837313790010081
+				}
+			],
+			"actions": [
+				{
+					"id": "set-key",
+					"objectClass": "flags",
+					"sid": 889530682248019,
+					"parameters": {
+						"key": "multi_choice_option.option",
+						"value": "multi_choice_option.option_value"
+					}
+				}
+			],
+			"sid": 611409680795768,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "saved_option",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 356890565631742
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 583636366850636
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 620496214228522,
+							"parameters": {
+								"variable": "saved_option",
+								"value": "multi_choice_option.option"
+							}
+						}
+					],
+					"sid": 129890102701098,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 295801474780904,
+									"parameters": {
+										"object": "multi_choice_option"
+									}
+								},
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 245272895929926,
+									"parameters": {
+										"object": "multi_choice_option",
+										"expression": "multi_choice_option.option",
+										"comparison": 0,
+										"value": "saved_option"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "alert",
+									"objectClass": "Browser",
+									"sid": 480421357107403,
+									"disabled": true,
+									"parameters": {
+										"message": "multi_choice_option.PickedCount"
+									}
+								}
+							],
+							"sid": 147628484562512,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 582366095717621,
+											"parameters": {
+												"object": "multi_choice_option"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "multi_choice_option",
+											"sid": 879117217532466,
+											"parameters": {
+												"animation": "flags.Get(Self.option) = Self.option_value ? (tokenat(Self.AnimationName, 0, \"_\")&\"_active\") : (tokenat(Self.AnimationName, 0, \"_\")&\"_inactive\")",
+												"from": "beginning"
+											}
+										}
+									],
+									"sid": 579219700304388
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 466539544544726,
+					"parameters": {
+						"object": "option_on"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 972751401096287,
+					"parameters": {
+						"layer": "option_on.LayerName"
+					}
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "option_on",
+					"sid": 746795693795354
+				},
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 471442588295642,
+					"parameters": {
+						"object": "option_off",
+						"expression": "option_off.option",
+						"comparison": 0,
+						"value": "option_on.option"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-key",
+					"objectClass": "flags",
+					"sid": 608895081837957,
+					"parameters": {
+						"key": "option_off.option",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "option_on",
+					"sid": 819432436975341,
+					"parameters": {
+						"animation": "\"active\"",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "option_off",
+					"sid": 566360145578127,
+					"parameters": {
+						"animation": "\"inactive\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 562795764738154
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 393020726867307,
+					"parameters": {
+						"object": "option_off"
+					}
+				},
+				{
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 932129593680191,
+					"parameters": {
+						"layer": "option_off.LayerName"
+					}
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "option_off",
+					"sid": 256693509494307
+				},
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 749854970537959,
+					"parameters": {
+						"object": "option_on",
+						"expression": "option_on.option",
+						"comparison": 0,
+						"value": "option_off.option"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-key",
+					"objectClass": "flags",
+					"sid": 241252428871321,
+					"parameters": {
+						"key": "option_on.option",
+						"value": "0"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "option_off",
+					"sid": 301237578690473,
+					"parameters": {
+						"animation": "\"active\"",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "option_on",
+					"sid": 678914121673083,
+					"parameters": {
+						"animation": "\"inactive\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 832380085935411
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-playing-by-tags",
+					"objectClass": "TimelineController",
+					"sid": 949821434514063,
+					"parameters": {
+						"tags": "\"MobileTips\""
+					},
+					"isInverted": true
+				},
+				{
+					"id": "is-visible",
+					"objectClass": "swipe_car",
+					"sid": 245741068612799
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instance",
+					"objectClass": "TimelineController",
+					"sid": 324342083294140,
+					"parameters": {
+						"object-class": "swipe_car",
+						"track-id": "\"car\""
+					}
+				},
+				{
+					"id": "set-instance",
+					"objectClass": "TimelineController",
+					"sid": 927009958707089,
+					"parameters": {
+						"object-class": "swipe_finger",
+						"track-id": "\"finger\""
+					}
+				},
+				{
+					"id": "play-timeline",
+					"objectClass": "TimelineController",
+					"sid": 359177696996047,
+					"parameters": {
+						"timeline": "MobileControlsTips",
+						"tags": "\"MobileTips\""
+					}
+				}
+			],
+			"sid": 392828928053116,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-end-of-layout",
+					"objectClass": "System",
+					"sid": 594007262804836
+				}
+			],
+			"actions": [
+				{
+					"id": "stop-all-timelines",
+					"objectClass": "TimelineController",
+					"sid": 116715609321761
+				}
+			],
+			"sid": 299702185400836
 		}
 	],
 	"sid": 936943754957788

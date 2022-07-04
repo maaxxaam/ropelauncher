@@ -1,0 +1,34 @@
+{
+	"name": "UpgradeBar",
+	"plugin-id": "NinePatch",
+	"sid": 267569393154263,
+	"instanceVariables": [
+		{
+			"name": "char_ID",
+			"type": "number",
+			"desc": "",
+			"sid": 629929405378858
+		},
+		{
+			"name": "high_value",
+			"type": "number",
+			"desc": "",
+			"sid": 607969021019601
+		},
+		{
+			"name": "low_value",
+			"type": "number",
+			"desc": "",
+			"sid": 188219715989791
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"garage_bar",
+		"garage_bar2",
+		"garage_bar3",
+		"garage_bar4",
+		"garage_bar5"
+	]
+}

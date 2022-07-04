@@ -1,0 +1,15 @@
+{
+	"name": "please_wait",
+	"plugin-id": "Text",
+	"sid": 977951996597666,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Fade",
+			"name": "Fade",
+			"sid": 305419696574191
+		}
+	],
+	"effectTypes": []
+}

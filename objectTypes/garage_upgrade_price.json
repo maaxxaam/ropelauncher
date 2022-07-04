@@ -1,0 +1,16 @@
+{
+	"name": "garage_upgrade_price",
+	"plugin-id": "Text",
+	"sid": 376197763271867,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "char_ID",
+			"type": "number",
+			"desc": "",
+			"sid": 317805190490098
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": []
+}

@@ -20,10 +20,21 @@
 			"type": "string",
 			"desc": "",
 			"sid": 773028482647085
+		},
+		{
+			"name": "ClickMode",
+			"type": "number",
+			"desc": "",
+			"sid": 405499277954219
 		}
 	],
 	"behaviorTypes": [],
-	"effectTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "exposure",
+			"name": "Exposure"
+		}
+	],
 	"members": [
 		"SettBut",
 		"MainBut",
@@ -47,6 +58,22 @@
 		"garage_upgrade_char",
 		"RestartBut",
 		"PlayLvlBut",
-		"garage_buy"
+		"garage_buy",
+		"sound_off",
+		"sound_on",
+		"music_off",
+		"music_on",
+		"to_game_no_text",
+		"plus_blue",
+		"option_on",
+		"option_off",
+		"multi_choice_option",
+		"remove_ads",
+		"rocket_buy",
+		"jump_buy",
+		"car_choice_but",
+		"to_shop",
+		"next_level",
+		"watch_ad_normal"
 	]
 }
