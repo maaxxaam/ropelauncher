@@ -75,6 +75,12 @@ function project_line_onto_vector(vector, point1, point2) {
 	return [project_point_onto_vector(vector, point1), project_point_onto_vector(vector, point2)];
 }
 
+export function distance_line_point(edge1, edge2, point){
+	const edge_vector = Vector2.subtract(edge2, edge1);
+	const other_vector = Vector2.subtract(point, edge1);
+	return Vector2.cross(edge_vector, other_vector)/Vector2.distance(edge2, edge1);
+}
+
 function line_intersection_point(edge1, edge2) {
 	let edge1vec = Vector2.subtract(edge1[0], edge1[1]);
 	let edge2vec = Vector2.subtract(edge2[0], edge2[1]);
@@ -369,9 +375,9 @@ export function car_collision_resolution(car1, car2, collision_data, collision_p
 
 const scriptsInEvents = {
 
-		async Gamesheet_Event113_Act1(runtime, localVars)
+		async Gamesheet_Event108_Act1(runtime, localVars)
 		{
-			const obs = runtime.objects.Obstacle.getFirstPickedInstance();
+			const obs = runtime.objects.obstacle.getFirstPickedInstance();
 			const car = runtime.objects.car_edge_collision.getFirstPickedInstance();
 			const collision = SAT_collision(car, obs);
 			//console.log(collision);
@@ -411,7 +417,7 @@ const scriptsInEvents = {
 			
 		},
 
-		async Gamesheet_Event121(runtime, localVars)
+		async Gamesheet_Event118(runtime, localVars)
 		{
 			// let's perform collision checks for cars! yay!
 			if (runtime.globalVars.GameState == runtime.globalVars.GAME_ACTIVE) {
@@ -457,27 +463,27 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event122(runtime, localVars)
+		async Gamesheet_Event119(runtime, localVars)
 		{
 			// calculate car positions
 			function getCP(id) {
 				const CP = runtime.objects.checkpoint.getAllInstances();
 				for (let checkpoint of CP) {
-					if (checkpoint.instVars.checkpointID == id) { return checkpoint; }
+					if (checkpoint.instVars.checkID == id) { return checkpoint; }
 				}
 			}
+			
 			if (runtime.layout.name != "ParkingLot") {
 				const dt = runtime.dt;
 				const all_cars = runtime.objects.Car.getAllInstances();
 				const CPs = runtime.objects.checkpoint.getAllInstances().length;
 				let results = [];
-				for (let index = 0; index < all_cars.length; index++) {
-					let car = all_cars[index];
+				for (let car of all_cars) {
 					let [posx, posy] = car.getImagePoint("Front");
 					let col = car.getChildAt(0);
 					let txt = col.getChildAt(0);
 					let newCP = getCP(col.instVars.ToCheckpoint);
-					let oldCP = getCP((CPs - 1 + col.instVars.ToCheckpoint) % CPs);
+					let oldCP = getCP((col.instVars.ToCheckpoint - 1 + CPs) % CPs);
 					let completion_fraction = Vector.distance(Vector(posx, posy), Vector(oldCP.x, oldCP.y)) / Vector.distance(Vector(oldCP.x, oldCP.y), Vector(newCP.x, newCP.y));
 					let pos = (col.instVars.Lap) * CPs + col.instVars.ToCheckpoint + completion_fraction;
 					//console.log(col, pos);
@@ -488,37 +494,97 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Menusheet_Event66_Act1(runtime, localVars)
+		async Gamesheet_Event167_Act1(runtime, localVars)
+		{
+			const furl = localVars.map_name + ".json";
+			const link = await runtime.assets.getProjectFileUrl(furl);
+			runtime.callFunction("GetMap", link);
+		},
+
+		async Gamesheet_Event180_Act7(runtime, localVars)
+		{
+			localVars.edge_angle = Math.atan2(localVars.edge_dx, localVars.edge_dy) * 180 / Math.PI;
+			localVars.edge_angle_c3 = 360 - localVars.edge_angle;
+			
+			const edge1 = Vector(localVars.edge_x1, localVars.edge_y1);
+			const edge2 = Vector(localVars.edge_x2, localVars.edge_y2);
+			
+			const segment = runtime.objects.road.getFirstPickedInstance();
+			
+			const start_point_coords = segment.getImagePoint("Start");
+			const start_point = Vector(start_point_coords[0], start_point_coords[1]);
+			
+			const end_point_coords = segment.getImagePoint("End");
+			const end_point = Vector(end_point_coords[0], end_point_coords[1]);
+			//console.log(start_point_coords, end_point_coords);
+			
+			localVars.distance_to_start = Math.abs(distance_line_point(edge1, edge2, start_point));
+			localVars.distance_to_end = Math.abs(distance_line_point(edge1, edge2, end_point));
+		},
+
+		async Gamesheet_Event211_Act1(runtime, localVars)
+		{
+			const sprite = runtime.getInstanceByUid(localVars.SpriteUID);
+			const [IPx, IPy] = sprite.getImagePoint(localVars.ImagePointName);
+			if (IPx === sprite.x && IPy === sprite.y) {
+				localVars.Result = 0;
+			}
+		},
+
+		async Gamesheet_Event215_Act2(runtime, localVars)
+		{
+			[localVars.gui_x, localVars.gui_y] = layer_to_layer_px(localVars.coin_x, localVars.coin_y, runtime.layout.getLayer("Level"), runtime.layout.getLayer("GUI"));
+		},
+
+		async Gamesheet_Event222_Act1(runtime, localVars)
+		{
+			[localVars.x, localVars.y] = layer_to_layer_px(localVars.x, localVars.y, runtime.layout.getLayer("Level"), runtime.layout.getLayer("GUI"));
+		},
+
+		async Menusheet_Event30_Act1(runtime, localVars)
+		{
+			localVars.layers = runtime.layout.getAllLayers().length;
+		},
+
+		async Menusheet_Event67_Act1(runtime, localVars)
 		{
 			let prompt = runtime.objects.prompt_back.getFirstInstance();
 			localVars.val = runtime.callFunction(prompt.instVars.function_to_call, prompt.instVars.param1, prompt.instVars.param2);
 		},
 
-		async Levelinits_Event8_Act4(runtime, localVars)
+		async Levelinits_Event9_Act4(runtime, localVars)
 		{
 			const tile = localVars.tile;
 			//console.log(tile);
 			localVars.is_start = ((tile == 1) || (tile == 19) || (tile == 37) || (tile == 55));
 		},
 
-		async Levelinits_Event9_Act3(runtime, localVars)
+		async Levelinits_Event10_Act3(runtime, localVars)
 		{
 			let tmap = runtime.objects.roads.getFirstPickedInstance();
 			let ttile = tmap.getTileAt(localVars.lv1, localVars.lv2);
 			localVars.tile_rotation = tile_degrees(ttile);
 		},
 
-		async Levelinits_Event16_Act2(runtime, localVars)
+		async Levelinits_Event25_Act1(runtime, localVars)
 		{
-			localVars.is_corner = test_tile_for_corner(localVars.tile);
-		},
-
-		async Levelinits_Event17_Act3(runtime, localVars)
-		{
-			localVars.clock_id = map_corners_to_clock(localVars.tile);
-			localVars.pos_id = map_corners_to_pos(localVars.tile);
-			localVars.circle_id = map_corners_to_circle(localVars.tile);
-			//alert(localVars.tile + " " + localVars.clock_id + " " + localVars.pos_id);
+			localVars.edge_angle = Math.atan2(localVars.edge_dx, localVars.edge_dy) * 180 / Math.PI;
+			localVars.edge_angle_c3 = 360 - localVars.edge_angle;
+			
+			const edge1 = Vector(localVars.edge_x1, localVars.edge_y1);
+			const edge2 = Vector(localVars.edge_x2, localVars.edge_y2);
+			
+			const segment = runtime.objects.road.getFirstPickedInstance();
+			
+			const start_point_coords = segment.getImagePoint("Start");
+			const start_point = Vector(start_point_coords[0], start_point_coords[1]);
+			
+			const end_point_coords = segment.getImagePoint("End");
+			const end_point = Vector(end_point_coords[0], end_point_coords[1]);
+			//console.log(start_point_coords, end_point_coords);
+			
+			localVars.distance_to_start = Math.abs(distance_line_point(edge1, edge2, start_point));
+			localVars.distance_to_end = Math.abs(distance_line_point(edge1, edge2, end_point));
 		}
 
 };

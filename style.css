@@ -37,3 +37,28 @@ html, body, canvas {
 }
 
 
+@font-face {
+	font-family: 'araboto black 400';
+	src: url('fonts/araboto black 400.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'araboto normal 400';
+	src: url('fonts/araboto normal 400.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'roboto-black';
+	src: url('fonts/roboto-black.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'roboto-bold';
+	src: url('fonts/roboto-bold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'roboto-medium';
+	src: url('fonts/roboto-medium.ttf') format('truetype');
+}
+

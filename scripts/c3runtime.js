@@ -3316,6 +3316,84 @@ self["C3_Shaders"]["hsladjust"] = {
 	animated: false,
 	parameters: [["huerotate",0,"percent"],["satadjust",0,"percent"],["lumadjust",0,"percent"]]
 };
+self["C3_Shaders"]["Mikal_Rotate"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform mediump vec2 srcStart;\nuniform mediump vec2 srcEnd;\nuniform mediump vec2 srcOriginStart;\nuniform mediump vec2 srcOriginEnd;\nuniform mediump vec2 layoutStart;\nuniform mediump vec2 layoutEnd;\nuniform lowp sampler2D samplerBack;\nuniform mediump vec2 destStart;\nuniform mediump vec2 destEnd;\nuniform mediump float seconds;\nuniform mediump vec2 pixelSize;\nuniform mediump float layerScale;\nuniform mediump float layerAngle;\nuniform mediump float newAngle;\nvoid main(void)\n{\nmediump float radianAngle;\nradianAngle = newAngle * 0.01745329252;\nmediump vec2 coord = (vTex-srcOriginStart)/(srcOriginEnd-srcOriginStart);\nmediump float sin_factor = sin(radianAngle);\nmediump float cos_factor = cos(radianAngle);\ncoord = (coord - 0.5) * mat2(cos_factor, sin_factor, -sin_factor, cos_factor);\ncoord += 0.5;\ncoord = clamp(coord,0.0,1.0);\ncoord = coord * (srcOriginEnd - srcOriginStart) + srcOriginStart;\ngl_FragColor = texture2D(samplerFront, coord);\n}",
+	wgsl: "",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: false,
+	animated: false,
+	parameters: [["newAngle",0,"float"]]
+};
+self["C3_Shaders"]["glowhorizontal"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform mediump sampler2D samplerFront;\nuniform mediump vec2 pixelSize;\nuniform mediump float intensity;\nvoid main(void)\n{\nmediump vec4 sum = vec4(0.0);\nmediump float pixelWidth = pixelSize.x;\nmediump float halfPixelWidth = pixelWidth / 2.0;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 7.0 + halfPixelWidth, 0.0)) * 0.06;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 5.0 + halfPixelWidth, 0.0)) * 0.10;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 3.0 + halfPixelWidth, 0.0)) * 0.13;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 1.0 + halfPixelWidth, 0.0)) * 0.16;\nmediump vec4 front = texture2D(samplerFront, vTex);\nsum += front * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 1.0 + halfPixelWidth, 0.0)) * 0.16;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 3.0 + halfPixelWidth, 0.0)) * 0.13;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 5.0 + halfPixelWidth, 0.0)) * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 7.0 + halfPixelWidth, 0.0)) * 0.06;\ngl_FragColor = mix(front, max(front, sum), intensity);\n}",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nintensity : f32;\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@stage(fragment)\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar pixelWidth : f32 = c3_getPixelSize(textureFront).x;\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar sum : vec4<f32> =\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(pixelWidth * 7.5, 0.0)) * 0.06 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(pixelWidth * 5.5, 0.0)) * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(pixelWidth * 3.5, 0.0)) * 0.13 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(pixelWidth * 1.5, 0.0)) * 0.16 +\nfront * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(pixelWidth * 1.5, 0.0)) * 0.16 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(pixelWidth * 3.5, 0.0)) * 0.13 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(pixelWidth * 5.5, 0.0)) * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(pixelWidth * 7.5, 0.0)) * 0.06;\nvar output : FragmentOutput;\noutput.color = mix(front, max(front, sum), shaderParams.intensity);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 8,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: false,
+	animated: false,
+	parameters: [["intensity",0,"percent"]]
+};
+self["C3_Shaders"]["glowvertical"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform mediump sampler2D samplerFront;\nuniform mediump vec2 pixelSize;\nuniform mediump float intensity;\nvoid main(void)\n{\nmediump vec4 sum = vec4(0.0);\nmediump float pixelHeight = pixelSize.y;\nmediump float halfPixelHeight = pixelHeight / 2.0;\nsum += texture2D(samplerFront, vTex - vec2(0.0, pixelHeight * 7.0 + halfPixelHeight)) * 0.06;\nsum += texture2D(samplerFront, vTex - vec2(0.0, pixelHeight * 5.0 + halfPixelHeight)) * 0.10;\nsum += texture2D(samplerFront, vTex - vec2(0.0, pixelHeight * 3.0 + halfPixelHeight)) * 0.13;\nsum += texture2D(samplerFront, vTex - vec2(0.0, pixelHeight * 1.0 + halfPixelHeight)) * 0.16;\nmediump vec4 front = texture2D(samplerFront, vTex);\nsum += front * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(0.0, pixelHeight * 1.0 + halfPixelHeight)) * 0.16;\nsum += texture2D(samplerFront, vTex + vec2(0.0, pixelHeight * 3.0 + halfPixelHeight)) * 0.13;\nsum += texture2D(samplerFront, vTex + vec2(0.0, pixelHeight * 5.0 + halfPixelHeight)) * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(0.0, pixelHeight * 7.0 + halfPixelHeight)) * 0.06;\ngl_FragColor = mix(front, max(front, sum), intensity);\n}",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nintensity : f32;\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@stage(fragment)\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar pixelHeight : f32 = c3_getPixelSize(textureFront).y;\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar sum : vec4<f32> =\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(0.0, pixelHeight * 7.5)) * 0.06 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(0.0, pixelHeight * 5.5)) * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(0.0, pixelHeight * 3.5)) * 0.13 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(0.0, pixelHeight * 1.5)) * 0.16 +\nfront * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(0.0, pixelHeight * 1.5)) * 0.16 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(0.0, pixelHeight * 3.5)) * 0.13 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(0.0, pixelHeight * 5.5)) * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(0.0, pixelHeight * 7.5)) * 0.06;\nvar output : FragmentOutput;\noutput.color = mix(front, max(front, sum), shaderParams.intensity);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 8,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: false,
+	animated: false,
+	parameters: [["intensity",0,"percent"]]
+};
+self["C3_Shaders"]["brightness"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform lowp float brightness;\nvoid main(void)\n{\nlowp vec4 front = texture2D(samplerFront, vTex);\nlowp float a = front.a;\nif (a != 0.0)\nfront.rgb /= front.a;\nfront.rgb += (brightness - 1.0);\nfront.rgb *= a;\ngl_FragColor = front;\n}",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nbrightness : f32;\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@stage(fragment)\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar front : vec4<f32> = c3_unpremultiply(textureSample(textureFront, samplerFront, input.fragUV));\nvar output : FragmentOutput;\noutput.color = vec4<f32>((front.rgb + (shaderParams.brightness - 1.0)) * front.a, front.a);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: true,
+	animated: false,
+	parameters: [["brightness",0,"percent"]]
+};
+self["C3_Shaders"]["pixellate"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform mediump vec2 srcOriginStart;\nuniform mediump vec2 srcOriginEnd;\nuniform mediump vec2 pixelSize;\nuniform mediump float tilesize;\nvoid main(void)\n{\nmediump vec2 tile = pixelSize * tilesize;\nmediump vec2 halftile = tile / 2.0;\nmediump vec2 tex = floor(vTex / tile) * tile + halftile;\ntex = clamp(tex, min(srcOriginStart, srcOriginEnd), max(srcOriginStart, srcOriginEnd));\ngl_FragColor = texture2D(samplerFront, tex);\n}",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\ntilesize : f32;\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3PARAMS_STRUCT%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@stage(fragment)\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar tile : vec2<f32> = vec2<f32>(shaderParams.tilesize) / vec2<f32>(textureDimensions(textureFront));\nvar halftile : vec2<f32> = tile / 2.0;\nvar tex : vec2<f32> = floor(input.fragUV / tile) * tile + halftile;\ntex = c3_clampToSrcOrigin(tex);\nvar output : FragmentOutput;\noutput.color = textureSample(textureFront, samplerFront, tex);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: false,
+	animated: false,
+	parameters: [["tilesize",0,"float"]]
+};
+self["C3_Shaders"]["exposure"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform mediump float exposure;\nvoid main(void)\n{\nlowp vec4 front = texture2D(samplerFront, vTex);\ngl_FragColor = vec4(front.rgb * pow(2.0, exposure), front.a);\n}",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nexposure : f32;\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@stage(fragment)\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar output : FragmentOutput;\noutput.color = vec4<f32>(front.rgb * pow(2.0, shaderParams.exposure), front.a);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: true,
+	animated: false,
+	parameters: [["exposure",0,"percent"]]
+};
 
 }
 
@@ -3829,688 +3907,6 @@ x+1,y+1,brushData);return patch}_Get8BitAutoTile(x,y,force,brushData){return thi
 true,nt,brushData);const w=this._auto.IsTileValid(west,true,wt,brushData);const e=this._auto.IsTileValid(east,true,et,brushData);const s=this._auto.IsTileValid(south,true,st,brushData);const nw=n&&w?this._auto.IsTileValid(northWest,true,nwt,brushData):0;const ne=n&&e?this._auto.IsTileValid(northEast,true,net,brushData):0;const sw=s&&w?this._auto.IsTileValid(southWest,true,swt,brushData):0;const se=s&&e?this._auto.IsTileValid(southEast,true,set,brushData):0;return 1*nw+2*n+4*ne+8*w+16*e+32*sw+64*s+
 128*se}_Get8BitTileIndex(tileDataIndex,x,y,brushData){if(tileDataIndex===this._auto.IGNORE_INDEX||tileDataIndex===this._auto.EMPTY_INDEX)return tileDataIndex;return this._auto.GetTileIndex(TILE_INDEX_MAP.get(tileDataIndex),x,y,brushData)}};
 
-}
-
-{
-"use strict";
-
-{
-	C3.Plugins.ValerypopoffTouchPlusPlugin = class SingleGlobalPlugin extends C3.SDKPluginBase
-	{
-		constructor(opts)
-		{
-			super(opts);
-		}
-		
-		Release()
-		{
-			super.Release();
-		}
-	};
-}
-}
-
-{
-"use strict";
-
-{
-	C3.Plugins.ValerypopoffTouchPlusPlugin.Type = class SingleGlobalType extends C3.SDKTypeBase
-	{
-		constructor(objectClass)
-		{
-			super(objectClass);
-		}
-		
-		Release()
-		{
-			super.Release();
-		}
-		
-		OnCreate()
-		{	
-		}
-	};
-}
-}
-
-{
-"use strict";
-
-{
-	C3.Plugins.ValerypopoffTouchPlusPlugin.Instance = class SingleGlobalInstance extends C3.SDKInstanceBase
-	{
-		
-		constructor(inst, properties)
-		{
-			super(inst);
-			
-			// Initialise object properties
-			this.dontClickThroughObjects = false;
-			this.dontClickThroughObjectsOnOtherLayers = false;
-			this.dontClickThroughLayers = false;
-			this.ignoreInvisibleObjects = false;
-			this.ignoreInvisibleLayers = false;			
-			
-			if (properties)
-			{
-				this.dontClickThroughObjects = properties[0];
-				this.dontClickThroughObjectsOnOtherLayers = properties[1];
-				this.dontClickThroughLayers = properties[2];
-				this.ignoreInvisibleObjects = properties[3];
-				this.ignoreInvisibleLayers = properties[4];
-			}
-
-			
-
-			// Highjack System Touch Plugin's conditions
-
-			//console.log(this);
-
-			const touch_condition_names = ["IsTouchingObject"];
-			const touch_trigger_names = ["OnDoubleTapGestureObject", "OnHoldGestureObject", "OnTapGestureObject", "OnTouchObject"];
-			
-			this.TypesLayersWithCoords = function(ptx, pty)
-			{
-				var TypesLayers = [];
-				var JustTypes = [];
-				var curr_layout = this._runtime._layoutManager.GetMainRunningLayout();
-				var topmost_layer = undefined;
-
-				for(var i=0; i<curr_layout.GetLayers().length; i++)
-				{
-					var curr_layer = curr_layout.GetLayers()[i];
-
-						//console.log(curr_layer)
-
-					// Ignore Invisible layers
-					if( !(this.ignoreInvisibleLayers && (!curr_layer.IsVisible() || curr_layer.GetOpacity()==0 ) ) )
-					{
-						//if( topmost_layer === undefined )
-							topmost_layer = curr_layer;
-
-						for(var k=0; k<curr_layer._GetInstances().length; k++)
-						{
-							var curr_instance = curr_layer._GetInstances()[k];
-
-							var xy_arr = curr_instance._worldInfo.GetLayer()._CanvasToLayer(ptx, pty, curr_instance._worldInfo.GetTotalZElevation(), this._runtime.GetDisplayScale());
-
-							// Ignore Invisible objects
-							var flag = true;
-							if( this.ignoreInvisibleObjects && (!curr_instance._worldInfo.IsVisible() || curr_instance._worldInfo.GetOpacity()==0) )
-								flag = false;
-
-							if( flag && curr_instance._worldInfo.ContainsPoint(xy_arr[0], xy_arr[1]) )
-							{
-								TypesLayers.push( [curr_instance.GetObjectClass(), curr_layer] );
-								JustTypes.push( curr_instance.GetObjectClass() );
-							}
-						}
-					}
-				}
-
-				return { TypesLayers: TypesLayers, topmost_layer: topmost_layer, JustTypes: JustTypes };
-			}
-			
-
-			function FamilyHasMember( obj, member )
-			{
-				var family_members_arr = obj.GetFamilyMembers();
-
-				if( !family_members_arr || family_members_arr.length == 0 )
-					return false;
-
-				if( family_members_arr.indexOf(member) >= 0 )
-					return true;
-
-				return false;
-			}
-
-			function FamilyHasMemberFromList( obj, members_list )
-			{
-				var family_members_arr = obj.GetFamilyMembers();
-
-				if( !family_members_arr || family_members_arr.length == 0 )
-					return false;
-
-				//var has = false;
-				var exception_found = {}
-
-				try
-				{
-					family_members_arr.forEach( family_member =>
-					{
-						members_list.forEach( member => 
-						{
-							if( family_member == member[0] )
-							{
-								throw exception_found;
-								//has = true;
-							}
-						})
-					})
-				} catch( e )
-				{
-					if( e === exception_found )
-						return true
-					else
-						throw e;
-				}
-
-				return false;
-			}
-
-			var ValerypopoffTouchPlusPluginInstance = this;
-
-			this.highjack = function()
-			{
-				//console.log("highjack")
-				// Triggers
-
-				//for( var sheet_key of this._runtime._eventSheetManager._sheetsByName.keys() )
-				for( var sheet_key of this._runtime.GetEventSheetManager()._sheetsByName.keys() )
-				{
-					//console.log( "-------------------------" )
-					//console.log( "sheet_key", sheet_key )
-
-					var sheet = this._runtime.GetEventSheetManager()._sheetsByName.get(sheet_key);
-					//console.log( "sheet._triggers", sheet._triggers )
-
-					for( var ObjectClass_key of sheet._triggers.keys() )
-					{
-						// Skip plugins other than C3.Plugins.Touch
-						if( !ObjectClass_key || !( ObjectClass_key.GetPlugin() instanceof C3.Plugins.Touch ) )
-							continue;
-
-						var trigger_map = sheet._triggers.get(ObjectClass_key);
-						//console.log( "trigger_map", trigger_map )
-						//console.log( "ObjectClass_key", ObjectClass_key )
-
-						if( ! (trigger_map instanceof Map) )
-							trigger_map = trigger_map.methodMap;
-
-						var trigger_keys = Array.from(trigger_map.keys());
-
-						/*
-						if( trigger_map instanceof Map )
-							var trigger_keys = Array.from(trigger_map.keys());
-						else
-							var trigger_keys = Array.from(trigger_map.methodMap.keys());
-						*/
-						
-						trigger_keys.forEach( trigger_key => 
-						{
-							//console.log( "-----" )
-							//console.log( "trigger_key", trigger_key )
-
-							touch_trigger_names.forEach((trigger_name)=>
-							{  
-								//console.log( "trigger_name", trigger_name )
-								
-								//console.log( C3.Plugins.Touch.Cnds )
-
-								//console.log( trigger_key == C3.Plugins.Touch.Cnds[ trigger_name ] || C3.Plugins.Touch.Cnds[ trigger_name ].name == "new_ace" )
-
-								//if( trigger_key == C3.Plugins.Touch.Cnds[ trigger_name ] /*|| C3.Plugins.Touch.Cnds[ trigger_name ].name == "new_ace"*/ )
-								if( trigger_key.name == trigger_name /*|| C3.Plugins.Touch.Cnds[ trigger_name ].name == "new_ace"*/ )
-								{
-									//console.log( "trigger_name", trigger_name )
-
-									//if( C3.Plugins.Touch.Cnds[ trigger_name ].name != "new_ace" )
-
-									{
-										//console.log( "altering trigger_name", trigger_name )
-										//console.log( "C3.Plugins.Touch.Cnds[ trigger_name ]: ↓ " )
-										//console.log( C3.Plugins.Touch.Cnds[ trigger_name ] )
-
-										//console.log( C3.Plugins.Touch.Cnds )
-										//console.log( "C3.Plugins.Touch.Cnds[ trigger_name ]" )
-										//console.log( C3.Plugins.Touch.Cnds[ trigger_name ] )
-										//console.log(trigger_key == C3.Plugins.Touch.Cnds[ trigger_name ])
-
-
-										// changing for the first time
-										if( trigger_key == C3.Plugins.Touch.Cnds[ trigger_name ] )
-											C3.Plugins.Touch.Cnds[ "old_" + trigger_name ] = C3.Plugins.Touch.Cnds[ trigger_name ];
-
-										//console.log("trigger_map.keys")
-										//console.log( Array.from((trigger_map.keys())) )
-										var arr = trigger_map.get(trigger_key);
-										//console.log( "arr", arr )
-
-										
-										trigger_map.delete( trigger_key );
-
-
-										function new_ace(type)
-										{
-											//console.log( "this", this )
-											//console.log( "type", type )
-
-											var ret = C3.Plugins.Touch.Cnds[ "old_" + trigger_name ].apply(this, [type] );
-
-											if( !ret )
-												return ret;
-											else // ret == true
-											{
-												var obj = ValerypopoffTouchPlusPluginInstance.TypesLayersWithCoords(this._curTouchX, this._curTouchY);
-												var TypesLayers = obj.TypesLayers;
-												var JustTypes = obj.JustTypes;
-
-													//console.log(obj);
-
-												if( ValerypopoffTouchPlusPluginInstance.dontClickThroughObjects )
-												{
-													if( TypesLayers.length == 0 || ( TypesLayers[TypesLayers.length-1][0]!=type && !FamilyHasMember(type, TypesLayers[TypesLayers.length-1][0]) ) )
-														return false;
-												} 
-
-												if( ValerypopoffTouchPlusPluginInstance.dontClickThroughObjectsOnOtherLayers )
-												{
-													if( TypesLayers.length == 0 )
-														return false;
-
-													var target_layer = undefined;
-													TypesLayers.forEach( TypeLayer =>
-													{
-														if( target_layer == undefined && TypeLayer[0] == type )
-															target_layer = TypeLayer[1]; 
-													})
-
-
-													for( var i=TypesLayers.length-1; i>=0; i-- )
-													{
-														if( TypesLayers[i][0]==type && TypesLayers[i][1] == target_layer)
-															break;
-
-														if( TypesLayers[i][0]!=type && !FamilyHasMember(type, TypesLayers[i][0]) && TypesLayers[i][1] != target_layer )
-															return false;
-													}
-												} 
-
-												if( ValerypopoffTouchPlusPluginInstance.dontClickThroughLayers )
-												{
-														//console.log("dontClickThroughLayers")
-
-													if( TypesLayers.length == 0 )
-														return false;
-
-													if( TypesLayers[TypesLayers.length-1][1] != obj.topmost_layer )
-														return false;
-												} 
-												
-												if( JustTypes.indexOf(type) == -1 && !FamilyHasMemberFromList(type, TypesLayers) )
-													return false;												
-
-												return ret;
-											}
-										}
-
-										// changing for the first time
-										if( trigger_key == C3.Plugins.Touch.Cnds[ trigger_name ] )
-											C3.Plugins.Touch.Cnds[ trigger_name ] = new_ace;
-
-										trigger_map.set( C3.Plugins.Touch.Cnds[ trigger_name ], arr );
-										//trigger_map.set( new_ace, arr );
-
-										//console.log( "arr", trigger_map.get(C3.Plugins.Touch.Cnds[ trigger_name ]) )
-									} /*else
-									{
-										//console.log("trigger_map.keys alternative")
-										//console.log( Array.from((trigger_map.keys())) )
-										var arr = trigger_map.get(trigger_key);
-									} */
-																		
-									arr.forEach(val=>
-									{
-										var conditions = val[0].GetConditions();
-
-										conditions.forEach(condition=>
-										{
-											//console.log( condition );
-
-											if( condition._objectClass && condition._objectClass._plugin instanceof C3.Plugins.Touch )
-											{
-												condition._func = C3.Plugins.Touch.Cnds[ trigger_name ];
-
-												condition.Run = C3.Plugins.Touch.Cnds[ trigger_name ].
-													bind( this._runtime.GetPluginManager().
-														GetPluginByConstructorFunction(C3.Plugins.Touch).
-														GetSingleGlobalInstance().
-														GetSdkInstance(), condition._parameters[0].GetObjectClass() )
-											}
-										})
-									})
-									
-									
-								}
-								
-							})
-						})
-					}
-				}
-
-
-				// Conditions
-
-				//var lyouts_arr = this._runtime.GetLayoutManager().GetAllLayouts();
-
-				//lyouts_arr.forEach( layout => 
-				//{
-					//var cnds_map = layout.GetEventSheet().GetEventSheetManager()._cndsBySid;
-					var cnds_map = this._runtime.GetEventSheetManager()._cndsBySid;
-
-					touch_condition_names.forEach( touch_condition_name => 
-					{
-						C3.Plugins.Touch.Cnds[ "old_" + touch_condition_name ] = C3.Plugins.Touch.Cnds[ touch_condition_name ];
-
-						C3.Plugins.Touch.Cnds[ touch_condition_name ] = function(type)
-						{
-							var ret = C3.Plugins.Touch.Cnds[ "old_" + touch_condition_name ].apply(this, [type] );
-
-							if( !ret )
-								return ret;
-							else // ret == true
-							{
-								var obj = ValerypopoffTouchPlusPluginInstance.TypesLayersWithCoords(this._curTouchX, this._curTouchY);
-								var TypesLayers = obj.TypesLayers;
-								var JustTypes = obj.JustTypes;
-
-									//console.log(obj);
-
-								if( ValerypopoffTouchPlusPluginInstance.dontClickThroughObjects )
-								{
-									if( TypesLayers.length == 0 || ( TypesLayers[TypesLayers.length-1][0]!=type && !FamilyHasMember(type, TypesLayers[TypesLayers.length-1][0]) ) )
-										return false;
-								} 
-
-								if( ValerypopoffTouchPlusPluginInstance.dontClickThroughObjectsOnOtherLayers )
-								{
-										if( TypesLayers.length == 0 )
-											return false;
-
-										var target_layer = undefined;
-										TypesLayers.forEach( TypeLayer =>
-										{
-											if( target_layer == undefined && TypeLayer[0] == type )
-												target_layer = TypeLayer[1]; 
-										})
-
-
-										for( var i=TypesLayers.length-1; i>=0; i-- )
-										{
-											if( TypesLayers[i][0]==type && TypesLayers[i][1] == target_layer)
-												break;
-
-											if( TypesLayers[i][0]!=type && !FamilyHasMember(type, TypesLayers[i][0]) && TypesLayers[i][1] != target_layer )
-												return false;
-										}
-								} 
-
-								if( ValerypopoffTouchPlusPluginInstance.dontClickThroughLayers )
-								{
-										//console.log("dontClickThroughLayers")
-
-									if( TypesLayers.length == 0 )
-										return false;
-
-									if( TypesLayers[TypesLayers.length-1][1] != obj.topmost_layer )
-										return false;
-								} 
-								
-								if( JustTypes.indexOf(type) == -1 && !FamilyHasMemberFromList(type, TypesLayers) )
-									return false;												
-
-								return ret;
-							}
-						}
-
-						for( var cnd_key of cnds_map.keys() )
-						{
-							var cnd = cnds_map.get(cnd_key);
-
-							if( cnd && cnd._objectClass && cnd._objectClass._plugin instanceof C3.Plugins.Touch &&
-								cnd._func.name == touch_condition_name)
-							{
-								//console.log(cnd._func)
-
-								cnd._func = C3.Plugins.Touch.Cnds[ touch_condition_name ];							
-							}
-						}
-					})
-					
-					
-				//})
-
-				/*
-				this._runtime.GetLayoutManager()._allLayouts[0]._eventSheet._eventSheetManager._allSheets.forEach( sheet =>
-				{
-					sheet._PostInit()
-				})	
-				*/
-
-				//this._runtime.GetLayoutManager()._allLayouts[0]._eventSheet._eventSheetManager._allSheets.forEach( sheet =>
-				this._runtime.GetEventSheetManager()._allSheets.forEach( sheet =>
-				{
-					function _PostInit()
-					{
-						function _PostInit(a)
-						{
-				            //-------
-				            if( this instanceof C3.EventScript )
-				            	return;
-
-				            if( this instanceof C3.EventInclude )
-				            	return;
-
-				            if( this instanceof C3.EventVariable )
-				            	return;
-				            //---------
-
-				            this._hasElseBlock = !!a,
-				            this._IdentifyTopLevelGroup(),
-				            this._IdentifySolModifiersIncludingParents(),
-				            this._IdentifyTriggerParents();
-				            
-				            for (const b of this._conditions)
-				            {
-				            	//-----
-				            	if( b.GetObjectClass() && b.GetObjectClass().GetPlugin() instanceof C3.Plugins.Touch )
-				            	//------
-				                	b._PostInit();
-				            }
-				            
-				            /*
-				            if (0 < this._actions.length) {
-				                let b = !1;
-				                for (const c of this._actions)
-				                    //c._PostInit(),
-				                    c.HasReturnType() && (b = !0);
-				                b ? (this._RunActions = this._RunActions_ReturnValue,
-				                this._DebugRunActions = this._DebugRunActions_ReturnValue) : (this._RunActions = this._RunActions_Fast,
-				                this._DebugRunActions = this._DebugRunActions_Fast)
-				            }
-				            */
-				            
-				            const b = this._subEvents;
-				            
-				            for (let c = 0, d = b.length; c < d; ++c) {
-				                const a = c < d - 1 && b[c + 1].IsElseBlock();
-				                //b[c]._PostInit(a)
-				                _PostInit.call(b[c], a)
-				            }
-				            
-				            this._debugData && this._UpdateCanRunFast(),
-				            this._perfRecord && this._GetPerfRecordParent()._GetPerfRecord().children.push(this._perfRecord)
-				        }
-
-				        const a = this._events;
-				        for (let b = 0, c = a.length; b < c; ++b) {
-				            const d = b < c - 1 && a[b + 1]instanceof C3.EventBlock && a[b + 1].IsElseBlock();
-				            
-				            //a[b]._PostInit(d)
-				            _PostInit.call( a[b], d )
-					    }
-    				}
-
-					_PostInit.call( sheet )
-				})	
-
-			
-			}
-
-			var initalizer_timer = setInterval( ()=>
-			{
-				if( !this._runtime.GetPluginManager().GetPluginByConstructorFunction(C3.Plugins.Touch) )
-					return;
-
-				
-				var lyouts_arr = this._runtime.GetLayoutManager().GetAllLayouts();
-
-				if( !lyouts_arr )
-					return;
-
-				var notready = false;
-
-/*				lyouts_arr.forEach( layout => 
-				{
-					var event_sheet_name = layout._eventSheetName;
-
-					if( !this._runtime.GetLayoutManager().GetMainRunningLayout() ||
-						!event_sheet_name || 
-						!this._runtime.GetEventSheetManager() ||
-						!this._runtime.GetEventSheetManager().GetEventSheetByName(event_sheet_name) || 
-						!this._runtime.GetEventSheetManager()._cndsBySid  
-					  )
-						notready = true;
-
-					// if( !layout.GetEventSheet() || !layout.GetEventSheet().GetEventSheetManager() || !layout.GetEventSheet().GetEventSheetManager()._cndsBySid  )
-					// 	notready = true;
-				})*/
-
-				var mainRunningLayout = this._runtime.GetLayoutManager().GetMainRunningLayout();
-
-				if( !mainRunningLayout ||
-					!mainRunningLayout._eventSheetName || 
-					!this._runtime.GetEventSheetManager() ||
-					!this._runtime.GetEventSheetManager().GetEventSheetByName(mainRunningLayout._eventSheetName) || 
-					!this._runtime.GetEventSheetManager()._cndsBySid  
-				)
-					notready = true;
-					  
-
-
-				if( notready )
-					return;
-				
-				clearTimeout(initalizer_timer);
-
-				this.highjack();
-				
-			}, 200)
-		}
-
-		
-		Release()
-		{
-			super.Release();
-		}
-		
-		SaveToJson()
-		{
-			return {
-				// data to be saved for savegames
-			};
-		}
-		
-		LoadFromJson(o)
-		{
-			// load state for savegames
-		}
-	};
-}
-}
-
-{
-"use strict";
-
-{
-	C3.Plugins.ValerypopoffTouchPlusPlugin.Cnds =
-	{
-
-	};
-
-
-}
-}
-
-{
-"use strict";
-
-{
-	C3.Plugins.ValerypopoffTouchPlusPlugin.Acts =
-	{
-		SetDontClickThroughObjects( param )
-		{
-			switch( param )
-			{
-				case 0: this.dontClickThroughObjects = false; break;
-				case 1: this.dontClickThroughObjects = true; break;
-				case 2: this.dontClickThroughObjects = !this.dontClickThroughObjects; break;
-			}
-		},
-
-		SetDontClickThroughObjectsOnOtherLayers( param )
-		{
-			switch( param )
-			{
-				case 0: this.dontClickThroughObjectsOnOtherLayers = false; break;
-				case 1: this.dontClickThroughObjectsOnOtherLayers = true; break;
-				case 2: this.dontClickThroughObjectsOnOtherLayers = !this.dontClickThroughObjectsOnOtherLayers; break;
-			}
-		},
-
-		SetDontClickThroughLayers( param )
-		{
-			switch( param )
-			{
-				case 0: this.dontClickThroughLayers = false; break;
-				case 1: this.dontClickThroughLayers = true; break;
-				case 2: this.dontClickThroughLayers = !this.dontClickThroughLayers; break;
-			}
-		},
-
-		SetIgnoreInvisibleObjects( param )
-		{
-			switch( param )
-			{
-				case 0: this.ignoreInvisibleObjects = false; break;
-				case 1: this.ignoreInvisibleObjects = true; break;
-				case 2: this.ignoreInvisibleObjects = !this.ignoreInvisibleObjects; break;
-			}
-		},
-
-		SetIgnoreInvisibleLayers( param )
-		{
-			switch( param )
-			{
-				case 0: this.ignoreInvisibleLayers = false; break;
-				case 1: this.ignoreInvisibleLayers = true; break;
-				case 2: this.ignoreInvisibleLayers = !this.ignoreInvisibleLayers; break;
-			}
-		}
-	};
-}
-}
-
-{
-"use strict";
-
-{
-	C3.Plugins.ValerypopoffTouchPlusPlugin.Exps =
-	{
-
-	};
-}
 }
 
 {
@@ -8234,6 +7630,34 @@ case SELECT:return this._isMultiSelect?MULTIPLE:SINGLE}}SetPropertyValueByIndex(
 {const C3=self.C3;C3.Plugins.filechooser.Acts={ReleaseFile(f){URL.revokeObjectURL(f)},Click(){this._PostToDOMElementMaybeSync("click")},Clear(){this.PostToDOMElement("clear")}}}
 {const C3=self.C3;const urlCache=new WeakMap;C3.Plugins.filechooser.Exps={FileCount(){return this._files.length},FileNameAt(i){const file=this._GetFileAt(i);return file?file["name"]||"":""},FileSizeAt(i){const file=this._GetFileAt(i);return file?file["size"]||0:0},FileTypeAt(i){const file=this._GetFileAt(i);return file?file["type"]||"":""},FileURLAt(i){const file=this._GetFileAt(i);if(!file)return"";let url=urlCache.get(file);if(url)return url;url=URL.createObjectURL(file);urlCache.set(file,url);
 return url}}};
+
+}
+
+{
+'use strict';{const C3=self.C3;C3.Plugins.Timeline=class TimelinePlugin extends C3.SDKPluginBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Plugins.Timeline.Type=class TimelineType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass)}Release(){super.Release()}OnCreate(){}}}{const C3=self.C3;C3.Plugins.Timeline.Instance=class TimelineInstance extends C3.SDKInstanceBase{constructor(inst,properties){super(inst);this.GetRuntime().GetTimelineManager().SetPluginInstance(inst)}Release(){super.Release()}}}
+{const C3=self.C3;let triggerTimeline=null;let triggerKeyframe=null;C3.Plugins.Timeline.Cnds={SetTriggerTimeline(timeline){triggerTimeline=timeline},GetTriggerTimeline(){return triggerTimeline},SetTriggerKeyframe(keyframe){triggerKeyframe=keyframe},GetTriggerKeyframe(){return triggerKeyframe},OnTimelineStarted(timeline){return triggerTimeline===timeline},OnTimelineStartedByName(name){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))if(C3.equalsNoCase(triggerTimeline.GetName(),
+timeline.GetName()))return true;return false},OnTimelineStartedByTags(tags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))if(timeline.HasTags(triggerTimeline.GetTags()))return true;return false},OnAnyTimelineStarted(){return true},OnTimelineFinished(timeline){return triggerTimeline===timeline},OnTimelineFinishedByName(name){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))if(C3.equalsNoCase(triggerTimeline.GetName(),
+timeline.GetName()))return true;return false},OnTimelineFinishedByTags(tags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))if(timeline.HasTags(triggerTimeline.GetTags()))return true;return false},OnAnyTimelineFinished(){return true},IsPlaying(timeline){return timeline.IsPlaying()},IsPlayingByName(name){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))if(timeline.IsPlaying())return true;
+return false},IsPlayingByTags(tags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))if(timeline.IsPlaying())return true;return false},IsAnyPlaying(){const timelines=[...this._runtime.GetTimelineManager().GetTimelines()];if(!timelines)return;return timelines.some(t=>t.IsPlaying())},IsPaused(timeline){return timeline.IsPaused()},IsPausedByName(name){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))if(timeline.IsPaused())return true;
+return false},IsPausedByTags(tags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))if(timeline.IsPaused())return true;return false},IsAnyPaused(){const timelines=[...this._runtime.GetTimelineManager().GetTimelines()];if(!timelines)return;return timelines.some(t=>t.IsPaused())},OnTimeSet(timeline){return triggerTimeline===timeline},OnTimeSetByName(name){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))if(triggerTimeline===
+timeline)return true;return false},OnTimeSetByTags(tags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))if(triggerTimeline===timeline)return true;return false},OnAnyKeyframeReached(){return!!triggerKeyframe},OnKeyframeReached(tagsStr,match){if(!triggerKeyframe)return false;if(triggerKeyframe.GetTags().length===0||!tagsStr)return false;const tags=tagsStr?tagsStr.split(" "):[];if(match===0){for(const tag of tags)if(triggerKeyframe.HasTag(tag))return true;
+return false}else{for(const tag of tags)if(!triggerKeyframe.HasTag(tag))return false;return true}}}}
+{const C3=self.C3;const nextTimelineObjectClasses=new Map;const set_timeline_instance_objects=(instanceObjects,timeline)=>{for(const instanceObject of instanceObjects)timeline.SetTrackInstance(instanceObject.trackId,instanceObject.instance)};const get_timeline_instance_objects=()=>{const ret=[];for(const [objectClass,obj]of nextTimelineObjectClasses.entries()){const instances=objectClass.GetCurrentSol().GetInstances();const count=obj.trackIds.length;for(let i=0;i<count;i++)if(instances[obj.startIndex+
+i])ret.push({trackId:obj.trackIds[i],instance:instances[obj.startIndex+i]});obj.startIndex+=count}return ret};C3.Plugins.Timeline.Acts={async PlayTimeline(timeline,tags,keepNextTimelineClasses){if(!timeline){if(!keepNextTimelineClasses)nextTimelineObjectClasses.clear();return}const timelineManager=this._runtime.GetTimelineManager();let tl;const playPromises=[];if(nextTimelineObjectClasses.size){let instances=get_timeline_instance_objects();do if(instances.length){tl=timelineManager.GetTimelineOfTemplateForInstances(timeline,
+instances);if(!tl){tl=timelineManager.CreateFromTemplate(timeline);tl.ClearTrackInstances();set_timeline_instance_objects(instances,tl)}tl.SetTags(tags);if(tl.Play())playPromises.push(tl.GetPlayPromise());instances=get_timeline_instance_objects()}while(instances.length)}else{timeline.SetTags(tags);if(timeline.Play())playPromises.push(timeline.GetPlayPromise())}if(!keepNextTimelineClasses)nextTimelineObjectClasses.clear();await Promise.all(playPromises)},async PlayTimelineByName(name,tags){const timelineManager=
+this._runtime.GetTimelineManager();const playPromises=[];for(const timeline of timelineManager.GetTimelinesByName(name))playPromises.push(C3.Plugins.Timeline.Acts.PlayTimeline.call(this,timeline,tags,true));nextTimelineObjectClasses.clear();await Promise.all(playPromises)},async PlayAllTimelines(){const timelineManager=this._runtime.GetTimelineManager();const playPromises=[];for(const tl of timelineManager.GetTimelines())if(tl.Play())playPromises.push(tl.GetPlayPromise());nextTimelineObjectClasses.clear();
+await Promise.all(playPromises)},PauseTimeline(timeline){if(!timeline)return;timeline.Stop()},PauseTimelineByName(name){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))C3.Plugins.Timeline.Acts.PauseTimeline.call(this,timeline)},PauseTimelineByTags(tags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))C3.Plugins.Timeline.Acts.PauseTimeline.call(this,timeline)},
+PauseAllTimelines(){const timelineManager=this._runtime.GetTimelineManager();for(const tl of timelineManager.GetTimelines())tl.Stop()},ResumeTimeline(timeline){if(!timeline)return;timeline.Resume()},ResumeTimelineByName(name){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))C3.Plugins.Timeline.Acts.ResumeTimeline.call(this,timeline)},ResumeTimelineByTags(tags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))C3.Plugins.Timeline.Acts.ResumeTimeline.call(this,
+timeline)},ResumeAllTimelines(){const timelineManager=this._runtime.GetTimelineManager();for(const tl of timelineManager.GetTimelines())tl.Resume()},StopTimeline(timeline){if(!timeline)return;timeline.Reset()},StopTimelineByName(name){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))C3.Plugins.Timeline.Acts.StopTimeline.call(this,timeline)},StopTimelineByTags(tags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))C3.Plugins.Timeline.Acts.StopTimeline.call(this,
+timeline)},StopAllTimelines(){const timelineManager=this._runtime.GetTimelineManager();for(const tl of timelineManager.GetTimelines())tl.Reset()},SetTimelineTime(timeline,timeOrTags){if(!timeline)return;if(C3.IsFiniteNumber(timeOrTags))timeline.SetTime(timeOrTags);else if(C3.IsString(timeOrTags)){const keyframe=timeline.GetKeyframeWithTags(timeOrTags);if(keyframe)timeline.SetTime(keyframe.GetTime());else C3.Plugins.Timeline.Acts.SetTimelineTime.call(this,timeline,Number(timeOrTags))}},SetTimelineTimeByName(name,
+timeOrTags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))C3.Plugins.Timeline.Acts.SetTimelineTime.call(this,timeline,timeOrTags)},SetTimelineTimeByTags(tags,timeOrTags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))C3.Plugins.Timeline.Acts.SetTimelineTime.call(this,timeline,timeOrTags)},SetTimelinePlaybackRate(timeline,rate){if(!timeline)return;timeline.SetPlaybackRate(rate)},
+SetTimelinePlaybackRateByName(name,rate){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(name))C3.Plugins.Timeline.Acts.SetTimelinePlaybackRate.call(this,timeline,rate)},SetTimelinePlaybackRateByTags(tags,rate){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByTags(tags))C3.Plugins.Timeline.Acts.SetTimelinePlaybackRate.call(this,timeline,rate)},SetInstance(objectClass,trackId){if(!nextTimelineObjectClasses.has(objectClass))nextTimelineObjectClasses.set(objectClass,
+{startIndex:0,trackIds:[]});nextTimelineObjectClasses.get(objectClass).trackIds.push(trackId)}}}
+{const C3=self.C3;C3.Plugins.Timeline.Exps={Time(nameOrTags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(nameOrTags))return timeline.GetTime();for(const timeline of timelineManager.GetTimelinesByTags(nameOrTags))return timeline.GetTime();return 0},TotalTime(nameOrTags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(nameOrTags))return timeline.GetTotalTime();for(const timeline of timelineManager.GetTimelinesByTags(nameOrTags))return timeline.GetTotalTime();
+return 0},Progress(nameOrTags){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(nameOrTags))return timeline.GetTime()/timeline.GetTotalTime();for(const timeline of timelineManager.GetTimelinesByTags(nameOrTags))return timeline.GetTime()/timeline.GetTotalTime();return 0},KeyframeTags(){const triggerKeyframe=C3.Plugins.Timeline.Cnds.GetTriggerKeyframe();if(!triggerKeyframe)return"";return triggerKeyframe.GetTags().join(" ")},TimelineName(){const timeline=
+C3.Plugins.Timeline.Cnds.GetTriggerTimeline();return timeline?timeline.GetName():""},TimelineTags(){const timeline=C3.Plugins.Timeline.Cnds.GetTriggerTimeline();return timeline?timeline.GetStringTags():""},Value(timelineNameOrTags,valueTrackNameOrId){const timelineManager=this._runtime.GetTimelineManager();for(const timeline of timelineManager.GetTimelinesByName(timelineNameOrTags)){let track=timeline.GetTrackByName(valueTrackNameOrId);if(track){const propertyTrack=track.GetPropertyTrack("value");
+if(propertyTrack)return propertyTrack.GetSourceAdapterValue()}else{let track=timeline.GetTrackById(valueTrackNameOrId);if(track){const propertyTrack=track.GetPropertyTrack("value");if(propertyTrack)return propertyTrack.GetSourceAdapterValue()}}}for(const timeline of timelineManager.GetTimelinesByTags(timelineNameOrTags)){let track=timeline.GetTrackByName(valueTrackNameOrId);if(track){const propertyTrack=track.GetPropertyTrack("value");if(propertyTrack)return propertyTrack.GetSourceAdapterValue()}else{let track=
+timeline.GetTrackById(valueTrackNameOrId);if(track){const propertyTrack=track.GetPropertyTrack("value");if(propertyTrack)return propertyTrack.GetSourceAdapterValue()}}}return 0}}};
 
 }
 
@@ -12768,7 +12192,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Tilemap,
 		C3.Behaviors.scrollto,
 		C3.Behaviors.DragnDrop,
-		C3.Plugins.ValerypopoffTouchPlusPlugin,
 		C3.Plugins.Mouse,
 		C3.Plugins.Audio,
 		C3.Plugins.GameAnalytics,
@@ -12791,16 +12214,20 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.gamepad,
 		C3.Behaviors.solid,
 		C3.Plugins.filechooser,
+		C3.Plugins.Timeline,
 		C3.Plugins.System.Cnds.OnLayoutStart,
+		C3.Plugins.System.Acts.SetBoolVar,
+		C3.Plugins.System.Acts.SetLayerVisible,
+		C3.Behaviors.Fade.Acts.StartFade,
+		C3.Plugins.System.Acts.Scroll,
 		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.Dictionary.Exps.Get,
-		C3.Plugins.System.Acts.WaitForPreviousActions,
-		C3.Plugins.shadowlight.Acts.ZMoveToObject,
+		C3.Plugins.TiledBg.Acts.SetInstanceVar,
+		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.System.Cnds.PickAll,
 		C3.Behaviors.Sin.Acts.SetEnabled,
-		C3.Plugins.System.Cnds.PickNth,
-		C3.Plugins.Text.Acts.SetText,
+		C3.Plugins.System.Cnds.PickByComparison,
 		C3.Plugins.PlatformInfo.Cnds.IsOnMobile,
 		C3.Plugins.System.Cnds.IsPreview,
 		C3.Plugins.TiledBg.Acts.Destroy,
@@ -12809,133 +12236,120 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Dictionary.Cnds.CompareValue,
 		C3.Plugins.System.Cnds.CompareBoolVar,
 		C3.Plugins.System.Acts.MapFunction,
-		C3.Plugins.System.Acts.SetBoolVar,
-		C3.Plugins.System.Cnds.PickByComparison,
-		C3.Plugins.Sprite.Cnds.IsOverlapping,
-		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
-		C3.Plugins.System.Cnds.CompareVar,
-		C3.Behaviors.CarPlus.Acts.SimulateControl,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.System.Cnds.ForEach,
 		C3.Behaviors.CarPlus.Cnds.IsMoving,
-		C3.Plugins.System.Cnds.AngleWithin,
-		C3.Plugins.Sprite.Exps.Angle,
-		C3.Behaviors.CarPlus.Exps.MovingAngle,
-		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
-		C3.Plugins.System.Cnds.For,
-		C3.Plugins.Sprite.Acts.Spawn,
-		C3.Plugins.Sprite.Exps.LayerName,
-		C3.Plugins.System.Exps.loopindex,
-		C3.Plugins.Arr.Acts.SetX,
-		C3.Plugins.Sprite.Exps.UID,
-		C3.Plugins.Sprite.Cnds.PickChildren,
-		C3.Plugins.Particles.Acts.SetRate,
-		C3.Plugins.Sprite.Cnds.PickByUID,
-		C3.Plugins.Arr.Exps.At,
-		C3.Behaviors.skymenTrail.Acts.PushPoint,
-		C3.Plugins.Sprite.Exps.ImagePointX,
-		C3.Plugins.Sprite.Exps.ImagePointY,
+		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
 		C3.Plugins.TiledBg.Acts.SetPos,
 		C3.Plugins.Sprite.Exps.X,
 		C3.Behaviors.CarPlus.Exps.VectorX,
 		C3.Plugins.Sprite.Exps.Y,
 		C3.Behaviors.CarPlus.Exps.VectorY,
-		C3.Plugins.Tilemap.Exps.TileAt,
-		C3.Plugins.Tilemap.Exps.PositionToTileX,
-		C3.Plugins.Tilemap.Exps.SnapX,
-		C3.Plugins.Tilemap.Exps.PositionToTileY,
-		C3.Plugins.Tilemap.Exps.SnapY,
 		C3.Plugins.System.Acts.AddVar,
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Behaviors.CarPlus.Acts.SetDriftRecover,
 		C3.Behaviors.CarPlus.Acts.SetDeceleration,
+		C3.Plugins.System.Cnds.CompareVar,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
-		C3.Behaviors.CV_BoundedDragnDrop.Exps.yOrigin,
 		C3.Plugins.TiledBg.Exps.Y,
+		C3.Plugins.System.Exps.max,
 		C3.Behaviors.CarPlus.Acts.SetMaxSpeed,
 		C3.Behaviors.CarPlus.Exps.MaxSpeed,
 		C3.Behaviors.CarPlus.Acts.SetAcceleration,
 		C3.Behaviors.CarPlus.Cnds.CompareSpeed,
 		C3.Behaviors.CarPlus.Acts.SetSpeed,
 		C3.Behaviors.CarPlus.Exps.Speed,
-		C3.Plugins.System.Cnds.ForEachOrdered,
-		C3.Plugins.System.Exps.anglediff,
-		C3.Plugins.Sprite.Acts.RotateTowardPosition,
-		C3.Plugins.System.Acts.StopLoop,
+		C3.Plugins.Sprite.Cnds.PickByUID,
+		C3.Plugins.Arr.Exps.At,
+		C3.Behaviors.skymenTrail.Acts.PushPoint,
+		C3.Plugins.Sprite.Exps.ImagePointX,
+		C3.Plugins.Sprite.Exps.ImagePointY,
+		C3.Plugins.Sprite.Exps.Angle,
+		C3.Plugins.Sprite.Acts.Spawn,
+		C3.Plugins.Sprite.Exps.LayerName,
+		C3.Plugins.Arr.Acts.Push,
+		C3.Plugins.Arr.Acts.SetX,
+		C3.Plugins.Sprite.Exps.UID,
+		C3.Plugins.Sprite.Acts.AddChild,
+		C3.Plugins.Sprite.Acts.ZMoveToObject,
 		C3.Plugins.System.Acts.SetLayerAngle,
 		C3.Plugins.Text.Acts.SetAngle,
 		C3.Plugins.System.Exps.layerangle,
 		C3.Plugins.System.Cnds.TriggerOnce,
-		C3.Plugins.System.Acts.SetGroupActive,
 		C3.Plugins.System.Acts.SetLayerScale,
+		C3.Plugins.System.Acts.SetGroupActive,
 		C3.Plugins.Sprite.Cnds.PickNthChild,
 		C3.Plugins.System.Acts.Wait,
-		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.Text.Acts.Destroy,
-		C3.Plugins.Touch.Cnds.IsTouchingObject,
-		C3.Plugins.System.Cnds.PickOverlappingPoint,
-		C3.Plugins.Touch.Exps.X,
-		C3.Plugins.Touch.Exps.Y,
-		C3.Plugins.Sprite.Acts.SetTowardPosition,
-		C3.Plugins.Sprite.Cnds.IsBetweenAngles,
-		C3.Plugins.Sprite.Acts.SetAngle,
-		C3.Plugins.System.Exps.max,
-		C3.Plugins.Touch.Exps.SpeedAt,
-		C3.Plugins.Touch.Exps.TouchIndex,
-		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
-		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
-		C3.Plugins.TiledBg.Acts.SetX,
+		C3.Plugins.System.Cnds.PickLastCreated,
+		C3.Plugins.Sprite.Acts.SetAnim,
+		C3.Behaviors.Tween.Acts.TweenValue,
 		C3.Plugins.TiledBg.Exps.X,
+		C3.Plugins.Touch.Exps.SpeedAt,
+		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
+		C3.Behaviors.CarPlus.Acts.SimulateControl,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
 		C3.Plugins.Sprite.Cnds.OnCollision,
 		C3.Plugins.Sprite.Cnds.IsVisible,
 		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
 		C3.Plugins.Sprite.Acts.AddInstanceVar,
+		C3.Plugins.System.Acts.CreateObject,
+		C3.Plugins.System.Acts.SetObjectTimescale,
+		C3.Behaviors.Tween.Acts.TweenOneProperty,
+		C3.Plugins.NinePatch.Acts.Destroy,
+		C3.Plugins.NinePatch.Cnds.IsOnScreen,
+		C3.Plugins.NinePatch.Cnds.CompareWidth,
 		C3.Behaviors.mcube_rexspline.Cnds.OnHitAnyPoint,
 		C3.Behaviors.mcube_rexspline.Acts.SetSpeed,
 		C3.Plugins.Arr.Exps.Width,
 		C3.Behaviors.mcube_rexspline.Exps.CurSegP0,
-		C3.Behaviors.Tween.Acts.TweenOneProperty,
 		C3.Plugins.Arr.Acts.Pop,
 		C3.Behaviors.mcube_rexspline.Cnds.OnHitTarget,
 		C3.Behaviors.Flash.Acts.Flash,
 		C3.Behaviors.Sin.Acts.SetMagnitude,
 		C3.Behaviors.Sin.Exps.Magnitude,
+		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
 		C3.Behaviors.mcube_rexspline.Acts.SetEnabled,
 		C3.Behaviors.CarPlus.Acts.SetEnabled,
 		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Behaviors.mcube_rexspline.Acts.CleanAll,
 		C3.Behaviors.Sin.Acts.SetPhase,
+		C3.Plugins.System.Cnds.For,
 		C3.Behaviors.mcube_rexspline.Acts.AddPoint,
+		C3.Plugins.System.Exps.loopindex,
 		C3.Behaviors.mcube_rexspline.Acts.Start,
 		C3.Plugins.System.Cnds.Every,
-		C3.Plugins.Arr.Acts.Push,
 		C3.Plugins.Arr.Acts.SetXY,
 		C3.Behaviors.CarPlus.Exps.SteerSpeed,
 		C3.Behaviors.CarPlus.Exps.Acceleration,
 		C3.Behaviors.CarPlus.Exps.Deceleration,
 		C3.Behaviors.CarPlus.Exps.DriftRecover,
+		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.Sprite.Cnds.PickParent,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
-		C3.ScriptsInEvents.Gamesheet_Event113_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event108_Act1,
 		C3.Plugins.NinePatch.Acts.SetWidth,
-		C3.Behaviors.Tween.Cnds.IsPlaying,
-		C3.Plugins.NinePatch.Acts.SetEffectParam,
-		C3.Behaviors.Tween.Exps.Value,
-		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.System.Exps.dt,
-		C3.Behaviors.Tween.Acts.StopAllTweens,
-		C3.ScriptsInEvents.Gamesheet_Event121,
-		C3.ScriptsInEvents.Gamesheet_Event122,
+		C3.Plugins.TiledBg.Acts.SetVisible,
+		C3.Behaviors.Tween.Acts.StopTweens,
+		C3.Behaviors.Tween.Cnds.IsPlaying,
+		C3.Plugins.TiledBg.Acts.SetImageOffsetY,
+		C3.Behaviors.Tween.Exps.Value,
+		C3.ScriptsInEvents.Gamesheet_Event118,
+		C3.ScriptsInEvents.Gamesheet_Event119,
 		C3.Behaviors.Pin.Exps.PinnedUID,
 		C3.Plugins.Particles.Acts.Destroy,
-		C3.Plugins.Browser.Acts.Alert,
 		C3.Plugins.Sprite.Cnds.OnCreated,
-		C3.Plugins.Sprite.Acts.ZMoveToObject,
+		C3.Plugins.Sprite.Acts.SetAngle,
 		C3.Behaviors.Timer.Acts.StartTimer,
+		C3.Plugins.System.Cnds.PickNth,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Plugins.System.Exps.left,
+		C3.Plugins.Sprite.Exps.AnimationName,
 		C3.Plugins.System.Acts.CallMappedFunction,
 		C3.Behaviors.Bullet.Cnds.IsEnabled,
+		C3.Plugins.Sprite.Acts.RotateTowardPosition,
 		C3.Behaviors.Flash.Cnds.IsFlashing,
 		C3.Behaviors.scrollto.Acts.Shake,
 		C3.Plugins.Sprite.Acts.SubInstanceVar,
@@ -12943,102 +12357,141 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.rgba,
 		C3.Plugins.DrawingCanvas.Acts.Line,
 		C3.Plugins.DrawingCanvas.Acts.FillEllipse,
-		C3.Plugins.System.Acts.SetObjectTimescale,
-		C3.Plugins.NinePatch.Acts.Destroy,
-		C3.Plugins.NinePatch.Cnds.IsOnScreen,
-		C3.Plugins.NinePatch.Cnds.CompareWidth,
-		C3.Behaviors.Timer.Cnds.OnTimer,
-		C3.Behaviors.Fade.Acts.StartFade,
 		C3.Plugins.System.Acts.RestartLayout,
 		C3.Plugins.System.Acts.GoToLayout,
-		C3.Plugins.System.Cnds.Compare,
-		C3.Plugins.Sprite.Exps.Count,
+		C3.Plugins.System.Cnds.LayerVisible,
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
-		C3.Behaviors.Tween.Acts.TweenValue,
+		C3.Plugins.System.Acts.WaitForPreviousActions,
+		C3.Plugins.Sprite.Cnds.PickChildren,
 		C3.Behaviors.Bullet.Acts.SetSpeed,
+		C3.Plugins.System.Cnds.ForEachOrdered,
+		C3.Plugins.System.Exps.anglediff,
+		C3.Plugins.System.Acts.StopLoop,
 		C3.Plugins.System.Exps.tokenat,
 		C3.Plugins.System.Acts.CreateObjectByName,
-		C3.Plugins.System.Cnds.PickLastCreated,
-		C3.Plugins.Sprite.Acts.SetAnim,
 		C3.Plugins.Sprite.Exps.ObjectTypeName,
-		C3.Plugins.System.Exps.left,
 		C3.Plugins.System.Exps.int,
 		C3.Plugins.System.Exps.right,
 		C3.Plugins.System.Exps.len,
+		C3.ScriptsInEvents.Gamesheet_Event167_Act1,
+		C3.Plugins.System.Exps.layoutname,
+		C3.Plugins.System.Acts.SetFunctionReturnValue,
+		C3.Plugins.AJAX.Cnds.OnComplete,
+		C3.Plugins.Browser.Acts.ConsoleLog,
+		C3.Plugins.AJAX.Exps.LastData,
+		C3.Plugins.Arr.Acts.JSONLoad,
+		C3.Plugins.Sprite.Exps.Count,
+		C3.Plugins.shadowlight.Acts.ZMoveToObject,
+		C3.Plugins.AJAX.Acts.Request,
+		C3.Plugins.Sprite.Exps.PolyPointCount,
+		C3.Plugins.Sprite.Exps.PolyPointXAt,
+		C3.Plugins.Sprite.Exps.PolyPointYAt,
+		C3.ScriptsInEvents.Gamesheet_Event180_Act7,
+		C3.Plugins.Sprite.Acts.SetVisible,
+		C3.Plugins.Sprite.Acts.SetHeight,
+		C3.Plugins.Sprite.Exps.Width,
+		C3.Plugins.Sprite.Acts.MoveAtAngle,
+		C3.Plugins.Sprite.Acts.SetOpacity,
+		C3.Plugins.Sprite.Exps.IID,
+		C3.Plugins.Sprite.Cnds.OnAnimFinished,
+		C3.Plugins.Sprite.Acts.SetPosToObject,
+		C3.Plugins.DrawingCanvas.Acts.PasteObject,
+		C3.Plugins.DrawingCanvas.Acts.ClearRect,
+		C3.Plugins.Sprite.Exps.Height,
+		C3.ScriptsInEvents.Gamesheet_Event211_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event215_Act2,
+		C3.Plugins.Sprite.Acts.SetEffectParam,
+		C3.Plugins.TiledBg.Acts.SetImageOffsetX,
+		C3.ScriptsInEvents.Gamesheet_Event222_Act1,
+		C3.Plugins.Sprite.Acts.SetCollisions,
+		C3.Plugins.System.Acts.SetLayerOpacity,
+		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.AJAX.Acts.RequestFile,
 		C3.Plugins.System.Acts.MapFunctionDefault,
-		C3.Plugins.System.Acts.SetLayerVisible,
 		C3.Plugins.Button.Acts.SetCSSStyle,
-		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.Text.Exps.Text,
+		C3.Plugins.Browser.Acts.Alert,
 		C3.Plugins.Arr.Exps.Depth,
 		C3.Plugins.System.Acts.GoToLayoutByName,
 		C3.Plugins.Touch.Cnds.OnTouchObject,
 		C3.Plugins.Text.Cnds.PickByUID,
 		C3.Plugins.Sprite.Cnds.CompareOpacity,
-		C3.Plugins.System.Cnds.LayerVisible,
 		C3.Plugins.Button.Cnds.OnClicked,
 		C3.Plugins.Dictionary.Acts.SetKey,
 		C3.Plugins.List.Cnds.OnSelectionChanged,
 		C3.Plugins.List.Exps.SelectedIndex,
 		C3.Plugins.sliderbar.Cnds.OnChanged,
 		C3.Plugins.sliderbar.Exps.Value,
+		C3.ScriptsInEvents.Menusheet_Event30_Act1,
 		C3.Plugins.System.Exps.layerindex,
 		C3.Plugins.AJAX.Cnds.OnAnyComplete,
 		C3.Plugins.AJAX.Exps.Tag,
-		C3.Plugins.Arr.Acts.JSONLoad,
-		C3.Plugins.AJAX.Exps.LastData,
 		C3.Plugins.Dictionary.Acts.JSONLoad,
-		C3.Plugins.AJAX.Cnds.OnComplete,
 		C3.Plugins.Button.Acts.SetChecked,
 		C3.Plugins.List.Acts.Select,
 		C3.Plugins.sliderbar.Acts.SetValue,
 		C3.Plugins.Browser.Cnds.OnUpdateFound,
 		C3.Plugins.Browser.Cnds.OnUpdateReady,
+		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.Arr.Acts.SetXYZ,
-		C3.Plugins.System.Acts.SetFunctionReturnValue,
-		C3.ScriptsInEvents.Menusheet_Event66_Act1,
-		C3.Plugins.Keyboard.Cnds.OnKey,
-		C3.Plugins.System.Acts.ToggleBoolVar,
+		C3.ScriptsInEvents.Menusheet_Event67_Act1,
+		C3.Plugins.Keyboard.Cnds.OnKeyReleased,
+		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Audio.Acts.PlayByName,
 		C3.Plugins.Keyboard.Cnds.OnAnyKeyReleased,
-		C3.Plugins.System.Exps.layoutname,
 		C3.Plugins.Dictionary.Cnds.HasKey,
 		C3.Plugins.Keyboard.Exps.LastKeyCode,
 		C3.Plugins.gamepad.Cnds.OnAnyButtonDown,
 		C3.Plugins.gamepad.Exps.LastButton,
+		C3.Plugins.Text.Cnds.CompareText,
+		C3.Plugins.Timeline.Acts.StopTimelineByTags,
+		C3.Plugins.Sprite.Acts.SetY,
+		C3.Plugins.Sprite.Acts.SetX,
+		C3.Plugins.Timeline.Acts.SetInstance,
+		C3.Plugins.Timeline.Acts.PlayTimeline,
+		C3.Behaviors.CV_BoundedDragnDrop.Exps.xMaxBoundPos,
+		C3.Behaviors.CV_BoundedDragnDrop.Exps.xMinBoundPos,
+		C3.Plugins.System.Exps.min,
+		C3.Plugins.NinePatch.Exps.X,
+		C3.Plugins.Audio.Acts.Stop,
+		C3.Plugins.Audio.Acts.Play,
+		C3.Plugins.Audio.Acts.SetMasterVolume,
+		C3.Plugins.Audio.Acts.SetSilent,
+		C3.Plugins.Audio.Cnds.IsSilent,
+		C3.Plugins.System.Cnds.CompareBetween,
+		C3.Plugins.NinePatch.Acts.SetVisible,
+		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
+		C3.Plugins.Sprite.Cnds.OnDestroyed,
+		C3.Plugins.System.Cnds.OnLayoutEnd,
+		C3.Plugins.Timeline.Acts.StopAllTimelines,
 		C3.Behaviors.CarPlus.Acts.SetDefaultControls,
 		C3.Behaviors.CarPlus.Cnds.IsEnabled,
-		C3.Plugins.Text.Cnds.CompareText,
 		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
 		C3.Behaviors.CarPlus.Acts.Stop,
 		C3.Plugins.System.Cnds.EveryTick,
+		C3.Plugins.Sprite.Exps.BBoxLeft,
+		C3.Plugins.Sprite.Exps.BBoxRight,
 		C3.Plugins.System.Exps.random,
+		C3.Behaviors.CarPlus.Exps.MovingAngle,
+		C3.Plugins.Sprite.Acts.SetTowardPosition,
 		C3.Plugins.System.Cnds.IsBetweenAngles,
 		C3.Plugins.Particles.Acts.SetAngle,
-		C3.Plugins.Sprite.Acts.AddChild,
+		C3.Plugins.Particles.Acts.SetRate,
 		C3.Plugins.Particles.Acts.ZMoveToObject,
 		C3.Plugins.Tilemap.Exps.MapDisplayWidth,
 		C3.Plugins.Tilemap.Exps.MapDisplayHeight,
-		C3.ScriptsInEvents.Levelinits_Event8_Act4,
+		C3.Plugins.Tilemap.Exps.TileAt,
+		C3.ScriptsInEvents.Levelinits_Event9_Act4,
 		C3.Plugins.Tilemap.Exps.TileToPositionX,
 		C3.Plugins.Tilemap.Exps.TileToPositionY,
-		C3.ScriptsInEvents.Levelinits_Event9_Act3,
+		C3.ScriptsInEvents.Levelinits_Event10_Act3,
 		C3.Plugins.Sprite.Acts.SetScale,
 		C3.Plugins.Sprite.Acts.MoveToTop,
 		C3.Behaviors.LOS.Acts.AddObstacle,
-		C3.Plugins.Sprite.Exps.IID,
 		C3.Plugins.TiledBg.Acts.SetPosToObject,
-		C3.ScriptsInEvents.Levelinits_Event16_Act2,
-		C3.Plugins.Sprite.Acts.SetSize,
-		C3.ScriptsInEvents.Levelinits_Event17_Act3,
-		C3.Plugins.Sprite.Exps.Width,
-		C3.Plugins.Tilemap.Exps.TileWidth,
-		C3.Plugins.Sprite.Exps.Height,
-		C3.Plugins.Tilemap.Exps.TileHeight,
-		C3.Plugins.Sprite.Cnds.PickDistance
+		C3.ScriptsInEvents.Levelinits_Event25_Act1
 	];
 };
 self.C3_JsPropNameTable = [
@@ -13092,7 +12545,6 @@ self.C3_JsPropNameTable = [
 	{DragDrop: 0},
 	{DriftBut: 0},
 	{vis_bar: 0},
-	{ValerypopoffTouchPlus: 0},
 	{Mouse: 0},
 	{Audio: 0},
 	{GameAnalytics: 0},
@@ -13101,6 +12553,7 @@ self.C3_JsPropNameTable = [
 	{AnimationPrefix: 0},
 	{onclick: 0},
 	{click_param: 0},
+	{ClickMode: 0},
 	{SettBut: 0},
 	{mmtext: 0},
 	{SendToLvl: 0},
@@ -13109,6 +12562,7 @@ self.C3_JsPropNameTable = [
 	{interface_zone: 0},
 	{ideal: 0},
 	{score_point: 0},
+	{purpose: 0},
 	{score_ui: 0},
 	{BoundedDragDrop: 0},
 	{SwipeZone: 0},
@@ -13142,14 +12596,16 @@ self.C3_JsPropNameTable = [
 	{randx: 0},
 	{randy: 0},
 	{GoalUID: 0},
+	{Searching: 0},
 	{car_edge_collision: 0},
 	{TileToConditionData: 0},
 	{JumpBut: 0},
 	{EdgeSparks: 0},
 	{car_position: 0},
 	{checkID: 0},
-	{IsStart: 0},
+	{IsEnd: 0},
 	{checkpointID: 0},
+	{isStart: 0},
 	{checkpoint: 0},
 	{AdvancedRandom: 0},
 	{pause_back: 0},
@@ -13176,13 +12632,17 @@ self.C3_JsPropNameTable = [
 	{DecelBut: 0},
 	{Wheel: 0},
 	{trails: 0},
+	{DesiredValue: 0},
 	{coin_txt: 0},
 	{tempGoal: 0},
 	{CarOwnership: 0},
 	{CarChars: 0},
 	{shownID: 0},
-	{garage_car: 0},
+	{garage_car_choice: 0},
 	{garage_bar_back: 0},
+	{char_ID: 0},
+	{high_value: 0},
+	{low_value: 0},
 	{charID: 0},
 	{lval: 0},
 	{hval: 0},
@@ -13207,8 +12667,6 @@ self.C3_JsPropNameTable = [
 	{Solid: 0},
 	{borders: 0},
 	{garage_value: 0},
-	{snapped_start: 0},
-	{snapped_end: 0},
 	{road: 0},
 	{decor: 0},
 	{obstacle: 0},
@@ -13217,13 +12675,80 @@ self.C3_JsPropNameTable = [
 	{FileChooser: 0},
 	{restX: 0},
 	{restY: 0},
+	{moneyonstart: 0},
 	{MotionCircle: 0},
+	{mm_back: 0},
+	{Level_data: 0},
+	{border: 0},
+	{garage_car: 0},
+	{garage_back: 0},
+	{garage_bar2: 0},
+	{garage_bar3: 0},
+	{garage_bar4: 0},
+	{garage_bar5: 0},
+	{araboto_test: 0},
+	{to_game_no_text: 0},
+	{settings_back: 0},
+	{credits_title: 0},
+	{logo: 0},
+	{sound_off: 0},
+	{sound_on: 0},
+	{music_off: 0},
+	{music_on: 0},
+	{volume_slider: 0},
+	{volume_slider_back: 0},
+	{percent: 0},
+	{temp_volume_storage: 0},
+	{slider_handle: 0},
+	{keyboard_tips: 0},
+	{swipe_rest: 0},
+	{swipe_car: 0},
+	{swipe_finger: 0},
+	{TimelineController: 0},
+	{option: 0},
+	{option_on: 0},
+	{option_off: 0},
+	{option_value: 0},
+	{multi_choice_option: 0},
+	{heart: 0},
+	{NitroLevel: 0},
+	{DrawNitrous: 0},
+	{remove_ads: 0},
+	{plus_blue: 0},
+	{position_text: 0},
+	{money_icon_static: 0},
+	{garage_upgrade_price: 0},
+	{money_back: 0},
+	{to_shop: 0},
+	{car_choice_but: 0},
+	{rocket_buy: 0},
+	{jump_buy: 0},
+	{hand_anim_: 0},
+	{plus_static: 0},
+	{Rocket_counter: 0},
+	{NitroLines: 0},
+	{speed_empty: 0},
+	{angle_snap: 0},
+	{x_snap: 0},
+	{y_snap: 0},
+	{DrawSpeed: 0},
+	{speed_full: 0},
+	{loss_background: 0},
+	{win_background: 0},
+	{next_level: 0},
+	{watch_ad_normal: 0},
+	{number: 0},
+	{Victory_info: 0},
+	{black_cover: 0},
+	{please_wait: 0},
+	{timer: 0},
 	{Button: 0},
 	{LoadableArray: 0},
 	{LoadableDict: 0},
 	{RocketTarget: 0},
 	{AIGoal: 0},
 	{MapElement: 0},
+	{UpgradeBar: 0},
 	{GameState: 0},
 	{GAME_PAUSE: 0},
 	{GAME_REPLAY: 0},
@@ -13231,6 +12756,9 @@ self.C3_JsPropNameTable = [
 	{GAME_OVER: 0},
 	{GAME_ACTIVE: 0},
 	{GAME_START: 0},
+	{Sprint: 0},
+	{Rockets: 0},
+	{Loaded_level: 0},
 	{FirstTime: 0},
 	{RaceLaps: 0},
 	{AdsDisabled: 0},
@@ -13238,8 +12766,6 @@ self.C3_JsPropNameTable = [
 	{Speed: 0},
 	{NitroState: 0},
 	{NitroCharge: 0},
-	{LvlScore: 0},
-	{DesAngle: 0},
 	{tile: 0},
 	{max_speed_coef: 0},
 	{accel_coef: 0},
@@ -13247,10 +12773,11 @@ self.C3_JsPropNameTable = [
 	{steer_coef: 0},
 	{recover_coef: 0},
 	{motion_influence: 0},
-	{motion: 0},
 	{zoom_diameter: 0},
 	{zoom_speed: 0},
 	{zoom_coef: 0},
+	{motion: 0},
+	{collected: 0},
 	{Mode: 0},
 	{motion_len: 0},
 	{motion_speed: 0},
@@ -13267,11 +12794,39 @@ self.C3_JsPropNameTable = [
 	{x: 0},
 	{y: 0},
 	{new_angle: 0},
+	{map_name: 0},
+	{counter: 0},
+	{map_url: 0},
+	{edge_angle: 0},
+	{edge_angle_c3: 0},
+	{edge_length: 0},
+	{edge_y2: 0},
+	{edge_y1: 0},
+	{edge_x2: 0},
+	{edge_x1: 0},
+	{edge_dy: 0},
+	{edge_dx: 0},
+	{distance_to_end: 0},
+	{distance_to_start: 0},
+	{CheckpointUID: 0},
+	{hasMiddle: 0},
+	{delta: 0},
+	{RoadUID: 0},
+	{Point: 0},
+	{Result: 0},
+	{SpriteUID: 0},
+	{ImagePointName: 0},
+	{prev_mid: 0},
+	{gui_y: 0},
+	{gui_x: 0},
+	{coin_x: 0},
+	{coin_y: 0},
 	{MenuState: 0},
 	{MENU_DEFAULT: 0},
 	{MENU_PROMPT: 0},
 	{ChosenCar: 0},
 	{Coins: 0},
+	{layers: 0},
 	{LayerToShow: 0},
 	{game_mode: 0},
 	{max_upgrade_tier: 0},
@@ -13283,24 +12838,28 @@ self.C3_JsPropNameTable = [
 	{SFX: 0},
 	{ExtraAnimation: 0},
 	{Music: 0},
-	{ButtonUID: 0},
-	{ButtonParam: 0},
+	{VolumeLevel: 0},
 	{Filename: 0},
 	{Expression: 0},
+	{ButtonUID: 0},
+	{ButtonParam: 0},
+	{TabName: 0},
+	{NewLevel: 0},
+	{saved_option: 0},
 	{Car_UID: 0},
 	{posy: 0},
 	{posx: 0},
 	{AngleToNode: 0},
+	{RightBound: 0},
+	{LeftBound: 0},
 	{your_car: 0},
+	{loaded: 0},
 	{max_cars: 0},
 	{is_start: 0},
 	{lv1: 0},
 	{lv2: 0},
 	{tile_rotation: 0},
-	{is_corner: 0},
-	{clock_id: 0},
-	{circle_id: 0},
-	{pos_id: 0}
+	{start_uid: 0}
 ];
 }
 
@@ -13401,11 +12960,23 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
+		() => "Settings",
+		() => "Win",
+		() => "Loss",
+		() => "GUI",
+		() => "Waiting",
+		() => "map_966518302",
+		() => 15000,
 		() => "RaceStart",
 		() => 1,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("difficulty_laps");
+		},
+		() => 20,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
 		},
 		() => 0,
 		p => {
@@ -13413,9 +12984,10 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject("difficulty_lives");
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and(v0.GetValue(), "❤");
+			const n0 = p._GetNode(0);
+			return () => n0.ExpInstVar();
 		},
+		() => "health",
 		() => "controls_scheme",
 		() => 2,
 		() => "destruction",
@@ -13430,43 +13002,7 @@ self.C3_ExpressionFuncs = [
 		() => "Jump",
 		() => "Shoot",
 		() => "Rewind",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpInstVar();
-		},
-		() => "RaceActive",
 		() => "Car Mechanics",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject();
-		},
-		() => 7,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpBehavior();
-		},
-		() => "spawn_marks",
-		() => 3,
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (f0("spawn_marks") + 1);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("spawn_marks");
-		},
-		() => 100,
-		() => "push_marks",
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("push_marks"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((f1("push_marks") + 1));
-		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -13478,45 +13014,6 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
 			return () => add(n0.ExpObject(), multiply((n1.ExpBehavior() / 3), subtract(1, n2.ExpObject("cam_center"))));
-		},
-		() => "Tires",
-		() => 4,
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			const f4 = p._GetNode(4).GetBoundMethod();
-			const n5 = p._GetNode(5);
-			const n6 = p._GetNode(6);
-			const n7 = p._GetNode(7);
-			const f8 = p._GetNode(8).GetBoundMethod();
-			return () => n0.ExpObject(n1.ExpObject(n2.ExpObject(n3.ExpObject(f4("Tires")))), n5.ExpObject(n6.ExpObject(n7.ExpObject(f8("Tires")))));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => multiply(0.25, n0.ExpObject(v1.GetValue(), 2));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => multiply(0.25, n0.ExpObject(v1.GetValue(), 3));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => multiply(0.25, n0.ExpObject(v1.GetValue(), 4));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => multiply(0.25, n0.ExpObject(v1.GetValue(), 5));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => multiply(0.25, n0.ExpObject(v1.GetValue(), 6));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -13538,12 +13035,18 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
-			return () => ((C3.clamp((n0.ExpBehavior() - n1.ExpObject()), 0, 350) + 50) / 400);
+			return () => ((C3.clamp((n0.ExpInstVar() - n1.ExpObject()), 0, 350) + 50) / 400);
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
 			return () => (v0.GetValue() * v1.GetValue());
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const v2 = p._GetNode(2).GetVar();
+			return () => (v0.GetValue() * f1(v2.GetValue(), 0.25));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -13556,19 +13059,19 @@ self.C3_ExpressionFuncs = [
 			return () => C3.lerp(n0.ExpBehavior(), n1.ExpInstVar(), 0.01);
 		},
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			const n6 = p._GetNode(6);
-			const n7 = p._GetNode(7);
-			const n8 = p._GetNode(8);
-			const n9 = p._GetNode(9);
-			return () => ((0.25 + (f0(n1.ExpObject(), C3.toDegrees(C3.angleTo(n2.ExpObject(), n3.ExpObject(), n4.ExpObject(), n5.ExpObject()))) / 180)) * C3.distanceTo(n6.ExpObject(), n7.ExpObject(), n8.ExpObject(), n9.ExpObject()));
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(0);
 		},
-		() => 1.5,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("Trail");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject();
+		},
+		() => "Trail",
+		() => "Camera related stuff",
 		() => "Angle Follow",
 		() => "cam_angle_follow",
 		() => "Level",
@@ -13600,7 +13103,6 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			return () => subtract(v0.GetValue(), multiply(n1.ExpObject("cam_zoom_strength"), v2.GetValue()));
 		},
-		() => "GUI",
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
@@ -13608,65 +13110,36 @@ self.C3_ExpressionFuncs = [
 		},
 		() => 0.75,
 		() => "",
-		() => 0.01,
-		() => 360,
-		() => 700,
-		() => "LeftBut",
-		() => "MidBut",
-		() => "Txt",
-		() => "Pause",
-		() => "RightBut",
-		() => "Пауза",
 		() => "RaceOver",
 		() => "RaceWin",
-		() => "Победа!\nНаграда: 250 монет",
-		() => 250,
-		() => "RaceLoss",
-		() => "Поражение!\nНаграда: 50 монет",
-		() => 50,
-		() => "3",
-		() => 0.5,
-		() => "2",
-		() => "1",
-		() => "GO!",
-		() => "LeverControls",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("GUI");
-		},
-		() => 180,
-		() => 359.99,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => ((((n0.ExpObject()) > (90) ? 1 : 0)) ? (180) : (359));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => subtract(270, n0.ExpObject("controls_dead_zone"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => add(270, n0.ExpObject("controls_dead_zone"));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			const f3 = p._GetNode(3).GetBoundMethod();
-			const f4 = p._GetNode(4).GetBoundMethod();
-			return () => f0(((((v1.GetValue()) < (1) ? 1 : 0)) ? (1) : (v2.GetValue())), f3(f4()));
-		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			return () => multiply(multiply(multiply((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))), divide(multiply((270 - n2.ExpObject()), subtract(multiply(2, n3.ExpObject("controls_invert")), 1)), 90)), n4.ExpInstVar()), n5.ExpObject("controls_sensitivity"));
+			return () => (v0.GetValue() - n1.ExpInstVar());
 		},
-		() => 270,
-		() => "SwipeControls",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + 250);
+		},
+		() => 250,
+		() => "RaceLoss",
+		() => "Three",
+		() => 0.4,
+		() => "Change",
+		() => 16,
+		() => 0.2,
+		() => 0.1,
+		() => "Two",
+		() => "One",
+		() => "Go",
+		() => "RaceActive",
+		() => 0.9,
+		() => "MotionControls",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => C3.lerp(n0.ExpObject(), n1.ExpInstVar(), 0.12);
+		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
@@ -13690,20 +13163,22 @@ self.C3_ExpressionFuncs = [
 			return () => multiply(multiply(multiply(((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))) * (v2.GetValue() / 360)), add(multiply((-2), n3.ExpObject("controls_invert")), 1)), n4.ExpObject("controls_sensitivity")), n5.ExpInstVar());
 		},
 		() => "controls_drift_mode",
-		() => "MotionControls",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => C3.lerp(n0.ExpObject(), n1.ExpInstVar(), 0.12);
-		},
 		() => "Rocket",
 		() => "Nitro",
+		() => 0.3,
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const n1 = p._GetNode(1);
-			return () => C3.clamp(add(v0.GetValue(), n1.ExpObject("difficulty_nitro_refill")), 0, 100);
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("difficulty_nitro_refill");
 		},
+		() => "Coin",
 		() => "Replays",
+		() => 360,
+		() => 700,
+		() => "MidBut",
+		() => "Bar",
+		() => "Txt",
+		() => "Отмотать время?",
+		() => "rewind_timer",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -13737,7 +13212,6 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => ((((v0.GetValue()) === ("Rewind") ? 1 : 0)) ? ("RaceActive") : ("RaceOver"));
 		},
-		() => 0.1,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (-n0.ExpBehavior());
@@ -13772,6 +13246,7 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => n0.ExpObject((n1.ExpObject() - 1), 9);
 		},
+		() => "Pause",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject(0, 0);
@@ -13796,10 +13271,6 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject(f1("replay"), 1);
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => v0.GetValue();
-		},
-		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			const f2 = p._GetNode(2).GetBoundMethod();
@@ -13811,8 +13282,14 @@ self.C3_ExpressionFuncs = [
 			const f2 = p._GetNode(2).GetBoundMethod();
 			return () => n0.ExpObject(((n1.ExpObject() - 1) - f2("replay")), 1);
 		},
+		() => 4,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior();
+		},
 		() => 5,
 		() => 6,
+		() => 7,
 		() => 8,
 		() => 9,
 		() => "Find collision points",
@@ -13825,38 +13302,42 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => (4.6 * v0.GetValue());
 		},
-		() => "PerfectQTE",
-		() => "AdjustHSL",
 		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpBehavior("PerfectQTE");
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0();
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
 			const v2 = p._GetNode(2).GetVar();
 			const n3 = p._GetNode(3);
-			return () => multiply(multiply(n0.ExpObject("difficulty_nitro_consumption"), f1()), add(1, ((((v2.GetValue()) === (2) ? 1 : 0)) ? (n3.ExpObject("difficulty_nitro_extra_coef")) : (0))));
+			return () => multiply(multiply(unaryminus(n0.ExpObject("difficulty_nitro_consumption")), f1()), add(1, ((((v2.GetValue()) === (2) ? 1 : 0)) ? (n3.ExpObject("difficulty_nitro_extra_coef")) : (0))));
 		},
-		() => "Хорошая была попытка! Нажми [R] для перезапуска или [ESC] для выхода в меню",
+		() => "Scroll",
+		() => 2562,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("Scroll");
+		},
 		() => 30,
 		() => "destroy_marks",
 		() => "Rockets & Obstacles",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpObject(), 6);
+		},
 		() => "Spikes",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpInstVar_Family();
 		},
+		() => 0.5,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() * 0.25);
 		},
-		() => 20,
-		() => 0.4,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => and(n0.ExpInstVar(), "❤");
-		},
+		() => "Hit",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0, 0, 0, 0);
@@ -13942,23 +13423,28 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0, 0, 0, 100);
 		},
-		() => "Bar",
-		() => "Отмотать время?",
-		() => "rewind_timer",
 		() => "Buttons",
 		() => "jumpUp",
+		() => 1.5,
 		() => "jumpDown",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((((n0.ExpObject("controls_car_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("controls_car_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
-		},
-		() => 110,
 		() => "Missile",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			return () => f0((n1.ExpBehavior() + 100), 300);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const n4 = p._GetNode(4);
+			const n5 = p._GetNode(5);
+			const n6 = p._GetNode(6);
+			const n7 = p._GetNode(7);
+			const n8 = p._GetNode(8);
+			const n9 = p._GetNode(9);
+			return () => ((0.25 + (f0(n1.ExpObject(), C3.toDegrees(C3.angleTo(n2.ExpObject(), n3.ExpObject(), n4.ExpObject(), n5.ExpObject()))) / 180)) * C3.distanceTo(n6.ExpObject(), n7.ExpObject(), n8.ExpObject(), n9.ExpObject()));
 		},
 		() => 150,
 		p => {
@@ -13982,6 +13468,193 @@ self.C3_ExpressionFuncs = [
 			const v6 = p._GetNode(6).GetVar();
 			return () => (((((f0(v1.GetValue(), 1)) === ("l") ? 1 : 0)) ? ((-1)) : (1)) * f2(f3(v4.GetValue(), (f5(v6.GetValue()) - 1))));
 		},
+		() => "Lvl1",
+		() => "Lvl2",
+		() => "Lvl3",
+		() => "ParkingLot",
+		() => "map",
+		() => "loadloop",
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject(f1("loadloop"), 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject(f1("loadloop"), 2);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject(f1("loadloop"), 3);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject(f1("loadloop"), 4);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 2);
+		},
+		() => "road_polygons",
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject(f1("road_polygons"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject((f1("road_polygons") + 1));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => (v0.GetValue() - v1.GetValue());
+		},
+		() => 50,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + 180);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			return () => Math.sqrt(((v0.GetValue() * v1.GetValue()) + (v2.GetValue() * v3.GetValue())));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => (v0.GetValue() + n1.ExpObject());
+		},
+		() => 80,
+		() => "Start",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("Start");
+		},
+		() => 768,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => (v0.GetValue() + (n1.ExpObject() * 2));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 180);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (384 + n0.ExpObject());
+		},
+		() => 10,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => ((((f0(n1.ExpObject(), "LapTrigger")) === (1) ? 1 : 0)) ? ("LapTrigger") : ("End"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpObject() + n1.ExpInstVar()) - 180);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpObject(), "Middle");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 1);
+		},
+		() => "Check",
+		() => 256,
+		() => "Middle",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpObject() + (n1.ExpInstVar() / 2)) - 180);
+		},
+		() => "Static",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => C3.clamp((v0.GetValue() + v1.GetValue()), 0, 100);
+		},
+		() => "Low",
+		() => 60,
+		() => "Mid",
+		() => 100,
+		() => "High",
+		() => "Full",
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			return () => (50 + (n0.ExpObject() - (v1.GetValue() * (n2.ExpObject() / 100))));
+		},
+		() => -500,
+		() => "NotFull",
+		() => "Add",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("Add");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() - 5);
+		},
+		() => "ToIcon",
+		() => 675,
+		() => 170,
+		() => 623,
+		() => "Glow",
+		() => "Brightness",
+		() => 200,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => Math.floor(n0.ExpBehavior("Add"));
+		},
+		() => "GlowHorizontal",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("Glow");
+		},
+		() => "GlowVertical",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("Brightness");
+		},
+		() => "ScrollX",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("ScrollX");
+		},
+		() => "ScrollY",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("ScrollY");
+		},
+		() => "BigBoost",
+		() => 1.75,
+		() => "ToBoost",
+		() => 565,
+		() => 1110,
+		() => "Pixellate",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("Change");
+		},
+		() => "Fade",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior("Fade");
+		},
+		() => 0.25,
 		() => "flags",
 		() => "tiles",
 		() => "ownership",
@@ -13991,7 +13664,6 @@ self.C3_ExpressionFuncs = [
 		() => "BuyCar",
 		() => "UpgradeCar",
 		() => "Title",
-		() => "Settings_tabs",
 		() => "color",
 		() => "white",
 		() => "MainButtons",
@@ -14004,17 +13676,17 @@ self.C3_ExpressionFuncs = [
 			return () => and((((("Купить машину \"" + n0.ExpObject()) + "\"?") + "\n") + "Стоимость: "), n1.ExpObject(0, 3, n2.ExpInstVar()));
 		},
 		() => "Выбрано",
-		() => "Avail",
 		p => {
 			const n0 = p._GetNode(0);
+			return () => (n0.ExpInstVar() + "_avail");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			const n6 = p._GetNode(6);
-			return () => and((((("Купить улучшение для машины \"" + n0.ExpObject()) + "\"?") + "\n") + "Стоимость: "), n1.ExpObject(((n2.ExpInstVar() * 2) + 2), add(n3.ExpObject(1, n4.ExpInstVar(), n5.ExpInstVar()), 2), n6.ExpInstVar()));
+			return () => f0(n1.ExpInstVar(), n2.ExpInstVar());
 		},
+		() => "Недостаточно средств!",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -14022,9 +13694,7 @@ self.C3_ExpressionFuncs = [
 			const n3 = p._GetNode(3);
 			return () => (((n0.ExpInstVar() + n1.ExpInstVar()) + n2.ExpObject()) % n3.ExpObject());
 		},
-		() => "ParkingLot",
-		() => "Race",
-		() => "Режим \"Схватка\" еще не готов.",
+		() => "Loaded_lvl",
 		() => 506,
 		p => {
 			const n0 = p._GetNode(0);
@@ -14032,7 +13702,6 @@ self.C3_ExpressionFuncs = [
 			return () => (((("LVL: " + n0.ExpInstVar()) + "\n") + "MODE: ") + n1.ExpInstVar());
 		},
 		() => "Режим еще не готов.",
-		() => "Settings",
 		() => "Flags",
 		p => {
 			const n0 = p._GetNode(0);
@@ -14046,6 +13715,10 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Layers",
 		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() - 1);
+		},
+		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("Layers");
 		},
@@ -14053,10 +13726,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
 			return () => f0(v1.GetValue());
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0();
 		},
 		() => "Найдено обновление! Оно загрузится автоматчически в фоне",
 		() => "Обновление загружено! Обновите страницу, чтобы играть в новую версию",
@@ -14067,24 +13736,13 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => and("👛 ", n0.ExpObject(0, 3, v1.GetValue()));
-		},
-		() => "Выбрать",
-		() => "car_chars",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("car_chars");
-		},
-		p => {
-			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			const v2 = p._GetNode(2).GetVar();
-			return () => n0.ExpObject(1, n1.ExpInstVar(), v2.GetValue());
+			return () => n0.ExpObject(1, n1.ExpInstVar_Family(), v2.GetValue());
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => ((2 * n0.ExpInstVar()) + 1);
+			return () => ((2 * n0.ExpInstVar_Family()) + 1);
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -14104,7 +13762,7 @@ self.C3_ExpressionFuncs = [
 			const n8 = p._GetNode(8);
 			const n9 = p._GetNode(9);
 			const n10 = p._GetNode(10);
-			return () => multiply(divide(subtract(add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue())))), n8.ExpInstVar()), (n9.ExpInstVar() - n10.ExpInstVar())), 624);
+			return () => add(multiply(divide(subtract(add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue())))), n8.ExpInstVar_Family()), (n9.ExpInstVar_Family() - n10.ExpInstVar_Family())), 470), 122);
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -14115,17 +13773,23 @@ self.C3_ExpressionFuncs = [
 			const v5 = p._GetNode(5).GetVar();
 			const v6 = p._GetNode(6).GetVar();
 			const v7 = p._GetNode(7).GetVar();
-			return () => add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue()))));
-		},
-		() => "NoAvail",
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => n0.ExpObject(0, 4, v1.GetValue());
+			const n8 = p._GetNode(8);
+			const n9 = p._GetNode(9);
+			const n10 = p._GetNode(10);
+			return () => add(multiply(divide(subtract(add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue())))), n8.ExpInstVar()), (n9.ExpInstVar() - n10.ExpInstVar())), 470), 145);
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => and("Coins: ", v0.GetValue());
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			const v3 = p._GetNode(3).GetVar();
+			const v4 = p._GetNode(4).GetVar();
+			const v5 = p._GetNode(5).GetVar();
+			return () => ((((v0.GetValue()) === (v1.GetValue()) ? 1 : 0)) ? ("") : (n2.ExpObject((v3.GetValue() + 1), (v4.GetValue() + 2), v5.GetValue())));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpInstVar() + "_done");
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -14167,19 +13831,22 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Default",
 		() => "Не хватает средств!",
-		() => "Click",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar_Family() + "Tap");
 		},
+		() => "Exposure",
+		() => -25,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar_Family() + "Hover");
 		},
+		() => 25,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar_Family() + "Idle");
 		},
+		() => "Click",
 		() => "Menu",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -14194,7 +13861,121 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0);
 		},
-		() => "Вы победили!",
+		() => 1195,
+		() => "to_menu",
+		() => "Controls",
+		() => 795,
+		() => "to_game",
+		() => "В МЕНЮ",
+		() => "MobileTips",
+		() => "credits_text",
+		() => "Credits",
+		() => 655,
+		() => "Sounds",
+		() => 535,
+		() => 70,
+		() => "car",
+		() => "finger",
+		() => 900,
+		() => 520,
+		() => 315,
+		() => 130,
+		() => 470,
+		() => 1040,
+		() => 310,
+		() => 190,
+		() => 650,
+		() => 410,
+		() => 580,
+		() => 425,
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpBehavior() - n1.ExpBehavior()) / 100);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const v3 = p._GetNode(3).GetVar();
+			const n4 = p._GetNode(4);
+			return () => f0((n1.ExpBehavior() + (n2.ExpInstVar() * v3.GetValue())), n4.ExpBehavior());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() - n1.ExpObject());
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((v0.GetValue()) ? ("inactive") : ("active"));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((v0.GetValue()) ? ("active") : ("inactive"));
+		},
+		() => "inactive",
+		() => "active",
+		() => "Background",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((-10) * ((100 - v0.GetValue()) / 40));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => ((n0.ExpObject() - n1.ExpBehavior()) / n2.ExpInstVar());
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + 5);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => f0((n1.ExpObject() - n2.ExpObject()), 48);
+		},
+		() => 3,
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => ((((n0.ExpInstVar()) > (50) ? 1 : 0)) ? (Math.ceil(n1.ExpInstVar())) : (Math.floor(n2.ExpInstVar())));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((((n0.ExpObject(n1.ExpInstVar())) === (0) ? 1 : 0)) ? ("active") : ("inactive"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((((n0.ExpObject(n1.ExpInstVar())) === (1) ? 1 : 0)) ? ("active") : ("inactive"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const f3 = p._GetNode(3).GetBoundMethod();
+			const n4 = p._GetNode(4);
+			const f5 = p._GetNode(5).GetBoundMethod();
+			const n6 = p._GetNode(6);
+			return () => ((((n0.ExpObject(n1.ExpInstVar())) === (n2.ExpInstVar()) ? 1 : 0)) ? ((f3(n4.ExpObject(), 0, "_") + "active")) : ((f5(n6.ExpObject(), 0, "_") + "inactive")));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const f3 = p._GetNode(3).GetBoundMethod();
+			const n4 = p._GetNode(4);
+			const f5 = p._GetNode(5).GetBoundMethod();
+			const n6 = p._GetNode(6);
+			return () => ((((n0.ExpObject(n1.ExpInstVar())) === (n2.ExpInstVar()) ? 1 : 0)) ? ((f3(n4.ExpObject(), 0, "_") + "_active")) : ((f5(n6.ExpObject(), 0, "_") + "_inactive")));
+		},
+		() => "Race",
+		() => "1",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (("Вы проиграли, заняв только " + n0.ExpObject()) + " место :-(");
@@ -14214,7 +13995,9 @@ self.C3_ExpressionFuncs = [
 		() => "checkpoint",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0((-64), 256);
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => f0(((-v1.GetValue()) / 2), (v2.GetValue() / 2));
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -14223,6 +14006,10 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar() + 1);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0((-64), 256);
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -14242,12 +14029,12 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() * 0.4);
 		},
-		() => 70,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
 			return () => (v0.GetValue() - n1.ExpObject());
 		},
+		() => 180,
 		() => 45,
 		p => {
 			const n0 = p._GetNode(0);
@@ -14301,10 +14088,6 @@ self.C3_ExpressionFuncs = [
 			return () => f0("TireImagePoints");
 		},
 		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 180);
-		},
-		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
 			const n2 = p._GetNode(2);
@@ -14347,6 +14130,11 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((((n0.ExpObject("controls_car_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("controls_car_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			return () => n0.ExpObject(2, 1, v1.GetValue());
 		},
@@ -14385,68 +14173,26 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ai_steer");
 		},
-		() => 768,
+		() => "Finish",
+		() => "timer",
+		() => "spawn_cars",
 		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const v3 = p._GetNode(3).GetVar();
-			return () => (n0.ExpObject() + (((n1.ExpObject() - n2.ExpObject()) / 2) * ((Math.floor((v3.GetValue() / 2)) * 2) - 1)));
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => and("SpawnPoint", f0("spawn_cars"));
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const v3 = p._GetNode(3).GetVar();
-			return () => (n0.ExpObject() + (((n1.ExpObject() - n2.ExpObject()) / 2) * (((v3.GetValue() % 2) * 2) - 1)));
+			return () => (n0.ExpObject() - 90);
 		},
 		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => (n0.ExpObject() + ((((((v1.GetValue() % 2)) === (0) ? 1 : 0)) ? (384) : (0)) * (v2.GetValue() - 1)));
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("spawn_cars");
 		},
 		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => (n0.ExpObject() - ((((((v1.GetValue() % 2)) === (1) ? 1 : 0)) ? (384) : (0)) * (v2.GetValue() - 2)));
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => and("Enemy", Math.floor(f0(0, 4)));
 		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => (n0.ExpObject() + ((((((v1.GetValue() % 2)) === (1) ? 1 : 0)) ? (384) : (0)) * (v2.GetValue() - 2)));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (((4 + (n0.ExpInstVar() / 90)) - ((n1.ExpInstVar()) ? (0) : (1))) % 4);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => (n0.ExpObject() - ((((((v1.GetValue() % 2)) === (0) ? 1 : 0)) ? (384) : (0)) * (v2.GetValue() - 1)));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => (n0.ExpObject() - ((((((v1.GetValue() % 2)) === (1) ? 1 : 0)) ? (128) : (0)) * (v2.GetValue() - 2)));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => (n0.ExpObject() + ((((((v1.GetValue() % 2)) === (0) ? 1 : 0)) ? (128) : (0)) * (v2.GetValue() - 1)));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => (n0.ExpObject() + ((((((v1.GetValue() % 2)) === (1) ? 1 : 0)) ? (128) : (0)) * (v2.GetValue() - 2)));
-		}
+		() => "End"
 ];
 
 
