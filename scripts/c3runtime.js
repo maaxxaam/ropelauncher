@@ -13198,6 +13198,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.min,
 		C3.Plugins.NinePatch.Exps.X,
 		C3.Plugins.Audio.Acts.Stop,
+		C3.Plugins.Audio.Cnds.IsTagPlaying,
 		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.Audio.Acts.SetMasterVolume,
 		C3.Plugins.Audio.Acts.SetSilent,
