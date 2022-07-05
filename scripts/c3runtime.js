@@ -14561,11 +14561,6 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Default",
 		() => "Не хватает средств!",
-		() => "Click",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (f0() * 3);
-		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar_Family() + "Tap");
@@ -14582,6 +14577,7 @@ self.C3_ExpressionFuncs = [
 			return () => (n0.ExpInstVar_Family() + "Idle");
 		},
 		() => -10,
+		() => "Click",
 		() => "Menu",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
