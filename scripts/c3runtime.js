@@ -13180,11 +13180,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Arr.Acts.SetXYZ,
 		C3.ScriptsInEvents.Menusheet_Event67_Act1,
 		C3.Plugins.Keyboard.Cnds.OnKeyReleased,
-		C3.Plugins.System.Cnds.EveryTick,
-		C3.ScriptsInEvents.Allevents_Event14_Act1,
-		C3.Plugins.Browser.Acts.ConsoleGroupEnd,
-		C3.Plugins.Sprite.Exps.LayerNumber,
-		C3.Plugins.Browser.Acts.ConsoleGroup,
 		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Audio.Acts.PlayByName,
@@ -13215,6 +13210,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Cnds.IsEnabled,
 		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
 		C3.Behaviors.CarPlus.Acts.Stop,
+		C3.Plugins.System.Cnds.EveryTick,
 		C3.Plugins.Sprite.Exps.BBoxLeft,
 		C3.Plugins.Sprite.Exps.BBoxRight,
 		C3.Plugins.System.Exps.random,
@@ -14565,15 +14561,6 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Default",
 		() => "Не хватает средств!",
-		() => "layers",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("layers");
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => and("Layer ", f0("layers"));
-		},
 		() => "Click",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -14594,6 +14581,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar_Family() + "Idle");
 		},
+		() => -10,
 		() => "Menu",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
