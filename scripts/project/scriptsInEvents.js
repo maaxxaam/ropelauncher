@@ -552,11 +552,6 @@ const scriptsInEvents = {
 			localVars.val = runtime.callFunction(prompt.instVars.function_to_call, prompt.instVars.param1, prompt.instVars.param2);
 		},
 
-		async Allevents_Event14_Act1(runtime, localVars)
-		{
-			localVars.layers = runtime.layout.getAllLayers().length;
-		},
-
 		async Levelinits_Event9_Act4(runtime, localVars)
 		{
 			const tile = localVars.tile;
