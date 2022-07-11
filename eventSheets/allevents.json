@@ -53,9 +53,12 @@
 					}
 				},
 				{
-					"id": "is-on-screen",
-					"objectClass": "Button",
-					"sid": 333168185593767
+					"id": "layer-is-visible",
+					"objectClass": "System",
+					"sid": 563449923890468,
+					"parameters": {
+						"layer": "Button.LayerName"
+					}
 				}
 			],
 			"actions": [],
@@ -350,12 +353,12 @@
 						{
 							"id": "play-by-name",
 							"objectClass": "Audio",
-							"sid": 108608459940052,
+							"sid": 754804060265745,
 							"parameters": {
 								"folder": "sounds",
 								"audio-file-name": "Filename",
 								"loop": "not-looping",
-								"volume": "0",
+								"volume": "-10",
 								"tag-optional": "Filename"
 							}
 						}
@@ -373,14 +376,6 @@
 					"sid": 379876807540352,
 					"parameters": {
 						"object": "Button"
-					}
-				},
-				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 755970759296707,
-					"parameters": {
-						"layer": "Button.LayerName"
 					}
 				}
 			],
@@ -504,6 +499,201 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 198482762341688,
+							"parameters": {
+								"object": "Rebindable_keys",
+								"expression": "Rebindable_keys.Selected",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 461452502254697,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-key",
+									"objectClass": "game_keyboard_tap",
+									"sid": 481687407219133,
+									"parameters": {
+										"key": "str(Keyboard.LastKeyCode)"
+									}
+								},
+								{
+									"id": "has-key",
+									"objectClass": "game_keyboard_hold",
+									"sid": 483726925756111,
+									"parameters": {
+										"key": "str(Keyboard.LastKeyCode)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "alert",
+									"objectClass": "Browser",
+									"sid": 634885509335970,
+									"parameters": {
+										"message": "\"Клавиша уже занята.\""
+									}
+								}
+							],
+							"sid": 968510487769672,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 186405282321615
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Rebindable_keys",
+									"sid": 391738893924341,
+									"parameters": {
+										"animation": "\"Key\"&Keyboard.LastKeyCode",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 713018475451683,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-animation-playing",
+											"objectClass": "Rebindable_keys",
+											"sid": 486329773137579,
+											"parameters": {
+												"animation": "\"Key\"&Keyboard.LastKeyCode"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "DeselectKey",
+											"sid": 453724959359322,
+											"parameters": [
+												"Rebindable_keys.UID"
+											]
+										}
+									],
+									"sid": 272965903266245,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-instance-variable",
+													"objectClass": "Rebindable_keys",
+													"sid": 984549694674594,
+													"parameters": {
+														"instance-variable": "ActionType",
+														"comparison": 0,
+														"value": "0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "delete-key",
+													"objectClass": "game_keyboard_tap",
+													"sid": 628802484661260,
+													"parameters": {
+														"key": "str(Rebindable_keys.CurrentCode)"
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "Rebindable_keys",
+													"sid": 829793960267221,
+													"parameters": {
+														"instance-variable": "CurrentCode",
+														"value": "Keyboard.LastKeyCode"
+													}
+												},
+												{
+													"id": "add-key",
+													"objectClass": "game_keyboard_tap",
+													"sid": 118270850035122,
+													"parameters": {
+														"key": "str(Rebindable_keys.CurrentCode)",
+														"value": "Rebindable_keys.Function"
+													}
+												}
+											],
+											"sid": 748071883626970
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-instance-variable",
+													"objectClass": "Rebindable_keys",
+													"sid": 496577303681819,
+													"parameters": {
+														"instance-variable": "ActionType",
+														"comparison": 0,
+														"value": "1"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "delete-key",
+													"objectClass": "game_keyboard_hold",
+													"sid": 528286725378303,
+													"parameters": {
+														"key": "str(Rebindable_keys.CurrentCode)"
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "Rebindable_keys",
+													"sid": 707133074202382,
+													"parameters": {
+														"instance-variable": "CurrentCode",
+														"value": "Keyboard.LastKeyCode"
+													}
+												},
+												{
+													"id": "add-key",
+													"objectClass": "game_keyboard_hold",
+													"sid": 437102632910165,
+													"parameters": {
+														"key": "str(Rebindable_keys.CurrentCode)",
+														"value": "Rebindable_keys.Function"
+													}
+												}
+											],
+											"sid": 753695622452715
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 394965403432695
+						},
+						{
 							"id": "compare-two-values",
 							"objectClass": "System",
 							"sid": 696565935233037,
@@ -515,7 +705,7 @@
 						},
 						{
 							"id": "has-key",
-							"objectClass": "game_keyboard_controls",
+							"objectClass": "game_keyboard_tap",
 							"sid": 904655324904373,
 							"parameters": {
 								"key": "str(Keyboard.LastKeyCode)"
@@ -529,12 +719,62 @@
 							"sid": 711102591424144,
 							"parameters": {
 								"name": "\"onclick\"",
-								"string": "game_keyboard_controls.Get(str(Keyboard.LastKeyCode))",
+								"string": "game_keyboard_tap.Get(str(Keyboard.LastKeyCode))",
 								"forward-params": "0"
 							}
 						}
 					],
 					"sid": 685340593747596
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each-key",
+					"objectClass": "game_keyboard_hold",
+					"sid": 790061835541629
+				},
+				{
+					"id": "key-code-is-down",
+					"objectClass": "Keyboard",
+					"sid": 516125853396471,
+					"parameters": {
+						"keycode": "int(game_keyboard_hold.CurrentKey)"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 366363754701267,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 648067376957946,
+							"parameters": {
+								"first-value": "LayoutName",
+								"comparison": 1,
+								"second-value": "\"Menu\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "call-mapped-function",
+							"objectClass": "Functions",
+							"sid": 447896556918028,
+							"parameters": {
+								"name": "\"onclick\"",
+								"string": "game_keyboard_hold.CurrentValue",
+								"forward-params": "0"
+							}
+						}
+					],
+					"sid": 349258563666063
 				}
 			]
 		},
@@ -761,14 +1001,6 @@
 					"parameters": {
 						"object": "to_game_no_text"
 					}
-				},
-				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 766413346150934,
-					"parameters": {
-						"layer": "to_game_no_text.LayerName"
-					}
 				}
 			],
 			"actions": [
@@ -779,6 +1011,23 @@
 					"parameters": {
 						"layer": "\"Settings\"",
 						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-layer-interactive",
+					"objectClass": "System",
+					"sid": 990361177927763,
+					"parameters": {
+						"layer": "\"Settings\"",
+						"interactive": false
+					}
+				},
+				{
+					"id": "stop-timeline-by-tags",
+					"objectClass": "TimelineController",
+					"sid": 375647249959867,
+					"parameters": {
+						"tags": "\"MobileTips\""
 					}
 				}
 			],
@@ -831,15 +1080,6 @@
 							"parameters": [
 								"\"Title\""
 							]
-						},
-						{
-							"id": "set-layer-visible",
-							"objectClass": "System",
-							"sid": 471179534387211,
-							"parameters": {
-								"layer": "\"Title\"",
-								"visibility": "visible"
-							}
 						}
 					],
 					"sid": 962008063611661
@@ -861,6 +1101,15 @@
 							"parameters": {
 								"layer": "\"GUI\"",
 								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-layer-interactive",
+							"objectClass": "System",
+							"sid": 614050025128260,
+							"parameters": {
+								"layer": "\"GUI\"",
+								"interactive": true
 							}
 						}
 					],
@@ -1007,6 +1256,11 @@
 							"parameters": {
 								"visibility": "invisible"
 							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "Rebindable_keys",
+							"sid": 621966856149357
 						}
 					],
 					"sid": 994328712194523,
@@ -1359,7 +1613,8 @@
 										{
 											"id": "is-in-preview",
 											"objectClass": "System",
-											"sid": 336258658984861
+											"sid": 336258658984861,
+											"disabled": true
 										}
 									],
 									"actions": [
@@ -1381,27 +1636,10 @@
 											}
 										},
 										{
-											"id": "move-to-top",
-											"objectClass": "swipe_finger",
-											"sid": 793230004592341,
-											"disabled": true
-										},
-										{
-											"id": "move-to-top",
-											"objectClass": "swipe_rest",
-											"sid": 791552144992658,
-											"disabled": true
-										},
-										{
-											"id": "move-to-top",
-											"objectClass": "swipe_car",
-											"sid": 938563804956589,
-											"disabled": true
-										},
-										{
 											"id": "set-visible",
 											"objectClass": "swipe_car",
 											"sid": 814296784476068,
+											"disabled": true,
 											"parameters": {
 												"visibility": "visible"
 											}
@@ -1410,6 +1648,7 @@
 											"id": "set-visible",
 											"objectClass": "swipe_finger",
 											"sid": 934664129058271,
+											"disabled": true,
 											"parameters": {
 												"visibility": "visible"
 											}
@@ -1418,6 +1657,7 @@
 											"id": "set-instance",
 											"objectClass": "TimelineController",
 											"sid": 892915078031109,
+											"disabled": true,
 											"parameters": {
 												"object-class": "swipe_car",
 												"track-id": "\"car\""
@@ -1427,6 +1667,7 @@
 											"id": "set-instance",
 											"objectClass": "TimelineController",
 											"sid": 335181936780675,
+											"disabled": true,
 											"parameters": {
 												"object-class": "swipe_finger",
 												"track-id": "\"finger\""
@@ -1436,6 +1677,7 @@
 											"id": "play-timeline",
 											"objectClass": "TimelineController",
 											"sid": 260819616642091,
+											"disabled": true,
 											"parameters": {
 												"timeline": "MobileControlsTips",
 												"tags": "\"MobileTips\""
@@ -1462,13 +1704,13 @@
 										{
 											"id": "create-object",
 											"objectClass": "System",
-											"sid": 242282579644977,
+											"sid": 170084469966567,
 											"parameters": {
 												"object-to-create": "keyboard_tips",
 												"layer": "\"Settings\"",
 												"x": "360",
 												"y": "900",
-												"create-hierarchy": false,
+												"create-hierarchy": true,
 												"template-name": "\"\""
 											}
 										}
@@ -1748,12 +1990,12 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 969674417086564,
+									"sid": 528214590485219,
 									"parameters": {
 										"object-to-create": "sound_off",
 										"layer": "\"Settings\"",
-										"x": "200",
-										"y": "650",
+										"x": "480",
+										"y": "415",
 										"create-hierarchy": true,
 										"template-name": "\"\""
 									}
@@ -1761,12 +2003,12 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 777662483029901,
+									"sid": 644440247449776,
 									"parameters": {
 										"object-to-create": "sound_on",
 										"layer": "\"Settings\"",
-										"x": "520",
-										"y": "650",
+										"x": "208",
+										"y": "412",
 										"create-hierarchy": true,
 										"template-name": "\"\""
 									}
@@ -1774,12 +2016,12 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 806222695117166,
+									"sid": 454935666465419,
 									"parameters": {
 										"object-to-create": "music_off",
 										"layer": "\"Settings\"",
-										"x": "200",
-										"y": "410",
+										"x": "465",
+										"y": "660",
 										"create-hierarchy": true,
 										"template-name": "\"\""
 									}
@@ -1787,12 +2029,12 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 325281792572166,
+									"sid": 421436228481577,
 									"parameters": {
 										"object-to-create": "music_on",
 										"layer": "\"Settings\"",
-										"x": "520",
-										"y": "410",
+										"x": "200",
+										"y": "666",
 										"create-hierarchy": true,
 										"template-name": "\"\""
 									}
@@ -1800,12 +2042,12 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 521068436738977,
+									"sid": 533726660623300,
 									"parameters": {
 										"object-to-create": "volume_slider_back",
 										"layer": "\"Settings\"",
-										"x": "360",
-										"y": "900",
+										"x": "362",
+										"y": "896",
 										"create-hierarchy": true,
 										"template-name": "\"\""
 									}
@@ -2395,14 +2637,6 @@
 					}
 				},
 				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 444892995022605,
-					"parameters": {
-						"layer": "sound_off.LayerName"
-					}
-				},
-				{
 					"id": "is-animation-playing",
 					"objectClass": "sound_off",
 					"sid": 784856917329582,
@@ -2462,14 +2696,6 @@
 					}
 				},
 				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 333353554697297,
-					"parameters": {
-						"layer": "sound_on.LayerName"
-					}
-				},
-				{
 					"id": "is-animation-playing",
 					"objectClass": "sound_on",
 					"sid": 720586285328618,
@@ -2518,14 +2744,6 @@
 					"sid": 891026915588777,
 					"parameters": {
 						"object": "music_off"
-					}
-				},
-				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 310016075028164,
-					"parameters": {
-						"layer": "music_off.LayerName"
 					}
 				},
 				{
@@ -2580,14 +2798,6 @@
 					}
 				},
 				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 513558547976062,
-					"parameters": {
-						"layer": "music_on.LayerName"
-					}
-				},
-				{
 					"id": "is-animation-playing",
 					"objectClass": "music_on",
 					"sid": 807724788038288,
@@ -2637,6 +2847,15 @@
 					"parameters": {
 						"variable": "Music"
 					}
+				},
+				{
+					"id": "is-tag-playing",
+					"objectClass": "Audio",
+					"sid": 468939065111946,
+					"parameters": {
+						"tag": "\"Background\""
+					},
+					"isInverted": true
 				}
 			],
 			"actions": [],
@@ -2679,6 +2898,14 @@
 						"variable": "Music"
 					},
 					"isInverted": true
+				},
+				{
+					"id": "is-tag-playing",
+					"objectClass": "Audio",
+					"sid": 157198541072017,
+					"parameters": {
+						"tag": "\"Background\""
+					}
 				}
 			],
 			"actions": [],
@@ -3070,14 +3297,6 @@
 					}
 				},
 				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 782212094901393,
-					"parameters": {
-						"layer": "multi_choice_option.LayerName"
-					}
-				},
-				{
 					"id": "is-visible",
 					"objectClass": "multi_choice_option",
 					"sid": 837313790010081
@@ -3207,14 +3426,6 @@
 					}
 				},
 				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 972751401096287,
-					"parameters": {
-						"layer": "option_on.LayerName"
-					}
-				},
-				{
 					"id": "is-visible",
 					"objectClass": "option_on",
 					"sid": 746795693795354
@@ -3274,14 +3485,6 @@
 					}
 				},
 				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 932129593680191,
-					"parameters": {
-						"layer": "option_off.LayerName"
-					}
-				},
-				{
 					"id": "is-visible",
 					"objectClass": "option_off",
 					"sid": 256693509494307
@@ -3333,69 +3536,782 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "is-playing-by-tags",
-					"objectClass": "TimelineController",
-					"sid": 949821434514063,
-					"parameters": {
-						"tags": "\"MobileTips\""
-					},
-					"isInverted": true
-				},
-				{
-					"id": "is-visible",
-					"objectClass": "swipe_car",
-					"sid": 245741068612799
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 998540652219719
 				}
 			],
 			"actions": [
 				{
-					"id": "set-instance",
-					"objectClass": "TimelineController",
-					"sid": 324342083294140,
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 390157310933783,
 					"parameters": {
-						"object-class": "swipe_car",
-						"track-id": "\"car\""
+						"object": "swipe_car",
+						"time-scale": "1.0"
 					}
 				},
 				{
-					"id": "set-instance",
-					"objectClass": "TimelineController",
-					"sid": 927009958707089,
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 550531548305396,
 					"parameters": {
-						"object-class": "swipe_finger",
-						"track-id": "\"finger\""
+						"object": "swipe_finger",
+						"time-scale": "1.0"
 					}
 				},
 				{
-					"id": "play-timeline",
-					"objectClass": "TimelineController",
-					"sid": 359177696996047,
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 512001172951765,
 					"parameters": {
-						"timeline": "MobileControlsTips",
-						"tags": "\"MobileTips\""
+						"object": "swipe_rest",
+						"time-scale": "1.0"
 					}
 				}
 			],
-			"sid": 392828928053116,
-			"disabled": true
+			"sid": 943862090987352
+		},
+		{
+			"functionName": "FindKeyByValue",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "number",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Value",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 622359855519760
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 231301097641664,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each-key",
+							"objectClass": "game_keyboard_tap",
+							"sid": 735957733036729
+						}
+					],
+					"actions": [],
+					"sid": 505318719302333,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-current-value",
+									"objectClass": "game_keyboard_tap",
+									"sid": 726300352244905,
+									"parameters": {
+										"comparison": 0,
+										"value": "Value"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-function-return-value",
+									"objectClass": "Functions",
+									"sid": 193641505844704,
+									"parameters": {
+										"value": "int(game_keyboard_tap.CurrentKey)"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 969812622772167,
+									"parameters": {
+										"type": "log",
+										"message": "game_keyboard_tap.CurrentKey&\" \"&game_keyboard_tap.CurrentValue"
+									}
+								}
+							],
+							"sid": 986690586023796
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each-key",
+							"objectClass": "game_keyboard_hold",
+							"sid": 420598322093278
+						}
+					],
+					"actions": [],
+					"sid": 636729421697871,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-current-value",
+									"objectClass": "game_keyboard_hold",
+									"sid": 886925596417647,
+									"parameters": {
+										"comparison": 0,
+										"value": "Value"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-function-return-value",
+									"objectClass": "Functions",
+									"sid": 360826548755333,
+									"parameters": {
+										"value": "int(game_keyboard_hold.CurrentKey)"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 932963418417231,
+									"parameters": {
+										"type": "log",
+										"message": "game_keyboard_hold.CurrentKey&\" \"&game_keyboard_hold.CurrentValue"
+									}
+								}
+							],
+							"sid": 861749703595876
+						}
+					]
+				}
+			]
 		},
 		{
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "on-end-of-layout",
+					"id": "on-created",
+					"objectClass": "Rebindable_keys",
+					"sid": 184123672314093
+				}
+			],
+			"actions": [],
+			"sid": 535931969013964,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "FoundKey",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 246523266408496
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 998826552195676,
+							"parameters": {
+								"variable": "FoundKey",
+								"value": "Functions.FindKeyByValue(Rebindable_keys.Function)"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "Rebindable_keys",
+							"sid": 193787014563621,
+							"parameters": {
+								"instance-variable": "CurrentCode",
+								"value": "FoundKey"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 371823423361816,
+							"parameters": {
+								"type": "log",
+								"message": "\"Found key \"&FoundKey&\" for function \"&Rebindable_keys.Function"
+							}
+						}
+					],
+					"sid": 776577826148752,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 963242893201966,
+									"parameters": {
+										"variable": "FoundKey",
+										"comparison": 0,
+										"value": "91"
+									}
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 647953283991787,
+									"parameters": {
+										"variable": "FoundKey",
+										"comparison": 0,
+										"value": "92"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 681993282834113,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-on-macos",
+											"objectClass": "PlatformInfo",
+											"sid": 714221470242842
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "Rebindable_keys",
+											"sid": 924260880568854,
+											"parameters": {
+												"animation": "\"Key\"&Self.CurrentCode&\"Mac\"",
+												"from": "beginning"
+											}
+										}
+									],
+									"sid": 824666510791435
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 786193495172987
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "Rebindable_keys",
+											"sid": 688951576832840,
+											"parameters": {
+												"animation": "\"Key\"&Self.CurrentCode&\"Win\"",
+												"from": "beginning"
+											}
+										}
+									],
+									"sid": 338687107205143
+								}
+							],
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 846642275605606
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Rebindable_keys",
+									"sid": 556158123115957,
+									"parameters": {
+										"animation": "\"Key\"&Self.CurrentCode",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 216060783943035
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 406886431103193,
+					"parameters": {
+						"object": "Rebindable_keys"
+					}
+				},
+				{
+					"id": "compare-two-values",
 					"objectClass": "System",
-					"sid": 594007262804836
+					"sid": 503614231373457,
+					"parameters": {
+						"first-value": "LayoutName",
+						"comparison": 0,
+						"second-value": "\"Menu\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 966033383561531,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 828699759416041,
+							"parameters": {
+								"object": "Rebindable_keys"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 167320284842255,
+							"parameters": {
+								"object": "Rebindable_keys",
+								"expression": "Rebindable_keys.Selected",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "DeselectKey",
+							"sid": 117185073531968,
+							"parameters": [
+								"Rebindable_keys.UID"
+							]
+						}
+					],
+					"sid": 495452312413913
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "Rebindable_keys",
+							"sid": 890821120344208,
+							"parameters": {
+								"instance-variable": "Selected",
+								"value": "true"
+							}
+						},
+						{
+							"id": "set-effect-enabled",
+							"objectClass": "Rebindable_keys",
+							"sid": 779828877644185,
+							"parameters": {
+								"mode": "enable",
+								"effect": "\"Inverse\""
+							}
+						}
+					],
+					"sid": 767262752608365,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "StartValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 642353237375875
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-playing",
+									"objectClass": "Rebindable_keys",
+									"sid": 525840563889797,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"Fade\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 865848924225819,
+									"parameters": {
+										"variable": "StartValue",
+										"value": "Rebindable_keys.Tween.Value(\"Fade\")"
+									}
+								},
+								{
+									"id": "stop-tweens",
+									"objectClass": "Rebindable_keys",
+									"sid": 196458371814871,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"Fade\""
+									}
+								}
+							],
+							"sid": 559000045263744
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "tween-value",
+									"objectClass": "Rebindable_keys",
+									"sid": 803182051563573,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"Fade\"",
+										"start-value": "StartValue",
+										"end-value": "100",
+										"time": "0.3 * (100 - StartValue) / 100",
+										"ease": "easeinoutsine",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								}
+							],
+							"sid": 442184460356746
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-playing",
+					"objectClass": "Rebindable_keys",
+					"sid": 648601156993878,
+					"behaviorType": "Tween",
+					"parameters": {
+						"tags": "\"Fade\""
+					}
 				}
 			],
 			"actions": [
 				{
-					"id": "stop-all-timelines",
-					"objectClass": "TimelineController",
-					"sid": 116715609321761
+					"id": "set-effect-parameter",
+					"objectClass": "Rebindable_keys",
+					"sid": 709853267892191,
+					"parameters": {
+						"effect": "\"Inverse\"",
+						"parameter-index": "0",
+						"value": "Self.Tween.Value(\"Fade\")"
+					}
 				}
 			],
-			"sid": 299702185400836
+			"sid": 840918294950264
+		},
+		{
+			"functionName": "DeselectKey",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "KeyUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 127952101655158
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "Rebindable_keys",
+					"sid": 848047115062607,
+					"parameters": {
+						"unique-id": "KeyUID"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "Rebindable_keys",
+					"sid": 187978902673069,
+					"parameters": {
+						"instance-variable": "Selected",
+						"value": "false"
+					}
+				}
+			],
+			"sid": 471635229062442,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "StartValue",
+					"type": "number",
+					"initialValue": "100",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 340804168424123
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-playing",
+							"objectClass": "Rebindable_keys",
+							"sid": 930680370650986,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"Fade\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 178301228536627,
+							"parameters": {
+								"variable": "StartValue",
+								"value": "Rebindable_keys.Tween.Value(\"Fade\")"
+							}
+						},
+						{
+							"id": "stop-tweens",
+							"objectClass": "Rebindable_keys",
+							"sid": 383892127455647,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"Fade\""
+							}
+						}
+					],
+					"sid": 457511789740934
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "tween-value",
+							"objectClass": "Rebindable_keys",
+							"sid": 142379294111298,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"Fade\"",
+								"start-value": "StartValue",
+								"end-value": "0",
+								"time": "0.3 * (StartValue) / 100",
+								"ease": "easeinoutsine",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 471630038234782
+						},
+						{
+							"id": "set-effect-enabled",
+							"objectClass": "Rebindable_keys",
+							"sid": 523005812477424,
+							"parameters": {
+								"mode": "disable",
+								"effect": "\"Inverse\""
+							}
+						}
+					],
+					"sid": 133276806473778
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap",
+					"objectClass": "Touch",
+					"sid": 414206496040597
+				},
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 109862949553765,
+					"parameters": {
+						"object": "Rebindable_keys",
+						"expression": "Rebindable_keys.Selected",
+						"comparison": 0,
+						"value": "1"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "DeselectKey",
+					"sid": 218056114544947,
+					"parameters": [
+						"Rebindable_keys.UID"
+					]
+				}
+			],
+			"sid": 432353257552926
+		},
+		{
+			"functionName": "RocketsChangedNew",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 834305168334445,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Rocket_counter",
+							"sid": 894301582553139,
+							"parameters": {
+								"unique-id": "553"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "Rocket_counter",
+							"sid": 258578470737124,
+							"parameters": {
+								"text": "Rockets"
+							}
+						}
+					],
+					"sid": 394500486441076
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 207807518058533,
+							"parameters": {
+								"object": "score_ui",
+								"expression": "score_ui.purpose",
+								"comparison": 0,
+								"value": "\"rockets\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "score_ui",
+							"sid": 858299827134073,
+							"parameters": {
+								"text": "Rockets"
+							}
+						}
+					],
+					"sid": 340600898226428
+				}
+			]
+		},
+		{
+			"functionName": "JumpsChanged",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 312272494554465,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Rocket_counter",
+							"sid": 128848545232278,
+							"parameters": {
+								"unique-id": "580"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "Rocket_counter",
+							"sid": 215149882300948,
+							"parameters": {
+								"text": "Jumps"
+							}
+						}
+					],
+					"sid": 110551789581049
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 866114977264364,
+							"parameters": {
+								"object": "score_ui",
+								"expression": "score_ui.purpose",
+								"comparison": 0,
+								"value": "\"jumps\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "score_ui",
+							"sid": 449953233342187,
+							"parameters": {
+								"text": "Jumps"
+							}
+						}
+					],
+					"sid": 690540947725439
+				}
+			]
 		}
 	],
 	"sid": 936943754957788

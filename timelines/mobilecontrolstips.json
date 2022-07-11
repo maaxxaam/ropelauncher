@@ -18,6 +18,7 @@
 	"pingPong": false,
 	"repeatCount": 1,
 	"startOnLayout": "",
+	"transformWithSceneGraph": false,
 	"tracks": [
 		{
 			"type": "instance-track",

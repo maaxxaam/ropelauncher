@@ -694,11 +694,13 @@
 							"behaviors": {},
 							"effects": {
 								"BlurHorizontal": {
+									"isEnabled": true,
 									"parameters": {
 										"intensity": 1
 									}
 								},
 								"BlurVertical": {
+									"isEnabled": true,
 									"parameters": {
 										"intensity": 1
 									}
@@ -6559,7 +6561,7 @@
 			"sid": 566688648510051,
 			"effectTypes": [],
 			"isInitiallyVisible": false,
-			"isInitiallyInteractive": true,
+			"isInitiallyInteractive": false,
 			"color": [
 				1,
 				1,

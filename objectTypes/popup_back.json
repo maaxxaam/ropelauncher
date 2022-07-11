@@ -1,0 +1,26 @@
+{
+	"name": "popup_back",
+	"plugin-id": "NinePatch",
+	"sid": 867770428733845,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 816200097117063
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 584,
+		"height": 548,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 6055946,
+		"useCollisionPoly": true
+	}
+}

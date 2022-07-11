@@ -1,0 +1,15 @@
+{
+	"name": "DrawCars",
+	"plugin-id": "DrawingCanvas",
+	"sid": 187746842784610,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 138591362611357
+		}
+	],
+	"effectTypes": []
+}

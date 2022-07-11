@@ -74,6 +74,10 @@
 		"car_choice_but",
 		"to_shop",
 		"next_level",
-		"watch_ad_normal"
+		"watch_ad_normal",
+		"Rebindable_keys",
+		"close_popup",
+		"garage_car_choice",
+		"CashPack"
 	]
 }

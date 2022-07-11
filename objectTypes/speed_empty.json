@@ -3,7 +3,14 @@
 	"plugin-id": "Sprite",
 	"sid": 879681670815811,
 	"isGlobal": false,
-	"instanceVariables": [],
+	"instanceVariables": [
+		{
+			"name": "moneyonstart",
+			"type": "number",
+			"desc": "",
+			"sid": 345711723990726
+		}
+	],
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {

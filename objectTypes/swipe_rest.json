@@ -2,7 +2,7 @@
 	"name": "swipe_rest",
 	"plugin-id": "Sprite",
 	"sid": 243604234641966,
-	"isGlobal": false,
+	"isGlobal": true,
 	"instanceVariables": [],
 	"behaviorTypes": [],
 	"effectTypes": [],
@@ -24,12 +24,59 @@
 					}
 				],
 				"sid": 571412151996352,
-				"name": "Default",
+				"name": "Engine",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,
 				"repeatTo": 0,
 				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 510,
+						"height": 792,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5212999,
+						"useCollisionPoly": true,
+						"duration": 1
+					},
+					{
+						"width": 510,
+						"height": 792,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 8875545,
+						"useCollisionPoly": true,
+						"duration": 1
+					},
+					{
+						"width": 510,
+						"height": 792,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 3061155,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 447473001399906,
+				"name": "Prerender",
+				"isLooping": true,
+				"isPingPong": true,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 3
 			}
 		],
 		"subfolders": []

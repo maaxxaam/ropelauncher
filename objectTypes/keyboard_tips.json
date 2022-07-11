@@ -24,7 +24,30 @@
 					}
 				],
 				"sid": 226036780558892,
-				"name": "Default",
+				"name": "Static",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 800,
+						"height": 622,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 6949857,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 479061323068266,
+				"name": "Rebindable",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,

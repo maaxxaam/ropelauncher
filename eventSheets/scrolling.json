@@ -1,0 +1,725 @@
+{
+	"name": "Scrolling",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Scroll",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "CanScrollY",
+					"type": "boolean",
+					"initialValue": "true",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 424946824650868
+				},
+				{
+					"eventType": "variable",
+					"name": "CanScrollX",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 460448443415067
+				},
+				{
+					"eventType": "variable",
+					"name": "CanUseWheel",
+					"type": "boolean",
+					"initialValue": "true",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 297386246501953
+				},
+				{
+					"eventType": "variable",
+					"name": "ScrollBoundXmax",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 253249281848016
+				},
+				{
+					"eventType": "variable",
+					"name": "ScrollBoundYmax",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 495814555863320
+				},
+				{
+					"eventType": "variable",
+					"name": "ScrollBoundXmin",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 556107077629804
+				},
+				{
+					"eventType": "variable",
+					"name": "ScrollBoundYmin",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 540038844312816
+				},
+				{
+					"eventType": "variable",
+					"name": "LastY",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 980535043031102
+				},
+				{
+					"eventType": "variable",
+					"name": "LastX",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 966661950421012
+				},
+				{
+					"eventType": "variable",
+					"name": "AfterScroll",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 252256650768253
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "Scroll - Main",
+					"description": "",
+					"isActiveOnStart": false,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-any-touch-start",
+									"objectClass": "Touch",
+									"sid": 415346184572447
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 582273892921730,
+									"parameters": {
+										"variable": "AfterScroll",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 930025045920045,
+									"parameters": {
+										"variable": "LastX",
+										"value": "CanScrollX ? Touch.X(0) : MidScreenX"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 820579971977518,
+									"parameters": {
+										"variable": "LastY",
+										"value": "CanScrollY ? Touch.Y(0): MidScreenY"
+									}
+								}
+							],
+							"sid": 629318875239099,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-any-touch-end",
+									"objectClass": "Touch",
+									"sid": 231360542122948
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 900457230160802,
+									"parameters": {
+										"variable": "AfterScroll",
+										"value": "1"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 338079502418579,
+									"parameters": {
+										"variable": "LastX",
+										"value": "CanScrollX ? scrollx - (Touch.X(0) - LastX) : MidScreenX"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 995426001429231,
+									"parameters": {
+										"variable": "LastY",
+										"value": "CanScrollY ? scrolly - (Touch.Y(0) - LastY) : MidScreenY"
+									}
+								}
+							],
+							"sid": 263672167870141
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 916335178498319,
+									"parameters": {
+										"variable": "AfterScroll",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "scroll-to-position",
+									"objectClass": "System",
+									"sid": 624183688918592,
+									"parameters": {
+										"x": "CanScrollX ? lerp(scrollx, clamp(LastX, ScrollBoundXmin, ScrollBoundXmax), 0.5) : MidScreenX",
+										"y": "CanScrollY ? lerp(scrolly, clamp(LastY, ScrollBoundYmin, ScrollBoundYmax), 0.5) : MidScreenY"
+									}
+								}
+							],
+							"sid": 200393484431775
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-in-touch",
+									"objectClass": "Touch",
+									"sid": 412261205511736
+								}
+							],
+							"actions": [
+								{
+									"id": "scroll-to-position",
+									"objectClass": "System",
+									"sid": 476965078110026,
+									"parameters": {
+										"x": "CanScrollX ? lerp(scrollx, clamp(scrollx - (Touch.X(0) - LastX), ScrollBoundXmin, ScrollBoundXmax), 0.5) : MidScreenX",
+										"y": "CanScrollY ? lerp(scrolly, clamp(scrolly - (Touch.Y(0) - LastY), ScrollBoundYmin, ScrollBoundYmax), 0.5) : MidScreenY"
+									}
+								}
+							],
+							"sid": 224601530928473
+						},
+						{
+							"eventType": "variable",
+							"name": "ScrollWheelRate",
+							"type": "number",
+							"initialValue": "50",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": true,
+							"sid": 440626422164363
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-mouse-wheel",
+									"objectClass": "Mouse",
+									"sid": 558516192101024,
+									"parameters": {
+										"direction": "down"
+									}
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 870122622761245,
+									"parameters": {
+										"variable": "CanUseWheel"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "scroll-to-position",
+									"objectClass": "System",
+									"sid": 185199193852311,
+									"disabled": true,
+									"parameters": {
+										"x": "scrollx",
+										"y": "CanScrollY ? clamp(scrolly - ScrollWheelRate, 720, ScrollBoundYmax) : 720"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 725241597318045,
+									"parameters": {
+										"variable": "LastY",
+										"value": "CanScrollY ? clamp(scrolly - ScrollWheelRate, ScrollBoundYmin, ScrollBoundYmax) : MidScreenY"
+									}
+								}
+							],
+							"sid": 428877577475823
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-mouse-wheel",
+									"objectClass": "Mouse",
+									"sid": 373467059376215,
+									"parameters": {
+										"direction": "up"
+									}
+								},
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 933736152763794,
+									"parameters": {
+										"variable": "CanUseWheel"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "scroll-to-position",
+									"objectClass": "System",
+									"sid": 548802174111803,
+									"disabled": true,
+									"parameters": {
+										"x": "scrollx",
+										"y": "CanScrollY ? clamp(scrolly + ScrollWheelRate, 720, ScrollBoundYmax) : 720"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 898453616612674,
+									"parameters": {
+										"variable": "LastY",
+										"value": "CanScrollY ? clamp(scrolly + ScrollWheelRate, ScrollBoundYmin, ScrollBoundYmax) : MidScreenY"
+									}
+								}
+							],
+							"sid": 737240448988787
+						}
+					],
+					"sid": 266194356145279
+				},
+				{
+					"functionName": "EnableScrolling",
+					"functionDescription": "",
+					"functionCategory": "Scrolling",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "SupportScrollX",
+							"type": "boolean",
+							"initialValue": "true",
+							"comment": "",
+							"sid": 669246216718269
+						},
+						{
+							"name": "SupportScrollY",
+							"type": "boolean",
+							"initialValue": "true",
+							"comment": "",
+							"sid": 976961960334644
+						},
+						{
+							"name": "XmaxBound",
+							"type": "number",
+							"initialValue": "360",
+							"comment": "",
+							"sid": 476396593227499
+						},
+						{
+							"name": "YmaxBound",
+							"type": "number",
+							"initialValue": "640",
+							"comment": "",
+							"sid": 947376458724484
+						},
+						{
+							"name": "XminBound",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 322012227748997
+						},
+						{
+							"name": "YminBound",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 241085277200744
+						},
+						{
+							"name": "SupportWheel",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"sid": 842385231201542
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 589238001530594,
+							"parameters": {
+								"group-name": "\"Scroll - Main\"",
+								"state": "activated"
+							}
+						}
+					],
+					"sid": 795928309812732,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 691664518236466,
+									"parameters": {
+										"variable": "SupportScrollX"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 165491772285063,
+									"parameters": {
+										"variable": "CanScrollX",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 411745041145164
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 644131287240893
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 117639902166062,
+									"parameters": {
+										"variable": "CanScrollX",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 354422944797100
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 383017584598369,
+									"parameters": {
+										"variable": "SupportScrollY"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 464745978253180,
+									"parameters": {
+										"variable": "CanScrollY",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 213941219428307
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 766556023615857
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 596231462829260,
+									"parameters": {
+										"variable": "CanScrollY",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 387695594833949
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 404209561490465,
+									"parameters": {
+										"variable": "SupportWheel"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 700748751561083,
+									"parameters": {
+										"variable": "CanUseWheel",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 125903264541507
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 894579987499656
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 451312898799154,
+									"parameters": {
+										"variable": "CanUseWheel",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 228617930161760
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 516692398030356,
+									"parameters": {
+										"variable": "ScrollBoundXmin",
+										"value": "CanScrollX ? XminBound : MidScreenX"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 118438163894153,
+									"parameters": {
+										"variable": "ScrollBoundXmax",
+										"value": "CanScrollX ? XmaxBound : MidScreenX"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 246289233868761,
+									"parameters": {
+										"variable": "ScrollBoundYmin",
+										"value": "CanScrollY ? YminBound : MidScreenY"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 634861746371066,
+									"parameters": {
+										"variable": "ScrollBoundYmax",
+										"value": "CanScrollY ? YmaxBound : MidScreenY"
+									}
+								}
+							],
+							"sid": 751315625905841
+						}
+					]
+				},
+				{
+					"functionName": "DisableScrolling",
+					"functionDescription": "",
+					"functionCategory": "Scrolling",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "ResetScrollX",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 618762704941194
+						},
+						{
+							"name": "ResetScrollY",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 588015722213631
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 403613017239480,
+							"parameters": {
+								"group-name": "\"Scroll - Main\"",
+								"state": "deactivated"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 512467909877194,
+							"parameters": {
+								"variable": "LastX",
+								"value": "ResetScrollX"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 214745552047665,
+							"parameters": {
+								"variable": "LastY",
+								"value": "ResetScrollY"
+							}
+						},
+						{
+							"id": "scroll-to-position",
+							"objectClass": "System",
+							"sid": 910865057452160,
+							"parameters": {
+								"x": "ResetScrollX",
+								"y": "ResetScrollY"
+							}
+						}
+					],
+					"sid": 947806942072881
+				}
+			],
+			"sid": 520832284075882
+		},
+		{
+			"eventType": "variable",
+			"name": "MidScreenY",
+			"type": "number",
+			"initialValue": "640",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 456253413700029
+		},
+		{
+			"eventType": "variable",
+			"name": "MidScreenX",
+			"type": "number",
+			"initialValue": "360",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 834958743031732
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 840896894469139
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 579730093914330,
+					"parameters": {
+						"variable": "MidScreenX",
+						"value": "ViewportWidth(0) / 2"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 339733973312908,
+					"parameters": {
+						"variable": "MidScreenY",
+						"value": "ViewportHeight(0) / 2"
+					}
+				}
+			],
+			"sid": 653636156848603
+		}
+	],
+	"sid": 434060425539564
+}

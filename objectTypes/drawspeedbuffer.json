@@ -1,0 +1,34 @@
+{
+	"name": "DrawSpeedBuffer",
+	"plugin-id": "DrawingCanvas",
+	"sid": 393834961260633,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "angle_snap",
+			"type": "number",
+			"desc": "",
+			"sid": 226486022466761
+		},
+		{
+			"name": "x_snap",
+			"type": "number",
+			"desc": "",
+			"sid": 454473874761862
+		},
+		{
+			"name": "y_snap",
+			"type": "number",
+			"desc": "",
+			"sid": 184180734821427
+		},
+		{
+			"name": "draw",
+			"type": "boolean",
+			"desc": "",
+			"sid": 273529152038755
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": []
+}

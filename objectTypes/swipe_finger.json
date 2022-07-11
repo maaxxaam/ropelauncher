@@ -2,7 +2,7 @@
 	"name": "swipe_finger",
 	"plugin-id": "Sprite",
 	"sid": 618679917743094,
-	"isGlobal": false,
+	"isGlobal": true,
 	"instanceVariables": [],
 	"behaviorTypes": [],
 	"effectTypes": [],

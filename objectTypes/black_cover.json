@@ -9,6 +9,11 @@
 			"behaviorId": "Fade",
 			"name": "Fade",
 			"sid": 687020844337554
+		},
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 523530495544519
 		}
 	],
 	"effectTypes": [],

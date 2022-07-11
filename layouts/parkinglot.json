@@ -252,11 +252,13 @@
 							"behaviors": {},
 							"effects": {
 								"BlurHorizontal": {
+									"isEnabled": true,
 									"parameters": {
 										"intensity": 1
 									}
 								},
 								"BlurVertical": {
+									"isEnabled": true,
 									"parameters": {
 										"intensity": 1
 									}
@@ -337,11 +339,13 @@
 							"behaviors": {},
 							"effects": {
 								"BlurHorizontal": {
+									"isEnabled": true,
 									"parameters": {
 										"intensity": 1
 									}
 								},
 								"BlurVertical": {
+									"isEnabled": true,
 									"parameters": {
 										"intensity": 1
 									}
@@ -6725,7 +6729,7 @@
 			"sid": 399868877570137,
 			"effectTypes": [],
 			"isInitiallyVisible": false,
-			"isInitiallyInteractive": true,
+			"isInitiallyInteractive": false,
 			"color": [
 				1,
 				1,

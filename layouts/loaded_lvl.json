@@ -150,11 +150,13 @@
 					"behaviors": {},
 					"effects": {
 						"BlurHorizontal": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 1
 							}
 						},
 						"BlurVertical": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 1
 							}
@@ -364,11 +366,12 @@
 						"AnimationPrefix": "Pause",
 						"onclick": "PauseSwitch",
 						"click_param": "",
-						"ClickMode": 0
+						"ClickMode": 1
 					},
 					"behaviors": {},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -410,6 +413,7 @@
 					"behaviors": {},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -451,6 +455,7 @@
 					"behaviors": {},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -618,7 +623,7 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": -182,
+						"x": 85,
 						"y": 1095,
 						"width": 142,
 						"height": 66,
@@ -688,6 +693,134 @@
 					}
 				},
 				{
+					"type": "DrawSpeedBuffer",
+					"properties": {
+						"initially-visible": true,
+						"origin": "left",
+						"antialiasing": "off"
+					},
+					"uid": 107,
+					"instanceVariables": {
+						"angle_snap": 37,
+						"x_snap": 360,
+						"y_snap": 1060,
+						"draw": false
+					},
+					"behaviors": {},
+					"world": {
+						"x": 408,
+						"y": 1122,
+						"width": 340,
+						"height": 700,
+						"originX": 0,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.6457718232379019
+					}
+				},
+				{
+					"type": "speed_full",
+					"properties": {
+						"initially-visible": false,
+						"initial-animation": "Default",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 235,
+					"instanceVariables": {
+						"speed_percent": 0.2
+					},
+					"behaviors": {
+						"Tween": {
+							"properties": {
+								"enabled": true
+							}
+						}
+					},
+					"world": {
+						"x": 408,
+						"y": 1122,
+						"width": 203.9796,
+						"height": 426.62399999999997,
+						"originX": -0.5317647058823529,
+						"originY": 0.6275000000000001,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "speed_empty",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Default",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 237,
+					"instanceVariables": {
+						"moneyonstart": 0
+					},
+					"behaviors": {},
+					"world": {
+						"x": 405,
+						"y": 1122,
+						"width": 203.9796,
+						"height": 426.62399999999997,
+						"originX": -0.5481045751633987,
+						"originY": 0.6275000000000001,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "speed_arrow",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Default",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 510,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 370,
+						"y": 1100,
+						"width": 120.65459999999999,
+						"height": 20.6646,
+						"originX": -1.9502762430939227,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.5235987755982991,
+						"zElevation": 0
+					}
+				},
+				{
 					"type": "NitroBut",
 					"properties": {
 						"initially-visible": true,
@@ -706,6 +839,7 @@
 					"behaviors": {},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -818,16 +952,19 @@
 					},
 					"effects": {
 						"GlowHorizontal": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 0
 							}
 						},
 						"GlowVertical": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 0
 							}
 						},
 						"Brightness": {
+							"isEnabled": true,
 							"parameters": {
 								"brightness": 1
 							}
@@ -954,7 +1091,7 @@
 			"sid": 420015520376984,
 			"effectTypes": [],
 			"isInitiallyVisible": false,
-			"isInitiallyInteractive": true,
+			"isInitiallyInteractive": false,
 			"color": [
 				1,
 				1,
@@ -987,7 +1124,7 @@
 			"sid": 461049877641684,
 			"effectTypes": [],
 			"isInitiallyVisible": false,
-			"isInitiallyInteractive": true,
+			"isInitiallyInteractive": false,
 			"color": [
 				1,
 				1,
@@ -1071,6 +1208,7 @@
 					"behaviors": {},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -1118,6 +1256,7 @@
 					},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -1144,7 +1283,7 @@
 			"sid": 947543269399431,
 			"effectTypes": [],
 			"isInitiallyVisible": false,
-			"isInitiallyInteractive": true,
+			"isInitiallyInteractive": false,
 			"color": [
 				1,
 				1,
@@ -1228,6 +1367,7 @@
 					"behaviors": {},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -1269,6 +1409,7 @@
 					"behaviors": {},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -1310,6 +1451,7 @@
 					"behaviors": {},
 					"effects": {
 						"Exposure": {
+							"isEnabled": true,
 							"parameters": {
 								"exposure": 0
 							}
@@ -1361,6 +1503,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 2
 							}
@@ -1437,6 +1580,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 2
 							}
@@ -1513,6 +1657,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -1564,6 +1709,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -1615,6 +1761,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -1666,6 +1813,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -1717,6 +1865,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -1768,6 +1917,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -1819,6 +1969,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -1870,6 +2021,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -1912,16 +2064,19 @@
 					},
 					"effects": {
 						"GlowHorizontal": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 0
 							}
 						},
 						"GlowVertical": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 0
 							}
 						},
 						"Brightness": {
+							"isEnabled": true,
 							"parameters": {
 								"brightness": 1
 							}
@@ -1973,6 +2128,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -2024,6 +2180,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -2066,16 +2223,19 @@
 					},
 					"effects": {
 						"GlowHorizontal": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 0
 							}
 						},
 						"GlowVertical": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 0
 							}
 						},
 						"Brightness": {
+							"isEnabled": true,
 							"parameters": {
 								"brightness": 1
 							}
@@ -2127,6 +2287,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -2178,6 +2339,7 @@
 					"behaviors": {},
 					"effects": {
 						"Rotate": {
+							"isEnabled": true,
 							"parameters": {
 								"new-angle": 1
 							}
@@ -2220,16 +2382,19 @@
 					},
 					"effects": {
 						"GlowHorizontal": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 0
 							}
 						},
 						"GlowVertical": {
+							"isEnabled": true,
 							"parameters": {
 								"intensity": 0
 							}
 						},
 						"Brightness": {
+							"isEnabled": true,
 							"parameters": {
 								"brightness": 1
 							}
@@ -2256,7 +2421,7 @@
 			"sid": 297223296584152,
 			"effectTypes": [],
 			"isInitiallyVisible": false,
-			"isInitiallyInteractive": true,
+			"isInitiallyInteractive": false,
 			"color": [
 				1,
 				1,
@@ -2310,6 +2475,15 @@
 								"destroy": false,
 								"enabled": false,
 								"live-preview": false
+							}
+						},
+						"Anchor": {
+							"properties": {
+								"left-edge": "window-left",
+								"top-edge": "window-top",
+								"right-edge": "none",
+								"bottom-edge": "none",
+								"enabled": true
 							}
 						}
 					},
@@ -2440,7 +2614,7 @@
 			"sid": 932409361595814,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
-			"isInitiallyInteractive": true,
+			"isInitiallyInteractive": false,
 			"color": [
 				1,
 				1,
@@ -2545,11 +2719,11 @@
 			}
 		},
 		{
-			"type": "game_keyboard_controls",
+			"type": "game_keyboard_tap",
 			"properties": {},
 			"uid": 117,
 			"instanceVariables": {
-				"tag": "keyboard"
+				"tag": "keyboard_tap"
 			}
 		},
 		{
@@ -2561,6 +2735,14 @@
 			},
 			"uid": 20,
 			"instanceVariables": {}
+		},
+		{
+			"type": "game_keyboard_hold",
+			"properties": {},
+			"uid": 512,
+			"instanceVariables": {
+				"tag": "keyboard_hold"
+			}
 		}
 	],
 	"effectTypes": [],

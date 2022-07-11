@@ -103,6 +103,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "Jumps",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 567856082525106
+		},
+		{
+			"eventType": "variable",
 			"name": "Rockets",
 			"type": "number",
 			"initialValue": "0",
@@ -220,12 +230,30 @@
 					}
 				},
 				{
+					"id": "set-layer-interactive",
+					"objectClass": "System",
+					"sid": 536431132604967,
+					"parameters": {
+						"layer": "\"Settings\"",
+						"interactive": false
+					}
+				},
+				{
 					"id": "set-layer-visible",
 					"objectClass": "System",
 					"sid": 101628354744788,
 					"parameters": {
 						"layer": "\"Win\"",
 						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-layer-interactive",
+					"objectClass": "System",
+					"sid": 491803332231123,
+					"parameters": {
+						"layer": "\"Win\"",
+						"interactive": false
 					}
 				},
 				{
@@ -238,12 +266,30 @@
 					}
 				},
 				{
+					"id": "set-layer-interactive",
+					"objectClass": "System",
+					"sid": 622304597399484,
+					"parameters": {
+						"layer": "\"Loss\"",
+						"interactive": false
+					}
+				},
+				{
 					"id": "set-layer-visible",
 					"objectClass": "System",
 					"sid": 284886060109549,
 					"parameters": {
 						"layer": "\"GUI\"",
 						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-layer-interactive",
+					"objectClass": "System",
+					"sid": 766775482100310,
+					"parameters": {
+						"layer": "\"GUI\"",
+						"interactive": false
 					}
 				},
 				{
@@ -320,8 +366,8 @@
 				},
 				{
 					"id": "set-instvar-value",
-					"objectClass": "MotionCircle",
-					"sid": 316959052266841,
+					"objectClass": "speed_empty",
+					"sid": 641457282293256,
 					"parameters": {
 						"instance-variable": "moneyonstart",
 						"value": "Coins"
@@ -347,6 +393,14 @@
 					"parameters": [
 						"0"
 					]
+				},
+				{
+					"callFunction": "RocketsChangedNew",
+					"sid": 724680029727738
+				},
+				{
+					"callFunction": "JumpsChanged",
+					"sid": 568557332243700
 				},
 				{
 					"id": "set-eventvar-value",
@@ -445,34 +499,21 @@
 							"id": "is-in-preview",
 							"objectClass": "System",
 							"sid": 868063745775295,
+							"disabled": true,
 							"isInverted": true
 						}
 					],
 					"actions": [
 						{
 							"id": "destroy",
-							"objectClass": "SwipeZone",
-							"sid": 649405829703244
-						},
-						{
-							"id": "destroy",
-							"objectClass": "Wheel",
-							"sid": 404066192366895
-						},
-						{
-							"id": "destroy",
-							"objectClass": "AccelBut",
-							"sid": 827406048959979
-						},
-						{
-							"id": "destroy",
-							"objectClass": "DecelBut",
-							"sid": 490791982872109
+							"objectClass": "MotionCircle",
+							"sid": 352418761364464
 						},
 						{
 							"id": "destroy",
 							"objectClass": "NitroBut",
-							"sid": 171829485010025
+							"sid": 171829485010025,
+							"disabled": true
 						},
 						{
 							"id": "destroy",
@@ -483,7 +524,8 @@
 						{
 							"id": "destroy",
 							"objectClass": "JumpBut",
-							"sid": 917349379089595
+							"sid": 917349379089595,
+							"disabled": true
 						}
 					],
 					"sid": 367938848174951
@@ -696,6 +738,46 @@
 								"name": "\"onclick\"",
 								"string": "\"Rewind\"",
 								"function": "Rewind"
+							}
+						},
+						{
+							"id": "map-function",
+							"objectClass": "Functions",
+							"sid": 776325342813102,
+							"parameters": {
+								"name": "\"onclick\"",
+								"string": "\"Accelerate\"",
+								"function": "Accelerate"
+							}
+						},
+						{
+							"id": "map-function",
+							"objectClass": "Functions",
+							"sid": 371360471805809,
+							"parameters": {
+								"name": "\"onclick\"",
+								"string": "\"Brake\"",
+								"function": "Brake"
+							}
+						},
+						{
+							"id": "map-function",
+							"objectClass": "Functions",
+							"sid": 429940974281774,
+							"parameters": {
+								"name": "\"onclick\"",
+								"string": "\"TurnLeft\"",
+								"function": "TurnLeft"
+							}
+						},
+						{
+							"id": "map-function",
+							"objectClass": "Functions",
+							"sid": 419823075487173,
+							"parameters": {
+								"name": "\"onclick\"",
+								"string": "\"TurnRight\"",
+								"function": "TurnRight"
 							}
 						},
 						{
@@ -1134,7 +1216,91 @@
 											}
 										}
 									],
-									"sid": 374817616456763
+									"sid": 374817616456763,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "is-boolean-instance-variable-set",
+													"objectClass": "DrawSpeedBuffer",
+													"sid": 834812108008272,
+													"parameters": {
+														"instance-variable": "draw"
+													},
+													"isInverted": true
+												}
+											],
+											"actions": [
+												{
+													"id": "set-instvar-value",
+													"objectClass": "speed_full",
+													"sid": 859849056286927,
+													"parameters": {
+														"instance-variable": "speed_percent",
+														"value": "Car.Car.Speed / Car.Car.MaxSpeed"
+													}
+												},
+												{
+													"id": "clear-canvas",
+													"objectClass": "DrawSpeedBuffer",
+													"sid": 969093555704583,
+													"parameters": {
+														"color": "rgba(0, 0, 0, 0)"
+													}
+												},
+												{
+													"id": "set-angle",
+													"objectClass": "DrawSpeedBuffer",
+													"sid": 895425669524340,
+													"parameters": {
+														"angle": "Self.angle_snap + (1 - speed_full.speed_percent) * 82"
+													}
+												},
+												{
+													"id": "set-angle",
+													"objectClass": "speed_arrow",
+													"sid": 998685358980709,
+													"parameters": {
+														"angle": "316 + (1 - speed_full.speed_percent) * 74"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "DrawSpeedBuffer",
+													"sid": 754026016832506,
+													"parameters": {
+														"instance-variable": "draw",
+														"value": "true"
+													}
+												},
+												{
+													"id": "paste-object",
+													"objectClass": "DrawSpeedBuffer",
+													"sid": 333480426778472,
+													"parameters": {
+														"object": "speed_full",
+														"effects": "without-effects"
+													}
+												},
+												{
+													"id": "wait-for-previous-actions",
+													"objectClass": "System",
+													"sid": 271502212287750
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "DrawSpeedBuffer",
+													"sid": 637193434401490,
+													"parameters": {
+														"instance-variable": "draw",
+														"value": "false"
+													}
+												}
+											],
+											"sid": 760835275361554
+										}
+									]
 								},
 								{
 									"eventType": "comment",
@@ -1509,6 +1675,7 @@
 													"id": "set-eventvar-value",
 													"objectClass": "System",
 													"sid": 112490350198182,
+													"disabled": true,
 													"parameters": {
 														"variable": "accel_coef",
 														"value": "accel_coef * motion_influence"
@@ -1518,6 +1685,7 @@
 													"id": "set-eventvar-value",
 													"objectClass": "System",
 													"sid": 871333324963456,
+													"disabled": true,
 													"parameters": {
 														"variable": "max_speed_coef",
 														"value": "max_speed_coef * max(motion_influence, 0.25)"
@@ -2280,6 +2448,24 @@
 					"conditions": [],
 					"actions": [
 						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 549410864694754,
+							"parameters": {
+								"layer": "\"GUI\"",
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-layer-interactive",
+							"objectClass": "System",
+							"sid": 286699549189382,
+							"parameters": {
+								"layer": "\"GUI\"",
+								"interactive": false
+							}
+						},
+						{
 							"id": "set-time-scale",
 							"objectClass": "System",
 							"sid": 167010229298446,
@@ -2443,10 +2629,10 @@
 										{
 											"id": "set-eventvar-value",
 											"objectClass": "System",
-											"sid": 401031239796017,
+											"sid": 208426971660010,
 											"parameters": {
 												"variable": "collected",
-												"value": "Coins - MotionCircle.moneyonstart"
+												"value": "Coins - speed_empty.moneyonstart"
 											}
 										},
 										{
@@ -2510,12 +2696,12 @@
 											}
 										},
 										{
-											"id": "set-layer-visible",
+											"id": "set-layer-interactive",
 											"objectClass": "System",
-											"sid": 115342617517048,
+											"sid": 742424414188328,
 											"parameters": {
-												"layer": "\"GUI\"",
-												"visibility": "invisible"
+												"layer": "\"Win\"",
+												"interactive": true
 											}
 										}
 									],
@@ -2572,12 +2758,12 @@
 									}
 								},
 								{
-									"id": "set-layer-visible",
+									"id": "set-layer-interactive",
 									"objectClass": "System",
-									"sid": 362475529023180,
+									"sid": 465121861896191,
 									"parameters": {
-										"layer": "\"GUI\"",
-										"visibility": "invisible"
+										"layer": "\"Loss\"",
+										"interactive": true
 									}
 								}
 							],
@@ -3194,6 +3380,11 @@
 												"comparison": 0,
 												"value": "0"
 											}
+										},
+										{
+											"id": "is-on-mobile",
+											"objectClass": "PlatformInfo",
+											"sid": 122591081344935
 										}
 									],
 									"actions": [
@@ -3374,6 +3565,11 @@
 											"id": "else",
 											"objectClass": "System",
 											"sid": 159917414521516
+										},
+										{
+											"id": "is-on-mobile",
+											"objectClass": "PlatformInfo",
+											"sid": 528324883941881
 										}
 									],
 									"actions": [
@@ -3488,8 +3684,8 @@
 									}
 								},
 								{
-									"callFunction": "RocketsChanged",
-									"sid": 874919004596396
+									"callFunction": "RocketsChangedNew",
+									"sid": 388736297783973
 								}
 							],
 							"sid": 386164095410959
@@ -5041,48 +5237,6 @@
 			"isActiveOnStart": true,
 			"children": [
 				{
-					"functionName": "RocketsChanged",
-					"functionDescription": "",
-					"functionCategory": "",
-					"functionReturnType": "none",
-					"functionIsAsync": false,
-					"functionParameters": [],
-					"eventType": "function-block",
-					"conditions": [
-						{
-							"id": "pick-nth-instance",
-							"objectClass": "System",
-							"sid": 706909988847694,
-							"parameters": {
-								"object": "score_ui",
-								"instance": "1"
-							}
-						},
-						{
-							"id": "pick-by-comparison",
-							"objectClass": "System",
-							"sid": 430636527195108,
-							"parameters": {
-								"object": "Car",
-								"expression": "Car.Player",
-								"comparison": 0,
-								"value": "1"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-text",
-							"objectClass": "score_ui",
-							"sid": 103980573439330,
-							"parameters": {
-								"text": "Car.Ammo"
-							}
-						}
-					],
-					"sid": 431344780895109
-				},
-				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -5690,6 +5844,142 @@
 			"isActiveOnStart": true,
 			"children": [
 				{
+					"functionName": "TurnRight",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 294230427082245,
+							"parameters": {
+								"object": "Car",
+								"expression": "Car.Player",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "Car",
+							"sid": 919478630714282,
+							"behaviorType": "Car",
+							"parameters": {
+								"control": "steer-right"
+							}
+						}
+					],
+					"sid": 437768320667805
+				},
+				{
+					"functionName": "TurnLeft",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 578467407450724,
+							"parameters": {
+								"object": "Car",
+								"expression": "Car.Player",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "Car",
+							"sid": 998914447430954,
+							"behaviorType": "Car",
+							"parameters": {
+								"control": "steer-left"
+							}
+						}
+					],
+					"sid": 862463542238096
+				},
+				{
+					"functionName": "Brake",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 431106694368701,
+							"parameters": {
+								"object": "Car",
+								"expression": "Car.Player",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "Car",
+							"sid": 511876270462242,
+							"behaviorType": "Car",
+							"parameters": {
+								"control": "brake"
+							}
+						}
+					],
+					"sid": 535651742520401
+				},
+				{
+					"functionName": "Accelerate",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 154620921773713,
+							"parameters": {
+								"object": "Car",
+								"expression": "Car.Player",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "Car",
+							"sid": 841869944260712,
+							"behaviorType": "Car",
+							"parameters": {
+								"control": "accelerate"
+							}
+						}
+					],
+					"sid": 837297658924002
+				},
+				{
 					"functionName": "Restart",
 					"functionDescription": "",
 					"functionCategory": "Buttons",
@@ -5785,12 +6075,30 @@
 									}
 								},
 								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 598781900131851,
+									"parameters": {
+										"layer": "\"Settings\"",
+										"interactive": true
+									}
+								},
+								{
 									"id": "set-layer-visible",
 									"objectClass": "System",
 									"sid": 831116233247973,
 									"parameters": {
 										"layer": "\"GUI\"",
 										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 641376961462573,
+									"parameters": {
+										"layer": "\"GUI\"",
+										"interactive": false
 									}
 								}
 							],
@@ -5816,12 +6124,30 @@
 									}
 								},
 								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 816750648384733,
+									"parameters": {
+										"layer": "\"Settings\"",
+										"interactive": false
+									}
+								},
+								{
 									"id": "set-layer-visible",
 									"objectClass": "System",
 									"sid": 734086997277947,
 									"parameters": {
 										"layer": "\"GUI\"",
 										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 539750961303302,
+									"parameters": {
+										"layer": "\"GUI\"",
+										"interactive": true
 									}
 								}
 							],
@@ -5863,6 +6189,16 @@
 										"instance-variable": "Flying"
 									},
 									"isInverted": true
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 730435042916591,
+									"parameters": {
+										"variable": "Jumps",
+										"comparison": 4,
+										"value": "0"
+									}
 								}
 							],
 							"actions": [
@@ -5891,6 +6227,19 @@
 										"loop": "no",
 										"ping-pong": "no"
 									}
+								},
+								{
+									"id": "subtract-from-eventvar",
+									"objectClass": "System",
+									"sid": 687008066237174,
+									"parameters": {
+										"variable": "Jumps",
+										"value": "1"
+									}
+								},
+								{
+									"callFunction": "JumpsChanged",
+									"sid": 926035221046147
 								},
 								{
 									"id": "wait-for-previous-actions",
@@ -6199,8 +6548,8 @@
 									}
 								},
 								{
-									"callFunction": "RocketsChanged",
-									"sid": 692798239345781
+									"callFunction": "RocketsChangedNew",
+									"sid": 353413791124274
 								}
 							],
 							"sid": 118938992214633,
@@ -6783,10 +7132,6 @@
 									"sid": 366098925734719
 								},
 								{
-									"callFunction": "RocketsChanged",
-									"sid": 215286738988012
-								},
-								{
 									"callFunction": "PlaceTireEffects",
 									"sid": 321410769046112
 								},
@@ -6835,8 +7180,8 @@
 									"sid": 375503871668019
 								},
 								{
-									"callFunction": "RocketsChanged",
-									"sid": 435484156957804
+									"callFunction": "RocketsChangedNew",
+									"sid": 767370969535699
 								},
 								{
 									"callFunction": "GenerateBorders&Checkpoints",
@@ -6853,6 +7198,15 @@
 									"parameters": {
 										"layer": "\"GUI\"",
 										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 983041446817069,
+									"parameters": {
+										"layer": "\"GUI\"",
+										"interactive": true
 									}
 								},
 								{

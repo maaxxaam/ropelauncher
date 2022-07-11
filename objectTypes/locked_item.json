@@ -1,0 +1,72 @@
+{
+	"name": "locked_item",
+	"plugin-id": "Sprite",
+	"sid": 408426166902781,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 398,
+						"height": 222,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 9761445,
+						"collisionPoly": {
+							"points": [
+								0.39195979899497485,
+								0.24774774774774774,
+								0.6080402010050251,
+								0.24774774774774774,
+								0.6080402010050251,
+								0.7522522522522522,
+								0.39195979899497485,
+								0.7522522522522522
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 995933098806897,
+				"name": "Locked",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 1,
+						"height": 1,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 9219485,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 111557749864041,
+				"name": "Unlocked",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

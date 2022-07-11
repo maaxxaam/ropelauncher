@@ -2,7 +2,7 @@
 	"name": "swipe_car",
 	"plugin-id": "Sprite",
 	"sid": 382881341333804,
-	"isGlobal": false,
+	"isGlobal": true,
 	"instanceVariables": [],
 	"behaviorTypes": [],
 	"effectTypes": [],
