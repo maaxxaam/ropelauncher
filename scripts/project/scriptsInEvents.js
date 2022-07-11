@@ -375,7 +375,7 @@ export function car_collision_resolution(car1, car2, collision_data, collision_p
 
 const scriptsInEvents = {
 
-		async Gamesheet_Event108_Act1(runtime, localVars)
+		async Gamesheet_Event109_Act1(runtime, localVars)
 		{
 			const obs = runtime.objects.obstacle.getFirstPickedInstance();
 			const car = runtime.objects.car_edge_collision.getFirstPickedInstance();
@@ -417,7 +417,7 @@ const scriptsInEvents = {
 			
 		},
 
-		async Gamesheet_Event118(runtime, localVars)
+		async Gamesheet_Event119(runtime, localVars)
 		{
 			// let's perform collision checks for cars! yay!
 			if (runtime.globalVars.GameState == runtime.globalVars.GAME_ACTIVE) {
@@ -463,7 +463,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event119(runtime, localVars)
+		async Gamesheet_Event120(runtime, localVars)
 		{
 			// calculate car positions
 			function getCP(id) {
@@ -494,14 +494,14 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event167_Act1(runtime, localVars)
+		async Gamesheet_Event171_Act1(runtime, localVars)
 		{
 			const furl = localVars.map_name + ".json";
 			const link = await runtime.assets.getProjectFileUrl(furl);
 			runtime.callFunction("GetMap", link);
 		},
 
-		async Gamesheet_Event180_Act7(runtime, localVars)
+		async Gamesheet_Event184_Act7(runtime, localVars)
 		{
 			localVars.edge_angle = Math.atan2(localVars.edge_dx, localVars.edge_dy) * 180 / Math.PI;
 			localVars.edge_angle_c3 = 360 - localVars.edge_angle;
@@ -522,7 +522,7 @@ const scriptsInEvents = {
 			localVars.distance_to_end = Math.abs(distance_line_point(edge1, edge2, end_point));
 		},
 
-		async Gamesheet_Event211_Act1(runtime, localVars)
+		async Gamesheet_Event215_Act1(runtime, localVars)
 		{
 			const sprite = runtime.getInstanceByUid(localVars.SpriteUID);
 			const [IPx, IPy] = sprite.getImagePoint(localVars.ImagePointName);
@@ -531,25 +531,19 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event215_Act2(runtime, localVars)
+		async Gamesheet_Event219_Act2(runtime, localVars)
 		{
 			[localVars.gui_x, localVars.gui_y] = layer_to_layer_px(localVars.coin_x, localVars.coin_y, runtime.layout.getLayer("Level"), runtime.layout.getLayer("GUI"));
 		},
 
-		async Gamesheet_Event222_Act1(runtime, localVars)
+		async Gamesheet_Event226_Act1(runtime, localVars)
 		{
 			[localVars.x, localVars.y] = layer_to_layer_px(localVars.x, localVars.y, runtime.layout.getLayer("Level"), runtime.layout.getLayer("GUI"));
 		},
 
-		async Menusheet_Event30_Act1(runtime, localVars)
+		async Menusheet_Event24_Act1(runtime, localVars)
 		{
 			localVars.layers = runtime.layout.getAllLayers().length;
-		},
-
-		async Menusheet_Event67_Act1(runtime, localVars)
-		{
-			let prompt = runtime.objects.prompt_back.getFirstInstance();
-			localVars.val = runtime.callFunction(prompt.instVars.function_to_call, prompt.instVars.param1, prompt.instVars.param2);
 		},
 
 		async Levelinits_Event9_Act4(runtime, localVars)

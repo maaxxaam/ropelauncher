@@ -1,0 +1,10 @@
+{
+    "c2dictionary": true,
+    "data": {
+        "16": "UseNitro",
+        "27": "PauseSwitch",
+        "32": "Jump",
+        "82": "Restart",
+        "88": "Shoot"
+    }
+}
