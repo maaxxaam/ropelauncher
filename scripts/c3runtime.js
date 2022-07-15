@@ -12309,8 +12309,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SetLayerVisible,
 		C3.Plugins.System.Acts.SetLayerInteractive,
 		C3.Behaviors.Fade.Acts.StartFade,
-		C3.Plugins.System.Acts.Scroll,
 		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.System.Acts.Scroll,
 		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.Dictionary.Exps.Get,
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
@@ -12322,7 +12322,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.TiledBg.Acts.Destroy,
 		C3.Plugins.System.Cnds.Else,
 		C3.Plugins.Dictionary.Cnds.CompareValue,
-		C3.Plugins.Sprite.Acts.Destroy,
 		C3.Plugins.System.Cnds.CompareBoolVar,
 		C3.Plugins.System.Acts.MapFunction,
 		C3.Plugins.System.Cnds.IsGroupActive,
@@ -12375,6 +12374,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SetGroupActive,
 		C3.Plugins.Sprite.Cnds.PickNthChild,
 		C3.Plugins.System.Acts.Wait,
+		C3.Plugins.Sprite.Acts.Destroy,
 		C3.Plugins.Text.Acts.Destroy,
 		C3.Plugins.System.Cnds.PickLastCreated,
 		C3.Plugins.Sprite.Acts.SetAnim,
@@ -12424,7 +12424,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.PickParent,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
-		C3.ScriptsInEvents.Gamesheet_Event109_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event105_Act1,
 		C3.Plugins.NinePatch.Acts.SetWidth,
 		C3.Plugins.System.Exps.dt,
 		C3.Plugins.TiledBg.Acts.SetVisible,
@@ -12432,8 +12432,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Tween.Cnds.IsPlaying,
 		C3.Plugins.TiledBg.Acts.SetImageOffsetY,
 		C3.Behaviors.Tween.Exps.Value,
-		C3.ScriptsInEvents.Gamesheet_Event119,
-		C3.ScriptsInEvents.Gamesheet_Event120,
+		C3.ScriptsInEvents.Gamesheet_Event115,
+		C3.ScriptsInEvents.Gamesheet_Event116,
 		C3.Behaviors.Pin.Exps.PinnedUID,
 		C3.Plugins.Particles.Acts.Destroy,
 		C3.Plugins.Sprite.Cnds.OnCreated,
@@ -12465,7 +12465,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.int,
 		C3.Plugins.System.Exps.right,
 		C3.Plugins.System.Exps.len,
-		C3.ScriptsInEvents.Gamesheet_Event171_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event166,
 		C3.Plugins.System.Exps.layoutname,
 		C3.Plugins.System.Acts.SetFunctionReturnValue,
 		C3.Plugins.AJAX.Cnds.OnComplete,
@@ -12478,7 +12478,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Exps.PolyPointCount,
 		C3.Plugins.Sprite.Exps.PolyPointXAt,
 		C3.Plugins.Sprite.Exps.PolyPointYAt,
-		C3.ScriptsInEvents.Gamesheet_Event184_Act7,
+		C3.ScriptsInEvents.Gamesheet_Event176_Act7,
 		C3.Plugins.Sprite.Acts.SetVisible,
 		C3.Plugins.Sprite.Acts.SetHeight,
 		C3.Plugins.Sprite.Exps.Width,
@@ -12489,14 +12489,16 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetPosToObject,
 		C3.Plugins.DrawingCanvas.Acts.ClearRect,
 		C3.Plugins.Sprite.Exps.Height,
-		C3.ScriptsInEvents.Gamesheet_Event215_Act1,
-		C3.ScriptsInEvents.Gamesheet_Event219_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event207_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event211_Act2,
 		C3.Plugins.Sprite.Acts.SetEffectParam,
 		C3.Plugins.TiledBg.Acts.SetImageOffsetX,
-		C3.ScriptsInEvents.Gamesheet_Event226_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event218_Act1,
 		C3.Plugins.Sprite.Acts.SetCollisions,
 		C3.Plugins.System.Acts.SetLayerOpacity,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
+		C3.ScriptsInEvents.Gamesheet_Event229,
+		C3.Plugins.TiledBg.Acts.LoadURL,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.AJAX.Acts.RequestFile,
 		C3.Plugins.System.Acts.MapFunctionDefault,
@@ -12504,7 +12506,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.PickNth,
 		C3.Plugins.Text.Exps.Text,
 		C3.Plugins.Arr.Exps.Depth,
-		C3.Plugins.System.Acts.GoToLayoutByName,
 		C3.Plugins.Touch.Cnds.OnTouchObject,
 		C3.Plugins.Text.Cnds.PickByUID,
 		C3.Plugins.Sprite.Cnds.CompareOpacity,
@@ -12870,6 +12871,7 @@ self.C3_JsPropNameTable = [
 	{slider_menu_handle: 0},
 	{shop_back: 0},
 	{CashPack: 0},
+	{lvl_select: 0},
 	{Button: 0},
 	{LoadableArray: 0},
 	{LoadableDict: 0},
@@ -12884,6 +12886,7 @@ self.C3_JsPropNameTable = [
 	{GAME_OVER: 0},
 	{GAME_ACTIVE: 0},
 	{GAME_START: 0},
+	{MapName: 0},
 	{Sprint: 0},
 	{Jumps: 0},
 	{Rockets: 0},
@@ -12950,6 +12953,8 @@ self.C3_JsPropNameTable = [
 	{gui_x: 0},
 	{coin_x: 0},
 	{coin_y: 0},
+	{ImageName: 0},
+	{URL: 0},
 	{MenuState: 0},
 	{MENU_DEFAULT: 0},
 	{MENU_PROMPT: 0},
@@ -13125,7 +13130,14 @@ self.C3_ExpressionFuncs = [
 		() => "Loss",
 		() => "GUI",
 		() => "Waiting",
-		() => "map_966518302",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((((v0.GetValue()) === ("map_966518302") ? 1 : 0)) ? ("Race") : ("FreeRoam"));
+		},
 		() => 15000,
 		() => "RaceStart",
 		() => 1,
@@ -13134,10 +13146,6 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject("difficulty_laps");
 		},
 		() => 20,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => v0.GetValue();
-		},
 		() => 0,
 		p => {
 			const n0 = p._GetNode(0);
@@ -13640,6 +13648,10 @@ self.C3_ExpressionFuncs = [
 		() => "Lvl3",
 		() => "ParkingLot",
 		() => "map",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => and("back_", add(n0.ExpObject(0, 2), 1));
+		},
 		() => "loadloop",
 		p => {
 			const n0 = p._GetNode(0);
@@ -13835,6 +13847,7 @@ self.C3_ExpressionFuncs = [
 		() => "BuyRockets",
 		() => "ShowLayer",
 		() => "ShowPopup",
+		() => "OpenMap",
 		() => "Title",
 		() => "color",
 		() => "white",
@@ -13856,7 +13869,6 @@ self.C3_ExpressionFuncs = [
 			const n3 = p._GetNode(3);
 			return () => (((n0.ExpInstVar() + n1.ExpInstVar()) + n2.ExpObject()) % n3.ExpObject());
 		},
-		() => "Loaded_lvl",
 		() => 506,
 		p => {
 			const n0 = p._GetNode(0);
@@ -14229,7 +14241,6 @@ self.C3_ExpressionFuncs = [
 		() => 553,
 		() => "rockets",
 		() => "jumps",
-		() => "Race",
 		() => "1",
 		p => {
 			const n0 = p._GetNode(0);
