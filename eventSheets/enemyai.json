@@ -123,6 +123,7 @@
 					"id": "compare-eventvar",
 					"objectClass": "System",
 					"sid": 765517057346492,
+					"disabled": true,
 					"parameters": {
 						"variable": "game_mode",
 						"comparison": 0,

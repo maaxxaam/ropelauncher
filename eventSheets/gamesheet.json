@@ -93,6 +93,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "MapName",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 792844164604991
+		},
+		{
+			"eventType": "variable",
 			"name": "Sprint",
 			"type": "boolean",
 			"initialValue": "false",
@@ -315,10 +325,19 @@
 				},
 				{
 					"callFunction": "LoadMap",
-					"sid": 451079422554774,
+					"sid": 807378559465123,
 					"parameters": [
-						"\"map_966518302\""
+						"MapName"
 					]
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 580465724704977,
+					"parameters": {
+						"variable": "game_mode",
+						"value": "MapName = \"map_966518302\" ? \"Race\" : \"FreeRoam\""
+					}
 				},
 				{
 					"id": "scroll-to-position",
@@ -508,24 +527,6 @@
 							"id": "destroy",
 							"objectClass": "MotionCircle",
 							"sid": 352418761364464
-						},
-						{
-							"id": "destroy",
-							"objectClass": "NitroBut",
-							"sid": 171829485010025,
-							"disabled": true
-						},
-						{
-							"id": "destroy",
-							"objectClass": "ShootBut",
-							"sid": 378391729528732,
-							"disabled": true
-						},
-						{
-							"id": "destroy",
-							"objectClass": "JumpBut",
-							"sid": 917349379089595,
-							"disabled": true
 						}
 					],
 					"sid": 367938848174951
@@ -537,91 +538,26 @@
 							"id": "else",
 							"objectClass": "System",
 							"sid": 487593717215167
+						},
+						{
+							"id": "compare-value",
+							"objectClass": "flags",
+							"sid": 808811296368790,
+							"parameters": {
+								"key": "\"controls_scheme\"",
+								"comparison": 1,
+								"value": "2"
+							}
 						}
 					],
-					"actions": [],
-					"sid": 979768128826583,
-					"children": [
+					"actions": [
 						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-value",
-									"objectClass": "flags",
-									"sid": 773546795135685,
-									"parameters": {
-										"key": "\"controls_scheme\"",
-										"comparison": 1,
-										"value": "0"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "destroy",
-									"objectClass": "SwipeZone",
-									"sid": 354241834673477
-								}
-							],
-							"sid": 206359666491697
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-value",
-									"objectClass": "flags",
-									"sid": 851805553920611,
-									"parameters": {
-										"key": "\"controls_scheme\"",
-										"comparison": 1,
-										"value": "1"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "destroy",
-									"objectClass": "Wheel",
-									"sid": 335900785614982
-								},
-								{
-									"id": "destroy",
-									"objectClass": "AccelBut",
-									"sid": 702405456305830
-								},
-								{
-									"id": "destroy",
-									"objectClass": "DecelBut",
-									"sid": 992037490612652
-								}
-							],
-							"sid": 901095798876073
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-value",
-									"objectClass": "flags",
-									"sid": 487058321946122,
-									"parameters": {
-										"key": "\"controls_scheme\"",
-										"comparison": 1,
-										"value": "2"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "destroy",
-									"objectClass": "MotionCircle",
-									"sid": 340956767698294
-								}
-							],
-							"sid": 505161912729957
+							"id": "destroy",
+							"objectClass": "MotionCircle",
+							"sid": 494401139216820
 						}
-					]
+					],
+					"sid": 979768128826583
 				},
 				{
 					"eventType": "comment",
@@ -793,57 +729,6 @@
 					"sid": 517351284854739
 				}
 			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "pick-by-comparison",
-					"objectClass": "System",
-					"sid": 980742843819439,
-					"parameters": {
-						"object": "roads",
-						"expression": "roads.back",
-						"comparison": 0,
-						"value": "0"
-					}
-				},
-				{
-					"id": "is-overlapping-another-object",
-					"objectClass": "Car",
-					"sid": 377815285178596,
-					"parameters": {
-						"object": "roads"
-					},
-					"isInverted": true
-				},
-				{
-					"id": "is-boolean-instance-variable-set",
-					"objectClass": "Car",
-					"sid": 904803748240610,
-					"parameters": {
-						"instance-variable": "Player"
-					}
-				},
-				{
-					"id": "compare-eventvar",
-					"objectClass": "System",
-					"sid": 643370242452937,
-					"parameters": {
-						"variable": "GameState",
-						"comparison": 0,
-						"value": "GAME_ACTIVE"
-					}
-				}
-			],
-			"actions": [
-				{
-					"callFunction": "GameOver",
-					"sid": 789709497906417
-				}
-			],
-			"sid": 412178629026609,
-			"disabled": true
 		},
 		{
 			"eventType": "block",
@@ -5813,30 +5698,6 @@
 			]
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-timer",
-					"objectClass": "DriftMarks",
-					"sid": 278251863168649,
-					"behaviorType": "Timer",
-					"parameters": {
-						"tag": "\"destroy_marks\""
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "start-fade",
-					"objectClass": "DriftMarks",
-					"sid": 376880240312711,
-					"behaviorType": "Fade"
-				}
-			],
-			"sid": 488196984795431,
-			"disabled": true
-		},
-		{
 			"eventType": "group",
 			"disabled": false,
 			"title": "Buttons",
@@ -6863,59 +6724,14 @@
 			"sid": 332265380590125,
 			"children": [
 				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 492077634912497
-						}
-					],
-					"actions": [
-						{
-							"type": "script",
-							"script": "const furl = localVars.map_name + \".json\";\nconst link = await runtime.assets.getProjectFileUrl(furl);\nruntime.callFunction(\"GetMap\", link);"
-						}
-					],
-					"sid": 216959862267474
+					"eventType": "script",
+					"script": "const furl = localVars.map_name + \".json\";\nconst link = await runtime.assets.getProjectFileUrl(furl);\nruntime.callFunction(\"GetMap\", link);"
 				}
 			]
 		},
 		{
 			"eventType": "comment",
 			"text": "Load from project files"
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-changed",
-					"objectClass": "FileChooser",
-					"sid": 805087179929706
-				}
-			],
-			"actions": [
-				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 455251285273711,
-					"parameters": {
-						"type": "log",
-						"message": "FileChooser.FileURLAt(0)"
-					}
-				},
-				{
-					"id": "request-url",
-					"objectClass": "AJAX",
-					"sid": 676453313829521,
-					"parameters": {
-						"tag": "\"map\"",
-						"url": "FileChooser.FileURLAt(0)"
-					}
-				}
-			],
-			"sid": 653421714794771,
-			"disabled": true
 		},
 		{
 			"functionName": "IsLoadedLvl",
@@ -7037,6 +6853,13 @@
 					"parameters": {
 						"json": "AJAX.LastData"
 					}
+				},
+				{
+					"callFunction": "GetBackground",
+					"sid": 699029788257198,
+					"parameters": [
+						"\"back_\"&(Level_data.At(0, 2) + 1)"
+					]
 				}
 			],
 			"sid": 409811941459900,
@@ -7102,56 +6925,6 @@
 					],
 					"sid": 931495501568812,
 					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-two-values",
-									"objectClass": "System",
-									"sid": 540556080478506,
-									"parameters": {
-										"first-value": "loopindex(\"loadloop\")",
-										"comparison": 0,
-										"second-value": "Level_data.Width - 1"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "wait-for-previous-actions",
-									"objectClass": "System",
-									"sid": 609423220691889
-								},
-								{
-									"callFunction": "PlaceCars",
-									"sid": 318140022216833
-								},
-								{
-									"id": "wait-for-previous-actions",
-									"objectClass": "System",
-									"sid": 366098925734719
-								},
-								{
-									"callFunction": "PlaceTireEffects",
-									"sid": 321410769046112
-								},
-								{
-									"callFunction": "do_timer",
-									"sid": 299862033620573
-								},
-								{
-									"id": "move-to-object",
-									"objectClass": "LevelLight",
-									"sid": 811648734971372,
-									"parameters": {
-										"where": "in-front",
-										"object": "Car"
-									}
-								}
-							],
-							"sid": 748885787028143,
-							"disabled": true
-						},
 						{
 							"eventType": "block",
 							"conditions": [
@@ -7243,19 +7016,6 @@
 							"sid": 895714403886562
 						}
 					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 481554173196301
-						}
-					],
-					"actions": [],
-					"sid": 630240787956556,
-					"disabled": true
 				}
 			]
 		},
@@ -9445,6 +9205,62 @@
 				}
 			],
 			"sid": 323387636132468
+		},
+		{
+			"functionName": "GetBackground",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ImageName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 257589795788309
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 657617741119868,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "const furl = localVars.ImageName + \".png\";\nconst link = await runtime.assets.getProjectFileUrl(furl);\nruntime.callFunction(\"LoadBackground\", link);"
+				}
+			]
+		},
+		{
+			"functionName": "LoadBackground",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "URL",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 555816813128417
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "load-image-from-url",
+					"objectClass": "background",
+					"sid": 551247643111578,
+					"parameters": {
+						"uri": "URL",
+						"cross-origin": "anonymous"
+					}
+				}
+			],
+			"sid": 900336635125591
 		}
 	],
 	"sid": 528873411861220

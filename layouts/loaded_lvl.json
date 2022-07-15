@@ -661,7 +661,7 @@
 					"behaviors": {
 						"BoundedDragDrop": {
 							"properties": {
-								"axes": "both",
+								"axes": "horizontal only",
 								"initial-state": "enabled",
 								"bound-to": "radius",
 								"bound-by": "origin",

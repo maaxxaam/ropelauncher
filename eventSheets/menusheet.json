@@ -201,6 +201,16 @@
 						"string": "\"ShowPopup\"",
 						"function": "ShowPopup"
 					}
+				},
+				{
+					"id": "map-function",
+					"objectClass": "Functions",
+					"sid": 457990139345621,
+					"parameters": {
+						"name": "\"onclick\"",
+						"string": "\"OpenMap\"",
+						"function": "OpenMap"
+					}
 				}
 			],
 			"sid": 372646819559251
@@ -552,6 +562,7 @@
 						}
 					],
 					"sid": 830283524682247,
+					"disabled": true,
 					"children": [
 						{
 							"eventType": "block",
@@ -587,8 +598,7 @@
 									}
 								}
 							],
-							"sid": 125798044822733,
-							"disabled": true
+							"sid": 125798044822733
 						},
 						{
 							"eventType": "block",
@@ -601,7 +611,8 @@
 								}
 							],
 							"actions": [],
-							"sid": 817208911599011
+							"sid": 817208911599011,
+							"disabled": true
 						}
 					]
 				},
@@ -3305,6 +3316,44 @@
 					"sid": 620453512407550
 				}
 			]
+		},
+		{
+			"functionName": "OpenMap",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "map_name",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 476774613628488
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 294313193670701,
+					"parameters": {
+						"variable": "MapName",
+						"value": "map_name"
+					}
+				},
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 706182693533295,
+					"parameters": {
+						"layout": "Loaded_lvl"
+					}
+				}
+			],
+			"sid": 611045784497311
 		}
 	],
 	"sid": 188176345997916

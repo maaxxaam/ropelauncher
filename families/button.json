@@ -78,6 +78,7 @@
 		"Rebindable_keys",
 		"close_popup",
 		"garage_car_choice",
-		"CashPack"
+		"CashPack",
+		"lvl_select"
 	]
 }
