@@ -12347,8 +12347,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.CarPlus.Acts.SetDriftRecover,
 		C3.Behaviors.CarPlus.Acts.SetDeceleration,
 		C3.Plugins.System.Cnds.CompareVar,
-		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
-		C3.Plugins.TiledBg.Exps.Y,
 		C3.Behaviors.CarPlus.Acts.SetMaxSpeed,
 		C3.Behaviors.CarPlus.Acts.SetAcceleration,
 		C3.Behaviors.CarPlus.Cnds.CompareSpeed,
@@ -12379,10 +12377,19 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.PickLastCreated,
 		C3.Plugins.Sprite.Acts.SetAnim,
 		C3.Behaviors.Tween.Acts.TweenValue,
+		C3.Plugins.gamepad.Cnds.HasGamepads,
+		C3.Plugins.Dictionary.Cnds.ForEachKey,
+		C3.Plugins.Dictionary.Cnds.CompareCurrentValue,
+		C3.Plugins.System.Cnds.CompareBetween,
+		C3.Plugins.gamepad.Exps.Axis,
+		C3.Plugins.System.Exps.int,
+		C3.Plugins.Dictionary.Exps.CurrentKey,
+		C3.Plugins.Browser.Acts.ConsoleLog,
+		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
 		C3.Plugins.TiledBg.Exps.X,
+		C3.Plugins.TiledBg.Exps.Y,
 		C3.Plugins.System.Exps.max,
 		C3.Plugins.Touch.Exps.SpeedAt,
-		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Behaviors.CarPlus.Acts.SimulateControl,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
 		C3.Plugins.Sprite.Cnds.OnCollision,
@@ -12406,6 +12413,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Sin.Exps.Magnitude,
 		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
 		C3.Behaviors.mcube_rexspline.Acts.SetEnabled,
+		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Behaviors.CarPlus.Acts.SetEnabled,
 		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Behaviors.mcube_rexspline.Acts.CleanAll,
@@ -12424,7 +12432,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.PickParent,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
-		C3.ScriptsInEvents.Gamesheet_Event105_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event109_Act1,
 		C3.Plugins.NinePatch.Acts.SetWidth,
 		C3.Plugins.System.Exps.dt,
 		C3.Plugins.TiledBg.Acts.SetVisible,
@@ -12432,8 +12440,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Tween.Cnds.IsPlaying,
 		C3.Plugins.TiledBg.Acts.SetImageOffsetY,
 		C3.Behaviors.Tween.Exps.Value,
-		C3.ScriptsInEvents.Gamesheet_Event115,
-		C3.ScriptsInEvents.Gamesheet_Event116,
+		C3.ScriptsInEvents.Gamesheet_Event119,
+		C3.ScriptsInEvents.Gamesheet_Event120,
 		C3.Behaviors.Pin.Exps.PinnedUID,
 		C3.Plugins.Particles.Acts.Destroy,
 		C3.Plugins.Sprite.Cnds.OnCreated,
@@ -12462,14 +12470,12 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.tokenat,
 		C3.Plugins.System.Acts.CreateObjectByName,
 		C3.Plugins.Sprite.Exps.ObjectTypeName,
-		C3.Plugins.System.Exps.int,
 		C3.Plugins.System.Exps.right,
 		C3.Plugins.System.Exps.len,
-		C3.ScriptsInEvents.Gamesheet_Event166,
+		C3.ScriptsInEvents.Gamesheet_Event171,
 		C3.Plugins.System.Exps.layoutname,
 		C3.Plugins.System.Acts.SetFunctionReturnValue,
 		C3.Plugins.AJAX.Cnds.OnComplete,
-		C3.Plugins.Browser.Acts.ConsoleLog,
 		C3.Plugins.AJAX.Exps.LastData,
 		C3.Plugins.Arr.Acts.JSONLoad,
 		C3.Plugins.Sprite.Exps.Count,
@@ -12478,7 +12484,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Exps.PolyPointCount,
 		C3.Plugins.Sprite.Exps.PolyPointXAt,
 		C3.Plugins.Sprite.Exps.PolyPointYAt,
-		C3.ScriptsInEvents.Gamesheet_Event176_Act7,
+		C3.ScriptsInEvents.Gamesheet_Event181_Act7,
 		C3.Plugins.Sprite.Acts.SetVisible,
 		C3.Plugins.Sprite.Acts.SetHeight,
 		C3.Plugins.Sprite.Exps.Width,
@@ -12489,15 +12495,15 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetPosToObject,
 		C3.Plugins.DrawingCanvas.Acts.ClearRect,
 		C3.Plugins.Sprite.Exps.Height,
-		C3.ScriptsInEvents.Gamesheet_Event207_Act1,
-		C3.ScriptsInEvents.Gamesheet_Event211_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event212_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event216_Act2,
 		C3.Plugins.Sprite.Acts.SetEffectParam,
 		C3.Plugins.TiledBg.Acts.SetImageOffsetX,
-		C3.ScriptsInEvents.Gamesheet_Event218_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event223_Act1,
 		C3.Plugins.Sprite.Acts.SetCollisions,
 		C3.Plugins.System.Acts.SetLayerOpacity,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
-		C3.ScriptsInEvents.Gamesheet_Event229,
+		C3.ScriptsInEvents.Gamesheet_Event234,
 		C3.Plugins.TiledBg.Acts.LoadURL,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.AJAX.Acts.RequestFile,
@@ -12537,12 +12543,15 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Keyboard.Exps.LastKeyCode,
 		C3.Plugins.Dictionary.Acts.DeleteKey,
 		C3.Plugins.Dictionary.Acts.AddKey,
-		C3.Plugins.Dictionary.Cnds.ForEachKey,
 		C3.Plugins.Keyboard.Cnds.IsKeyCodeDown,
-		C3.Plugins.Dictionary.Exps.CurrentKey,
 		C3.Plugins.Dictionary.Exps.CurrentValue,
+		C3.Plugins.gamepad.Cnds.OnGamepadConnected,
+		C3.Plugins.gamepad.Exps.GamepadID,
+		C3.Plugins.gamepad.Exps.GamepadIndex,
+		C3.Plugins.gamepad.Cnds.OnGamepadDisconnected,
 		C3.Plugins.gamepad.Cnds.OnAnyButtonDown,
 		C3.Plugins.gamepad.Exps.LastButton,
+		C3.Plugins.gamepad.Exps.Button,
 		C3.Plugins.Timeline.Acts.StopTimelineByTags,
 		C3.Plugins.Text.Cnds.CompareText,
 		C3.Plugins.Sprite.Acts.SetX,
@@ -12556,11 +12565,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio.Acts.SetMasterVolume,
 		C3.Plugins.Audio.Acts.SetSilent,
 		C3.Plugins.Audio.Cnds.IsSilent,
-		C3.Plugins.System.Cnds.CompareBetween,
 		C3.Plugins.NinePatch.Acts.SetVisible,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
 		C3.Plugins.Sprite.Cnds.OnDestroyed,
-		C3.Plugins.Dictionary.Cnds.CompareCurrentValue,
 		C3.Plugins.PlatformInfo.Cnds.IsOnMacOS,
 		C3.Plugins.Sprite.Acts.SetEffectEnabled,
 		C3.Plugins.Touch.Cnds.OnTapGesture,
@@ -12770,7 +12777,7 @@ self.C3_JsPropNameTable = [
 	{prompt_yes: 0},
 	{prompt_no: 0},
 	{prompt_message: 0},
-	{game_keyboard_tap: 0},
+	{keyboard_tap: 0},
 	{Gamepad: 0},
 	{Solid: 0},
 	{borders: 0},
@@ -12861,7 +12868,7 @@ self.C3_JsPropNameTable = [
 	{ActionType: 0},
 	{Selected: 0},
 	{Rebindable_keys: 0},
-	{game_keyboard_hold: 0},
+	{keyboard_hold: 0},
 	{locked_item: 0},
 	{DrawCars: 0},
 	{slider_menu: 0},
@@ -12872,6 +12879,11 @@ self.C3_JsPropNameTable = [
 	{shop_back: 0},
 	{CashPack: 0},
 	{lvl_select: 0},
+	{gamepad_hold: 0},
+	{gamepad_tap: 0},
+	{gamepad_axis: 0},
+	{garage_downgrade_char: 0},
+	{Gamepad_buttons: 0},
 	{Button: 0},
 	{LoadableArray: 0},
 	{LoadableDict: 0},
@@ -12919,6 +12931,7 @@ self.C3_JsPropNameTable = [
 	{CarUID: 0},
 	{SlowsDown: 0},
 	{ObstacleUID: 0},
+	{Direction: 0},
 	{object_animation: 0},
 	{object_type: 0},
 	{new_uid: 0},
@@ -12968,6 +12981,7 @@ self.C3_JsPropNameTable = [
 	{upgrade_tier: 0},
 	{owned: 0},
 	{char_line: 0},
+	{charValue: 0},
 	{carID: 0},
 	{carUID: 0},
 	{buttonID: 0},
@@ -13225,11 +13239,6 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
-			return () => ((C3.clamp((n0.ExpInstVar() - n1.ExpObject()), 0, 350) + 50) / 400);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
 			return () => C3.lerp(n0.ExpBehavior(), n1.ExpInstVar(), 0.03);
 		},
 		p => {
@@ -13313,6 +13322,23 @@ self.C3_ExpressionFuncs = [
 		() => "Go",
 		() => "RaceActive",
 		() => 0.9,
+		() => "GamepadSteering",
+		() => "Steer",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			return () => (f0(0, f1(n2.ExpObject())) / 100);
+		},
+		() => -0.2,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => multiply((f0(0, f1(n2.ExpObject())) / 100), add(multiply((-2), n3.ExpObject("controls_invert")), 1));
+		},
+		() => "Steering...",
 		() => "MotionControls",
 		p => {
 			const n0 = p._GetNode(0);
@@ -13338,8 +13364,7 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			const n3 = p._GetNode(3);
 			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			return () => multiply(multiply(multiply(((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))) * (v2.GetValue() / 360)), add(multiply((-2), n3.ExpObject("controls_invert")), 1)), n4.ExpObject("controls_sensitivity")), n5.ExpInstVar());
+			return () => multiply(multiply(((Math.log(v0.GetValue()) / Math.log(n1.ExpObject("controls_speed_factor"))) * (v2.GetValue() / 360)), add(multiply((-2), n3.ExpObject("controls_invert")), 1)), n4.ExpObject("controls_sensitivity"));
 		},
 		() => "controls_drift_mode",
 		() => "Rocket",
@@ -13599,6 +13624,7 @@ self.C3_ExpressionFuncs = [
 			return () => f0(0, 0, 0, 100);
 		},
 		() => "Buttons",
+		() => -1,
 		() => "jumpUp",
 		() => 1.5,
 		() => "jumpDown",
@@ -13840,9 +13866,13 @@ self.C3_ExpressionFuncs = [
 		() => "cars",
 		() => "keyboard_tap",
 		() => "keyboard_hold",
+		() => "gamepad_hold",
+		() => "gamepad_tap",
+		() => "gamepad_axis",
 		() => "BuyCar",
 		() => "PickCar",
 		() => "UpgradeCar",
+		() => "DowngradeCar",
 		() => "BuyJumps",
 		() => "BuyRockets",
 		() => "ShowLayer",
@@ -13933,24 +13963,27 @@ self.C3_ExpressionFuncs = [
 			const v5 = p._GetNode(5).GetVar();
 			const v6 = p._GetNode(6).GetVar();
 			const v7 = p._GetNode(7).GetVar();
-			const n8 = p._GetNode(8);
-			const n9 = p._GetNode(9);
-			const n10 = p._GetNode(10);
-			return () => add(multiply(divide(subtract(add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue())))), n8.ExpInstVar_Family()), (n9.ExpInstVar_Family() - n10.ExpInstVar_Family())), 470), 122);
+			return () => add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue()))));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => ((((v0.GetValue() - n1.ExpInstVar_Family()) / (n2.ExpInstVar_Family() - n3.ExpInstVar_Family())) * 470) + 122);
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			const v2 = p._GetNode(2).GetVar();
-			const v3 = p._GetNode(3).GetVar();
-			const n4 = p._GetNode(4);
+			const n3 = p._GetNode(3);
+			const v4 = p._GetNode(4).GetVar();
 			const v5 = p._GetNode(5).GetVar();
 			const v6 = p._GetNode(6).GetVar();
-			const v7 = p._GetNode(7).GetVar();
+			const n7 = p._GetNode(7);
 			const n8 = p._GetNode(8);
 			const n9 = p._GetNode(9);
-			const n10 = p._GetNode(10);
-			return () => add(multiply(divide(subtract(add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), ((((v3.GetValue()) === (0) ? 1 : 0)) ? (0) : (n4.ExpObject(v5.GetValue(), (v6.GetValue() + 1), v7.GetValue())))), n8.ExpInstVar()), (n9.ExpInstVar() - n10.ExpInstVar())), 470), 145);
+			return () => add(multiply(divide(subtract(add(n0.ExpObject(v1.GetValue(), 0, v2.GetValue()), n3.ExpObject(v4.GetValue(), (v5.GetValue() + 1), v6.GetValue())), n7.ExpInstVar()), (n8.ExpInstVar() - n9.ExpInstVar())), 470), 145);
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -14002,6 +14035,24 @@ self.C3_ExpressionFuncs = [
 			const v7 = p._GetNode(7).GetVar();
 			const v8 = p._GetNode(8).GetVar();
 			return () => add(n0.ExpObject(((2 * v1.GetValue()) + 1), 0, v2.GetValue()), n3.ExpObject(((2 * v4.GetValue()) + 1), add(n5.ExpObject(1, v6.GetValue(), v7.GetValue()), 1), v8.GetValue()));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => subtract(n0.ExpObject(1, v1.GetValue(), v2.GetValue()), 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const n3 = p._GetNode(3);
+			const v4 = p._GetNode(4).GetVar();
+			const n5 = p._GetNode(5);
+			const v6 = p._GetNode(6).GetVar();
+			const v7 = p._GetNode(7).GetVar();
+			const v8 = p._GetNode(8).GetVar();
+			return () => add(n0.ExpObject(((2 * v1.GetValue()) + 1), 0, v2.GetValue()), n3.ExpObject(((2 * v4.GetValue()) + 1), subtract(n5.ExpObject(1, v6.GetValue(), v7.GetValue()), 1), v8.GetValue()));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -14080,7 +14131,14 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => ((("Только не говори мне, что хочешь играть с геймпада! Их поддержка - сущий кошмар... :-(" + "\n") + "Модель геймпада: ") + f0(f1()));
+		},
+		() => "Слава Богу, ты передумал! :-)",
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject((f1(0)).toString());
 		},
 		() => 1195,
 		() => "to_menu",
