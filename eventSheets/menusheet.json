@@ -124,6 +124,33 @@
 					}
 				},
 				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 200680809683986,
+					"parameters": {
+						"tag": "\"gamepad_hold\"",
+						"file": "Gamepad_mapping_buttons_hold.json"
+					}
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 907526678415435,
+					"parameters": {
+						"tag": "\"gamepad_tap\"",
+						"file": "Gamepad_mapping_buttons_tap.json"
+					}
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 371600256746880,
+					"parameters": {
+						"tag": "\"gamepad_axis\"",
+						"file": "Gamepad_mapping_axis.json"
+					}
+				},
+				{
 					"id": "map-function",
 					"objectClass": "Functions",
 					"sid": 387798297637498,
@@ -151,6 +178,16 @@
 						"name": "\"onclick\"",
 						"string": "\"UpgradeCar\"",
 						"function": "UpgradeCar"
+					}
+				},
+				{
+					"id": "map-function",
+					"objectClass": "Functions",
+					"sid": 745402830208143,
+					"parameters": {
+						"name": "\"onclick\"",
+						"string": "\"DowngradeCar\"",
+						"function": "DowngradeCar"
 					}
 				},
 				{
@@ -251,6 +288,15 @@
 					"parameters": {
 						"property-name": "\"color\"",
 						"value": "\"white\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "garage_car",
+					"sid": 176678742407309,
+					"parameters": {
+						"instance-variable": "shownID",
+						"value": "ChosenCar"
 					}
 				}
 			],
@@ -628,14 +674,6 @@
 							}
 						},
 						{
-							"id": "layer-is-visible",
-							"objectClass": "System",
-							"sid": 432705271356984,
-							"parameters": {
-								"layer": "LvlBut.LayerName"
-							}
-						},
-						{
 							"id": "pick-by-unique-id",
 							"objectClass": "mmtext",
 							"sid": 988596115323543,
@@ -674,14 +712,6 @@
 							"sid": 522168456044765,
 							"parameters": {
 								"object": "ModeBut"
-							}
-						},
-						{
-							"id": "layer-is-visible",
-							"objectClass": "System",
-							"sid": 674947460416834,
-							"parameters": {
-								"layer": "ModeBut.LayerName"
 							}
 						}
 					],
@@ -1539,6 +1569,16 @@
 					"disabled": true
 				},
 				{
+					"eventType": "variable",
+					"name": "charValue",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 498633566577188
+				},
+				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -1581,6 +1621,28 @@
 								"comparison": 0,
 								"value": "UpgradeBar.char_ID"
 							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 288714439215387,
+							"parameters": {
+								"object": "garage_downgrade_char",
+								"expression": "garage_downgrade_char.char_ID",
+								"comparison": 0,
+								"value": "UpgradeBar.char_ID"
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 836210294197838,
+							"parameters": {
+								"object": "garage_value",
+								"expression": "garage_value.charID",
+								"comparison": 0,
+								"value": "UpgradeBar.char_ID"
+							}
 						}
 					],
 					"actions": [
@@ -1612,19 +1674,28 @@
 							}
 						},
 						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 475602274587018,
+							"parameters": {
+								"variable": "charValue",
+								"value": "(CarChars.At(char_line, 0, carID) + (upgrade_tier = 0 ? 0 : CarChars.At(char_line, upgrade_tier + 1, carID)))"
+							}
+						},
+						{
 							"id": "set-width",
 							"objectClass": "UpgradeBar",
-							"sid": 382178442998848,
+							"sid": 691258586374593,
 							"parameters": {
-								"width": "((CarChars.At(char_line, 0, carID) + (upgrade_tier = 0 ? 0 : CarChars.At(char_line, upgrade_tier + 1, carID))) - UpgradeBar.low_value) / (UpgradeBar.high_value - UpgradeBar.low_value) * 470 + 122"
+								"width": "(charValue - UpgradeBar.low_value) / (UpgradeBar.high_value - UpgradeBar.low_value) * 470 + 122"
 							}
 						},
 						{
 							"id": "set-width",
 							"objectClass": "garage_bar_max",
-							"sid": 529717747756583,
+							"sid": 496972087292967,
 							"parameters": {
-								"width": "((CarChars.At(char_line, 0, carID) + (max_upgrade_tier = 0 ? 0 : CarChars.At(char_line, max_upgrade_tier + 1, carID))) - garage_bar_max.low_value) / (garage_bar_max.high_value - garage_bar_max.low_value) * 470 + 145"
+								"width": "((CarChars.At(char_line, 0, carID) + (CarChars.At(char_line, max_upgrade_tier + 1, carID))) - garage_bar_max.low_value) / (garage_bar_max.high_value - garage_bar_max.low_value) * 470 + 145"
 							}
 						},
 						{
@@ -1633,6 +1704,14 @@
 							"sid": 433148979436120,
 							"parameters": {
 								"text": "(upgrade_tier = max_upgrade_tier ? \"\" : CarChars.At(char_line + 1, upgrade_tier + 2, carID))"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "garage_value",
+							"sid": 486479795214575,
+							"parameters": {
+								"text": "charValue"
 							}
 						}
 					],
@@ -1707,6 +1786,76 @@
 								}
 							],
 							"sid": 142385200348249
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 461133479452704,
+									"parameters": {
+										"variable": "upgrade_tier",
+										"comparison": 0,
+										"value": "0"
+									}
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 641484399910712,
+									"parameters": {
+										"variable": "owned",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "garage_downgrade_char",
+									"sid": 254644893911359,
+									"parameters": {
+										"animation": "Self.AnimationPrefix&\"_done\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 774952537372310,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 682011307943807
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 696323066918512,
+									"parameters": {
+										"variable": "max_upgrade_tier",
+										"comparison": 4,
+										"value": "upgrade_tier"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "garage_downgrade_char",
+									"sid": 882894065202707,
+									"parameters": {
+										"animation": "Self.AnimationPrefix&\"_avail\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 350471033008453
 						}
 					]
 				},
@@ -2190,6 +2339,7 @@
 							"id": "set-function-return-value",
 							"objectClass": "Functions",
 							"sid": 841150703521675,
+							"disabled": true,
 							"parameters": {
 								"value": "CarOwnership.At(1, charUID, carUID)"
 							}
@@ -2217,6 +2367,192 @@
 						}
 					],
 					"sid": 631702661699829
+				}
+			]
+		},
+		{
+			"functionName": "DowngradeCar",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "buttonID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 140959745340905
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "garage_downgrade_char",
+					"sid": 594604455170744,
+					"parameters": {
+						"unique-id": "buttonID"
+					}
+				},
+				{
+					"id": "is-animation-playing",
+					"objectClass": "garage_downgrade_char",
+					"sid": 543226121883758,
+					"parameters": {
+						"animation": "Self.AnimationPrefix&\"_avail\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 925747273436472,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "charUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 568872767044030
+				},
+				{
+					"eventType": "variable",
+					"name": "carUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 325305601081937
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nth-instance",
+							"objectClass": "System",
+							"sid": 604340821796442,
+							"parameters": {
+								"object": "garage_car",
+								"instance": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 986837374731465,
+							"parameters": {
+								"variable": "carUID",
+								"value": "garage_car.shownID"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 577768755626598,
+							"parameters": {
+								"variable": "charUID",
+								"value": "garage_downgrade_char.char_ID"
+							}
+						}
+					],
+					"sid": 768660870449840
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 145842891692968,
+							"disabled": true,
+							"parameters": {
+								"variable": "Coins",
+								"comparison": 5,
+								"value": "CarChars.At(2 * charUID + 2, CarOwnership.At(1, charUID, carUID) + 2, carUID)"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-eventvar",
+							"objectClass": "System",
+							"sid": 369478753962709,
+							"disabled": true,
+							"parameters": {
+								"variable": "Coins",
+								"value": "CarChars.At(2 * charUID + 2, CarOwnership.At(1, charUID, carUID) + 2, carUID)"
+							}
+						},
+						{
+							"callFunction": "CoinsChanged",
+							"sid": 111350941582270,
+							"disabled": true
+						},
+						{
+							"id": "set-at-xyz",
+							"objectClass": "CarOwnership",
+							"sid": 655100310154917,
+							"parameters": {
+								"x": "1",
+								"y": "charUID",
+								"z": "carUID",
+								"value": "CarOwnership.At(1, charUID, carUID) - 1"
+							}
+						},
+						{
+							"id": "set-at-xyz",
+							"objectClass": "CarOwnership",
+							"sid": 494446485171353,
+							"parameters": {
+								"x": "2",
+								"y": "charUID",
+								"z": "carUID",
+								"value": "CarChars.At(2 * charUID + 1, 0, carUID) + CarChars.At(2 * charUID + 1, CarOwnership.At(1, charUID, carUID) - 1, carUID)"
+							}
+						},
+						{
+							"callFunction": "ShowCar",
+							"sid": 612491340692018,
+							"parameters": [
+								"carUID"
+							]
+						},
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 227135985326015,
+							"parameters": {
+								"value": "CarOwnership.At(1, charUID, carUID)"
+							}
+						}
+					],
+					"sid": 526250648934871
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 459229604613518
+						}
+					],
+					"actions": [
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 563983236813063,
+							"parameters": {
+								"message": "\"Не хватает монет!\""
+							}
+						}
+					],
+					"sid": 544207472747067
 				}
 			]
 		},

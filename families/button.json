@@ -79,6 +79,7 @@
 		"close_popup",
 		"garage_car_choice",
 		"CashPack",
-		"lvl_select"
+		"lvl_select",
+		"garage_downgrade_char"
 	]
 }

@@ -12,7 +12,10 @@
 	],
 	"members": [
 		"flags",
-		"game_keyboard_tap",
-		"game_keyboard_hold"
+		"keyboard_tap",
+		"keyboard_hold",
+		"gamepad_hold",
+		"gamepad_tap",
+		"gamepad_axis"
 	]
 }

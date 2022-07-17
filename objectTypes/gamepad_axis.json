@@ -1,7 +1,7 @@
 {
-	"name": "game_keyboard_hold",
+	"name": "gamepad_axis",
 	"plugin-id": "Dictionary",
-	"sid": 361499640988883,
+	"sid": 138083710267892,
 	"isGlobal": true,
 	"instanceVariables": []
 }

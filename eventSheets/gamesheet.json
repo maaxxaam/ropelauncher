@@ -1577,7 +1577,8 @@
 													}
 												}
 											],
-											"sid": 873767178396877
+											"sid": 873767178396877,
+											"disabled": true
 										},
 										{
 											"eventType": "block",
@@ -2808,99 +2809,7 @@
 					"functionParameters": [],
 					"eventType": "function-block",
 					"conditions": [],
-					"actions": [
-						{
-							"id": "set-text",
-							"objectClass": "dbgtxt",
-							"sid": 170433467922972,
-							"disabled": true,
-							"parameters": {
-								"text": "\"3\""
-							}
-						},
-						{
-							"id": "wait",
-							"objectClass": "System",
-							"sid": 281330208293131,
-							"disabled": true,
-							"parameters": {
-								"seconds": "0.5"
-							}
-						},
-						{
-							"id": "set-text",
-							"objectClass": "dbgtxt",
-							"sid": 286854944623270,
-							"disabled": true,
-							"parameters": {
-								"text": "\"2\""
-							}
-						},
-						{
-							"id": "wait",
-							"objectClass": "System",
-							"sid": 925943012054191,
-							"disabled": true,
-							"parameters": {
-								"seconds": "0.5"
-							}
-						},
-						{
-							"id": "set-text",
-							"objectClass": "dbgtxt",
-							"sid": 141912028675721,
-							"disabled": true,
-							"parameters": {
-								"text": "\"1\""
-							}
-						},
-						{
-							"id": "wait",
-							"objectClass": "System",
-							"sid": 571655368683626,
-							"disabled": true,
-							"parameters": {
-								"seconds": "0.5"
-							}
-						},
-						{
-							"id": "set-text",
-							"objectClass": "dbgtxt",
-							"sid": 581272343030200,
-							"disabled": true,
-							"parameters": {
-								"text": "\"GO!\""
-							}
-						},
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 547906811994937,
-							"disabled": true,
-							"parameters": {
-								"variable": "GameState",
-								"value": "GAME_ACTIVE"
-							}
-						},
-						{
-							"id": "wait",
-							"objectClass": "System",
-							"sid": 354651834876794,
-							"disabled": true,
-							"parameters": {
-								"seconds": "1.0"
-							}
-						},
-						{
-							"id": "set-text",
-							"objectClass": "dbgtxt",
-							"sid": 177765956044160,
-							"disabled": true,
-							"parameters": {
-								"text": "\"\""
-							}
-						}
-					],
+					"actions": [],
 					"sid": 726635467225390,
 					"children": [
 						{
@@ -3102,6 +3011,88 @@
 				{
 					"eventType": "group",
 					"disabled": false,
+					"title": "GamepadSteering",
+					"description": "",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-gamepads",
+									"objectClass": "Gamepad",
+									"sid": 351122924213799
+								}
+							],
+							"actions": [],
+							"sid": 359777498275077,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each-key",
+											"objectClass": "gamepad_axis",
+											"sid": 290575993819669
+										}
+									],
+									"actions": [],
+									"sid": 996158584932865,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-current-value",
+													"objectClass": "gamepad_axis",
+													"sid": 862771571581120,
+													"parameters": {
+														"comparison": 0,
+														"value": "\"Steer\""
+													}
+												},
+												{
+													"id": "is-between-values",
+													"objectClass": "System",
+													"sid": 705119307526817,
+													"parameters": {
+														"value": "Gamepad.Axis(0, int(gamepad_axis.CurrentKey)) / 100",
+														"lower-bound": "-0.2",
+														"upper-bound": "0.2"
+													},
+													"isInverted": true
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "Steer",
+													"sid": 824509558781369,
+													"parameters": [
+														"Gamepad.Axis(0, int(gamepad_axis.CurrentKey)) / 100 * (-2 * flags.Get(\"controls_invert\")+ 1)"
+													]
+												},
+												{
+													"id": "log",
+													"objectClass": "Browser",
+													"sid": 811956563750310,
+													"parameters": {
+														"type": "log",
+														"message": "\"Steering...\""
+													}
+												}
+											],
+											"sid": 126217880373855
+										}
+									]
+								}
+							]
+						}
+					],
+					"sid": 531630420470812
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
 					"title": "MotionControls",
 					"description": "",
 					"isActiveOnStart": true,
@@ -3193,20 +3184,19 @@
 								{
 									"id": "set-steer-speed",
 									"objectClass": "Car",
-									"sid": 481541090522025,
+									"sid": 419181805081939,
+									"disabled": true,
 									"behaviorType": "Car",
 									"parameters": {
-										"steer-speed": "ln(motion)/ln(flags.Get(\"controls_speed_factor\")) * (motion_len / 360) * (-2 * flags.Get(\"controls_invert\")+ 1) * flags.Get(\"controls_sensitivity\") * Self.SteerCoef"
+										"steer-speed": "ln(motion)/\nln(flags.Get(\"controls_speed_factor\")) \n* (motion_len / 360) \n* (-2 * flags.Get(\"controls_invert\")+ 1) \n* flags.Get(\"controls_sensitivity\") \n* Self.SteerCoef"
 									}
 								},
 								{
-									"id": "simulate-control",
-									"objectClass": "Car",
-									"sid": 464912041770293,
-									"behaviorType": "Car",
-									"parameters": {
-										"control": "steer-right"
-									}
+									"callFunction": "Steer",
+									"sid": 732938442856342,
+									"parameters": [
+										"ln(motion)/\r\nln(flags.Get(\"controls_speed_factor\")) \r\n* (motion_len / 360) \r\n* (-2 * flags.Get(\"controls_invert\")+ 1) \r\n* flags.Get(\"controls_sensitivity\")\r\n"
+									]
 								}
 							],
 							"sid": 733812283991011,
@@ -5705,6 +5695,45 @@
 			"isActiveOnStart": true,
 			"children": [
 				{
+					"functionName": "Steer",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "Direction",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "[-1, 0) to steer left, (0, 1] to steer right",
+							"sid": 178161048428221
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-steer-speed",
+							"objectClass": "Car",
+							"sid": 594882124632889,
+							"behaviorType": "Car",
+							"parameters": {
+								"steer-speed": "Self.SteerCoef * Direction"
+							}
+						},
+						{
+							"id": "simulate-control",
+							"objectClass": "Car",
+							"sid": 250003836847876,
+							"behaviorType": "Car",
+							"parameters": {
+								"control": "steer-right"
+							}
+						}
+					],
+					"sid": 815090310679583
+				},
+				{
 					"functionName": "TurnRight",
 					"functionDescription": "",
 					"functionCategory": "",
@@ -5730,10 +5759,18 @@
 							"id": "simulate-control",
 							"objectClass": "Car",
 							"sid": 919478630714282,
+							"disabled": true,
 							"behaviorType": "Car",
 							"parameters": {
 								"control": "steer-right"
 							}
+						},
+						{
+							"callFunction": "Steer",
+							"sid": 977741955744507,
+							"parameters": [
+								"1"
+							]
 						}
 					],
 					"sid": 437768320667805
@@ -5764,10 +5801,18 @@
 							"id": "simulate-control",
 							"objectClass": "Car",
 							"sid": 998914447430954,
+							"disabled": true,
 							"behaviorType": "Car",
 							"parameters": {
 								"control": "steer-left"
 							}
+						},
+						{
+							"callFunction": "Steer",
+							"sid": 744838692729191,
+							"parameters": [
+								"-1"
+							]
 						}
 					],
 					"sid": 862463542238096

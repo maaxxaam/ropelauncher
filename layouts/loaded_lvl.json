@@ -2719,7 +2719,7 @@
 			}
 		},
 		{
-			"type": "game_keyboard_tap",
+			"type": "keyboard_tap",
 			"properties": {},
 			"uid": 117,
 			"instanceVariables": {
@@ -2737,11 +2737,35 @@
 			"instanceVariables": {}
 		},
 		{
-			"type": "game_keyboard_hold",
+			"type": "keyboard_hold",
 			"properties": {},
 			"uid": 512,
 			"instanceVariables": {
 				"tag": "keyboard_hold"
+			}
+		},
+		{
+			"type": "gamepad_hold",
+			"properties": {},
+			"uid": 855,
+			"instanceVariables": {
+				"tag": "gamepad_hold"
+			}
+		},
+		{
+			"type": "gamepad_tap",
+			"properties": {},
+			"uid": 856,
+			"instanceVariables": {
+				"tag": "gamepad_tap"
+			}
+		},
+		{
+			"type": "gamepad_axis",
+			"properties": {},
+			"uid": 857,
+			"instanceVariables": {
+				"tag": "gamepad_axis"
 			}
 		}
 	],

@@ -1468,8 +1468,8 @@
 					"uid": 497,
 					"instanceVariables": {
 						"char_ID": 0,
-						"low_value": 600,
-						"high_value": 2500
+						"low_value": 200,
+						"high_value": 4000
 					},
 					"behaviors": {},
 					"world": {
@@ -1505,8 +1505,8 @@
 					"uid": 59,
 					"instanceVariables": {
 						"char_ID": 1,
-						"low_value": 300,
-						"high_value": 800
+						"low_value": 200,
+						"high_value": 1250
 					},
 					"behaviors": {},
 					"world": {
@@ -1542,8 +1542,8 @@
 					"uid": 58,
 					"instanceVariables": {
 						"char_ID": 2,
-						"low_value": 150,
-						"high_value": 600
+						"low_value": 100,
+						"high_value": 750
 					},
 					"behaviors": {},
 					"world": {
@@ -1616,8 +1616,8 @@
 					"uid": 42,
 					"instanceVariables": {
 						"char_ID": 3,
-						"low_value": 80,
-						"high_value": 130
+						"low_value": 30,
+						"high_value": 140
 					},
 					"behaviors": {},
 					"world": {
@@ -1653,8 +1653,8 @@
 					"uid": 653,
 					"instanceVariables": {
 						"char_ID": 0,
-						"high_value": 2500,
-						"low_value": 600,
+						"high_value": 4000,
+						"low_value": 200,
 						"charID": 0,
 						"lval": 200,
 						"hval": 700
@@ -2195,8 +2195,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": -581,
-						"y": 594,
+						"x": 331,
+						"y": 521,
 						"width": 227,
 						"height": 46,
 						"originX": 0,
@@ -2227,8 +2227,8 @@
 					"uid": 73,
 					"instanceVariables": {
 						"char_ID": 1,
-						"high_value": 800,
-						"low_value": 300,
+						"high_value": 1250,
+						"low_value": 200,
 						"charID": 0,
 						"lval": 200,
 						"hval": 700
@@ -2267,8 +2267,8 @@
 					"uid": 80,
 					"instanceVariables": {
 						"char_ID": 2,
-						"high_value": 600,
-						"low_value": 150,
+						"high_value": 750,
+						"low_value": 100,
 						"charID": 0,
 						"lval": 200,
 						"hval": 700
@@ -2347,8 +2347,8 @@
 					"uid": 86,
 					"instanceVariables": {
 						"char_ID": 3,
-						"high_value": 130,
-						"low_value": 80,
+						"high_value": 140,
+						"low_value": 30,
 						"charID": 0,
 						"lval": 200,
 						"hval": 700
@@ -2399,8 +2399,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": -585,
-						"y": 712,
+						"x": 327,
+						"y": 639,
 						"width": 227,
 						"height": 46,
 						"originX": 0,
@@ -2443,8 +2443,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": -582,
-						"y": 837,
+						"x": 330,
+						"y": 764,
 						"width": 227,
 						"height": 46,
 						"originX": 0,
@@ -2487,8 +2487,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": -579,
-						"y": 1084,
+						"x": 327,
+						"y": 999,
 						"width": 227,
 						"height": 46,
 						"originX": 0,
@@ -2531,8 +2531,8 @@
 					},
 					"behaviors": {},
 					"world": {
-						"x": -579,
-						"y": 964,
+						"x": 333,
+						"y": 891,
 						"width": 227,
 						"height": 46,
 						"originX": 0,
@@ -3545,6 +3545,221 @@
 							1
 						],
 						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_downgrade_char",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Speed_avail",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 858,
+					"instanceVariables": {
+						"AnimationPrefix": "Speed",
+						"onclick": "DowngradeCar",
+						"click_param": "858",
+						"ClickMode": 1,
+						"char_ID": 0
+					},
+					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"isEnabled": true,
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
+					"world": {
+						"x": 64,
+						"y": 606,
+						"width": 73.326,
+						"height": 72.65939999999999,
+						"originX": 0.4909090909090909,
+						"originY": 0.46788990825688076,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.7853981633974483,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_downgrade_char",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Accel_avail",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 859,
+					"instanceVariables": {
+						"AnimationPrefix": "Accel",
+						"onclick": "DowngradeCar",
+						"click_param": "859",
+						"ClickMode": 1,
+						"char_ID": 1
+					},
+					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"isEnabled": true,
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
+					"world": {
+						"x": 64,
+						"y": 726,
+						"width": 72.65939999999999,
+						"height": 71.9928,
+						"originX": 0.48623853211009177,
+						"originY": 0.46296296296296297,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.7853981633974483,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_downgrade_char",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Decel_avail",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 860,
+					"instanceVariables": {
+						"AnimationPrefix": "Decel",
+						"onclick": "DowngradeCar",
+						"click_param": "860",
+						"ClickMode": 1,
+						"char_ID": 2
+					},
+					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"isEnabled": true,
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
+					"world": {
+						"x": 64,
+						"y": 849,
+						"width": 72.65939999999999,
+						"height": 72.65939999999999,
+						"originX": 0.48623853211009177,
+						"originY": 0.46788990825688076,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.7853981633974483,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_downgrade_char",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Offroad_avail",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 861,
+					"instanceVariables": {
+						"AnimationPrefix": "Offroad",
+						"onclick": "DowngradeCar",
+						"click_param": "861",
+						"ClickMode": 1,
+						"char_ID": 4
+					},
+					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"isEnabled": true,
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
+					"world": {
+						"x": 64,
+						"y": 972,
+						"width": 71.9928,
+						"height": 72.65939999999999,
+						"originX": 0.48148148148148145,
+						"originY": 0.46788990825688076,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.7853981633974483,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "garage_downgrade_char",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Steer_avail",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 862,
+					"instanceVariables": {
+						"AnimationPrefix": "Steer",
+						"onclick": "DowngradeCar",
+						"click_param": "862",
+						"ClickMode": 1,
+						"char_ID": 3
+					},
+					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"isEnabled": true,
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
+					"world": {
+						"x": 64,
+						"y": 1097,
+						"width": 71.9928,
+						"height": 72.65939999999999,
+						"originX": 0.48148148148148145,
+						"originY": 0.46788990825688076,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0.7853981633974483,
 						"zElevation": 0
 					}
 				}

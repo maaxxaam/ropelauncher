@@ -539,7 +539,7 @@
 			"prompt_yes",
 			"prompt_no",
 			"prompt_message",
-			"game_keyboard_tap",
+			"keyboard_tap",
 			"Gamepad",
 			"borders",
 			"garage_value",
@@ -609,7 +609,7 @@
 			"timer",
 			"speed_arrow",
 			"Rebindable_keys",
-			"game_keyboard_hold",
+			"keyboard_hold",
 			"locked_item",
 			"DrawCars",
 			"slider_menu",
@@ -618,7 +618,12 @@
 			"slider_menu_handle",
 			"shop_back",
 			"CashPack",
-			"lvl_select"
+			"lvl_select",
+			"gamepad_hold",
+			"gamepad_tap",
+			"gamepad_axis",
+			"garage_downgrade_char",
+			"Gamepad_buttons"
 		],
 		"subfolders": []
 	},
@@ -853,14 +858,6 @@
 					}
 				},
 				{
-					"name": "Tiles_to_conditions.json",
-					"type": "application/json",
-					"sid": 439020388287075,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
 					"name": "Car_data.json",
 					"type": "application/json",
 					"sid": 671171256130918,
@@ -877,49 +874,9 @@
 					}
 				},
 				{
-					"name": "Keyboard_mapping_tap.json",
-					"type": "application/json",
-					"sid": 280743589371615,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
 					"name": "map_966518302.json",
 					"type": "application/json",
 					"sid": 699486407076714,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "Keyboard_mapping_hold.json",
-					"type": "application/json",
-					"sid": 161168183310372,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "back_1.png",
-					"type": "image/png",
-					"sid": 863759534021501,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "back_3.png",
-					"type": "image/png",
-					"sid": 582354002667523,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "back_2.png",
-					"type": "image/png",
-					"sid": 329698009834090,
 					"file-info": {
 						"purpose": "none"
 					}
@@ -941,7 +898,98 @@
 					}
 				}
 			],
-			"subfolders": []
+			"subfolders": [
+				{
+					"items": [
+						{
+							"name": "back_1.png",
+							"type": "image/png",
+							"sid": 863759534021501,
+							"file-info": {
+								"purpose": "none"
+							}
+						},
+						{
+							"name": "back_2.png",
+							"type": "image/png",
+							"sid": 329698009834090,
+							"file-info": {
+								"purpose": "none"
+							}
+						},
+						{
+							"name": "back_3.png",
+							"type": "image/png",
+							"sid": 582354002667523,
+							"file-info": {
+								"purpose": "none"
+							}
+						}
+					],
+					"subfolders": [],
+					"name": "Backgrounds"
+				},
+				{
+					"items": [
+						{
+							"name": "Tiles_to_conditions.json",
+							"type": "application/json",
+							"sid": 439020388287075,
+							"file-info": {
+								"purpose": "none"
+							}
+						}
+					],
+					"subfolders": [],
+					"name": "Legacy"
+				},
+				{
+					"items": [
+						{
+							"name": "Keyboard_mapping_hold.json",
+							"type": "application/json",
+							"sid": 161168183310372,
+							"file-info": {
+								"purpose": "none"
+							}
+						},
+						{
+							"name": "Keyboard_mapping_tap.json",
+							"type": "application/json",
+							"sid": 280743589371615,
+							"file-info": {
+								"purpose": "none"
+							}
+						},
+						{
+							"name": "Gamepad_mapping_buttons_tap.json",
+							"type": "application/json",
+							"sid": 552746993000572,
+							"file-info": {
+								"purpose": "none"
+							}
+						},
+						{
+							"name": "Gamepad_mapping_axis.json",
+							"type": "application/json",
+							"sid": 361280943420734,
+							"file-info": {
+								"purpose": "none"
+							}
+						},
+						{
+							"name": "Gamepad_mapping_buttons_hold.json",
+							"type": "application/json",
+							"sid": 973637183510032,
+							"file-info": {
+								"purpose": "none"
+							}
+						}
+					],
+					"subfolders": [],
+					"name": "Controls"
+				}
+			]
 		}
 	},
 	"timelines": {

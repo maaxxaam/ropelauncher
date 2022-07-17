@@ -518,7 +518,7 @@
 							"conditions": [
 								{
 									"id": "has-key",
-									"objectClass": "game_keyboard_tap",
+									"objectClass": "keyboard_tap",
 									"sid": 481687407219133,
 									"parameters": {
 										"key": "str(Keyboard.LastKeyCode)"
@@ -526,7 +526,7 @@
 								},
 								{
 									"id": "has-key",
-									"objectClass": "game_keyboard_hold",
+									"objectClass": "keyboard_hold",
 									"sid": 483726925756111,
 									"parameters": {
 										"key": "str(Keyboard.LastKeyCode)"
@@ -608,7 +608,7 @@
 											"actions": [
 												{
 													"id": "delete-key",
-													"objectClass": "game_keyboard_tap",
+													"objectClass": "keyboard_tap",
 													"sid": 628802484661260,
 													"parameters": {
 														"key": "str(Rebindable_keys.CurrentCode)"
@@ -625,7 +625,7 @@
 												},
 												{
 													"id": "add-key",
-													"objectClass": "game_keyboard_tap",
+													"objectClass": "keyboard_tap",
 													"sid": 118270850035122,
 													"parameters": {
 														"key": "str(Rebindable_keys.CurrentCode)",
@@ -652,7 +652,7 @@
 											"actions": [
 												{
 													"id": "delete-key",
-													"objectClass": "game_keyboard_hold",
+													"objectClass": "keyboard_hold",
 													"sid": 528286725378303,
 													"parameters": {
 														"key": "str(Rebindable_keys.CurrentCode)"
@@ -669,7 +669,7 @@
 												},
 												{
 													"id": "add-key",
-													"objectClass": "game_keyboard_hold",
+													"objectClass": "keyboard_hold",
 													"sid": 437102632910165,
 													"parameters": {
 														"key": "str(Rebindable_keys.CurrentCode)",
@@ -705,7 +705,7 @@
 						},
 						{
 							"id": "has-key",
-							"objectClass": "game_keyboard_tap",
+							"objectClass": "keyboard_tap",
 							"sid": 904655324904373,
 							"parameters": {
 								"key": "str(Keyboard.LastKeyCode)"
@@ -719,7 +719,7 @@
 							"sid": 711102591424144,
 							"parameters": {
 								"name": "\"onclick\"",
-								"string": "game_keyboard_tap.Get(str(Keyboard.LastKeyCode))",
+								"string": "keyboard_tap.Get(str(Keyboard.LastKeyCode))",
 								"forward-params": "0"
 							}
 						}
@@ -733,7 +733,7 @@
 			"conditions": [
 				{
 					"id": "for-each-key",
-					"objectClass": "game_keyboard_hold",
+					"objectClass": "keyboard_hold",
 					"sid": 790061835541629
 				},
 				{
@@ -741,7 +741,7 @@
 					"objectClass": "Keyboard",
 					"sid": 516125853396471,
 					"parameters": {
-						"keycode": "int(game_keyboard_hold.CurrentKey)"
+						"keycode": "int(keyboard_hold.CurrentKey)"
 					}
 				}
 			],
@@ -769,7 +769,7 @@
 							"sid": 447896556918028,
 							"parameters": {
 								"name": "\"onclick\"",
-								"string": "game_keyboard_hold.CurrentValue",
+								"string": "keyboard_hold.CurrentValue",
 								"forward-params": "0"
 							}
 						}
@@ -777,6 +777,48 @@
 					"sid": 349258563666063
 				}
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-gamepad-connected",
+					"objectClass": "Gamepad",
+					"sid": 650178076892667
+				}
+			],
+			"actions": [
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 390897526733005,
+					"parameters": {
+						"message": "\"Только не говори мне, что хочешь играть с геймпада! Их поддержка - сущий кошмар... :-(\"&newline&\"Модель геймпада: \"&Gamepad.GamepadID(Gamepad.GamepadIndex)"
+					}
+				}
+			],
+			"sid": 214420102338177
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-gamepad-disconnected",
+					"objectClass": "Gamepad",
+					"sid": 153757421809113
+				}
+			],
+			"actions": [
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 271714689650102,
+					"parameters": {
+						"message": "\"Слава Богу, ты передумал! :-)\""
+					}
+				}
+			],
+			"sid": 710140983566039
 		},
 		{
 			"eventType": "block",
@@ -794,13 +836,80 @@
 				{
 					"id": "alert",
 					"objectClass": "Browser",
-					"sid": 356510018889001,
+					"sid": 487592450831721,
+					"disabled": true,
 					"parameters": {
-						"message": "Gamepad.LastButton(0)"
+						"message": "Gamepad.LastButton(0)&\": \"&Gamepad.RawButton(0, Gamepad.LastButton(0))"
+					}
+				},
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 136338215333012,
+					"disabled": true,
+					"parameters": {
+						"message": "\"Ого! Вижу геймпад c \"&Gamepad.RawAxisCount(0)&\" осями\""
+					}
+				},
+				{
+					"id": "call-mapped-function",
+					"objectClass": "Functions",
+					"sid": 607993507348776,
+					"parameters": {
+						"name": "\"onclick\"",
+						"string": "gamepad_tap.Get(str(Gamepad.LastButton(0)))",
+						"forward-params": "0"
 					}
 				}
 			],
 			"sid": 104526680856725
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "has-gamepads",
+					"objectClass": "Gamepad",
+					"sid": 724625950649959
+				},
+				{
+					"id": "for-each-key",
+					"objectClass": "gamepad_hold",
+					"sid": 468297381819351
+				},
+				{
+					"id": "compare-two-values",
+					"objectClass": "System",
+					"sid": 462630044724337,
+					"parameters": {
+						"first-value": "Gamepad.Button(0, int(gamepad_hold.CurrentKey)) / 100",
+						"comparison": 5,
+						"second-value": "0.2"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "call-mapped-function",
+					"objectClass": "Functions",
+					"sid": 341890918443265,
+					"parameters": {
+						"name": "\"onclick\"",
+						"string": "gamepad_hold.CurrentValue",
+						"forward-params": "0"
+					}
+				},
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 391878233130335,
+					"disabled": true,
+					"parameters": {
+						"message": "Gamepad.Button(0, int(gamepad_hold.CurrentKey))&\": \"&Gamepad.RawButton(0, Gamepad.LastButton(0))"
+					}
+				}
+			],
+			"sid": 137520388052562
 		},
 		{
 			"eventType": "block",
@@ -3597,7 +3706,7 @@
 					"conditions": [
 						{
 							"id": "for-each-key",
-							"objectClass": "game_keyboard_tap",
+							"objectClass": "keyboard_tap",
 							"sid": 735957733036729
 						}
 					],
@@ -3609,7 +3718,7 @@
 							"conditions": [
 								{
 									"id": "compare-current-value",
-									"objectClass": "game_keyboard_tap",
+									"objectClass": "keyboard_tap",
 									"sid": 726300352244905,
 									"parameters": {
 										"comparison": 0,
@@ -3623,7 +3732,7 @@
 									"objectClass": "Functions",
 									"sid": 193641505844704,
 									"parameters": {
-										"value": "int(game_keyboard_tap.CurrentKey)"
+										"value": "int(keyboard_tap.CurrentKey)"
 									}
 								},
 								{
@@ -3632,7 +3741,7 @@
 									"sid": 969812622772167,
 									"parameters": {
 										"type": "log",
-										"message": "game_keyboard_tap.CurrentKey&\" \"&game_keyboard_tap.CurrentValue"
+										"message": "keyboard_tap.CurrentKey&\" \"&keyboard_tap.CurrentValue"
 									}
 								}
 							],
@@ -3645,7 +3754,7 @@
 					"conditions": [
 						{
 							"id": "for-each-key",
-							"objectClass": "game_keyboard_hold",
+							"objectClass": "keyboard_hold",
 							"sid": 420598322093278
 						}
 					],
@@ -3657,7 +3766,7 @@
 							"conditions": [
 								{
 									"id": "compare-current-value",
-									"objectClass": "game_keyboard_hold",
+									"objectClass": "keyboard_hold",
 									"sid": 886925596417647,
 									"parameters": {
 										"comparison": 0,
@@ -3671,7 +3780,7 @@
 									"objectClass": "Functions",
 									"sid": 360826548755333,
 									"parameters": {
-										"value": "int(game_keyboard_hold.CurrentKey)"
+										"value": "int(keyboard_hold.CurrentKey)"
 									}
 								},
 								{
@@ -3680,7 +3789,7 @@
 									"sid": 932963418417231,
 									"parameters": {
 										"type": "log",
-										"message": "game_keyboard_hold.CurrentKey&\" \"&game_keyboard_hold.CurrentValue"
+										"message": "keyboard_hold.CurrentKey&\" \"&keyboard_hold.CurrentValue"
 									}
 								}
 							],
