@@ -16,6 +16,11 @@
 			"behaviorId": "Tween",
 			"name": "Tween",
 			"sid": 896007072800846
+		},
+		{
+			"behaviorId": "Pin",
+			"name": "Pin",
+			"sid": 974957352399290
 		}
 	],
 	"effectTypes": [],

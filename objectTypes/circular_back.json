@@ -1,29 +1,35 @@
 {
-	"name": "Gamepad_buttons",
+	"name": "circular_back",
 	"plugin-id": "Sprite",
-	"sid": 101007301575872,
+	"sid": 432106270812422,
 	"isGlobal": false,
 	"instanceVariables": [],
-	"behaviorTypes": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 892815512147660
+		}
+	],
 	"effectTypes": [],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 250,
-						"height": 250,
+						"width": 110,
+						"height": 110,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 57726,
+						"imageSpriteId": 5708326,
 						"useCollisionPoly": true,
 						"duration": 1
 					}
 				],
-				"sid": 774338933357925,
+				"sid": 556559514409459,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

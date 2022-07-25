@@ -1,0 +1,26 @@
+{
+	"name": "MapButton",
+	"plugin-id": "Button",
+	"sid": 380757978548769,
+	"instanceVariables": [
+		{
+			"name": "map_id",
+			"type": "string",
+			"desc": "",
+			"sid": 819307955823206
+		},
+		{
+			"name": "action",
+			"type": "number",
+			"desc": "",
+			"sid": 576330356459097
+		}
+	],
+	"behaviorTypes": [],
+	"members": [
+		"delete_map",
+		"rename_map",
+		"load_map",
+		"download_map"
+	]
+}

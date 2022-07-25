@@ -1,0 +1,26 @@
+{
+	"name": "scroll_zone",
+	"plugin-id": "TiledBg",
+	"sid": 208053616970905,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 119375743480254
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 16,
+		"height": 16,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 3928112,
+		"useCollisionPoly": true
+	}
+}

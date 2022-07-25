@@ -1,0 +1,14 @@
+{
+	"name": "RoadPoints",
+	"plugin-id": "Arr",
+	"sid": 675536397253531,
+	"isGlobal": true,
+	"instanceVariables": [
+		{
+			"name": "loop",
+			"type": "boolean",
+			"desc": "",
+			"sid": 292733097917471
+		}
+	]
+}

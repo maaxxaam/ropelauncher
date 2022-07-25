@@ -1,0 +1,14 @@
+{
+	"name": "AddObject",
+	"plugin-id": "Button",
+	"sid": 839913678499981,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 912349081785991
+		}
+	]
+}

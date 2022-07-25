@@ -1,0 +1,14 @@
+{
+	"name": "subtract_ten",
+	"plugin-id": "Button",
+	"sid": 890430062476339,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 172912136723874
+		}
+	]
+}

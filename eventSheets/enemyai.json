@@ -2,72 +2,6 @@
 	"name": "EnemyAI",
 	"events": [
 		{
-			"functionName": "CreateAI_Car",
-			"functionDescription": "Make a Car instance become controlled by AI",
-			"functionCategory": "AI",
-			"functionReturnType": "none",
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "Car_UID",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "UID of a Car you want to make into AI-controlled",
-					"sid": 953810398379681
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [
-				{
-					"id": "pick-by-unique-id",
-					"objectClass": "Car",
-					"sid": 200012251232948,
-					"parameters": {
-						"unique-id": "Car_UID"
-					}
-				},
-				{
-					"id": "pick-nth-child",
-					"objectClass": "Car",
-					"sid": 673637447160380,
-					"parameters": {
-						"child": "car_edge_collision",
-						"instance": "0"
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "set-boolean-instvar",
-					"objectClass": "Car",
-					"sid": 406021382927205,
-					"parameters": {
-						"instance-variable": "Player",
-						"value": "false"
-					}
-				},
-				{
-					"id": "set-default-controls",
-					"objectClass": "Car",
-					"sid": 459601591306575,
-					"behaviorType": "Car",
-					"parameters": {
-						"default-controls": false
-					}
-				},
-				{
-					"id": "set-instvar-value",
-					"objectClass": "car_edge_collision",
-					"sid": 369535747817201,
-					"parameters": {
-						"instance-variable": "ToCheckpoint",
-						"value": "0"
-					}
-				}
-			],
-			"sid": 253735775079773
-		},
-		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -83,7 +17,7 @@
 					"objectClass": "checkpoint",
 					"sid": 816085148281076,
 					"parameters": {
-						"instance-variable": "IsEnd"
+						"instance-variable": "isEnd"
 					}
 				},
 				{
@@ -749,18 +683,10 @@
 									],
 									"actions": [
 										{
-											"id": "alert",
-											"objectClass": "Browser",
-											"sid": 217390784862438,
-											"disabled": true,
-											"parameters": {
-												"message": "\"far enough\""
-											}
-										},
-										{
 											"id": "set-eventvar-value",
 											"objectClass": "System",
 											"sid": 860179987438270,
+											"disabled": true,
 											"parameters": {
 												"variable": "AngleToNode",
 												"value": "angle(posx, posy, Car.X, Car.Y) + 180"
@@ -773,6 +699,35 @@
 									],
 									"sid": 384600729083323,
 									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "is-overlapping-another-object",
+													"objectClass": "AIGoal",
+													"sid": 113833409513697,
+													"parameters": {
+														"object": "meshedRoad"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "alert",
+													"objectClass": "Browser",
+													"sid": 541157234820903,
+													"disabled": true,
+													"parameters": {
+														"message": "\"far enough\""
+													}
+												},
+												{
+													"type": "script",
+													"script": "let car = runtime.objects.Car.getFirstPickedInstance();\nlet road = runtime.objects.meshedRoad.getFirstPickedInstance();\nlet index = road.getParent().instVars.point;\nlet curve = RoadEditor.track.segments[index];\nlet vector = curve.getTangent(curve.getClosestPoint(new Vector(car.x, car.y)));\nlocalVars.AngleToNode = -vector.angleSigned(new Vector(1, 0));"
+												}
+											],
+											"sid": 978234674639241
+										},
 										{
 											"eventType": "block",
 											"conditions": [

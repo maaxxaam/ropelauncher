@@ -1,0 +1,33 @@
+{
+	"name": "map_back",
+	"plugin-id": "NinePatch",
+	"sid": 917787962066667,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "index",
+			"type": "number",
+			"desc": "",
+			"sid": 994262371447096
+		},
+		{
+			"name": "async_val",
+			"type": "string",
+			"desc": "",
+			"sid": 285856422749618
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"image": {
+		"width": 584,
+		"height": 548,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 5678771,
+		"useCollisionPoly": true
+	}
+}

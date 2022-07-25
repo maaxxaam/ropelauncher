@@ -223,6 +223,30 @@
 			"bundled": false
 		},
 		{
+			"type": "plugin",
+			"id": "Date",
+			"name": "Date",
+			"author": "Scirra",
+			"version": "r302",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "TextBox",
+			"name": "Text input",
+			"author": "Scirra",
+			"version": "r302",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Json",
+			"name": "JSON",
+			"author": "Scirra",
+			"version": "r302",
+			"bundled": false
+		},
+		{
 			"type": "behavior",
 			"id": "Pin",
 			"name": "Pin",
@@ -312,6 +336,14 @@
 		},
 		{
 			"type": "behavior",
+			"id": "Anchor",
+			"name": "Anchor",
+			"author": "Scirra",
+			"version": "r302",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
 			"id": "CV_BoundedDragnDrop",
 			"name": "Bounded Drag & Drop",
 			"author": "Chadori",
@@ -354,14 +386,6 @@
 			"type": "behavior",
 			"id": "solid",
 			"name": "Solid",
-			"author": "Scirra",
-			"version": "r302",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
-			"id": "Anchor",
-			"name": "Anchor",
 			"author": "Scirra",
 			"version": "r302",
 			"bundled": false
@@ -442,6 +466,14 @@
 			"type": "effect",
 			"id": "exposure",
 			"name": "Exposure",
+			"author": "Scirra",
+			"version": "r302",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "tint",
+			"name": "Tint",
 			"author": "Scirra",
 			"version": "r302",
 			"bundled": false
@@ -623,7 +655,73 @@
 			"gamepad_tap",
 			"gamepad_axis",
 			"garage_downgrade_char",
-			"Gamepad_buttons"
+			"Rebindable_gamepad",
+			"scale",
+			"SnapZone",
+			"scale_text",
+			"EdBack",
+			"type",
+			"CreateObject",
+			"add_ten",
+			"subtract_ten",
+			"SetAngle",
+			"Angle_text",
+			"Cancel",
+			"TurnAngle_text",
+			"SetTurnAngle",
+			"subtype",
+			"AddObject",
+			"SaveMap",
+			"ToMenu",
+			"map_back",
+			"map_names",
+			"map_dates",
+			"map_name_txt",
+			"map_date_txt",
+			"load_map",
+			"rename_map",
+			"delete_map",
+			"welcome_txt",
+			"download_map",
+			"Date",
+			"Snap",
+			"create_map",
+			"map_new_name",
+			"DefLvl",
+			"ThisLvl",
+			"scroll_zone",
+			"decor_subs",
+			"bonus_subs",
+			"obstacle_subs",
+			"current_subs",
+			"changes_buffer",
+			"UndoAction",
+			"RedoAction",
+			"DestroyObject",
+			"base_types",
+			"Start",
+			"Z_up",
+			"Z_down",
+			"Z_top",
+			"Z_bottom",
+			"choose_back",
+			"Rapid",
+			"meshedRoad",
+			"control_handle",
+			"RoadPoints",
+			"anchor_handle",
+			"control_line",
+			"loop",
+			"track_start",
+			"track_end",
+			"start_brackets",
+			"JSON",
+			"angle_slider",
+			"RoadMode",
+			"zoom_slider",
+			"DefJSON",
+			"circular_back",
+			"TestLevel"
 		],
 		"subfolders": []
 	},
@@ -645,6 +743,7 @@
 			"LoadableDict",
 			"RocketTarget",
 			"AIGoal",
+			"MapButton",
 			"MapElement",
 			"UpgradeBar"
 		],
@@ -652,10 +751,10 @@
 	},
 	"layouts": {
 		"items": [
+			"Editor",
+			"EdMenu",
+			"EdResources",
 			"Loaded_lvl",
-			"Lvl1",
-			"Lvl2",
-			"Lvl3",
 			"Resources",
 			"Menu",
 			"ParkingLot"
@@ -664,6 +763,8 @@
 	},
 	"eventSheets": {
 		"items": [
+			"EdSheet",
+			"EdMenuSheet",
 			"GameSheet",
 			"MenuSheet",
 			"AllEvents",
@@ -677,6 +778,14 @@
 	"rootFileFolders": {
 		"script": {
 			"items": [
+				{
+					"name": "bezier.js",
+					"type": "application/javascript",
+					"sid": 943283524669890,
+					"script-info": {
+						"purpose": "none"
+					}
+				},
 				{
 					"name": "main.js",
 					"type": "application/javascript",
@@ -850,6 +959,54 @@
 		"general": {
 			"items": [
 				{
+					"name": "Decors.json",
+					"type": "application/json",
+					"sid": 405627043253752,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Obstacles.json",
+					"type": "application/json",
+					"sid": 513346659063334,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "DefaultMap.json",
+					"type": "application/json",
+					"sid": 243153119042512,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Sliders.css",
+					"type": "text/css",
+					"sid": 449280773656200,
+					"file-info": {
+						"purpose": "stylesheet"
+					}
+				},
+				{
+					"name": "Bonuses.json",
+					"type": "application/json",
+					"sid": 386932423550192,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Types.json",
+					"type": "application/json",
+					"sid": 865137354183596,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
 					"name": "Flags_defaults.json",
 					"type": "application/json",
 					"sid": 726763313289019,
@@ -874,14 +1031,6 @@
 					}
 				},
 				{
-					"name": "map_966518302.json",
-					"type": "application/json",
-					"sid": 699486407076714,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
 					"name": "map_295869923.json",
 					"type": "application/json",
 					"sid": 814084998640234,
@@ -893,6 +1042,14 @@
 					"name": "map_791230538.json",
 					"type": "application/json",
 					"sid": 508142991714202,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "map_966518302.json",
+					"type": "application/json",
+					"sid": 139730432023447,
 					"file-info": {
 						"purpose": "none"
 					}
@@ -1016,7 +1173,7 @@
 		"zAxisScale": "normalized",
 		"fov": 0.7853981633974483,
 		"useLoaderLayout": false,
-		"fullscreenMode": "letterbox-scale",
+		"fullscreenMode": "scale-outer",
 		"fullscreenQuality": "high",
 		"viewportFit": "auto",
 		"backgroundColor": [

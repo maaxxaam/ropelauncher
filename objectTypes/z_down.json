@@ -1,0 +1,14 @@
+{
+	"name": "Z_down",
+	"plugin-id": "Button",
+	"sid": 448249950415245,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 871173245284467
+		}
+	]
+}

@@ -1,0 +1,7665 @@
+{
+	"name": "EdSheet",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "Scrolling"
+		},
+		{
+			"eventType": "comment",
+			"text": "Action type constants"
+		},
+		{
+			"eventType": "variable",
+			"name": "ACTION_DELETE",
+			"type": "string",
+			"initialValue": "Delete",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 433891990444951
+		},
+		{
+			"eventType": "variable",
+			"name": "ACTION_MODIFY",
+			"type": "string",
+			"initialValue": "Modify",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 715312206313320
+		},
+		{
+			"eventType": "variable",
+			"name": "ACTION_ADD",
+			"type": "string",
+			"initialValue": "Add",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 264717688872807
+		},
+		{
+			"eventType": "variable",
+			"name": "ACTION_ROAD_NEW",
+			"type": "string",
+			"initialValue": "RoadNew",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 365463761812091
+		},
+		{
+			"eventType": "variable",
+			"name": "ACTION_ROAD_REMOVE",
+			"type": "string",
+			"initialValue": "RoadRemove",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 920304838242632
+		},
+		{
+			"eventType": "variable",
+			"name": "ACTION_ROAD_INSERT",
+			"type": "string",
+			"initialValue": "RoadInsert",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 465076596310663
+		},
+		{
+			"eventType": "variable",
+			"name": "ACTION_ROAD_MOVE",
+			"type": "string",
+			"initialValue": "RoadMove",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 503414209935157
+		},
+		{
+			"eventType": "variable",
+			"name": "ACTION_ROAD_LOOP",
+			"type": "string",
+			"initialValue": "RoadLoop",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 415989804152744
+		},
+		{
+			"eventType": "comment",
+			"text": "Editor state constants"
+		},
+		{
+			"eventType": "variable",
+			"name": "EDITOR_NEW",
+			"type": "string",
+			"initialValue": "New",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 665750619160415
+		},
+		{
+			"eventType": "variable",
+			"name": "EDITOR_MODIFY",
+			"type": "string",
+			"initialValue": "Modify",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 187409594517970
+		},
+		{
+			"eventType": "variable",
+			"name": "EDITOR_READY",
+			"type": "string",
+			"initialValue": "Ready",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 674999423969893
+		},
+		{
+			"eventType": "variable",
+			"name": "EDITOR_ROAD",
+			"type": "string",
+			"initialValue": "Road",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": true,
+			"sid": 258038864122081
+		},
+		{
+			"eventType": "comment",
+			"text": "Constants Over"
+		},
+		{
+			"eventType": "variable",
+			"name": "MapSlot",
+			"type": "number",
+			"initialValue": "-1",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 528458810781348
+		},
+		{
+			"eventType": "variable",
+			"name": "EdState",
+			"type": "string",
+			"initialValue": "NONE",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 454021335682234
+		},
+		{
+			"eventType": "variable",
+			"name": "EditUID",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 287541508327671
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 899755105326270
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 689190149648971,
+					"parameters": {
+						"variable": "EdState",
+						"value": "\"NONE\""
+					}
+				},
+				{
+					"callFunction": "DisableScrolling",
+					"sid": 609124955480099,
+					"parameters": [
+						"LayoutWidth / 2",
+						"LayoutHeight / 2"
+					]
+				},
+				{
+					"type": "script",
+					"script": "RoadEditor = new Editor.CurveEditor();"
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 246353665715332,
+					"parameters": {
+						"variable": "EdState",
+						"value": "EDITOR_READY"
+					}
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 280209638056083,
+					"parameters": {
+						"tag": "\"bonuses\"",
+						"file": "Bonuses.json"
+					}
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 738962485304961,
+					"parameters": {
+						"tag": "\"decor\"",
+						"file": "Decors.json"
+					}
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 959676884163748,
+					"parameters": {
+						"tag": "\"obstacles\"",
+						"file": "Obstacles.json"
+					}
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 923360419084916,
+					"parameters": {
+						"tag": "\"base_types\"",
+						"file": "Types.json"
+					}
+				}
+			],
+			"sid": 157274110196663,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Load existing map"
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "start-group",
+							"objectClass": "Browser",
+							"sid": 322615933168352,
+							"parameters": {
+								"group-name": "\"Loading map \"&MapSlot&\"...\""
+							}
+						},
+						{
+							"id": "set-selection",
+							"objectClass": "choose_back",
+							"sid": 969370858111010,
+							"parameters": {
+								"index": "JSON.Get(\"background\")"
+							}
+						}
+					],
+					"sid": 448984671851948,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "JSON",
+									"sid": 517829075861228,
+									"parameters": {
+										"path": "\"road_format\"",
+										"cmp": 0,
+										"value": "\"bezier\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "load",
+									"objectClass": "RoadPoints",
+									"sid": 969799458191763,
+									"parameters": {
+										"json": "JSON.GetAsCompactString(\"road_points\")"
+									}
+								},
+								{
+									"type": "script",
+									"script": "let array = runtime.objects.RoadPoints.getFirstInstance();\nRoadEditor.loadFromCArray(array);\nRoadEditor.hideFullEditor();"
+								}
+							],
+							"sid": 408287451318885
+						},
+						{
+							"eventType": "script",
+							"script": "let looped = runtime.objects.loop.getFirstInstance();\nlooped.isChecked = RoadEditor.track.loop;"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "JSON",
+									"sid": 372683726883987,
+									"parameters": {
+										"path": "\"objects\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "CreateObject",
+									"sid": 868948403523216,
+									"parameters": [
+										"JSON.Get(\".type\")",
+										"JSON.Get(\".x\")",
+										"JSON.Get(\".y\")",
+										"JSON.Get(\".angle\")"
+									]
+								}
+							],
+							"sid": 174580764401156
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "end-group",
+									"objectClass": "Browser",
+									"sid": 629698749911385
+								}
+							],
+							"sid": 771590311736489
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "has-parent",
+							"objectClass": "slider_handle",
+							"sid": 424145263539129
+						},
+						{
+							"id": "pick-parent",
+							"objectClass": "slider_handle",
+							"sid": 470765416721864,
+							"parameters": {
+								"parent": "zoom_slider",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 969929922142808,
+							"parameters": {
+								"seconds": "dt"
+							}
+						},
+						{
+							"id": "set-enabled",
+							"objectClass": "slider_handle",
+							"sid": 250002257368523,
+							"behaviorType": "Anchor",
+							"parameters": {
+								"state": "disabled"
+							}
+						},
+						{
+							"id": "setboundy10",
+							"objectClass": "slider_handle",
+							"sid": 584012706479505,
+							"behaviorType": "BoundedDragDrop",
+							"parameters": {
+								"minimum_boundy0": "zoom_slider.Y - zoom_slider.Width",
+								"maximum_boundy1": "zoom_slider.Y"
+							}
+						},
+						{
+							"callFunction": "UpdateScale",
+							"sid": 909610726772108,
+							"parameters": [
+								"1"
+							]
+						}
+					],
+					"sid": 716720812299782
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 917670950143644,
+							"parameters": {
+								"object": "angle_slider"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 101146402051976,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 376059214234619,
+									"parameters": {
+										"object": "Angle_text",
+										"expression": "Angle_text.LayerName",
+										"comparison": 0,
+										"value": "angle_slider.LayerName"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "pin-to-object-distance",
+									"objectClass": "angle_slider",
+									"sid": 206893580426739,
+									"behaviorType": "Pin",
+									"parameters": {
+										"pin-to": "Angle_text",
+										"mode": "bar-style"
+									}
+								}
+							],
+							"sid": 212686881794155
+						}
+					]
+				},
+				{
+					"eventType": "variable",
+					"name": "scale_factor",
+					"type": "number",
+					"initialValue": "1.5",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": true,
+					"sid": 569468809396204
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-on-mobile",
+							"objectClass": "PlatformInfo",
+							"sid": 773877609519287,
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-scale",
+							"objectClass": "System",
+							"sid": 180863494183347,
+							"parameters": {
+								"layer": "2",
+								"scale": "scale_factor"
+							}
+						},
+						{
+							"id": "set-layer-scroll",
+							"objectClass": "System",
+							"sid": 313907838230263,
+							"disabled": true,
+							"parameters": {
+								"layer": "2",
+								"scroll-x": "360",
+								"scroll-y": "640"
+							}
+						},
+						{
+							"id": "set-layer-scale",
+							"objectClass": "System",
+							"sid": 851880079071678,
+							"parameters": {
+								"layer": "3",
+								"scale": "scale_factor"
+							}
+						},
+						{
+							"id": "set-layer-scale",
+							"objectClass": "System",
+							"sid": 730897923674202,
+							"parameters": {
+								"layer": "4",
+								"scale": "scale_factor"
+							}
+						},
+						{
+							"id": "set-layer-scale",
+							"objectClass": "System",
+							"sid": 808620666672332,
+							"parameters": {
+								"layer": "5",
+								"scale": "scale_factor"
+							}
+						},
+						{
+							"id": "set-layer-scale",
+							"objectClass": "System",
+							"sid": 980608632367414,
+							"parameters": {
+								"layer": "6",
+								"scale": "scale_factor"
+							}
+						}
+					],
+					"sid": 494348929589981
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 850805989685921,
+							"parameters": {
+								"variable": "game_mode",
+								"comparison": 1,
+								"value": "\"Test\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "comment",
+							"text": "Reset the operation buffer"
+						},
+						{
+							"id": "set-size",
+							"objectClass": "changes_buffer",
+							"sid": 455230207615758,
+							"parameters": {
+								"width": "0",
+								"height": "Self.Height",
+								"depth": "1"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "changes_buffer",
+							"sid": 969303028104837,
+							"parameters": {
+								"instance-variable": "current_action",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "changes_buffer",
+							"sid": 174736873160477,
+							"parameters": {
+								"instance-variable": "last_action",
+								"value": "-1"
+							}
+						},
+						{
+							"id": "set-enabled",
+							"objectClass": "UndoAction",
+							"sid": 862789480401744,
+							"parameters": {
+								"mode": "disabled"
+							}
+						},
+						{
+							"id": "set-enabled",
+							"objectClass": "RedoAction",
+							"sid": 691802857975487,
+							"parameters": {
+								"mode": "disabled"
+							}
+						}
+					],
+					"sid": 744601220471374
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 912900070580587
+						}
+					],
+					"actions": [],
+					"sid": 765737545985166,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "changes_buffer",
+									"sid": 337789485397052,
+									"parameters": {
+										"instance-variable": "current_action",
+										"comparison": 3,
+										"value": "Self.last_action"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-enabled",
+									"objectClass": "RedoAction",
+									"sid": 450602053384444,
+									"parameters": {
+										"mode": "enabled"
+									}
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "UndoAction",
+									"sid": 553904489461135,
+									"parameters": {
+										"mode": "enabled"
+									}
+								}
+							],
+							"sid": 350057282595395,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-instance-variable",
+											"objectClass": "changes_buffer",
+											"sid": 446984015818682,
+											"parameters": {
+												"instance-variable": "current_action",
+												"comparison": 0,
+												"value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-enabled",
+											"objectClass": "UndoAction",
+											"sid": 628280913430654,
+											"parameters": {
+												"mode": "disabled"
+											}
+										}
+									],
+									"sid": 833651065361127
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 113047109559058
+								}
+							],
+							"actions": [
+								{
+									"id": "set-enabled",
+									"objectClass": "RedoAction",
+									"sid": 195786009904641,
+									"parameters": {
+										"mode": "disabled"
+									}
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "UndoAction",
+									"sid": 780152883207158,
+									"parameters": {
+										"mode": "enabled"
+									}
+								}
+							],
+							"sid": 463563976396013,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-instance-variable",
+											"objectClass": "changes_buffer",
+											"sid": 789305392644448,
+											"parameters": {
+												"instance-variable": "last_action",
+												"comparison": 0,
+												"value": "-1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-enabled",
+											"objectClass": "UndoAction",
+											"sid": 657539085210183,
+											"parameters": {
+												"mode": "disabled"
+											}
+										}
+									],
+									"sid": 169023123723257
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-any-completed",
+					"objectClass": "AJAX",
+					"sid": 450034782296500
+				}
+			],
+			"actions": [],
+			"sid": 398258316179797,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 661117024736326,
+							"parameters": {
+								"object": "LoadableDict",
+								"expression": "LoadableDict.tag",
+								"comparison": 0,
+								"value": "AJAX.Tag"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "load",
+							"objectClass": "LoadableDict",
+							"sid": 218952800910913,
+							"parameters": {
+								"json": "AJAX.LastData"
+							}
+						}
+					],
+					"sid": 197747331218811
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 650523590160497,
+							"parameters": {
+								"first-value": "AJAX.Tag",
+								"comparison": 0,
+								"second-value": "\"bonuses\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "load",
+							"objectClass": "current_subs",
+							"sid": 468262184425847,
+							"parameters": {
+								"json": "bonus_subs.AsJSON"
+							}
+						}
+					],
+					"sid": 976970979430856
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "MapElement",
+					"sid": 734059596971396
+				}
+			],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "MapElement",
+					"sid": 386999572686789,
+					"parameters": {
+						"mode": "disable",
+						"effect": "\"TintSelected\""
+					}
+				}
+			],
+			"sid": 544760595044569
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "On State Changed",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 446671333785173,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 328684915098442,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 618528104180602
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "DisableScrolling",
+									"sid": 552674768661679,
+									"parameters": [
+										"scrollx",
+										"scrolly"
+									]
+								},
+								{
+									"callFunction": "EnableScrolling",
+									"sid": 739169850110496,
+									"parameters": [
+										true,
+										true,
+										"LayoutWidth - ViewportWidth(\"Level\") / 2",
+										"LayoutHeight - ViewportHeight(\"Level\") / 2",
+										"ViewportWidth(\"Level\") / 2",
+										"ViewportHeight(\"Level\") / 2",
+										false
+									]
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 706795880285348,
+									"parameters": {
+										"layer": "\"GUI_root\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 474960780881216,
+									"parameters": {
+										"group-name": "\"GUI_root\"",
+										"state": "activated"
+									}
+								}
+							],
+							"sid": 396441569149136
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 970807498923600
+						}
+					],
+					"actions": [],
+					"sid": 879482825438442,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 672486987545095
+								}
+							],
+							"actions": [
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 335551868835661,
+									"parameters": {
+										"layer": "\"GUI_root\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 418582423415541,
+									"parameters": {
+										"group-name": "\"GUI_root\"",
+										"state": "deactivated"
+									}
+								}
+							],
+							"sid": 318014805964991
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 400927068806200,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_NEW"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 141147873120367,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 723384346756737
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "DisableScrolling",
+									"sid": 397605571704416,
+									"parameters": [
+										"scrollx",
+										"scrolly"
+									]
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 944496977968858,
+									"parameters": {
+										"layer": "\"GUI_create\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 775777611609457,
+									"parameters": {
+										"group-name": "\"GUI_create\"",
+										"state": "activated"
+									}
+								}
+							],
+							"sid": 406565223440176
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 342257877224780
+						}
+					],
+					"actions": [],
+					"sid": 499657872649068,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 972850717453044
+								}
+							],
+							"actions": [
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 673263823349892,
+									"parameters": {
+										"layer": "\"GUI_create\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 943743457818239,
+									"parameters": {
+										"group-name": "\"GUI_create\"",
+										"state": "deactivated"
+									}
+								}
+							],
+							"sid": 646381113968074
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 265752945019447,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_MODIFY"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 230068906368110,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 869546982776409
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "DisableScrolling",
+									"sid": 448276486139320,
+									"parameters": [
+										"scrollx",
+										"scrolly"
+									]
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 616801748028289,
+									"parameters": {
+										"layer": "\"GUI_modify\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 421199569241253,
+									"parameters": {
+										"group-name": "\"GUI_modify\"",
+										"state": "activated"
+									}
+								}
+							],
+							"sid": 822513070405924
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 333396591880642
+						}
+					],
+					"actions": [],
+					"sid": 941491393514538,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 357405364510279
+								}
+							],
+							"actions": [
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 948023339831518,
+									"parameters": {
+										"layer": "\"GUI_modify\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 322742934307490,
+									"parameters": {
+										"group-name": "\"GUI_modify\"",
+										"state": "deactivated"
+									}
+								}
+							],
+							"sid": 815431927892311
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 544024149191630,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_ROAD"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 990485000629228,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 579157762986521
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "DisableScrolling",
+									"sid": 111417442408992,
+									"parameters": [
+										"scrollx",
+										"scrolly"
+									]
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 497639573060380,
+									"parameters": {
+										"layer": "\"GUI_road\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"type": "script",
+									"script": "RoadEditor.showFullEditor();"
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 247621333258646,
+									"parameters": {
+										"group-name": "\"GUI_road\"",
+										"state": "activated"
+									}
+								}
+							],
+							"sid": 420361944478920
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 304392666482908
+						}
+					],
+					"actions": [],
+					"sid": 795594541132082,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "trigger-once-while-true",
+									"objectClass": "System",
+									"sid": 767288457077750
+								}
+							],
+							"actions": [
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 736082735057519,
+									"parameters": {
+										"layer": "\"GUI_road\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"type": "script",
+									"script": "RoadEditor.hideFullEditor();"
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 597314805939805,
+									"parameters": {
+										"group-name": "\"GUI_road\"",
+										"state": "deactivated"
+									}
+								}
+							],
+							"sid": 563180920873357
+						}
+					]
+				}
+			],
+			"sid": 462233869837648
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "isdragging0",
+					"objectClass": "slider_handle",
+					"sid": 783745464627378,
+					"behaviorType": "BoundedDragDrop"
+				},
+				{
+					"id": "pick-parent",
+					"objectClass": "slider_handle",
+					"sid": 941404037421929,
+					"parameters": {
+						"parent": "zoom_slider",
+						"which": "own"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "UpdateScale",
+					"sid": 642852270758057,
+					"parameters": [
+						"round((slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 60) / 20"
+					]
+				}
+			],
+			"sid": 799129767608662,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 292433496000421
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 795965838596495,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "DisableScrolling",
+							"sid": 265245860039690,
+							"parameters": [
+								"scrollx",
+								"scrolly"
+							]
+						}
+					],
+					"sid": 333145634846477
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "ondrop2",
+					"objectClass": "slider_handle",
+					"sid": 222857839351319,
+					"behaviorType": "BoundedDragDrop"
+				},
+				{
+					"id": "compare-eventvar",
+					"objectClass": "System",
+					"sid": 516275446243628,
+					"parameters": {
+						"variable": "EdState",
+						"comparison": 0,
+						"value": "EDITOR_READY"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "EnableScrolling",
+					"sid": 466113368935181,
+					"parameters": [
+						true,
+						true,
+						"LayoutWidth - ViewportWidth(\"Level\") / 2",
+						"LayoutHeight - ViewportHeight(\"Level\") / 2",
+						"ViewportWidth(\"Level\") / 2",
+						"ViewportHeight(\"Level\") / 2",
+						false
+					]
+				}
+			],
+			"sid": 775841100082132
+		},
+		{
+			"eventType": "comment",
+			"text": "Show object preview"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-selection-changed",
+					"objectClass": "type",
+					"sid": 801982290389706
+				},
+				{
+					"id": "on-clicked",
+					"objectClass": "AddObject",
+					"sid": 544051112331985
+				}
+			],
+			"actions": [],
+			"sid": 835051331453863,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 745568311277064,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_READY"
+							}
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 818604789720164,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_NEW"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 566774630776396,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Destroy prev map element meant to be placed (to be sure)"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MapElement",
+									"sid": 722904381390465,
+									"parameters": {
+										"unique-id": "EditUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "MapElement",
+									"sid": 514015541829936
+								}
+							],
+							"sid": 791924580333738
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "create-object-by-name",
+									"objectClass": "System",
+									"sid": 311970047820117,
+									"parameters": {
+										"object-name": "base_types.Get(str(type.SelectedIndex))",
+										"layer": "\"Level\"",
+										"x": "scrollx",
+										"y": "scrolly",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								}
+							],
+							"sid": 988028977277599,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 255259887116524,
+											"parameters": {
+												"object": "MapElement"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 117353904846289,
+											"parameters": {
+												"variable": "EditUID",
+												"value": "MapElement.UID"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "MapElement",
+											"sid": 291159858187825,
+											"parameters": {
+												"instance-variable": "placed",
+												"value": "false"
+											}
+										},
+										{
+											"id": "set-opacity",
+											"objectClass": "MapElement",
+											"sid": 303729714092226,
+											"parameters": {
+												"opacity": "60"
+											}
+										},
+										{
+											"id": "set-angle",
+											"objectClass": "MapElement",
+											"sid": 256965097173057,
+											"parameters": {
+												"angle": "round(angle(Angle_text.X, Angle_text.y, angle_slider.X, angle_slider.y) / 10) * 10"
+											}
+										},
+										{
+											"id": "set-animation",
+											"objectClass": "MapElement",
+											"sid": 674100572420619,
+											"parameters": {
+												"animation": "current_subs.Get(str(subtype.SelectedIndex))",
+												"from": "beginning"
+											}
+										},
+										{
+											"callFunction": "check_placed",
+											"sid": 470112528565279,
+											"parameters": [
+												"MapElement.UID"
+											]
+										}
+									],
+									"sid": 210399771210680
+								}
+							]
+						}
+					],
+					"isOrBlock": true
+				}
+			],
+			"isOrBlock": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap",
+					"objectClass": "Touch",
+					"sid": 198994141889150
+				}
+			],
+			"actions": [],
+			"sid": 752382778976664,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 393754892855219,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_NEW"
+							}
+						},
+						{
+							"id": "is-checked",
+							"objectClass": "Rapid",
+							"sid": 786982597701192
+						}
+					],
+					"actions": [
+						{
+							"type": "comment",
+							"text": "Finish creating old object and make a new one"
+						},
+						{
+							"callFunction": "AddNewObject",
+							"sid": 546719774613707
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 998155726459543,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_NEW"
+							}
+						}
+					],
+					"sid": 606126694283296,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "create-object-by-name",
+									"objectClass": "System",
+									"sid": 953950639254899,
+									"parameters": {
+										"object-name": "base_types.Get(str(type.SelectedIndex))",
+										"layer": "\"Level\"",
+										"x": "Touch.X(\"Level\")",
+										"y": "Touch.Y(\"Level\")",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								}
+							],
+							"sid": 113334932708394,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 840311377418887,
+											"parameters": {
+												"object": "MapElement"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 966183783611657,
+											"parameters": {
+												"variable": "EditUID",
+												"value": "MapElement.UID"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "MapElement",
+											"sid": 831851697841967,
+											"parameters": {
+												"instance-variable": "placed",
+												"value": "false"
+											}
+										},
+										{
+											"id": "set-opacity",
+											"objectClass": "MapElement",
+											"sid": 218615543287536,
+											"parameters": {
+												"opacity": "60"
+											}
+										},
+										{
+											"id": "set-angle",
+											"objectClass": "MapElement",
+											"sid": 877850991429188,
+											"parameters": {
+												"angle": "round(angle(Angle_text.X, Angle_text.y, angle_slider.X, angle_slider.y) / 10) * 10"
+											}
+										},
+										{
+											"id": "set-animation",
+											"objectClass": "MapElement",
+											"sid": 351288285238343,
+											"parameters": {
+												"animation": "current_subs.Get(str(subtype.SelectedIndex))",
+												"from": "beginning"
+											}
+										},
+										{
+											"callFunction": "check_placed",
+											"sid": 146152136100846,
+											"parameters": [
+												"MapElement.UID"
+											]
+										}
+									],
+									"sid": 257752904865560
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-touching-object",
+							"objectClass": "Touch",
+							"sid": 765405534177572,
+							"parameters": {
+								"object": "MapElement"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "is-touching-object",
+							"objectClass": "Touch",
+							"sid": 630746589768022,
+							"parameters": {
+								"object": "SnapZone"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [],
+					"sid": 190625125554059,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 539638365486221,
+									"parameters": {
+										"variable": "EdState",
+										"comparison": 0,
+										"value": "EDITOR_READY"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 823557121238027,
+									"parameters": {
+										"variable": "EdState",
+										"value": "EDITOR_NEW"
+									}
+								},
+								{
+									"id": "scroll-to-position",
+									"objectClass": "System",
+									"sid": 212725432066590,
+									"parameters": {
+										"x": "Touch.X(\"Level\")",
+										"y": "Touch.Y(\"Level\")"
+									}
+								}
+							],
+							"sid": 741087283485768,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "create-object-by-name",
+											"objectClass": "System",
+											"sid": 683234694654498,
+											"parameters": {
+												"object-name": "base_types.Get(str(type.SelectedIndex))",
+												"layer": "\"Level\"",
+												"x": "scrollx",
+												"y": "scrolly",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										}
+									],
+									"sid": 492655470336128,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-last-created",
+													"objectClass": "System",
+													"sid": 954151436689407,
+													"parameters": {
+														"object": "MapElement"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 436781986712135,
+													"parameters": {
+														"variable": "EditUID",
+														"value": "MapElement.UID"
+													}
+												},
+												{
+													"id": "set-boolean-instvar",
+													"objectClass": "MapElement",
+													"sid": 257250628041740,
+													"parameters": {
+														"instance-variable": "placed",
+														"value": "false"
+													}
+												},
+												{
+													"id": "set-opacity",
+													"objectClass": "MapElement",
+													"sid": 274837372656908,
+													"parameters": {
+														"opacity": "60"
+													}
+												},
+												{
+													"id": "set-angle",
+													"objectClass": "MapElement",
+													"sid": 228480085968825,
+													"parameters": {
+														"angle": "round(angle(Angle_text.X, Angle_text.y, angle_slider.X, angle_slider.y) / 10) * 10"
+													}
+												},
+												{
+													"id": "set-animation",
+													"objectClass": "MapElement",
+													"sid": 640268920947353,
+													"parameters": {
+														"animation": "current_subs.Get(str(subtype.SelectedIndex))",
+														"from": "beginning"
+													}
+												},
+												{
+													"callFunction": "check_placed",
+													"sid": 402815655843177,
+													"parameters": [
+														"MapElement.UID"
+													]
+												}
+											],
+											"sid": 466264523600853
+										}
+									]
+								}
+							],
+							"isOrBlock": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-dragging",
+					"objectClass": "MapElement",
+					"sid": 294129136189466,
+					"behaviorType": "DragDrop"
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "check_placed",
+					"sid": 848940005222656,
+					"parameters": [
+						"MapElement.UID"
+					]
+				}
+			],
+			"sid": 593032830916480,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-touching-object",
+							"objectClass": "Touch",
+							"sid": 520137860032668,
+							"parameters": {
+								"object": "scroll_zone"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "scroll-to-position",
+							"objectClass": "System",
+							"sid": 762743934508865,
+							"parameters": {
+								"x": "lerp(scrollx, Touch.X(\"Level\"), 0.03)",
+								"y": "lerp(scrolly, Touch.Y(\"Level\"), 0.03)"
+							}
+						}
+					],
+					"sid": 951993290051548
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-selection-changed",
+					"objectClass": "subtype",
+					"sid": 109533365639488
+				}
+			],
+			"actions": [
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 817956050814680,
+					"disabled": true,
+					"parameters": {
+						"message": "EditUID"
+					}
+				}
+			],
+			"sid": 248143288916488,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 139862791587314,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "MapElement",
+							"sid": 762942236666553,
+							"parameters": {
+								"animation": "current_subs.Get(str(subtype.SelectedIndex))",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 182391918207641
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 757184357700790,
+					"parameters": {
+						"object": "MapElement"
+					}
+				},
+				{
+					"id": "pick-topbottom",
+					"objectClass": "MapElement",
+					"sid": 238320043726569,
+					"parameters": {
+						"which": "top"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 337797336461488,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 573204005567090,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_MODIFY"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 914733658854053,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MapElement",
+									"sid": 950287600050803,
+									"parameters": {
+										"unique-id": "EditUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 766613047523464,
+									"parameters": {
+										"type": "log",
+										"message": "\"Edit stopped\""
+									}
+								},
+								{
+									"callFunction": "DeselectObject",
+									"sid": 748545132659553,
+									"parameters": [
+										"MapElement.UID"
+									]
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 411855146409118,
+									"parameters": {
+										"variable": "EdState",
+										"value": "EDITOR_READY"
+									}
+								}
+							],
+							"sid": 150294532716583
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 246562859303096
+								}
+							],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 210989560903857,
+									"parameters": {
+										"type": "log",
+										"message": "\"Edit \"&MapElement.UID"
+									}
+								}
+							],
+							"sid": 245474628725151,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 201607205804708,
+											"parameters": {
+												"object": "MapElement"
+											}
+										},
+										{
+											"id": "pick-by-unique-id",
+											"objectClass": "MapElement",
+											"sid": 857763818234381,
+											"parameters": {
+												"unique-id": "EditUID"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 978840002294265,
+											"parameters": {
+												"type": "log",
+												"message": "\"Edit \"&MapElement.UID&\" removed\""
+											}
+										},
+										{
+											"callFunction": "DeselectObject",
+											"sid": 615328722643555,
+											"parameters": [
+												"MapElement.UID"
+											]
+										}
+									],
+									"sid": 194697301069662
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"callFunction": "SelectObject",
+											"sid": 511288390464333,
+											"parameters": [
+												"MapElement.UID"
+											]
+										}
+									],
+									"sid": 322418386173360
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 602121667117608
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 700461518557064,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 487569940929586,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_MODIFY"
+							}
+						},
+						{
+							"callFunction": "SelectObject",
+							"sid": 852659907348688,
+							"parameters": [
+								"MapElement.UID"
+							]
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 674912445008273,
+							"parameters": {
+								"type": "log",
+								"message": "\"Edit \"&MapElement.UID"
+							}
+						}
+					],
+					"sid": 378768565074293
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 289308076306817
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 993100330482522,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_NEW"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 949760796043807,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						},
+						{
+							"id": "is-checked",
+							"objectClass": "Rapid",
+							"sid": 879386134686851,
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "AddNewObject",
+							"sid": 901516859441593
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 284204968124912,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"sid": 544249370494803
+				}
+			]
+		},
+		{
+			"functionName": "check_placed",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "uid",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 452886218102853
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "MapElement",
+					"sid": 526242146379090,
+					"parameters": {
+						"unique-id": "uid"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "MapElement",
+					"sid": 307974744946726,
+					"parameters": {
+						"mode": "disable",
+						"effect": "\"TintRed\""
+					}
+				},
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "MapElement",
+					"sid": 586056558432839,
+					"parameters": {
+						"instance-variable": "can_place",
+						"value": "true"
+					}
+				}
+			],
+			"sid": 223089097971843
+		},
+		{
+			"eventType": "comment",
+			"text": "Rotate selected object with mouse wheel"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-mouse-wheel",
+					"objectClass": "Mouse",
+					"sid": 638260123615218,
+					"parameters": {
+						"direction": "down"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 277386214630929,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "cur",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 412038319863570
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 874662035142030,
+							"parameters": {
+								"key": "left-control"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 156888369781712,
+							"parameters": {
+								"variable": "cur",
+								"value": "round((slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 60) / 20"
+							}
+						},
+						{
+							"callFunction": "UpdateScale",
+							"sid": 547501173720148,
+							"parameters": [
+								"clamp(cur - 0.05, 0, 3)"
+							]
+						}
+					],
+					"sid": 166141084241629,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 454066209383006,
+									"parameters": {
+										"variable": "EdState",
+										"comparison": 0,
+										"value": "EDITOR_READY"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "EnableScrolling",
+									"sid": 256440596080874,
+									"parameters": [
+										true,
+										true,
+										"LayoutWidth - ViewportWidth(\"Level\") / 2",
+										"LayoutHeight - ViewportHeight(\"Level\") / 2",
+										"ViewportWidth(\"Level\") / 2",
+										"ViewportHeight(\"Level\") / 2",
+										false
+									]
+								}
+							],
+							"sid": 941161573590967
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 596818219950788
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 920117818818223,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_NEW"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 794695064850973,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeAngle",
+							"sid": 827043705063685,
+							"parameters": [
+								"MapElement.Angle - 10"
+							]
+						}
+					],
+					"sid": 251497396529764
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 134614316920821
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 732810928662421,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_MODIFY"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 591758640360907,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeAngle",
+							"sid": 603350882549686,
+							"parameters": [
+								"MapElement.Angle - 10"
+							]
+						}
+					],
+					"sid": 973766042346096
+				}
+			],
+			"isOrBlock": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-mouse-wheel",
+					"objectClass": "Mouse",
+					"sid": 946067848550191,
+					"parameters": {
+						"direction": "up"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 583212113945915,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "cur",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 242090551204821
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 108919692645049,
+							"parameters": {
+								"key": "left-control"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 123911817233626,
+							"parameters": {
+								"variable": "cur",
+								"value": "round((slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 60) / 20"
+							}
+						},
+						{
+							"callFunction": "UpdateScale",
+							"sid": 524610893013093,
+							"parameters": [
+								"clamp(cur + 0.05, 0, 3)"
+							]
+						}
+					],
+					"sid": 974861339432777,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 909906989020015,
+									"parameters": {
+										"variable": "EdState",
+										"comparison": 0,
+										"value": "EDITOR_READY"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "EnableScrolling",
+									"sid": 523541344530877,
+									"parameters": [
+										true,
+										true,
+										"LayoutWidth - ViewportWidth(\"Level\") / 2",
+										"LayoutHeight - ViewportHeight(\"Level\") / 2",
+										"ViewportWidth(\"Level\") / 2",
+										"ViewportHeight(\"Level\") / 2",
+										false
+									]
+								}
+							],
+							"sid": 739671022831249
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 797234109943202
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 336563049978315,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_NEW"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 604559265416851,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeAngle",
+							"sid": 993764792071431,
+							"parameters": [
+								"MapElement.Angle + 10"
+							]
+						}
+					],
+					"sid": 816054931314655
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 147727119044201
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 855257835389352,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_MODIFY"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 933803600896425,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeAngle",
+							"sid": 769762316375147,
+							"parameters": [
+								"MapElement.Angle + 10"
+							]
+						}
+					],
+					"sid": 464661126996604
+				}
+			],
+			"isOrBlock": true
+		},
+		{
+			"eventType": "comment",
+			"text": "Add new road segment and snap it this instant"
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "GUI_root",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "AddObject",
+							"sid": 387111301131341
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 183016510384721,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 550263025905639,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_NEW"
+							}
+						}
+					],
+					"sid": 881220161668682
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "RoadMode",
+							"sid": 566759555303499
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 338461285408873,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 741155889249871,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_ROAD"
+							}
+						}
+					],
+					"sid": 853036942550391
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "TestLevel",
+							"sid": 334901208250162
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 149476706821709,
+							"parameters": {
+								"variable": "EdState",
+								"comparison": 0,
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "SaveProject",
+							"sid": 983951815259242
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 271689805907493,
+							"parameters": {
+								"variable": "game_mode",
+								"value": "\"Test\""
+							}
+						},
+						{
+							"id": "go-to-layout",
+							"objectClass": "System",
+							"sid": 438034366598388,
+							"parameters": {
+								"layout": "Loaded_lvl"
+							}
+						}
+					],
+					"sid": 253791655505995
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "RedoAction",
+							"sid": 197251834090598
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "Redo",
+							"sid": 893139340614060
+						}
+					],
+					"sid": 447026564386786
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 438775846870394,
+							"parameters": {
+								"key": 89
+							}
+						},
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 596761087686272,
+							"parameters": {
+								"key": "left-control"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "Redo",
+							"sid": 803079928151638
+						}
+					],
+					"sid": 564440876976403
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "UndoAction",
+							"sid": 532887569374553
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "Undo",
+							"sid": 939121598587880
+						}
+					],
+					"sid": 558537926857368
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 447037572639024,
+							"parameters": {
+								"key": 90
+							}
+						},
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 268138639330209,
+							"parameters": {
+								"key": "left-control"
+							}
+						},
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 237102554028699,
+							"parameters": {
+								"key": "left-shift"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "Undo",
+							"sid": 311211645856621
+						}
+					],
+					"sid": 641858929315567
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "SaveMap",
+							"sid": 475891112077281
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "SaveProject",
+							"sid": 846310449351719
+						}
+					],
+					"sid": 398271178787811
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 573001330596636,
+							"parameters": {
+								"key": 83
+							}
+						},
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 621393466278329,
+							"parameters": {
+								"key": "left-control"
+							}
+						},
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 203425288520245,
+							"parameters": {
+								"key": "left-shift"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "SaveProject",
+							"sid": 302811396048577
+						}
+					],
+					"sid": 867355113537511
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "ToMenu",
+							"sid": 148629078574850
+						},
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 318206288316648,
+							"parameters": {
+								"key": 27
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "Editor.RoadEditor.cleanSlate();\nconsole.log(runtime.objects.meshedRoad.getAllInstances().length);"
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 169307363654912,
+							"parameters": {
+								"variable": "game_mode",
+								"value": "\"FreeRoam\""
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 856239690810284,
+							"parameters": {
+								"seconds": "dt"
+							}
+						},
+						{
+							"id": "go-to-layout",
+							"objectClass": "System",
+							"sid": 266166098710120,
+							"parameters": {
+								"layout": "EdMenu"
+							}
+						}
+					],
+					"sid": 376890799354846,
+					"isOrBlock": true
+				}
+			],
+			"sid": 361199500923219
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "GUI_create",
+			"description": "",
+			"isActiveOnStart": false,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "add_ten",
+							"sid": 249019463094884
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 142434919527547,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeAngle",
+							"sid": 239604778861472,
+							"parameters": [
+								"MapElement.Angle + 10"
+							]
+						}
+					],
+					"sid": 110530807953850
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "subtract_ten",
+							"sid": 640207988087272
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 518363577513198,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeAngle",
+							"sid": 458653611741970,
+							"parameters": [
+								"MapElement.Angle - 10"
+							]
+						}
+					],
+					"sid": 611130310448179
+				},
+				{
+					"functionName": "UpdateType",
+					"functionDescription": "",
+					"functionCategory": "GUI",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "typeID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 355148922734867
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 269334094898090,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Bonuses"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 733733713569140,
+									"parameters": {
+										"variable": "typeID",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-from-json",
+									"objectClass": "subtype",
+									"sid": 882466795492026,
+									"parameters": {
+										"json": "\"{\"\"c3\"\":true,\"\"w\"\":{\"\"w\"\":150,\"\"h\"\":22,\"\"l\"\":593705883740258,\"\"zi\"\":12,\"\"oX\"\":0,\"\"oY\"\":0},\"\"data\"\":{\"\"title\"\":\"\"\"\",\"\"isEnabled\"\":true,\"\"id\"\":\"\"\"\",\"\"items\"\":[\"\"Монета\"\",\"\"Ракета\"\",\"\"Нитро\"\",\"\"Бонус\"\"],\"\"selectedIndex\"\":0,\"\"selectedIndices\"\":[]}}\""
+									}
+								},
+								{
+									"id": "load",
+									"objectClass": "current_subs",
+									"sid": 561759768695523,
+									"parameters": {
+										"json": "bonus_subs.AsJSON"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 938254499674024,
+									"parameters": {
+										"type": "log",
+										"message": "subtype.AsJSON"
+									}
+								}
+							],
+							"sid": 935261736662251
+						},
+						{
+							"eventType": "comment",
+							"text": "Obstacles"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 492106961524237,
+									"parameters": {
+										"variable": "typeID",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-from-json",
+									"objectClass": "subtype",
+									"sid": 928480054932244,
+									"parameters": {
+										"json": "\"{\"\"c3\"\":true,\"\"w\"\":{\"\"w\"\":150,\"\"h\"\":22,\"\"l\"\":593705883740258,\"\"zi\"\":12,\"\"oX\"\":0,\"\"oY\"\":0},\"\"data\"\":{\"\"title\"\":\"\"\"\",\"\"isEnabled\"\":true,\"\"id\"\":\"\"\"\",\"\"items\"\":[\"\"Камень 1\"\",\"\"Камень 2\"\",\"\"Камень 3\"\",\"\"Камень 4\"\",\"\"Камень 1 (мал.)\"\",\"\"Камень 2 (мал.)\"\",\"\"Камень 3 (мал.)\"\",\"\"Камень 4 (мал.)\"\",\"\"Шипы 1\"\",\"\"Шипы 2\"\",\"\"Шипы 3\"\",\"\"Шипы 4\"\"],\"\"selectedIndex\"\":0,\"\"selectedIndices\"\":[]}}\""
+									}
+								},
+								{
+									"id": "load",
+									"objectClass": "current_subs",
+									"sid": 897146939904725,
+									"parameters": {
+										"json": "obstacle_subs.AsJSON"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 538749458022151,
+									"parameters": {
+										"type": "log",
+										"message": "subtype.AsJSON"
+									}
+								}
+							],
+							"sid": 325423205233705
+						},
+						{
+							"eventType": "comment",
+							"text": "Decor"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 172264842454910,
+									"parameters": {
+										"variable": "typeID",
+										"comparison": 0,
+										"value": "2"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-from-json",
+									"objectClass": "subtype",
+									"sid": 566582191718970,
+									"parameters": {
+										"json": "\"{\"\"c3\"\":true,\"\"w\"\":{\"\"w\"\":150,\"\"h\"\":22,\"\"l\"\":593705883740258,\"\"zi\"\":12,\"\"oX\"\":0,\"\"oY\"\":0},\"\"data\"\":{\"\"title\"\":\"\"\"\",\"\"isEnabled\"\":true,\"\"id\"\":\"\"\"\",\"\"items\"\":[\"\"Дерево 1\"\",\"\"Дерево 2\"\",\"\"Палатка 1\"\",\"\"Палатка 2\"\"],\"\"selectedIndex\"\":-1,\"\"selectedIndices\"\":[]}}\""
+									}
+								},
+								{
+									"id": "load",
+									"objectClass": "current_subs",
+									"sid": 166247580780176,
+									"parameters": {
+										"json": "decor_subs.AsJSON"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 287373364484979,
+									"parameters": {
+										"type": "log",
+										"message": "subtype.AsJSON"
+									}
+								}
+							],
+							"sid": 190567149155690
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "Cancel",
+							"sid": 463531524141406
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 686394341175588,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 252488860394816,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "MapElement",
+							"sid": 609687151049503
+						}
+					],
+					"sid": 260246465978081
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 411625191942383,
+							"parameters": {
+								"key": 27
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 341418943810243,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 967959680817512,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "MapElement",
+							"sid": 933917241409718
+						}
+					],
+					"sid": 601371481771976
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-selection-changed",
+							"objectClass": "type",
+							"sid": 264010812865259
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "UpdateType",
+							"sid": 554807925281681,
+							"parameters": [
+								"type.SelectedIndex"
+							]
+						}
+					],
+					"sid": 769499931881027
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "CreateObject",
+							"sid": 153988133417860
+						},
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 553177375841946,
+							"parameters": {
+								"key": 13
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "AddNewObject",
+							"sid": 497679023912640
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 497494530038174,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"sid": 926382990333361,
+					"isOrBlock": true
+				}
+			],
+			"sid": 903642033661495
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "GUI_modify",
+			"description": "",
+			"isActiveOnStart": false,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "add_ten",
+							"sid": 191204662332920
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 130444198047195,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeAngle",
+							"sid": 498397787098809,
+							"parameters": [
+								"MapElement.Angle + 10"
+							]
+						}
+					],
+					"sid": 332173643970126
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "subtract_ten",
+							"sid": 146057069305465
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 650856176453916,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ChangeAngle",
+							"sid": 362312389938726,
+							"parameters": [
+								"MapElement.Angle - 10"
+							]
+						}
+					],
+					"sid": 944132201568081
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "DestroyObject",
+							"sid": 939264659219645
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 654615873630222,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "comment",
+							"text": "If element was moved during edit, get it back where it was to delete correctly"
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "MapElement",
+							"sid": 259444510663124,
+							"parameters": {
+								"angle": "Self.saved_angle"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "MapElement",
+							"sid": 991899248611000,
+							"parameters": {
+								"x": "Self.saved_x",
+								"y": "Self.saved_y"
+							}
+						},
+						{
+							"callFunction": "AddAction",
+							"sid": 625265595026850,
+							"parameters": [
+								"ACTION_DELETE",
+								"MapElement.UID"
+							]
+						},
+						{
+							"callFunction": "RemoveObject",
+							"sid": 257326643197663,
+							"parameters": [
+								"MapElement.X",
+								"MapElement.Y"
+							]
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 168753196690915,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"sid": 724938400326757
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "CreateObject",
+							"sid": 254731143232358
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 886809365032361,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "DeselectObject",
+							"sid": 768641363501706,
+							"parameters": [
+								"MapElement.UID"
+							]
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 932712369848744,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"sid": 807442911312959
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 604433595253086,
+							"parameters": {
+								"key": 13
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 603986782921557,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "DeselectObject",
+							"sid": 243021462293652,
+							"parameters": [
+								"MapElement.UID"
+							]
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 185136838203826,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"sid": 570877357967734
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "Cancel",
+							"sid": 486364014694991
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 376575484583470,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "MapElement",
+							"sid": 874298512933398,
+							"parameters": {
+								"angle": "Self.saved_angle"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "MapElement",
+							"sid": 471580979631504,
+							"parameters": {
+								"x": "Self.saved_x",
+								"y": "Self.saved_y"
+							}
+						},
+						{
+							"callFunction": "DeselectObject",
+							"sid": 788075029584427,
+							"parameters": [
+								"MapElement.UID"
+							]
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 642527557266974,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"sid": 518129939326601
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 246189924090786,
+							"parameters": {
+								"key": 27
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 932311065245387,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "MapElement",
+							"sid": 409852360298768,
+							"parameters": {
+								"angle": "Self.saved_angle"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "MapElement",
+							"sid": 357291247978410,
+							"parameters": {
+								"x": "Self.saved_x",
+								"y": "Self.saved_y"
+							}
+						},
+						{
+							"callFunction": "DeselectObject",
+							"sid": 196682934774963,
+							"parameters": [
+								"MapElement.UID"
+							]
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 761483172682160,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"sid": 823277251550127
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "Z_bottom",
+							"sid": 422045099980851
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 361409506282238,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-bottom",
+							"objectClass": "MapElement",
+							"sid": 898244196468259
+						}
+					],
+					"sid": 319345942065771
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "Z_top",
+							"sid": 195108673080857
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 598161067955523,
+							"parameters": {
+								"unique-id": "EditUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-top",
+							"objectClass": "MapElement",
+							"sid": 797517700058343
+						}
+					],
+					"sid": 348863336178693
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "Z_down",
+							"sid": 583976298852659
+						}
+					],
+					"actions": [],
+					"sid": 589005087748448,
+					"children": [
+						{
+							"eventType": "script",
+							"script": "let edited = runtime.getInstanceByUid(runtime.globalVars.EditUID);\nlet prev = {zIndex: -Infinity, isStub: true};\nfor (let element of runtime.objects.MapElement.getAllInstances()) {\n\tif (edited.testOverlap(element) && edited.zIndex > element.zIndex && element.zIndex > prev.zIndex) {\n\t\tprev = element;\n\t}\n};\nif (!prev.isStub){\n\tedited.moveAdjacentToInstance(prev, false);\n}"
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "Z_up",
+							"sid": 830641605969335
+						}
+					],
+					"actions": [],
+					"sid": 522685849340849,
+					"children": [
+						{
+							"eventType": "script",
+							"script": "let edited = runtime.getInstanceByUid(runtime.globalVars.EditUID);\nlet next = {zIndex: Infinity, isStub: true};\nfor (let element of runtime.objects.MapElement.getAllInstances()) {\n\tif (edited.testOverlap(element) && edited.zIndex < element.zIndex && element.zIndex < next.zIndex) {\n\t\tnext = element;\n\t}\n};\nif (!next.isStub) {\n\tedited.moveAdjacentToInstance(next, true);\n}"
+						}
+					]
+				}
+			],
+			"sid": 355003011969289
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "GUI_road",
+			"description": "",
+			"isActiveOnStart": false,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "Cancel",
+							"sid": 242995273607760
+						},
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 323541281858686,
+							"parameters": {
+								"key": 27
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 520773125637922,
+							"parameters": {
+								"variable": "EdState",
+								"value": "EDITOR_READY"
+							}
+						}
+					],
+					"sid": 843296458089546,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "RedoAction",
+							"sid": 875540671199595
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "Redo",
+							"sid": 353172825509907
+						}
+					],
+					"sid": 947583927735441
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 709212319728753,
+							"parameters": {
+								"key": 89
+							}
+						},
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 446468991260960,
+							"parameters": {
+								"key": "left-control"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "Redo",
+							"sid": 879197442834163
+						}
+					],
+					"sid": 639132252283635
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "UndoAction",
+							"sid": 512239802380662
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "Undo",
+							"sid": 220089863043713
+						}
+					],
+					"sid": 296402870393660
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 356153095643928,
+							"parameters": {
+								"key": 90
+							}
+						},
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 756977181181199,
+							"parameters": {
+								"key": "left-control"
+							}
+						},
+						{
+							"id": "is-left-right-key-down",
+							"objectClass": "Keyboard",
+							"sid": 775379340793207,
+							"parameters": {
+								"key": "left-shift"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "Undo",
+							"sid": 743742919563575
+						}
+					],
+					"sid": 761520496049552
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-dragging",
+							"objectClass": "control_handle",
+							"sid": 446080744164055,
+							"behaviorType": "DragDrop"
+						},
+						{
+							"id": "pick-parent",
+							"objectClass": "control_handle",
+							"sid": 576105836102100,
+							"parameters": {
+								"parent": "anchor_handle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let control = runtime.objects.control_handle.getFirstPickedInstance();\nlet index = control.instVars.point;\nlet right = control.instVars.right;\nlet position = new Vector(control.x, control.y);\nconsole.log(index, right);\nRoadEditor.moveControl(index, right, position);"
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "anchor_handle",
+							"sid": 495243641294381,
+							"parameters": {
+								"instance-variable": "Moving",
+								"value": "true"
+							}
+						}
+					],
+					"sid": 243217840230398,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "anchor_handle",
+									"sid": 553564713251559,
+									"parameters": {
+										"child": "control_line",
+										"which": "all"
+									}
+								},
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 973098258838031,
+									"parameters": {
+										"object": "control_line"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-angle-toward-position",
+									"objectClass": "control_line",
+									"sid": 797140966362128,
+									"parameters": {
+										"x": "anchor_handle.X",
+										"y": "anchor_handle.Y"
+									}
+								},
+								{
+									"id": "set-width",
+									"objectClass": "control_line",
+									"sid": 970505490254078,
+									"parameters": {
+										"width": "distance(Self.X, Self.Y, anchor_handle.X, anchor_handle.Y)"
+									}
+								}
+							],
+							"sid": 144237898574450
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-drop",
+							"objectClass": "control_handle",
+							"sid": 421627734962367,
+							"behaviorType": "DragDrop"
+						},
+						{
+							"id": "pick-parent",
+							"objectClass": "control_handle",
+							"sid": 252224703600298,
+							"parameters": {
+								"parent": "anchor_handle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 747348528806693,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "control_handle",
+									"sid": 361376268875266,
+									"parameters": {
+										"instance-variable": "saved_x",
+										"comparison": 1,
+										"value": "Self.X"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "control_handle",
+									"sid": 437410923495021,
+									"parameters": {
+										"instance-variable": "saved_y",
+										"comparison": 1,
+										"value": "Self.Y"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "AddAction",
+									"sid": 587543561885059,
+									"parameters": [
+										"ACTION_ROAD_MOVE",
+										"anchor_handle.UID"
+									]
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "anchor_handle",
+									"sid": 576754362585588,
+									"parameters": {
+										"instance-variable": "Moving",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 802461795331333
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-drag-start",
+							"objectClass": "control_handle",
+							"sid": 990190959790592,
+							"behaviorType": "DragDrop"
+						},
+						{
+							"id": "pick-parent",
+							"objectClass": "control_handle",
+							"sid": 688809173221165,
+							"parameters": {
+								"parent": "anchor_handle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "anchor_handle",
+							"sid": 560758547709778,
+							"parameters": {
+								"instance-variable": "saved_x",
+								"value": "Self.X"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "anchor_handle",
+							"sid": 694985821668926,
+							"parameters": {
+								"instance-variable": "saved_y",
+								"value": "Self.Y"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 543324075845649,
+							"parameters": {
+								"type": "warn",
+								"message": "anchor_handle.saved_x&\" \"&anchor_handle.saved_y"
+							}
+						}
+					],
+					"sid": 403218087203858,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-all",
+									"objectClass": "System",
+									"sid": 805371056115691,
+									"parameters": {
+										"object": "control_handle"
+									}
+								},
+								{
+									"id": "pick-children",
+									"objectClass": "anchor_handle",
+									"sid": 489633258423443,
+									"parameters": {
+										"child": "control_handle",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 261520671251065,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 840236510275612,
+											"parameters": {
+												"object": "control_handle"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-instvar-value",
+											"objectClass": "control_handle",
+											"sid": 556727184244973,
+											"parameters": {
+												"instance-variable": "saved_x",
+												"value": "Self.X"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "control_handle",
+											"sid": 722385321018874,
+											"parameters": {
+												"instance-variable": "saved_y",
+												"value": "Self.Y"
+											}
+										},
+										{
+											"id": "alert",
+											"objectClass": "Browser",
+											"sid": 571067567894643,
+											"disabled": true,
+											"parameters": {
+												"message": "\"Heck yeah!\""
+											}
+										}
+									],
+									"sid": 757148392235307
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-dragging",
+							"objectClass": "anchor_handle",
+							"sid": 589891190279180,
+							"behaviorType": "DragDrop"
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let control = runtime.objects.anchor_handle.getFirstPickedInstance();\nlet index = control.instVars.point;\nlet position = new Vector(control.x, control.y);\nRoadEditor.moveAnchor(index, position);"
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "anchor_handle",
+							"sid": 431134361555684,
+							"parameters": {
+								"instance-variable": "Moving",
+								"value": "true"
+							}
+						}
+					],
+					"sid": 931845815726767
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-drop",
+							"objectClass": "anchor_handle",
+							"sid": 785906834870963,
+							"behaviorType": "DragDrop"
+						}
+					],
+					"actions": [],
+					"sid": 926661830454883,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "anchor_handle",
+									"sid": 441823544953101,
+									"parameters": {
+										"instance-variable": "saved_x",
+										"comparison": 1,
+										"value": "Self.X"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "anchor_handle",
+									"sid": 105560985469667,
+									"parameters": {
+										"instance-variable": "saved_y",
+										"comparison": 1,
+										"value": "Self.Y"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "AddAction",
+									"sid": 328482567821065,
+									"parameters": [
+										"ACTION_ROAD_MOVE",
+										"anchor_handle.UID"
+									]
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "anchor_handle",
+									"sid": 504673453744753,
+									"parameters": {
+										"instance-variable": "Moving",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 293774311746516
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-drag-start",
+							"objectClass": "anchor_handle",
+							"sid": 307090057398641,
+							"behaviorType": "DragDrop"
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "anchor_handle",
+							"sid": 113242591087881,
+							"parameters": {
+								"instance-variable": "saved_x",
+								"value": "Self.X"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "anchor_handle",
+							"sid": 680495756233563,
+							"parameters": {
+								"instance-variable": "saved_y",
+								"value": "Self.Y"
+							}
+						}
+					],
+					"sid": 547400794936650,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "anchor_handle",
+									"sid": 194147552379724,
+									"parameters": {
+										"child": "control_handle",
+										"which": "own"
+									}
+								},
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 176223548532664,
+									"parameters": {
+										"object": "control_handle"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "control_handle",
+									"sid": 926128834501063,
+									"parameters": {
+										"instance-variable": "saved_x",
+										"value": "Self.X"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "control_handle",
+									"sid": 316176223853563,
+									"parameters": {
+										"instance-variable": "saved_y",
+										"value": "Self.Y"
+									}
+								}
+							],
+							"sid": 999638606271557
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-double-tap-object",
+							"objectClass": "Touch",
+							"sid": 281117256815097,
+							"parameters": {
+								"object": "anchor_handle"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "anchor_handle",
+							"sid": 847324581194514,
+							"parameters": {
+								"instance-variable": "AboutToDelete",
+								"value": "true"
+							}
+						},
+						{
+							"callFunction": "AddAction",
+							"sid": 306561863341519,
+							"parameters": [
+								"ACTION_ROAD_REMOVE",
+								"anchor_handle.UID"
+							]
+						},
+						{
+							"type": "script",
+							"script": "let handle = runtime.objects.anchor_handle.getFirstPickedInstance();\nlet index = handle.instVars.point;\nRoadEditor.removePoint(index);"
+						}
+					],
+					"sid": 616306366839670,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "anchor_handle",
+									"sid": 307109062524970,
+									"parameters": {
+										"child": "control_line",
+										"which": "all"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "control_line",
+									"sid": 315792936582361,
+									"parameters": {
+										"where": "behind",
+										"object": "anchor_handle"
+									}
+								},
+								{
+									"id": "set-angle-toward-position",
+									"objectClass": "control_line",
+									"sid": 501673196582262,
+									"parameters": {
+										"x": "anchor_handle.X",
+										"y": "anchor_handle.Y"
+									}
+								},
+								{
+									"id": "set-width",
+									"objectClass": "control_line",
+									"sid": 464065006340038,
+									"parameters": {
+										"width": "distance(Self.X, Self.Y, anchor_handle.X, anchor_handle.Y)"
+									}
+								}
+							],
+							"sid": 256466944757107
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tap",
+							"objectClass": "Touch",
+							"sid": 164580671745681
+						}
+					],
+					"actions": [],
+					"sid": 642172337363107,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-touching-object",
+									"objectClass": "Touch",
+									"sid": 835877418816340,
+									"parameters": {
+										"object": "meshedRoad"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-touching-object",
+									"objectClass": "Touch",
+									"sid": 531632390677327,
+									"parameters": {
+										"object": "anchor_handle"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-touching-object",
+									"objectClass": "Touch",
+									"sid": 398437479205887,
+									"parameters": {
+										"object": "control_handle"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"type": "script",
+									"script": "RoadEditor.newPoint(runtime, new Vector(runtime.mouse.getMouseX(\"Level\"), runtime.mouse.getMouseY(\"Level\")));\nRoadEditor.showFullEditor();"
+								}
+							],
+							"sid": 640668601478298,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 293574461804623,
+											"parameters": {
+												"object": "anchor_handle"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "AddAction",
+											"sid": 228526496189749,
+											"parameters": [
+												"ACTION_ROAD_NEW",
+												"anchor_handle.UID"
+											]
+										}
+									],
+									"sid": 260178612008162
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-touching-object",
+									"objectClass": "Touch",
+									"sid": 440627657707894,
+									"parameters": {
+										"object": "meshedRoad"
+									}
+								},
+								{
+									"id": "is-touching-object",
+									"objectClass": "Touch",
+									"sid": 713451198024679,
+									"parameters": {
+										"object": "anchor_handle"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-touching-object",
+									"objectClass": "Touch",
+									"sid": 696648947533623,
+									"parameters": {
+										"object": "control_handle"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [],
+							"sid": 350183201502867,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "new_index",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 463452302168330
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"type": "script",
+											"script": "let road = runtime.objects.meshedRoad.getFirstPickedInstance();\nlet anchor = road.getParent();\nlocalVars.new_index = anchor.instVars.point + 1;\nRoadEditor.insertPoint(runtime, anchor.instVars.point, new Vector(runtime.mouse.getMouseX(\"Level\"), runtime.mouse.getMouseY(\"Level\")));\nRoadEditor.showFullEditor();"
+										}
+									],
+									"sid": 660195075428610
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-comparison",
+											"objectClass": "System",
+											"sid": 236001869837776,
+											"parameters": {
+												"object": "anchor_handle",
+												"expression": "anchor_handle.point",
+												"comparison": 0,
+												"value": "new_index"
+											}
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "AddAction",
+											"sid": 229600859053454,
+											"parameters": [
+												"ACTION_ROAD_INSERT",
+												"anchor_handle.UID"
+											]
+										}
+									],
+									"sid": 716336395361419
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 342338297080918
+						},
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 788470988700652,
+							"parameters": {
+								"object": "control_line"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 699376931656334,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-parent",
+									"objectClass": "control_line",
+									"sid": 704224160390381,
+									"parameters": {
+										"parent": "control_handle",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 675320654602313,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-parent",
+											"objectClass": "control_handle",
+											"sid": 369360304222729,
+											"parameters": {
+												"parent": "anchor_handle",
+												"which": "own"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-angle-toward-position",
+											"objectClass": "control_line",
+											"sid": 394126757685544,
+											"parameters": {
+												"x": "anchor_handle.X",
+												"y": "anchor_handle.Y"
+											}
+										},
+										{
+											"id": "set-width",
+											"objectClass": "control_line",
+											"sid": 462810131475438,
+											"parameters": {
+												"width": "distance(Self.X, Self.Y, anchor_handle.X, anchor_handle.Y)"
+											}
+										}
+									],
+									"sid": 169296132824832
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "control_line",
+							"sid": 154407906656069
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 718886201359901,
+							"parameters": {
+								"seconds": "dt"
+							}
+						}
+					],
+					"sid": 874541317347542,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-parent",
+									"objectClass": "control_line",
+									"sid": 408129664552372,
+									"parameters": {
+										"parent": "control_handle",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 339576762502343,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-parent",
+											"objectClass": "control_handle",
+											"sid": 259792818679179,
+											"parameters": {
+												"parent": "anchor_handle",
+												"which": "own"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-angle-toward-position",
+											"objectClass": "control_line",
+											"sid": 308308523052505,
+											"parameters": {
+												"x": "anchor_handle.X",
+												"y": "anchor_handle.Y"
+											}
+										},
+										{
+											"id": "set-width",
+											"objectClass": "control_line",
+											"sid": 897793893658236,
+											"parameters": {
+												"width": "distance(Self.X, Self.Y, anchor_handle.X, anchor_handle.Y)"
+											}
+										}
+									],
+									"sid": 168470512834311
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-clicked",
+							"objectClass": "loop",
+							"sid": 543627604823016
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "AddAction",
+							"sid": 934800484890541,
+							"parameters": [
+								"ACTION_ROAD_LOOP",
+								"0"
+							]
+						},
+						{
+							"type": "script",
+							"script": "let check = runtime.objects.loop.getFirstPickedInstance();\nRoadEditor.loop(runtime, check.isChecked);\nRoadEditor.showFullEditor();"
+						}
+					],
+					"sid": 187881918810507,
+					"isOrBlock": true
+				}
+			],
+			"sid": 422288200349972
+		},
+		{
+			"functionName": "AddAction",
+			"functionDescription": "",
+			"functionCategory": "Buffer",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "action_type",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 970195790008646
+				},
+				{
+					"name": "uid",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 162239660971877
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "changes_buffer",
+					"sid": 356633939210582,
+					"parameters": {
+						"instance-variable": "last_action",
+						"value": "Self.current_action"
+					}
+				},
+				{
+					"id": "add-to-instvar",
+					"objectClass": "changes_buffer",
+					"sid": 725598960463836,
+					"parameters": {
+						"instance-variable": "current_action",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-size",
+					"objectClass": "changes_buffer",
+					"sid": 546590615011120,
+					"parameters": {
+						"width": "Self.current_action",
+						"height": "Self.Height",
+						"depth": "1"
+					}
+				},
+				{
+					"id": "set-at-xy",
+					"objectClass": "changes_buffer",
+					"sid": 951425925263207,
+					"parameters": {
+						"x": "Self.last_action",
+						"y": "0",
+						"value": "action_type"
+					}
+				},
+				{
+					"type": "comment",
+					"text": "Cell 1 reserved for future"
+				},
+				{
+					"id": "set-at-xy",
+					"objectClass": "changes_buffer",
+					"sid": 104798787227281,
+					"parameters": {
+						"x": "Self.last_action",
+						"y": "1",
+						"value": "0"
+					}
+				},
+				{
+					"type": "comment",
+					"text": "Disable redo button, since there is nothing to redo"
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "RedoAction",
+					"sid": 916052851767511,
+					"parameters": {
+						"mode": "disabled"
+					}
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "UndoAction",
+					"sid": 941410306697004,
+					"parameters": {
+						"mode": "enabled"
+					}
+				}
+			],
+			"sid": 758698471912073,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 273925478142925,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ADD"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 334695486132707,
+							"parameters": {
+								"unique-id": "uid"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 210283525638719,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "2",
+								"value": "MapElement.ObjectTypeName&\"_\"&MapElement.AnimationName"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 282329107058248,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "6",
+								"value": "MapElement.X"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 783986716393318,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "7",
+								"value": "MapElement.Y"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 280270025234693,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "8",
+								"value": "MapElement.Angle"
+							}
+						}
+					],
+					"sid": 148500744639638
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 678165447871435,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_MODIFY"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 939607757675478,
+							"parameters": {
+								"unique-id": "uid"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 179054325984042,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "2",
+								"value": "MapElement.ObjectTypeName&\"_\"&MapElement.AnimationName"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 518096120650510,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "3",
+								"value": "MapElement.saved_x"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 600196004572674,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "4",
+								"value": "MapElement.saved_y"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 368468122703131,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "5",
+								"value": "MapElement.saved_angle"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 682619656471298,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "6",
+								"value": "MapElement.X"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 995304298813800,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "7",
+								"value": "MapElement.Y"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 791369719175020,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "8",
+								"value": "MapElement.Angle"
+							}
+						}
+					],
+					"sid": 673524777835958
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 810740737109656,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_DELETE"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MapElement",
+							"sid": 238563787127467,
+							"parameters": {
+								"unique-id": "uid"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 376397502286709,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "2",
+								"value": "MapElement.ObjectTypeName&\"_\"&MapElement.AnimationName"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 729584869711110,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "3",
+								"value": "MapElement.X"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 518012909279618,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "4",
+								"value": "MapElement.Y"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 860446347611238,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "5",
+								"value": "MapElement.Angle"
+							}
+						}
+					],
+					"sid": 749846325925358
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 550549981857361,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_INSERT"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "anchor_handle",
+							"sid": 488306036154331,
+							"parameters": {
+								"unique-id": "uid"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "anchor_handle",
+							"sid": 172778735219888,
+							"parameters": {
+								"child": "control_handle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 424225745165238,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "2",
+								"value": "anchor_handle.point"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 833678877961888,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "3",
+								"value": "anchor_handle.x"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 141966858119053,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "4",
+								"value": "anchor_handle.Y"
+							}
+						}
+					],
+					"sid": 624460848387559,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 716070661403883,
+									"parameters": {
+										"object": "control_handle",
+										"expression": "control_handle.right",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 260161836426946,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "5",
+										"value": "control_handle.x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 968743985663525,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "6",
+										"value": "control_handle.Y"
+									}
+								}
+							],
+							"sid": 137103795596702
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 515716139786346,
+									"parameters": {
+										"object": "control_handle",
+										"expression": "control_handle.right",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 318903422033228,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "7",
+										"value": "control_handle.x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 834700818538230,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "8",
+										"value": "control_handle.Y"
+									}
+								}
+							],
+							"sid": 862725979190977
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 629646809397934,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_MOVE"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "anchor_handle",
+							"sid": 754650613918186,
+							"parameters": {
+								"unique-id": "uid"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "anchor_handle",
+							"sid": 699470976304108,
+							"parameters": {
+								"child": "control_handle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 121442774723381,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "2",
+								"value": "anchor_handle.point"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 791819076248342,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "3",
+								"value": "anchor_handle.saved_x"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 701313147725904,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "4",
+								"value": "anchor_handle.saved_y"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 910638738564077,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "9",
+								"value": "anchor_handle.x"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 460024516306964,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "10",
+								"value": "anchor_handle.Y"
+							}
+						}
+					],
+					"sid": 245284572251925,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 151525200339401,
+									"parameters": {
+										"object": "control_handle",
+										"expression": "control_handle.right",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 377504847198807,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "5",
+										"value": "control_handle.saved_x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 861007367852236,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "6",
+										"value": "control_handle.saved_y"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 325626762341581,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "11",
+										"value": "control_handle.x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 282176623798461,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "12",
+										"value": "control_handle.Y"
+									}
+								}
+							],
+							"sid": 940956199798016
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 141931472623857,
+									"parameters": {
+										"object": "control_handle",
+										"expression": "control_handle.right",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 822582364571010,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "7",
+										"value": "control_handle.saved_x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 311057838511550,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "8",
+										"value": "control_handle.saved_y"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 736951613425946,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "13",
+										"value": "control_handle.x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 308258749655636,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "14",
+										"value": "control_handle.Y"
+									}
+								}
+							],
+							"sid": 884252752243147
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 183713987784299,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_NEW"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "anchor_handle",
+							"sid": 754650613918186,
+							"parameters": {
+								"unique-id": "uid"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "anchor_handle",
+							"sid": 891206296197204,
+							"parameters": {
+								"child": "control_handle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 798232491487980,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "2",
+								"value": "anchor_handle.point"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 581405739084057,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "3",
+								"value": "anchor_handle.x"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 713143482784132,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "4",
+								"value": "anchor_handle.Y"
+							}
+						}
+					],
+					"sid": 854341163658501,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 709249337152310,
+									"parameters": {
+										"object": "control_handle",
+										"expression": "control_handle.right",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 872783537523477,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "5",
+										"value": "control_handle.x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 995524669936190,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "6",
+										"value": "control_handle.Y"
+									}
+								}
+							],
+							"sid": 452198176276296
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 686751138500106,
+									"parameters": {
+										"object": "control_handle",
+										"expression": "control_handle.right",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 698449378856842,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "7",
+										"value": "control_handle.x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 769178255188418,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "8",
+										"value": "control_handle.Y"
+									}
+								}
+							],
+							"sid": 524966333718983
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 692197857413423,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_REMOVE"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "anchor_handle",
+							"sid": 754650613918186,
+							"parameters": {
+								"unique-id": "uid"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "anchor_handle",
+							"sid": 296478110757537,
+							"parameters": {
+								"child": "control_handle",
+								"which": "own"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "anchor_handle",
+							"sid": 933121149708374,
+							"parameters": {
+								"child": "control_handle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 614697089865495,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "2",
+								"value": "anchor_handle.point"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 348486863338186,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "3",
+								"value": "anchor_handle.x"
+							}
+						},
+						{
+							"id": "set-at-xy",
+							"objectClass": "changes_buffer",
+							"sid": 497172359007213,
+							"parameters": {
+								"x": "Self.last_action",
+								"y": "4",
+								"value": "anchor_handle.Y"
+							}
+						}
+					],
+					"sid": 440679987426429,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 122654643931295,
+									"parameters": {
+										"object": "control_handle",
+										"expression": "control_handle.right",
+										"comparison": 0,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 753993831385268,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "5",
+										"value": "control_handle.x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 972792401486652,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "6",
+										"value": "control_handle.Y"
+									}
+								}
+							],
+							"sid": 691722929882948
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-comparison",
+									"objectClass": "System",
+									"sid": 171044678561763,
+									"parameters": {
+										"object": "control_handle",
+										"expression": "control_handle.right",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 688252695506455,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "7",
+										"value": "control_handle.x"
+									}
+								},
+								{
+									"id": "set-at-xy",
+									"objectClass": "changes_buffer",
+									"sid": 380086078203965,
+									"parameters": {
+										"x": "Self.last_action",
+										"y": "8",
+										"value": "control_handle.Y"
+									}
+								}
+							],
+							"sid": 963701611992775
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 740281276985870,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_LOOP"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst action = changes.instVars.last_action;\nif (RoadEditor.track.loop) {\n\tlet point0 = RoadEditor.track.points[0];\n\tlet point_last = RoadEditor.track.points[RoadEditor.track.pointsEnd];\n\tchanges.getAt(point0.control1.x, action, 2);\n\tchanges.getAt(point0.control1.y, action, 3);\n\tchanges.getAt(point_last.control2.x, action, 4);\n\tchanges.getAt(point_last.control2.y, action, 5);\n}"
+						}
+					],
+					"sid": 430893888885960
+				}
+			]
+		},
+		{
+			"functionName": "Undo",
+			"functionDescription": "",
+			"functionCategory": "Buffer",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "subtract-from-instvar",
+					"objectClass": "changes_buffer",
+					"sid": 882381271455084,
+					"parameters": {
+						"instance-variable": "current_action",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "RedoAction",
+					"sid": 914404962748263,
+					"parameters": {
+						"mode": "enabled"
+					}
+				}
+			],
+			"sid": 489497323245778,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "action_type",
+					"type": "string",
+					"initialValue": "Add",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 615475341381255
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 856886742755317,
+							"parameters": {
+								"variable": "action_type",
+								"value": "changes_buffer.At(changes_buffer.current_action, 0)"
+							}
+						}
+					],
+					"sid": 573041989204161
+				},
+				{
+					"eventType": "comment",
+					"text": "Remove added object"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 568657766692246,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ADD"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "RemoveObject",
+							"sid": 507475665635213,
+							"parameters": [
+								"changes_buffer.At(changes_buffer.current_action, 6)",
+								"changes_buffer.At(changes_buffer.current_action, 7)"
+							]
+						}
+					],
+					"sid": 335061420109615
+				},
+				{
+					"eventType": "comment",
+					"text": "Place object on previous place"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 585470790467006,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_MODIFY"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "MoveObject",
+							"sid": 213517286676743,
+							"parameters": [
+								"changes_buffer.At(changes_buffer.current_action, 3)",
+								"changes_buffer.At(changes_buffer.current_action, 4)",
+								"changes_buffer.At(changes_buffer.current_action, 5)",
+								"changes_buffer.At(changes_buffer.current_action, 6)",
+								"changes_buffer.At(changes_buffer.current_action, 7)"
+							]
+						}
+					],
+					"sid": 235663240652354
+				},
+				{
+					"eventType": "comment",
+					"text": "Recreate object"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 385513938119324,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_DELETE"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "CreateObject",
+							"sid": 800755622326127,
+							"parameters": [
+								"changes_buffer.At(changes_buffer.current_action, 2)",
+								"changes_buffer.At(changes_buffer.current_action, 3)",
+								"changes_buffer.At(changes_buffer.current_action, 4)",
+								"changes_buffer.At(changes_buffer.current_action, 5)"
+							]
+						}
+					],
+					"sid": 855723360751054
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 807447745662136,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_INSERT"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.removePoint(changes.getAt(entry, 2));"
+						}
+					],
+					"sid": 451882842276536
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 143280196187568,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_MOVE"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.moveAnchor(changes.getAt(entry, 2), new Vector(changes.getAt(entry, 3), changes.getAt(entry, 4)));\nif (changes.getAt(entry, 5) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), false, new Vector(changes.getAt(entry, 5), changes.getAt(entry, 6)));\n}\nif (changes.getAt(entry, 7) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), true, new Vector(changes.getAt(entry, 7), changes.getAt(entry, 8)));\n}\nlet anchor = RoadEditor.anchors[changes.getAt(entry, 2)];\nlet av = new Vector(anchor.x, anchor.y);\nfor (let control of anchor.children()) {\n\tfor (let line of control.children()) {\n\t\tlet lv = new Vector(line.x, line.y);\n\t\tif (av.subtract(lv).normalize().equalTo(new Vector(-1, 0))) line.angleDegrees = 180;\n\t\telse line.angleDegrees = - av.subtract(lv).angleSigned(new Vector(1, 0));\n\t\tline.width = av.distance(lv);\n\t}\n}"
+						}
+					],
+					"sid": 748776017631744
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 267876851399930,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_NEW"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.removePoint(changes.getAt(entry, 2));"
+						}
+					],
+					"sid": 851910513527006
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 414645890969296,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_REMOVE"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.insertPoint(runtime, changes.getAt(entry, 2) - 1, new Vector(changes.getAt(entry, 3), changes.getAt(entry, 4)));\nRoadEditor.showFullEditor();\nif (changes.getAt(entry, 5) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), false, new Vector(changes.getAt(entry, 5), changes.getAt(entry, 6)));\n}\nif (changes.getAt(entry, 7) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), true, new Vector(changes.getAt(entry, 7), changes.getAt(entry, 8)));\n}"
+						}
+					],
+					"sid": 160228316338740
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 622094417538756,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_LOOP"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.loop(runtime, !RoadEditor.track.loop);\nif (RoadEditor.track.loop) {\n\tif (changes.getAt(entry, 2) != 0) {\n\t\tRoadEditor.moveControl(0, false, new Vector(changes.getAt(entry, 2), changes.getAt(entry, 3)));\n\t}\n\tif (changes.getAt(entry, 4) != 0) {\n\t\tRoadEditor.moveControl(RoadEditor.track.pointsEnd, true, new Vector(changes.getAt(entry, 4), changes.getAt(entry, 5)));\n\t}\n}\nif (runtime.globalVars.EdState != runtime.globalVars.EDITOR_READY) RoadEditor.showFullEditor();\nelse RoadEditor.hideFullEditor();"
+						}
+					],
+					"sid": 522765296872844
+				},
+				{
+					"eventType": "comment",
+					"text": "Cannot undo actions anymore"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "changes_buffer",
+							"sid": 186029197731234,
+							"parameters": {
+								"instance-variable": "current_action",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "UndoAction",
+							"sid": 897838271527466,
+							"parameters": {
+								"mode": "disabled"
+							}
+						}
+					],
+					"sid": 161204179237229
+				}
+			]
+		},
+		{
+			"functionName": "Redo",
+			"functionDescription": "",
+			"functionCategory": "Buffer",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-enabled",
+					"objectClass": "UndoAction",
+					"sid": 323593415204130,
+					"parameters": {
+						"mode": "enabled"
+					}
+				}
+			],
+			"sid": 414397578749080,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "action_type",
+					"type": "string",
+					"initialValue": "Add",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 758224509550796
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 542270252899342,
+							"parameters": {
+								"variable": "action_type",
+								"value": "changes_buffer.At(changes_buffer.current_action, 0)"
+							}
+						}
+					],
+					"sid": 479361468410806
+				},
+				{
+					"eventType": "comment",
+					"text": "Remove previously deleted object"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 667591164907480,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_DELETE"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "RemoveObject",
+							"sid": 789092121784609,
+							"parameters": [
+								"changes_buffer.At(changes_buffer.current_action, 3)",
+								"changes_buffer.At(changes_buffer.current_action, 4)"
+							]
+						}
+					],
+					"sid": 993691889435198
+				},
+				{
+					"eventType": "comment",
+					"text": "Place object on new place"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 606642867633451,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_MODIFY"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "MoveObject",
+							"sid": 434441254724466,
+							"parameters": [
+								"changes_buffer.At(changes_buffer.current_action, 6)",
+								"changes_buffer.At(changes_buffer.current_action, 7)",
+								"changes_buffer.At(changes_buffer.current_action, 8)",
+								"changes_buffer.At(changes_buffer.current_action, 3)",
+								"changes_buffer.At(changes_buffer.current_action, 4)"
+							]
+						}
+					],
+					"sid": 182761227730241
+				},
+				{
+					"eventType": "comment",
+					"text": "Recreate object"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 857808834268377,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ADD"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "CreateObject",
+							"sid": 574403988461828,
+							"parameters": [
+								"changes_buffer.At(changes_buffer.current_action, 2)",
+								"changes_buffer.At(changes_buffer.current_action, 6)",
+								"changes_buffer.At(changes_buffer.current_action, 7)",
+								"changes_buffer.At(changes_buffer.current_action, 8)"
+							]
+						}
+					],
+					"sid": 935604964788946
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 581482519240341,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_INSERT"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.insertPoint(runtime, changes.getAt(entry, 2) - 1, new Vector(changes.getAt(entry, 3), changes.getAt(entry, 4)));\nRoadEditor.showFullEditor();\nif (changes.getAt(entry, 5) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), false, new Vector(changes.getAt(entry, 5), changes.getAt(entry, 6)));\n}\nif (changes.getAt(entry, 7) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), true, new Vector(changes.getAt(entry, 7), changes.getAt(entry, 8)));\n}"
+						}
+					],
+					"sid": 431746162735062
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 968089091840276,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_MOVE"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.moveAnchor(changes.getAt(entry, 2), new Vector(changes.getAt(entry, 9), changes.getAt(entry, 10)));\nif (changes.getAt(entry, 11) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), false, new Vector(changes.getAt(entry, 11), changes.getAt(entry, 12)));\n}\nif (changes.getAt(entry, 13) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), true, new Vector(changes.getAt(entry, 13), changes.getAt(entry, 14)));\n}\nlet anchor = RoadEditor.anchors[changes.getAt(entry, 2)];\nlet av = new Vector(anchor.x, anchor.y);\nfor (let control of anchor.children()) {\n\tfor (let line of control.children()) {\n\t\tlet lv = new Vector(line.x, line.y);\n\t\tif (av.subtract(lv).normalize().equalTo(new Vector(-1, 0))) line.angleDegrees = 180;\n\t\telse line.angleDegrees = - av.subtract(lv).angleSigned(new Vector(1, 0));\n\t\tline.width = av.distance(lv);\n\t}\n}"
+						}
+					],
+					"sid": 907521382229830
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 995518158498676,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_NEW"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.newPoint(runtime, new Vector(changes.getAt(entry, 3), changes.getAt(entry, 4)));\nRoadEditor.showFullEditor();\nif (changes.getAt(entry, 5) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), false, new Vector(changes.getAt(entry, 5), changes.getAt(entry, 6)));\n}\nif (changes.getAt(entry, 7) != 0) {\n\tRoadEditor.moveControl(changes.getAt(entry, 2), true, new Vector(changes.getAt(entry, 7), changes.getAt(entry, 8)));\n}"
+						}
+					],
+					"sid": 409789629574904
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 671723516602505,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_REMOVE"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.removePoint(changes.getAt(entry, 2));"
+						}
+					],
+					"sid": 703936297967065
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 483538431313013,
+							"parameters": {
+								"variable": "action_type",
+								"comparison": 0,
+								"value": "ACTION_ROAD_LOOP"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "let changes = runtime.objects.changes_buffer.getFirstInstance();\nconst entry = changes.instVars.current_action;\nRoadEditor.loop(runtime, !RoadEditor.track.loop);\nif (RoadEditor.track.loop) {\n\tif (changes.getAt(entry, 2) != 0) {\n\t\tRoadEditor.moveControl(0, false, new Vector(changes.getAt(entry, 2), changes.getAt(entry, 3)));\n\t}\n\tif (changes.getAt(entry, 4) != 0) {\n\t\tRoadEditor.moveControl(RoadEditor.track.pointsEnd, true, new Vector(changes.getAt(entry, 4), changes.getAt(entry, 5)));\n\t}\n}\nif (runtime.globalVars.EdState != runtime.globalVars.EDITOR_READY) RoadEditor.showFullEditor();\nelse RoadEditor.hideFullEditor();"
+						}
+					],
+					"sid": 846069793744630
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "add-to-instvar",
+							"objectClass": "changes_buffer",
+							"sid": 924738408408538,
+							"parameters": {
+								"instance-variable": "current_action",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 821534450129434
+				},
+				{
+					"eventType": "comment",
+					"text": "Cannot redo actions anymore"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "changes_buffer",
+							"sid": 684057520046978,
+							"parameters": {
+								"instance-variable": "current_action",
+								"comparison": 4,
+								"value": "Self.last_action"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "RedoAction",
+							"sid": 325758153910231,
+							"parameters": {
+								"mode": "disabled"
+							}
+						}
+					],
+					"sid": 249171665232046
+				}
+			]
+		},
+		{
+			"functionName": "MoveObject",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 496981391836090
+				},
+				{
+					"name": "y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 666964528457090
+				},
+				{
+					"name": "new_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 164947833415302
+				},
+				{
+					"name": "old_x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 123847913834828
+				},
+				{
+					"name": "old_y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 846621576445639
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "start-group",
+					"objectClass": "Browser",
+					"sid": 127865725106315,
+					"parameters": {
+						"group-name": "\"Moving object\""
+					}
+				}
+			],
+			"sid": 425751430849304,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "obj_str",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 671673665721306
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 583924421245406,
+							"parameters": {
+								"object": "MapElement",
+								"expression": "distance(MapElement.X, MapElement.Y, old_x, old_y)",
+								"comparison": 2,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 242452032697682,
+							"parameters": {
+								"variable": "obj_str",
+								"value": "MapElement.ObjectTypeName&\"_\"&MapElement.AnimationName"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "MapElement",
+							"sid": 572576054596513,
+							"parameters": {
+								"x": "x",
+								"y": "y"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "MapElement",
+							"sid": 688127409869981,
+							"parameters": {
+								"angle": "new_angle"
+							}
+						}
+					],
+					"sid": 745343147522966
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "end-group",
+							"objectClass": "Browser",
+							"sid": 526221144912224
+						}
+					],
+					"sid": 526016594368064
+				}
+			]
+		},
+		{
+			"functionName": "RemoveObject",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 134552724530471
+				},
+				{
+					"name": "y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 680196601620587
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "start-group",
+					"objectClass": "Browser",
+					"sid": 236262355887617,
+					"parameters": {
+						"group-name": "\"Removing object\""
+					}
+				}
+			],
+			"sid": 456008044770153,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Remove added object"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 853102052219687,
+							"parameters": {
+								"object": "MapElement",
+								"expression": "distance(MapElement.X, MapElement.Y, x, y)",
+								"comparison": 2,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "MapElement",
+							"sid": 428520091301083
+						}
+					],
+					"sid": 516678623741976
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "end-group",
+							"objectClass": "Browser",
+							"sid": 387911665751486
+						}
+					],
+					"sid": 925519118636556
+				}
+			]
+		},
+		{
+			"functionName": "CreateObject",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "object_string",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 549408920938319
+				},
+				{
+					"name": "x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 404742925794666
+				},
+				{
+					"name": "y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 209853639067570
+				},
+				{
+					"name": "new_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 918689208697120
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "start-group",
+					"objectClass": "Browser",
+					"sid": 359614665201617,
+					"parameters": {
+						"group-name": "\"Creating new object\""
+					}
+				}
+			],
+			"sid": 620701370934290,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "object_animation",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 350663757101768
+				},
+				{
+					"eventType": "variable",
+					"name": "object_type",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 285235856655719
+				},
+				{
+					"eventType": "variable",
+					"name": "new_uid",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 238353350333668
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 728991286683296,
+							"parameters": {
+								"variable": "object_type",
+								"value": "tokenat(object_string, 0, \"_\")"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 905739740648148,
+							"parameters": {
+								"variable": "object_animation",
+								"value": "tokenat(object_string, 1, \"_\")"
+							}
+						},
+						{
+							"id": "create-object-by-name",
+							"objectClass": "System",
+							"sid": 724609899388440,
+							"parameters": {
+								"object-name": "object_type",
+								"layer": "\"Level\"",
+								"x": "x",
+								"y": "y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 491315804471169,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 516171367171182,
+									"parameters": {
+										"object": "MapElement"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 236704413058141,
+									"parameters": {
+										"variable": "new_uid",
+										"value": "MapElement.UID"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 479126071490327,
+									"parameters": {
+										"type": "log",
+										"message": "\"Spawned \"&MapElement.ObjectTypeName&newline&\"Animation:  \"&object_animation&newline&\"UID: \"&MapElement.UID"
+									}
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "MapElement",
+									"sid": 841152667282856,
+									"behaviorType": "DragDrop",
+									"parameters": {
+										"state": "disabled"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "MapElement",
+									"sid": 644324229983992,
+									"parameters": {
+										"instance-variable": "placed",
+										"value": "true"
+									}
+								},
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "MapElement",
+									"sid": 654169300449643,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"TintRed\""
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "MapElement",
+									"sid": 535725900100696,
+									"parameters": {
+										"angle": "new_angle"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "MapElement",
+									"sid": 706748916986632,
+									"parameters": {
+										"animation": "object_animation",
+										"from": "beginning"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "MapElement",
+									"sid": 512117348548718,
+									"parameters": {
+										"x": "x",
+										"y": "y"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 285833181589977,
+									"parameters": {
+										"type": "log",
+										"message": "\"Position: [\"&MapElement.X&\", \"&MapElement.Y&\"]\"&newline&\"Angle: \"&MapElement.Angle"
+									}
+								}
+							],
+							"sid": 747808774843958
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "end-group",
+							"objectClass": "Browser",
+							"sid": 813794994041323
+						}
+					],
+					"sid": 411733441990472
+				}
+			]
+		},
+		{
+			"functionName": "SelectObject",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "uid",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 220212565351630
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "MapElement",
+					"sid": 465158960379215,
+					"parameters": {
+						"unique-id": "uid"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 215145191835911,
+					"parameters": {
+						"variable": "EditUID",
+						"value": "MapElement.UID"
+					}
+				},
+				{
+					"id": "set-opacity",
+					"objectClass": "MapElement",
+					"sid": 888625453710858,
+					"parameters": {
+						"opacity": "60"
+					}
+				},
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "MapElement",
+					"sid": 680047676455094,
+					"parameters": {
+						"mode": "enable",
+						"effect": "\"TintSelected\""
+					}
+				},
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "MapElement",
+					"sid": 785875189178562,
+					"parameters": {
+						"instance-variable": "selected",
+						"value": "true"
+					}
+				},
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "MapElement",
+					"sid": 617535099574464,
+					"parameters": {
+						"instance-variable": "placed",
+						"value": "false"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MapElement",
+					"sid": 153978250267740,
+					"parameters": {
+						"instance-variable": "saved_x",
+						"value": "Self.X"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MapElement",
+					"sid": 895608315365855,
+					"parameters": {
+						"instance-variable": "saved_y",
+						"value": "Self.Y"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MapElement",
+					"sid": 755720529879313,
+					"parameters": {
+						"instance-variable": "saved_angle",
+						"value": "Self.Angle"
+					}
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "MapElement",
+					"sid": 396616488949739,
+					"behaviorType": "DragDrop",
+					"parameters": {
+						"state": "enabled"
+					}
+				},
+				{
+					"callFunction": "ChangeAngle",
+					"sid": 339156538244147,
+					"parameters": [
+						"MapElement.Angle"
+					]
+				}
+			],
+			"sid": 543444421275037
+		},
+		{
+			"functionName": "DeselectObject",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "uid",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 748041610216584
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "MapElement",
+					"sid": 957905542519378,
+					"parameters": {
+						"unique-id": "uid"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-opacity",
+					"objectClass": "MapElement",
+					"sid": 906536070211051,
+					"parameters": {
+						"opacity": "100"
+					}
+				},
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "MapElement",
+					"sid": 124467566002344,
+					"parameters": {
+						"mode": "disable",
+						"effect": "\"TintSelected\""
+					}
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "MapElement",
+					"sid": 869383873646182,
+					"behaviorType": "DragDrop",
+					"parameters": {
+						"state": "disabled"
+					}
+				}
+			],
+			"sid": 829312659804264,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "MapElement",
+							"sid": 262725874411639,
+							"parameters": {
+								"instance-variable": "saved_angle",
+								"comparison": 1,
+								"value": "Self.Angle"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "MapElement",
+							"sid": 771698156428032,
+							"parameters": {
+								"instance-variable": "saved_x",
+								"comparison": 1,
+								"value": "Self.X"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "MapElement",
+							"sid": 137872151533824,
+							"parameters": {
+								"instance-variable": "saved_y",
+								"comparison": 1,
+								"value": "Self.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "AddAction",
+							"sid": 110600260332366,
+							"parameters": [
+								"ACTION_MODIFY",
+								"MapElement.UID"
+							]
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "MapElement",
+							"sid": 317050704186100,
+							"parameters": {
+								"instance-variable": "selected",
+								"value": "false"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "MapElement",
+							"sid": 407774549137168,
+							"parameters": {
+								"instance-variable": "placed",
+								"value": "true"
+							}
+						}
+					],
+					"sid": 793238886394060,
+					"isOrBlock": true
+				}
+			]
+		},
+		{
+			"functionName": "AddNewObject",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "MapElement",
+					"sid": 548849318869956,
+					"parameters": {
+						"unique-id": "EditUID"
+					}
+				},
+				{
+					"id": "is-boolean-instance-variable-set",
+					"objectClass": "MapElement",
+					"sid": 691160501050985,
+					"parameters": {
+						"instance-variable": "can_place"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "AddAction",
+					"sid": 104121001357396,
+					"parameters": [
+						"ACTION_ADD",
+						"MapElement.UID"
+					]
+				}
+			],
+			"sid": 433229988356258,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "obj_str",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 107400987146013
+				},
+				{
+					"eventType": "variable",
+					"name": "y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 876655677339985
+				},
+				{
+					"eventType": "variable",
+					"name": "x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 534200015636245
+				},
+				{
+					"eventType": "variable",
+					"name": "new_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 560391685714799
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 370112519122243,
+							"parameters": {
+								"variable": "x",
+								"value": "MapElement.X"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 611513614883109,
+							"parameters": {
+								"variable": "y",
+								"value": "MapElement.Y"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 373576551183416,
+							"parameters": {
+								"variable": "new_angle",
+								"value": "MapElement.Angle"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 893013202886708,
+							"parameters": {
+								"variable": "obj_str",
+								"value": "MapElement.ObjectTypeName&\"_\"&MapElement.AnimationName"
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "MapElement",
+							"sid": 546865763572257
+						},
+						{
+							"callFunction": "CreateObject",
+							"sid": 386400783788955,
+							"parameters": [
+								"obj_str",
+								"x",
+								"y",
+								"new_angle"
+							]
+						}
+					],
+					"sid": 417671886121432
+				}
+			]
+		},
+		{
+			"functionName": "ChangeAngle",
+			"functionDescription": "",
+			"functionCategory": "Logic",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "new_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 931299407106762
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "MapElement",
+					"sid": 366628063558597,
+					"parameters": {
+						"unique-id": "EditUID"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-angle",
+					"objectClass": "MapElement",
+					"sid": 124976622615845,
+					"parameters": {
+						"angle": "new_angle"
+					}
+				},
+				{
+					"callFunction": "check_placed",
+					"sid": 857722979522573,
+					"parameters": [
+						"MapElement.UID"
+					]
+				}
+			],
+			"sid": 919411223839210,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 701067761766188,
+							"parameters": {
+								"object": "angle_slider"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Angle_text",
+							"sid": 357974616625759,
+							"parameters": {
+								"unique-id": "angle_slider.Pin.PinnedUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "Angle_text",
+							"sid": 646997223512420,
+							"parameters": {
+								"text": "\"Угол\"&newline&MapElement.Angle&\"°\""
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "angle_slider",
+							"sid": 282962652055342,
+							"parameters": {
+								"x": "Angle_text.X + cos(MapElement.Angle) * 48",
+								"y": "Angle_text.Y + sin(MapElement.Angle) * 48"
+							}
+						}
+					],
+					"sid": 262101607218881
+				}
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "Saving project format:\n1. Number of segments that form the track\n2. Track segments - starting from finish/start segment till ending segment\n3. All other objects on top of that"
+		},
+		{
+			"functionName": "SaveProject",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-size",
+					"objectClass": "ThisLvl",
+					"sid": 245434981989933,
+					"disabled": true,
+					"parameters": {
+						"width": "2",
+						"height": "5",
+						"depth": "1"
+					}
+				},
+				{
+					"id": "set-at-xyz",
+					"objectClass": "ThisLvl",
+					"sid": 411084947793028,
+					"disabled": true,
+					"parameters": {
+						"x": "0",
+						"y": "2",
+						"z": "0",
+						"value": "choose_back.SelectedIndex"
+					}
+				},
+				{
+					"id": "set-value",
+					"objectClass": "JSON",
+					"sid": 176833697431571,
+					"parameters": {
+						"path": "\"modified\"",
+						"value": "Date.Now"
+					}
+				},
+				{
+					"id": "set-value",
+					"objectClass": "JSON",
+					"sid": 847691606234633,
+					"parameters": {
+						"path": "\"background\"",
+						"value": "choose_back.SelectedIndex"
+					}
+				},
+				{
+					"id": "set-array",
+					"objectClass": "JSON",
+					"sid": 791722846867925,
+					"parameters": {
+						"path": "\"objects\"",
+						"size": "MapElement.Count"
+					}
+				},
+				{
+					"id": "set-value",
+					"objectClass": "JSON",
+					"sid": 277269391439904,
+					"parameters": {
+						"path": "\"road_format\"",
+						"value": "\"bezier\""
+					}
+				},
+				{
+					"type": "script",
+					"script": "let arr = runtime.objects.RoadPoints.getFirstInstance();\nRoadEditor.exportToCArray(arr);"
+				},
+				{
+					"id": "set-json",
+					"objectClass": "JSON",
+					"sid": 312901028416975,
+					"parameters": {
+						"path": "\"road_points\"",
+						"json": "RoadPoints.AsJSON"
+					}
+				}
+			],
+			"sid": 309995402693282,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "Sprint",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 501210511952042
+				},
+				{
+					"eventType": "variable",
+					"name": "error",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "Boolean to check whether should we abort saving map",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 845930074030920
+				},
+				{
+					"eventType": "comment",
+					"text": "Start assuming we have a complete circle track"
+				},
+				{
+					"eventType": "variable",
+					"name": "complete_track",
+					"type": "boolean",
+					"initialValue": "true",
+					"comment": "Boolean to check whether  or not we have a complete track built",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 322505606848233
+				},
+				{
+					"eventType": "variable",
+					"name": "finish_id",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "Finish segment UID",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 412079970955723
+				},
+				{
+					"eventType": "variable",
+					"name": "next_id",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "UID of the next segment to add",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 739939406840464
+				},
+				{
+					"eventType": "comment",
+					"text": "Write rest of the map"
+				},
+				{
+					"eventType": "script",
+					"script": "let js = runtime.objects.JSON.getFirstInstance();\nlet data = js.getJsonDataCopy();\nlet arr = runtime.objects.MapElement.getAllInstances();\ndata[\"objects\"] = [];\narr.sort((a, b) => { return a.zIndex - b.zIndex; });\nfor (const item of arr) data[\"objects\"].push({\"x\": item.x, \"y\": item.y, \"type\": item.objectType.name + \"_\" + item.animationName, \"angle\": item.angleDegrees});\njs.setJsonDataCopy(data);"
+				},
+				{
+					"eventType": "comment",
+					"text": "Actually save the map if all good"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 190541914651224,
+							"parameters": {
+								"variable": "error"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-value",
+							"objectClass": "JSON",
+							"sid": 891255298375044,
+							"parameters": {
+								"path": "\"modified\"",
+								"value": "Date.Now"
+							}
+						},
+						{
+							"id": "set-item",
+							"objectClass": "LocalStorage",
+							"sid": 742367941836149,
+							"parameters": {
+								"key": "\"map_\"&MapSlot",
+								"value": "JSON.ToCompactString"
+							}
+						}
+					],
+					"sid": 600642555766954
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-all-sets-complete",
+					"objectClass": "LocalStorage",
+					"sid": 950644489469446
+				}
+			],
+			"actions": [
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 618026107267202,
+					"parameters": {
+						"message": "\"Карта сохранена!\""
+					}
+				}
+			],
+			"sid": 875669852644472
+		},
+		{
+			"functionName": "GetBackground",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ImageName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 330602247107761
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 355970624915481,
+			"children": [
+				{
+					"eventType": "script",
+					"script": "const furl = localVars.ImageName + \".png\";\nconst link = await runtime.assets.getProjectFileUrl(furl);\nruntime.callFunction(\"LoadBackground\", link);"
+				}
+			]
+		},
+		{
+			"functionName": "LoadBackground",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "URL",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 301891590405461
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "load-image-from-url",
+					"objectClass": "background",
+					"sid": 559264641878003,
+					"parameters": {
+						"uri": "URL",
+						"cross-origin": "anonymous"
+					}
+				}
+			],
+			"sid": 407003200790325
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-selection-changed",
+					"objectClass": "choose_back",
+					"sid": 981899918084718
+				},
+				{
+					"id": "compare-instance-variable",
+					"objectClass": "choose_back",
+					"sid": 248701566069443,
+					"parameters": {
+						"instance-variable": "last_index",
+						"comparison": 1,
+						"value": "Self.SelectedIndex"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "GetBackground",
+					"sid": 625536484282410,
+					"parameters": [
+						"\"back_\"&str(choose_back.SelectedIndex + 1)"
+					]
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "choose_back",
+					"sid": 964945542395671,
+					"parameters": {
+						"instance-variable": "last_index",
+						"value": "Self.SelectedIndex"
+					}
+				}
+			],
+			"sid": 237836341244393,
+			"isOrBlock": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-completed",
+					"objectClass": "AJAX",
+					"sid": 150923089851599,
+					"parameters": {
+						"tag": "\"default_road\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "load",
+					"objectClass": "RoadPoints",
+					"sid": 554901718364613,
+					"parameters": {
+						"json": "AJAX.LastData"
+					}
+				},
+				{
+					"type": "script",
+					"script": "RoadEditor.loadFromCArray(runtime.objects.RoadPoints.getFirstInstance());\nRoadEditor.hideFullEditor();"
+				}
+			],
+			"sid": 313519663092012
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "isdragging0",
+					"objectClass": "angle_slider",
+					"sid": 590972201638719,
+					"behaviorType": "BoundedDragDrop"
+				},
+				{
+					"id": "pick-by-unique-id",
+					"objectClass": "Angle_text",
+					"sid": 501154111297543,
+					"parameters": {
+						"unique-id": "angle_slider.Pin.PinnedUID"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "ChangeAngle",
+					"sid": 598657325821124,
+					"parameters": [
+						"round(angle(Angle_text.X, Angle_text.y, angle_slider.X, angle_slider.y) / 10) * 10"
+					]
+				}
+			],
+			"sid": 786403749687504
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-end-of-layout",
+					"objectClass": "System",
+					"sid": 585992548897855
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "RoadEditor.cleanSlate();"
+				}
+			],
+			"sid": 821902435933319
+		},
+		{
+			"functionName": "UpdateScale",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "new_scale",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 440561137081444
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-last-created",
+					"objectClass": "System",
+					"sid": 501858288959661,
+					"parameters": {
+						"object": "slider_handle"
+					}
+				},
+				{
+					"id": "pick-parent",
+					"objectClass": "slider_handle",
+					"sid": 965941382264040,
+					"parameters": {
+						"parent": "zoom_slider",
+						"which": "own"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "scale_text",
+					"sid": 962950331201681,
+					"parameters": {
+						"text": "roundToDp(new_scale, 2) * 100&\"%\""
+					}
+				},
+				{
+					"id": "set-layer-scale",
+					"objectClass": "System",
+					"sid": 638358479034277,
+					"parameters": {
+						"layer": "\"Level\"",
+						"scale": "new_scale / 8 + 0.05"
+					}
+				},
+				{
+					"id": "set-layer-scale",
+					"objectClass": "System",
+					"sid": 724775949109969,
+					"parameters": {
+						"layer": "\"Background\"",
+						"scale": "new_scale / 8 + 0.05"
+					}
+				},
+				{
+					"id": "set-y",
+					"objectClass": "slider_handle",
+					"sid": 524445845759221,
+					"parameters": {
+						"y": "Self.BoundedDragDrop.yMaxBoundPos - zoom_slider.Width * (new_scale / 3)"
+					}
+				}
+			],
+			"sid": 214182909968350
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "obstacle",
+					"sid": 489406476033699
+				}
+			],
+			"actions": [
+				{
+					"id": "set-active",
+					"objectClass": "obstacle",
+					"sid": 166156442735849,
+					"behaviorType": "Sine",
+					"parameters": {
+						"state": "inactive"
+					}
+				}
+			],
+			"sid": 741745506966531
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-animation-frame",
+					"objectClass": "MapElement",
+					"sid": 393303745064583,
+					"parameters": {
+						"comparison": 1,
+						"number": "0"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "stop-animation",
+					"objectClass": "MapElement",
+					"sid": 775273434814399
+				},
+				{
+					"id": "set-animation-frame",
+					"objectClass": "MapElement",
+					"sid": 847680858291049,
+					"parameters": {
+						"frame-number": "0"
+					}
+				}
+			],
+			"sid": 703084232395392
+		}
+	],
+	"sid": 290152901591731
+}

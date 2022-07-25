@@ -5,7 +5,7 @@
 	"isGlobal": false,
 	"instanceVariables": [
 		{
-			"name": "IsEnd",
+			"name": "isEnd",
 			"type": "boolean",
 			"desc": "",
 			"sid": 459895257415111
@@ -32,12 +32,12 @@
 					{
 						"width": 768,
 						"height": 128,
-						"originX": 0.25,
+						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 1331880,
+						"imageSpriteId": 2814029,
 						"useCollisionPoly": true,
 						"duration": 1
 					}

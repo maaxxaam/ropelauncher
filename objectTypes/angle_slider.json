@@ -1,0 +1,68 @@
+{
+	"name": "angle_slider",
+	"plugin-id": "Sprite",
+	"sid": 550390444232292,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "CV_BoundedDragnDrop",
+			"name": "BoundedDragDrop",
+			"sid": 375897713867372
+		},
+		{
+			"behaviorId": "Pin",
+			"name": "Pin",
+			"sid": 531650746202039
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 85,
+						"height": 85,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 1963530,
+						"collisionPoly": {
+							"points": [
+								0.1411764705882353,
+								0.1411764705882353,
+								0.5,
+								0,
+								0.8470588235294118,
+								0.1411764705882353,
+								0.9882352941176471,
+								0.5,
+								0.8470588235294118,
+								0.8470588235294118,
+								0.5,
+								0.9882352941176471,
+								0.1411764705882353,
+								0.8470588235294118,
+								0,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 336453242639441,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

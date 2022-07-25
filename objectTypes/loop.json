@@ -1,0 +1,14 @@
+{
+	"name": "loop",
+	"plugin-id": "Button",
+	"sid": 406479463810308,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 118274379164476
+		}
+	]
+}

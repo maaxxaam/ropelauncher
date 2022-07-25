@@ -1,0 +1,95 @@
+:root {
+	--after-slider: #ccc;
+	--before-slider: #a00;	
+}
+
+.slider {
+  -webkit-appearance: none;
+  margin: 0;
+  appearance: none;
+  width: 100%; 
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+#scale {
+  border-radius: 4px; 
+  background: #d3d3d3;
+}
+
+.slider-full {
+  overflow: hidden;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+.thumb-round::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.thumb-round::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.thumb-square::-moz-range-thumb {
+  width: 26px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.thumb-square::-webkit-slider-thumb:hover {
+  background: #009960;
+}
+
+.thumb-square::-webkit-slider-thumb:active {
+  background: #008858;
+}
+
+
+.button-slider {
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #04AA6D;
+  border: none;
+}
+
+.button-slider:hover {background-color: #3e8e41}
+
+.button-slider:active {
+  background-color: #2e8731;
+}
+
+.thumb-square::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 26px;
+  width: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider-full::-webkit-slider-thumb {
+  box-shadow: 160px 0 0 140px var(--after-slider);
+}
+
+.slider-full {
+	background: var(--before-slider);
+}

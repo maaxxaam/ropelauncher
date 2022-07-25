@@ -1,0 +1,14 @@
+{
+	"name": "RoadMode",
+	"plugin-id": "Button",
+	"sid": 617093377884823,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 361753229698058
+		}
+	]
+}

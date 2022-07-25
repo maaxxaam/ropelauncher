@@ -1,0 +1,1521 @@
+{
+	"name": "MapsSheet",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "AllEvents"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 926513315137934
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 853669098420918,
+					"parameters": {
+						"variable": "MapAction",
+						"value": "-1"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "ValeryppoffLayouter",
+					"sid": 187398970175303,
+					"disabled": true,
+					"parameters": {
+						"instance-variable": "index",
+						"value": "1"
+					}
+				},
+				{
+					"type": "comment",
+					"text": "Set MapSlot to -1 so we can load a map later"
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 993702013044114,
+					"parameters": {
+						"variable": "MapSlot",
+						"value": "-1"
+					}
+				},
+				{
+					"type": "comment",
+					"text": "Set LoadOrder to 0 so we can keep updating map info"
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 658172976806523,
+					"parameters": {
+						"variable": "LoadOrder",
+						"value": "0"
+					}
+				},
+				{
+					"callFunction": "DisableScrolling",
+					"sid": 228218887958259,
+					"disabled": true,
+					"parameters": [
+						"360",
+						"MidScreenY"
+					]
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 927855040547500,
+					"parameters": {
+						"tag": "\"default_map\"",
+						"file": "DefaultMap.json"
+					}
+				},
+				{
+					"id": "get-all-key-names",
+					"objectClass": "LocalStorage",
+					"sid": 101614839666528
+				},
+				{
+					"id": "clear",
+					"objectClass": "FileChooser",
+					"sid": 399927190109284
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "FileChooser",
+					"sid": 817876875778822,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "create_map",
+					"sid": 550929588514898,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 474839334531505,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 654725446414189,
+							"disabled": true,
+							"parameters": {
+								"object-to-create": "map_back",
+								"layer": "0",
+								"x": "ValeryppoffLayouter.getCellX(0)",
+								"y": "ValeryppoffLayouter.getCelly(0)",
+								"create-hierarchy": true,
+								"template-name": "\"new_card\""
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 166228004760664,
+							"parameters": {
+								"object-to-create": "create_map",
+								"layer": "0",
+								"x": "map_back.X + 640",
+								"y": "map_back.Y + 144 + 80",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 769796550143794,
+							"parameters": {
+								"object-to-create": "map_new_name",
+								"layer": "0",
+								"x": "map_back.X + 32",
+								"y": "map_back.Y + 144 + 80",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 336023250550312,
+							"parameters": {
+								"object-to-create": "FileChooser",
+								"layer": "0",
+								"x": "map_back.X + 640",
+								"y": "map_back.Y + 112 + 80",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 777502659338642
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "create_map",
+					"sid": 276301264140706
+				},
+				{
+					"id": "compare-text",
+					"objectClass": "map_new_name",
+					"sid": 637110425440329,
+					"parameters": {
+						"text": "\"\"",
+						"case": "case-insensitive"
+					},
+					"isInverted": true
+				},
+				{
+					"id": "pick-overlapping-point",
+					"objectClass": "System",
+					"sid": 263426761148522,
+					"parameters": {
+						"object": "map_back",
+						"x": "create_map.X",
+						"y": "create_map.Y"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 615420315506558,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "id",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 409349384176850
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 730581608953649,
+							"parameters": {
+								"variable": "id",
+								"value": "int(random(0, 999999999))"
+							}
+						}
+					],
+					"sid": 998190243318263,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Generate random unique id for the new map"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "while",
+									"objectClass": "System",
+									"sid": 178283404775743
+								},
+								{
+									"id": "has-key",
+									"objectClass": "map_names",
+									"sid": 582030486564800,
+									"parameters": {
+										"key": "\"map_\"&id"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 129626047173331,
+									"parameters": {
+										"variable": "id",
+										"value": "int(random(0, 999999999))"
+									}
+								}
+							],
+							"sid": 334508355071481,
+							"disabled": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 800357323550497,
+									"parameters": {
+										"variable": "MapSlot",
+										"value": "id"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 174137618873641,
+									"parameters": {
+										"variable": "MapAction",
+										"value": "MAP_NEW"
+									}
+								},
+								{
+									"id": "set-object",
+									"objectClass": "JSON",
+									"sid": 570591639428288,
+									"parameters": {
+										"path": "\"\""
+									}
+								},
+								{
+									"id": "parse",
+									"objectClass": "JSON",
+									"sid": 839178170962829,
+									"parameters": {
+										"data": "DefJSON.ToCompactString"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "JSON",
+									"sid": 356946063476249,
+									"parameters": {
+										"path": "\"name\"",
+										"value": "map_new_name.Text"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "JSON",
+									"sid": 969664267892415,
+									"parameters": {
+										"path": "\"created\"",
+										"value": "Date.Now"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "JSON",
+									"sid": 779156569017571,
+									"parameters": {
+										"path": "\"modified\"",
+										"value": "Date.Now"
+									}
+								},
+								{
+									"id": "set-item",
+									"objectClass": "LocalStorage",
+									"sid": 243880808374700,
+									"parameters": {
+										"key": "\"map_\"&id",
+										"value": "JSON.ToCompactString"
+									}
+								},
+								{
+									"id": "set-item",
+									"objectClass": "LocalStorage",
+									"sid": 402254710945308,
+									"parameters": {
+										"key": "\"map_names\"",
+										"value": "map_names.AsJSON"
+									}
+								},
+								{
+									"id": "set-item",
+									"objectClass": "LocalStorage",
+									"sid": 585060080897530,
+									"parameters": {
+										"key": "\"map_dates\"",
+										"value": "map_dates.AsJSON"
+									}
+								}
+							],
+							"sid": 293862873851291,
+							"disabled": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-completed",
+					"objectClass": "AJAX",
+					"sid": 452707496190936,
+					"parameters": {
+						"tag": "\"default_map\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "parse",
+					"objectClass": "DefJSON",
+					"sid": 546503097993154,
+					"parameters": {
+						"data": "AJAX.LastData"
+					}
+				}
+			],
+			"sid": 460987256423421,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-all-sets-complete",
+					"objectClass": "LocalStorage",
+					"sid": 517511672264280
+				}
+			],
+			"actions": [],
+			"sid": 364965203386941,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 868220865837504,
+							"parameters": {
+								"variable": "MapAction",
+								"comparison": 0,
+								"value": "MAP_NEW"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 935840873131881,
+							"parameters": {
+								"message": "\"Карта создана! Загружаем редактор...\""
+							}
+						},
+						{
+							"id": "go-to-layout",
+							"objectClass": "System",
+							"sid": 227857124981565,
+							"parameters": {
+								"layout": "Editor"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 465188426546671,
+							"parameters": {
+								"variable": "MapAction",
+								"value": "-1"
+							}
+						}
+					],
+					"sid": 575988236057666,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 513241677543366,
+							"parameters": {
+								"variable": "MapAction",
+								"comparison": 0,
+								"value": "MAP_EXTERNAL"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 450157367539959,
+							"parameters": {
+								"message": "\"Карта загружена! Открываем редактор...\""
+							}
+						},
+						{
+							"id": "go-to-layout",
+							"objectClass": "System",
+							"sid": 911255573588749,
+							"parameters": {
+								"layout": "Editor"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 259706018100757,
+							"parameters": {
+								"variable": "MapAction",
+								"value": "-1"
+							}
+						}
+					],
+					"sid": 122835762010956,
+					"disabled": true
+				}
+			],
+			"isOrBlock": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-any-item-removed",
+					"objectClass": "LocalStorage",
+					"sid": 222114817486189
+				}
+			],
+			"actions": [],
+			"sid": 786364709937329,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 957787307314463,
+							"parameters": {
+								"variable": "MapAction",
+								"comparison": 0,
+								"value": "MAP_DELETE"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ClearMaps",
+							"sid": 179509997141222
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ValeryppoffLayouter",
+							"sid": 557431397893761,
+							"parameters": {
+								"instance-variable": "index",
+								"value": "1"
+							}
+						},
+						{
+							"id": "get-all-key-names",
+							"objectClass": "LocalStorage",
+							"sid": 732454152815277
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 261210558367906,
+							"parameters": {
+								"variable": "MapAction",
+								"value": "-1"
+							}
+						}
+					],
+					"sid": 905904270761654,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "MapButton",
+					"sid": 166703754365836
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 330963266275320,
+					"parameters": {
+						"variable": "MapAction",
+						"value": "MapButton.action"
+					}
+				},
+				{
+					"id": "get-item",
+					"objectClass": "LocalStorage",
+					"sid": 903265797184008,
+					"parameters": {
+						"key": "MapButton.map_id"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 110851128083233,
+					"parameters": {
+						"variable": "MapSlot",
+						"value": "int(tokenat(MapButton.map_id, 1, \"_\"))"
+					}
+				}
+			],
+			"sid": 571735940240762,
+			"disabled": true
+		},
+		{
+			"functionName": "ClearMaps2",
+			"functionDescription": "",
+			"functionCategory": "GUI",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "pick-by-comparison",
+					"objectClass": "System",
+					"sid": 750155277989051,
+					"parameters": {
+						"object": "map_back",
+						"expression": "map_back.IID",
+						"comparison": 4,
+						"value": "0"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "map_back",
+					"sid": 827253459596871
+				}
+			],
+			"sid": 276139736910249,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 560260214203304,
+							"parameters": {
+								"object": "delete_map"
+							}
+						},
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 291365647295242,
+							"parameters": {
+								"object": "load_map"
+							}
+						},
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 628388990946803,
+							"parameters": {
+								"object": "download_map"
+							}
+						},
+						{
+							"id": "pick-all",
+							"objectClass": "System",
+							"sid": 987878067279341,
+							"parameters": {
+								"object": "rename_map"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "delete_map",
+							"sid": 878172245073676
+						},
+						{
+							"id": "destroy",
+							"objectClass": "load_map",
+							"sid": 827080559633154
+						},
+						{
+							"id": "destroy",
+							"objectClass": "download_map",
+							"sid": 159770324191249
+						},
+						{
+							"id": "destroy",
+							"objectClass": "rename_map",
+							"sid": 339957193538781
+						}
+					],
+					"sid": 502427819469044,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-changed",
+					"objectClass": "FileChooser",
+					"sid": 683249604359711
+				}
+			],
+			"actions": [],
+			"sid": 786471664069653,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-text",
+							"objectClass": "map_new_name",
+							"sid": 894047084897491,
+							"parameters": {
+								"text": "\"\"",
+								"case": "case-insensitive"
+							},
+							"isInverted": true
+						},
+						{
+							"id": "pick-overlapping-point",
+							"objectClass": "System",
+							"sid": 818240033129837,
+							"parameters": {
+								"object": "map_back",
+								"x": "create_map.X",
+								"y": "create_map.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "request-url",
+							"objectClass": "AJAX",
+							"sid": 897816835156821,
+							"parameters": {
+								"tag": "\"file\"",
+								"url": "FileChooser.FileURLAt(0)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 813999901763070,
+							"parameters": {
+								"variable": "MapAction",
+								"value": "MAP_EXTERNAL"
+							}
+						}
+					],
+					"sid": 129209189925573,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 219175665739076
+						}
+					],
+					"actions": [
+						{
+							"id": "clear",
+							"objectClass": "FileChooser",
+							"sid": 145768192526173
+						},
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 357807185433772,
+							"parameters": {
+								"message": "\"Сначала введите название карты\""
+							}
+						}
+					],
+					"sid": 856706079804178,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-text-changed",
+					"objectClass": "map_new_name",
+					"sid": 783656265144131
+				}
+			],
+			"actions": [],
+			"sid": 402553471069698,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-text",
+							"objectClass": "map_new_name",
+							"sid": 446639313930402,
+							"parameters": {
+								"text": "\"\"",
+								"case": "case-insensitive"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "clear",
+							"objectClass": "FileChooser",
+							"sid": 309906840197757
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "FileChooser",
+							"sid": 961597224207465,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "create_map",
+							"sid": 663795958183169,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 441132975814693,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 537410604062247
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "FileChooser",
+							"sid": 689780687863649,
+							"parameters": {
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "create_map",
+							"sid": 146281727227890,
+							"parameters": {
+								"visibility": "visible"
+							}
+						}
+					],
+					"sid": 472439338202749,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-completed",
+					"objectClass": "AJAX",
+					"sid": 416485866483730,
+					"parameters": {
+						"tag": "\"file\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 592906057675567,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-overlapping-point",
+							"objectClass": "System",
+							"sid": 326521631362047,
+							"parameters": {
+								"object": "map_back",
+								"x": "create_map.X",
+								"y": "create_map.Y"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 664338021806882,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "id",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 784785984467141
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 938475846397020,
+									"parameters": {
+										"variable": "id",
+										"value": "int(random(0, 999999999))"
+									}
+								}
+							],
+							"sid": 859646304492739,
+							"disabled": true,
+							"children": [
+								{
+									"eventType": "comment",
+									"text": "Generate random unique id for the new map"
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "while",
+											"objectClass": "System",
+											"sid": 473135480366512
+										},
+										{
+											"id": "has-key",
+											"objectClass": "map_names",
+											"sid": 169322431803831,
+											"parameters": {
+												"key": "\"map_\"&id"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 731535135135201,
+											"parameters": {
+												"variable": "id",
+												"value": "int(random(0, 999999999))"
+											}
+										}
+									],
+									"sid": 332440402063274,
+									"disabled": true
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 451342427503606,
+											"parameters": {
+												"variable": "MapSlot",
+												"value": "id"
+											}
+										},
+										{
+											"id": "add-key",
+											"objectClass": "map_names",
+											"sid": 860633800746933,
+											"parameters": {
+												"key": "\"map_\"&id",
+												"value": "map_new_name.Text"
+											}
+										},
+										{
+											"id": "add-key",
+											"objectClass": "map_dates",
+											"sid": 143014242245266,
+											"parameters": {
+												"key": "\"map_\"&id",
+												"value": "Date.Now"
+											}
+										},
+										{
+											"id": "load",
+											"objectClass": "ThisLvl",
+											"sid": 814139417910752,
+											"disabled": true,
+											"parameters": {
+												"json": " AJAX.LastData"
+											}
+										},
+										{
+											"id": "set-object",
+											"objectClass": "JSON",
+											"sid": 836229585687789,
+											"parameters": {
+												"path": "\"\""
+											}
+										},
+										{
+											"id": "parse",
+											"objectClass": "JSON",
+											"sid": 518691237926751,
+											"parameters": {
+												"data": "AJAX.LastData"
+											}
+										},
+										{
+											"id": "set-item",
+											"objectClass": "LocalStorage",
+											"sid": 168743627428807,
+											"parameters": {
+												"key": "\"map_\"&id",
+												"value": "JSON.ToCompactString"
+											}
+										},
+										{
+											"id": "set-item",
+											"objectClass": "LocalStorage",
+											"sid": 611652631992412,
+											"parameters": {
+												"key": "\"map_names\"",
+												"value": "map_names.AsJSON"
+											}
+										},
+										{
+											"id": "set-item",
+											"objectClass": "LocalStorage",
+											"sid": 103448502654302,
+											"parameters": {
+												"key": "\"map_dates\"",
+												"value": "map_dates.AsJSON"
+											}
+										}
+									],
+									"sid": 865091257162823,
+									"disabled": true
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-all-key-names-loaded",
+					"objectClass": "LocalStorage",
+					"sid": 361331123365651
+				}
+			],
+			"actions": [
+				{
+					"id": "set-cells-number",
+					"objectClass": "ValeryppoffLayouter",
+					"sid": 781082172366636,
+					"parameters": {
+						"num": "LocalStorage.KeyCount"
+					}
+				},
+				{
+					"id": "set-height",
+					"objectClass": "ValeryppoffLayouter",
+					"sid": 506255439962145,
+					"parameters": {
+						"height": "Self.getCellHeight * 1.1 * Self.getCellsNumber"
+					}
+				},
+				{
+					"id": "set-y",
+					"objectClass": "ValeryppoffLayouter",
+					"sid": 671946845536167,
+					"parameters": {
+						"y": "Self.Height / 2 + 140"
+					}
+				},
+				{
+					"callFunction": "EnableScrolling",
+					"sid": 815837997278282,
+					"disabled": true,
+					"parameters": [
+						false,
+						true,
+						"360",
+						"max((map_back.Height + 20 * 2) * ValeryppoffLayouter.getCellHeight + 140 - MidScreenY, MidScreenY)",
+						"360",
+						"MidScreenY",
+						true
+					]
+				}
+			],
+			"sid": 832852868373851,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "key",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 921904437458786
+				},
+				{
+					"eventType": "variable",
+					"name": "index",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 588584224516863
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 384427718795781,
+							"parameters": {
+								"name": "\"\"",
+								"start-index": "0",
+								"end-index": "LocalStorage.KeyCount - 1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 753001241939861,
+							"parameters": {
+								"variable": "key",
+								"value": "LocalStorage.KeyAt(loopindex)"
+							}
+						}
+					],
+					"sid": 973861352743966,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 375673265643219,
+									"parameters": {
+										"first-value": "left(key, 4)",
+										"comparison": 0,
+										"second-value": "\"map_\""
+									}
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 568567449114955,
+									"parameters": {
+										"first-value": "right(key, 1)",
+										"comparison": 1,
+										"second-value": "\"s\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "alert",
+									"objectClass": "Browser",
+									"sid": 679367121726169,
+									"parameters": {
+										"message": "key"
+									}
+								},
+								{
+									"id": "get-item",
+									"objectClass": "LocalStorage",
+									"sid": 636420331706593,
+									"parameters": {
+										"key": "key"
+									}
+								}
+							],
+							"sid": 444408884063200,
+							"disabled": true
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-any-item-get",
+					"objectClass": "LocalStorage",
+					"sid": 202955381997852
+				},
+				{
+					"id": "compare-two-values",
+					"objectClass": "System",
+					"sid": 472636609558136,
+					"parameters": {
+						"first-value": "left(LocalStorage.Key, 4)",
+						"comparison": 0,
+						"second-value": "\"map_\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "add-key",
+					"objectClass": "map_names",
+					"sid": 253077566351661,
+					"parameters": {
+						"key": "LocalStorage.Key",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-object",
+					"objectClass": "JSON",
+					"sid": 826287345957782,
+					"parameters": {
+						"path": "\"\""
+					}
+				},
+				{
+					"id": "parse",
+					"objectClass": "JSON",
+					"sid": 731156963830872,
+					"parameters": {
+						"data": "LocalStorage.ItemValue"
+					}
+				}
+			],
+			"sid": 709832392567289,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 145112271319440,
+							"parameters": {
+								"variable": "MapAction",
+								"comparison": 0,
+								"value": "-1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 118810629030134,
+							"parameters": {
+								"object-to-create": "map_back",
+								"layer": "0",
+								"x": "ValeryppoffLayouter.getCellX(ValeryppoffLayouter.index)",
+								"y": "ValeryppoffLayouter.getCelly(ValeryppoffLayouter.index)",
+								"create-hierarchy": true,
+								"template-name": "\"map_card\""
+							}
+						},
+						{
+							"id": "add-to-instvar",
+							"objectClass": "ValeryppoffLayouter",
+							"sid": 259031199985131,
+							"parameters": {
+								"instance-variable": "index",
+								"value": "1"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "map_back",
+							"sid": 895573207811534,
+							"parameters": {
+								"instance-variable": "async_val",
+								"value": "LocalStorage.Key"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "map_name_txt",
+							"sid": 722778914252716,
+							"parameters": {
+								"text": "JSON.Get(\"name\")"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "map_date_txt",
+							"sid": 866550408107225,
+							"parameters": {
+								"text": "\"Создана: \"&Date.ToLocaleString(JSON.Get(\"created\"))&newline&\"Последнее изменение: \"&Date.ToLocaleString(JSON.Get(\"modified\"))"
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 907927601375740,
+							"parameters": {
+								"object-to-create": "delete_map",
+								"layer": "0",
+								"x": "map_back.X + 640",
+								"y": "map_back.Y + 160 + 80",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "delete_map",
+							"sid": 643044160739773,
+							"parameters": {
+								"instance-variable": "map_id",
+								"value": "LocalStorage.Key"
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 760434571611682,
+							"parameters": {
+								"object-to-create": "rename_map",
+								"layer": "0",
+								"x": "map_back.X + 640",
+								"y": "map_back.Y + 112 + 80",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "rename_map",
+							"sid": 498835946284079,
+							"parameters": {
+								"instance-variable": "map_id",
+								"value": "LocalStorage.Key"
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 160087936876482,
+							"parameters": {
+								"object-to-create": "download_map",
+								"layer": "0",
+								"x": "map_back.X + 640",
+								"y": "map_back.Y + 64 + 80",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "download_map",
+							"sid": 153502310099140,
+							"parameters": {
+								"instance-variable": "map_id",
+								"value": "LocalStorage.Key"
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 394795077223606,
+							"parameters": {
+								"object-to-create": "load_map",
+								"layer": "0",
+								"x": "map_back.X + 640",
+								"y": "map_back.Y + 16 + 80",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "load_map",
+							"sid": 786412516357300,
+							"parameters": {
+								"instance-variable": "map_id",
+								"value": "LocalStorage.Key"
+							}
+						}
+					],
+					"sid": 188307136242501,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 981573676937436,
+							"parameters": {
+								"variable": "MapAction",
+								"comparison": 0,
+								"value": "MAP_DOWNLOAD"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 573667051811193,
+							"disabled": true,
+							"parameters": {
+								"message": "LocalStorage.Key"
+							}
+						}
+					],
+					"sid": 959517189881416,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 546101914679438,
+							"parameters": {
+								"variable": "MapAction",
+								"comparison": 0,
+								"value": "MAP_LOAD"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 518251484625540,
+							"parameters": {
+								"message": "\"Карта найдена! Загружаем редактор...\""
+							}
+						},
+						{
+							"id": "go-to-layout",
+							"objectClass": "System",
+							"sid": 144094482265189,
+							"parameters": {
+								"layout": "Editor"
+							}
+						}
+					],
+					"sid": 755191725011885,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "FileChooser",
+					"sid": 849379459841949
+				}
+			],
+			"actions": [
+				{
+					"id": "clear",
+					"objectClass": "FileChooser",
+					"sid": 660801102275309
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "FileChooser",
+					"sid": 833652896773422,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 754679491009805,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "create_map",
+					"sid": 254449402867242
+				}
+			],
+			"actions": [
+				{
+					"id": "set-visible",
+					"objectClass": "create_map",
+					"sid": 982944137094459,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 722028156671450,
+			"disabled": true
+		}
+	],
+	"sid": 730367220118816
+}

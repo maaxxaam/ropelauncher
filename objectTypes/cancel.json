@@ -1,0 +1,14 @@
+{
+	"name": "Cancel",
+	"plugin-id": "Button",
+	"sid": 189409473995788,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 951294811269162
+		}
+	]
+}

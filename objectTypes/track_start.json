@@ -1,0 +1,69 @@
+{
+	"name": "track_start",
+	"plugin-id": "Sprite",
+	"sid": 851749464416901,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 768,
+						"height": 768,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 589935,
+						"collisionPoly": {
+							"points": [
+								0,
+								0,
+								0.5,
+								0,
+								0.9990234375,
+								0,
+								0.9990234375,
+								0.5,
+								0.9990234375,
+								0.9990234375,
+								0.5,
+								0.9990234375,
+								0,
+								0.9990234375,
+								0,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "timer",
+								"x": 0.5,
+								"y": 0.7604166666666666
+							},
+							{
+								"name": "Checkpoint",
+								"x": 0.5,
+								"y": 0.890625
+							}
+						],
+						"duration": 1
+					}
+				],
+				"sid": 326322566034437,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

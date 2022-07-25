@@ -1,0 +1,14 @@
+{
+	"name": "add_ten",
+	"plugin-id": "Button",
+	"sid": 411093860065856,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 103744737840911
+		}
+	]
+}

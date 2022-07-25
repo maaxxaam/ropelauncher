@@ -1,0 +1,21 @@
+{
+	"name": "choose_back",
+	"plugin-id": "List",
+	"sid": 767424755947703,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "last_index",
+			"type": "number",
+			"desc": "",
+			"sid": 459321190959568
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 543899536703206
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"name": "ToMenu",
+	"plugin-id": "Button",
+	"sid": 379344872596030,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 661219455651587
+		}
+	]
+}

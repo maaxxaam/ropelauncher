@@ -2,9 +2,61 @@
 	"name": "MapElement",
 	"plugin-id": "Sprite",
 	"sid": 641709591779281,
-	"instanceVariables": [],
-	"behaviorTypes": [],
-	"effectTypes": [],
+	"instanceVariables": [
+		{
+			"name": "placed",
+			"type": "boolean",
+			"desc": "",
+			"sid": 716004673048136
+		},
+		{
+			"name": "can_place",
+			"type": "boolean",
+			"desc": "",
+			"sid": 772818136085890
+		},
+		{
+			"name": "saved_x",
+			"type": "number",
+			"desc": "",
+			"sid": 946858091978471
+		},
+		{
+			"name": "saved_y",
+			"type": "number",
+			"desc": "",
+			"sid": 811492762076858
+		},
+		{
+			"name": "saved_angle",
+			"type": "number",
+			"desc": "",
+			"sid": 102284587187450
+		},
+		{
+			"name": "selected",
+			"type": "boolean",
+			"desc": "",
+			"sid": 461343172712339
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "DragnDrop",
+			"name": "DragDrop",
+			"sid": 711766292192479
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "tint",
+			"name": "TintRed"
+		},
+		{
+			"effectId": "tint",
+			"name": "TintSelected"
+		}
+	],
 	"members": [
 		"road",
 		"decor",

@@ -1,0 +1,20 @@
+{
+	"name": "changes_buffer",
+	"plugin-id": "Arr",
+	"sid": 900130925074795,
+	"isGlobal": true,
+	"instanceVariables": [
+		{
+			"name": "current_action",
+			"type": "number",
+			"desc": "",
+			"sid": 177748270320718
+		},
+		{
+			"name": "last_action",
+			"type": "number",
+			"desc": "",
+			"sid": 536272949581353
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"name": "DestroyObject",
+	"plugin-id": "Button",
+	"sid": 849891144458230,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 643675363994405
+		}
+	]
+}

@@ -1,0 +1,73 @@
+{
+	"name": "Rebindable_gamepad",
+	"plugin-id": "Sprite",
+	"sid": 600500576392421,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "CurrentCode",
+			"type": "number",
+			"desc": "Assigned key code",
+			"sid": 103321394605652
+		},
+		{
+			"name": "Function",
+			"type": "string",
+			"desc": "Function assigned to button",
+			"sid": 977170122295848
+		},
+		{
+			"name": "ActionType",
+			"type": "number",
+			"desc": "",
+			"sid": 889154294892123
+		},
+		{
+			"name": "Selected",
+			"type": "boolean",
+			"desc": "Whether this button is selected or not",
+			"sid": 820503371323050
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 465313423118240
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "inverse",
+			"name": "Inverse"
+		}
+	],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 250,
+						"height": 250,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 8693750,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 578397611980806,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

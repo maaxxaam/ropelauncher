@@ -1,0 +1,26 @@
+{
+	"name": "EdBack",
+	"plugin-id": "NinePatch",
+	"sid": 118660595362194,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 630573417914690
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 292,
+		"height": 274,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 7639508,
+		"useCollisionPoly": true
+	}
+}

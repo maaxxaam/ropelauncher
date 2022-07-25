@@ -1535,9 +1535,48 @@
 					},
 					"uid": 3,
 					"instanceVariables": {
-						"TurnAngle": 0
+						"placed": false,
+						"can_place": false,
+						"saved_x": 0,
+						"saved_y": 0,
+						"saved_angle": 0,
+						"selected": false,
+						"TurnAngle": 0,
+						"snapped_start": 0,
+						"snapped_end": 0
 					},
-					"behaviors": {},
+					"behaviors": {
+						"DragDrop": {
+							"properties": {
+								"axes": "both",
+								"enabled": true
+							}
+						}
+					},
+					"effects": {
+						"TintRed": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									0,
+									0,
+									1
+								]
+							}
+						},
+						"TintSelected": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									0,
+									0,
+									1
+								]
+							}
+						}
+					},
 					"world": {
 						"x": 1918,
 						"y": 3410,
@@ -1607,7 +1646,7 @@
 						"width": 50,
 						"height": 200,
 						"originX": 0.5,
-						"originY": 1,
+						"originY": 0.5,
 						"color": [
 							1,
 							1,
@@ -2484,31 +2523,6 @@
 							}
 						}
 					},
-					"sceneGraphData": {
-						"parent-uid": null,
-						"uid": 92,
-						"flags": {
-							"x": true,
-							"y": true,
-							"z": true,
-							"w": true,
-							"h": true,
-							"a": true,
-							"d": true,
-							"sm": "normal"
-						},
-						"preview": {
-							"transformX": 0,
-							"transformY": 0,
-							"transformZElevation": 0,
-							"transformW": 0,
-							"transformH": 0,
-							"transformA": 0,
-							"transformSX": 0,
-							"transformSY": 0,
-							"previewSceneGraph": false
-						}
-					},
 					"world": {
 						"x": 1553,
 						"y": 48,
@@ -3071,7 +3085,17 @@
 						"click_param": "",
 						"ClickMode": 0
 					},
-					"behaviors": {},
+					"behaviors": {
+						"Anchor": {
+							"properties": {
+								"left-edge": "window-left",
+								"top-edge": "window-top",
+								"right-edge": "none",
+								"bottom-edge": "none",
+								"enabled": true
+							}
+						}
+					},
 					"effects": {
 						"Exposure": {
 							"isEnabled": true,
@@ -3150,7 +3174,17 @@
 					},
 					"uid": 136,
 					"instanceVariables": {},
-					"behaviors": {},
+					"behaviors": {
+						"Anchor": {
+							"properties": {
+								"left-edge": "window-left",
+								"top-edge": "window-top",
+								"right-edge": "none",
+								"bottom-edge": "none",
+								"enabled": true
+							}
+						}
+					},
 					"world": {
 						"x": 125,
 						"y": 500,
@@ -3222,9 +3256,21 @@
 					"instanceVariables": {
 						"TargetName": "Obstacle",
 						"Health": 3,
+						"placed": false,
+						"can_place": false,
+						"saved_x": 0,
+						"saved_y": 0,
+						"saved_angle": 0,
+						"selected": false,
 						"Moving": false
 					},
 					"behaviors": {
+						"DragDrop": {
+							"properties": {
+								"axes": "both",
+								"enabled": true
+							}
+						},
 						"Sine": {
 							"properties": {
 								"movement": "horizontal",
@@ -3242,6 +3288,30 @@
 						"Tween": {
 							"properties": {
 								"enabled": true
+							}
+						}
+					},
+					"effects": {
+						"TintRed": {
+							"isEnabled": true,
+							"parameters": {
+								"color": [
+									1,
+									0,
+									0,
+									1
+								]
+							}
+						},
+						"TintSelected": {
+							"isEnabled": true,
+							"parameters": {
+								"color": [
+									1,
+									0,
+									0,
+									1
+								]
 							}
 						}
 					},
@@ -3276,7 +3346,13 @@
 						"y_snap": 1060,
 						"draw": false
 					},
-					"behaviors": {},
+					"behaviors": {
+						"Pin": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
 					"world": {
 						"x": 408,
 						"y": 1122,
@@ -3310,6 +3386,11 @@
 						"Tween": {
 							"properties": {
 								"enabled": true
+							}
+						},
+						"Pin": {
+							"properties": {
+								"destroy": false
 							}
 						}
 					},
@@ -4120,7 +4201,179 @@
 					},
 					"uid": 104,
 					"instanceVariables": {},
-					"behaviors": {},
+					"behaviors": {
+						"Anchor": {
+							"properties": {
+								"left-edge": "window-left",
+								"top-edge": "window-top",
+								"right-edge": "none",
+								"bottom-edge": "none",
+								"enabled": false
+							}
+						}
+					},
+					"template": {
+						"mode": "template",
+						"templateName": "Volume",
+						"sourceTemplateName": "",
+						"components": [
+							{
+								"id": "plugin",
+								"component": [
+									{
+										"key": "plugin",
+										"state": [
+											[
+												"initially-visible",
+												true
+											],
+											[
+												"initial-animation",
+												true
+											],
+											[
+												"initial-frame",
+												true
+											],
+											[
+												"enable-collisions",
+												true
+											]
+										]
+									}
+								]
+							},
+							{
+								"id": "instance-variable",
+								"component": [
+									{
+										"key": "instance-variable",
+										"state": []
+									}
+								]
+							},
+							{
+								"id": "behavior",
+								"component": [
+									{
+										"key": "Anchor",
+										"state": [
+											[
+												"left-edge",
+												true
+											],
+											[
+												"top-edge",
+												true
+											],
+											[
+												"right-edge",
+												true
+											],
+											[
+												"bottom-edge",
+												true
+											],
+											[
+												"enabled",
+												true
+											]
+										]
+									}
+								]
+							},
+							{
+								"id": "effect",
+								"component": []
+							},
+							{
+								"id": "world-instance",
+								"component": [
+									{
+										"key": "world-instance",
+										"state": [
+											[
+												"x",
+												false
+											],
+											[
+												"y",
+												false
+											],
+											[
+												"z",
+												true
+											],
+											[
+												"w",
+												true
+											],
+											[
+												"h",
+												true
+											],
+											[
+												"a",
+												true
+											],
+											[
+												"o",
+												true
+											],
+											[
+												"c",
+												true
+											],
+											[
+												"sx",
+												true
+											],
+											[
+												"sy",
+												true
+											],
+											[
+												"bm",
+												true
+											],
+											[
+												"twpx",
+												true
+											],
+											[
+												"twpy",
+												true
+											],
+											[
+												"twpz",
+												true
+											],
+											[
+												"twpw",
+												true
+											],
+											[
+												"twph",
+												true
+											],
+											[
+												"twpa",
+												true
+											],
+											[
+												"dwp",
+												true
+											],
+											[
+												"ssm",
+												true
+											]
+										]
+									}
+								]
+							}
+						]
+					},
 					"sceneGraphData": {
 						"parent-uid": null,
 						"uid": 104,
@@ -4304,6 +4557,20 @@
 								"bound-min-y": 0,
 								"bound-max-y": 0
 							}
+						},
+						"Anchor": {
+							"properties": {
+								"left-edge": "window-left",
+								"top-edge": "window-top",
+								"right-edge": "none",
+								"bottom-edge": "none",
+								"enabled": false
+							}
+						},
+						"Pin": {
+							"properties": {
+								"destroy": false
+							}
 						}
 					},
 					"sceneGraphData": {
@@ -4361,7 +4628,17 @@
 					"instanceVariables": {
 						"moneyonstart": 0
 					},
-					"behaviors": {},
+					"behaviors": {
+						"Anchor": {
+							"properties": {
+								"left-edge": "window-left",
+								"top-edge": "window-top",
+								"right-edge": "none",
+								"bottom-edge": "none",
+								"enabled": true
+							}
+						}
+					},
 					"world": {
 						"x": 405,
 						"y": 1122,
@@ -4390,7 +4667,13 @@
 					},
 					"uid": 112,
 					"instanceVariables": {},
-					"behaviors": {},
+					"behaviors": {
+						"Pin": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
 					"world": {
 						"x": 370,
 						"y": 1100,
@@ -5210,7 +5493,7 @@
 					}
 				},
 				{
-					"type": "Gamepad_buttons",
+					"type": "Rebindable_gamepad",
 					"properties": {
 						"initially-visible": true,
 						"initial-animation": "Animation 1",
@@ -5218,14 +5501,68 @@
 						"enable-collisions": true,
 						"live-preview": false
 					},
-					"uid": 864,
-					"instanceVariables": {},
-					"behaviors": {},
+					"uid": 865,
+					"instanceVariables": {
+						"AnimationPrefix": "Pause",
+						"onclick": "",
+						"click_param": "",
+						"ClickMode": 1,
+						"CurrentCode": 32,
+						"Function": "Jump",
+						"ActionType": 0,
+						"Selected": false
+					},
+					"behaviors": {
+						"Tween": {
+							"properties": {
+								"enabled": true
+							}
+						}
+					},
+					"effects": {
+						"Exposure": {
+							"isEnabled": true,
+							"parameters": {
+								"exposure": 0
+							}
+						},
+						"Inverse": {
+							"isEnabled": false,
+							"parameters": {
+								"intensity": 0
+							}
+						}
+					},
+					"sceneGraphData": {
+						"parent-uid": null,
+						"uid": 865,
+						"flags": {
+							"x": true,
+							"y": true,
+							"z": true,
+							"w": true,
+							"h": true,
+							"a": true,
+							"d": true,
+							"sm": "normal"
+						},
+						"preview": {
+							"transformX": 0,
+							"transformY": 0,
+							"transformZElevation": 0,
+							"transformW": 0,
+							"transformH": 0,
+							"transformA": 0,
+							"transformSX": 0,
+							"transformSY": 0,
+							"previewSceneGraph": false
+						}
+					},
 					"world": {
-						"x": -636,
-						"y": 21,
-						"width": 250,
-						"height": 250,
+						"x": -598,
+						"y": -141,
+						"width": 225,
+						"height": 225,
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [

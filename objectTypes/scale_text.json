@@ -1,0 +1,15 @@
+{
+	"name": "scale_text",
+	"plugin-id": "Text",
+	"sid": 298200476403860,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 484135792255220
+		}
+	],
+	"effectTypes": []
+}

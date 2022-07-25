@@ -1,0 +1,64 @@
+{
+	"name": "start_brackets",
+	"plugin-id": "Sprite",
+	"sid": 697171020297644,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 46,
+						"height": 76,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 3396573,
+						"collisionPoly": {
+							"points": [
+								1,
+								1,
+								0.5,
+								1,
+								0.025862068965517238,
+								0.9714285714285714,
+								0.025862068965517238,
+								0.5,
+								0.051724137931034475,
+								0.08571428571428574,
+								0.5,
+								0.8714285714285714,
+								0.48275862068965514,
+								0.8714285714285714,
+								1,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "Spawn",
+								"x": -0.782608695652174,
+								"y": 0.5
+							}
+						],
+						"duration": 1
+					}
+				],
+				"sid": 326626158217153,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

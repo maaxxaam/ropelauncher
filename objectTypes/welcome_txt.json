@@ -1,0 +1,16 @@
+{
+	"name": "welcome_txt",
+	"plugin-id": "Text",
+	"sid": 330132345365098,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "index",
+			"type": "number",
+			"desc": "",
+			"sid": 893197663028170
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": []
+}

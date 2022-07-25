@@ -1,0 +1,39 @@
+{
+	"name": "SnapZone",
+	"plugin-id": "TiledBg",
+	"sid": 582380059165658,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "isEnd",
+			"type": "boolean",
+			"desc": "",
+			"sid": 230465478278517
+		},
+		{
+			"name": "snap_to",
+			"type": "number",
+			"desc": "",
+			"sid": 741345267680634
+		},
+		{
+			"name": "about_to_destroy",
+			"type": "boolean",
+			"desc": "",
+			"sid": 718726562385447
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"image": {
+		"width": 32,
+		"height": 32,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 7695725,
+		"useCollisionPoly": true
+	}
+}

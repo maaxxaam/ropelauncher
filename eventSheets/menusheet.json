@@ -248,6 +248,26 @@
 						"string": "\"OpenMap\"",
 						"function": "OpenMap"
 					}
+				},
+				{
+					"id": "map-function",
+					"objectClass": "Functions",
+					"sid": 360413547554002,
+					"parameters": {
+						"name": "\"onclick\"",
+						"string": "\"ToEditor\"",
+						"function": "ToEditor"
+					}
+				},
+				{
+					"id": "map-function",
+					"objectClass": "Functions",
+					"sid": 285654833442354,
+					"parameters": {
+						"name": "\"onclick\"",
+						"string": "\"ToMenu\"",
+						"function": "ToMenu"
+					}
 				}
 			],
 			"sid": 372646819559251
@@ -265,6 +285,14 @@
 				{
 					"callFunction": "CoinsChanged",
 					"sid": 908075644430505
+				},
+				{
+					"callFunction": "DisableScrolling",
+					"sid": 821656203603395,
+					"parameters": [
+						"MidScreenX",
+						"MidScreenY"
+					]
 				},
 				{
 					"type": "comment",
@@ -573,92 +601,6 @@
 								}
 							],
 							"sid": 400785495272710
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-tap-object",
-							"objectClass": "Touch",
-							"sid": 949015847621496,
-							"parameters": {
-								"object": "PlayLvlBut"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 998242895287433,
-							"parameters": {
-								"variable": "game_mode",
-								"value": "PlayLvlBut.SelectedMode"
-							}
-						},
-						{
-							"id": "go-to-layout-by-name",
-							"objectClass": "System",
-							"sid": 777466167519650,
-							"parameters": {
-								"layout": "\"Loaded_lvl\""
-							}
-						}
-					],
-					"sid": 830283524682247,
-					"disabled": true,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-instance-variable",
-									"objectClass": "PlayLvlBut",
-									"sid": 877320800637059,
-									"parameters": {
-										"instance-variable": "SelectedLvl",
-										"comparison": 0,
-										"value": "\"ParkingLot\""
-									}
-								},
-								{
-									"id": "compare-instance-variable",
-									"objectClass": "PlayLvlBut",
-									"sid": 930908537039897,
-									"parameters": {
-										"instance-variable": "SelectedMode",
-										"comparison": 0,
-										"value": "\"Race\""
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "alert",
-									"objectClass": "Browser",
-									"sid": 731596195287617,
-									"parameters": {
-										"message": "\"Режим \"\"Схватка\"\" еще не готов.\""
-									}
-								}
-							],
-							"sid": 125798044822733
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "else",
-									"objectClass": "System",
-									"sid": 915149665408207,
-									"disabled": true
-								}
-							],
-							"actions": [],
-							"sid": 817208911599011,
-							"disabled": true
 						}
 					]
 				},
@@ -1011,6 +953,17 @@
 										}
 									],
 									"actions": [
+										{
+											"id": "set-layer-scroll",
+											"objectClass": "System",
+											"sid": 560175143626543,
+											"disabled": true,
+											"parameters": {
+												"layer": "loopindex(\"Layers\")",
+												"scroll-x": "360 - MidScreenX",
+												"scroll-y": "MidScreenY"
+											}
+										},
 										{
 											"id": "set-layer-visible",
 											"objectClass": "System",
@@ -3091,6 +3044,7 @@
 			],
 			"actions": [],
 			"sid": 864122663142604,
+			"disabled": true,
 			"children": [
 				{
 					"eventType": "block",
@@ -3104,14 +3058,15 @@
 					"actions": [
 						{
 							"callFunction": "DisableScrolling",
-							"sid": 393793324969087,
+							"sid": 213390928428593,
 							"parameters": [
-								"0",
+								"360",
 								"MidScreenY"
 							]
 						}
 					],
-					"sid": 174394390483108
+					"sid": 174394390483108,
+					"disabled": true
 				}
 			]
 		},
@@ -3681,6 +3636,15 @@
 					}
 				},
 				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 580465724704977,
+					"parameters": {
+						"variable": "game_mode",
+						"value": "MapName = \"map_966518302\" ? \"Race\" : \"FreeRoam\""
+					}
+				},
+				{
 					"id": "go-to-layout",
 					"objectClass": "System",
 					"sid": 706182693533295,
@@ -3690,6 +3654,27 @@
 				}
 			],
 			"sid": 611045784497311
+		},
+		{
+			"functionName": "ToEditor",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 813662546634004,
+					"parameters": {
+						"layout": "EdMenu"
+					}
+				}
+			],
+			"sid": 132142180123083
 		}
 	],
 	"sid": 188176345997916

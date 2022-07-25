@@ -1,0 +1,14 @@
+{
+	"name": "Rapid",
+	"plugin-id": "Button",
+	"sid": 271054420919304,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 389402083126901
+		}
+	]
+}

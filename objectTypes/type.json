@@ -1,0 +1,14 @@
+{
+	"name": "type",
+	"plugin-id": "List",
+	"sid": 475195122923852,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 992494924064872
+		}
+	]
+}

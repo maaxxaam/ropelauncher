@@ -1,0 +1,14 @@
+{
+	"name": "Z_up",
+	"plugin-id": "Button",
+	"sid": 685285840184885,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 341525975844556
+		}
+	]
+}

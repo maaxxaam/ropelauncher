@@ -11,7 +11,13 @@
 			"sid": 345711723990726
 		}
 	],
-	"behaviorTypes": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 475741856742654
+		}
+	],
 	"effectTypes": [],
 	"animations": {
 		"items": [

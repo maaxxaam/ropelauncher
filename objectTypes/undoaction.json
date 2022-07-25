@@ -1,0 +1,14 @@
+{
+	"name": "UndoAction",
+	"plugin-id": "Button",
+	"sid": 509003531924888,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 151128575489010
+		}
+	]
+}

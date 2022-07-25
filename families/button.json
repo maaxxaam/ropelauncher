@@ -80,6 +80,7 @@
 		"garage_car_choice",
 		"CashPack",
 		"lvl_select",
-		"garage_downgrade_char"
+		"garage_downgrade_char",
+		"Rebindable_gamepad"
 	]
 }

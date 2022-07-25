@@ -1,0 +1,27 @@
+{
+	"name": "meshedRoad",
+	"plugin-id": "TiledBg",
+	"sid": 372001641308777,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "next_offset",
+			"type": "number",
+			"desc": "",
+			"sid": 196489325186700
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"image": {
+		"width": 768,
+		"height": 768,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 7815101,
+		"useCollisionPoly": true
+	}
+}

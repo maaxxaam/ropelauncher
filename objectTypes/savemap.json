@@ -1,0 +1,14 @@
+{
+	"name": "SaveMap",
+	"plugin-id": "Button",
+	"sid": 658479325454553,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 332022918249332
+		}
+	]
+}

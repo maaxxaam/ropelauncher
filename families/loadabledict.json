@@ -6,7 +6,7 @@
 		{
 			"name": "tag",
 			"type": "string",
-			"desc": "",
+			"desc": "Tag for AJAX to use",
 			"sid": 758674933565915
 		}
 	],
@@ -16,6 +16,10 @@
 		"keyboard_hold",
 		"gamepad_hold",
 		"gamepad_tap",
-		"gamepad_axis"
+		"gamepad_axis",
+		"base_types",
+		"bonus_subs",
+		"decor_subs",
+		"obstacle_subs"
 	]
 }

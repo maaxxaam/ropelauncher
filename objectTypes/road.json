@@ -9,6 +9,18 @@
 			"type": "number",
 			"desc": "",
 			"sid": 471211276718835
+		},
+		{
+			"name": "snapped_start",
+			"type": "number",
+			"desc": "",
+			"sid": 871244931611162
+		},
+		{
+			"name": "snapped_end",
+			"type": "number",
+			"desc": "",
+			"sid": 806435793167791
 		}
 	],
 	"behaviorTypes": [],

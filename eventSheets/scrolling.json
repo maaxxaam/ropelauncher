@@ -702,7 +702,17 @@
 				{
 					"id": "set-eventvar-value",
 					"objectClass": "System",
-					"sid": 579730093914330,
+					"sid": 687969403626839,
+					"parameters": {
+						"variable": "MidScreenX",
+						"value": "360"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 485232147667812,
+					"disabled": true,
 					"parameters": {
 						"variable": "MidScreenX",
 						"value": "ViewportWidth(0) / 2"
@@ -715,6 +725,15 @@
 					"parameters": {
 						"variable": "MidScreenY",
 						"value": "ViewportHeight(0) / 2"
+					}
+				},
+				{
+					"id": "alert",
+					"objectClass": "Browser",
+					"sid": 109897221748835,
+					"disabled": true,
+					"parameters": {
+						"message": "ViewportWidth(0)&\" \"&ViewportHeight(0)"
 					}
 				}
 			],
