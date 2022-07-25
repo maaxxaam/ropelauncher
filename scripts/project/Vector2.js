@@ -1,197 +1,125 @@
-//////////////////////////////////////////////////////
-///
-/// Javascript port of my Actionscript Vector2 library
-/// class for generic 2d vector operations and more
-/// Dogan CORUH
-/// 11.01.2013
-/// 
-//////////////////////////////////////////////////////
-
-function MathHelper() {
-
-}
-
-/**
- * Converts radian to degree
- */
-MathHelper.toDegree = function (angle) {
-    return angle * 180 / Math.PI;
-}
-
-/**
- * Converts degree to radian
- */
-MathHelper.toRadian = function (angle) {
-    return angle * Math.PI / 180;
-}
-
-MathHelper.degAcos = function(dot) {
-	return MathHelper.toDegree(Math.acos(dot));
+class MathHelper {
+	constructor() {}
+	toDegree(radians) {
+    return radians * 180 / Math.PI;
+	}
+	toRadian(degrees) {
+    return degrees * Math.PI / 180;
+	}
+	degAcos(dot) {
+	return this.toDegree(Math.acos(dot));
+	}
 }
 
 /**
  * Vector2 class for instances
  */
-export function Vector2(x, y) {
-	if (Number.isNaN(x)) x = 0;
-	if (Number.isNaN(y)) y = 0;
+export class Vector2{
+	constructor(x, y) {
+		if (Number.isNaN(x)) this.x = 0
+		else this.x = x;
+		if (Number.isNaN(y)) this.y = 0
+		else this.y = y;
+	}
 	
-	return {x: x, y: y, clone: function () {
-        return new Vector2(this.x, this.y);
-    }}
-}
-
-/**
-* Adds two vectors with each other
-*/
-Vector2.add = function(v1, v2) {
-	return Vector2(v1.x + v2.x, v1.y + v2.y);
-}
-/**
-* Subtracts second vector from first vector
-* @summary Subtracts second vector from first vector
-*/
-Vector2.subtract = function(v1, v2) {
-	return Vector2(v1.x - v2.x, v1.y - v2.y);
-}
-/**
-* Multiplies vector x,y,z components with a scaler value
-* @summary Multiplies vector x,y,z components with a scaler value
-*/
-Vector2.multiply = function(v, scaler) {
-	return Vector2(v.x * scaler, v.y * scaler);
-}
-/**
-* Divides vector x,y,z components with a divider value
-* @summary Divides vector x,y,z components with a divider value
-*/
-Vector2.divide = function(v, divider) {
-	return Vector2(v.x / divider, v.y / divider);
-}
-/**
-* Inverses vector
-* @summary Inverses vector
-*/
-Vector2.inverse = function(v) {
-	return Vector2(-v.x, -v.y);
-}
-/**
-* returns dot product of two given vectors
-* @summary returns dot product of two given vectors
-*/
-Vector2.dot = function(v1, v2, debug) {
-	if (debug) console.log(v1, v2);
-	return (v1.x * v2.x) + (v1.y * v2.y);
-}
-/**
-* returns the length of vector
-* @summary returns the length of vector
-*/
-Vector2.magnitude = function(v) {
-	return Math.sqrt(Vector2.dot(v, v));
-}
-/**
-* sets length of given vector and return it
-* @summary sets length of given vector and return it
-*/
-Vector2.setLength = function(v, length) {
-	var len_factor = length / Vector2.magnitude(v);
-	return Vector2.multiply(v, len_factor);
-}
-/**
-* returns true if the vector is zero vector
-* @summary returns true if the vector is zero vector
-*/
-Vector2.isZeroVector = function(v) {
-	return ((v.x == 0) && (v.y == 0));
-}
-/**
-* returns unit vector from given vector
-* @summary returns unit vector from given vector
-*/
-Vector2.normalize = function(v) {
-	var mag = Vector2.magnitude(v);
-	if (mag == 0) return Vector2(0, 0);
-	else return Vector2.divide(v, mag);
-}
-/**
-* returns cross product of two given vectors
-* @summary returns cross product of two given vectors
-*/
-Vector2.cross = function(v1, v2) {
-	return (v1.x * v2.y) - (v2.x * v1.y);
-}
-/**
-* returns the distance from one vector to another
-* @summary returns the distance from one vector to another
-*/
-Vector2.distance = function(v1, v2) {
-	return Vector2.magnitude(Vector2.subtract(v1, v2));
-}
-/**
-* rotates a vector with given radian angle
-* @summary rotates a vector with given radian angle
-* @explicit thanks to Sinan
-*/
-Vector2.rotateRadian = function(v, radian) {
-	var vr = Vector2(0, 0);
-
-	vr.x = v.x * Math.cos(radian) - v.y * Math.sin(radian);
-	vr.y = v.y * Math.cos(radian) + v.x * Math.sin(radian);
-
-	return vr;
-}
-/**
-* rotates a vector with given degree angle
-* @summary rotates a vector with given degree angle
-* @explicit thanks to Sinan
-*/
-Vector2.rotateDegree = function(v, degree) {
-	return Vector2.rotateRadian(v, MathHelper.toRadian(degree));
-}
-
-
-/**
-* returns unsigned degree angle between 0 and +180 by given two vectors
-* @summary returns unsigned degree angle between 0 and +180 by given two vectors
-*/
-Vector2.angleUnsigned = function(v1, v2) {
-	var va = Vector2.normalize(v1);
-	var vb = Vector2.normalize(v2);
-
-	return MathHelper.degAcos(Vector2.dot(va, vb));
-}
-/**
-* returns signed degree angle between -180 and +180 by given two vectors
-* @summary returns signed degree angle between -180 and +180 by given two vectors
-*/
-Vector2.angleSigned = function(v1, v2) {
-	var va = Vector2.normalize(v1);
-	var vb = Vector2.normalize(v2);
-	var deg = MathHelper.degAcos(Vector2.dot(va, vb));
+	clone() {
+		return new Vector2(this.x, this.y);
+	}
 	
-	return deg * Math.sign(Vector2.cross(vb, va));
-}
-/**
-* returns degree angle between 0 and 360 by given two vectors
-* @summary returns degree angle between 0 and 360 by given two vectors
-*/
-Vector2.angle360 = function(v1, v2) {
-	var va = Vector2.normalize(v1);
-	var vb = Vector2.normalize(v2);
-	var deg = MathHelper.degAcos(Vector2.dot(va, vb));
+	add(second) {
+		return new Vector2(this.x + second.x, this.y + second.y);
+	}
 	
-	return Vector2.cross(vb, va) > 0 ? deg : 360 - deg;
-}
-
-/**
-	* Compares two vectors for their equality?
-	* @summary Compares two vectors for their equality?
-	* @param	v1 "First vector to compare."
-	* @param	v2 "Second vector to compare."
-	* @return "True of false by comparison."
-	*/
-Vector2.isEqual = function isEqual(v1, v2)
-{
-	return (v1.x == v2.x) && (v1.y == v2.y);
+	subtract(second) {
+		return new Vector2(this.x - second.x, this.y - second.y);
+	}
+	
+	multiply(num) {
+		return new Vector2(this.x * num, this.y * num);
+	}
+	
+	divide(num) {
+		return new Vector2(this.x / num, this.y / num);
+	}
+	
+	inverse() {
+		return new Vector2(-this.x, -this.y);
+	}
+	
+	dot(second) {
+		return (this.x * second.x) + (this.y * second.y);
+	}
+	
+	magnitude() {
+		return Math.sqrt(this.dot(this));
+	}
+	
+	resize(len) {
+		let factor = len / this.magnitude();
+		return this.multiply(factor);
+	}
+	
+	isZero(precision) {
+		if (precision === undefined) {
+			return ((this.x == 0) && (this.y == 0))
+		} else {
+			let xIsZero = (this.x < precision) && (this.x > -precision);
+			let yIsZero = (this.y < precision) && (this.y > -precision);
+			return xIsZero && yIsZero;
+		}
+	}
+	
+	equalTo(second, precision) {
+		return this.subtract(second).isZero(precision);
+	}
+	
+	normalize() {
+		let magnitude = this.magnitude();
+		if (magnitude == 0) return Vector2(0, 0)
+		else return this.divide(magnitude);
+	}
+	
+	cross(second) {
+		return (this.x * second.y) - (second.x * this.y);
+	}
+	
+	distance(second) {
+		return this.subtract(second).magnitude();
+	}
+	
+	rotateRadian(radian) {
+		let result = new Vector2(0, 0);
+		
+		result.x = this.x * Math.cos(radian) - this.y * Math.sin(radian);
+		result.y = this.y * Math.cos(radian) + this.x * Math.sin(radian);
+		
+		return result;
+	}
+	
+	rotateDegree(degree) {
+		let helper = new MathHelper();
+		return this.rotateRadian(helper.toRadian(degree));
+	}
+	
+	// angle in [0, 180] degree range
+	angleUnsigned(second) {
+		let helper = new MathHelper();
+		
+		return helper.degAcos(this.normalize().dot(second.normalize()));
+	}
+	
+	// angle in [-180, 180] degree range
+	angleSigned(second) {
+		let angle = this.angleUnsigned(second);
+		let sign = Math.sign(this.normalize().cross(second.normalize()));
+		
+		return angle * sign;
+	}
+	
+	// angle in [0, 360] degree range
+	angle360(second) {
+		let angle = this.angleSigned(second);
+		if (angle < 0) angle = 360 - angle;
+		return angle;
+	}
 }

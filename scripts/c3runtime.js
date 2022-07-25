@@ -3463,6 +3463,19 @@ self["C3_Shaders"]["exposure"] = {
 	animated: false,
 	parameters: [["exposure",0,"percent"]]
 };
+self["C3_Shaders"]["tint"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform lowp vec3 tintColor;\nvoid main(void)\n{\nlowp vec4 front = texture2D(samplerFront, vTex);\ngl_FragColor = front * vec4(tintColor.r, tintColor.g, tintColor.b, 1.0);\n}",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\ntintColor : vec3<f32>\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@stage(fragment)\nfn main(input : FragmentInput) -> FragmentOutput {\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar output : FragmentOutput;\noutput.color = front * vec4<f32>(shaderParams.tintColor, 1.0);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: true,
+	animated: false,
+	parameters: [["tintColor",0,"color"]]
+};
 
 }
 
@@ -7734,6 +7747,73 @@ timeline.GetTrackById(valueTrackNameOrId);if(track){const propertyTrack=track.Ge
 }
 
 {
+'use strict';{const C3=self.C3;C3.Plugins.Date=class DatePlugin extends C3.SDKPluginBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Plugins.Date.Type=class DateType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass)}Release(){super.Release()}OnCreate(){}}}{const C3=self.C3;C3.Plugins.Date.Instance=class DateInstance extends C3.SDKInstanceBase{constructor(inst,properties){super(inst)}}}
+{const C3=self.C3;const getters=[];getters[0]=[ts=>C3.Plugins.Date.Exps.GetYear(ts),ts=>C3.Plugins.Date.Exps.GetMonth(ts),ts=>C3.Plugins.Date.Exps.GetDate(ts),ts=>C3.Plugins.Date.Exps.GetDay(ts),ts=>C3.Plugins.Date.Exps.GetHours(ts),ts=>C3.Plugins.Date.Exps.GetMinutes(ts),ts=>C3.Plugins.Date.Exps.GetSeconds(ts),ts=>C3.Plugins.Date.Exps.GetMilliseconds(ts)];getters[1]=[ts=>C3.Plugins.Date.Exps.GetUTCYear(ts),ts=>C3.Plugins.Date.Exps.GetUTCMonth(ts),ts=>C3.Plugins.Date.Exps.GetUTCDate(ts),ts=>C3.Plugins.Date.Exps.GetUTCDay(ts),
+ts=>C3.Plugins.Date.Exps.GetUTCHours(ts),ts=>C3.Plugins.Date.Exps.GetUTCMinutes(ts),ts=>C3.Plugins.Date.Exps.GetUTCSeconds(ts),ts=>C3.Plugins.Date.Exps.GetUTCMilliseconds(ts)];const parse=dateString=>C3.Plugins.Date.Exps.Parse(dateString);C3.Plugins.Date.Cnds={CompareTimeStamps(first,cmp,second){return C3.compare(first,cmp,second)},CompareDateStrings(first,cmp,second){return C3.compare(parse(first),cmp,parse(second))},CompareTimestampParts(first,cmp,second,part){return C3.compare(getters[1][part](first),
+cmp,getters[1][part](second))},CompareDateStringParts(first,cmp,second,part,mode){return C3.compare(getters[mode][part](parse(first)),cmp,getters[mode][part](parse(second)))}}}{const C3=self.C3;C3.Plugins.Date.Acts={}}
+{const C3=self.C3;const getters=new Map;getters.set("local",new Map([["year",ts=>(new Date(ts)).getFullYear()],["month",ts=>(new Date(ts)).getMonth()],["date",ts=>(new Date(ts)).getDate()],["day",ts=>(new Date(ts)).getDay()],["hours",ts=>(new Date(ts)).getHours()],["minutes",ts=>(new Date(ts)).getMinutes()],["seconds",ts=>(new Date(ts)).getSeconds()],["milliseconds",ts=>(new Date(ts)).getMilliseconds()]]));getters.set("universal",new Map([["year",ts=>(new Date(ts)).getUTCFullYear()],["month",ts=>
+(new Date(ts)).getUTCMonth()],["date",ts=>(new Date(ts)).getUTCDate()],["day",ts=>(new Date(ts)).getUTCDay()],["hours",ts=>(new Date(ts)).getUTCHours()],["minutes",ts=>(new Date(ts)).getUTCMinutes()],["seconds",ts=>(new Date(ts)).getUTCSeconds()],["milliseconds",ts=>(new Date(ts)).getUTCMilliseconds()]]));const setters=new Map;setters.set("local",new Map([["year",(ts,year)=>(new Date(ts)).setFullYear(year)],["month",(ts,month)=>(new Date(ts)).setMonth(month)],["date",(ts,date)=>(new Date(ts)).setDate(date)],
+["hours",(ts,hours)=>(new Date(ts)).setHours(hours)],["minutes",(ts,minutes)=>(new Date(ts)).setMinutes(minutes)],["seconds",(ts,seconds)=>(new Date(ts)).setSeconds(seconds)],["milliseconds",(ts,milliseconds)=>(new Date(ts)).setMilliseconds(milliseconds)]]));setters.set("universal",new Map([["year",(ts,year)=>(new Date(ts)).setUTCFullYear(year)],["month",(ts,month)=>(new Date(ts)).setUTCMonth(month)],["date",(ts,date)=>(new Date(ts)).setUTCDate(date)],["hours",(ts,hours)=>(new Date(ts)).setUTCHours(hours)],
+["minutes",(ts,minutes)=>(new Date(ts)).setUTCMinutes(minutes)],["seconds",(ts,seconds)=>(new Date(ts)).setUTCSeconds(seconds)],["milliseconds",(ts,milliseconds)=>(new Date(ts)).setUTCMilliseconds(milliseconds)]]));C3.Plugins.Date.Exps={ToString(timeStamp){return(new Date(timeStamp)).toString()},ToDateString(timeStamp){return(new Date(timeStamp)).toDateString()},ToTimeString(timeStamp){return(new Date(timeStamp)).toTimeString()},ToLocaleString(timeStamp){return(new Date(timeStamp)).toLocaleString()},
+ToLocaleDateString(timeStamp){return(new Date(timeStamp)).toLocaleDateString()},ToLocaleTimeString(timeStamp){return(new Date(timeStamp)).toLocaleTimeString()},ToUTCString(timeStamp){return(new Date(timeStamp)).toUTCString()},Parse(dateString){return Date.parse(dateString)},Get(year,month,day,hours,minutes,seconds,milliseconds){return Date.UTC(year,month,day,hours,minutes,seconds,milliseconds)},Now(){return Date.now()},TimezoneOffset(){return(new Date(Date.now())).getTimezoneOffset()},GetYear(timeStamp){return getters.get("local").get("year")(timeStamp)},
+GetUTCYear(timeStamp){return getters.get("universal").get("year")(timeStamp)},GetMonth(timeStamp){return getters.get("local").get("month")(timeStamp)},GetUTCMonth(timeStamp){return getters.get("universal").get("month")(timeStamp)},GetDate(timeStamp){return getters.get("local").get("date")(timeStamp)},GetUTCDate(timeStamp){return getters.get("universal").get("date")(timeStamp)},GetDay(timeStamp){return getters.get("local").get("day")(timeStamp)},GetUTCDay(timeStamp){return getters.get("universal").get("day")(timeStamp)},
+GetHours(timeStamp){return getters.get("local").get("hours")(timeStamp)},GetUTCHours(timeStamp){return getters.get("universal").get("hours")(timeStamp)},GetMinutes(timeStamp){return getters.get("local").get("minutes")(timeStamp)},GetUTCMinutes(timeStamp){return getters.get("universal").get("minutes")(timeStamp)},GetSeconds(timeStamp){return getters.get("local").get("seconds")(timeStamp)},GetUTCSeconds(timeStamp){return getters.get("universal").get("seconds")(timeStamp)},GetMilliseconds(timeStamp){return getters.get("local").get("milliseconds")(timeStamp)},
+GetUTCMilliseconds(timeStamp){return getters.get("universal").get("milliseconds")(timeStamp)},ChangeYear(timeStamp,year){return setters.get("local").get("year")(timeStamp,year)},ChangeUTCYear(timeStamp,year){return setters.get("universal").get("year")(timeStamp,year)},ChangeMonth(timeStamp,month){return setters.get("local").get("month")(timeStamp,month)},ChangeUTCMonth(timeStamp,month){return setters.get("universal").get("month")(timeStamp,month)},ChangeDate(timeStamp,date){return setters.get("local").get("date")(timeStamp,
+date)},ChangeUTCDate(timeStamp,date){return setters.get("universal").get("date")(timeStamp,date)},ChangeDay(timeStamp,targetDay){const year=C3.Plugins.Date.Exps.GetYear(timeStamp);const month=C3.Plugins.Date.Exps.GetMonth(timeStamp);const date=C3.Plugins.Date.Exps.GetDate(timeStamp);const hours=C3.Plugins.Date.Exps.GetHours(timeStamp);const minutes=C3.Plugins.Date.Exps.GetMinutes(timeStamp);const seconds=C3.Plugins.Date.Exps.GetSeconds(timeStamp);const milliseconds=C3.Plugins.Date.Exps.GetMilliseconds(timeStamp);
+const currentDay=C3.Plugins.Date.Exps.GetDay(timeStamp);const distance=targetDay-currentDay;return(new Date(year,month,date+distance,hours,minutes,seconds,milliseconds)).getTime()},ChangeUTCDay(timeStamp,targetDay){const year=C3.Plugins.Date.Exps.GetUTCYear(timeStamp);const month=C3.Plugins.Date.Exps.GetUTCMonth(timeStamp);const date=C3.Plugins.Date.Exps.GetUTCDate(timeStamp);const hours=C3.Plugins.Date.Exps.GetUTCHours(timeStamp);const minutes=C3.Plugins.Date.Exps.GetUTCMinutes(timeStamp);const seconds=
+C3.Plugins.Date.Exps.GetUTCSeconds(timeStamp);const milliseconds=C3.Plugins.Date.Exps.GetUTCMilliseconds(timeStamp);const currentDay=C3.Plugins.Date.Exps.GetUTCDay(timeStamp);const distance=targetDay-currentDay;return C3.Plugins.Date.Exps.Get(year,month,date+distance,hours,minutes,seconds,milliseconds)},ChangeHours(timeStamp,hours){return setters.get("local").get("hours")(timeStamp,hours)},ChangeUTCHours(timeStamp,hours){return setters.get("universal").get("hours")(timeStamp,hours)},ChangeMinutes(timeStamp,
+minutes){return setters.get("local").get("minutes")(timeStamp,minutes)},ChangeUTCMinutes(timeStamp,minutes){return setters.get("universal").get("minutes")(timeStamp,minutes)},ChangeSeconds(timeStamp,seconds){return setters.get("local").get("seconds")(timeStamp,seconds)},ChangeUTCSeconds(timeStamp,seconds){return setters.get("universal").get("seconds")(timeStamp,seconds)},ChangeMilliseconds(timeStamp,milliseconds){return setters.get("local").get("milliseconds")(timeStamp,milliseconds)},ChangeUTCMilliseconds(timeStamp,
+milliseconds){return setters.get("universal").get("milliseconds")(timeStamp,milliseconds)},Difference(firstTimeStamp,secondTimeStamp){return secondTimeStamp-firstTimeStamp},ToTimerHours(milliseconds){return Math.trunc(C3.Plugins.Date.Exps.ToTotalHours(milliseconds))},ToTimerMinutes(milliseconds){return Math.trunc(C3.Plugins.Date.Exps.ToTotalMinutes(milliseconds))%60},ToTimerSeconds(milliseconds){return Math.trunc(C3.Plugins.Date.Exps.ToTotalSeconds(milliseconds))%60},ToTimerMilliseconds(milliseconds){return milliseconds%
+1E3},ToTotalHours(milliseconds){return milliseconds/(1E3*60*60)},ToTotalMinutes(milliseconds){return milliseconds/(1E3*60)},ToTotalSeconds(milliseconds){return milliseconds/1E3}}};
+
+}
+
+{
+'use strict';{const C3=self.C3;const DOM_COMPONENT_ID="text-input";C3.Plugins.TextBox=class TextInputPlugin extends C3.SDKDOMPluginBase{constructor(opts){super(opts,DOM_COMPONENT_ID);this.AddElementMessageHandler("click",(sdkInst,e)=>sdkInst._OnClick(e));this.AddElementMessageHandler("dblclick",(sdkInst,e)=>sdkInst._OnDoubleClick(e));this.AddElementMessageHandler("change",(sdkInst,e)=>sdkInst._OnChange(e))}Release(){super.Release()}}}{const C3=self.C3;C3.Plugins.TextBox.Type=class TextInputType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass)}Release(){super.Release()}OnCreate(){}}}
+{const C3=self.C3;const C3X=self.C3X;const TEXT=0;const PLACEHOLDER=1;const TOOLTIP=2;const INITIALLY_VISIBLE=3;const ENABLE=4;const READ_ONLY=5;const SPELL_CHECK=6;const TYPE=7;const AUTO_FONT_SIZE=8;const ID=9;const CLASS_NAME=10;const DOM_COMPONENT_ID="text-input";const elemTypes=["text","password","email","number","tel","url","textarea","search"];C3.Plugins.TextBox.Instance=class TextInputInstance extends C3.SDKDOMInstanceBase{constructor(inst,properties){super(inst,DOM_COMPONENT_ID);this._text=
+"";this._placeholder="";this._title="";this._isEnabled=true;this._isReadOnly=false;this._spellCheck=false;this._type="text";this._autoFontSize=true;this._maxLength=-1;this._id="";this._className="";if(properties){this._text=properties[TEXT];this._placeholder=properties[PLACEHOLDER];this._title=properties[TOOLTIP];this.GetWorldInfo().SetVisible(properties[INITIALLY_VISIBLE]);this._isEnabled=properties[ENABLE];this._isReadOnly=properties[READ_ONLY];this._spellCheck=properties[SPELL_CHECK];this._type=
+elemTypes[properties[TYPE]];this._autoFontSize=properties[AUTO_FONT_SIZE];this._id=properties[ID];this._className=properties[CLASS_NAME]}this.CreateElement({"type":this._type,"id":this._id,"className":this._className})}Release(){super.Release()}GetElementState(){return{"text":this._text,"placeholder":this._placeholder,"title":this._title,"isEnabled":this._isEnabled,"isReadOnly":this._isReadOnly,"spellCheck":this._spellCheck,"maxLength":this._maxLength}}async _OnClick(e){this.DispatchScriptEvent("click",
+true);await this.TriggerAsync(C3.Plugins.TextBox.Cnds.OnClicked)}async _OnDoubleClick(e){this.DispatchScriptEvent("dblclick",true);await this.TriggerAsync(C3.Plugins.TextBox.Cnds.OnDoubleClicked)}async _OnChange(e){this._text=e["text"];this.DispatchScriptEvent("change",true);await this.TriggerAsync(C3.Plugins.TextBox.Cnds.OnTextChanged)}_SetText(text){if(this._text===text)return;this._text=text;this.UpdateElementState()}_GetText(){return this._text}_SetPlaceholder(placeholder){if(this._placeholder===
+placeholder)return;this._placeholder=placeholder;this.UpdateElementState()}_GetPlaceholder(){return this._placeholder}_SetTooltip(title){if(this._title===title)return;this._title=title;this.UpdateElementState()}_GetTooltip(){return this._title}_SetEnabled(e){e=!!e;if(this._isEnabled===e)return;this._isEnabled=e;this.UpdateElementState()}_IsEnabled(){return this._isEnabled}_SetReadOnly(r){r=!!r;if(this._isReadOnly===r)return;this._isReadOnly=r;this.UpdateElementState()}_IsReadOnly(){return this._isReadOnly}_SetMaxLength(l){l=
+Math.max(+l,-1);if(this._maxLength===l)return;this._maxLength=l;this.UpdateElementState()}_GetMaxLength(){return this._maxLength}_ScrollToBottom(){Promise.resolve().then(()=>this.PostToDOMElement("scroll-to-bottom"))}Draw(renderer){}SaveToJson(){return{"t":this._text,"p":this._placeholder,"ti":this._title,"e":this._isEnabled,"r":this._isReadOnly,"sp":this._spellCheck,"ml":this._maxLength,"type":this._type,"id":this._id}}LoadFromJson(o){this._text=o["t"];this._placeholder=o["p"];this._title=o["ti"];
+this._isEnabled=o["e"];this._isReadOnly=o["r"];this._spellCheck=o["sp"];this._maxLength=o.hasOwnProperty("ml")?o["ml"]:-1;this._type=o["type"];this._id=o["id"];this.UpdateElementState()}GetPropertyValueByIndex(index){switch(index){case TEXT:return this._text;case PLACEHOLDER:return this._placeholder;case TOOLTIP:return this._title;case ENABLE:return this._isEnabled;case READ_ONLY:return this._isReadOnly;case SPELL_CHECK:return this._spellCheck;case AUTO_FONT_SIZE:return this._autoFontSize}}SetPropertyValueByIndex(index,
+value){switch(index){case TEXT:if(this._text===value)return;this._text=value;this.UpdateElementState();break;case PLACEHOLDER:if(this._placeholder===value)return;this._placeholder=value;this.UpdateElementState();break;case TOOLTIP:if(this._title===value)return;this._title=value;this.UpdateElementState();break;case ENABLE:if(this._isEnabled===!!value)return;this._isEnabled=!!value;this.UpdateElementState();break;case READ_ONLY:if(this._isReadOnly===!!value)return;this._isReadOnly=!!value;this.UpdateElementState();
+break;case SPELL_CHECK:if(this._spellCheck===!!value)return;this._spellCheck=!!value;this.UpdateElementState();break;case AUTO_FONT_SIZE:this._autoFontSize=!!value;break}}GetDebuggerProperties(){const Acts=C3.Plugins.TextBox.Acts;const prefix="plugins.textbox";return[{title:prefix+".name",properties:[{name:prefix+".properties.text.name",value:this._text,onedit:v=>this.CallAction(Acts.SetText,v)},{name:prefix+".properties.enabled.name",value:this._isEnabled,onedit:v=>this.CallAction(Acts.SetEnabled,
+v)},{name:prefix+".properties.read-only.name",value:this._isReadOnly,onedit:v=>this.CallAction(Acts.SetReadOnly,v)}]}]}GetScriptInterfaceClass(){return self.ITextInputInstance}};const map=new WeakMap;self.ITextInputInstance=class ITextInputInstance extends self.IDOMInstance{constructor(){super();map.set(this,self.IInstance._GetInitInst().GetSdkInstance())}set text(str){C3X.RequireString(str);map.get(this)._SetText(str)}get text(){return map.get(this)._GetText()}set placeholder(str){C3X.RequireString(str);
+map.get(this)._SetPlaceholder(str)}get placeholder(){return map.get(this)._GetPlaceholder()}set tooltip(str){C3X.RequireString(str);map.get(this)._SetTooltip(str)}get tooltip(){return map.get(this)._GetTooltip()}set isEnabled(e){map.get(this)._SetEnabled(e)}get isEnabled(){return map.get(this)._IsEnabled()}set isReadOnly(r){map.get(this)._SetReadOnly(r)}get isReadOnly(){return map.get(this)._IsReadOnly()}set maxLength(l){C3X.RequireFiniteNumber(l);map.get(this)._SetMaxLength(l)}get maxLength(){return map.get(this)._GetMaxLength()}scrollToBottom(){map.get(this)._ScrollToBottom()}}}
+{const C3=self.C3;C3.Plugins.TextBox.Cnds={CompareText(text,case_){if(case_===0)return C3.equalsNoCase(this._text,text);else return this._text===text},OnTextChanged(){return true},OnClicked(){return true},OnDoubleClicked(){return true}}}
+{const C3=self.C3;C3.Plugins.TextBox.Acts={SetText(param){this._SetText(param.toString())},AppendText(param){if(param==="")return;this._SetText(this._GetText()+param)},SetPlaceholder(placeholder){this._SetPlaceholder(placeholder)},SetTooltip(title){this._SetTooltip(title)},SetReadOnly(r){this._SetReadOnly(r===0)},ScrollToBottom(){this._ScrollToBottom()},SetMaxLength(l){this._SetMaxLength(l)}}}{const C3=self.C3;C3.Plugins.TextBox.Exps={Text(){return this._GetText()},MaxLength(){return this._GetMaxLength()}}};
+
+}
+
+{
+'use strict';{const C3=self.C3;C3.Plugins.Json=class JSONPlugin extends C3.SDKPluginBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Plugins.Json.Type=class JSONType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass)}Release(){super.Release()}OnCreate(){}}}
+{const C3=self.C3;const C3X=self.C3X;const IInstance=self.IInstance;C3.Plugins.Json.Instance=class JSONInstance extends C3.SDKInstanceBase{constructor(inst,properties){super(inst);this._valueCache=[null,null];this._locationCache=[null,null];this._data={};this._path=[];this._currentKey="";this._currentValue=0}Release(){super.Release()}_InvalidateValueCache(){this._valueCache[0]=null;this._valueCache[1]=null}_HasValueCache(arr,isMutate){const cacheArr=this._valueCache[0];if(arr===null||cacheArr===null)return false;
+if(cacheArr===arr||C3.arraysEqual(cacheArr,arr))return true;if(isMutate&&cacheArr.length>0){for(let i=0,len=Math.min(arr.length,cacheArr.length);i<len;++i)if(arr[i]!==cacheArr[i])return false;return true}else return false}_GetValueCache(){return this._valueCache[1]}_UpdateValueCache(arr,value){this._valueCache[0]=arr;this._valueCache[1]=value}_InvalidateLocationCache(){this._locationCache[0]=null;this._locationCache[1]=null}_HasLocationCache(str){return this._locationCache[0]===str}_GetLocationCache(){return this._locationCache[1]}_UpdateLocationCache(str,
+value){this._locationCache[0]=str;this._locationCache[1]=value}_SetData(obj){this._data=obj;this._InvalidateValueCache()}_GetData(){return this._data}_SetPath(str){this._path=this._ParsePathUnsafe(str);this._InvalidateLocationCache()}_ParsePath(str){return C3.cloneArray(this._ParsePathUnsafe(str))}_ParsePathUnsafe(str){const buffer=[];let escaped=false;let parts;if(this._HasLocationCache(str))return this._GetLocationCache();if(str[0]==="."){parts=C3.cloneArray(this._path);str=str.slice(1)}else parts=
+[];for(const c of str)if(escaped){buffer.push(c);escaped=false}else if(c==="\\")escaped=true;else if(c==="."){parts.push(buffer.join(""));C3.clearArray(buffer)}else buffer.push(c);if(buffer.length!==0)parts.push(buffer.join(""));this._UpdateLocationCache(str,parts);return parts}_GetValueAtFullPath(path,lazyCreate){if(this._HasValueCache(path,false))return this._GetValueCache();let result=this._data;for(const part of path)if(Array.isArray(result)){const index=parseInt(part,10);if(index<0||index>=result.length||
+!isFinite(index)){result=null;break}result=result[index]}else if(typeof result==="object"&&result!==null)if(result.hasOwnProperty(part))result=result[part];else if(lazyCreate){const o={};result[part]=o;result=o}else{result=null;break}else{result=null;break}this._UpdateValueCache(path,result);return result}_GetValue(str){const path=this._ParsePath(str);if(!path.length)return this._data;const key=path.pop();const obj=this._GetValueAtFullPath(path,false);if(Array.isArray(obj)){const index=parseInt(key,
+10);return index>=0&&index<obj.length?obj[index]:null}else if(typeof obj==="object"&&obj!==null)return obj.hasOwnProperty(key)?obj[key]:null;else return null}_JSONTypeOf(val){if(val===null)return"null";else if(Array.isArray(val))return"array";else return typeof val}_GetTypeOf(str){const val=this._GetValue(str);return this._JSONTypeOf(val)}_ToSafeValue(value){const type=typeof value;if(type==="number"||type==="string")return value;else if(type==="boolean")return value?1:0;else return 0}_GetSafeValue(str){return this._ToSafeValue(this._GetValue(str))}_HasKey(str){const path=
+this._ParsePath(str);if(!path.length)return false;const key=path.pop();const obj=this._GetValueAtFullPath(path,false);if(Array.isArray(obj)){const index=parseInt(key,10);return index>=0&&index<obj.length}else if(typeof obj==="object"&&obj!==null)return obj.hasOwnProperty(key);else return false}_SetValue(str,value){const path=this._ParsePath(str);if(!path.length)return false;if(this._HasValueCache(path,true))this._InvalidateValueCache();const key=path.pop();const obj=this._GetValueAtFullPath(path,
+true);if(Array.isArray(obj)){const index=parseInt(key,10);if(!isFinite(index)||index<0||index>=obj.length)return false;obj[index]=value;return true}else if(typeof obj==="object"&&obj!==null){obj[key]=value;return true}return false}_DeleteKey(str){const path=this._ParsePath(str);if(!path.length)return false;if(this._HasValueCache(path,true))this._InvalidateValueCache();const key=path.pop();const obj=this._GetValueAtFullPath(path,false);if(Array.isArray(obj))return false;else if(typeof obj==="object"&&
+obj!==null){delete obj[key];return true}else return false}SaveToJson(){return{"path":this._path,"data":this._data}}LoadFromJson(o){this._InvalidateValueCache();this._InvalidateLocationCache();this._path=o["path"];this._data=o["data"]}_SanitizeValue(val){const type=typeof val;if(type==="number"){if(!isFinite(val))return 0;return val}if(typeof val=="object")return JSON.stringify(val);return val+""}GetDebuggerProperties(){const prefix="plugins.json.debugger";let topLevelData;try{topLevelData=this._SanitizeValue(this._data)}catch(e){topLevelData=
+'"invalid"'}return[{title:prefix+".title",properties:[{name:prefix+".data",value:topLevelData,onedit:v=>{try{const n=JSON.parse(v);this._SetData(n)}catch(e){}}},{name:prefix+".path",value:this._path.map(seg=>seg.replace(/\./g,"\\.")).join(".")}]}]}GetScriptInterfaceClass(){return self.IJSONInstance}};const map=new WeakMap;self.IJSONInstance=class IJSONInstance extends IInstance{constructor(){super();map.set(this,IInstance._GetInitInst().GetSdkInstance())}getJsonDataCopy(){const data=map.get(this)._GetData();
+return JSON.parse(JSON.stringify(data))}setJsonDataCopy(o){try{const o2=JSON.parse(JSON.stringify(o));map.get(this)._SetData(o2)}catch(err){console.error("[JSON plugin] setJsonData: object is not valid JSON: ",err);throw err;}}setJsonString(str){C3X.RequireString(str);try{const o=JSON.parse(str);map.get(this)._SetData(o)}catch(err){console.error("[JSON plugin] setJsonString: string is not valid JSON: ",err);throw err;}}toCompactString(){return JSON.stringify(map.get(this)._GetData())}toBeautifiedString(){return JSON.stringify(map.get(this)._GetData(),
+null,4)}}}
+{const C3=self.C3;const JSON_TYPES=["null","boolean","number","string","object","array"];C3.Plugins.Json.Cnds={HasKey(str){return this._HasKey(str)},CompareType(str,typeIndex){return this._GetTypeOf(str)===JSON_TYPES[typeIndex]},CompareValue(str,cmp,value){return C3.compare(this._GetSafeValue(str),cmp,value)},IsBooleanSet(str){return this._GetValue(str)===true},ForEach(str){const value=this._GetValue(str);if(typeof value!=="object"||value===null)return false;const runtime=this._runtime;const eventSheetManager=
+runtime.GetEventSheetManager();const currentEvent=runtime.GetCurrentEvent();const solModifiers=currentEvent.GetSolModifiers();const eventStack=runtime.GetEventStack();const oldFrame=eventStack.GetCurrentStackFrame();const newFrame=eventStack.Push(currentEvent);const oldPath=this._path;const oldKey=this._currentKey;const oldValue=this._currentValue;const subPath=this._ParsePathUnsafe(str);runtime.SetDebuggingEnabled(false);for(const [k,v]of Object.entries(value)){this._path=C3.cloneArray(subPath);
+this._path.push(k);this._currentKey=k;this._currentValue=v;eventSheetManager.PushCopySol(solModifiers);currentEvent.Retrigger(oldFrame,newFrame);eventSheetManager.PopSol(solModifiers)}runtime.SetDebuggingEnabled(true);this._path=oldPath;this._InvalidateLocationCache();this._currentKey=oldKey;this._currentValue=oldValue;eventStack.Pop();return false},OnParseError(){return true}}}
+{const C3=self.C3;C3.Plugins.Json.Acts={Parse(str){try{this._SetData(JSON.parse(str))}catch(err){console.warn("[JSON plugin] Failed to parse JSON data: ",err);this._SetData({});this.Trigger(C3.Plugins.Json.Cnds.OnParseError)}},SetPath(str){this._SetPath(str)},SetValue(str,value){this._SetValue(str,value)},SetArray(str,size){let value=this._GetValue(str);if(Array.isArray(value))C3.resizeArray(value,size,0);else{value=[];C3.extendArray(value,size,0);this._SetValue(str,value)}},SetObject(str){this._SetValue(str,
+{})},SetJSON(location,value){let obj=null;try{obj=JSON.parse(value)}catch(err){console.warn("[JSON plugin] Failed to parse JSON data: ",err);this.Trigger(C3.Plugins.Json.Cnds.OnParseError)}this._SetValue(location,obj)},SetNull(str){this._SetValue(str,null)},SetBoolean(str,value){this._SetValue(str,value!==0)},ToggleBoolean(str){const value=this._GetValue(str);if(typeof value==="boolean")this._SetValue(str,!value)},AddTo(str,inc){const value=this._GetValue(str);if(typeof value==="number")this._SetValue(str,
+value+inc)},SubtractFrom(str,dec){const value=this._GetValue(str);if(typeof value==="number")this._SetValue(str,value-dec)},DeleteKey(str){this._DeleteKey(str)},PushValue(side,str,value){const parent=this._GetValue(str);if(Array.isArray(parent))side===0?parent.push(value):parent.unshift(value)},PopValue(side,str){const parent=this._GetValue(str);if(Array.isArray(parent))side===0?parent.pop():parent.shift()},InsertValue(value,str,index){const parent=this._GetValue(str);if(Array.isArray(parent))parent.splice(index,
+0,value)},RemoveValues(count,str,index){const parent=this._GetValue(str);if(Array.isArray(parent))parent.splice(index,count)}}}
+{const C3=self.C3;C3.Plugins.Json.Exps={ToCompactString(){try{return JSON.stringify(this._data)}catch(err){return""}},ToBeautifiedString(){try{return JSON.stringify(this._data,null,4)}catch(err){return""}},Get(str){return this._GetSafeValue(str)},GetAsCompactString(str){const value=this._GetValue(str);return JSON.stringify(value)},GetAsBeautifiedString(str){const value=this._GetValue(str);return JSON.stringify(value,null,4)},Front(str){const parent=this._GetValue(str);if(Array.isArray(parent)){const value=
+parent[0];return this._ToSafeValue(value)}else return-1},Back(str){const parent=this._GetValue(str);if(Array.isArray(parent)){const value=parent.at(-1);return this._ToSafeValue(value)}else return-1},Type(str){return this._GetTypeOf(str)},ArraySize(str){const value=this._GetValue(str);if(Array.isArray(value))return value.length;else return-1},Path(){return this._path.map(seg=>seg.replace(/\./g,"\\.")).join(".")},CurrentKey(){return this._currentKey},CurrentValue(){return this._ToSafeValue(this._currentValue)},
+CurrentType(){return this._JSONTypeOf(this._currentValue)}}};
+
+}
+
+{
 'use strict';{const C3=self.C3;C3.Behaviors.Pin=class PinBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.Pin.Type=class PinType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
 {const C3=self.C3;C3.Behaviors.Pin.Instance=class PinInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._pinInst=null;this._pinUid=-1;this._mode="";this._propSet=new Set;this._pinDist=0;this._pinAngle=0;this._pinImagePoint=0;this._dx=0;this._dy=0;this._dWidth=0;this._dHeight=0;this._dAngle=0;this._dz=0;this._lastKnownAngle=0;this._destroy=false;if(properties)this._destroy=properties[0];const rt=this._runtime.Dispatcher();this._disposables=new C3.CompositeDisposable(C3.Disposable.From(rt,
 "instancedestroy",e=>this._OnInstanceDestroyed(e.instance)),C3.Disposable.From(rt,"afterload",e=>this._OnAfterLoad()))}Release(){this._pinInst=null;super.Release()}_SetPinInst(inst){if(inst){this._pinInst=inst;this._StartTicking2()}else{this._pinInst=null;this._StopTicking2()}}_Pin(objectClass,mode,propList){if(!objectClass)return;const otherInst=objectClass.GetFirstPicked(this._inst);if(!otherInst)return;this._mode=mode;this._SetPinInst(otherInst);const myWi=this._inst.GetWorldInfo();const otherWi=
@@ -10217,6 +10297,21 @@ break}}GetDebuggerProperties(){const prefix="behaviors.dragndrop";return[{title:
 }
 
 {
+'use strict';{const C3=self.C3;C3.Behaviors.Anchor=class AnchorBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.Anchor.Type=class AnchorType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
+{const C3=self.C3;const ANCHOR_LEFT=0;const ANCHOR_TOP=1;const ANCHOR_RIGHT=2;const ANCHOR_BOTTOM=3;const ENABLE=4;C3.Behaviors.Anchor.Instance=class AnchorInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._anchorLeft=2;this._anchorTop=2;this._anchorRight=0;this._anchorBottom=0;this._isEnabled=true;const bbox=this._inst.GetWorldInfo().GetBoundingBox();this._xLeft=bbox.getLeft();this._yTop=bbox.getTop();this._xRight=this._runtime.GetOriginalViewportWidth()-
+bbox.getLeft();this._yBottom=this._runtime.GetOriginalViewportHeight()-bbox.getTop();this._rDiff=this._runtime.GetOriginalViewportWidth()-bbox.getRight();this._bDiff=this._runtime.GetOriginalViewportHeight()-bbox.getBottom();if(properties){this._anchorLeft=properties[ANCHOR_LEFT];this._anchorTop=properties[ANCHOR_TOP];this._anchorRight=properties[ANCHOR_RIGHT];this._anchorBottom=properties[ANCHOR_BOTTOM];this._isEnabled=!!properties[ENABLE]}const rt=this._runtime.Dispatcher();this._disposables=new C3.CompositeDisposable(C3.Disposable.From(rt,
+"layoutchange",()=>this._OnLayoutChange()));if(this._isEnabled)this._StartTicking()}Release(){super.Release()}SaveToJson(){return{"xl":this._xLeft,"yt":this._yTop,"xr":this._xRight,"yb":this._yBottom,"rd":this._rDiff,"bd":this._bDiff,"al":this._anchorLeft,"at":this._anchorTop,"ar":this._anchorRight,"ab":this._anchorBottom,"e":this._isEnabled}}LoadFromJson(o){this._xLeft=o["xl"];this._yTop=o["yt"];this._xRight=o["xr"];this._yBottom=o["yb"];this._rDiff=o["rd"];this._bDiff=o["bd"];this._anchorLeft=o["al"];
+this._anchorTop=o["at"];this._anchorRight=o["ar"];this._anchorBottom=o["ab"];this._isEnabled=o["e"];if(this._isEnabled)this._StartTicking();else this._StopTicking()}_UpdatePosition(){if(!this._isEnabled)return;const wi=this._inst.GetWorldInfo();const viewport=wi.GetLayer().GetViewport();if(this._anchorLeft===0){const n=viewport.getLeft()+this._xLeft-wi.GetBoundingBox().getLeft();if(n!==0){wi.OffsetX(n);wi.SetBboxChanged()}}else if(this._anchorLeft===1){const n=viewport.getRight()-this._xRight-wi.GetBoundingBox().getLeft();
+if(n!==0){wi.OffsetX(n);wi.SetBboxChanged()}}if(this._anchorTop===0){const n=viewport.getTop()+this._yTop-wi.GetBoundingBox().getTop();if(n!==0){wi.OffsetY(n);wi.SetBboxChanged()}}else if(this._anchorTop===1){const n=viewport.getBottom()-this._yBottom-wi.GetBoundingBox().getTop();if(n!==0){wi.OffsetY(n);wi.SetBboxChanged()}}if(this._anchorRight===1){const n=viewport.getRight()-this._rDiff-wi.GetBoundingBox().getRight();if(n!==0){wi.OffsetX(wi.GetOriginX()*n);wi.SetWidth(Math.max(wi.GetWidth()+n),
+0);wi.SetBboxChanged();this._rDiff=viewport.getRight()-wi.GetBoundingBox().getRight()}}if(this._anchorBottom===1){const n=viewport.getBottom()-this._bDiff-wi.GetBoundingBox().getBottom();if(n!==0){wi.OffsetY(wi.GetOriginY()*n);wi.SetHeight(Math.max(wi.GetHeight()+n,0));wi.SetBboxChanged();this._bDiff=viewport.getBottom()-wi.GetBoundingBox().getBottom()}}}Tick(){this._UpdatePosition()}_OnLayoutChange(){this._UpdatePosition()}GetPropertyValueByIndex(index){switch(index){case ANCHOR_LEFT:return this._anchorLeft;
+case ANCHOR_TOP:return this._anchorTop;case ANCHOR_RIGHT:return this._anchorRight;case ANCHOR_BOTTOM:return this._anchorBottom;case ENABLE:return this._isEnabled}}SetPropertyValueByIndex(index,value){switch(index){case ANCHOR_LEFT:this._anchorLeft=value;break;case ANCHOR_TOP:this._anchorTop=value;break;case ANCHOR_RIGHT:this._anchorRight=value;break;case ANCHOR_BOTTOM:this._anchorBottom=value;break;case ENABLE:this._isEnabled=!!value;if(this._isEnabled)this._StartTicking();else this._StopTicking();
+break}}}}{const C3=self.C3;C3.Behaviors.Anchor.Cnds={IsEnabled(){return this._isEnabled}}}
+{const C3=self.C3;C3.Behaviors.Anchor.Acts={SetEnabled(e){if(this._isEnabled&&e===0){this._isEnabled=false;this._StopTicking()}else if(!this._isEnabled&&e!==0){const bbox=this._inst.GetWorldInfo().GetBoundingBox();this._xLeft=bbox.getLeft();this._yTop=bbox.getTop();this._xRight=this._runtime.GetOriginalViewportWidth()-bbox.getLeft();this._yBottom=this._runtime.GetOriginalViewportHeight()-bbox.getTop();this._rDiff=this._runtime.GetOriginalViewportWidth()-bbox.getRight();this._bDiff=this._runtime.GetOriginalViewportHeight()-
+bbox.getBottom();this._isEnabled=true;this._StartTicking()}}}}{const C3=self.C3;C3.Behaviors.Anchor.Exps={}};
+
+}
+
+{
 "use strict";
 
 {
@@ -12241,21 +12336,6 @@ break}}GetDebuggerProperties(){return[{title:"$"+this.GetBehaviorType().GetName(
 }
 
 {
-'use strict';{const C3=self.C3;C3.Behaviors.Anchor=class AnchorBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.Anchor.Type=class AnchorType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
-{const C3=self.C3;const ANCHOR_LEFT=0;const ANCHOR_TOP=1;const ANCHOR_RIGHT=2;const ANCHOR_BOTTOM=3;const ENABLE=4;C3.Behaviors.Anchor.Instance=class AnchorInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._anchorLeft=2;this._anchorTop=2;this._anchorRight=0;this._anchorBottom=0;this._isEnabled=true;const bbox=this._inst.GetWorldInfo().GetBoundingBox();this._xLeft=bbox.getLeft();this._yTop=bbox.getTop();this._xRight=this._runtime.GetOriginalViewportWidth()-
-bbox.getLeft();this._yBottom=this._runtime.GetOriginalViewportHeight()-bbox.getTop();this._rDiff=this._runtime.GetOriginalViewportWidth()-bbox.getRight();this._bDiff=this._runtime.GetOriginalViewportHeight()-bbox.getBottom();if(properties){this._anchorLeft=properties[ANCHOR_LEFT];this._anchorTop=properties[ANCHOR_TOP];this._anchorRight=properties[ANCHOR_RIGHT];this._anchorBottom=properties[ANCHOR_BOTTOM];this._isEnabled=!!properties[ENABLE]}const rt=this._runtime.Dispatcher();this._disposables=new C3.CompositeDisposable(C3.Disposable.From(rt,
-"layoutchange",()=>this._OnLayoutChange()));if(this._isEnabled)this._StartTicking()}Release(){super.Release()}SaveToJson(){return{"xl":this._xLeft,"yt":this._yTop,"xr":this._xRight,"yb":this._yBottom,"rd":this._rDiff,"bd":this._bDiff,"al":this._anchorLeft,"at":this._anchorTop,"ar":this._anchorRight,"ab":this._anchorBottom,"e":this._isEnabled}}LoadFromJson(o){this._xLeft=o["xl"];this._yTop=o["yt"];this._xRight=o["xr"];this._yBottom=o["yb"];this._rDiff=o["rd"];this._bDiff=o["bd"];this._anchorLeft=o["al"];
-this._anchorTop=o["at"];this._anchorRight=o["ar"];this._anchorBottom=o["ab"];this._isEnabled=o["e"];if(this._isEnabled)this._StartTicking();else this._StopTicking()}_UpdatePosition(){if(!this._isEnabled)return;const wi=this._inst.GetWorldInfo();const viewport=wi.GetLayer().GetViewport();if(this._anchorLeft===0){const n=viewport.getLeft()+this._xLeft-wi.GetBoundingBox().getLeft();if(n!==0){wi.OffsetX(n);wi.SetBboxChanged()}}else if(this._anchorLeft===1){const n=viewport.getRight()-this._xRight-wi.GetBoundingBox().getLeft();
-if(n!==0){wi.OffsetX(n);wi.SetBboxChanged()}}if(this._anchorTop===0){const n=viewport.getTop()+this._yTop-wi.GetBoundingBox().getTop();if(n!==0){wi.OffsetY(n);wi.SetBboxChanged()}}else if(this._anchorTop===1){const n=viewport.getBottom()-this._yBottom-wi.GetBoundingBox().getTop();if(n!==0){wi.OffsetY(n);wi.SetBboxChanged()}}if(this._anchorRight===1){const n=viewport.getRight()-this._rDiff-wi.GetBoundingBox().getRight();if(n!==0){wi.OffsetX(wi.GetOriginX()*n);wi.SetWidth(Math.max(wi.GetWidth()+n),
-0);wi.SetBboxChanged();this._rDiff=viewport.getRight()-wi.GetBoundingBox().getRight()}}if(this._anchorBottom===1){const n=viewport.getBottom()-this._bDiff-wi.GetBoundingBox().getBottom();if(n!==0){wi.OffsetY(wi.GetOriginY()*n);wi.SetHeight(Math.max(wi.GetHeight()+n,0));wi.SetBboxChanged();this._bDiff=viewport.getBottom()-wi.GetBoundingBox().getBottom()}}}Tick(){this._UpdatePosition()}_OnLayoutChange(){this._UpdatePosition()}GetPropertyValueByIndex(index){switch(index){case ANCHOR_LEFT:return this._anchorLeft;
-case ANCHOR_TOP:return this._anchorTop;case ANCHOR_RIGHT:return this._anchorRight;case ANCHOR_BOTTOM:return this._anchorBottom;case ENABLE:return this._isEnabled}}SetPropertyValueByIndex(index,value){switch(index){case ANCHOR_LEFT:this._anchorLeft=value;break;case ANCHOR_TOP:this._anchorTop=value;break;case ANCHOR_RIGHT:this._anchorRight=value;break;case ANCHOR_BOTTOM:this._anchorBottom=value;break;case ENABLE:this._isEnabled=!!value;if(this._isEnabled)this._StartTicking();else this._StopTicking();
-break}}}}{const C3=self.C3;C3.Behaviors.Anchor.Cnds={IsEnabled(){return this._isEnabled}}}
-{const C3=self.C3;C3.Behaviors.Anchor.Acts={SetEnabled(e){if(this._isEnabled&&e===0){this._isEnabled=false;this._StopTicking()}else if(!this._isEnabled&&e!==0){const bbox=this._inst.GetWorldInfo().GetBoundingBox();this._xLeft=bbox.getLeft();this._yTop=bbox.getTop();this._xRight=this._runtime.GetOriginalViewportWidth()-bbox.getLeft();this._yBottom=this._runtime.GetOriginalViewportHeight()-bbox.getTop();this._rDiff=this._runtime.GetOriginalViewportWidth()-bbox.getRight();this._bDiff=this._runtime.GetOriginalViewportHeight()-
-bbox.getBottom();this._isEnabled=true;this._StartTicking()}}}}{const C3=self.C3;C3.Behaviors.Anchor.Exps={}};
-
-}
-
-{
 const C3 = self.C3;
 self.C3_GetObjectRefTable = function () {
 	return [
@@ -12285,6 +12365,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.GameAnalytics,
 		C3.Plugins.PlatformInfo,
 		C3.Plugins.Eponesh_GameScore,
+		C3.Behaviors.Anchor,
 		C3.Behaviors.CV_BoundedDragnDrop,
 		C3.Plugins.Button,
 		C3.Behaviors.Persist,
@@ -12303,35 +12384,238 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.solid,
 		C3.Plugins.filechooser,
 		C3.Plugins.Timeline,
-		C3.Behaviors.Anchor,
+		C3.Plugins.Date,
+		C3.Plugins.TextBox,
+		C3.Plugins.Json,
 		C3.Plugins.System.Cnds.OnLayoutStart,
-		C3.Plugins.System.Acts.SetBoolVar,
+		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.System.Exps.layoutwidth,
+		C3.Plugins.System.Exps.layoutheight,
+		C3.ScriptsInEvents.Edsheet_Event1_Act3,
+		C3.Plugins.AJAX.Acts.RequestFile,
+		C3.Plugins.Browser.Acts.ConsoleGroup,
+		C3.Plugins.List.Acts.Select,
+		C3.Plugins.Json.Exps.Get,
+		C3.Plugins.Json.Cnds.CompareValue,
+		C3.Plugins.Arr.Acts.JSONLoad,
+		C3.Plugins.Json.Exps.GetAsCompactString,
+		C3.ScriptsInEvents.Edsheet_Event3_Act2,
+		C3.ScriptsInEvents.Edsheet_Event4,
+		C3.Plugins.Json.Cnds.ForEach,
+		C3.Plugins.Browser.Acts.ConsoleGroupEnd,
+		C3.Plugins.Sprite.Cnds.HasParent,
+		C3.Plugins.Sprite.Cnds.PickParent,
+		C3.Plugins.System.Acts.Wait,
+		C3.Plugins.System.Exps.dt,
+		C3.Behaviors.Anchor.Acts.SetEnabled,
+		C3.Behaviors.CV_BoundedDragnDrop.Acts.SetBoundY,
+		C3.Plugins.NinePatch.Exps.Y,
+		C3.Plugins.NinePatch.Exps.Width,
+		C3.Plugins.System.Cnds.ForEach,
+		C3.Plugins.System.Cnds.PickByComparison,
+		C3.Plugins.Text.Exps.LayerName,
+		C3.Plugins.Sprite.Exps.LayerName,
+		C3.Behaviors.Pin.Acts.PinByDistance,
+		C3.Plugins.PlatformInfo.Cnds.IsOnMobile,
+		C3.Plugins.System.Acts.SetLayerScale,
+		C3.Plugins.System.Cnds.CompareVar,
+		C3.Plugins.Arr.Acts.SetSize,
+		C3.Plugins.Arr.Exps.Height,
+		C3.Plugins.Arr.Acts.SetInstanceVar,
+		C3.Plugins.Button.Acts.SetEnabled,
+		C3.Plugins.System.Cnds.Else,
+		C3.Plugins.Arr.Cnds.CompareInstanceVar,
+		C3.Plugins.AJAX.Cnds.OnAnyComplete,
+		C3.Plugins.AJAX.Exps.Tag,
+		C3.Plugins.Dictionary.Acts.JSONLoad,
+		C3.Plugins.AJAX.Exps.LastData,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Plugins.Dictionary.Exps.AsJSON,
+		C3.Plugins.Sprite.Cnds.OnCreated,
+		C3.Plugins.Sprite.Acts.SetEffectEnabled,
+		C3.Plugins.System.Cnds.IsGroupActive,
+		C3.Plugins.System.Cnds.TriggerOnce,
+		C3.Plugins.System.Exps.scrollx,
+		C3.Plugins.System.Exps.scrolly,
+		C3.Plugins.System.Exps.viewportwidth,
+		C3.Plugins.System.Exps.viewportheight,
 		C3.Plugins.System.Acts.SetLayerVisible,
+		C3.Plugins.System.Acts.SetGroupActive,
+		C3.ScriptsInEvents.Edsheet_Event35_Act3,
+		C3.ScriptsInEvents.Edsheet_Event37_Act2,
+		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
+		C3.Behaviors.CV_BoundedDragnDrop.Exps.yMaxBoundPos,
+		C3.Plugins.Sprite.Exps.Y,
+		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
+		C3.Plugins.List.Cnds.OnSelectionChanged,
+		C3.Plugins.Button.Cnds.OnClicked,
+		C3.Plugins.Sprite.Cnds.PickByUID,
+		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.System.Acts.CreateObjectByName,
+		C3.Plugins.Dictionary.Exps.Get,
+		C3.Plugins.List.Exps.SelectedIndex,
+		C3.Plugins.System.Cnds.PickLastCreated,
+		C3.Plugins.Sprite.Exps.UID,
+		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
+		C3.Plugins.Sprite.Acts.SetOpacity,
+		C3.Plugins.Sprite.Acts.SetAngle,
+		C3.Plugins.Text.Exps.X,
+		C3.Plugins.Text.Exps.Y,
+		C3.Plugins.Sprite.Exps.X,
+		C3.Plugins.Sprite.Acts.SetAnim,
+		C3.Plugins.Touch.Cnds.OnTapGesture,
+		C3.Plugins.Button.Cnds.IsChecked,
+		C3.Plugins.Touch.Exps.X,
+		C3.Plugins.Touch.Exps.Y,
+		C3.Plugins.Touch.Cnds.IsTouchingObject,
+		C3.Plugins.System.Acts.Scroll,
+		C3.Behaviors.DragnDrop.Cnds.IsDragging,
+		C3.Plugins.Touch.Cnds.OnTapGestureObject,
+		C3.Plugins.Sprite.Cnds.PickTopBottom,
+		C3.Plugins.Browser.Acts.ConsoleLog,
+		C3.Plugins.System.Cnds.PickAll,
+		C3.Plugins.Mouse.Cnds.OnWheel,
+		C3.Plugins.Keyboard.Cnds.IsLeftRightKeyDown,
+		C3.Plugins.Sprite.Exps.Angle,
+		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.Keyboard.Cnds.OnKey,
+		C3.ScriptsInEvents.Edsheet_Event87_Act1,
+		C3.Plugins.List.Acts.LoadFromJsonString,
+		C3.Plugins.List.Exps.AsJSON,
+		C3.Plugins.Sprite.Acts.SetPos,
+		C3.Plugins.Sprite.Acts.MoveToBottom,
+		C3.Plugins.Sprite.Acts.MoveToTop,
+		C3.ScriptsInEvents.Edsheet_Event110,
+		C3.ScriptsInEvents.Edsheet_Event112,
+		C3.ScriptsInEvents.Edsheet_Event119_Act1,
+		C3.Plugins.Sprite.Cnds.PickChildren,
+		C3.Plugins.TiledBg.Acts.SetTowardPosition,
+		C3.Plugins.TiledBg.Acts.SetWidth,
+		C3.Plugins.TiledBg.Exps.X,
+		C3.Plugins.TiledBg.Exps.Y,
+		C3.Behaviors.DragnDrop.Cnds.OnDrop,
+		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
+		C3.Behaviors.DragnDrop.Cnds.OnDragStart,
+		C3.Plugins.Sprite.Acts.SetInstanceVar,
+		C3.ScriptsInEvents.Edsheet_Event126_Act1,
+		C3.Plugins.Touch.Cnds.OnDoubleTapGestureObject,
+		C3.ScriptsInEvents.Edsheet_Event131_Act3,
+		C3.Plugins.TiledBg.Acts.ZMoveToObject,
+		C3.ScriptsInEvents.Edsheet_Event134_Act1,
+		C3.ScriptsInEvents.Edsheet_Event137_Act1,
+		C3.Plugins.TiledBg.Cnds.PickParent,
+		C3.Plugins.TiledBg.Cnds.OnCreated,
+		C3.ScriptsInEvents.Edsheet_Event145_Act2,
+		C3.Plugins.Arr.Acts.AddInstanceVar,
+		C3.Plugins.Arr.Acts.SetXY,
+		C3.Plugins.Sprite.Exps.ObjectTypeName,
+		C3.Plugins.Sprite.Exps.AnimationName,
+		C3.ScriptsInEvents.Edsheet_Event162_Act1,
+		C3.Plugins.Arr.Acts.SubInstanceVar,
+		C3.Plugins.Arr.Exps.At,
+		C3.ScriptsInEvents.Edsheet_Event168_Act1,
+		C3.ScriptsInEvents.Edsheet_Event169_Act1,
+		C3.ScriptsInEvents.Edsheet_Event170_Act1,
+		C3.ScriptsInEvents.Edsheet_Event171_Act1,
+		C3.ScriptsInEvents.Edsheet_Event172_Act1,
+		C3.ScriptsInEvents.Edsheet_Event179_Act1,
+		C3.ScriptsInEvents.Edsheet_Event180_Act1,
+		C3.ScriptsInEvents.Edsheet_Event181_Act1,
+		C3.ScriptsInEvents.Edsheet_Event182_Act1,
+		C3.ScriptsInEvents.Edsheet_Event183_Act1,
+		C3.Plugins.System.Exps.tokenat,
+		C3.Behaviors.DragnDrop.Acts.SetEnabled,
+		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
+		C3.Plugins.Text.Cnds.PickByUID,
+		C3.Behaviors.Pin.Exps.PinnedUID,
+		C3.Plugins.Text.Acts.SetText,
+		C3.Plugins.Json.Acts.SetValue,
+		C3.Plugins.Date.Exps.Now,
+		C3.Plugins.Json.Acts.SetArray,
+		C3.Plugins.Sprite.Exps.Count,
+		C3.ScriptsInEvents.Edsheet_Event203_Act7,
+		C3.Plugins.Json.Acts.SetJSON,
+		C3.Plugins.Arr.Exps.AsJSON,
+		C3.ScriptsInEvents.Edsheet_Event204,
+		C3.Plugins.System.Cnds.CompareBoolVar,
+		C3.Plugins.LocalStorage.Acts.SetItem,
+		C3.Plugins.Json.Exps.ToCompactString,
+		C3.Plugins.LocalStorage.Cnds.OnAllSetsComplete,
+		C3.Plugins.Browser.Acts.Alert,
+		C3.ScriptsInEvents.Edsheet_Event208,
+		C3.Plugins.TiledBg.Acts.LoadURL,
+		C3.Plugins.List.Cnds.CompareInstanceVar,
+		C3.Plugins.List.Acts.SetInstanceVar,
+		C3.Plugins.AJAX.Cnds.OnComplete,
+		C3.ScriptsInEvents.Edsheet_Event211_Act2,
+		C3.Plugins.System.Cnds.OnLayoutEnd,
+		C3.ScriptsInEvents.Edsheet_Event213_Act1,
+		C3.Plugins.System.Exps.roundtodp,
+		C3.Plugins.Sprite.Acts.SetY,
+		C3.Behaviors.Sin.Acts.SetEnabled,
+		C3.Plugins.Sprite.Cnds.CompareFrame,
+		C3.Plugins.Sprite.Acts.StopAnim,
+		C3.Plugins.Sprite.Acts.SetAnimFrame,
+		C3.Plugins.System.Acts.SetFunctionReturnValue,
+		C3.Plugins.NinePatch.Exps.Height,
+		C3.Plugins.LocalStorage.Acts.GetAllKeyNames,
+		C3.Plugins.filechooser.Acts.Clear,
+		C3.Plugins.filechooser.Acts.SetVisible,
+		C3.Plugins.Button.Acts.SetVisible,
+		C3.Plugins.System.Acts.CreateObject,
+		C3.Plugins.Text.Acts.Destroy,
+		C3.Plugins.NinePatch.Exps.X,
+		C3.Plugins.TextBox.Cnds.CompareText,
+		C3.Plugins.System.Cnds.PickOverlappingPoint,
+		C3.Plugins.Button.Exps.X,
+		C3.Plugins.Button.Exps.Y,
+		C3.Plugins.System.Exps.int,
+		C3.Plugins.System.Exps.random,
+		C3.Plugins.System.Cnds.While,
+		C3.Plugins.Dictionary.Cnds.HasKey,
+		C3.Plugins.Json.Acts.SetObject,
+		C3.Plugins.Json.Acts.Parse,
+		C3.Plugins.TextBox.Exps.Text,
+		C3.Plugins.LocalStorage.Cnds.OnAnyItemRemoved,
+		C3.Plugins.Text.Acts.SetInstanceVar,
+		C3.Plugins.LocalStorage.Acts.GetItem,
+		C3.Plugins.NinePatch.Exps.IID,
+		C3.Plugins.NinePatch.Acts.Destroy,
+		C3.Plugins.Button.Acts.Destroy,
+		C3.Plugins.filechooser.Cnds.OnChanged,
+		C3.Plugins.AJAX.Acts.Request,
+		C3.Plugins.filechooser.Exps.FileURLAt,
+		C3.Plugins.TextBox.Cnds.OnTextChanged,
+		C3.Plugins.Dictionary.Acts.AddKey,
+		C3.Plugins.LocalStorage.Cnds.OnAllKeyNamesLoaded,
+		C3.Plugins.System.Cnds.For,
+		C3.Plugins.LocalStorage.Exps.KeyCount,
+		C3.Plugins.LocalStorage.Exps.KeyAt,
+		C3.Plugins.System.Exps.loopindex,
+		C3.Plugins.System.Exps.left,
+		C3.Plugins.System.Exps.right,
+		C3.Plugins.LocalStorage.Cnds.OnAnyItemGet,
+		C3.Plugins.LocalStorage.Exps.Key,
+		C3.Plugins.LocalStorage.Exps.ItemValue,
+		C3.Plugins.Text.Acts.AddInstanceVar,
+		C3.Plugins.NinePatch.Acts.SetInstanceVar,
+		C3.Plugins.Date.Exps.ToLocaleString,
+		C3.Plugins.Button.Acts.SetInstanceVar,
+		C3.Plugins.System.Exps.max,
+		C3.ScriptsInEvents.Edmenusheet_Event31_Act1,
+		C3.Plugins.LocalStorage.Acts.RemoveItem,
+		C3.Plugins.Button.Cnds.OnCreated,
+		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.System.Acts.SetLayerInteractive,
 		C3.Behaviors.Fade.Acts.StartFade,
-		C3.Plugins.System.Acts.SetVar,
-		C3.Plugins.System.Acts.Scroll,
 		C3.Plugins.System.Acts.SetTimescale,
-		C3.Plugins.Dictionary.Exps.Get,
-		C3.Plugins.Sprite.Acts.SetInstanceVar,
-		C3.Plugins.Text.Acts.SetText,
-		C3.Plugins.System.Cnds.PickAll,
-		C3.Behaviors.Sin.Acts.SetEnabled,
-		C3.Plugins.System.Cnds.PickByComparison,
-		C3.Plugins.PlatformInfo.Cnds.IsOnMobile,
+		C3.Behaviors.Pin.Acts.PinByProperties,
 		C3.Plugins.TiledBg.Acts.Destroy,
-		C3.Plugins.System.Cnds.Else,
 		C3.Plugins.Dictionary.Cnds.CompareValue,
-		C3.Plugins.System.Cnds.CompareBoolVar,
 		C3.Plugins.System.Acts.MapFunction,
-		C3.Plugins.System.Cnds.IsGroupActive,
-		C3.Plugins.System.Cnds.ForEach,
 		C3.Behaviors.CarPlus.Cnds.IsMoving,
-		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
 		C3.Plugins.TiledBg.Acts.SetPos,
-		C3.Plugins.Sprite.Exps.X,
 		C3.Behaviors.CarPlus.Exps.VectorX,
-		C3.Plugins.Sprite.Exps.Y,
 		C3.Behaviors.CarPlus.Exps.VectorY,
 		C3.Plugins.DrawingCanvas.Cnds.IsBoolInstanceVarSet,
 		C3.Behaviors.CarPlus.Exps.Speed,
@@ -12339,56 +12623,35 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.DrawingCanvas.Acts.ClearCanvas,
 		C3.Plugins.System.Exps.rgba,
 		C3.Plugins.DrawingCanvas.Acts.SetAngle,
-		C3.Plugins.Sprite.Acts.SetAngle,
 		C3.Plugins.DrawingCanvas.Acts.SetBoolInstanceVar,
 		C3.Plugins.DrawingCanvas.Acts.PasteObject,
 		C3.Plugins.System.Acts.WaitForPreviousActions,
 		C3.Plugins.System.Acts.AddVar,
 		C3.Behaviors.CarPlus.Acts.SetDriftRecover,
 		C3.Behaviors.CarPlus.Acts.SetDeceleration,
-		C3.Plugins.System.Cnds.CompareVar,
 		C3.Behaviors.CarPlus.Acts.SetMaxSpeed,
 		C3.Behaviors.CarPlus.Acts.SetAcceleration,
 		C3.Behaviors.CarPlus.Cnds.CompareSpeed,
 		C3.Behaviors.CarPlus.Acts.SetSpeed,
-		C3.Plugins.Sprite.Cnds.PickByUID,
-		C3.Plugins.Arr.Exps.At,
 		C3.Behaviors.skymenTrail.Acts.PushPoint,
 		C3.Plugins.Sprite.Exps.ImagePointX,
 		C3.Plugins.Sprite.Exps.ImagePointY,
-		C3.Plugins.Sprite.Exps.Angle,
 		C3.Plugins.Sprite.Acts.Spawn,
-		C3.Plugins.Sprite.Exps.LayerName,
 		C3.Plugins.Arr.Acts.Push,
 		C3.Plugins.Arr.Acts.SetX,
-		C3.Plugins.Sprite.Exps.UID,
 		C3.Plugins.Sprite.Acts.AddChild,
 		C3.Plugins.Sprite.Acts.ZMoveToObject,
 		C3.Plugins.System.Acts.SetLayerAngle,
 		C3.Plugins.Text.Acts.SetAngle,
 		C3.Plugins.System.Exps.layerangle,
-		C3.Plugins.System.Cnds.TriggerOnce,
-		C3.Plugins.System.Acts.SetLayerScale,
-		C3.Plugins.System.Acts.SetGroupActive,
 		C3.Plugins.Sprite.Cnds.PickNthChild,
-		C3.Plugins.System.Acts.Wait,
-		C3.Plugins.Sprite.Acts.Destroy,
-		C3.Plugins.Text.Acts.Destroy,
-		C3.Plugins.System.Cnds.PickLastCreated,
-		C3.Plugins.Sprite.Acts.SetAnim,
 		C3.Behaviors.Tween.Acts.TweenValue,
 		C3.Plugins.gamepad.Cnds.HasGamepads,
 		C3.Plugins.Dictionary.Cnds.ForEachKey,
 		C3.Plugins.Dictionary.Cnds.CompareCurrentValue,
 		C3.Plugins.System.Cnds.CompareBetween,
 		C3.Plugins.gamepad.Exps.Axis,
-		C3.Plugins.System.Exps.int,
 		C3.Plugins.Dictionary.Exps.CurrentKey,
-		C3.Plugins.Browser.Acts.ConsoleLog,
-		C3.Behaviors.CV_BoundedDragnDrop.Cnds.IsDragging,
-		C3.Plugins.TiledBg.Exps.X,
-		C3.Plugins.TiledBg.Exps.Y,
-		C3.Plugins.System.Exps.max,
 		C3.Plugins.Touch.Exps.SpeedAt,
 		C3.Behaviors.CarPlus.Acts.SimulateControl,
 		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDragStart,
@@ -12396,10 +12659,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.IsVisible,
 		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
 		C3.Plugins.Sprite.Acts.AddInstanceVar,
-		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.System.Acts.SetObjectTimescale,
 		C3.Behaviors.Tween.Acts.TweenOneProperty,
-		C3.Plugins.NinePatch.Acts.Destroy,
 		C3.Plugins.NinePatch.Cnds.IsOnScreen,
 		C3.Plugins.NinePatch.Cnds.CompareWidth,
 		C3.Behaviors.mcube_rexspline.Cnds.OnHitAnyPoint,
@@ -12411,44 +12672,31 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Flash.Acts.Flash,
 		C3.Behaviors.Sin.Acts.SetMagnitude,
 		C3.Behaviors.Sin.Exps.Magnitude,
-		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
 		C3.Behaviors.mcube_rexspline.Acts.SetEnabled,
 		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
 		C3.Behaviors.CarPlus.Acts.SetEnabled,
-		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Behaviors.mcube_rexspline.Acts.CleanAll,
 		C3.Behaviors.Sin.Acts.SetPhase,
-		C3.Plugins.System.Cnds.For,
 		C3.Behaviors.mcube_rexspline.Acts.AddPoint,
-		C3.Plugins.System.Exps.loopindex,
 		C3.Behaviors.mcube_rexspline.Acts.Start,
 		C3.Plugins.System.Cnds.Every,
-		C3.Plugins.Arr.Acts.SetXY,
 		C3.Behaviors.CarPlus.Exps.SteerSpeed,
 		C3.Behaviors.CarPlus.Exps.Acceleration,
 		C3.Behaviors.CarPlus.Exps.Deceleration,
 		C3.Behaviors.CarPlus.Exps.DriftRecover,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
-		C3.Plugins.Sprite.Cnds.PickParent,
-		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
-		C3.ScriptsInEvents.Gamesheet_Event109_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event111_Act1,
 		C3.Plugins.NinePatch.Acts.SetWidth,
-		C3.Plugins.System.Exps.dt,
 		C3.Plugins.TiledBg.Acts.SetVisible,
 		C3.Behaviors.Tween.Acts.StopTweens,
 		C3.Behaviors.Tween.Cnds.IsPlaying,
 		C3.Plugins.TiledBg.Acts.SetImageOffsetY,
 		C3.Behaviors.Tween.Exps.Value,
-		C3.ScriptsInEvents.Gamesheet_Event119,
-		C3.ScriptsInEvents.Gamesheet_Event120,
-		C3.Behaviors.Pin.Exps.PinnedUID,
+		C3.ScriptsInEvents.Gamesheet_Event121,
+		C3.ScriptsInEvents.Gamesheet_Event122,
 		C3.Plugins.Particles.Acts.Destroy,
-		C3.Plugins.Sprite.Cnds.OnCreated,
 		C3.Behaviors.Timer.Acts.StartTimer,
-		C3.Plugins.System.Cnds.Compare,
-		C3.Plugins.System.Exps.left,
-		C3.Plugins.Sprite.Exps.AnimationName,
 		C3.Plugins.System.Acts.CallMappedFunction,
 		C3.Behaviors.Bullet.Cnds.IsEnabled,
 		C3.Plugins.Sprite.Acts.RotateTowardPosition,
@@ -12457,92 +12705,57 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SubInstanceVar,
 		C3.Plugins.DrawingCanvas.Acts.Line,
 		C3.Plugins.DrawingCanvas.Acts.FillEllipse,
+		C3.ScriptsInEvents.Gamesheet_Event151_Act1,
 		C3.Plugins.System.Acts.RestartLayout,
-		C3.Plugins.System.Acts.GoToLayout,
+		C3.ScriptsInEvents.Gamesheet_Event152_Act1,
+		C3.Plugins.System.Exps.layoutname,
 		C3.Plugins.System.Cnds.LayerVisible,
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Plugins.System.Acts.SubVar,
-		C3.Plugins.Sprite.Cnds.PickChildren,
 		C3.Behaviors.Bullet.Acts.SetSpeed,
 		C3.Plugins.System.Cnds.ForEachOrdered,
 		C3.Plugins.System.Exps.anglediff,
 		C3.Plugins.System.Acts.StopLoop,
-		C3.Plugins.System.Exps.tokenat,
-		C3.Plugins.System.Acts.CreateObjectByName,
-		C3.Plugins.Sprite.Exps.ObjectTypeName,
-		C3.Plugins.System.Exps.right,
 		C3.Plugins.System.Exps.len,
-		C3.ScriptsInEvents.Gamesheet_Event171,
-		C3.Plugins.System.Exps.layoutname,
-		C3.Plugins.System.Acts.SetFunctionReturnValue,
-		C3.Plugins.AJAX.Cnds.OnComplete,
-		C3.Plugins.AJAX.Exps.LastData,
-		C3.Plugins.Arr.Acts.JSONLoad,
-		C3.Plugins.Sprite.Exps.Count,
+		C3.ScriptsInEvents.Gamesheet_Event176,
+		C3.ScriptsInEvents.Gamesheet_Event181_Act2,
 		C3.Plugins.shadowlight.Acts.ZMoveToObject,
-		C3.Plugins.AJAX.Acts.Request,
-		C3.Plugins.Sprite.Exps.PolyPointCount,
-		C3.Plugins.Sprite.Exps.PolyPointXAt,
-		C3.Plugins.Sprite.Exps.PolyPointYAt,
-		C3.ScriptsInEvents.Gamesheet_Event181_Act7,
-		C3.Plugins.Sprite.Acts.SetVisible,
-		C3.Plugins.Sprite.Acts.SetHeight,
-		C3.Plugins.Sprite.Exps.Width,
-		C3.Plugins.Sprite.Acts.MoveAtAngle,
-		C3.Plugins.Sprite.Acts.SetOpacity,
-		C3.Plugins.Sprite.Exps.IID,
+		C3.ScriptsInEvents.Gamesheet_Event187,
 		C3.Plugins.Sprite.Cnds.OnAnimFinished,
 		C3.Plugins.Sprite.Acts.SetPosToObject,
 		C3.Plugins.DrawingCanvas.Acts.ClearRect,
 		C3.Plugins.Sprite.Exps.Height,
-		C3.ScriptsInEvents.Gamesheet_Event212_Act1,
-		C3.ScriptsInEvents.Gamesheet_Event216_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event203_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event207_Act2,
 		C3.Plugins.Sprite.Acts.SetEffectParam,
-		C3.Plugins.TiledBg.Acts.SetImageOffsetX,
-		C3.ScriptsInEvents.Gamesheet_Event223_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event212_Act1,
 		C3.Plugins.Sprite.Acts.SetCollisions,
 		C3.Plugins.System.Acts.SetLayerOpacity,
-		C3.Plugins.Touch.Cnds.OnTapGestureObject,
-		C3.ScriptsInEvents.Gamesheet_Event234,
-		C3.Plugins.TiledBg.Acts.LoadURL,
+		C3.ScriptsInEvents.Gamesheet_Event221,
 		C3.Plugins.System.Cnds.OnLoadFinished,
-		C3.Plugins.AJAX.Acts.RequestFile,
 		C3.Plugins.System.Acts.MapFunctionDefault,
 		C3.Plugins.Button.Acts.SetCSSStyle,
 		C3.Plugins.System.Cnds.PickNth,
 		C3.Plugins.Text.Exps.Text,
 		C3.Plugins.Arr.Exps.Depth,
 		C3.Plugins.Touch.Cnds.OnTouchObject,
-		C3.Plugins.Text.Cnds.PickByUID,
 		C3.Plugins.Sprite.Cnds.CompareOpacity,
-		C3.Plugins.Browser.Acts.Alert,
-		C3.Plugins.Button.Cnds.OnClicked,
 		C3.Plugins.Dictionary.Acts.SetKey,
-		C3.Plugins.List.Cnds.OnSelectionChanged,
-		C3.Plugins.List.Exps.SelectedIndex,
 		C3.Plugins.sliderbar.Cnds.OnChanged,
 		C3.Plugins.sliderbar.Exps.Value,
-		C3.ScriptsInEvents.Menusheet_Event24_Act1,
+		C3.ScriptsInEvents.Menusheet_Event21_Act1,
 		C3.Plugins.System.Exps.layerindex,
-		C3.Plugins.AJAX.Cnds.OnAnyComplete,
-		C3.Plugins.AJAX.Exps.Tag,
-		C3.Plugins.Dictionary.Acts.JSONLoad,
 		C3.Plugins.Button.Acts.SetChecked,
-		C3.Plugins.List.Acts.Select,
 		C3.Plugins.sliderbar.Acts.SetValue,
 		C3.Plugins.Browser.Cnds.OnUpdateFound,
 		C3.Plugins.Browser.Cnds.OnUpdateReady,
 		C3.Plugins.Arr.Acts.SetXYZ,
-		C3.Plugins.Sprite.Acts.SetY,
 		C3.Plugins.System.Exps.viewportbottom,
-		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Audio.Acts.PlayByName,
 		C3.Plugins.Keyboard.Cnds.OnAnyKeyReleased,
-		C3.Plugins.Dictionary.Cnds.HasKey,
 		C3.Plugins.Keyboard.Exps.LastKeyCode,
 		C3.Plugins.Dictionary.Acts.DeleteKey,
-		C3.Plugins.Dictionary.Acts.AddKey,
 		C3.Plugins.Keyboard.Cnds.IsKeyCodeDown,
 		C3.Plugins.Dictionary.Exps.CurrentValue,
 		C3.Plugins.gamepad.Cnds.OnGamepadConnected,
@@ -12552,13 +12765,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.gamepad.Cnds.OnAnyButtonDown,
 		C3.Plugins.gamepad.Exps.LastButton,
 		C3.Plugins.gamepad.Exps.Button,
+		C3.Plugins.Sprite.Acts.SetVisible,
+		C3.Plugins.Sprite.Cnds.IsOnLayer,
 		C3.Plugins.Timeline.Acts.StopTimelineByTags,
 		C3.Plugins.Text.Cnds.CompareText,
 		C3.Plugins.Sprite.Acts.SetX,
 		C3.Behaviors.CV_BoundedDragnDrop.Exps.xMaxBoundPos,
 		C3.Behaviors.CV_BoundedDragnDrop.Exps.xMinBoundPos,
 		C3.Plugins.System.Exps.min,
-		C3.Plugins.NinePatch.Exps.X,
 		C3.Plugins.Audio.Acts.Stop,
 		C3.Plugins.Audio.Cnds.IsTagPlaying,
 		C3.Plugins.Audio.Acts.Play,
@@ -12566,47 +12780,29 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio.Acts.SetSilent,
 		C3.Plugins.Audio.Cnds.IsSilent,
 		C3.Plugins.NinePatch.Acts.SetVisible,
-		C3.Behaviors.CV_BoundedDragnDrop.Cnds.OnDrop,
 		C3.Plugins.Sprite.Cnds.OnDestroyed,
 		C3.Plugins.PlatformInfo.Cnds.IsOnMacOS,
-		C3.Plugins.Sprite.Acts.SetEffectEnabled,
-		C3.Plugins.Touch.Cnds.OnTapGesture,
-		C3.Behaviors.CarPlus.Acts.SetDefaultControls,
 		C3.Behaviors.CarPlus.Cnds.IsEnabled,
 		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
 		C3.Behaviors.CarPlus.Acts.Stop,
 		C3.Plugins.System.Cnds.EveryTick,
 		C3.Plugins.Sprite.Exps.BBoxLeft,
 		C3.Plugins.Sprite.Exps.BBoxRight,
-		C3.Plugins.System.Exps.random,
+		C3.ScriptsInEvents.Enemyai_Event18_Act2,
 		C3.Behaviors.CarPlus.Exps.MovingAngle,
 		C3.Plugins.Sprite.Acts.SetTowardPosition,
 		C3.Plugins.System.Cnds.IsBetweenAngles,
-		C3.Plugins.Particles.Acts.SetAngle,
-		C3.Plugins.Particles.Acts.SetRate,
-		C3.Plugins.Particles.Acts.ZMoveToObject,
-		C3.Plugins.Tilemap.Exps.MapDisplayWidth,
-		C3.Plugins.Tilemap.Exps.MapDisplayHeight,
-		C3.Plugins.Tilemap.Exps.TileAt,
-		C3.ScriptsInEvents.Levelinits_Event9_Act4,
-		C3.Plugins.Tilemap.Exps.TileToPositionX,
-		C3.Plugins.Tilemap.Exps.TileToPositionY,
-		C3.ScriptsInEvents.Levelinits_Event10_Act3,
-		C3.Plugins.Sprite.Acts.SetScale,
-		C3.Plugins.Sprite.Acts.MoveToTop,
+		C3.ScriptsInEvents.Levelinits_Event8_Act3,
 		C3.Behaviors.LOS.Acts.AddObstacle,
+		C3.Plugins.Sprite.Exps.IID,
 		C3.Plugins.TiledBg.Acts.SetPosToObject,
-		C3.ScriptsInEvents.Levelinits_Event25_Act1,
+		C3.Behaviors.CarPlus.Acts.SetDefaultControls,
+		C3.Plugins.Sprite.Exps.PolyPointCount,
+		C3.ScriptsInEvents.Levelinits_Event14_Act1,
+		C3.Plugins.Sprite.Acts.MoveAtAngle,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
-		C3.Plugins.Touch.Exps.X,
-		C3.Plugins.Touch.Exps.Y,
 		C3.Plugins.Touch.Cnds.OnTouchEnd,
-		C3.Plugins.System.Exps.scrollx,
-		C3.Plugins.System.Exps.scrolly,
-		C3.Plugins.Touch.Cnds.IsInTouch,
-		C3.Plugins.Mouse.Cnds.OnWheel,
-		C3.Plugins.System.Exps.viewportwidth,
-		C3.Plugins.System.Exps.viewportheight
+		C3.Plugins.Touch.Cnds.IsInTouch
 	];
 };
 self.C3_JsPropNameTable = [
@@ -12674,6 +12870,7 @@ self.C3_JsPropNameTable = [
 	{SendToLvl: 0},
 	{LvlBut: 0},
 	{adzone: 0},
+	{Anchor: 0},
 	{interface_zone: 0},
 	{ideal: 0},
 	{score_point: 0},
@@ -12718,7 +12915,7 @@ self.C3_JsPropNameTable = [
 	{EdgeSparks: 0},
 	{car_position: 0},
 	{checkID: 0},
-	{IsEnd: 0},
+	{isEnd: 0},
 	{checkpointID: 0},
 	{isStart: 0},
 	{checkpoint: 0},
@@ -12782,6 +12979,14 @@ self.C3_JsPropNameTable = [
 	{Solid: 0},
 	{borders: 0},
 	{garage_value: 0},
+	{placed: 0},
+	{can_place: 0},
+	{saved_x: 0},
+	{saved_y: 0},
+	{saved_angle: 0},
+	{selected: 0},
+	{snapped_start: 0},
+	{snapped_end: 0},
 	{road: 0},
 	{decor: 0},
 	{obstacle: 0},
@@ -12858,7 +13063,6 @@ self.C3_JsPropNameTable = [
 	{watch_ad_normal: 0},
 	{number: 0},
 	{Victory_info: 0},
-	{Anchor: 0},
 	{black_cover: 0},
 	{please_wait: 0},
 	{timer: 0},
@@ -12883,14 +13087,142 @@ self.C3_JsPropNameTable = [
 	{gamepad_tap: 0},
 	{gamepad_axis: 0},
 	{garage_downgrade_char: 0},
-	{Gamepad_buttons: 0},
+	{Rebindable_gamepad: 0},
+	{scale: 0},
+	{snap_to: 0},
+	{about_to_destroy: 0},
+	{SnapZone: 0},
+	{scale_text: 0},
+	{EdBack: 0},
+	{type: 0},
+	{CreateObject: 0},
+	{add_ten: 0},
+	{subtract_ten: 0},
+	{SetAngle: 0},
+	{Angle_text: 0},
+	{Cancel: 0},
+	{TurnAngle_text: 0},
+	{SetTurnAngle: 0},
+	{subtype: 0},
+	{AddObject: 0},
+	{SaveMap: 0},
+	{ToMenu: 0},
+	{async_val: 0},
+	{map_back: 0},
+	{map_names: 0},
+	{map_dates: 0},
+	{map_name_txt: 0},
+	{map_date_txt: 0},
+	{map_id: 0},
+	{action: 0},
+	{load_map: 0},
+	{rename_map: 0},
+	{delete_map: 0},
+	{welcome_txt: 0},
+	{download_map: 0},
+	{Date: 0},
+	{Snap: 0},
+	{create_map: 0},
+	{map_new_name: 0},
+	{DefLvl: 0},
+	{ThisLvl: 0},
+	{scroll_zone: 0},
+	{decor_subs: 0},
+	{bonus_subs: 0},
+	{obstacle_subs: 0},
+	{current_subs: 0},
+	{current_action: 0},
+	{last_action: 0},
+	{changes_buffer: 0},
+	{UndoAction: 0},
+	{RedoAction: 0},
+	{DestroyObject: 0},
+	{base_types: 0},
+	{Start: 0},
+	{Z_up: 0},
+	{Z_down: 0},
+	{Z_top: 0},
+	{Z_bottom: 0},
+	{last_index: 0},
+	{choose_back: 0},
+	{Rapid: 0},
+	{next_offset: 0},
+	{meshedRoad: 0},
+	{point: 0},
+	{right: 0},
+	{control_handle: 0},
+	{loop: 0},
+	{RoadPoints: 0},
+	{AboutToDelete: 0},
+	{anchor_handle: 0},
+	{control_line: 0},
+	{track_start: 0},
+	{track_end: 0},
+	{start_brackets: 0},
+	{JSON: 0},
+	{angle_slider: 0},
+	{RoadMode: 0},
+	{zoom_slider: 0},
+	{DefJSON: 0},
+	{circular_back: 0},
+	{TestLevel: 0},
 	{Button: 0},
 	{LoadableArray: 0},
 	{LoadableDict: 0},
 	{RocketTarget: 0},
 	{AIGoal: 0},
+	{MapButton: 0},
 	{MapElement: 0},
 	{UpgradeBar: 0},
+	{ACTION_DELETE: 0},
+	{ACTION_MODIFY: 0},
+	{ACTION_ADD: 0},
+	{ACTION_ROAD_NEW: 0},
+	{ACTION_ROAD_REMOVE: 0},
+	{ACTION_ROAD_INSERT: 0},
+	{ACTION_ROAD_MOVE: 0},
+	{ACTION_ROAD_LOOP: 0},
+	{EDITOR_NEW: 0},
+	{EDITOR_MODIFY: 0},
+	{EDITOR_READY: 0},
+	{EDITOR_ROAD: 0},
+	{MapSlot: 0},
+	{EdState: 0},
+	{EditUID: 0},
+	{scale_factor: 0},
+	{uid: 0},
+	{cur: 0},
+	{typeID: 0},
+	{new_index: 0},
+	{action_type: 0},
+	{obj_str: 0},
+	{x: 0},
+	{y: 0},
+	{new_angle: 0},
+	{old_x: 0},
+	{old_y: 0},
+	{object_animation: 0},
+	{object_type: 0},
+	{new_uid: 0},
+	{object_string: 0},
+	{Sprint: 0},
+	{error: 0},
+	{complete_track: 0},
+	{finish_id: 0},
+	{next_id: 0},
+	{ImageName: 0},
+	{URL: 0},
+	{new_scale: 0},
+	{MAP_RENAME: 0},
+	{MAP_EXTERNAL: 0},
+	{MAP_NEW: 0},
+	{MAP_DELETE: 0},
+	{MAP_DOWNLOAD: 0},
+	{MAP_LOAD: 0},
+	{MapAction: 0},
+	{LoadOrder: 0},
+	{id: 0},
+	{key: 0},
 	{GameState: 0},
 	{GAME_PAUSE: 0},
 	{GAME_REPLAY: 0},
@@ -12898,8 +13230,8 @@ self.C3_JsPropNameTable = [
 	{GAME_OVER: 0},
 	{GAME_ACTIVE: 0},
 	{GAME_START: 0},
+	{PlayerUID: 0},
 	{MapName: 0},
-	{Sprint: 0},
 	{Jumps: 0},
 	{Rockets: 0},
 	{Loaded_level: 0},
@@ -12932,29 +13264,9 @@ self.C3_JsPropNameTable = [
 	{SlowsDown: 0},
 	{ObstacleUID: 0},
 	{Direction: 0},
-	{object_animation: 0},
-	{object_type: 0},
-	{new_uid: 0},
-	{object_string: 0},
-	{x: 0},
-	{y: 0},
-	{new_angle: 0},
 	{map_name: 0},
 	{counter: 0},
 	{map_url: 0},
-	{edge_angle: 0},
-	{edge_angle_c3: 0},
-	{edge_length: 0},
-	{edge_y2: 0},
-	{edge_y1: 0},
-	{edge_x2: 0},
-	{edge_x1: 0},
-	{edge_dy: 0},
-	{edge_dx: 0},
-	{distance_to_end: 0},
-	{distance_to_start: 0},
-	{CheckpointUID: 0},
-	{hasMiddle: 0},
 	{delta: 0},
 	{RoadUID: 0},
 	{Point: 0},
@@ -12964,10 +13276,10 @@ self.C3_JsPropNameTable = [
 	{prev_mid: 0},
 	{gui_y: 0},
 	{gui_x: 0},
+	{to_y: 0},
+	{to_x: 0},
 	{coin_x: 0},
 	{coin_y: 0},
-	{ImageName: 0},
-	{URL: 0},
 	{MenuState: 0},
 	{MENU_DEFAULT: 0},
 	{MENU_PROMPT: 0},
@@ -13003,7 +13315,6 @@ self.C3_JsPropNameTable = [
 	{FoundKey: 0},
 	{StartValue: 0},
 	{KeyUID: 0},
-	{Car_UID: 0},
 	{posy: 0},
 	{posx: 0},
 	{AngleToNode: 0},
@@ -13012,11 +13323,18 @@ self.C3_JsPropNameTable = [
 	{your_car: 0},
 	{loaded: 0},
 	{max_cars: 0},
-	{is_start: 0},
-	{lv1: 0},
-	{lv2: 0},
-	{tile_rotation: 0},
 	{start_uid: 0},
+	{edge_angle: 0},
+	{edge_angle_c3: 0},
+	{edge_length: 0},
+	{edge_y2: 0},
+	{edge_y1: 0},
+	{edge_x2: 0},
+	{edge_x1: 0},
+	{edge_dy: 0},
+	{edge_dx: 0},
+	{distance_to_end: 0},
+	{distance_to_start: 0},
 	{CanScrollY: 0},
 	{CanScrollX: 0},
 	{CanUseWheel: 0},
@@ -13139,39 +13457,448 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-		() => "Settings",
-		() => "Win",
-		() => "Loss",
-		() => "GUI",
-		() => "Waiting",
+		() => "NONE",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0() / 2);
+		},
+		() => "Ready",
+		() => "bonuses",
+		() => "decor",
+		() => "obstacles",
+		() => "base_types",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (and("Loading map ", v0.GetValue()) + "...");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("background");
+		},
+		() => "road_format",
+		() => "bezier",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("road_points");
+		},
+		() => "objects",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(".type");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(".x");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(".y");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(".angle");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0();
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() - n1.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject();
+		},
+		() => 1,
+		() => 2,
+		() => 1.5,
+		() => 3,
+		() => 4,
+		() => 5,
+		() => 6,
+		() => "Test",
+		() => 0,
+		() => -1,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpInstVar();
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpInstVar_Family();
+		},
+		() => "TintSelected",
+		() => "On State Changed",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => (f0() - (f1("Level") / 2));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0("Level") / 2);
+		},
+		() => "GUI_root",
+		() => "New",
+		() => "GUI_create",
+		() => "Modify",
+		() => "GUI_modify",
+		() => "Road",
+		() => "GUI_road",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => (Math.round((((n0.ExpBehavior() - n1.ExpObject()) / n2.ExpObject()) * 60)) / 20);
+		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => ((((v0.GetValue()) === ("map_966518302") ? 1 : 0)) ? ("Race") : ("FreeRoam"));
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject((n1.ExpObject()).toString());
 		},
+		() => "Level",
+		() => "",
+		() => 60,
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => (Math.round((C3.toDegrees(C3.angleTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject())) / 10)) * 10);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("Level");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => C3.lerp(f0(), f1("Level"), 0.03);
+		},
+		() => "Edit stopped",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => and("Edit ", n0.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (and("Edit ", n0.ExpObject()) + " removed");
+		},
+		() => "TintRed",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => C3.clamp((v0.GetValue() - 0.05), 0, 3);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 10);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => C3.clamp((v0.GetValue() + 0.05), 0, 3);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 10);
+		},
+		() => "FreeRoam",
+		() => "{\"c3\":true,\"w\":{\"w\":150,\"h\":22,\"l\":593705883740258,\"zi\":12,\"oX\":0,\"oY\":0},\"data\":{\"title\":\"\",\"isEnabled\":true,\"id\":\"\",\"items\":[\"Монета\",\"Ракета\",\"Нитро\",\"Бонус\"],\"selectedIndex\":0,\"selectedIndices\":[]}}",
+		() => "{\"c3\":true,\"w\":{\"w\":150,\"h\":22,\"l\":593705883740258,\"zi\":12,\"oX\":0,\"oY\":0},\"data\":{\"title\":\"\",\"isEnabled\":true,\"id\":\"\",\"items\":[\"Камень 1\",\"Камень 2\",\"Камень 3\",\"Камень 4\",\"Камень 1 (мал.)\",\"Камень 2 (мал.)\",\"Камень 3 (мал.)\",\"Камень 4 (мал.)\",\"Шипы 1\",\"Шипы 2\",\"Шипы 3\",\"Шипы 4\"],\"selectedIndex\":0,\"selectedIndices\":[]}}",
+		() => "{\"c3\":true,\"w\":{\"w\":150,\"h\":22,\"l\":593705883740258,\"zi\":12,\"oX\":0,\"oY\":0},\"data\":{\"title\":\"\",\"isEnabled\":true,\"id\":\"\",\"items\":[\"Дерево 1\",\"Дерево 2\",\"Палатка 1\",\"Палатка 2\"],\"selectedIndex\":-1,\"selectedIndices\":[]}}",
+		() => "Delete",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject());
+		},
+		() => "RoadMove",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => and(and(n0.ExpInstVar(), " "), n1.ExpInstVar());
+		},
+		() => "RoadRemove",
+		() => "RoadNew",
+		() => "RoadInsert",
+		() => "RoadLoop",
+		() => "Add",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpObject() + "_") + n1.ExpObject());
+		},
+		() => 7,
+		() => 8,
+		() => 9,
+		() => 10,
+		() => 11,
+		() => 12,
+		() => 13,
+		() => 14,
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 0);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 6);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 7);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 3);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 4);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 5);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 2);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 8);
+		},
+		() => "Moving object",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), v2.GetValue(), v3.GetValue());
+		},
+		() => "Removing object",
+		() => "Creating new object",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue(), 0, "_");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue(), 1, "_");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			return () => and((((((("Spawned " + n0.ExpObject()) + "\n") + "Animation:  ") + v1.GetValue()) + "\n") + "UID: "), n2.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => and((((and((and("Position: [", n0.ExpObject()) + ", "), n1.ExpObject()) + "]") + "\n") + "Angle: "), n2.ExpObject());
+		},
+		() => 100,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpBehavior();
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (and(("Угол" + "\n"), n0.ExpObject()) + "°");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() + (Math.cos(C3.toRadians(n1.ExpObject())) * 48));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() + (Math.sin(C3.toRadians(n1.ExpObject())) * 48));
+		},
+		() => "modified",
+		() => "background",
+		() => "road_points",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("map_", v0.GetValue());
+		},
+		() => "Карта сохранена!",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ("back_" + ((n0.ExpObject() + 1)).toString());
+		},
+		() => "default_road",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => and((f0(v1.GetValue(), 2) * 100), "%");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((v0.GetValue() / 8) + 0.05);
+		},
+		() => "Background",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			return () => (n0.ExpBehavior() - (n1.ExpObject() * (v2.GetValue() / 3)));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => (((n0.ExpObject() + (20 * 2)) * v1.GetValue()) + 140);
+		},
+		() => 360,
+		() => "default_map",
+		() => 20,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0);
+		},
+		() => "map_card",
+		() => "Добавить карту",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 490);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((n0.ExpObject() + 144) + 80);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 32);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((n0.ExpObject() + 112) + 80);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(f1(0, 999999999));
+		},
+		() => "name",
+		() => "created",
+		() => "map_names",
+		() => "map_dates",
+		() => "Карта создана! Загружаем редактор...",
+		() => "Карта загружена! Открываем редактор...",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			return () => f0(f1(n2.ExpInstVar_Family(), 1, "_"));
+		},
+		() => "file",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(0);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0() - 1);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(f1());
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue(), 4);
+		},
+		() => "map_",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue(), 1);
+		},
+		() => "s",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(f1(), 4);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpInstVar());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("name");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const f2 = p._GetNode(2).GetBoundMethod();
+			const n3 = p._GetNode(3);
+			return () => (((("Создана: " + f0(n1.ExpObject("created"))) + "\n") + "Последнее изменение: ") + f2(n3.ExpObject("modified")));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 510);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((n0.ExpObject() + 160) + 80);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((n0.ExpObject() + 64) + 80);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ((n0.ExpObject() + 16) + 80);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const v3 = p._GetNode(3).GetVar();
+			const v4 = p._GetNode(4).GetVar();
+			return () => f0((((n1.ExpObject() + n2.ExpObject()) + (20 * 2)) - v3.GetValue()), v4.GetValue());
+		},
+		() => "Карта найдена! Загружаем редактор...",
+		() => "Settings",
+		() => "Win",
+		() => "Loss",
+		() => "GUI",
+		() => "Waiting",
 		() => 15000,
 		() => "RaceStart",
-		() => 1,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("difficulty_laps");
 		},
-		() => 20,
-		() => 0,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("difficulty_lives");
 		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpInstVar();
-		},
 		() => "health",
 		() => "controls_scheme",
-		() => 2,
 		() => "destruction",
 		() => "Car",
 		() => "Obstacle",
@@ -13248,30 +13975,17 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("Trail");
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject();
 		},
 		() => "Trail",
 		() => "Camera related stuff",
 		() => "Angle Follow",
 		() => "cam_angle_follow",
-		() => "Level",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 90);
 		},
 		() => "Layout",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("Level");
-		},
 		() => "Camera Zoom",
 		() => "cam_zoom_speed",
 		p => {
@@ -13297,7 +14011,6 @@ self.C3_ExpressionFuncs = [
 			return () => and((and("Круг ", (n0.ExpInstVar() + 1)) + " / "), v1.GetValue());
 		},
 		() => 0.75,
-		() => "",
 		() => "RaceOver",
 		() => "RaceWin",
 		p => {
@@ -13376,7 +14089,6 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Coin",
 		() => "Replays",
-		() => 360,
 		() => 700,
 		() => "MidBut",
 		() => "Bar",
@@ -13486,16 +14198,6 @@ self.C3_ExpressionFuncs = [
 			const f2 = p._GetNode(2).GetBoundMethod();
 			return () => n0.ExpObject(((n1.ExpObject() - 1) - f2("replay")), 1);
 		},
-		() => 4,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpBehavior();
-		},
-		() => 5,
-		() => 6,
-		() => 7,
-		() => 8,
-		() => 9,
 		() => "Find collision points",
 		p => {
 			const n0 = p._GetNode(0);
@@ -13505,10 +14207,6 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (4.6 * v0.GetValue());
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0();
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -13532,10 +14230,6 @@ self.C3_ExpressionFuncs = [
 			return () => f0(n1.ExpObject(), 6);
 		},
 		() => "Spikes",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpInstVar_Family();
-		},
 		() => 0.5,
 		p => {
 			const n0 = p._GetNode(0);
@@ -13624,9 +14318,8 @@ self.C3_ExpressionFuncs = [
 			return () => f0(0, 0, 0, 100);
 		},
 		() => "Buttons",
-		() => -1,
+		() => "EdMenu",
 		() => "jumpUp",
-		() => 1.5,
 		() => "jumpDown",
 		() => "Missile",
 		p => {
@@ -13648,16 +14341,6 @@ self.C3_ExpressionFuncs = [
 			return () => ((0.25 + (f0(n1.ExpObject(), C3.toDegrees(C3.angleTo(n2.ExpObject(), n3.ExpObject(), n4.ExpObject(), n5.ExpObject()))) / 180)) * C3.distanceTo(n6.ExpObject(), n7.ExpObject(), n8.ExpObject(), n9.ExpObject()));
 		},
 		() => 150,
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			return () => f0(v1.GetValue(), 0, "_");
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			return () => f0(v1.GetValue(), 1, "_");
-		},
 		() => "road",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -13673,117 +14356,11 @@ self.C3_ExpressionFuncs = [
 		() => "Lvl2",
 		() => "Lvl3",
 		() => "ParkingLot",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => and("back_", add(n0.ExpObject("background"), 1));
+		},
 		() => "map",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => and("back_", add(n0.ExpObject(0, 2), 1));
-		},
-		() => "loadloop",
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("loadloop"), 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("loadloop"), 2);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("loadloop"), 3);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("loadloop"), 4);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 2);
-		},
-		() => "road_polygons",
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("road_polygons"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((f1("road_polygons") + 1));
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			return () => (v0.GetValue() - v1.GetValue());
-		},
-		() => 50,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() + 180);
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			const v3 = p._GetNode(3).GetVar();
-			return () => Math.sqrt(((v0.GetValue() * v1.GetValue()) + (v2.GetValue() * v3.GetValue())));
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const n1 = p._GetNode(1);
-			return () => (v0.GetValue() + n1.ExpObject());
-		},
-		() => 80,
-		() => "Start",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("Start");
-		},
-		() => 768,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const n1 = p._GetNode(1);
-			return () => (v0.GetValue() + (n1.ExpObject() * 2));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 180);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (384 + n0.ExpObject());
-		},
-		() => 10,
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			return () => ((((f0(n1.ExpObject(), "LapTrigger")) === (1) ? 1 : 0)) ? ("LapTrigger") : ("End"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((n0.ExpObject() + n1.ExpInstVar()) - 180);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			return () => f0(n1.ExpObject(), "Middle");
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() + 1);
-		},
-		() => "Check",
-		() => 256,
-		() => "Middle",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((n0.ExpObject() + (n1.ExpInstVar() / 2)) - 180);
-		},
 		() => "Static",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -13791,9 +14368,7 @@ self.C3_ExpressionFuncs = [
 			return () => C3.clamp((v0.GetValue() + v1.GetValue()), 0, 100);
 		},
 		() => "Low",
-		() => 60,
 		() => "Mid",
-		() => 100,
 		() => "High",
 		() => "Full",
 		p => {
@@ -13804,7 +14379,7 @@ self.C3_ExpressionFuncs = [
 		},
 		() => -500,
 		() => "NotFull",
-		() => "Add",
+		() => 50,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpBehavior("Add");
@@ -13814,8 +14389,6 @@ self.C3_ExpressionFuncs = [
 			return () => (v0.GetValue() - 5);
 		},
 		() => "ToIcon",
-		() => 675,
-		() => 170,
 		() => 623,
 		() => "Glow",
 		() => "Brightness",
@@ -13834,21 +14407,9 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpBehavior("Brightness");
 		},
-		() => "ScrollX",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpBehavior("ScrollX");
-		},
-		() => "ScrollY",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpBehavior("ScrollY");
-		},
 		() => "BigBoost",
 		() => 1.75,
 		() => "ToBoost",
-		() => 565,
-		() => 1110,
 		() => "Pixellate",
 		p => {
 			const n0 = p._GetNode(0);
@@ -13860,6 +14421,7 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpBehavior("Fade");
 		},
 		() => 0.25,
+		() => "obstacle",
 		() => "flags",
 		() => "tiles",
 		() => "ownership",
@@ -13878,6 +14440,7 @@ self.C3_ExpressionFuncs = [
 		() => "ShowLayer",
 		() => "ShowPopup",
 		() => "OpenMap",
+		() => "ToEditor",
 		() => "Title",
 		() => "color",
 		() => "white",
@@ -14089,6 +14652,10 @@ self.C3_ExpressionFuncs = [
 			return () => and(n0.ExpObject(0, 0, v1.GetValue()), "_on");
 		},
 		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((((v0.GetValue()) === ("map_966518302") ? 1 : 0)) ? ("Race") : ("FreeRoam"));
+		},
+		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar_Family() + "Tap");
 		},
@@ -14170,6 +14737,7 @@ self.C3_ExpressionFuncs = [
 		() => 666,
 		() => 362,
 		() => 896,
+		() => "Volume",
 		() => 580,
 		() => 425,
 		p => {
@@ -14186,11 +14754,6 @@ self.C3_ExpressionFuncs = [
 			return () => f0((n1.ExpBehavior() + (n2.ExpInstVar() * v3.GetValue())), n4.ExpBehavior());
 		},
 		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (n0.ExpObject() - n1.ExpObject());
-		},
-		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => ((v0.GetValue()) ? ("inactive") : ("active"));
 		},
@@ -14200,7 +14763,6 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "inactive",
 		() => "active",
-		() => "Background",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => ((-10) * ((100 - v0.GetValue()) / 40));
@@ -14221,7 +14783,6 @@ self.C3_ExpressionFuncs = [
 			const n2 = p._GetNode(2);
 			return () => f0((n1.ExpObject() - n2.ExpObject()), 48);
 		},
-		() => 3,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -14262,11 +14823,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => and((n0.ExpObject() + " "), n1.ExpObject());
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			return () => f0(n1.ExpInstVar());
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -14336,13 +14892,6 @@ self.C3_ExpressionFuncs = [
 			return () => f0((-64), 256);
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			return () => (C3.toDegrees(C3.angleTo(v0.GetValue(), v1.GetValue(), n2.ExpObject(), n3.ExpObject())) + 180);
-		},
-		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			const v2 = p._GetNode(2).GetVar();
@@ -14406,57 +14955,22 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject((13 + (f1("rays") * 4)), 1);
 		},
 		() => "Init Functions",
-		() => "TireImagePoints",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("TireImagePoints");
-		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			const n2 = p._GetNode(2);
-			return () => ((((v0.GetValue()) === ("FreeRoam") ? 1 : 0)) ? (1) : (((((v1.GetValue()) === ("Race") ? 1 : 0)) ? (add(n2.ExpObject("difficulty_enemies"), 1)) : (6))));
+			const n1 = p._GetNode(1);
+			return () => ((((v0.GetValue()) === ("Race") ? 1 : 0)) ? (add(n1.ExpObject("difficulty_enemies"), 1)) : (1));
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
 			return () => Math.floor(f0(v1.GetValue()));
 		},
-		() => "roadX",
-		() => "roadY",
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => n0.ExpObject(f1("roadX"), f2("roadY"));
-		},
+		() => "spawn_cars",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("roadX");
+			return () => f0("spawn_cars");
 		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("roadY");
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("roadX"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("roadY"));
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (270 + v0.GetValue());
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => ((((n0.ExpObject("controls_car_scale")) === (0) ? 1 : 0)) ? (0.75) : (((((n1.ExpObject("controls_car_scale")) === (1) ? 1 : 0)) ? (1) : (1.25))));
-		},
+		() => "Spawn",
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
@@ -14478,6 +14992,10 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject(2, 3, v1.GetValue());
 		},
 		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => and("Enemy", Math.floor(f0(0, 4)));
+		},
+		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ai_accel");
 		},
@@ -14497,26 +15015,20 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ai_steer");
 		},
-		() => "Finish",
-		() => "timer",
-		() => "spawn_cars",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => and("SpawnPoint", f0("spawn_cars"));
-		},
+		() => "road_polygons",
+		() => "End",
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 90);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpObject() + n1.ExpInstVar()) - 180);
 		},
+		() => "Start",
+		() => "Check",
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("spawn_cars");
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 180);
 		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => and("Enemy", Math.floor(f0(0, 4)));
-		},
-		() => "End",
+		() => 256,
 		() => "Speed",
 		p => {
 			const n0 = p._GetNode(0);
