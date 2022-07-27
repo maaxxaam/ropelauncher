@@ -44,57 +44,6 @@
 						"angle": 0,
 						"zElevation": 0
 					}
-				},
-				{
-					"type": "Old_Obstacle",
-					"properties": {
-						"initially-visible": true,
-						"initial-animation": "Barrel1",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
-					},
-					"uid": 38,
-					"instanceVariables": {
-						"Moving": true
-					},
-					"behaviors": {
-						"Sine": {
-							"properties": {
-								"movement": "forwards-backwards",
-								"wave": "sine",
-								"period": 4,
-								"period-random": 0,
-								"period-offset": 2,
-								"period-offset-random": 0,
-								"magnitude": 160,
-								"magnitude-random": 0,
-								"enabled": false,
-								"live-preview": false
-							}
-						},
-						"Tween": {
-							"properties": {
-								"enabled": true
-							}
-						}
-					},
-					"world": {
-						"x": 15026,
-						"y": 13796,
-						"width": 48,
-						"height": 1700,
-						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 4.71238898038469,
-						"zElevation": 0
-					}
 				}
 			],
 			"sid": 950322535817103,
@@ -1602,10 +1551,10 @@
 					"world": {
 						"x": 360,
 						"y": 765,
-						"width": 500,
-						"height": 483,
-						"originX": 0.5,
-						"originY": 0.5,
+						"width": 229,
+						"height": 214,
+						"originX": 0.5021834061135371,
+						"originY": 0.5023364485981309,
 						"color": [
 							1,
 							1,

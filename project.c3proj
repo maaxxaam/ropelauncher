@@ -8,14 +8,6 @@
 	"usedAddons": [
 		{
 			"type": "plugin",
-			"id": "Sprite",
-			"name": "Sprite",
-			"author": "Scirra",
-			"version": "r302",
-			"bundled": false
-		},
-		{
-			"type": "plugin",
 			"id": "TiledBg",
 			"name": "Tiled Background",
 			"author": "Scirra",
@@ -72,16 +64,16 @@
 		},
 		{
 			"type": "plugin",
-			"id": "Particles",
-			"name": "Particles",
+			"id": "Sprite",
+			"name": "Sprite",
 			"author": "Scirra",
 			"version": "r302",
 			"bundled": false
 		},
 		{
 			"type": "plugin",
-			"id": "Tilemap",
-			"name": "Tilemap",
+			"id": "Particles",
+			"name": "Particles",
 			"author": "Scirra",
 			"version": "r302",
 			"bundled": false
@@ -184,16 +176,16 @@
 		},
 		{
 			"type": "plugin",
-			"id": "NinePatch",
-			"name": "9-patch",
+			"id": "DrawingCanvas",
+			"name": "Drawing canvas",
 			"author": "Scirra",
 			"version": "r302",
 			"bundled": false
 		},
 		{
 			"type": "plugin",
-			"id": "DrawingCanvas",
-			"name": "Drawing canvas",
+			"id": "NinePatch",
+			"name": "9-patch",
 			"author": "Scirra",
 			"version": "r302",
 			"bundled": false
@@ -328,14 +320,6 @@
 		},
 		{
 			"type": "behavior",
-			"id": "DragnDrop",
-			"name": "Drag & Drop",
-			"author": "Scirra",
-			"version": "r302",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
 			"id": "Anchor",
 			"name": "Anchor",
 			"author": "Scirra",
@@ -368,14 +352,6 @@
 		},
 		{
 			"type": "behavior",
-			"id": "Sin",
-			"name": "Sine",
-			"author": "Scirra",
-			"version": "r302",
-			"bundled": false
-		},
-		{
-			"type": "behavior",
 			"id": "Bullet",
 			"name": "Bullet",
 			"author": "Scirra",
@@ -384,8 +360,24 @@
 		},
 		{
 			"type": "behavior",
+			"id": "Sin",
+			"name": "Sine",
+			"author": "Scirra",
+			"version": "r302",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
 			"id": "solid",
 			"name": "Solid",
+			"author": "Scirra",
+			"version": "r302",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "DragnDrop",
+			"name": "Drag & Drop",
 			"author": "Scirra",
 			"version": "r302",
 			"bundled": false
@@ -482,7 +474,6 @@
 	"uniqueId": "j211m18wkv4",
 	"objectTypes": {
 		"items": [
-			"Pole",
 			"TiledBackground",
 			"Touch",
 			"LocalStorage",
@@ -493,10 +484,7 @@
 			"Car",
 			"DriftMarks",
 			"Particles",
-			"roads",
-			"drift_zone",
 			"cam_follow",
-			"DriftBut",
 			"vis_bar",
 			"Mouse",
 			"Audio",
@@ -506,7 +494,6 @@
 			"SettBut",
 			"mmtext",
 			"LvlBut",
-			"adzone",
 			"interface_zone",
 			"ideal",
 			"score_point",
@@ -516,8 +503,6 @@
 			"pause_menu",
 			"LevelLight",
 			"scenery",
-			"Old_Obstacle",
-			"Old_Bonus",
 			"BackToMainBut",
 			"PlayLvlBut",
 			"flags",
@@ -541,7 +526,6 @@
 			"ResumeBut",
 			"ReplayBut",
 			"PauseTxt",
-			"NitroBar",
 			"NitroBut",
 			"ShootBut",
 			"rocket",
@@ -550,9 +534,6 @@
 			"cannon",
 			"RewindBut",
 			"RewindBar",
-			"AccelBut",
-			"DecelBut",
-			"Wheel",
 			"trails",
 			"coin_txt",
 			"tempGoal",
@@ -563,19 +544,14 @@
 			"garage_bar",
 			"garage_car_name",
 			"garage_upgrade_char",
-			"garage_switch",
 			"garage_buy",
 			"garage_car_price",
 			"garage_bar_max",
 			"prompt_back",
-			"prompt_yes",
-			"prompt_no",
 			"prompt_message",
 			"keyboard_tap",
 			"Gamepad",
-			"borders",
 			"garage_value",
-			"road",
 			"decor",
 			"obstacle",
 			"bonus",
@@ -687,7 +663,7 @@
 			"Snap",
 			"create_map",
 			"map_new_name",
-			"DefLvl",
+			"MapOrdering",
 			"ThisLvl",
 			"scroll_zone",
 			"decor_subs",
@@ -721,7 +697,11 @@
 			"zoom_slider",
 			"DefJSON",
 			"circular_back",
-			"TestLevel"
+			"TestLevel",
+			"TouchStarts",
+			"rename_finish",
+			"rename_input",
+			"sorting_options"
 		],
 		"subfolders": []
 	},
@@ -1031,9 +1011,17 @@
 					}
 				},
 				{
+					"name": "map_966518302.json",
+					"type": "application/json",
+					"sid": 139730432023447,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
 					"name": "map_295869923.json",
 					"type": "application/json",
-					"sid": 814084998640234,
+					"sid": 691036407577691,
 					"file-info": {
 						"purpose": "none"
 					}
@@ -1041,15 +1029,7 @@
 				{
 					"name": "map_791230538.json",
 					"type": "application/json",
-					"sid": 508142991714202,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "map_966518302.json",
-					"type": "application/json",
-					"sid": 139730432023447,
+					"sid": 390566377083088,
 					"file-info": {
 						"purpose": "none"
 					}

@@ -4,7 +4,18 @@
 	"sid": 934391040912822,
 	"isGlobal": false,
 	"instanceVariables": [],
-	"behaviorTypes": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "DragnDrop",
+			"name": "DragDrop",
+			"sid": 436655238919004
+		},
+		{
+			"behaviorId": "Pin",
+			"name": "Pin",
+			"sid": 465318770575724
+		}
+	],
 	"effectTypes": [],
 	"animations": {
 		"items": [

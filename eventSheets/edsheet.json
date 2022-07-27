@@ -2,10 +2,6 @@
 	"name": "EdSheet",
 	"events": [
 		{
-			"eventType": "include",
-			"includeSheet": "Scrolling"
-		},
-		{
 			"eventType": "comment",
 			"text": "Action type constants"
 		},
@@ -480,17 +476,6 @@
 							}
 						},
 						{
-							"id": "set-layer-scroll",
-							"objectClass": "System",
-							"sid": 313907838230263,
-							"disabled": true,
-							"parameters": {
-								"layer": "2",
-								"scroll-x": "360",
-								"scroll-y": "640"
-							}
-						},
-						{
 							"id": "set-layer-scale",
 							"objectClass": "System",
 							"sid": 851880079071678,
@@ -863,7 +848,7 @@
 								},
 								{
 									"callFunction": "EnableScrolling",
-									"sid": 739169850110496,
+									"sid": 358707154106445,
 									"parameters": [
 										true,
 										true,
@@ -871,7 +856,8 @@
 										"LayoutHeight - ViewportHeight(\"Level\") / 2",
 										"ViewportWidth(\"Level\") / 2",
 										"ViewportHeight(\"Level\") / 2",
-										false
+										false,
+										"1"
 									]
 								},
 								{
@@ -1284,9 +1270,9 @@
 			"actions": [
 				{
 					"callFunction": "UpdateScale",
-					"sid": 642852270758057,
+					"sid": 805615362342585,
 					"parameters": [
-						"round((slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 60) / 20"
+						"(slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 3"
 					]
 				}
 			],
@@ -1296,19 +1282,19 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 292433496000421
-						},
-						{
 							"id": "compare-eventvar",
 							"objectClass": "System",
-							"sid": 795965838596495,
+							"sid": 682968603438849,
 							"parameters": {
 								"variable": "EdState",
 								"comparison": 0,
 								"value": "EDITOR_READY"
 							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 292433496000421
 						}
 					],
 					"actions": [
@@ -1348,15 +1334,16 @@
 			"actions": [
 				{
 					"callFunction": "EnableScrolling",
-					"sid": 466113368935181,
+					"sid": 771088881659602,
 					"parameters": [
 						true,
 						true,
 						"LayoutWidth - ViewportWidth(\"Level\") / 2",
-						"LayoutHeight - ViewportHeight(\"Level\") / 2",
+						"LayoutHeight - MidScreenY",
 						"ViewportWidth(\"Level\") / 2",
-						"ViewportHeight(\"Level\") / 2",
-						false
+						"MidScreenY",
+						false,
+						"1"
 					]
 				}
 			],
@@ -2279,17 +2266,17 @@
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
-							"sid": 156888369781712,
+							"sid": 778473410428928,
 							"parameters": {
 								"variable": "cur",
-								"value": "round((slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 60) / 20"
+								"value": "roundToDp((slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 3, 2)"
 							}
 						},
 						{
 							"callFunction": "UpdateScale",
-							"sid": 547501173720148,
+							"sid": 884305796027130,
 							"parameters": [
-								"clamp(cur - 0.05, 0, 3)"
+								"cur - 0.05"
 							]
 						}
 					],
@@ -2312,7 +2299,7 @@
 							"actions": [
 								{
 									"callFunction": "EnableScrolling",
-									"sid": 256440596080874,
+									"sid": 732438793853931,
 									"parameters": [
 										true,
 										true,
@@ -2320,7 +2307,8 @@
 										"LayoutHeight - ViewportHeight(\"Level\") / 2",
 										"ViewportWidth(\"Level\") / 2",
 										"ViewportHeight(\"Level\") / 2",
-										false
+										false,
+										"1"
 									]
 								}
 							],
@@ -2448,17 +2436,17 @@
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
-							"sid": 123911817233626,
+							"sid": 427059938116956,
 							"parameters": {
 								"variable": "cur",
-								"value": "round((slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 60) / 20"
+								"value": "roundToDp((slider_handle.BoundedDragDrop.yMaxBoundPos - slider_handle.Y) / zoom_slider.Width * 3, 2)"
 							}
 						},
 						{
 							"callFunction": "UpdateScale",
-							"sid": 524610893013093,
+							"sid": 711339340917526,
 							"parameters": [
-								"clamp(cur + 0.05, 0, 3)"
+								"cur + 0.05"
 							]
 						}
 					],
@@ -2481,7 +2469,7 @@
 							"actions": [
 								{
 									"callFunction": "EnableScrolling",
-									"sid": 523541344530877,
+									"sid": 618886749565716,
 									"parameters": [
 										true,
 										true,
@@ -2489,7 +2477,8 @@
 										"LayoutHeight - ViewportHeight(\"Level\") / 2",
 										"ViewportWidth(\"Level\") / 2",
 										"ViewportHeight(\"Level\") / 2",
-										false
+										false,
+										"1"
 									]
 								}
 							],
@@ -2896,6 +2885,172 @@
 					],
 					"sid": 376890799354846,
 					"isOrBlock": true
+				},
+				{
+					"eventType": "variable",
+					"name": "PinchStartScale",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 498887129663708
+				},
+				{
+					"eventType": "variable",
+					"name": "PinchStartDistance",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 631126864598516
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-nth-touch-start",
+							"objectClass": "Touch",
+							"sid": 586816318056818,
+							"parameters": {
+								"touch-number": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 217536508729837,
+							"parameters": {
+								"variable": "PinchStartDistance",
+								"value": "distance(Touch.AbsoluteXAt(0), Touch.AbsoluteYAt(0), Touch.AbsoluteXAt(1), Touch.AbsoluteYAt(1))"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 825794230928344,
+							"parameters": {
+								"variable": "PinchStartScale",
+								"value": "(LayerScale(\"Level\") - 0.05) * 8"
+							}
+						},
+						{
+							"id": "alert",
+							"objectClass": "Browser",
+							"sid": 512170590361717,
+							"disabled": true,
+							"parameters": {
+								"message": "PinchStartDistance&\" \"&PinchStartScale"
+							}
+						}
+					],
+					"sid": 366967403708076
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "has-nth-touch",
+							"objectClass": "Touch",
+							"sid": 936971264108087,
+							"parameters": {
+								"touch-number": "1"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 883862647080170,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "PinchDistance",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 170841595380551
+						},
+						{
+							"eventType": "variable",
+							"name": "PinchScale",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 614472972607700
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 604393954120981,
+									"parameters": {
+										"variable": "PinchDistance",
+										"value": "distance(Touch.AbsoluteXAt(0), Touch.AbsoluteYAt(0), Touch.AbsoluteXAt(1), Touch.AbsoluteYAt(1))"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 968654614648869,
+									"parameters": {
+										"variable": "PinchScale",
+										"value": "abs(PinchDistance / PinchStartDistance) - 1"
+									}
+								},
+								{
+									"callFunction": "UpdateScale",
+									"sid": 588285213604627,
+									"parameters": [
+										"PinchStartScale + PinchScale "
+									]
+								}
+							],
+							"sid": 598676963557882
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-nth-touch-end",
+							"objectClass": "Touch",
+							"sid": 443609297572698,
+							"parameters": {
+								"touch-number": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 446247663886387,
+							"parameters": {
+								"variable": "PinchStartDistance",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 736825446481201,
+							"parameters": {
+								"variable": "PinchStartScale",
+								"value": "0"
+							}
+						}
+					],
+					"sid": 594447499170447
 				}
 			],
 			"sid": 361199500923219
@@ -4331,6 +4486,51 @@
 					"sid": 642172337363107,
 					"children": [
 						{
+							"eventType": "variable",
+							"name": "TouchY",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 459662467753060
+						},
+						{
+							"eventType": "variable",
+							"name": "TouchX",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 771638237557308
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 201624442037472,
+									"parameters": {
+										"variable": "TouchX",
+										"value": "Touch.X(\"Level\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 442915617525380,
+									"parameters": {
+										"variable": "TouchY",
+										"value": "Touch.Y(\"Level\")"
+									}
+								}
+							],
+							"sid": 335739189327767
+						},
+						{
 							"eventType": "block",
 							"conditions": [
 								{
@@ -4364,7 +4564,7 @@
 							"actions": [
 								{
 									"type": "script",
-									"script": "RoadEditor.newPoint(runtime, new Vector(runtime.mouse.getMouseX(\"Level\"), runtime.mouse.getMouseY(\"Level\")));\nRoadEditor.showFullEditor();"
+									"script": "RoadEditor.newPoint(runtime, new Vector(localVars.TouchX, localVars.TouchY));\nRoadEditor.showFullEditor();"
 								}
 							],
 							"sid": 640668601478298,
@@ -4444,7 +4644,7 @@
 									"actions": [
 										{
 											"type": "script",
-											"script": "let road = runtime.objects.meshedRoad.getFirstPickedInstance();\nlet anchor = road.getParent();\nlocalVars.new_index = anchor.instVars.point + 1;\nRoadEditor.insertPoint(runtime, anchor.instVars.point, new Vector(runtime.mouse.getMouseX(\"Level\"), runtime.mouse.getMouseY(\"Level\")));\nRoadEditor.showFullEditor();"
+											"script": "let road = runtime.objects.meshedRoad.getFirstPickedInstance();\nlet anchor = road.getParent();\nlocalVars.new_index = anchor.instVars.point + 1;\nRoadEditor.insertPoint(runtime, anchor.instVars.point, new Vector(localVars.TouchX, localVars.TouchY));\nRoadEditor.showFullEditor();"
 										}
 									],
 									"sid": 660195075428610
@@ -7572,17 +7772,26 @@
 			],
 			"actions": [
 				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 228329548638781,
+					"parameters": {
+						"variable": "new_scale",
+						"value": "clamp(roundToDp(new_scale, 2), 0, 3)"
+					}
+				},
+				{
 					"id": "set-text",
 					"objectClass": "scale_text",
-					"sid": 962950331201681,
+					"sid": 682948892206025,
 					"parameters": {
-						"text": "roundToDp(new_scale, 2) * 100&\"%\""
+						"text": "new_scale * 100&\"%\""
 					}
 				},
 				{
 					"id": "set-layer-scale",
 					"objectClass": "System",
-					"sid": 638358479034277,
+					"sid": 510456272412147,
 					"parameters": {
 						"layer": "\"Level\"",
 						"scale": "new_scale / 8 + 0.05"
@@ -7591,7 +7800,7 @@
 				{
 					"id": "set-layer-scale",
 					"objectClass": "System",
-					"sid": 724775949109969,
+					"sid": 475341472247593,
 					"parameters": {
 						"layer": "\"Background\"",
 						"scale": "new_scale / 8 + 0.05"
@@ -7600,7 +7809,7 @@
 				{
 					"id": "set-y",
 					"objectClass": "slider_handle",
-					"sid": 524445845759221,
+					"sid": 169523539748241,
 					"parameters": {
 						"y": "Self.BoundedDragDrop.yMaxBoundPos - zoom_slider.Width * (new_scale / 3)"
 					}
@@ -7659,6 +7868,10 @@
 				}
 			],
 			"sid": 703084232395392
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "Scrolling"
 		}
 	],
 	"sid": 290152901591731

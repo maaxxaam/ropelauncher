@@ -10,6 +10,16 @@
 			"children": [
 				{
 					"eventType": "variable",
+					"name": "Sensitivity",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 882599160841115
+				},
+				{
+					"eventType": "variable",
 					"name": "CanScrollY",
 					"type": "boolean",
 					"initialValue": "true",
@@ -80,6 +90,16 @@
 				},
 				{
 					"eventType": "variable",
+					"name": "LastID",
+					"type": "number",
+					"initialValue": "-1",
+					"comment": "",
+					"isStatic": true,
+					"isConstant": false,
+					"sid": 408659532963850
+				},
+				{
+					"eventType": "variable",
 					"name": "LastY",
 					"type": "number",
 					"initialValue": "0",
@@ -97,6 +117,16 @@
 					"isStatic": true,
 					"isConstant": false,
 					"sid": 966661950421012
+				},
+				{
+					"eventType": "variable",
+					"name": "FocusLayer",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 540241661719329
 				},
 				{
 					"eventType": "variable",
@@ -121,39 +151,114 @@
 								{
 									"id": "on-any-touch-start",
 									"objectClass": "Touch",
-									"sid": 415346184572447
+									"sid": 353373607102067
 								}
 							],
-							"actions": [
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 582273892921730,
-									"parameters": {
-										"variable": "AfterScroll",
-										"value": "0"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 930025045920045,
-									"parameters": {
-										"variable": "LastX",
-										"value": "CanScrollX ? Touch.X(0) : MidScreenX"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 820579971977518,
-									"parameters": {
-										"variable": "LastY",
-										"value": "CanScrollY ? Touch.Y(0): MidScreenY"
-									}
-								}
-							],
+							"actions": [],
 							"sid": 629318875239099,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 624553640019645,
+											"parameters": {
+												"variable": "LastID",
+												"comparison": 0,
+												"value": "-1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 889163444243289,
+											"parameters": {
+												"variable": "AfterScroll",
+												"value": "0"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 236938116984299,
+											"parameters": {
+												"variable": "LastID",
+												"value": "Touch.TouchID"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 691588835339152,
+											"parameters": {
+												"variable": "LastX",
+												"value": "CanScrollX ? Touch.XForID(LastID, FocusLayer) : MidScreenX"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 276713025768161,
+											"parameters": {
+												"variable": "LastY",
+												"value": "CanScrollY ? Touch.YForID(LastID, FocusLayer) : MidScreenY"
+											}
+										}
+									],
+									"sid": 535407328482201
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "push",
+											"objectClass": "TouchStarts",
+											"sid": 221262763786344,
+											"parameters": {
+												"where": "back",
+												"value": "0",
+												"axis": "x"
+											}
+										},
+										{
+											"id": "set-at-xy",
+											"objectClass": "TouchStarts",
+											"sid": 998749617691232,
+											"parameters": {
+												"x": "TouchStarts.Width - 1",
+												"y": "0",
+												"value": "Touch.TouchID"
+											}
+										},
+										{
+											"id": "set-at-xy",
+											"objectClass": "TouchStarts",
+											"sid": 597329752166819,
+											"parameters": {
+												"x": "TouchStarts.Width - 1",
+												"y": "1",
+												"value": "Touch.XForID(Touch.TouchID, FocusLayer)"
+											}
+										},
+										{
+											"id": "set-at-xy",
+											"objectClass": "TouchStarts",
+											"sid": 179240248166101,
+											"parameters": {
+												"x": "TouchStarts.Width - 1",
+												"y": "2",
+												"value": "Touch.YForID(Touch.TouchID, FocusLayer)"
+											}
+										}
+									],
+									"sid": 895590569878521
+								}
+							],
 							"isOrBlock": true
 						},
 						{
@@ -162,39 +267,142 @@
 								{
 									"id": "on-any-touch-end",
 									"objectClass": "Touch",
-									"sid": 231360542122948
+									"sid": 687108429314818
 								}
 							],
-							"actions": [
+							"actions": [],
+							"sid": 263672167870141,
+							"children": [
 								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 900457230160802,
-									"parameters": {
-										"variable": "AfterScroll",
-										"value": "1"
-									}
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "delete",
+											"objectClass": "TouchStarts",
+											"sid": 453088258387590,
+											"parameters": {
+												"index": "Self.IndexOf(Touch.TouchID)",
+												"axis": "x"
+											}
+										}
+									],
+									"sid": 107477172266710
 								},
 								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 338079502418579,
-									"parameters": {
-										"variable": "LastX",
-										"value": "CanScrollX ? scrollx - (Touch.X(0) - LastX) : MidScreenX"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 995426001429231,
-									"parameters": {
-										"variable": "LastY",
-										"value": "CanScrollY ? scrolly - (Touch.Y(0) - LastY) : MidScreenY"
-									}
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 754084722362258,
+											"parameters": {
+												"variable": "LastID",
+												"comparison": 0,
+												"value": "Touch.TouchID"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 947560255475182,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-size",
+													"objectClass": "TouchStarts",
+													"sid": 128861807863468,
+													"parameters": {
+														"axis": "x",
+														"comparison": 4,
+														"value": "0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 588326555058306,
+													"parameters": {
+														"variable": "LastID",
+														"value": "TouchStarts.At(0, 0)"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 974424148339521,
+													"parameters": {
+														"variable": "LastX",
+														"value": "CanScrollX ? Touch.XForID(LastID, FocusLayer) : MidScreenX"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 316041628548529,
+													"parameters": {
+														"variable": "LastY",
+														"value": "CanScrollY ? Touch.YForID(LastID, FocusLayer) : MidScreenY"
+													}
+												}
+											],
+											"sid": 706562008827288
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 507578658710749
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 622090080341767,
+													"parameters": {
+														"variable": "AfterScroll",
+														"value": "1"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 583617000697774,
+													"parameters": {
+														"variable": "LastX",
+														"value": "CanScrollX ? scrollx - (Touch.XForID(LastID, FocusLayer) - LastX) : MidScreenX"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 539764427176481,
+													"parameters": {
+														"variable": "LastY",
+														"value": "CanScrollY ? scrolly - (Touch.YForID(LastID, FocusLayer) - LastY) : MidScreenY"
+													}
+												},
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 155281586043195,
+													"parameters": {
+														"variable": "LastID",
+														"value": "-1"
+													}
+												}
+											],
+											"sid": 306578591018604
+										}
+									]
 								}
-							],
-							"sid": 263672167870141
+							]
 						},
 						{
 							"eventType": "block",
@@ -224,6 +432,26 @@
 							"sid": 200393484431775
 						},
 						{
+							"eventType": "variable",
+							"name": "y",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 558969896850908
+						},
+						{
+							"eventType": "variable",
+							"name": "x",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 204598365993228
+						},
+						{
 							"eventType": "block",
 							"conditions": [
 								{
@@ -234,12 +462,50 @@
 							],
 							"actions": [
 								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 779499397147807,
+									"disabled": true,
+									"parameters": {
+										"type": "log",
+										"message": "scrollx&newline&Touch.XForID(Touch.TouchID)&newline&LastX&newline&Touch.XForID(LastID)&newline&LastID"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 958560664708649,
+									"parameters": {
+										"variable": "x",
+										"value": "(Touch.XForID(LastID, FocusLayer) - LastX) * Sensitivity"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 852478977902424,
+									"parameters": {
+										"variable": "y",
+										"value": "(Touch.YForID(LastID, FocusLayer) - LastY) * Sensitivity"
+									}
+								},
+								{
 									"id": "scroll-to-position",
 									"objectClass": "System",
-									"sid": 476965078110026,
+									"sid": 915360933561388,
 									"parameters": {
-										"x": "CanScrollX ? lerp(scrollx, clamp(scrollx - (Touch.X(0) - LastX), ScrollBoundXmin, ScrollBoundXmax), 0.5) : MidScreenX",
-										"y": "CanScrollY ? lerp(scrolly, clamp(scrolly - (Touch.Y(0) - LastY), ScrollBoundYmin, ScrollBoundYmax), 0.5) : MidScreenY"
+										"x": "CanScrollX ? lerp(scrollx, clamp(scrollx - x, ScrollBoundXmin, ScrollBoundXmax), 0.5) : MidScreenX",
+										"y": "CanScrollY ? lerp(scrolly, clamp(scrolly - y, ScrollBoundYmin, ScrollBoundYmax), 0.5) : MidScreenY"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 743929225057397,
+									"disabled": true,
+									"parameters": {
+										"type": "log",
+										"message": "\"intouch: \"&Touch.TouchID&newline&Touch.XForID(Touch.TouchID)&\" \"&Touch.YForID(Touch.TouchID)&newline&scrollx&\" \"&scrolly"
 									}
 								}
 							],
@@ -399,6 +665,13 @@
 							"initialValue": "false",
 							"comment": "",
 							"sid": 842385231201542
+						},
+						{
+							"name": "ScrollLayer",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 161775224163320
 						}
 					],
 					"eventType": "function-block",
@@ -596,6 +869,15 @@
 										"variable": "ScrollBoundYmax",
 										"value": "CanScrollY ? YmaxBound : MidScreenY"
 									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 724847700988665,
+									"parameters": {
+										"variable": "FocusLayer",
+										"value": "ScrollLayer"
+									}
 								}
 							],
 							"sid": 751315625905841
@@ -639,6 +921,15 @@
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
+							"sid": 671822177003447,
+							"parameters": {
+								"variable": "LastID",
+								"value": "-1"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
 							"sid": 512467909877194,
 							"parameters": {
 								"variable": "LastX",
@@ -661,6 +952,16 @@
 							"parameters": {
 								"x": "ResetScrollX",
 								"y": "ResetScrollY"
+							}
+						},
+						{
+							"id": "set-size",
+							"objectClass": "TouchStarts",
+							"sid": 662035480990683,
+							"parameters": {
+								"width": "0",
+								"height": "3",
+								"depth": "1"
 							}
 						}
 					],

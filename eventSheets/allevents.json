@@ -309,6 +309,49 @@
 			]
 		},
 		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 478540788502255,
+					"parameters": {
+						"object": "close_popup"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-layer-interactive",
+					"objectClass": "System",
+					"sid": 406137676789784,
+					"parameters": {
+						"layer": "close_popup.LayerName",
+						"interactive": false
+					}
+				},
+				{
+					"id": "set-layer-visible",
+					"objectClass": "System",
+					"sid": 373531882357551,
+					"parameters": {
+						"layer": "close_popup.LayerName",
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-layer-interactive",
+					"objectClass": "System",
+					"sid": 484084743482906,
+					"parameters": {
+						"layer": "close_popup.Overlapping",
+						"interactive": true
+					}
+				}
+			],
+			"sid": 757583519444282
+		},
+		{
 			"functionName": "PlayIf",
 			"functionDescription": "",
 			"functionCategory": "",
@@ -1165,24 +1208,6 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 587925397225521,
-							"parameters": {
-								"first-value": "LayoutName",
-								"comparison": 0,
-								"second-value": "\"Menu\""
-							}
-						}
-					],
-					"actions": [],
-					"sid": 650915489275178,
-					"disabled": true
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
 							"id": "pick-children",
 							"objectClass": "to_game_no_text",
 							"sid": 956780177488775,
@@ -1740,12 +1765,6 @@
 											"id": "is-on-mobile",
 											"objectClass": "PlatformInfo",
 											"sid": 655169737757252
-										},
-										{
-											"id": "is-in-preview",
-											"objectClass": "System",
-											"sid": 336258658984861,
-											"disabled": true
 										}
 									],
 									"actions": [

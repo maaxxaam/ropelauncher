@@ -337,6 +337,7 @@
 					"id": "scroll-to-position",
 					"objectClass": "System",
 					"sid": 471491008867479,
+					"disabled": true,
 					"parameters": {
 						"x": "15000",
 						"y": "15000"
@@ -394,11 +395,6 @@
 						"variable": "NitroState",
 						"value": "0"
 					}
-				},
-				{
-					"callFunction": "NitroChanged",
-					"sid": 891336781107510,
-					"disabled": true
 				},
 				{
 					"callFunction": "RocketsChangedNew",
@@ -476,31 +472,6 @@
 				{
 					"eventType": "comment",
 					"text": "Disable all moving bonuses"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-all",
-							"objectClass": "System",
-							"sid": 855884843894486,
-							"parameters": {
-								"object": "Old_Bonus"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-active",
-							"objectClass": "Old_Bonus",
-							"sid": 945037223365546,
-							"behaviorType": "Sine",
-							"parameters": {
-								"state": "inactive"
-							}
-						}
-					],
-					"sid": 326008994642412
 				},
 				{
 					"eventType": "block",
@@ -1340,115 +1311,6 @@
 											"isStatic": false,
 											"isConstant": false,
 											"sid": 706230514911217
-										},
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "for",
-													"objectClass": "System",
-													"sid": 837202287553071,
-													"parameters": {
-														"name": "\"Tires\"",
-														"start-index": "1",
-														"end-index": "4"
-													}
-												}
-											],
-											"actions": [
-												{
-													"id": "set-eventvar-value",
-													"objectClass": "System",
-													"sid": 101005429968934,
-													"parameters": {
-														"variable": "tile",
-														"value": "roads.TileAt(roads.PositionToTileX(roads.SnapX(Car.ImagePointX(loopindex(\"Tires\")))), roads.PositionToTileY(roads.SnapY(Car.ImagePointY(loopindex(\"Tires\")))))"
-													}
-												},
-												{
-													"id": "add-to-eventvar",
-													"objectClass": "System",
-													"sid": 425381316943071,
-													"parameters": {
-														"variable": "max_speed_coef",
-														"value": "0.25 * TileToConditionData.At(tile, 2)"
-													}
-												},
-												{
-													"id": "add-to-eventvar",
-													"objectClass": "System",
-													"sid": 770735592879262,
-													"parameters": {
-														"variable": "accel_coef",
-														"value": "0.25 * TileToConditionData.At(tile, 3)"
-													}
-												},
-												{
-													"id": "add-to-eventvar",
-													"objectClass": "System",
-													"sid": 158408195302369,
-													"parameters": {
-														"variable": "decel_coef",
-														"value": "0.25 * TileToConditionData.At(tile, 4)"
-													}
-												},
-												{
-													"id": "add-to-eventvar",
-													"objectClass": "System",
-													"sid": 375311773998618,
-													"parameters": {
-														"variable": "steer_coef",
-														"value": "0.25 * TileToConditionData.At(tile, 5)"
-													}
-												},
-												{
-													"id": "add-to-eventvar",
-													"objectClass": "System",
-													"sid": 159593662488971,
-													"parameters": {
-														"variable": "recover_coef",
-														"value": "0.25 * TileToConditionData.At(tile, 6)"
-													}
-												},
-												{
-													"id": "set-instvar-value",
-													"objectClass": "Car",
-													"sid": 967821616808359,
-													"parameters": {
-														"instance-variable": "CarRecover",
-														"value": "Car.CarRecoverBasic* recover_coef"
-													}
-												},
-												{
-													"id": "set-instvar-value",
-													"objectClass": "Car",
-													"sid": 518148160096503,
-													"parameters": {
-														"instance-variable": "CarDecel",
-														"value": "Car.CarDecelBasic * decel_coef"
-													}
-												},
-												{
-													"id": "set-drift-recover",
-													"objectClass": "Car",
-													"sid": 226630596593948,
-													"behaviorType": "Car",
-													"parameters": {
-														"drift-recover": "Car.CarRecover"
-													}
-												},
-												{
-													"id": "set-deceleration",
-													"objectClass": "Car",
-													"sid": 528864611628294,
-													"behaviorType": "Car",
-													"parameters": {
-														"deceleration": "Car.CarDecel"
-													}
-												}
-											],
-											"sid": 176846880446408,
-											"disabled": true
 										},
 										{
 											"eventType": "block",
@@ -3658,11 +3520,6 @@
 							}
 						},
 						{
-							"callFunction": "NitroChanged",
-							"sid": 538382088095181,
-							"disabled": true
-						},
-						{
 							"callFunction": "NitroPickup",
 							"sid": 614968304643813,
 							"parameters": [
@@ -4110,31 +3967,6 @@
 										{
 											"id": "pick-all",
 											"objectClass": "System",
-											"sid": 708547865446529,
-											"parameters": {
-												"object": "Old_Obstacle"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-magnitude",
-											"objectClass": "Old_Obstacle",
-											"sid": 820090559324957,
-											"behaviorType": "Sine",
-											"parameters": {
-												"magnitude": "-Self.Sine.Magnitude"
-											}
-										}
-									],
-									"sid": 146243238096170
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "pick-all",
-											"objectClass": "System",
 											"sid": 111760084537138,
 											"parameters": {
 												"object": "Car"
@@ -4341,31 +4173,6 @@
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 886177709674595,
-									"parameters": {
-										"object": "Old_Obstacle"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-cycle-position",
-									"objectClass": "Old_Obstacle",
-									"sid": 923041202704778,
-									"behaviorType": "Sine",
-									"parameters": {
-										"cycle-position": "0"
-									}
-								}
-							],
-							"sid": 446631089617771
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
 									"id": "for",
 									"objectClass": "System",
 									"sid": 166024283259343,
@@ -4483,31 +4290,6 @@
 					],
 					"sid": 139741880982889,
 					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-all",
-									"objectClass": "System",
-									"sid": 953773374705483,
-									"parameters": {
-										"object": "Old_Obstacle"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-magnitude",
-									"objectClass": "Old_Obstacle",
-									"sid": 988811198165684,
-									"behaviorType": "Sine",
-									"parameters": {
-										"magnitude": "-Self.Sine.Magnitude"
-									}
-								}
-							],
-							"sid": 562463380903254
-						},
 						{
 							"eventType": "block",
 							"conditions": [
@@ -4823,27 +4605,6 @@
 			"isActiveOnStart": true,
 			"children": [
 				{
-					"functionName": "NitroChanged",
-					"functionDescription": "",
-					"functionCategory": "GUI",
-					"functionReturnType": "none",
-					"functionIsAsync": false,
-					"functionParameters": [],
-					"eventType": "function-block",
-					"conditions": [],
-					"actions": [
-						{
-							"id": "set-width",
-							"objectClass": "NitroBar",
-							"sid": 509367434703503,
-							"parameters": {
-								"width": "4.6 * NitroCharge"
-							}
-						}
-					],
-					"sid": 188501627324224
-				},
-				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -5023,7 +4784,7 @@
 		},
 		{
 			"eventType": "script",
-			"script": "// calculate car positions\nfunction getCP(id) {\n\tconst CP = runtime.objects.checkpoint.getAllInstances();\n\tfor (let checkpoint of CP) {\n\t\tif (checkpoint.instVars.checkID == id) { return new Vector(checkpoint.x, checkpoint.y); }\n\t}\n}\n\nif (runtime.layout.name != \"ParkingLot\") {\n\tconst dt = runtime.dt;\n\tconst all_cars = runtime.objects.Car.getAllInstances();\n\tconst CPs = runtime.objects.checkpoint.getAllInstances().length;\n\tlet results = [];\n\tfor (let car of all_cars) {\n\t\tlet [posx, posy] = car.getImagePoint(\"Front\");\n\t\tlet col = car.getChildAt(0);\n\t\tlet txt = col.getChildAt(0);\n\t\tlet newCP = getCP(col.instVars.ToCheckpoint);\n\t\tlet oldCP = getCP((col.instVars.ToCheckpoint - 1 + CPs) % CPs);\n\t\tlet completion_fraction = new Vector(posx, posy).distance(oldCP) / oldCP.distance(newCP);\n\t\tlet pos = (col.instVars.Lap) * CPs + col.instVars.ToCheckpoint + completion_fraction;\n\t\t//console.log(col, pos);\n\t\tresults.push({txt: txt, pos: pos});\n\t}\n\tresults = results.sort((a, b) => {return b.pos - a.pos});\n\tfor (let index = 0; index < results.length; index++) results[index].txt.text = String(index + 1);\n}"
+			"script": "// calculate car positions\nfunction getCP(id) {\n\tconst CP = runtime.objects.checkpoint.getAllInstances();\n\tfor (let checkpoint of CP) {\n\t\tif (checkpoint.instVars.checkID == id) { return new Vector(checkpoint.x, checkpoint.y); }\n\t}\n}\n// TODO: Rewrite using curve data\nif (runtime.layout.name != \"ParkingLot\") {\n\tconst dt = runtime.dt;\n\tconst all_cars = runtime.objects.Car.getAllInstances();\n\tconst CPs = runtime.objects.checkpoint.getAllInstances().length;\n\tlet results = [];\n\tfor (let car of all_cars) {\n\t\tlet [posx, posy] = car.getImagePoint(\"Front\");\n\t\tlet col = car.getChildAt(0);\n\t\tlet txt = col.getChildAt(0);\n\t\tlet newCP = getCP(col.instVars.ToCheckpoint);\n\t\tlet oldCP = getCP((col.instVars.ToCheckpoint - 1 + CPs) % CPs);\n\t\tlet completion_fraction = new Vector(posx, posy).distance(oldCP) / oldCP.distance(newCP);\n\t\tlet pos = (col.instVars.Lap) * CPs + col.instVars.ToCheckpoint + completion_fraction;\n\t\t//console.log(col, pos);\n\t\tresults.push({txt: txt, pos: pos});\n\t}\n\tresults = results.sort((a, b) => {return b.pos - a.pos});\n\tfor (let index = 0; index < results.length; index++) results[index].txt.text = String(index + 1);\n}"
 		},
 		{
 			"functionName": "GameOver",
@@ -5607,7 +5368,7 @@
 					"conditions": [
 						{
 							"id": "pick-by-unique-id",
-							"objectClass": "Old_Obstacle",
+							"objectClass": "obstacle",
 							"sid": 673522303530915,
 							"parameters": {
 								"unique-id": "ObstacleUID"
@@ -5617,7 +5378,7 @@
 					"actions": [
 						{
 							"id": "destroy",
-							"objectClass": "Old_Obstacle",
+							"objectClass": "obstacle",
 							"sid": 302273943697315
 						}
 					],
@@ -5931,7 +5692,12 @@
 					"functionParameters": [],
 					"eventType": "function-block",
 					"conditions": [],
-					"actions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "RoadEditor.cleanSlate();"
+						}
+					],
 					"sid": 726678404874562,
 					"children": [
 						{
@@ -6345,94 +6111,9 @@
 												"variable": "NitroState",
 												"value": "1"
 											}
-										},
-										{
-											"id": "tween-value",
-											"objectClass": "NitroBar",
-											"sid": 401506925345451,
-											"disabled": true,
-											"behaviorType": "Tween",
-											"parameters": {
-												"tags": "\"PerfectQTE\"",
-												"start-value": "0",
-												"end-value": "30",
-												"time": "1",
-												"ease": "easeinoutsine",
-												"destroy-on-complete": "no",
-												"loop": "no",
-												"ping-pong": "yes"
-											}
 										}
 									],
 									"sid": 370571921084289
-								},
-								{
-									"eventType": "comment",
-									"text": "Deprecated"
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-eventvar",
-											"objectClass": "System",
-											"sid": 719484526492202,
-											"parameters": {
-												"variable": "NitroState",
-												"comparison": 0,
-												"value": "1"
-											}
-										},
-										{
-											"id": "compare-two-values",
-											"objectClass": "System",
-											"sid": 292966747991441,
-											"parameters": {
-												"first-value": "NitroBar.Tween.Value(\"PerfectQTE\")",
-												"comparison": 5,
-												"second-value": "20"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "stop-all-tweens",
-											"objectClass": "NitroBar",
-											"sid": 331843508965700,
-											"behaviorType": "Tween"
-										},
-										{
-											"id": "set-effect-parameter",
-											"objectClass": "NitroBar",
-											"sid": 163946857441999,
-											"parameters": {
-												"effect": "\"AdjustHSL\"",
-												"parameter-index": "0",
-												"value": "30"
-											}
-										},
-										{
-											"id": "set-effect-parameter",
-											"objectClass": "NitroBar",
-											"sid": 227739227045208,
-											"parameters": {
-												"effect": "\"AdjustHSL\"",
-												"parameter-index": "2",
-												"value": "110"
-											}
-										},
-										{
-											"id": "set-eventvar-value",
-											"objectClass": "System",
-											"sid": 627364129490093,
-											"parameters": {
-												"variable": "NitroState",
-												"value": "2"
-											}
-										}
-									],
-									"sid": 616809892199467,
-									"disabled": true
 								}
 							]
 						}
@@ -6789,44 +6470,7 @@
 									}
 								}
 							],
-							"sid": 856540145579726,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-two-values",
-											"objectClass": "System",
-											"sid": 427657273967910,
-											"parameters": {
-												"first-value": "MapElement.ObjectTypeName",
-												"comparison": 0,
-												"second-value": "\"road\""
-											}
-										},
-										{
-											"id": "pick-by-unique-id",
-											"objectClass": "road",
-											"sid": 124122253932787,
-											"parameters": {
-												"unique-id": "new_uid"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-instvar-value",
-											"objectClass": "road",
-											"sid": 523526170677837,
-											"parameters": {
-												"instance-variable": "TurnAngle",
-												"value": "(left(object_animation, 1) = \"l\" ? -1 : 1) * int(right(object_animation, len(object_animation)-1))"
-											}
-										}
-									],
-									"sid": 619949294541043
-								}
-							]
+							"sid": 856540145579726
 						}
 					]
 				}
@@ -7209,712 +6853,7 @@
 			"children": [
 				{
 					"eventType": "script",
-					"script": "for (let m = 0; m < RoadEditor.meshes.length; m++) {\n\tconst segment = RoadEditor.meshes[m];\n\tconst mesh_width = segment.imageWidth * segment.imageScaleX;\n\tlet left_border = runtime.objects.border.createInstance(\"Level\", 0, 0, false);\n\tlet right_border = runtime.objects.border.createInstance(\"Level\", 0, 0, false);\n\n\tlet curve = RoadEditor.track.segments[m];\n\n\tlet length = curve.getArcLength(); // rough estimate\n\tconst bb = curve.getQuickBB();\n\tconst center = bb[0].add(bb[1]).divide(2);\n\tlet size = bb[1].subtract(bb[0]).add(new Vector(mesh_width + 100, mesh_width + 100));\n\tsize.y = Math.max(size.y, length);\n\tsize.x = Math.max(size.x, mesh_width);\n\tconst bbox = {\n\t\tleft: center.x - (size.x) / 2,\n\t\ttop: center.y - (size.y) / 2,\n\t\twidth: size.x,\n\t\theight: size.y\n\t};\n\tlet steps = Math.ceil(length / 25);\n\tconst curvature = curve.getMaxCurvature(steps);\n\tif (curvature > 1e-3) steps = Math.round(steps * Math.log(curvature * 10000) / 2);\n\tlength = curve.createLUT(steps); // refined estimate\n\t//console.warn(curve.getMaxCurvature(steps));\n\n\tleft_border.releaseMesh();\n\tleft_border.createMesh(2, steps + 1);\n\tleft_border.x = center.x;\n\tleft_border.y = center.y;\n\tleft_border.width = size.x;\n\tleft_border.height = size.y;\n\t\n\tright_border.releaseMesh();\n\tright_border.createMesh(2, steps + 1);\n\tright_border.x = center.x;\n\tright_border.y = center.y;\n\tright_border.width = size.x;\n\tright_border.height = size.y;\n\n\tfor (let i = 0; i <= steps; i++) {\n\t\tconst d = i / steps;\n\t\tlet ll = curve.getPointOffset(d, -mesh_width / 2 - 80);\n\t\tlet lr = curve.getPointOffset(d, -mesh_width / 2 - 20);\n\t\tlet rl = curve.getPointOffset(d, mesh_width / 2 + 20);\n\t\tlet rr = curve.getPointOffset(d, mesh_width / 2 + 80);\n\t\tconst v = curve.getDistanceOfPoint(d) / length;\n\t\tll = Editor.coordsInBBox(bbox, ll);\n\t\tlr = Editor.coordsInBBox(bbox, lr);\n\t\trl = Editor.coordsInBBox(bbox, rl);\n\t\trr = Editor.coordsInBBox(bbox, rr);\n\t\tconsole.log(ll, rl);\n\t\tleft_border.setMeshPoint(0, steps - i, {x: ll[0], y: ll[1], u: 0, v: v});\n\t\tleft_border.setMeshPoint(1, steps - i, {x: lr[0], y: lr[1], u: 1, v: v});\n\t\tright_border.setMeshPoint(0, steps - i, {x: rl[0], y: rl[1], u: 0, v: v});\n\t\tright_border.setMeshPoint(1, steps - i, {x: rr[0], y: rr[1], u: 1, v: v});\n\t}\n}\n// checkpoints\nlet start = runtime.objects.track_start.getFirstInstance();\n// start checkpoint\nlet zero = runtime.objects.checkpoint.createInstance(\"Level\", start.getImagePointX(\"Checkpoint\"), start.getImagePointY(\"Checkpoint\"), false);\nzero.instVars.checkID = 0;\nzero.instVars.isStart = true;\nlet vector = RoadEditor.track.segments[0].getTangent(1);\nlet angle = vector.angleSigned(new Vector(1, 0));\nzero.angleDegrees = -angle + 90;\n\nlet end = runtime.objects.track_end.getFirstInstance();\n\nlet last_check = RoadEditor.track.numSegments - 1;\nif (RoadEditor.track.loop) {\n\tlast_check += 1;\n\tzero.instVars.isEnd = true;\n} else {\n\tlet finish = runtime.objects.checkpoint.createInstance(\"Level\", end.getImagePointX(\"Checkpoint\"), end.getImagePointY(\"Checkpoint\"), false);\n\tvector = RoadEditor.track.segments[RoadEditor.track.segmentsEnd].getTangent(1);\n\tangle = vector.angleSigned(new Vector(1, 0));\n\tfinish.angleDegrees = -angle + 90;\n\tfinish.instVars.checkID = RoadEditor.track.segmentsEnd;\n\tfinish.instVars.isEnd = true;\n}\n\nfor (let i = 1; i < last_check; i++) {\n\tlet curve = RoadEditor.track.segments[i];\n\tvector = curve.getTangent(1);\n\tangle = vector.angleSigned(new Vector(1, 0));\n\tlet new_check = runtime.objects.checkpoint.createInstance(\"Level\", curve.p1.x, curve.p1.y, false);\n\tnew_check.instVars.checkID = i;\n\tnew_check.angleDegrees = -angle + 90;\n}"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "for-each",
-							"objectClass": "System",
-							"sid": 895490940305555,
-							"parameters": {
-								"object": "road"
-							}
-						}
-					],
-					"actions": [],
-					"sid": 590679403055328,
-					"disabled": true,
-					"children": [
-						{
-							"eventType": "variable",
-							"name": "edge_angle",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 149642413073552
-						},
-						{
-							"eventType": "variable",
-							"name": "edge_angle_c3",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 533052414855246
-						},
-						{
-							"eventType": "variable",
-							"name": "edge_length",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 205682209085141
-						},
-						{
-							"eventType": "variable",
-							"name": "edge_y2",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 823026016321855
-						},
-						{
-							"eventType": "variable",
-							"name": "edge_y1",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 544912169379692
-						},
-						{
-							"eventType": "variable",
-							"name": "edge_x2",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 846227502681259
-						},
-						{
-							"eventType": "variable",
-							"name": "edge_x1",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 796181672913544
-						},
-						{
-							"eventType": "variable",
-							"name": "edge_dy",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 990064952541233
-						},
-						{
-							"eventType": "variable",
-							"name": "edge_dx",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 714377324290062
-						},
-						{
-							"eventType": "variable",
-							"name": "distance_to_end",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 924637203036845
-						},
-						{
-							"eventType": "variable",
-							"name": "distance_to_start",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 661459943357605
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "for",
-									"objectClass": "System",
-									"sid": 908063699493689,
-									"parameters": {
-										"name": "\"road_polygons\"",
-										"start-index": "0",
-										"end-index": "road.PolyPointCount - 1"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 154122317725059,
-									"parameters": {
-										"variable": "edge_x1",
-										"value": "road.PolyPointXAt(loopindex(\"road_polygons\"))"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 182132289435127,
-									"parameters": {
-										"variable": "edge_x2",
-										"value": "road.PolyPointXAt(loopindex(\"road_polygons\") + 1)"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 297499384690914,
-									"parameters": {
-										"variable": "edge_y1",
-										"value": "road.PolyPointYAt(loopindex(\"road_polygons\"))"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 404523639291659,
-									"parameters": {
-										"variable": "edge_y2",
-										"value": "road.PolyPointYAt(loopindex(\"road_polygons\") + 1)"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 384634592402800,
-									"parameters": {
-										"variable": "edge_dx",
-										"value": "edge_x2 - edge_x1"
-									}
-								},
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 832866860931921,
-									"parameters": {
-										"variable": "edge_dy",
-										"value": "edge_y2 - edge_y1"
-									}
-								},
-								{
-									"type": "script",
-									"script": "localVars.edge_angle = Math.atan2(localVars.edge_dx, localVars.edge_dy) * 180 / Math.PI;\nlocalVars.edge_angle_c3 = 360 - localVars.edge_angle;\n\nconst edge1 = new Vector(localVars.edge_x1, localVars.edge_y1);\nconst edge2 = new Vector(localVars.edge_x2, localVars.edge_y2);\n\nconst segment = runtime.objects.road.getFirstPickedInstance();\n\nconst start_point_coords = segment.getImagePoint(\"Start\");\nconst start_point = new Vector(start_point_coords[0], start_point_coords[1]);\n\nconst end_point_coords = segment.getImagePoint(\"End\");\nconst end_point = new Vector(end_point_coords[0], end_point_coords[1]);\n//console.log(start_point_coords, end_point_coords);\n\nlocalVars.distance_to_start = Math.abs(distance_line_point(edge1, edge2, start_point));\nlocalVars.distance_to_end = Math.abs(distance_line_point(edge1, edge2, end_point));"
-								},
-								{
-									"id": "log",
-									"objectClass": "Browser",
-									"sid": 596996332557018,
-									"disabled": true,
-									"parameters": {
-										"type": "log",
-										"message": "edge_x1&\" \"&edge_y1&newline&edge_x2&\" \"&edge_y2"
-									}
-								},
-								{
-									"id": "log",
-									"objectClass": "Browser",
-									"sid": 365520100175636,
-									"disabled": true,
-									"parameters": {
-										"type": "log",
-										"message": "\"Dsts: \"&distance_to_start&\" \"&distance_to_end"
-									}
-								},
-								{
-									"id": "log",
-									"objectClass": "Browser",
-									"sid": 732491401299632,
-									"disabled": true,
-									"parameters": {
-										"type": "log",
-										"message": "edge_angle&\" \"&edge_angle_c3"
-									}
-								}
-							],
-							"sid": 880909185439111,
-							"disabled": true,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-eventvar",
-											"objectClass": "System",
-											"sid": 628663416175550,
-											"parameters": {
-												"variable": "distance_to_start",
-												"comparison": 5,
-												"value": "50"
-											}
-										},
-										{
-											"id": "compare-eventvar",
-											"objectClass": "System",
-											"sid": 799358922141864,
-											"parameters": {
-												"variable": "distance_to_end",
-												"comparison": 5,
-												"value": "50"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "create-object",
-											"objectClass": "System",
-											"sid": 974390854095733,
-											"parameters": {
-												"object-to-create": "border",
-												"layer": "\"Level\"",
-												"x": "edge_x1",
-												"y": "edge_y1",
-												"create-hierarchy": false,
-												"template-name": "\"\""
-											}
-										},
-										{
-											"id": "set-visible",
-											"objectClass": "border",
-											"sid": 542059389901979,
-											"parameters": {
-												"visibility": "invisible"
-											}
-										},
-										{
-											"id": "set-angle",
-											"objectClass": "border",
-											"sid": 500342645164071,
-											"parameters": {
-												"angle": "edge_angle_c3 + 180"
-											}
-										},
-										{
-											"id": "set-eventvar-value",
-											"objectClass": "System",
-											"sid": 286042243039940,
-											"parameters": {
-												"variable": "edge_length",
-												"value": "sqrt(edge_dx*edge_dx + edge_dy*edge_dy)"
-											}
-										},
-										{
-											"id": "set-height",
-											"objectClass": "border",
-											"sid": 212516786305832,
-											"parameters": {
-												"height": "edge_length + border.Width"
-											}
-										},
-										{
-											"id": "move-at-angle",
-											"objectClass": "border",
-											"sid": 998580965784667,
-											"parameters": {
-												"angle": "edge_angle_c3",
-												"distance": "80"
-											}
-										}
-									],
-									"sid": 869857398801920,
-									"disabled": true
-								}
-							]
-						},
-						{
-							"eventType": "comment",
-							"text": "TO:DO - add extra borders for sprint tracks"
-						},
-						{
-							"eventType": "comment",
-							"text": "Generate checkpoint/-s"
-						},
-						{
-							"eventType": "variable",
-							"name": "CheckpointUID",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 719375286687705
-						},
-						{
-							"eventType": "block",
-							"conditions": [],
-							"actions": [
-								{
-									"id": "spawn-another-object",
-									"objectClass": "road",
-									"sid": 718923991491574,
-									"parameters": {
-										"object": "checkpoint",
-										"layer": "road.LayerName",
-										"image-point": "Functions.ImagePointExists(road.UID, \"LapTrigger\") = 1 ? \"LapTrigger\" : \"End\"",
-										"create-hierarchy": false
-									}
-								},
-								{
-									"id": "set-visible",
-									"objectClass": "checkpoint",
-									"sid": 637364608059127,
-									"parameters": {
-										"visibility": "invisible"
-									}
-								},
-								{
-									"id": "set-opacity",
-									"objectClass": "checkpoint",
-									"sid": 329888564409831,
-									"parameters": {
-										"opacity": "0"
-									}
-								},
-								{
-									"id": "set-angle",
-									"objectClass": "checkpoint",
-									"sid": 574698423221031,
-									"parameters": {
-										"angle": "road.Angle + road.TurnAngle - 180"
-									}
-								}
-							],
-							"sid": 976688301413561,
-							"disabled": true,
-							"children": [
-								{
-									"eventType": "variable",
-									"name": "hasMiddle",
-									"type": "boolean",
-									"initialValue": "false",
-									"comment": "",
-									"isStatic": false,
-									"isConstant": false,
-									"sid": 370979139743541
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-two-values",
-											"objectClass": "System",
-											"sid": 486179176847119,
-											"parameters": {
-												"first-value": "Functions.ImagePointExists(road.UID, \"Middle\")",
-												"comparison": 0,
-												"second-value": "1"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-instvar-value",
-											"objectClass": "checkpoint",
-											"sid": 476711708237183,
-											"parameters": {
-												"instance-variable": "checkID",
-												"value": "checkpoint.IID + 1"
-											}
-										},
-										{
-											"id": "set-boolean-eventvar",
-											"objectClass": "System",
-											"sid": 764390414643793,
-											"parameters": {
-												"variable": "hasMiddle",
-												"value": "true"
-											}
-										}
-									],
-									"sid": 441807447381397,
-									"disabled": true
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 871914603617985
-										}
-									],
-									"actions": [
-										{
-											"id": "set-instvar-value",
-											"objectClass": "checkpoint",
-											"sid": 746627948564423,
-											"parameters": {
-												"instance-variable": "checkID",
-												"value": "checkpoint.IID"
-											}
-										}
-									],
-									"sid": 631340382843294,
-									"disabled": true
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-instance-variable",
-											"objectClass": "checkpoint",
-											"sid": 797851201781880,
-											"parameters": {
-												"instance-variable": "checkID",
-												"comparison": 0,
-												"value": "0"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-boolean-instvar",
-											"objectClass": "checkpoint",
-											"sid": 249403255871209,
-											"parameters": {
-												"instance-variable": "isStart",
-												"value": "true"
-											}
-										},
-										{
-											"id": "set-boolean-instvar",
-											"objectClass": "checkpoint",
-											"sid": 301388901805456,
-											"parameters": {
-												"instance-variable": "isEnd",
-												"value": "false"
-											}
-										}
-									],
-									"sid": 216749819877072,
-									"disabled": true
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 438361335720798
-										}
-									],
-									"actions": [
-										{
-											"id": "set-boolean-instvar",
-											"objectClass": "checkpoint",
-											"sid": 678816546131406,
-											"parameters": {
-												"instance-variable": "isStart",
-												"value": "false"
-											}
-										},
-										{
-											"id": "set-boolean-instvar",
-											"objectClass": "checkpoint",
-											"sid": 939059718296173,
-											"parameters": {
-												"instance-variable": "isEnd",
-												"value": "false"
-											}
-										}
-									],
-									"sid": 910532517617404,
-									"disabled": true
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-instance-variable",
-											"objectClass": "road",
-											"sid": 492348358631646,
-											"parameters": {
-												"instance-variable": "TurnAngle",
-												"comparison": 0,
-												"value": "0"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-animation",
-											"objectClass": "checkpoint",
-											"sid": 146764832814396,
-											"parameters": {
-												"animation": "\"Start\"",
-												"from": "beginning"
-											}
-										}
-									],
-									"sid": 187721781199955,
-									"disabled": true
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 346484474630267
-										}
-									],
-									"actions": [
-										{
-											"id": "set-animation",
-											"objectClass": "checkpoint",
-											"sid": 540677089126031,
-											"parameters": {
-												"animation": "\"Check\"",
-												"from": "beginning"
-											}
-										},
-										{
-											"id": "move-at-angle",
-											"objectClass": "checkpoint",
-											"sid": 502135128541562,
-											"parameters": {
-												"angle": "checkpoint.Angle - 180",
-												"distance": "256"
-											}
-										}
-									],
-									"sid": 624035003462809,
-									"disabled": true
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-boolean-eventvar",
-											"objectClass": "System",
-											"sid": 172884202672675,
-											"parameters": {
-												"variable": "hasMiddle"
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "spawn-another-object",
-											"objectClass": "road",
-											"sid": 916791103946422,
-											"parameters": {
-												"object": "checkpoint",
-												"layer": "road.LayerName",
-												"image-point": "\"Middle\"",
-												"create-hierarchy": false
-											}
-										},
-										{
-											"id": "set-instvar-value",
-											"objectClass": "checkpoint",
-											"sid": 836987244262944,
-											"parameters": {
-												"instance-variable": "checkID",
-												"value": "checkpoint.IID - 1"
-											}
-										},
-										{
-											"id": "set-visible",
-											"objectClass": "checkpoint",
-											"sid": 705098177432187,
-											"parameters": {
-												"visibility": "invisible"
-											}
-										},
-										{
-											"id": "set-opacity",
-											"objectClass": "checkpoint",
-											"sid": 139152218169073,
-											"parameters": {
-												"opacity": "0"
-											}
-										},
-										{
-											"id": "set-angle",
-											"objectClass": "checkpoint",
-											"sid": 653700783656559,
-											"parameters": {
-												"angle": "road.Angle + road.TurnAngle / 2 - 180"
-											}
-										},
-										{
-											"id": "set-boolean-instvar",
-											"objectClass": "checkpoint",
-											"sid": 708738364116615,
-											"parameters": {
-												"instance-variable": "isStart",
-												"value": "false"
-											}
-										},
-										{
-											"id": "set-boolean-instvar",
-											"objectClass": "checkpoint",
-											"sid": 130358193470334,
-											"parameters": {
-												"instance-variable": "isEnd",
-												"value": "false"
-											}
-										},
-										{
-											"id": "set-animation",
-											"objectClass": "checkpoint",
-											"sid": 197374861543075,
-											"parameters": {
-												"animation": "\"Check\"",
-												"from": "beginning"
-											}
-										},
-										{
-											"id": "move-at-angle",
-											"objectClass": "checkpoint",
-											"sid": 373449305347044,
-											"parameters": {
-												"angle": "checkpoint.Angle - 180",
-												"distance": "256"
-											}
-										}
-									],
-									"sid": 642577217770891,
-									"disabled": true
-								}
-							]
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-last-created",
-							"objectClass": "System",
-							"sid": 521076796814035,
-							"parameters": {
-								"object": "checkpoint"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-boolean-instvar",
-							"objectClass": "checkpoint",
-							"sid": 951650952745402,
-							"parameters": {
-								"instance-variable": "isEnd",
-								"value": "true"
-							}
-						}
-					],
-					"sid": 496414894582803
+					"script": "for (let m = 0; m < RoadEditor.meshes.length; m++) {\n\tconst segment = RoadEditor.meshes[m];\n\tconst mesh_width = segment.imageWidth * segment.imageScaleX;\n\tlet left_border = runtime.objects.border.createInstance(\"Level\", 0, 0, false);\n\tlet right_border = runtime.objects.border.createInstance(\"Level\", 0, 0, false);\n\t//left_border.isVisible = false;\n\t//right_border.isVisible = false;\n\n\tlet curve = RoadEditor.track.segments[m];\n\n\tlet length = curve.getArcLength(); // rough estimate\n\tconst bb = curve.getQuickBB();\n\tconst center = bb[0].add(bb[1]).divide(2);\n\tlet size = bb[1].subtract(bb[0]).add(new Vector(mesh_width + 100, mesh_width + 100));\n\tsize.y = Math.max(size.y, length);\n\tsize.x = Math.max(size.x, mesh_width);\n\tconst bbox = {\n\t\tleft: center.x - (size.x) / 2,\n\t\ttop: center.y - (size.y) / 2,\n\t\twidth: size.x,\n\t\theight: size.y\n\t};\n\tlet steps = Math.ceil(length / 25);\n\tconst curvature = curve.getMaxCurvature(steps);\n\tif (curvature > 1e-3) steps = Math.round(steps * Math.log(curvature * 10000) / 2);\n\tlength = curve.createLUT(steps); // refined estimate\n\t//console.warn(curve.getMaxCurvature(steps));\n\n\tleft_border.releaseMesh();\n\tleft_border.createMesh(2, steps + 1);\n\tleft_border.x = center.x;\n\tleft_border.y = center.y;\n\tleft_border.width = size.x;\n\tleft_border.height = size.y;\n\t\n\tright_border.releaseMesh();\n\tright_border.createMesh(2, steps + 1);\n\tright_border.x = center.x;\n\tright_border.y = center.y;\n\tright_border.width = size.x;\n\tright_border.height = size.y;\n\n\tfor (let i = 0; i <= steps; i++) {\n\t\tconst d = i / steps;\n\t\tlet ll = curve.getPointOffset(d, -mesh_width / 2 - 80);\n\t\tlet lr = curve.getPointOffset(d, -mesh_width / 2 - 20);\n\t\tlet rl = curve.getPointOffset(d, mesh_width / 2 + 20);\n\t\tlet rr = curve.getPointOffset(d, mesh_width / 2 + 80);\n\t\tconst v = curve.getDistanceOfPoint(d) / length;\n\t\tll = Editor.coordsInBBox(bbox, ll);\n\t\tlr = Editor.coordsInBBox(bbox, lr);\n\t\trl = Editor.coordsInBBox(bbox, rl);\n\t\trr = Editor.coordsInBBox(bbox, rr);\n\t\tconsole.log(ll, rl);\n\t\tleft_border.setMeshPoint(0, steps - i, {x: ll[0], y: ll[1], u: 0, v: v});\n\t\tleft_border.setMeshPoint(1, steps - i, {x: lr[0], y: lr[1], u: 1, v: v});\n\t\tright_border.setMeshPoint(0, steps - i, {x: rl[0], y: rl[1], u: 0, v: v});\n\t\tright_border.setMeshPoint(1, steps - i, {x: rr[0], y: rr[1], u: 1, v: v});\n\t}\n}\n// checkpoints\nlet start = runtime.objects.track_start.getFirstInstance();\n// start checkpoint\nlet zero = runtime.objects.checkpoint.createInstance(\"Level\", start.getImagePointX(\"Checkpoint\"), start.getImagePointY(\"Checkpoint\"), false);\nzero.instVars.checkID = 0;\nzero.instVars.isStart = true;\nlet vector = RoadEditor.track.segments[0].getTangent(1);\nlet angle = vector.angleSigned(new Vector(1, 0));\nzero.angleDegrees = -angle + 90;\nzero.isVisible = false;\n\nlet end = runtime.objects.track_end.getFirstInstance();\n\nlet last_check = RoadEditor.track.numSegments - 1;\nif (RoadEditor.track.loop) {\n\tlast_check += 1;\n\tzero.instVars.isEnd = true;\n} else {\n\tzero.instVars.isEnd = false;\n\tlet finish = runtime.objects.checkpoint.createInstance(\"Level\", end.getImagePointX(\"Checkpoint\"), end.getImagePointY(\"Checkpoint\"), false);\n\tvector = RoadEditor.track.segments[RoadEditor.track.segmentsEnd].getTangent(1);\n\tangle = vector.angleSigned(new Vector(1, 0));\n\tfinish.angleDegrees = -angle + 90;\n\tfinish.instVars.checkID = RoadEditor.track.segmentsEnd;\n\tfinish.instVars.isStart = false;\n\tfinish.instVars.isEnd = true;\n\tfinish.isVisible = false;\n}\n\nfor (let i = 1; i < last_check; i++) {\n\tlet curve = RoadEditor.track.segments[i];\n\tvector = curve.getTangent(1);\n\tangle = vector.angleSigned(new Vector(1, 0));\n\tlet new_check = runtime.objects.checkpoint.createInstance(\"Level\", curve.p1.x, curve.p1.y, false);\n\tnew_check.instVars.checkID = i;\n\tnew_check.instVars.isEnd = false;\n\tnew_check.instVars.isStart = false;\n\tnew_check.angleDegrees = -angle + 90;\n\tnew_check.isVisible = false;\n}"
 				}
 			]
 		},
@@ -8326,42 +7265,6 @@
 					"sid": 933756177384737
 				}
 			]
-		},
-		{
-			"functionName": "SpawnCheckpoint",
-			"functionDescription": "",
-			"functionCategory": "Logic",
-			"functionReturnType": "number",
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "RoadUID",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"sid": 782224098388766
-				},
-				{
-					"name": "Point",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 869406723930549
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [
-				{
-					"id": "pick-by-unique-id",
-					"objectClass": "road",
-					"sid": 230716564272427,
-					"parameters": {
-						"unique-id": "RoadUID"
-					}
-				}
-			],
-			"actions": [],
-			"sid": 451810717701834
 		},
 		{
 			"functionName": "ImagePointExists",

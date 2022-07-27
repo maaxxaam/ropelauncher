@@ -58,7 +58,6 @@
 		}
 	],
 	"members": [
-		"road",
 		"decor",
 		"bonus",
 		"obstacle"

@@ -27,7 +27,7 @@
 					},
 					"behaviors": {},
 					"sceneGraphData": {
-						"parent-uid": 890,
+						"parent-uid": null,
 						"uid": 5,
 						"flags": {
 							"x": true,
@@ -497,7 +497,7 @@
 						"text": "Переим.",
 						"tooltip": "",
 						"initially-visible": true,
-						"enabled": false,
+						"enabled": true,
 						"auto-font-size": true,
 						"checked": false,
 						"id": "",
@@ -780,19 +780,6 @@
 						"parent-uid": null,
 						"uid": 866,
 						"children": [
-							{
-								"uid": 43,
-								"flags": {
-									"x": true,
-									"y": true,
-									"z": true,
-									"w": true,
-									"h": true,
-									"a": true,
-									"d": true,
-									"sm": "normal"
-								}
-							},
 							{
 								"uid": 913,
 								"flags": {
@@ -1230,129 +1217,6 @@
 							1,
 							1
 						]
-					}
-				},
-				{
-					"type": "road",
-					"properties": {
-						"initially-visible": true,
-						"initial-animation": "Finish",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
-					},
-					"uid": 890,
-					"instanceVariables": {
-						"placed": true,
-						"can_place": true,
-						"saved_x": 0,
-						"saved_y": 0,
-						"saved_angle": 0,
-						"selected": false,
-						"TurnAngle": 0,
-						"snapped_start": -1,
-						"snapped_end": -1
-					},
-					"behaviors": {
-						"DragDrop": {
-							"properties": {
-								"axes": "both",
-								"enabled": true
-							}
-						}
-					},
-					"effects": {
-						"TintRed": {
-							"isEnabled": false,
-							"parameters": {
-								"color": [
-									1,
-									0,
-									0,
-									1
-								]
-							}
-						},
-						"TintSelected": {
-							"isEnabled": false,
-							"parameters": {
-								"color": [
-									1,
-									1,
-									0,
-									1
-								]
-							}
-						}
-					},
-					"sceneGraphData": {
-						"parent-uid": null,
-						"uid": 890,
-						"children": [
-							{
-								"uid": 5,
-								"flags": {
-									"x": true,
-									"y": true,
-									"z": true,
-									"w": true,
-									"h": true,
-									"a": true,
-									"d": true,
-									"sm": "normal"
-								}
-							},
-							{
-								"uid": 72,
-								"flags": {
-									"x": true,
-									"y": true,
-									"z": true,
-									"w": true,
-									"h": true,
-									"a": true,
-									"d": true,
-									"sm": "normal"
-								}
-							}
-						],
-						"flags": {
-							"x": true,
-							"y": true,
-							"z": true,
-							"w": true,
-							"h": true,
-							"a": true,
-							"d": true,
-							"sm": "normal"
-						},
-						"preview": {
-							"transformX": 0,
-							"transformY": 0,
-							"transformZElevation": 0,
-							"transformW": 0,
-							"transformH": 0,
-							"transformA": 0,
-							"transformSX": 0,
-							"transformSY": 0,
-							"previewSceneGraph": false
-						}
-					},
-					"world": {
-						"x": 2240,
-						"y": 1760,
-						"width": 768,
-						"height": 2344,
-						"originX": 0.5,
-						"originY": 0.9914675767918089,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"angle": 0,
-						"zElevation": 0
 					}
 				},
 				{

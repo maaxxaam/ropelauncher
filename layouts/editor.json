@@ -1000,7 +1000,7 @@
 					},
 					"uid": 903,
 					"instanceVariables": {
-						"last_index": 0
+						"last_index": -1
 					},
 					"behaviors": {
 						"Anchor": {
@@ -2652,9 +2652,9 @@
 			"instanceVariables": {}
 		},
 		{
-			"type": "DefLvl",
+			"type": "MapOrdering",
 			"properties": {
-				"width": 10,
+				"width": 0,
 				"height": 1,
 				"depth": 1
 			},
@@ -2745,6 +2745,16 @@
 			"type": "DefJSON",
 			"properties": {},
 			"uid": 968,
+			"instanceVariables": {}
+		},
+		{
+			"type": "TouchStarts",
+			"properties": {
+				"width": 0,
+				"height": 3,
+				"depth": 1
+			},
+			"uid": 3,
 			"instanceVariables": {}
 		}
 	],

@@ -13,9 +13,9 @@
 	],
 	"behaviorTypes": [
 		{
-			"behaviorId": "Anchor",
-			"name": "Anchor",
-			"sid": 181946238769266
+			"behaviorId": "Pin",
+			"name": "Pin",
+			"sid": 357681503977639
 		}
 	],
 	"effectTypes": [],

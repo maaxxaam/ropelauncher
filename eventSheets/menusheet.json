@@ -328,7 +328,127 @@
 					}
 				}
 			],
-			"sid": 939153019443281
+			"sid": 939153019443281,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 312399692174150,
+							"parameters": {
+								"object": "close_popup",
+								"expression": "close_popup.LayerName",
+								"comparison": 0,
+								"value": "\"CarChoice\""
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 229523702250816,
+							"parameters": {
+								"object": "slider_menu",
+								"expression": "slider_menu.LayerName",
+								"comparison": 0,
+								"value": "\"CarChoice\""
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 748551247347960,
+							"parameters": {
+								"object": "DrawCars",
+								"expression": "DrawCars.LayerName",
+								"comparison": 0,
+								"value": "\"CarChoice\""
+							}
+						},
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 862049028639685,
+							"parameters": {
+								"object": "popup_back",
+								"expression": "popup_back.LayerName",
+								"comparison": 0,
+								"value": "\"CarChoice\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "pin-to-object-properties",
+							"objectClass": "close_popup",
+							"sid": 728465448549780,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "popup_back",
+								"x": true,
+								"y": true,
+								"angle": true,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "pin-to-object-properties",
+							"objectClass": "slider_menu",
+							"sid": 219917454699297,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "popup_back",
+								"x": true,
+								"y": true,
+								"angle": true,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "pin-to-object-properties",
+							"objectClass": "DrawCars",
+							"sid": 461533209463922,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "popup_back",
+								"x": true,
+								"y": true,
+								"angle": true,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "set-pin-distance",
+							"objectClass": "slider_menu_handle",
+							"sid": 104702531842176,
+							"disabled": true,
+							"behaviorType": "Pin",
+							"parameters": {
+								"distance": "slider_menu.Height - Self.Height"
+							}
+						},
+						{
+							"id": "pin-to-object-distance",
+							"objectClass": "slider_menu_handle",
+							"sid": 102371933993708,
+							"disabled": true,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "slider_menu",
+								"mode": "bar-style"
+							}
+						}
+					],
+					"sid": 252055363377721
+				}
+			]
 		},
 		{
 			"eventType": "group",
@@ -337,49 +457,6 @@
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-tap-object",
-							"objectClass": "Touch",
-							"sid": 478540788502255,
-							"parameters": {
-								"object": "close_popup"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-layer-interactive",
-							"objectClass": "System",
-							"sid": 406137676789784,
-							"parameters": {
-								"layer": "close_popup.LayerName",
-								"interactive": false
-							}
-						},
-						{
-							"id": "set-layer-visible",
-							"objectClass": "System",
-							"sid": 373531882357551,
-							"parameters": {
-								"layer": "close_popup.LayerName",
-								"visibility": "invisible"
-							}
-						},
-						{
-							"id": "set-layer-interactive",
-							"objectClass": "System",
-							"sid": 484084743482906,
-							"parameters": {
-								"layer": "close_popup.Overlapping",
-								"interactive": true
-							}
-						}
-					],
-					"sid": 757583519444282
-				},
 				{
 					"eventType": "block",
 					"conditions": [
@@ -536,71 +613,6 @@
 								}
 							],
 							"sid": 135153142571823
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-tap-object",
-							"objectClass": "Touch",
-							"sid": 977349041828157,
-							"parameters": {
-								"object": "garage_switch"
-							}
-						}
-					],
-					"actions": [],
-					"sid": 913930533729817,
-					"children": [
-						{
-							"eventType": "variable",
-							"name": "index",
-							"type": "number",
-							"initialValue": "0",
-							"comment": "",
-							"isStatic": false,
-							"isConstant": false,
-							"sid": 977410851042492
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "trigger-once-while-true",
-									"objectClass": "System",
-									"sid": 449163617100936
-								}
-							],
-							"actions": [
-								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 164920201690465,
-									"parameters": {
-										"variable": "index",
-										"value": "(garage_car_choice.shownID + garage_switch.direction + CarChars.Depth) % CarChars.Depth"
-									}
-								},
-								{
-									"id": "set-instvar-value",
-									"objectClass": "garage_car_choice",
-									"sid": 344106142111643,
-									"parameters": {
-										"instance-variable": "shownID",
-										"value": "index"
-									}
-								},
-								{
-									"callFunction": "ShowCar",
-									"sid": 537665162116620,
-									"parameters": [
-										"index"
-									]
-								}
-							],
-							"sid": 400785495272710
 						}
 					]
 				},
@@ -1372,154 +1384,6 @@
 						}
 					],
 					"sid": 556748318484926
-				},
-				{
-					"eventType": "comment",
-					"text": "Show buy button if not purchased (deprecated)"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-eventvar",
-							"objectClass": "System",
-							"sid": 693810824258400,
-							"parameters": {
-								"variable": "owned",
-								"comparison": 0,
-								"value": "0"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-instvar-value",
-							"objectClass": "garage_buy",
-							"sid": 381093461031019,
-							"parameters": {
-								"instance-variable": "State",
-								"value": "0"
-							}
-						},
-						{
-							"id": "set-visible",
-							"objectClass": "garage_buy",
-							"sid": 800112463169965,
-							"disabled": true,
-							"parameters": {
-								"visibility": "visible"
-							}
-						},
-						{
-							"id": "set-visible",
-							"objectClass": "garage_car_price",
-							"sid": 547067671869756,
-							"disabled": true,
-							"parameters": {
-								"visibility": "visible"
-							}
-						},
-						{
-							"id": "set-text",
-							"objectClass": "garage_car_price",
-							"sid": 104758647703586,
-							"parameters": {
-								"text": "\"👛 \"&CarChars.At(0, 3, carID)"
-							}
-						}
-					],
-					"sid": 763821087665214,
-					"disabled": true
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "else",
-							"objectClass": "System",
-							"sid": 142294711120409
-						},
-						{
-							"id": "compare-eventvar",
-							"objectClass": "System",
-							"sid": 272608647124427,
-							"parameters": {
-								"variable": "ChosenCar",
-								"comparison": 0,
-								"value": "garage_car_choice.shownID"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-instvar-value",
-							"objectClass": "garage_buy",
-							"sid": 200056164578478,
-							"parameters": {
-								"instance-variable": "State",
-								"value": "2"
-							}
-						},
-						{
-							"id": "set-text",
-							"objectClass": "garage_car_price",
-							"sid": 362288164519589,
-							"parameters": {
-								"text": "\"Выбрано\""
-							}
-						},
-						{
-							"id": "set-visible",
-							"objectClass": "garage_buy",
-							"sid": 204584640425945,
-							"disabled": true,
-							"parameters": {
-								"visibility": "invisible"
-							}
-						},
-						{
-							"id": "set-visible",
-							"objectClass": "garage_car_price",
-							"sid": 181386722715626,
-							"disabled": true,
-							"parameters": {
-								"visibility": "invisible"
-							}
-						}
-					],
-					"sid": 914584415802559,
-					"disabled": true
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "else",
-							"objectClass": "System",
-							"sid": 240717462548191
-						}
-					],
-					"actions": [
-						{
-							"id": "set-instvar-value",
-							"objectClass": "garage_buy",
-							"sid": 648440510982111,
-							"parameters": {
-								"instance-variable": "State",
-								"value": "1"
-							}
-						},
-						{
-							"id": "set-text",
-							"objectClass": "garage_car_price",
-							"sid": 628104307275854,
-							"parameters": {
-								"text": "\"Выбрать\""
-							}
-						}
-					],
-					"sid": 242955646276229,
-					"disabled": true
 				},
 				{
 					"eventType": "variable",
@@ -2510,270 +2374,6 @@
 			]
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "compare-eventvar",
-					"objectClass": "System",
-					"sid": 615722401496838,
-					"parameters": {
-						"variable": "MenuState",
-						"comparison": 0,
-						"value": "MENU_PROMPT"
-					}
-				}
-			],
-			"actions": [],
-			"sid": 342649526677113,
-			"disabled": true,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 581183724209856
-						}
-					],
-					"actions": [
-						{
-							"id": "set-group-active",
-							"objectClass": "System",
-							"sid": 927135827678044,
-							"parameters": {
-								"group-name": "\"MainButtons\"",
-								"state": "deactivated"
-							}
-						},
-						{
-							"id": "alert",
-							"objectClass": "Browser",
-							"sid": 941302298859293,
-							"disabled": true,
-							"parameters": {
-								"message": "\"Prompt on\""
-							}
-						}
-					],
-					"sid": 609772499375234,
-					"disabled": true
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "else",
-					"objectClass": "System",
-					"sid": 849026916605556
-				}
-			],
-			"actions": [],
-			"sid": 142293719144283,
-			"disabled": true,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 891913983311364
-						}
-					],
-					"actions": [
-						{
-							"id": "alert",
-							"objectClass": "Browser",
-							"sid": 559180946124244,
-							"disabled": true,
-							"parameters": {
-								"message": "\"Prompt off\""
-							}
-						},
-						{
-							"id": "set-group-active",
-							"objectClass": "System",
-							"sid": 558546018945796,
-							"parameters": {
-								"group-name": "\"MainButtons\"",
-								"state": "activated"
-							}
-						}
-					],
-					"sid": 475085210979602,
-					"disabled": true
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-tap-object",
-					"objectClass": "Touch",
-					"sid": 586785472749403,
-					"parameters": {
-						"object": "prompt_yes"
-					}
-				},
-				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 333130018386916,
-					"parameters": {
-						"layer": "prompt_yes.LayerName"
-					}
-				}
-			],
-			"actions": [],
-			"sid": 417666042872022,
-			"disabled": true,
-			"children": [
-				{
-					"eventType": "variable",
-					"name": "val",
-					"type": "number",
-					"initialValue": "-1",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 637132172354655
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 559646509154385
-						}
-					],
-					"actions": [
-						{
-							"type": "script",
-							"script": "let prompt = runtime.objects.prompt_back.getFirstInstance();\nlocalVars.val = runtime.callFunction(prompt.instVars.function_to_call, prompt.instVars.param1, prompt.instVars.param2);"
-						},
-						{
-							"id": "destroy",
-							"objectClass": "prompt_back",
-							"sid": 587461434377217
-						},
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 298526157011450,
-							"parameters": {
-								"variable": "MenuState",
-								"value": "MENU_DEFAULT"
-							}
-						}
-					],
-					"sid": 593237645097633,
-					"disabled": true
-				},
-				{
-					"eventType": "comment",
-					"text": "Not enough coins - function have returned 0"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-eventvar",
-							"objectClass": "System",
-							"sid": 362147315856182,
-							"parameters": {
-								"variable": "val",
-								"comparison": 0,
-								"value": "0"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "alert",
-							"objectClass": "Browser",
-							"sid": 344728029193135,
-							"parameters": {
-								"message": "\"Не хватает средств!\""
-							}
-						}
-					],
-					"sid": 251001491661804,
-					"disabled": true
-				},
-				{
-					"eventType": "comment",
-					"text": "Success"
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "else",
-							"objectClass": "System",
-							"sid": 390142226009129
-						}
-					],
-					"actions": [
-						{
-							"id": "alert",
-							"objectClass": "Browser",
-							"sid": 402293783287332,
-							"disabled": true,
-							"parameters": {
-								"message": "\"Успешная покупка! \""
-							}
-						}
-					],
-					"sid": 215776673678856,
-					"disabled": true
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-tap-object",
-					"objectClass": "Touch",
-					"sid": 138951326182424,
-					"parameters": {
-						"object": "prompt_no"
-					}
-				},
-				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 176913878931638,
-					"parameters": {
-						"layer": "prompt_no.LayerName"
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "destroy",
-					"objectClass": "prompt_back",
-					"sid": 583139424219803
-				},
-				{
-					"id": "set-eventvar-value",
-					"objectClass": "System",
-					"sid": 890107028480528,
-					"parameters": {
-						"variable": "MenuState",
-						"value": "MENU_DEFAULT"
-					}
-				}
-			],
-			"sid": 101655602285942,
-			"disabled": true
-		},
-		{
 			"functionName": "Empty",
 			"functionDescription": "",
 			"functionCategory": "Buttons",
@@ -2888,15 +2488,15 @@
 						{
 							"id": "scroll-to-position",
 							"objectClass": "System",
-							"sid": 282721809606116,
+							"sid": 409850066807591,
 							"parameters": {
-								"x": "0",
+								"x": "360",
 								"y": "MidScreenY"
 							}
 						},
 						{
 							"callFunction": "EnableScrolling",
-							"sid": 222481668944294,
+							"sid": 401560638614662,
 							"parameters": [
 								false,
 								true,
@@ -2904,7 +2504,8 @@
 								"830",
 								"0",
 								"640",
-								true
+								true,
+								"3"
 							]
 						},
 						{
@@ -2926,16 +2527,7 @@
 							}
 						}
 					],
-					"actions": [
-						{
-							"id": "set-y",
-							"objectClass": "slider_menu_handle",
-							"sid": 329878681600806,
-							"parameters": {
-								"y": "slider_menu.Y + (ViewportBottom(\"CarChoice\") - MidScreenY - 640)/(830 - 640) * (slider_menu.Height - Self.Height)"
-							}
-						}
-					],
+					"actions": [],
 					"sid": 289530557318497,
 					"children": [
 						{
@@ -3024,49 +2616,156 @@
 								}
 							],
 							"sid": 452148185673615
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-dragging",
+									"objectClass": "slider_menu_handle",
+									"sid": 593376096879528,
+									"behaviorType": "DragDrop",
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "slider_menu_handle",
+									"sid": 633960966381180,
+									"parameters": {
+										"y": "slider_menu.Y + (ViewportBottom(\"CarChoice\") - MidScreenY - 640)/(830 - 640) * (slider_menu.Height - Self.Height)"
+									}
+								}
+							],
+							"sid": 502787308481017
 						}
 					]
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "layer-is-visible",
-					"objectClass": "System",
-					"sid": 591292834687171,
-					"parameters": {
-						"layer": "\"CarChoice\""
-					},
-					"isInverted": true
-				}
-			],
-			"actions": [],
-			"sid": 864122663142604,
-			"disabled": true,
-			"children": [
+				},
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "trigger-once-while-true",
-							"objectClass": "System",
-							"sid": 806175025270013
+							"id": "is-dragging",
+							"objectClass": "slider_menu_handle",
+							"sid": 865823561415228,
+							"behaviorType": "DragDrop"
+						}
+					],
+					"actions": [],
+					"sid": 433397261105088,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-y",
+									"objectClass": "slider_menu_handle",
+									"sid": 600624734941129,
+									"parameters": {
+										"comparison": 2,
+										"y-co-ordinate": "slider_menu.Y"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "slider_menu_handle",
+									"sid": 980825092170944,
+									"parameters": {
+										"y": "slider_menu.Y"
+									}
+								}
+							],
+							"sid": 940542122828042
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-y",
+									"objectClass": "slider_menu_handle",
+									"sid": 329982824917192,
+									"parameters": {
+										"comparison": 4,
+										"y-co-ordinate": "slider_menu.BBoxBottom - Self.Height"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "slider_menu_handle",
+									"sid": 189008772506130,
+									"parameters": {
+										"y": "slider_menu.BBoxBottom - Self.Height"
+									}
+								}
+							],
+							"sid": 280086395783292
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "slider_menu_handle",
+									"sid": 764739411970410,
+									"disabled": true,
+									"parameters": {
+										"y": "slider_menu.Y + (ViewportBottom(\"CarChoice\") - MidScreenY - 640)/(830 - 640) * (slider_menu.Height - Self.Height)"
+									}
+								},
+								{
+									"id": "scroll-to-y",
+									"objectClass": "System",
+									"sid": 843768046560329,
+									"parameters": {
+										"y": "640 + (slider_menu_handle.Y - slider_menu.Y) / (slider_menu.Height - slider_menu_handle.Height) * (830 - 640)"
+									}
+								}
+							],
+							"sid": 140854993471411
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-drop",
+							"objectClass": "slider_menu_handle",
+							"sid": 599635712801846,
+							"behaviorType": "DragDrop"
 						}
 					],
 					"actions": [
 						{
 							"callFunction": "DisableScrolling",
-							"sid": 213390928428593,
+							"sid": 743934710230755,
 							"parameters": [
+								"scrollx",
+								"scrolly"
+							]
+						},
+						{
+							"callFunction": "EnableScrolling",
+							"sid": 550058810968282,
+							"parameters": [
+								false,
+								true,
 								"360",
-								"MidScreenY"
+								"830",
+								"360",
+								"640",
+								true,
+								"3"
 							]
 						}
 					],
-					"sid": 174394390483108,
-					"disabled": true
+					"sid": 767263341241122
 				}
 			]
 		},

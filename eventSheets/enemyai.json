@@ -241,7 +241,8 @@
 							"sid": 726874454410149
 						}
 					],
-					"sid": 106762162029473
+					"sid": 106762162029473,
+					"disabled": true
 				}
 			]
 		},
@@ -723,7 +724,7 @@
 												},
 												{
 													"type": "script",
-													"script": "let car = runtime.objects.Car.getFirstPickedInstance();\nlet road = runtime.objects.meshedRoad.getFirstPickedInstance();\nlet index = road.getParent().instVars.point;\nlet curve = RoadEditor.track.segments[index];\nlet vector = curve.getTangent(curve.getClosestPoint(new Vector(car.x, car.y)));\nlocalVars.AngleToNode = -vector.angleSigned(new Vector(1, 0));"
+													"script": "let car = runtime.objects.Car.getFirstPickedInstance();\nlet road = runtime.objects.meshedRoad.getFirstPickedInstance();\nlet index = road.getParent().instVars.point;\nlet curve = RoadEditor.track.segments[index];\nlet car_pos = new Vector(car.x, car.y);\nlet vector = curve.getTangent(curve.getClosestPoint(car_pos)).normalize();\nlet to_curve = curve.getPoint(curve.getClosestPoint(car_pos)).subtract(car_pos).normalize().divide(2);\nlocalVars.AngleToNode = -vector.add(to_curve).angleSigned(new Vector(1, 0));"
 												}
 											],
 											"sid": 978234674639241
