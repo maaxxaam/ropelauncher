@@ -362,7 +362,7 @@ const scriptsInEvents = {
 			console.log(runtime.objects.meshedRoad.getAllInstances().length);
 		},
 
-		async Edsheet_Event110(runtime, localVars)
+		async Edsheet_Event114(runtime, localVars)
 		{
 			let edited = runtime.getInstanceByUid(runtime.globalVars.EditUID);
 			let prev = {zIndex: -Infinity, isStub: true};
@@ -376,7 +376,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Edsheet_Event112(runtime, localVars)
+		async Edsheet_Event116(runtime, localVars)
 		{
 			let edited = runtime.getInstanceByUid(runtime.globalVars.EditUID);
 			let next = {zIndex: Infinity, isStub: true};
@@ -390,7 +390,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Edsheet_Event119_Act1(runtime, localVars)
+		async Edsheet_Event123_Act1(runtime, localVars)
 		{
 			let control = runtime.objects.control_handle.getFirstPickedInstance();
 			let index = control.instVars.point;
@@ -400,7 +400,7 @@ const scriptsInEvents = {
 			RoadEditor.moveControl(index, right, position);
 		},
 
-		async Edsheet_Event126_Act1(runtime, localVars)
+		async Edsheet_Event130_Act1(runtime, localVars)
 		{
 			let control = runtime.objects.anchor_handle.getFirstPickedInstance();
 			let index = control.instVars.point;
@@ -408,36 +408,36 @@ const scriptsInEvents = {
 			RoadEditor.moveAnchor(index, position);
 		},
 
-		async Edsheet_Event131_Act3(runtime, localVars)
+		async Edsheet_Event135_Act3(runtime, localVars)
 		{
 			let handle = runtime.objects.anchor_handle.getFirstPickedInstance();
 			let index = handle.instVars.point;
 			RoadEditor.removePoint(index);
 		},
 
-		async Edsheet_Event134_Act1(runtime, localVars)
+		async Edsheet_Event139_Act1(runtime, localVars)
 		{
-			RoadEditor.newPoint(runtime, new Vector(runtime.mouse.getMouseX("Level"), runtime.mouse.getMouseY("Level")));
+			RoadEditor.newPoint(runtime, new Vector(localVars.TouchX, localVars.TouchY));
 			RoadEditor.showFullEditor();
 		},
 
-		async Edsheet_Event137_Act1(runtime, localVars)
+		async Edsheet_Event142_Act1(runtime, localVars)
 		{
 			let road = runtime.objects.meshedRoad.getFirstPickedInstance();
 			let anchor = road.getParent();
 			localVars.new_index = anchor.instVars.point + 1;
-			RoadEditor.insertPoint(runtime, anchor.instVars.point, new Vector(runtime.mouse.getMouseX("Level"), runtime.mouse.getMouseY("Level")));
+			RoadEditor.insertPoint(runtime, anchor.instVars.point, new Vector(localVars.TouchX, localVars.TouchY));
 			RoadEditor.showFullEditor();
 		},
 
-		async Edsheet_Event145_Act2(runtime, localVars)
+		async Edsheet_Event150_Act2(runtime, localVars)
 		{
 			let check = runtime.objects.loop.getFirstPickedInstance();
 			RoadEditor.loop(runtime, check.isChecked);
 			RoadEditor.showFullEditor();
 		},
 
-		async Edsheet_Event162_Act1(runtime, localVars)
+		async Edsheet_Event167_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const action = changes.instVars.last_action;
@@ -451,14 +451,14 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Edsheet_Event168_Act1(runtime, localVars)
+		async Edsheet_Event173_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
 			RoadEditor.removePoint(changes.getAt(entry, 2));
 		},
 
-		async Edsheet_Event169_Act1(runtime, localVars)
+		async Edsheet_Event174_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
@@ -481,14 +481,14 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Edsheet_Event170_Act1(runtime, localVars)
+		async Edsheet_Event175_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
 			RoadEditor.removePoint(changes.getAt(entry, 2));
 		},
 
-		async Edsheet_Event171_Act1(runtime, localVars)
+		async Edsheet_Event176_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
@@ -502,7 +502,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Edsheet_Event172_Act1(runtime, localVars)
+		async Edsheet_Event177_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
@@ -519,7 +519,7 @@ const scriptsInEvents = {
 			else RoadEditor.hideFullEditor();
 		},
 
-		async Edsheet_Event179_Act1(runtime, localVars)
+		async Edsheet_Event184_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
@@ -533,7 +533,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Edsheet_Event180_Act1(runtime, localVars)
+		async Edsheet_Event185_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
@@ -556,7 +556,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Edsheet_Event181_Act1(runtime, localVars)
+		async Edsheet_Event186_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
@@ -570,14 +570,14 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Edsheet_Event182_Act1(runtime, localVars)
+		async Edsheet_Event187_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
 			RoadEditor.removePoint(changes.getAt(entry, 2));
 		},
 
-		async Edsheet_Event183_Act1(runtime, localVars)
+		async Edsheet_Event188_Act1(runtime, localVars)
 		{
 			let changes = runtime.objects.changes_buffer.getFirstInstance();
 			const entry = changes.instVars.current_action;
@@ -594,13 +594,13 @@ const scriptsInEvents = {
 			else RoadEditor.hideFullEditor();
 		},
 
-		async Edsheet_Event203_Act7(runtime, localVars)
+		async Edsheet_Event208_Act7(runtime, localVars)
 		{
 			let arr = runtime.objects.RoadPoints.getFirstInstance();
 			RoadEditor.exportToCArray(arr);
 		},
 
-		async Edsheet_Event204(runtime, localVars)
+		async Edsheet_Event209(runtime, localVars)
 		{
 			let js = runtime.objects.JSON.getFirstInstance();
 			let data = js.getJsonDataCopy();
@@ -611,25 +611,56 @@ const scriptsInEvents = {
 			js.setJsonDataCopy(data);
 		},
 
-		async Edsheet_Event208(runtime, localVars)
+		async Edsheet_Event213(runtime, localVars)
 		{
 			const furl = localVars.ImageName + ".png";
 			const link = await runtime.assets.getProjectFileUrl(furl);
 			runtime.callFunction("LoadBackground", link);
 		},
 
-		async Edsheet_Event211_Act2(runtime, localVars)
+		async Edsheet_Event216_Act2(runtime, localVars)
 		{
 			RoadEditor.loadFromCArray(runtime.objects.RoadPoints.getFirstInstance());
 			RoadEditor.hideFullEditor();
 		},
 
-		async Edsheet_Event213_Act1(runtime, localVars)
+		async Edsheet_Event218_Act1(runtime, localVars)
 		{
 			RoadEditor.cleanSlate();
 		},
 
-		async Edmenusheet_Event31_Act1(runtime, localVars)
+		async Edmenusheet_Event15_Act2(runtime, localVars)
+		{
+			let maps = runtime.objects.map_names.getFirstInstance().getDataMap();
+			console.log(maps);
+			let order = runtime.objects.MapOrdering.getFirstInstance();
+			
+			let sorting_functions = [(a, b) => {
+				return a[1]["name"].localeCompare(b[1]["name"]);
+			}, (a, b) => {
+				return b[1]["created"] - a[1]["created"];
+			}, (a, b) => {
+				return b[1]["modified"] - a[1]["modified"];
+			}];
+			
+			// Create items array
+			var keys = maps.keys()
+			let items = [];
+			for (let item of maps.keys()) {
+				items.push([item, JSON.parse(maps.get(item))]);
+			}
+			
+			console.log(items);
+			items.sort(sorting_functions[localVars.Option]);
+			console.log(items);
+			
+			order.setSize(items.length);
+			for (let i = 0; i < items.length; i++) {
+				order.setAt(items[i][0], i);
+			}
+		},
+
+		async Edmenusheet_Event34_Act1(runtime, localVars)
 		{
 			function download(filename, text) {
 			  var element = document.createElement('a');
@@ -650,7 +681,7 @@ const scriptsInEvents = {
 			download(data["name"] + ".json", js.toBeautifiedString());
 		},
 
-		async Gamesheet_Event111_Act1(runtime, localVars)
+		async Gamesheet_Event106_Act1(runtime, localVars)
 		{
 			const obs = runtime.objects.obstacle.getFirstPickedInstance();
 			const car = runtime.objects.car_edge_collision.getFirstPickedInstance();
@@ -692,7 +723,7 @@ const scriptsInEvents = {
 			
 		},
 
-		async Gamesheet_Event121(runtime, localVars)
+		async Gamesheet_Event115(runtime, localVars)
 		{
 			// let's perform collision checks for cars! yay!
 			if (runtime.globalVars.GameState == runtime.globalVars.GAME_ACTIVE) {
@@ -738,7 +769,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event122(runtime, localVars)
+		async Gamesheet_Event116(runtime, localVars)
 		{
 			// calculate car positions
 			function getCP(id) {
@@ -747,7 +778,7 @@ const scriptsInEvents = {
 					if (checkpoint.instVars.checkID == id) { return new Vector(checkpoint.x, checkpoint.y); }
 				}
 			}
-			
+			// TODO: Rewrite using curve data
 			if (runtime.layout.name != "ParkingLot") {
 				const dt = runtime.dt;
 				const all_cars = runtime.objects.Car.getAllInstances();
@@ -769,31 +800,31 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event151_Act1(runtime, localVars)
+		async Gamesheet_Event145_Act1(runtime, localVars)
 		{
 			RoadEditor.cleanSlate();
 		},
 
-		async Gamesheet_Event152_Act1(runtime, localVars)
+		async Gamesheet_Event146_Act1(runtime, localVars)
 		{
 			RoadEditor.cleanSlate();
 		},
 
-		async Gamesheet_Event176(runtime, localVars)
+		async Gamesheet_Event168(runtime, localVars)
 		{
 			const furl = localVars.map_name + ".json";
 			const link = await runtime.assets.getProjectFileUrl(furl);
 			runtime.callFunction("GetMap", link);
 		},
 
-		async Gamesheet_Event181_Act2(runtime, localVars)
+		async Gamesheet_Event173_Act2(runtime, localVars)
 		{
 			let array = runtime.objects.RoadPoints.getFirstInstance();
 			RoadEditor.loadFromCArray(array);
 			RoadEditor.hideFullEditor();
 		},
 
-		async Gamesheet_Event187(runtime, localVars)
+		async Gamesheet_Event179(runtime, localVars)
 		{
 			for (let m = 0; m < RoadEditor.meshes.length; m++) {
 				const segment = RoadEditor.meshes[m];
@@ -897,7 +928,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event203_Act1(runtime, localVars)
+		async Gamesheet_Event194_Act1(runtime, localVars)
 		{
 			const sprite = runtime.getInstanceByUid(localVars.SpriteUID);
 			const [IPx, IPy] = sprite.getImagePoint(localVars.ImagePointName);
@@ -906,7 +937,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event207_Act2(runtime, localVars)
+		async Gamesheet_Event198_Act2(runtime, localVars)
 		{
 			[localVars.gui_x, localVars.gui_y] = layer_to_layer_px(localVars.coin_x, localVars.coin_y, runtime.layout.getLayer("Level"), runtime.layout.getLayer("GUI"));
 			let icon = runtime.getInstanceByUid(623);
@@ -914,19 +945,19 @@ const scriptsInEvents = {
 			localVars.to_y = icon.y;
 		},
 
-		async Gamesheet_Event212_Act1(runtime, localVars)
+		async Gamesheet_Event203_Act1(runtime, localVars)
 		{
 			[localVars.x, localVars.y] = layer_to_layer_px(localVars.x, localVars.y, runtime.layout.getLayer("Level"), runtime.layout.getLayer("GUI"));
 		},
 
-		async Gamesheet_Event221(runtime, localVars)
+		async Gamesheet_Event212(runtime, localVars)
 		{
 			const furl = localVars.ImageName + ".png";
 			const link = await runtime.assets.getProjectFileUrl(furl);
 			runtime.callFunction("LoadBackground", link);
 		},
 
-		async Menusheet_Event21_Act1(runtime, localVars)
+		async Menusheet_Event19_Act1(runtime, localVars)
 		{
 			localVars.layers = runtime.layout.getAllLayers().length;
 		},
@@ -950,27 +981,6 @@ const scriptsInEvents = {
 			let angle = vector.angleSigned(new Vector(1, 0));
 			let timer = runtime.objects.timer.getFirstInstance();
 			timer.angleDegrees = -angle + 90;
-		},
-
-		async Levelinits_Event14_Act1(runtime, localVars)
-		{
-			localVars.edge_angle = Math.atan2(localVars.edge_dx, localVars.edge_dy) * 180 / Math.PI;
-			localVars.edge_angle_c3 = 360 - localVars.edge_angle;
-			
-			const edge1 = Vector(localVars.edge_x1, localVars.edge_y1);
-			const edge2 = Vector(localVars.edge_x2, localVars.edge_y2);
-			
-			const segment = runtime.objects.road.getFirstPickedInstance();
-			
-			const start_point_coords = segment.getImagePoint("Start");
-			const start_point = Vector(start_point_coords[0], start_point_coords[1]);
-			
-			const end_point_coords = segment.getImagePoint("End");
-			const end_point = Vector(end_point_coords[0], end_point_coords[1]);
-			//console.log(start_point_coords, end_point_coords);
-			
-			localVars.distance_to_start = Math.abs(distance_line_point(edge1, edge2, start_point));
-			localVars.distance_to_end = Math.abs(distance_line_point(edge1, edge2, end_point));
 		}
 
 };
