@@ -9,7 +9,7 @@
 				{
 					"type": "welcome_txt",
 					"properties": {
-						"text": "Drift Game Level Editor\nbuild v3 alpha",
+						"text": "Drift Game Level Editor\nbuild v3.1 alpha",
 						"enable-bbcode": true,
 						"font": "Roboto-Bold",
 						"size": 24,

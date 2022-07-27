@@ -84,7 +84,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v15 alpha",
+						"text": "v15.1 alpha",
 						"enable-bbcode": true,
 						"font": "Roboto-Medium",
 						"size": 15,
