@@ -1,4 +1,5 @@
 import { Vector2 } from './Vector2.js'
+import { generate_road, spawn_generated } from './endless.js'
 import * as Editor from './bezier.js'
 
 export var RoadEditor = new Editor.CurveEditor();
@@ -396,7 +397,6 @@ const scriptsInEvents = {
 			let index = control.instVars.point;
 			let right = control.instVars.right;
 			let position = new Vector(control.x, control.y);
-			console.log(index, right);
 			RoadEditor.moveControl(index, right, position);
 		},
 
@@ -681,7 +681,7 @@ const scriptsInEvents = {
 			download(data["name"] + ".json", js.toBeautifiedString());
 		},
 
-		async Gamesheet_Event106_Act1(runtime, localVars)
+		async Gamesheet_Event86_Act1(runtime, localVars)
 		{
 			const obs = runtime.objects.obstacle.getFirstPickedInstance();
 			const car = runtime.objects.car_edge_collision.getFirstPickedInstance();
@@ -723,7 +723,7 @@ const scriptsInEvents = {
 			
 		},
 
-		async Gamesheet_Event115(runtime, localVars)
+		async Gamesheet_Event95(runtime, localVars)
 		{
 			// let's perform collision checks for cars! yay!
 			if (runtime.globalVars.GameState == runtime.globalVars.GAME_ACTIVE) {
@@ -769,7 +769,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event116(runtime, localVars)
+		async Gamesheet_Event96(runtime, localVars)
 		{
 			// calculate car positions
 			function getCP(id) {
@@ -779,7 +779,7 @@ const scriptsInEvents = {
 				}
 			}
 			// TODO: Rewrite using curve data
-			if (runtime.layout.name != "ParkingLot") {
+			if (runtime.globalVars.game_mode == "Race") {
 				const dt = runtime.dt;
 				const all_cars = runtime.objects.Car.getAllInstances();
 				const CPs = runtime.objects.checkpoint.getAllInstances().length;
@@ -800,31 +800,31 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event145_Act1(runtime, localVars)
+		async Gamesheet_Event125_Act1(runtime, localVars)
 		{
 			RoadEditor.cleanSlate();
 		},
 
-		async Gamesheet_Event146_Act1(runtime, localVars)
+		async Gamesheet_Event126_Act1(runtime, localVars)
 		{
 			RoadEditor.cleanSlate();
 		},
 
-		async Gamesheet_Event168(runtime, localVars)
+		async Gamesheet_Event147(runtime, localVars)
 		{
 			const furl = localVars.map_name + ".json";
 			const link = await runtime.assets.getProjectFileUrl(furl);
 			runtime.callFunction("GetMap", link);
 		},
 
-		async Gamesheet_Event173_Act2(runtime, localVars)
+		async Gamesheet_Event153_Act2(runtime, localVars)
 		{
 			let array = runtime.objects.RoadPoints.getFirstInstance();
 			RoadEditor.loadFromCArray(array);
 			RoadEditor.hideFullEditor();
 		},
 
-		async Gamesheet_Event179(runtime, localVars)
+		async Gamesheet_Event161(runtime, localVars)
 		{
 			for (let m = 0; m < RoadEditor.meshes.length; m++) {
 				const segment = RoadEditor.meshes[m];
@@ -879,56 +879,62 @@ const scriptsInEvents = {
 					lr = Editor.coordsInBBox(bbox, lr);
 					rl = Editor.coordsInBBox(bbox, rl);
 					rr = Editor.coordsInBBox(bbox, rr);
-					console.log(ll, rl);
-					left_border.setMeshPoint(0, steps - i, {x: ll[0], y: ll[1], u: 0, v: v});
-					left_border.setMeshPoint(1, steps - i, {x: lr[0], y: lr[1], u: 1, v: v});
-					right_border.setMeshPoint(0, steps - i, {x: rl[0], y: rl[1], u: 0, v: v});
-					right_border.setMeshPoint(1, steps - i, {x: rr[0], y: rr[1], u: 1, v: v});
+					left_border.setMeshPoint(0, steps - i, {x: ll.x, y: ll.y, u: 0, v: v});
+					left_border.setMeshPoint(1, steps - i, {x: lr.x, y: lr.y, u: 1, v: v});
+					right_border.setMeshPoint(0, steps - i, {x: rl.x, y: rl.y, u: 0, v: v});
+					right_border.setMeshPoint(1, steps - i, {x: rr.x, y: rr.y, u: 1, v: v});
 				}
-			}
-			// checkpoints
-			let start = runtime.objects.track_start.getFirstInstance();
-			// start checkpoint
-			let zero = runtime.objects.checkpoint.createInstance("Level", start.getImagePointX("Checkpoint"), start.getImagePointY("Checkpoint"), false);
-			zero.instVars.checkID = 0;
-			zero.instVars.isStart = true;
-			let vector = RoadEditor.track.segments[0].getTangent(1);
-			let angle = vector.angleSigned(new Vector(1, 0));
-			zero.angleDegrees = -angle + 90;
-			zero.isVisible = false;
-			
-			let end = runtime.objects.track_end.getFirstInstance();
-			
-			let last_check = RoadEditor.track.numSegments - 1;
-			if (RoadEditor.track.loop) {
-				last_check += 1;
-				zero.instVars.isEnd = true;
-			} else {
-				zero.instVars.isEnd = false;
-				let finish = runtime.objects.checkpoint.createInstance("Level", end.getImagePointX("Checkpoint"), end.getImagePointY("Checkpoint"), false);
-				vector = RoadEditor.track.segments[RoadEditor.track.segmentsEnd].getTangent(1);
-				angle = vector.angleSigned(new Vector(1, 0));
-				finish.angleDegrees = -angle + 90;
-				finish.instVars.checkID = RoadEditor.track.segmentsEnd;
-				finish.instVars.isStart = false;
-				finish.instVars.isEnd = true;
-				finish.isVisible = false;
-			}
-			
-			for (let i = 1; i < last_check; i++) {
-				let curve = RoadEditor.track.segments[i];
-				vector = curve.getTangent(1);
-				angle = vector.angleSigned(new Vector(1, 0));
-				let new_check = runtime.objects.checkpoint.createInstance("Level", curve.p1.x, curve.p1.y, false);
-				new_check.instVars.checkID = i;
-				new_check.instVars.isEnd = false;
-				new_check.instVars.isStart = false;
-				new_check.angleDegrees = -angle + 90;
-				new_check.isVisible = false;
 			}
 		},
 
-		async Gamesheet_Event194_Act1(runtime, localVars)
+		async Gamesheet_Event162(runtime, localVars)
+		{
+			const mode = runtime.globalVars.game_mode;
+			if (mode == "Race" || mode == "FreeRoam") {
+				// checkpoints
+				let start = runtime.objects.track_start.getFirstInstance();
+				// start checkpoint
+				let zero = runtime.objects.checkpoint.createInstance("Level", start.getImagePointX("Checkpoint"), start.getImagePointY("Checkpoint"), false);
+				zero.instVars.checkID = 0;
+				zero.instVars.isStart = true;
+				let vector = RoadEditor.track.segments[0].getTangent(1);
+				let angle = vector.angleSigned(new Vector(1, 0));
+				zero.angleDegrees = -angle + 90;
+				zero.isVisible = false;
+			
+				let end = runtime.objects.track_end.getFirstInstance();
+			
+				let last_check = RoadEditor.track.numSegments - 1;
+				if (RoadEditor.track.loop) {
+					last_check += 1;
+					zero.instVars.isEnd = true;
+				} else {
+					zero.instVars.isEnd = false;
+					let finish = runtime.objects.checkpoint.createInstance("Level", end.getImagePointX("Checkpoint"), end.getImagePointY("Checkpoint"), false);
+					vector = RoadEditor.track.segments[RoadEditor.track.segmentsEnd].getTangent(1);
+					angle = vector.angleSigned(new Vector(1, 0));
+					finish.angleDegrees = -angle + 90;
+					finish.instVars.checkID = RoadEditor.track.segmentsEnd;
+					finish.instVars.isStart = false;
+					finish.instVars.isEnd = true;
+					finish.isVisible = false;
+				}
+			
+				for (let i = 1; i < last_check; i++) {
+					let curve = RoadEditor.track.segments[i];
+					vector = curve.getTangent(1);
+					angle = vector.angleSigned(new Vector(1, 0));
+					let new_check = runtime.objects.checkpoint.createInstance("Level", curve.p1.x, curve.p1.y, false);
+					new_check.instVars.checkID = i;
+					new_check.instVars.isEnd = false;
+					new_check.instVars.isStart = false;
+					new_check.angleDegrees = -angle + 90;
+					new_check.isVisible = false;
+				}
+			}
+		},
+
+		async Gamesheet_Event177_Act1(runtime, localVars)
 		{
 			const sprite = runtime.getInstanceByUid(localVars.SpriteUID);
 			const [IPx, IPy] = sprite.getImagePoint(localVars.ImagePointName);
@@ -937,7 +943,7 @@ const scriptsInEvents = {
 			}
 		},
 
-		async Gamesheet_Event198_Act2(runtime, localVars)
+		async Gamesheet_Event181_Act2(runtime, localVars)
 		{
 			[localVars.gui_x, localVars.gui_y] = layer_to_layer_px(localVars.coin_x, localVars.coin_y, runtime.layout.getLayer("Level"), runtime.layout.getLayer("GUI"));
 			let icon = runtime.getInstanceByUid(623);
@@ -945,19 +951,60 @@ const scriptsInEvents = {
 			localVars.to_y = icon.y;
 		},
 
-		async Gamesheet_Event203_Act1(runtime, localVars)
+		async Gamesheet_Event186_Act1(runtime, localVars)
 		{
 			[localVars.x, localVars.y] = layer_to_layer_px(localVars.x, localVars.y, runtime.layout.getLayer("Level"), runtime.layout.getLayer("GUI"));
 		},
 
-		async Gamesheet_Event212(runtime, localVars)
+		async Gamesheet_Event195(runtime, localVars)
 		{
 			const furl = localVars.ImageName + ".png";
 			const link = await runtime.assets.getProjectFileUrl(furl);
 			runtime.callFunction("LoadBackground", link);
 		},
 
-		async Menusheet_Event19_Act1(runtime, localVars)
+		async Gamesheet_Event203(runtime, localVars)
+		{
+			function randomRange(from, to) {
+				return from + Math.random() * (to - from);
+			}
+			
+			// do not forget to add ended segment distance
+			localVars.distance_travelled += RoadEditor.track.segments[2].arc;
+			
+			// remove old segment first
+			RoadEditor.removePoint(0);
+			
+			// get last point coords
+			let last_point = RoadEditor.track.points[RoadEditor.track.pointsEnd].anchor;
+			// define turning angles and segment distance
+			const min_turn_angle = Math.floor(Math.log10(localVars.distance_travelled));
+			const max_turn_angle = 10 * min_turn_angle + 10;
+			const segment_distance = 3000;
+			// find new shift
+			const last_segment = RoadEditor.track.segments[RoadEditor.track.segmentsEnd];
+			const start_angle = -last_segment.p1.subtract(last_segment.p0).angleSigned(new Vector(1, 0));
+			let angle = randomRange(min_turn_angle, max_turn_angle) * (~~(Math.random() * 2) * 2 - 1);
+			console.log(angle)
+			let shift = new Vector(segment_distance, 0).rotateDegree(start_angle + angle);
+			// Create new point in RoadEditor
+			RoadEditor.newPoint(runtime, last_point.add(shift));
+			RoadEditor.hideFullEditor();
+		},
+
+		async Gamesheet_Event204(runtime, localVars)
+		{
+			// generate and spawn road stuff
+			const dst = localVars.distance_travelled;
+			const leftover_spacing = localVars.leftover_spacing;
+			let curve = RoadEditor.track.segments[RoadEditor.track.segmentsEnd];
+			const mesh_wd = runtime.objects.meshedRoad.getFirstInstance().imageWidth;
+			let objects = generate_road(dst, leftover_spacing);
+			localVars.leftover_spacing = objects["spacing"];
+			spawn_generated(runtime, objects["data"], curve, mesh_wd);
+		},
+
+		async Menusheet_Event16_Act1(runtime, localVars)
 		{
 			localVars.layers = runtime.layout.getAllLayers().length;
 		},
@@ -972,6 +1019,16 @@ const scriptsInEvents = {
 			let vector = curve.getTangent(curve.getClosestPoint(car_pos)).normalize();
 			let to_curve = curve.getPoint(curve.getClosestPoint(car_pos)).subtract(car_pos).normalize().divide(2);
 			localVars.AngleToNode = -vector.add(to_curve).angleSigned(new Vector(1, 0));
+		},
+
+		async Enemyai_Event19_Act1(runtime, localVars)
+		{
+			let car = runtime.objects.Car.getFirstPickedInstance();
+			let goal = runtime.objects.AIGoal.getFirstPickedInstance();
+			let car_pos = new Vector(car.x, car.y);
+			let goal_pos = new Vector(goal.x, goal.y);
+			let vector = goal_pos.subtract(car_pos).normalize();
+			localVars.AngleToNode = -vector.angleSigned(new Vector(1, 0));
 		},
 
 		async Levelinits_Event8_Act3(runtime, localVars)

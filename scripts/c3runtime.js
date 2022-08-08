@@ -4722,11 +4722,8 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
                     'robohash_robots',
                     'robohash_cats'
                 ],
-                order: ['default', 'DESC', 'ASC'],
                 withMe: ['none', 'first', 'last'],
                 platform: ['YANDEX', 'VK', 'NONE', 'OK', 'GAME_MONETIZE', 'CRAZY_GAMES', 'GAME_DISTRIBUTION'],
-                documentTypes: ['PLAYER_PRIVACY_POLICY'],
-                documentFormat: ['HTML', 'TXT', 'RAW'],
                 compare: [
                     (a, b) => a === b,
                     (a, b) => a !== b,
@@ -4754,12 +4751,9 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
             });
 
             this.leaderboard = [];
-            this.leaderboardInfo = {};
-            this.leaderboardRecords = {};
             this.currentLeaderboardIndex = 0;
             this.currentLeaderboardPlayer = {};
             this.lastLeaderboardTag = '';
-            this.lastLeaderboardVariant = '';
             this.lastLeaderboardPlayerRatingTag = '';
             this.leaderboardPlayerPosition = 0;
 
@@ -4855,14 +4849,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
             this.gamesCollectionFetchError = '';
             this.lastGamesCollectionIdOrTag = '';
 
-            this.document = {
-                type: '',
-                content: ''
-            };
-
-            this.lastDocumentType = '';
-            this.documentFetchError = '';
-
             this.projectId = Number(properties[0] || 0);
             this.publicToken = properties[1];
             this.showPreloaderOnStart = properties[2];
@@ -4936,11 +4922,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
                     unlock: stub
                 },
                 gamesCollections: {
-                    on() {},
-                    open: stub,
-                    fetch: stub
-                },
-                documents: {
                     on() {},
                     open: stub,
                     fetch: stub
@@ -5023,7 +5004,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
 
         init(gs) {
             this.gs = gs;
-            this._runtime.GetIRuntime().GameScore = gs;
 
             // player
             this.gs.player.on('ready', () => {
@@ -5057,9 +5037,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
             // games collections
             this.gs.gamesCollections.on('open', () => this.Trigger(this.conditions.OnGamesCollectionsOpen));
             this.gs.gamesCollections.on('close', () => this.Trigger(this.conditions.OnGamesCollectionsClose));
-
-            this.gs.documents.on('open', () => this.Trigger(this.conditions.OnDocumentsOpen));
-            this.gs.documents.on('close', () => this.Trigger(this.conditions.OnDocumentsClose));
 
             // fullscreen
             this.gs.fullscreen.on('open', () => this.Trigger(this.conditions.OnFullscreenOpen));
@@ -5128,13 +5105,9 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
         SaveToJson() {
             return {
                 leaderboard: this.leaderboard,
-                leaderboardInfo: this.leaderboardInfo,
-                leaderboardRecords: this.leaderboardRecords,
-
                 currentLeaderboardIndex: this.currentLeaderboardIndex,
                 currentLeaderboardPlayer: this.currentLeaderboardPlayer,
                 lastLeaderboardTag: this.lastLeaderboardTag,
-                lastLeaderboardVariant: this.lastLeaderboardVariant,
                 lastLeaderboardPlayerRatingTag: this.lastLeaderboardPlayerRatingTag,
                 leaderboardPlayerPosition: this.leaderboardPlayerPosition,
 
@@ -5223,23 +5196,15 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
                 currentGameUrl: this.currentGameUrl,
 
                 gamesCollectionFetchError: this.gamesCollectionFetchError,
-                lastGamesCollectionIdOrTag: this.lastGamesCollectionIdOrTag,
-
-                document: this.document,
-                lastDocumentType: this.lastDocumentType,
-                documentFetchError: this.documentFetchError
+                lastGamesCollectionIdOrTag: this.lastGamesCollectionIdOrTag
             };
         }
 
         LoadFromJson(o) {
             this.leaderboard = o.leaderboard;
-            this.leaderboardInfo = o.leaderboardInfo || {};
-            this.leaderboardRecords = o.leaderboardRecords || {};
-
             this.currentLeaderboardIndex = o.currentLeaderboardIndex;
             this.currentLeaderboardPlayer = o.currentLeaderboardPlayer;
             this.lastLeaderboardTag = o.lastLeaderboardTag;
-            this.lastLeaderboardVariant = o.lastLeaderboardVariant;
             this.lastLeaderboardPlayerRatingTag = o.lastLeaderboardPlayerRatingTag;
             this.leaderboardPlayerPosition = o.leaderboardPlayerPosition || 0;
 
@@ -5335,14 +5300,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
 
             this.gamesCollectionFetchError = o.gamesCollectionFetchError || '';
             this.lastGamesCollectionIdOrTag = o.lastGamesCollectionIdOrTag || '';
-
-            this.document = o.document || {
-                type: '',
-                content: ''
-            };
-
-            this.lastDocumentType = o.lastDocumentType || '';
-            this.documentFetchError = o.documentFetchError || '';
         }
 
         GetDebuggerProperties() {
@@ -5691,23 +5648,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
                             value: this.currentGameUrl
                         }
                     ]
-                },
-                {
-                    title: 'GS - Documents',
-                    properties: [
-                        {
-                            name: 'Document Type',
-                            value: this.document.type
-                        },
-                        {
-                            name: 'Document Content',
-                            value: this.document.content
-                        },
-                        {
-                            name: 'Fetch Error',
-                            value: this.documentFetchError
-                        }
-                    ]
                 }
             ];
         }
@@ -5861,14 +5801,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
         },
 
         OnLeaderboardAnyFetchPlayerError() {
-            return true;
-        },
-
-        OnLeaderboardPublishRecord() {
-            return true;
-        },
-
-        OnLeaderboardPublishRecordError() {
             return true;
         },
 
@@ -6304,31 +6236,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
             return this.gs.gamesCollections.isAvailable;
         },
 
-        // documents
-        OnDocumentsOpen() {
-            return true;
-        },
-
-        OnDocumentsClose() {
-            return true;
-        },
-
-        OnDocumentsFetchAny() {
-            return true;
-        },
-
-        OnDocumentsFetchAnyError() {
-            return true;
-        },
-
-        OnDocumentsFetch(type) {
-            return this.lastDocumentType === this.mappers.documentTypes[type];
-        },
-
-        OnDocumentsFetchError(type) {
-            return this.lastDocumentType === this.mappers.documentTypes[type];
-        },
-
         OnLoadJsonError() {
             return true;
         }
@@ -6442,8 +6349,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
                 })
                 .then((leaderboardInfo) => {
                     this.lastLeaderboardTag = tag;
-                    this.lastLeaderboardVariant = 'default';
-                    this.leaderboardInfo = leaderboardInfo.leaderboard;
                     this.leaderboard = leaderboardInfo.players;
                     this.Trigger(this.conditions.OnLeaderboardFetch);
                     this.Trigger(this.conditions.OnLeaderboardAnyFetch);
@@ -6451,7 +6356,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
                 .catch((err) => {
                     console.warn(err);
                     this.lastLeaderboardTag = tag;
-                    this.lastLeaderboardVariant = 'default';
                     this.Trigger(this.conditions.OnLeaderboardFetchError);
                     this.Trigger(this.conditions.OnLeaderboardAnyFetchError);
                 });
@@ -6468,153 +6372,17 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
                     order: order === 0 ? 'DESC' : 'ASC'
                 })
                 .then((result) => {
-                    this.lastLeaderboardTag = tag;
-                    this.lastLeaderboardVariant = 'default';
                     this.lastLeaderboardPlayerRatingTag = tag;
-                    this.currentLeaderboardPlayer = Object.assign(this.gs.player.toJSON(), result.player);
                     this.leaderboardPlayerPosition = result.player.position;
                     this.Trigger(this.conditions.OnLeaderboardFetchPlayer);
                     this.Trigger(this.conditions.OnLeaderboardAnyFetchPlayer);
                 })
                 .catch((err) => {
                     console.warn(err);
-                    this.lastLeaderboardTag = tag;
-                    this.lastLeaderboardVariant = 'default';
                     this.lastLeaderboardPlayerRatingTag = tag;
                     this.Trigger(this.conditions.OnLeaderboardFetchPlayerError);
                     this.Trigger(this.conditions.OnLeaderboardAnyFetchPlayerError);
                 });
-        },
-
-        LeaderboardOpenScoped(idOrTag, variant, order, limit, withMe, includeFields, displayFields) {
-            const id = parseInt(idOrTag, 10) || 0;
-            const query = {
-                id,
-                tag: idOrTag,
-                variant,
-                limit,
-                order: this.mappers.order[order],
-                withMe: this.mappers.withMe[withMe],
-                includeFields: includeFields
-                    .split(',')
-                    .map((o) => o.trim())
-                    .filter((f) => f),
-                displayFields: displayFields
-                    .split(',')
-                    .map((o) => o.trim())
-                    .filter((f) => f)
-            };
-
-            return this.gs.leaderboard.openScoped(query).catch(console.warn);
-        },
-
-        LeaderboardFetchScoped(idOrTag, variant, order, limit, withMe, includeFields) {
-            const id = parseInt(idOrTag, 10) || 0;
-            const query = {
-                id,
-                tag: idOrTag,
-                variant,
-                limit,
-                order: this.mappers.order[order],
-                withMe: this.mappers.withMe[withMe],
-                includeFields: includeFields
-                    .split(',')
-                    .map((o) => o.trim())
-                    .filter((f) => f)
-            };
-
-            return this.gs.leaderboard
-                .fetchScoped(query)
-                .then((leaderboardInfo) => {
-                    this.lastLeaderboardTag = idOrTag;
-                    this.lastLeaderboardVariant = variant;
-                    this.leaderboardInfo = leaderboardInfo.leaderboard;
-                    this.leaderboard = leaderboardInfo.players;
-                    this.Trigger(this.conditions.OnLeaderboardFetch);
-                    this.Trigger(this.conditions.OnLeaderboardAnyFetch);
-                })
-                .catch((err) => {
-                    console.warn(err);
-                    this.lastLeaderboardTag = idOrTag;
-                    this.lastLeaderboardVariant = variant;
-                    this.Trigger(this.conditions.OnLeaderboardFetchError);
-                    this.Trigger(this.conditions.OnLeaderboardAnyFetchError);
-                });
-        },
-
-        LeaderboardFetchPlayerRatingScoped(idOrTag, variant, order) {
-            const id = parseInt(idOrTag, 10) || 0;
-            const query = {
-                id,
-                tag: idOrTag,
-                variant,
-                order: this.mappers.order[order]
-            };
-
-            return this.gs.leaderboard
-                .fetchPlayerRatingScoped(query)
-                .then((result) => {
-                    this.lastLeaderboardPlayerRatingTag = idOrTag;
-                    this.lastLeaderboardTag = idOrTag;
-                    this.lastLeaderboardVariant = variant;
-                    this.currentLeaderboardPlayer = Object.assign(this.gs.player.toJSON(), result.player);
-                    this.leaderboardPlayerPosition = result.player.position;
-                    this.Trigger(this.conditions.OnLeaderboardFetchPlayer);
-                    this.Trigger(this.conditions.OnLeaderboardAnyFetchPlayer);
-                })
-                .catch((err) => {
-                    console.warn(err);
-                    this.lastLeaderboardPlayerRatingTag = idOrTag;
-                    this.lastLeaderboardTag = idOrTag;
-                    this.lastLeaderboardVariant = variant;
-                    this.Trigger(this.conditions.OnLeaderboardFetchPlayerError);
-                    this.Trigger(this.conditions.OnLeaderboardAnyFetchPlayerError);
-                });
-        },
-
-        LeaderboardPublishRecord(idOrTag, variant, override) {
-            const recordsTable = this.leaderboardRecords[idOrTag];
-            const record = recordsTable ? recordsTable[variant] : null;
-
-            const id = parseInt(idOrTag, 10) || 0;
-            const query = {
-                id,
-                tag: idOrTag,
-                variant,
-                override,
-                record
-            };
-
-            return this.gs.leaderboard
-                .publishRecord(query)
-                .then((result) => {
-                    this.lastLeaderboardTag = idOrTag;
-                    this.lastLeaderboardVariant = variant;
-                    this.lastLeaderboardPlayerRatingTag = idOrTag;
-                    this.leaderboardPlayerPosition = result.player.position;
-                    this.currentLeaderboardPlayer = Object.assign(this.gs.player.toJSON(), result.player);
-
-                    this.Trigger(this.conditions.OnLeaderboardPublishRecord);
-                })
-                .catch((err) => {
-                    console.warn(err);
-                    this.lastLeaderboardTag = idOrTag;
-                    this.lastLeaderboardVariant = variant;
-                    this.lastLeaderboardPlayerRatingTag = idOrTag;
-                    this.Trigger(this.conditions.OnLeaderboardPublishRecordError);
-                });
-        },
-
-        LeaderboardSetRecord(idOrTag, variant, field, value) {
-            if (!this.leaderboardRecords[idOrTag]) {
-                this.leaderboardRecords[idOrTag] = {};
-            }
-
-            if (!this.leaderboardRecords[idOrTag][variant]) {
-                this.leaderboardRecords[idOrTag][variant] = {};
-            }
-
-            this.leaderboardRecords[idOrTag][variant][field] = value;
         },
 
         AchievementsOpen() {
@@ -6821,35 +6589,9 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
                 .catch((err) => {
                     console.warn(err);
                     this.lastGamesCollectionIdOrTag = idOrTag;
-                    this.gamesCollectionFetchError = (err && err.message) || '';
+                    this.gamesCollectionFetchError = err && err.message || '';
                     this.Trigger(this.conditions.OnGamesCollectionsFetchError);
                     this.Trigger(this.conditions.OnGamesCollectionsFetchAnyError);
-                });
-        },
-
-        // documents
-        DocumentsOpen(docType) {
-            const type = this.mappers.documentTypes[docType];
-            return this.gs.documents.open({ type });
-        },
-
-        DocumentsFetch(docType, docFormat) {
-            const type = this.mappers.documentTypes[docType];
-            const format = this.mappers.documentFormat[docFormat];
-            return this.gs.documents
-                .fetch({ type, format })
-                .then((result) => {
-                    this.lastDocumentType = type;
-                    this.document = result;
-                    this.Trigger(this.conditions.OnDocumentsFetch);
-                    this.Trigger(this.conditions.OnDocumentsFetchAny);
-                })
-                .catch((err) => {
-                    console.warn(err);
-                    this.lastDocumentType = type;
-                    this.documentFetchError = (err && err.message) || '';
-                    this.Trigger(this.conditions.OnDocumentsFetchError);
-                    this.Trigger(this.conditions.OnDocumentsFetchAnyError);
                 });
         },
 
@@ -7000,14 +6742,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
             return this.leaderboardPlayerPosition || 0;
         },
 
-        LastLeaderboardTag() {
-            return this.lastLeaderboardTag;
-        },
-
-        LastLeaderboardVariant() {
-            return this.lastLeaderboardVariant;
-        },
-
         IsFullscreenMode() {
             return Number(this.gs.fullscreen.isEnabled);
         },
@@ -7018,10 +6752,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
 
         AvatarGenerator() {
             return this.gs.avatarGenerator;
-        },
-
-        ServerTime() {
-            return this.gs.serverTime;
         },
 
         PlatformType() {
@@ -7289,19 +7019,6 @@ WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},Win
 
         GamesCollectionsFetchError() {
             return this.gamesCollectionFetchError;
-        },
-
-        // documents
-        DocumentsDocumentType() {
-            return this.document.type;
-        },
-
-        DocumentsDocumentContent() {
-            return this.document.content;
-        },
-
-        DocumentsFetchError() {
-            return this.documentFetchError;
         },
 
         AsJSON() {
@@ -12495,7 +12212,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.LocalStorage.Exps.ItemValue,
 		C3.Plugins.Dictionary.Acts.AddKey,
 		C3.ScriptsInEvents.Edmenusheet_Event34_Act1,
-		C3.Plugins.Dictionary.Acts.DeleteKey,
 		C3.Plugins.LocalStorage.Acts.RemoveItem,
 		C3.Plugins.Button.Cnds.OnCreated,
 		C3.Plugins.System.Cnds.LayerInteractive,
@@ -12560,74 +12276,63 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.IsVisible,
 		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
 		C3.Plugins.Sprite.Acts.AddInstanceVar,
-		C3.Plugins.System.Acts.SetObjectTimescale,
-		C3.Behaviors.Tween.Acts.TweenOneProperty,
-		C3.Plugins.NinePatch.Cnds.IsOnScreen,
-		C3.Plugins.NinePatch.Cnds.CompareWidth,
-		C3.Behaviors.mcube_rexspline.Cnds.OnHitAnyPoint,
-		C3.Behaviors.mcube_rexspline.Acts.SetSpeed,
-		C3.Plugins.Arr.Exps.Width,
-		C3.Behaviors.mcube_rexspline.Exps.CurSegP0,
-		C3.Plugins.Arr.Acts.Pop,
-		C3.Behaviors.mcube_rexspline.Cnds.OnHitTarget,
-		C3.Behaviors.Flash.Acts.Flash,
-		C3.Behaviors.mcube_rexspline.Acts.SetEnabled,
-		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
-		C3.Behaviors.CarPlus.Acts.SetEnabled,
-		C3.Behaviors.mcube_rexspline.Acts.CleanAll,
-		C3.Behaviors.mcube_rexspline.Acts.AddPoint,
-		C3.Behaviors.mcube_rexspline.Acts.Start,
-		C3.Plugins.System.Cnds.Every,
-		C3.Behaviors.CarPlus.Exps.SteerSpeed,
-		C3.Behaviors.CarPlus.Exps.Acceleration,
-		C3.Behaviors.CarPlus.Exps.Deceleration,
-		C3.Behaviors.CarPlus.Exps.DriftRecover,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
-		C3.ScriptsInEvents.Gamesheet_Event106_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event86_Act1,
+		C3.Plugins.System.Cnds.Every,
 		C3.Plugins.TiledBg.Acts.SetVisible,
 		C3.Behaviors.Tween.Acts.StopTweens,
 		C3.Behaviors.Tween.Cnds.IsPlaying,
 		C3.Plugins.TiledBg.Acts.SetImageOffsetY,
 		C3.Behaviors.Tween.Exps.Value,
-		C3.ScriptsInEvents.Gamesheet_Event115,
-		C3.ScriptsInEvents.Gamesheet_Event116,
+		C3.ScriptsInEvents.Gamesheet_Event95,
+		C3.ScriptsInEvents.Gamesheet_Event96,
 		C3.Plugins.Particles.Acts.Destroy,
 		C3.Behaviors.Timer.Acts.StartTimer,
 		C3.Plugins.System.Acts.CallMappedFunction,
-		C3.Behaviors.Bullet.Cnds.IsEnabled,
 		C3.Plugins.Sprite.Acts.RotateTowardPosition,
 		C3.Behaviors.Flash.Cnds.IsFlashing,
+		C3.Behaviors.Flash.Acts.Flash,
 		C3.Behaviors.scrollto.Acts.Shake,
+		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.Sprite.Acts.SubInstanceVar,
-		C3.Plugins.DrawingCanvas.Acts.Line,
-		C3.Plugins.DrawingCanvas.Acts.FillEllipse,
-		C3.ScriptsInEvents.Gamesheet_Event145_Act1,
+		C3.Behaviors.CarPlus.Acts.SetSteerSpeed,
+		C3.ScriptsInEvents.Gamesheet_Event125_Act1,
 		C3.Plugins.System.Acts.RestartLayout,
-		C3.ScriptsInEvents.Gamesheet_Event146_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event126_Act1,
 		C3.Plugins.System.Exps.layoutname,
 		C3.Plugins.System.Cnds.LayerVisible,
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
-		C3.Plugins.System.Acts.SubVar,
+		C3.Plugins.System.Exps.choose,
 		C3.Behaviors.Bullet.Acts.SetSpeed,
 		C3.Plugins.System.Cnds.ForEachOrdered,
 		C3.Plugins.System.Exps.anglediff,
 		C3.Plugins.System.Acts.StopLoop,
-		C3.ScriptsInEvents.Gamesheet_Event168,
-		C3.ScriptsInEvents.Gamesheet_Event173_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event147,
+		C3.ScriptsInEvents.Gamesheet_Event153_Act2,
 		C3.Plugins.shadowlight.Acts.ZMoveToObject,
-		C3.ScriptsInEvents.Gamesheet_Event179,
+		C3.ScriptsInEvents.Gamesheet_Event161,
+		C3.ScriptsInEvents.Gamesheet_Event162,
 		C3.Plugins.Sprite.Cnds.OnAnimFinished,
 		C3.Plugins.Sprite.Acts.SetPosToObject,
 		C3.Plugins.DrawingCanvas.Acts.ClearRect,
 		C3.Plugins.Sprite.Exps.Height,
-		C3.ScriptsInEvents.Gamesheet_Event194_Act1,
-		C3.ScriptsInEvents.Gamesheet_Event198_Act2,
+		C3.ScriptsInEvents.Gamesheet_Event177_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event181_Act2,
 		C3.Plugins.Sprite.Acts.SetEffectParam,
-		C3.ScriptsInEvents.Gamesheet_Event203_Act1,
+		C3.ScriptsInEvents.Gamesheet_Event186_Act1,
 		C3.Plugins.Sprite.Acts.SetCollisions,
 		C3.Plugins.System.Acts.SetLayerOpacity,
-		C3.ScriptsInEvents.Gamesheet_Event212,
+		C3.ScriptsInEvents.Gamesheet_Event195,
+		C3.ScriptsInEvents.Gamesheet_Event203,
+		C3.ScriptsInEvents.Gamesheet_Event204,
+		C3.Plugins.System.Exps.min,
+		C3.Plugins.TiledBg.Exps.Width,
+		C3.Plugins.TiledBg.Exps.Height,
+		C3.Plugins.TiledBg.Acts.SetSize,
+		C3.Plugins.TiledBg.Exps.ImageWidth,
+		C3.Plugins.TiledBg.Exps.ImageHeight,
+		C3.Plugins.Sprite.Cnds.OnDestroyed,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.System.Acts.MapFunctionDefault,
 		C3.Plugins.Button.Acts.SetCSSStyle,
@@ -12636,11 +12341,10 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.PickNth,
 		C3.Plugins.Text.Exps.Text,
 		C3.Plugins.Touch.Cnds.OnTouchObject,
-		C3.Plugins.Sprite.Cnds.CompareOpacity,
 		C3.Plugins.Dictionary.Acts.SetKey,
 		C3.Plugins.sliderbar.Cnds.OnChanged,
 		C3.Plugins.sliderbar.Exps.Value,
-		C3.ScriptsInEvents.Menusheet_Event19_Act1,
+		C3.ScriptsInEvents.Menusheet_Event16_Act1,
 		C3.Plugins.System.Exps.layerindex,
 		C3.Plugins.Button.Acts.SetChecked,
 		C3.Plugins.sliderbar.Acts.SetValue,
@@ -12657,6 +12361,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio.Acts.PlayByName,
 		C3.Plugins.Keyboard.Cnds.OnAnyKeyReleased,
 		C3.Plugins.Keyboard.Exps.LastKeyCode,
+		C3.Plugins.Dictionary.Acts.DeleteKey,
 		C3.Plugins.Keyboard.Cnds.IsKeyCodeDown,
 		C3.Plugins.Dictionary.Exps.CurrentValue,
 		C3.Plugins.gamepad.Cnds.OnGamepadConnected,
@@ -12673,7 +12378,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetX,
 		C3.Behaviors.CV_BoundedDragnDrop.Exps.xMaxBoundPos,
 		C3.Behaviors.CV_BoundedDragnDrop.Exps.xMinBoundPos,
-		C3.Plugins.System.Exps.min,
 		C3.Plugins.Audio.Acts.Stop,
 		C3.Plugins.Audio.Cnds.IsTagPlaying,
 		C3.Plugins.Audio.Acts.Play,
@@ -12681,15 +12385,19 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio.Acts.SetSilent,
 		C3.Plugins.Audio.Cnds.IsSilent,
 		C3.Plugins.NinePatch.Acts.SetVisible,
-		C3.Plugins.Sprite.Cnds.OnDestroyed,
+		C3.Plugins.System.Acts.SetObjectTimescale,
 		C3.Plugins.PlatformInfo.Cnds.IsOnMacOS,
 		C3.Behaviors.CarPlus.Cnds.IsEnabled,
 		C3.Behaviors.CarPlus.Acts.SetIgnoreInput,
 		C3.Behaviors.CarPlus.Acts.Stop,
+		C3.Behaviors.CarPlus.Acts.SetEnabled,
 		C3.Plugins.System.Cnds.EveryTick,
 		C3.Plugins.Sprite.Exps.BBoxLeft,
 		C3.Plugins.Sprite.Exps.BBoxRight,
+		C3.Plugins.NinePatch.Exps.BBoxRight,
+		C3.Plugins.NinePatch.Exps.BBoxBottom,
 		C3.ScriptsInEvents.Enemyai_Event18_Act2,
+		C3.ScriptsInEvents.Enemyai_Event19_Act1,
 		C3.Behaviors.CarPlus.Exps.MovingAngle,
 		C3.Plugins.Sprite.Acts.SetTowardPosition,
 		C3.Plugins.System.Cnds.IsBetweenAngles,
@@ -12702,6 +12410,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Touch.Exps.TouchID,
 		C3.Plugins.Touch.Exps.XForID,
 		C3.Plugins.Touch.Exps.YForID,
+		C3.Plugins.Arr.Exps.Width,
 		C3.Plugins.Touch.Cnds.OnTouchEnd,
 		C3.Plugins.Arr.Acts.Delete,
 		C3.Plugins.Arr.Exps.IndexOf,
@@ -13050,6 +12759,8 @@ self.C3_JsPropNameTable = [
 	{rename_finish: 0},
 	{rename_input: 0},
 	{sorting_options: 0},
+	{brawl_arena: 0},
+	{load_anim: 0},
 	{Button: 0},
 	{LoadableArray: 0},
 	{LoadableDict: 0},
@@ -13116,8 +12827,6 @@ self.C3_JsPropNameTable = [
 	{key: 0},
 	{GameState: 0},
 	{GAME_PAUSE: 0},
-	{GAME_REPLAY: 0},
-	{GAME_REWIND: 0},
 	{GAME_OVER: 0},
 	{GAME_ACTIVE: 0},
 	{GAME_START: 0},
@@ -13148,7 +12857,6 @@ self.C3_JsPropNameTable = [
 	{Mode: 0},
 	{motion_len: 0},
 	{motion_speed: 0},
-	{frames_back: 0},
 	{Name: 0},
 	{UID: 0},
 	{CarUID: 0},
@@ -13156,7 +12864,6 @@ self.C3_JsPropNameTable = [
 	{ObstacleUID: 0},
 	{Direction: 0},
 	{map_name: 0},
-	{counter: 0},
 	{map_url: 0},
 	{delta: 0},
 	{Result: 0},
@@ -13169,6 +12876,8 @@ self.C3_JsPropNameTable = [
 	{to_x: 0},
 	{coin_x: 0},
 	{coin_y: 0},
+	{leftover_spacing: 0},
+	{distance_travelled: 0},
 	{MenuState: 0},
 	{MENU_DEFAULT: 0},
 	{MENU_PROMPT: 0},
@@ -13835,11 +13544,11 @@ self.C3_ExpressionFuncs = [
 		() => "UseNitro",
 		() => "Jump",
 		() => "Shoot",
-		() => "Rewind",
 		() => "Accelerate",
 		() => "Brake",
 		() => "TurnLeft",
 		() => "TurnRight",
+		() => "Brawl",
 		() => "Car Mechanics",
 		p => {
 			const n0 = p._GetNode(0);
@@ -14013,112 +13722,6 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject("difficulty_nitro_refill");
 		},
 		() => "Coin",
-		() => "Replays",
-		() => 700,
-		() => "MidBut",
-		() => "Bar",
-		() => "Txt",
-		() => "Отмотать время?",
-		() => "rewind_timer",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			const n4 = p._GetNode(4);
-			const n5 = p._GetNode(5);
-			return () => ((((n0.ExpObject(subtract((n1.ExpObject() - 1), n2.ExpBehavior()), 4)) === (0) ? 1 : 0)) ? (1) : (n3.ExpObject(subtract((n4.ExpObject() - 1), n5.ExpBehavior()), 4)));
-		},
-		() => "replay_angle",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			return () => n0.ExpObject(subtract((n1.ExpObject() - 1), n2.ExpBehavior()), 2);
-		},
-		() => 0.02,
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			return () => ((((n0.ExpObject(n1.ExpBehavior(), 4)) === (0) ? 1 : 0)) ? (1) : (n2.ExpObject(n3.ExpBehavior(), 4)));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject(n1.ExpBehavior(), 2);
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => ((((v0.GetValue()) === ("Rewind") ? 1 : 0)) ? ("RaceActive") : ("RaceOver"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject((n1.ExpObject() - 1), 4);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject((n1.ExpObject() - 1), 5);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject((n1.ExpObject() - 1), 6);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject((n1.ExpObject() - 1), 7);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject((n1.ExpObject() - 1), 8);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject((n1.ExpObject() - 1), 9);
-		},
-		() => "Pause",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(0, 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(0, 1);
-		},
-		() => "replay",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("replay"), 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("replay"), 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => n0.ExpObject(((n1.ExpObject() - 1) - f2("replay")), 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => n0.ExpObject(((n1.ExpObject() - 1) - f2("replay")), 1);
-		},
 		() => "Find collision points",
 		p => {
 			const n0 = p._GetNode(0);
@@ -14147,102 +13750,24 @@ self.C3_ExpressionFuncs = [
 			return () => f0(n1.ExpObject(), 6);
 		},
 		() => "Spikes",
-		() => 0.5,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() * 0.25);
 		},
 		() => "Hit",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(1, 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(1, 1);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(255, 0, 0, 50);
-		},
-		() => "ddraw",
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("ddraw"), 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(f1("ddraw"), 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((f1("ddraw") + 1), 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((f1("ddraw") + 1), 1);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0, 255, 0, 50);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(6, 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(6, 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(7, 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(7, 1);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0, 0, 255, 50);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(8, 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(8, 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(9, 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(9, 1);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(255, 255, 255, 50);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0, 0, 0, 100);
-		},
 		() => "Buttons",
 		() => "EdMenu",
 		() => "jumpUp",
+		() => 0.5,
 		() => "jumpDown",
-		() => "Missile",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => ("Rocket" + (f0(1, 2)).toString());
+		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
-			return () => f0((n1.ExpBehavior() + 100), 300);
+			return () => f0((n1.ExpBehavior() + 300), 1000);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -14257,7 +13782,6 @@ self.C3_ExpressionFuncs = [
 			const n9 = p._GetNode(9);
 			return () => ((0.25 + (f0(n1.ExpObject(), C3.toDegrees(C3.angleTo(n2.ExpObject(), n3.ExpObject(), n4.ExpObject(), n5.ExpObject()))) / 180)) * C3.distanceTo(n6.ExpObject(), n7.ExpObject(), n8.ExpObject(), n9.ExpObject()));
 		},
-		() => 150,
 		() => "Lvl1",
 		() => "Lvl2",
 		() => "Lvl3",
@@ -14297,6 +13821,7 @@ self.C3_ExpressionFuncs = [
 		() => "ToIcon",
 		() => 623,
 		() => "Glow",
+		() => 150,
 		() => "Brightness",
 		() => 200,
 		p => {
@@ -14328,6 +13853,20 @@ self.C3_ExpressionFuncs = [
 		},
 		() => 0.25,
 		() => "obstacle",
+		() => "Endless",
+		() => "New segment added",
+		() => 4000,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => (f0(n1.ExpObject(), n2.ExpObject()) * (3 / 8));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() + (n1.ExpObject() * 2));
+		},
 		() => "flags",
 		() => "tiles",
 		() => "ownership",
@@ -14368,7 +13907,6 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => (((("LVL: " + n0.ExpInstVar()) + "\n") + "MODE: ") + n1.ExpInstVar());
 		},
-		() => "Режим еще не готов.",
 		() => "Flags",
 		p => {
 			const n0 = p._GetNode(0);
@@ -14557,10 +14095,28 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => and(n0.ExpObject(0, 0, v1.GetValue()), "_on");
 		},
+		() => "map_966518302",
+		() => "Race",
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => ((((v0.GetValue()) === ("map_966518302") ? 1 : 0)) ? ("Race") : ("FreeRoam"));
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpInstVar() + "_inactive");
 		},
+		() => 690,
+		() => "LvlAlphaSelect",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpInstVar() + "_active");
+		},
+		() => 675,
+		() => 950,
+		() => 1200,
+		() => 945,
+		() => "map_-255",
+		() => 565,
+		() => 925,
+		() => 1165,
+		() => 810,
+		() => 1170,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar_Family() + "Tap");
@@ -14618,6 +14174,7 @@ self.C3_ExpressionFuncs = [
 		() => "Controls",
 		() => 795,
 		() => "to_game",
+		() => "Pause",
 		() => "MobileTips",
 		() => "В МЕНЮ",
 		() => "credits_text",
@@ -14791,11 +14348,21 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			return () => (n0.ExpInstVar() + 1);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0((-64), 256);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => f0((n1.ExpObject() + 1536), (n2.ExpObject() - 1536));
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -14819,52 +14386,12 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpBehavior() * 0.2);
 		},
-		() => "rays",
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((10 + (f1("rays") * 4)), 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((10 + (f1("rays") * 4)), 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((11 + (f1("rays") * 4)), 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((11 + (f1("rays") * 4)), 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((12 + (f1("rays") * 4)), 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((12 + (f1("rays") * 4)), 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((13 + (f1("rays") * 4)), 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject((13 + (f1("rays") * 4)), 1);
-		},
 		() => "Init Functions",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
-			return () => ((((v0.GetValue()) === ("Race") ? 1 : 0)) ? (add(n1.ExpObject("difficulty_enemies"), 1)) : (1));
+			const v2 = p._GetNode(2).GetVar();
+			return () => ((((v0.GetValue()) === ("Race") ? 1 : 0)) ? (add(n1.ExpObject("difficulty_enemies"), 1)) : (((((v2.GetValue()) === ("Brawl") ? 1 : 0)) ? (6) : (1))));
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -14945,6 +14472,10 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => n0.ExpObject(f1());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(0, 0);
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();

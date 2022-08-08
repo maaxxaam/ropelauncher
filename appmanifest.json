@@ -1,6 +1,6 @@
 {
-	"name": "SlingTest",
-	"short_name": "SlingTest",
+	"name": "Drift Game",
+	"short_name": "Drift Game",
 	"description": "",
 	"start_url": "index.html",
 	"display": "fullscreen",
