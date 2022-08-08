@@ -1,4 +1,5 @@
 import { Vector2 } from './Vector2.js'
+import { spawn, setMeshAt, setSize, setPosition, recreateMesh } from './utils.js'
 
 var Vector = Vector2;
 
@@ -7,7 +8,7 @@ export function coordsInBBox(BBox, point) {
 	let relPoint = point.subtract(LeftTop);
 	let coordx = relPoint.x / BBox.width;
 	let coordy = relPoint.y / BBox.height;
-	return [coordx, coordy];
+	return new Vector(coordx, coordy);
 }
 
 export class BezierCurve {
@@ -18,6 +19,10 @@ export class BezierCurve {
 		this.p1 = p1;
 	}
 	
+	getWithCoefs(p0w, p1w, c0w, c1w) {
+		return this.p0.multiply(p0w).add(this.p1.multiply(p1w)).add(this.c0.multiply(c0w)).add(this.c1.multiply(c1w));
+	}
+	
 	getPoint(d) {
 		const d2 = d*d;
 		const d3 = d2*d;
@@ -25,7 +30,7 @@ export class BezierCurve {
 		const c0w = 3 * d3 - 6 * d2 + 3 * d;
 		const c1w = -3 * d3 + 3 * d2;
 		const p1w = d3;
-		return this.p0.multiply(p0w).add(this.p1.multiply(p1w)).add(this.c0.multiply(c0w)).add(this.c1.multiply(c1w));
+		return this.getWithCoefs(p0w, p1w, c0w, c1w);
 	}
 	
 	getVelocity(d) {
@@ -34,7 +39,7 @@ export class BezierCurve {
 		const c0w = 9 * d2 - 12 * d + 3;
 		const c1w = -9 * d2 + 6 * d;
 		const p1w = 3 * d2;
-		return this.p0.multiply(p0w).add(this.p1.multiply(p1w)).add(this.c0.multiply(c0w)).add(this.c1.multiply(c1w));
+		return this.getWithCoefs(p0w, p1w, c0w, c1w);
 	}
 	
 	getAcceleration(d) {
@@ -42,7 +47,7 @@ export class BezierCurve {
 		const c0w = 18 * d - 12;
 		const c1w = -18 * d + 6;
 		const p1w = 6 * d;
-		return this.p0.multiply(p0w).add(this.p1.multiply(p1w)).add(this.c0.multiply(c0w)).add(this.c1.multiply(c1w));
+		return this.getWithCoefs(p0w, p1w, c0w, c1w);
 	}
 	
 	getCurvature(d) {
@@ -51,17 +56,9 @@ export class BezierCurve {
 		return velocity.cross(acceleration) / Math.pow(velocity.magnitude(), 3);
 	}
 	
-	getJerk() {
-		const p0w = -6;
-		const c0w = 18;
-		const c1w = -18;
-		const p1w = 6;
-		return this.p0.multiply(p0w).add(this.p1.multiply(p1w)).add(this.c0.multiply(c0w)).add(this.c1.multiply(c1w));
-	}
+	getJerk() { return this.getWithCoefs(-6, 18, -18, 6) }
 	
-	getTangent(d) {
-		return this.getVelocity(d).normalize();
-	}
+	getTangent(d) { return this.getVelocity(d).normalize() }
 	
 	getLeftNormal(d) {
 		let tangent = this.getTangent(d);
@@ -76,6 +73,13 @@ export class BezierCurve {
 	getPointOffset(d, offset) {
 		let normal = this.getRightNormal(d);
 		return this.getPoint(d).add(normal.multiply(offset));
+	}
+	
+	getMeshPoints(d, width) {
+		let offset = width / 2;
+		let point = this.getPoint(d);
+		let movement = this.getRightNormal(d).multiply(offset);
+		return [point.subtract(movement), point.add(movement)];
 	}
 	
 	getArcLength(n) {
@@ -324,24 +328,14 @@ export class BezierTrack {
 	insertSegmentAt(after, position) {
 		let anchor = position;
 		let before = this.points[after];
-		/*if (after == this.pointsEnd) {
-			if (this.loop) {
-				var next = this.points[0];
-			}
-		} else {
-			var next = this.points[after + 1];
-		}*/
+
 		if (before.hasRightControl()) {
 			var control1 = anchor.add(before.control2.subtract(anchor).divide(2));
 			var control2 = anchor.subtract(before.control2.subtract(anchor).divide(2));
 		} else if (before.hasLeftControl()) {
 			var control1 = anchor.add(before.control1.add(anchor).divide(2));
 		} else throw Error("How come an anchor has no controls?");
-	 	/*if(next !== undefined) {
-			var control2 = anchor.subtract(before.control2.subtract(anchor).divide(2));
-		} else {
-			var control2 = undefined;
-		}*/
+
 		this.insertAnchor(after, new AnchorPoint(anchor, control1, control2));
 	}
 	
@@ -446,8 +440,7 @@ export class CurveEditor {
 	moveAnchor(index, position) {
 		this.track.anchorChanged(index, position, undefined, undefined);
 		// move anchor
-		this.anchors[index].x = position.x;
-		this.anchors[index].y = position.y;
+		setPosition(this.anchors[index], position);
 		// move controls 
 		if (this.track.points[index].hasLeftControl()) this.moveControl(index, false, this.track.points[index].control1);
 		if (this.track.points[index].hasRightControl()) this.moveControl(index, true, this.track.points[index].control2);
@@ -462,12 +455,10 @@ export class CurveEditor {
 		// move controls
 		let indexes = this.getControlIndexes(index);
 		if (indexes.left !== undefined) {
-			this.controls[indexes.left].x = this.track.points[index].control1.x;
-			this.controls[indexes.left].y = this.track.points[index].control1.y;
+			setPosition(this.controls[indexes.left], this.track.points[index].control1);
 		}
 		if (indexes.right !== undefined) {
-			this.controls[indexes.right].x = this.track.points[index].control2.x;
-			this.controls[indexes.right].y = this.track.points[index].control2.y;
+			setPosition(this.controls[indexes.right], this.track.points[index].control2);
 		}
 		// redraw meshes
 		if (index == 0) {
@@ -493,11 +484,13 @@ export class CurveEditor {
 			this.track.addAnchorAt(position);
 		}
 		let i = this.track.pointsEnd;
-		let new_anchor = runtime.objects.anchor_handle.createInstance("Level", this.track.points[i].anchor.x, this.track.points[i].anchor.y, false);
+		let control_handle = runtime.objects.control_handle;
+		
+		let new_anchor = spawn(runtime.objects.anchor_handle, "Level", this.track.points[i].anchor, false);
 		new_anchor.instVars.point = i;
 		new_anchor.isVisible = false;
 		if (this.track.points[i - 1].hasRightControl()) {
-			let rightControl = runtime.objects.control_handle.createInstance("Level", this.track.points[i - 1].control2.x, this.track.points[i - 1].control2.y, true);
+			let rightControl = spawn(control_handle, "Level", this.track.points[i - 1].control2, true);
 			rightControl.instVars.point = i - 1;
 			rightControl.instVars.right = true;
 			rightControl.isVisible = false;
@@ -505,7 +498,7 @@ export class CurveEditor {
 			this.anchors[i - 1].addChild(rightControl, {destroyWithParent: true, transformX: true, transformY: true});
 		}
 		if (this.track.points[i].hasLeftControl()) {
-			let leftControl = runtime.objects.control_handle.createInstance("Level", this.track.points[i].control1.x, this.track.points[i].control1.y, true);
+			let leftControl = spawn(control_handle, "Level", this.track.points[i].control1, true);
 			leftControl.instVars.point = i;
 			leftControl.instVars.right = false;
 			leftControl.isVisible = false;
@@ -513,7 +506,7 @@ export class CurveEditor {
 			new_anchor.addChild(leftControl, {destroyWithParent: true, transformX: true, transformY: true});
 		}
 		if (this.track.points[i].hasRightControl()) {
-			let rightControl = runtime.objects.control_handle.createInstance("Level", this.track.points[i].control2.x, this.track.points[i].control2.y, true);
+			let rightControl = spawn(control_handle, "Level", this.track.points[i].control2, true);
 			rightControl.instVars.point = i;
 			rightControl.instVars.right = true;
 			rightControl.isVisible = false;
@@ -576,15 +569,17 @@ export class CurveEditor {
 			let control1 = edit.getChildAt(0);
 			control1.instVars.point = i;
 			let control2 = edit.getChildAt(1);
-			if (control2.objectType.name === "control_handle") control2.instVars.point = i;
+			if (control2 !== null) {
+				if (control2.objectType.name === "control_handle") control2.instVars.point = i;
+			}
 		}
 	}
 	
 	leaveControls(amount) {
 		let result = 0;
 		for (let i = 0; i < amount; i++) {
-			if (this.track.points[i].hasLeftControl()) result += 1;
-			if (this.track.points[i].hasRightControl()) result += 1;
+			let point = this.track.points[i];
+			result += Number(point.hasLeftControl()) + Number(point.hasRightControl());
 		}
 		return result;
 	}
@@ -614,8 +609,7 @@ export class CurveEditor {
 		let bb = curve.getQuickBB();
 		let center = bb[0].add(bb[1]).divide(2);
 		let size = bb[1].subtract(bb[0]).add(new Vector(mesh_width, mesh_width));
-		size.y = Math.max(size.y, length);
-		size.x = Math.max(size.x, mesh_width);
+		size = new Vector(Math.max(size.x, mesh_width), Math.max(size.y, length));
 		segment.instVars.next_offset = - ((size.y - segment.imageOffsetY) % (segment.imageHeight * segment.imageScaleY));
 		const bbox = {
 			left: center.x - (size.x) / 2,
@@ -623,39 +617,28 @@ export class CurveEditor {
 			width: size.x,
 			height: size.y
 		};
+		
 		let steps = Math.ceil(length / 25 * resolution);
 		let curvature = curve.getMaxCurvature(steps);
 		if (curvature > 1e-3) steps = Math.round(steps * Math.log(curvature * 10000) / 2);
 		length = curve.createLUT(steps); // refined estimate
-		//console.warn(curve.getMaxCurvature(steps));
-
-		let start_l = curve.getPointOffset(0, -mesh_width / 2);
-		let start_r = curve.getPointOffset(0, mesh_width / 2);
-		console.warn("start:", start_l, start_r);
-		console.warn("mesh width:", mesh_width);
 		
-		start_l = coordsInBBox(bbox, start_l);
-		start_r = coordsInBBox(bbox, start_r);
-		
-		segment.releaseMesh();
-		segment.createMesh(2, steps + 1);
-		segment.x = center.x;
-		segment.y = center.y;
-		segment.width = size.x;
-		segment.height = size.y;
+		recreateMesh(segment, 2, steps + 1);
+		setPosition(segment, center);
+		setSize(segment, size);
 
-		segment.setMeshPoint(0, steps, {x: start_l[0], y: start_l[1], u: 0, v: 0});
-		segment.setMeshPoint(1, steps, {x: start_r[0], y: start_r[1], u: mesh_width / segment.width, v: 0});
-
-		for (let i = 1; i <= steps; i++) {
+		for (let i = 0; i <= steps; i++) {
 			let d = i / steps;
-			let end_l = curve.getPointOffset(d, -mesh_width / 2);
-			let end_r = curve.getPointOffset(d, mesh_width / 2);
-			let v = curve.getDistanceOfPoint(d) / length;
-			end_l = coordsInBBox(bbox, end_l);
-			end_r = coordsInBBox(bbox, end_r);
-			segment.setMeshPoint(0, steps - i, {x: end_l[0], y: end_l[1], u: 0, v: v});
-			segment.setMeshPoint(1, steps - i, {x: end_r[0], y: end_r[1], u: mesh_width / segment.width, v: v});
+			
+			let reverse = new Vector(0, steps - i);
+			let texture = new Vector(0, curve.getDistanceOfPoint(d) / length);
+			
+			let ends = curve.getMeshPoints(d, mesh_width);
+			ends[0] = coordsInBBox(bbox, ends[0]);
+			ends[1] = coordsInBBox(bbox, ends[1]);
+			
+			setMeshAt(segment, reverse, ends[0], texture);
+			setMeshAt(segment, reverse.addX(1), ends[1], texture.addX(mesh_width / segment.width));
 		}
 		if (index != this.meshes.length - 1) this.propagateOffsets(index);
 		if (index == 0) this.placeStart(runtime)
@@ -668,19 +651,22 @@ export class CurveEditor {
 		while (this.anchors.length > from) this.anchors.pop().destroy();
 		while (this.controls.length > this.leaveControls(from)) this.controls.pop().destroy();
 		while (this.meshes.length > from) this.meshes.pop().destroy();
+		let anchor_handle = runtime.objects.anchor_handle;
+		let control_handle = runtime.objects.control_handle;
 		// generate anchor points
 		for (let i = from; i < this.track.numPoints; i++) {
-			let new_anchor = runtime.objects.anchor_handle.createInstance("Level", this.track.points[i].anchor.x, this.track.points[i].anchor.y, false);
+			const point = this.track.points[i];
+			let new_anchor = spawn(anchor_handle, "Level", point.anchor, false);
 			new_anchor.instVars.point = i;
 			if (this.track.points[i].hasLeftControl()) {
-				let leftControl = runtime.objects.control_handle.createInstance("Level", this.track.points[i].control1.x, this.track.points[i].control1.y, true);
+				let leftControl = spawn(control_handle, "Level", point.control1, true);
 				leftControl.instVars.point = i;
 				leftControl.instVars.right = false;
 				this.controls.push(leftControl);
 				new_anchor.addChild(leftControl, {destroyWithParent: true, transformX: true, transformY: true});
 			}
 			if (this.track.points[i].hasRightControl()) {
-				let rightControl = runtime.objects.control_handle.createInstance("Level", this.track.points[i].control2.x, this.track.points[i].control2.y, true);
+				let rightControl = spawn(control_handle, "Level", point.control2, true);
 				rightControl.instVars.point = i;
 				rightControl.instVars.right = true;
 				this.controls.push(rightControl);
@@ -702,7 +688,6 @@ export class CurveEditor {
 		let loop = (array.width % 3 == 0) ? true : false;
 		let vector_array = [];
 		for (let i = 0; i < array.width; i++) {
-		console.log(array.getAt(i, 0), array.getAt(i, 1));
 			vector_array.push(new Vector(array.getAt(i, 0), array.getAt(i, 1)));
 		}
 		this.track.loadFromArray(vector_array, loop);
@@ -755,78 +740,96 @@ export class CurveEditor {
 	placeStart(runtime) {
 		let start = runtime.objects.track_start.getFirstInstance();
 		start.removeFromParent();
+		
+		const buffer_pixels = 64;
+		const orig_size = new Vector(start.imageWidth, start.imageHeight);
+		const buffered_size = orig_size.add(new Vector(buffer_pixels, buffer_pixels));
+		const steps = Math.floor(buffered_size.y / 32);
+		
 		let road = this.meshes[0];
 		road.addChild(start);
 		start.moveAdjacentToInstance(road, true);
+		
 		let curve = this.track.segments[0];
 		let length = curve.arc;
-		let position = curve.getPointByDistance(length - start.height / 2);
-		start.x = position.x;
-		start.y = position.y;
-		start.width = 2 * start.imageWidth;
-		start.height = 2 * start.imageHeight;
-		start.releaseMesh();
-		start.createMesh(2, start.width / 16 + 1);
+		let position = curve.getPointByDistance(length - orig_size.y / 2);
+		
+		setPosition(start, position);
+		setSize(start, buffered_size);
+		recreateMesh(start, 2, steps + 1);
+		
 		let bbox = start.getBoundingBox();
 		
-		for (let i = 0; i <= start.height / 2; i += 8) {
-			let dst = length - start.height / 2 + i;
-			let left = curve.getPointOffset(curve.getPointDistance(dst), -start.width / 4);
-			let right = curve.getPointOffset(curve.getPointDistance(dst), start.width / 4);
-			let point = coordsInBBox(bbox, left);
+		for (let i = 0; i <= steps; i++) {
+			let dst = length - i * 32;
+			let d = curve.getPointDistance(dst);
+			let part = curve.getMeshPoints(d, orig_size.x);
 			
-			start.setMeshPoint(0, i / 8, {x: point[0], y: point[1], u: 0, v: i * 2 / start.height});
-			point = coordsInBBox(bbox, right);
-			start.setMeshPoint(1, i / 8, {x: point[0], y: point[1], u: 1, v: i * 2 / start.height});
+			let coord = new Vector(0, steps - i);
+			let texture = new Vector(0, 1 - i * 32 / orig_size.y);
+			
+			let point = coordsInBBox(bbox, part[0]);
+			setMeshAt(start, coord, point, texture);
+			
+			point = coordsInBBox(bbox, part[1]);
+			setMeshAt(start, coord.addX(1), point, texture.addX(1));
 		}
 		
 		for (let i = 0; i < 4; i++) {
+			const d = curve.getPointDistance(length - orig_size.y / 2 - 256 * Math.floor(i / 2));
+			const angle = -curve.getTangent(d).angleSigned(new Vector(1, 0));
+			position = curve.getPointOffset(d, 96 * ((i % 2) * 2 - 1));
+			
 			let bracket = runtime.objects.start_brackets.getAllInstances()[i];	
 			bracket.moveAdjacentToInstance(start, true);
-			let d = curve.getPointDistance(length - start.height / 4 - 256 * Math.floor(i / 2));
-			position = curve.getPointOffset(d, 96 * ((i % 2) * 2 - 1));
-			let angle = curve.getTangent(d).angleSigned(new Vector(1, 0));
-			bracket.x = position.x;
-			bracket.y = position.y;
-			bracket.angleDegrees = -angle;
+			bracket.angleDegrees = angle;
+			setPosition(bracket, position);
 		}
 	}
 	
 	placeFinish(runtime) {
 		let end = runtime.objects.track_end.getFirstInstance();
 		end.removeFromParent();
+		end.isVisible = true;
+		
+		const buffer_pixels = 64;
+		const orig_size = new Vector(end.imageWidth, end.imageHeight);
+		const buffered_size = orig_size.add(new Vector(buffer_pixels, buffer_pixels));
+		const steps = Math.ceil(orig_size.y / 32);
+		
 		let road = this.meshes[this.meshes.length - 1];
 		road.addChild(end);
-		end.isVisible = true;
 		end.moveAdjacentToInstance(road, true);
+		
 		let curve = this.track.segments[this.track.segmentsEnd];
 		let length = curve.arc;
-		let position = curve.getPointByDistance(length - end.height / 2);
-		end.x = position.x;
-		end.y = position.y;
-		end.width = 2 * end.imageWidth;
-		end.height = 2 * end.imageHeight;
-		end.releaseMesh();
-		end.createMesh(2, end.width / 16 + 1);
+		let position = curve.getPointByDistance(length - orig_size.y / 2);
+		
+		setPosition(end, position);
+		setSize(end, buffered_size);
+		recreateMesh(end, 2, steps + 1);
+		
 		let bbox = end.getBoundingBox();
 		
-		for (let i = 0; i <= end.height / 2; i += 8) {
-			let dst = length - end.height / 2 + i;
-			let left = curve.getPointOffset(curve.getPointDistance(dst), -end.width / 4);
-			let right = curve.getPointOffset(curve.getPointDistance(dst), end.width / 4);
-			let point = coordsInBBox(bbox, left);
+		for (let i = 0; i <= steps; i++) {
+			const dst = length - i * 32;
+			const d = curve.getPointDistance(dst);
+			const part = curve.getMeshPoints(d, orig_size.x);
+			let coord = new Vector(0, steps - i);
+			let texture = new Vector(0, 1 - i * 32 / orig_size.y);
 			
-			end.setMeshPoint(0, i / 8, {x: point[0], y: point[1], u: 0, v: i * 2 / end.height});
-			point = coordsInBBox(bbox, right);
-			end.setMeshPoint(1, i / 8, {x: point[0], y: point[1], u: 1, v: i * 2 / end.height});
+			let point = coordsInBBox(bbox, part[0]);
+			setMeshAt(end, coord, point, texture);
+			
+			point = coordsInBBox(bbox, part[1]);
+			setMeshAt(end, coord.addX(1), point, texture.addX(1));
 		}
 	}
 	
 	hideFinish(runtime) {
 		let end = runtime.objects.track_end.getFirstInstance();
 		end.isVisible = false;
-		end.x = -10000;
-		end.y = -10000;
+		setPosition(end, new Vector(-10000, -10000));
 	}
 	
 	exportToCArray(arr) {

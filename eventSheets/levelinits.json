@@ -181,10 +181,10 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 771947099564314,
+									"sid": 988337023821027,
 									"parameters": {
 										"variable": "max_cars",
-										"value": "game_mode = \"Race\" ? flags.Get(\"difficulty_enemies\") + 1 : 1"
+										"value": "game_mode = \"Race\" ? flags.Get(\"difficulty_enemies\") + 1 : game_mode = \"Brawl\" ? 6 : 1"
 									}
 								},
 								{
@@ -227,6 +227,7 @@
 											"id": "wait",
 											"objectClass": "System",
 											"sid": 375037162377092,
+											"disabled": true,
 											"parameters": {
 												"seconds": "dt"
 											}
@@ -457,30 +458,12 @@
 															}
 														},
 														{
-															"id": "set-instvar-value",
-															"objectClass": "Car",
-															"sid": 662881086032111,
-															"parameters": {
-																"instance-variable": "Health",
-																"value": "Lives"
-															}
-														},
-														{
 															"id": "set-animation",
 															"objectClass": "Car",
 															"sid": 653080976969032,
 															"parameters": {
 																"animation": "CarChars.At(0, 0, ChosenCar)",
 																"from": "beginning"
-															}
-														},
-														{
-															"id": "set-instvar-value",
-															"objectClass": "Car",
-															"sid": 998260321745614,
-															"parameters": {
-																"instance-variable": "Health",
-																"value": "flags.Get(\"difficulty_lives\")"
 															}
 														},
 														{
@@ -633,7 +616,106 @@
 															}
 														}
 													],
-													"sid": 634744977079208
+													"sid": 634744977079208,
+													"children": [
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "compare-eventvar",
+																	"objectClass": "System",
+																	"sid": 609374717626248,
+																	"parameters": {
+																		"variable": "game_mode",
+																		"comparison": 0,
+																		"value": "\"Brawl\""
+																	}
+																}
+															],
+															"actions": [
+																{
+																	"id": "create-object",
+																	"objectClass": "System",
+																	"sid": 983443752086863,
+																	"parameters": {
+																		"object-to-create": "tempGoal",
+																		"layer": "\"Level\"",
+																		"x": "random(brawl_arena.X + 1536, brawl_arena.BBoxRight - 1536)",
+																		"y": "random(brawl_arena.Y + 1536, brawl_arena.BBoxBottom - 1536)",
+																		"create-hierarchy": false,
+																		"template-name": "\"\""
+																	}
+																},
+																{
+																	"id": "set-visible",
+																	"objectClass": "tempGoal",
+																	"sid": 732122183689927,
+																	"parameters": {
+																		"visibility": "invisible"
+																	}
+																},
+																{
+																	"id": "set-instvar-value",
+																	"objectClass": "car_edge_collision",
+																	"sid": 776072086556648,
+																	"parameters": {
+																		"instance-variable": "GoalUID",
+																		"value": "tempGoal.UID"
+																	}
+																}
+															],
+															"sid": 123030265804563
+														}
+													]
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-eventvar",
+													"objectClass": "System",
+													"sid": 280766465281125,
+													"parameters": {
+														"variable": "game_mode",
+														"comparison": 1,
+														"value": "\"Race\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "wait",
+													"objectClass": "System",
+													"sid": 661212786185162,
+													"parameters": {
+														"seconds": "dt"
+													}
+												}
+											],
+											"sid": 864903418884120,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "pick-all",
+															"objectClass": "System",
+															"sid": 497325559481624,
+															"parameters": {
+																"object": "car_position"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "destroy",
+															"objectClass": "car_position",
+															"sid": 598847787638024
+														}
+													],
+													"sid": 466596533458267
 												}
 											]
 										}

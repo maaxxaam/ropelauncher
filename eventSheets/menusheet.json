@@ -656,86 +656,6 @@
 						}
 					],
 					"sid": 105557048729463
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "on-touched-object",
-							"objectClass": "Touch",
-							"sid": 522168456044765,
-							"parameters": {
-								"object": "ModeBut"
-							}
-						}
-					],
-					"actions": [],
-					"sid": 280713494584618,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-opacity",
-									"objectClass": "ModeBut",
-									"sid": 153414020104817,
-									"parameters": {
-										"comparison": 0,
-										"opacity": "100"
-									}
-								},
-								{
-									"id": "pick-by-unique-id",
-									"objectClass": "mmtext",
-									"sid": 363078599438626,
-									"parameters": {
-										"unique-id": "506"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-instvar-value",
-									"objectClass": "PlayLvlBut",
-									"sid": 943649924396660,
-									"parameters": {
-										"instance-variable": "SelectedMode",
-										"value": "ModeBut.AnimationPrefix"
-									}
-								},
-								{
-									"id": "set-text",
-									"objectClass": "mmtext",
-									"sid": 298854076981161,
-									"parameters": {
-										"text": "\"LVL: \"&PlayLvlBut.SelectedLvl&newline&\n\"MODE: \"&PlayLvlBut.SelectedMode"
-									}
-								}
-							],
-							"sid": 352036570629267
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "else",
-									"objectClass": "System",
-									"sid": 351988271456069
-								}
-							],
-							"actions": [
-								{
-									"id": "alert",
-									"objectClass": "Browser",
-									"sid": 280624088827617,
-									"parameters": {
-										"message": "\"Режим еще не готов.\""
-									}
-								}
-							],
-							"sid": 865793328597943
-						}
-					]
 				}
 			],
 			"sid": 912634431366851
@@ -3323,7 +3243,16 @@
 				}
 			],
 			"eventType": "function-block",
-			"conditions": [],
+			"conditions": [
+				{
+					"id": "pick-last-created",
+					"objectClass": "System",
+					"sid": 363538749075973,
+					"parameters": {
+						"object": "PlayLvlBut"
+					}
+				}
+			],
 			"actions": [
 				{
 					"id": "set-eventvar-value",
@@ -3337,22 +3266,90 @@
 				{
 					"id": "set-eventvar-value",
 					"objectClass": "System",
-					"sid": 580465724704977,
+					"sid": 530772160210573,
 					"parameters": {
 						"variable": "game_mode",
-						"value": "MapName = \"map_966518302\" ? \"Race\" : \"FreeRoam\""
-					}
-				},
-				{
-					"id": "go-to-layout",
-					"objectClass": "System",
-					"sid": 706182693533295,
-					"parameters": {
-						"layout": "Loaded_lvl"
+						"value": "PlayLvlBut.SelectedMode"
 					}
 				}
 			],
-			"sid": 611045784497311
+			"sid": 611045784497311,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 178038972604416,
+							"parameters": {
+								"variable": "map_name",
+								"comparison": 0,
+								"value": "\"map_966518302\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 845000172101790,
+							"parameters": {
+								"variable": "game_mode",
+								"value": "\"Race\""
+							}
+						}
+					],
+					"sid": 133037951329642
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 295381399803790,
+							"parameters": {
+								"variable": "game_mode",
+								"comparison": 1,
+								"value": "\"Brawl\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "go-to-layout",
+							"objectClass": "System",
+							"sid": 622046077061537,
+							"parameters": {
+								"layout": "Loaded_lvl"
+							}
+						}
+					],
+					"sid": 429816792026788
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 311609685331874
+						}
+					],
+					"actions": [
+						{
+							"id": "go-to-layout",
+							"objectClass": "System",
+							"sid": 732997634505728,
+							"parameters": {
+								"layout": "Brawl"
+							}
+						}
+					],
+					"sid": 905552843811535
+				}
+			]
 		},
 		{
 			"functionName": "ToEditor",
@@ -3374,6 +3371,563 @@
 				}
 			],
 			"sid": 132142180123083
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 342521049991847,
+					"parameters": {
+						"object": "ModeBut"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 418235484708395,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-animation-playing",
+							"objectClass": "ModeBut",
+							"sid": 833460326703139,
+							"parameters": {
+								"animation": "Self.AnimationPrefix&\"_inactive\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "PlayLvlBut",
+							"sid": 386595337374125,
+							"parameters": {
+								"instance-variable": "SelectedMode",
+								"value": "ModeBut.AnimationPrefix"
+							}
+						}
+					],
+					"sid": 447748086955238,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ModeBut",
+									"sid": 181269984239707,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Race\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "PlayLvlBut",
+									"sid": 119169165131109,
+									"parameters": {
+										"y": "690"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "PlayLvlBut",
+									"sid": 736679320349241,
+									"parameters": {
+										"instance-variable": "onclick",
+										"value": "\"ShowPopup\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "PlayLvlBut",
+									"sid": 758880155469606,
+									"parameters": {
+										"instance-variable": "click_param",
+										"value": "\"LvlAlphaSelect\""
+									}
+								}
+							],
+							"sid": 305906984870515,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 937304867658835,
+											"parameters": {
+												"object": "ModeBut"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 623431064256975,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 953472533529234,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Race\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 641235311438205,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_active\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 213516354103504,
+													"parameters": {
+														"y": "675"
+													}
+												}
+											],
+											"sid": 938939620896035
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 773042265528498,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Endless\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 782686479702992,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_inactive\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 310360284121447,
+													"parameters": {
+														"y": "950"
+													}
+												}
+											],
+											"sid": 815266851208019
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 545465072884929,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Brawl\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 865360486122921,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_inactive\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 206563220527444,
+													"parameters": {
+														"y": "1200"
+													}
+												}
+											],
+											"sid": 891684347274128
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ModeBut",
+									"sid": 420018894874381,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Endless\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "PlayLvlBut",
+									"sid": 710673541462080,
+									"parameters": {
+										"y": "945"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "PlayLvlBut",
+									"sid": 552506018076643,
+									"parameters": {
+										"instance-variable": "onclick",
+										"value": "\"OpenMap\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "PlayLvlBut",
+									"sid": 250548703830713,
+									"parameters": {
+										"instance-variable": "click_param",
+										"value": "\"map_-255\""
+									}
+								}
+							],
+							"sid": 636867756911302,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 210955401670363,
+											"parameters": {
+												"object": "ModeBut"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 507536579995753,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 238645328421564,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Race\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 345899744442294,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_inactive\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 554477996400554,
+													"parameters": {
+														"y": "565"
+													}
+												}
+											],
+											"sid": 137606507878037
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 463198934987442,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Endless\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 315903537523058,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_active\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 498592359277186,
+													"parameters": {
+														"y": "925"
+													}
+												}
+											],
+											"sid": 358482754151669
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 910350349260653,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Brawl\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 822775219276373,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_inactive\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 536493402076353,
+													"parameters": {
+														"y": "1200"
+													}
+												}
+											],
+											"sid": 424190793795151
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ModeBut",
+									"sid": 197908546226816,
+									"parameters": {
+										"instance-variable": "AnimationPrefix",
+										"comparison": 0,
+										"value": "\"Brawl\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "PlayLvlBut",
+									"sid": 645998483912586,
+									"parameters": {
+										"y": "1165"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "PlayLvlBut",
+									"sid": 496035307024598,
+									"parameters": {
+										"instance-variable": "onclick",
+										"value": "\"OpenMap\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "PlayLvlBut",
+									"sid": 925241326779147,
+									"parameters": {
+										"instance-variable": "click_param",
+										"value": "\"Brawl\""
+									}
+								}
+							],
+							"sid": 225267209987160,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-all",
+											"objectClass": "System",
+											"sid": 419312681941168,
+											"parameters": {
+												"object": "ModeBut"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 535287975956155,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 441797363906298,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Race\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 334540144051409,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_inactive\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 766925359015127,
+													"parameters": {
+														"y": "565"
+													}
+												}
+											],
+											"sid": 540943350558793
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 942568750498618,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Endless\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 816536937140413,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_inactive\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 498944338410391,
+													"parameters": {
+														"y": "810"
+													}
+												}
+											],
+											"sid": 257373996750445
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-comparison",
+													"objectClass": "System",
+													"sid": 127587280150674,
+													"parameters": {
+														"object": "ModeBut",
+														"expression": "ModeBut.AnimationPrefix",
+														"comparison": 0,
+														"value": "\"Brawl\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-animation",
+													"objectClass": "ModeBut",
+													"sid": 902891800730230,
+													"parameters": {
+														"animation": "Self.AnimationPrefix&\"_active\"",
+														"from": "beginning"
+													}
+												},
+												{
+													"id": "set-y",
+													"objectClass": "ModeBut",
+													"sid": 529987153181892,
+													"parameters": {
+														"y": "1170"
+													}
+												}
+											],
+											"sid": 992345146697868
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
 		}
 	],
 	"sid": 188176345997916

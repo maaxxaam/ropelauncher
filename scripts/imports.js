@@ -1,4 +1,5 @@
 import { Vector2 } from './Vector2.js'
+import { generate_road, spawn_generated } from './endless.js'
 import * as Editor from './bezier.js'
 
 export var RoadEditor = new Editor.CurveEditor();

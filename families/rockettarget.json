@@ -19,7 +19,7 @@
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"members": [
-		"Car",
-		"obstacle"
+		"obstacle",
+		"Car"
 	]
 }

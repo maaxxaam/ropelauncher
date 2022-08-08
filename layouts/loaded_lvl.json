@@ -10,7 +10,7 @@
 					"type": "background",
 					"properties": {
 						"initially-visible": true,
-						"origin": "top-left",
+						"origin": "center",
 						"wrap-horizontal": "repeat",
 						"wrap-vertical": "repeat",
 						"image-offset-x": 0,
@@ -29,12 +29,12 @@
 						}
 					},
 					"world": {
-						"x": 0,
-						"y": 0,
+						"x": 15000,
+						"y": 15000,
 						"width": 30000,
 						"height": 30000,
-						"originX": 0,
-						"originY": 0,
+						"originX": 0.5,
+						"originY": 0.5,
 						"color": [
 							1,
 							1,
@@ -634,7 +634,7 @@
 						}
 					},
 					"world": {
-						"x": -173,
+						"x": 87,
 						"y": 905,
 						"width": 220.6446,
 						"height": 152.6514,
@@ -688,7 +688,7 @@
 						}
 					},
 					"world": {
-						"x": -178,
+						"x": 82,
 						"y": 900,
 						"width": 142,
 						"height": 66,
@@ -2933,7 +2933,7 @@
 						"image-scale-y": 1,
 						"image-angle": 0
 					},
-					"uid": 797,
+					"uid": 171,
 					"instanceVariables": {},
 					"behaviors": {
 						"Fade": {
@@ -2951,15 +2951,15 @@
 								"left-edge": "window-left",
 								"top-edge": "window-top",
 								"right-edge": "none",
-								"bottom-edge": "none",
+								"bottom-edge": "window-bottom",
 								"enabled": false
 							}
 						}
 					},
 					"world": {
-						"x": -1667,
+						"x": -2520,
 						"y": 0,
-						"width": 4049,
+						"width": 5760,
 						"height": 1280,
 						"originX": 0,
 						"originY": 0,
@@ -2974,9 +2974,49 @@
 					}
 				},
 				{
+					"type": "load_anim",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 244,
+					"instanceVariables": {},
+					"behaviors": {
+						"Fade": {
+							"properties": {
+								"fade-in-time": 0,
+								"wait-time": 1,
+								"fade-out-time": 0.5,
+								"destroy": false,
+								"enabled": false,
+								"live-preview": false
+							}
+						}
+					},
+					"world": {
+						"x": 360.5,
+						"y": 927,
+						"width": 489,
+						"height": 433,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
 					"type": "please_wait",
 					"properties": {
-						"text": "Пожалуйста, подождите. Карта загружается...",
+						"text": "ЗАГРУЖАЕТСЯ\nТЕРРИТОРИЯ...",
 						"enable-bbcode": true,
 						"font": "Roboto-Black",
 						"size": 60,
@@ -3029,7 +3069,7 @@
 				{
 					"type": "please_wait",
 					"properties": {
-						"text": "Пожалуйста, подождите. Карта загружается...",
+						"text": "ЗАГРУЖАЕТСЯ\nТЕРРИТОРИЯ...",
 						"enable-bbcode": true,
 						"font": "Roboto-Black",
 						"size": 60,
@@ -3241,7 +3281,7 @@
 	"effectTypes": [],
 	"width": 30000,
 	"height": 30000,
-	"unboundedScrolling": false,
+	"unboundedScrolling": true,
 	"vpX": 0.5,
 	"vpY": 0.5,
 	"projection": "perspective",

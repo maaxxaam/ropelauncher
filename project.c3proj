@@ -1,7 +1,7 @@
 {
 	"projectFormatVersion": 1,
 	"savedWithRelease": 30200,
-	"name": "SlingTest",
+	"name": "Drift Game",
 	"runtime": "c3",
 	"useWorker": "auto",
 	"bundleAddons": false,
@@ -115,7 +115,7 @@
 			"id": "Eponesh_GameScore",
 			"name": "GameScore",
 			"author": "Eponesh",
-			"version": "1.0.27",
+			"version": "1.0.25",
 			"bundled": false
 		},
 		{
@@ -701,7 +701,9 @@
 			"TouchStarts",
 			"rename_finish",
 			"rename_input",
-			"sorting_options"
+			"sorting_options",
+			"brawl_arena",
+			"load_anim"
 		],
 		"subfolders": []
 	},
@@ -737,7 +739,7 @@
 			"Loaded_lvl",
 			"Resources",
 			"Menu",
-			"ParkingLot"
+			"Brawl"
 		],
 		"subfolders": []
 	},
@@ -786,6 +788,22 @@
 					"name": "Vector2.js",
 					"type": "application/javascript",
 					"sid": 672989851742822,
+					"script-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "utils.js",
+					"type": "application/javascript",
+					"sid": 728180027031838,
+					"script-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "endless.js",
+					"type": "application/javascript",
+					"sid": 725932726743591,
 					"script-info": {
 						"purpose": "none"
 					}
@@ -1033,6 +1051,14 @@
 					"file-info": {
 						"purpose": "none"
 					}
+				},
+				{
+					"name": "map_-255.json",
+					"type": "application/json",
+					"sid": 298500856739292,
+					"file-info": {
+						"purpose": "none"
+					}
 				}
 			],
 			"subfolders": [
@@ -1144,11 +1170,11 @@
 	},
 	"properties": {
 		"description": "",
-		"version": "v15.1-alpha",
+		"version": "v16-alpha",
 		"author": "maaxxaam",
 		"authorEmail": "maxfocus.mch@gmail.com",
 		"authorWebsite": "",
-		"appId": "com.casketwithgames.",
+		"appId": "com.casketwithgames.driftgame",
 		"pixelRounding": false,
 		"zAxisScale": "normalized",
 		"fov": 0.7853981633974483,

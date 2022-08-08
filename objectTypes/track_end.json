@@ -18,7 +18,7 @@
 						"originalSource": "",
 						"exportFormat": "png",
 						"exportQuality": 0.8,
-						"imageSpriteId": 6473707,
+						"imageSpriteId": 118477,
 						"collisionPoly": {
 							"points": [
 								0,
@@ -44,7 +44,7 @@
 							{
 								"name": "Checkpoint",
 								"x": 0.5,
-								"y": 0.16145833333333334
+								"y": 0.16145833333333337
 							}
 						],
 						"duration": 1

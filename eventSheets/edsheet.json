@@ -3979,7 +3979,7 @@
 					"actions": [
 						{
 							"type": "script",
-							"script": "let control = runtime.objects.control_handle.getFirstPickedInstance();\nlet index = control.instVars.point;\nlet right = control.instVars.right;\nlet position = new Vector(control.x, control.y);\nconsole.log(index, right);\nRoadEditor.moveControl(index, right, position);"
+							"script": "let control = runtime.objects.control_handle.getFirstPickedInstance();\nlet index = control.instVars.point;\nlet right = control.instVars.right;\nlet position = new Vector(control.x, control.y);\nRoadEditor.moveControl(index, right, position);"
 						},
 						{
 							"id": "set-boolean-instvar",

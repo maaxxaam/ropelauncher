@@ -613,9 +613,9 @@
 					"world": {
 						"x": 902,
 						"y": 73,
-						"width": 52,
-						"height": 32,
-						"originX": 0.5,
+						"width": 92,
+						"height": 12,
+						"originX": 0.7062146892655334,
 						"originY": 0.5,
 						"color": [
 							1,
@@ -772,8 +772,8 @@
 						}
 					},
 					"world": {
-						"x": 200,
-						"y": 1100,
+						"x": -67,
+						"y": 1292,
 						"width": 140,
 						"height": 140,
 						"originX": 0.5,
@@ -800,7 +800,7 @@
 					"uid": 595,
 					"instanceVariables": {
 						"TargetName": "Car",
-						"Health": 3,
+						"Health": 0,
 						"second_frame": 0,
 						"Player": false,
 						"Recording": true,
@@ -914,8 +914,8 @@
 						}
 					},
 					"world": {
-						"x": 200,
-						"y": 1100,
+						"x": -67,
+						"y": 1292,
 						"width": 140,
 						"height": 83,
 						"originX": 0.5,
@@ -990,8 +990,8 @@
 						}
 					},
 					"world": {
-						"x": 200,
-						"y": 1100,
+						"x": -67,
+						"y": 1292,
 						"width": 140,
 						"height": 80,
 						"originX": 0.5,
@@ -1044,8 +1044,8 @@
 						}
 					},
 					"world": {
-						"x": 200,
-						"y": 1100,
+						"x": -67,
+						"y": 1292,
 						"width": 60,
 						"height": 20,
 						"originX": 0,

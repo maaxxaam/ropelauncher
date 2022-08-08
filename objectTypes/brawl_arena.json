@@ -1,0 +1,20 @@
+{
+	"name": "brawl_arena",
+	"plugin-id": "NinePatch",
+	"sid": 951712007576688,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"image": {
+		"width": 4096,
+		"height": 4096,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 4653622,
+		"useCollisionPoly": true
+	}
+}

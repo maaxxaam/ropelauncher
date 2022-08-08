@@ -84,7 +84,7 @@
 				{
 					"type": "mmtext",
 					"properties": {
-						"text": "v15.1 alpha",
+						"text": "v16 alpha",
 						"enable-bbcode": true,
 						"font": "Roboto-Medium",
 						"size": 15,
@@ -211,48 +211,6 @@
 					"type": "ModeBut",
 					"properties": {
 						"initially-visible": true,
-						"initial-animation": "FreeRoamIdle",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
-					},
-					"uid": 507,
-					"instanceVariables": {
-						"AnimationPrefix": "FreeRoam",
-						"onclick": "",
-						"click_param": "",
-						"ClickMode": 1
-					},
-					"behaviors": {},
-					"effects": {
-						"Exposure": {
-							"isEnabled": true,
-							"parameters": {
-								"exposure": 0
-							}
-						}
-					},
-					"world": {
-						"x": 360,
-						"y": 1200,
-						"width": 719.928,
-						"height": 313.9686,
-						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							1,
-							1,
-							1,
-							0.99
-						],
-						"angle": 0,
-						"zElevation": 0
-					}
-				},
-				{
-					"type": "ModeBut",
-					"properties": {
-						"initially-visible": true,
 						"initial-animation": "Race_active",
 						"initial-frame": 0,
 						"enable-collisions": true,
@@ -295,7 +253,7 @@
 					"type": "ModeBut",
 					"properties": {
 						"initially-visible": true,
-						"initial-animation": "EndlessIdle",
+						"initial-animation": "Endless_inactive",
 						"initial-frame": 0,
 						"enable-collisions": true,
 						"live-preview": false
@@ -319,6 +277,48 @@
 					"world": {
 						"x": 360,
 						"y": 950,
+						"width": 719.928,
+						"height": 313.9686,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							0.99
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "ModeBut",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Brawl_inactive",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 507,
+					"instanceVariables": {
+						"AnimationPrefix": "Brawl",
+						"onclick": "",
+						"click_param": "",
+						"ClickMode": 1
+					},
+					"behaviors": {},
+					"effects": {
+						"Exposure": {
+							"isEnabled": true,
+							"parameters": {
+								"exposure": 0
+							}
+						}
+					},
+					"world": {
+						"x": 360,
+						"y": 1200,
 						"width": 719.928,
 						"height": 313.9686,
 						"originX": 0.5,
@@ -362,7 +362,7 @@
 					},
 					"world": {
 						"x": 455,
-						"y": 700,
+						"y": 690,
 						"width": 528.6138,
 						"height": 213.31199999999998,
 						"originX": 0.5,

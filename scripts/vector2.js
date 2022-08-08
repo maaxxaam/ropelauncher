@@ -1,19 +1,10 @@
 class MathHelper {
 	constructor() {}
-	toDegree(radians) {
-    return radians * 180 / Math.PI;
-	}
-	toRadian(degrees) {
-    return degrees * Math.PI / 180;
-	}
-	degAcos(dot) {
-	return this.toDegree(Math.acos(dot));
-	}
+	toDegree(radians) { return radians * 180 / Math.PI }
+	toRadian(degrees) { return degrees * Math.PI / 180 }
+	degAcos(dot) { return this.toDegree(Math.acos(dot)) }
 }
 
-/**
- * Vector2 class for instances
- */
 export class Vector2{
 	constructor(x, y) {
 		if (Number.isNaN(x)) this.x = 0
@@ -22,42 +13,27 @@ export class Vector2{
 		else this.y = y;
 	}
 	
-	clone() {
-		return new Vector2(this.x, this.y);
-	}
+	clone() { return new Vector2(this.x, this.y) }
 	
-	add(second) {
-		return new Vector2(this.x + second.x, this.y + second.y);
-	}
+	add(second) { return new Vector2(this.x + second.x, this.y + second.y) }
 	
-	subtract(second) {
-		return new Vector2(this.x - second.x, this.y - second.y);
-	}
+	addX(value) { return new Vector2(this.x + value, this.y) }
 	
-	multiply(num) {
-		return new Vector2(this.x * num, this.y * num);
-	}
+	addY(value) { return new Vector2(this.x, this.y + value) }
 	
-	divide(num) {
-		return new Vector2(this.x / num, this.y / num);
-	}
+	subtract(second) { return new Vector2(this.x - second.x, this.y - second.y) }
 	
-	inverse() {
-		return new Vector2(-this.x, -this.y);
-	}
+	multiply(num) { return new Vector2(this.x * num, this.y * num) }
 	
-	dot(second) {
-		return (this.x * second.x) + (this.y * second.y);
-	}
+	divide(num) { return new Vector2(this.x / num, this.y / num); }
 	
-	magnitude() {
-		return Math.sqrt(this.dot(this));
-	}
+	inverse() { return new Vector2(-this.x, -this.y); }
 	
-	resize(len) {
-		let factor = len / this.magnitude();
-		return this.multiply(factor);
-	}
+	dot(second) { return (this.x * second.x) + (this.y * second.y) }
+	
+	magnitude() { return Math.sqrt(this.dot(this)); }
+	
+	resize(len) { return this.multiply(len / this.magnitude()); }
 	
 	isZero(precision) {
 		if (precision === undefined) {
@@ -69,9 +45,7 @@ export class Vector2{
 		}
 	}
 	
-	equalTo(second, precision) {
-		return this.subtract(second).isZero(precision);
-	}
+	equalTo(second, precision) { return this.subtract(second).isZero(precision) }
 	
 	normalize() {
 		let magnitude = this.magnitude();
@@ -79,13 +53,9 @@ export class Vector2{
 		else return this.divide(magnitude);
 	}
 	
-	cross(second) {
-		return (this.x * second.y) - (second.x * this.y);
-	}
+	cross(second) { return (this.x * second.y) - (second.x * this.y) }
 	
-	distance(second) {
-		return this.subtract(second).magnitude();
-	}
+	distance(second) { return this.subtract(second).magnitude() }
 	
 	rotateRadian(radian) {
 		let result = new Vector2(0, 0);
